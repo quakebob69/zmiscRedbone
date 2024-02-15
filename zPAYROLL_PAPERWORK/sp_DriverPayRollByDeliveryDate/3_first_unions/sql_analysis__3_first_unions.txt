@@ -1,0 +1,84 @@
+Legind = 0
+-----------------------------------------------------------------------------------------
+									Load		l
+                JOIN				LoadStop	lsPick
+                JOIN				LoadStop	lsDrop
+                JOIN 				Person		p1
+                LEFT OUTER JOIN		Person		p2
+
+	===================
+	convert(DATE, lsDrop.StartDateTime) between @StartDt and @ThroughDt
+	===================
+
+--union all
+
+
+
+
+
+
+
+LegInd = 1
+-----------------------------------------------------------------------------------------
+									Load		l
+                JOIN 				LoadStop 	lsPick
+                JOIN 				LoadStop 	lsDrop
+                JOIN 				Person 		p1
+                LEFT OUTER JOIN 	Person 		p2
+	
+	===================
+	iif(
+		lsDrop.LoadStopTypeId = 2
+		,
+		Convert(Date, lsDrop.DropStartDateTime)
+		,
+		convert(DATE, lsDrop.StartDateTime)
+	)
+		between @StartDt and @ThroughDt
+	===================
+
+--union all
+
+
+
+
+
+
+
+Legind = 0
+-----------------------------------------------------------------------------------------
+									Load		l
+                JOIN				LoadStop	lsPick
+                JOIN				LoadStop	lsDrop
+                JOIN				Person		p1
+                LEFT OUTER JOIN		Person		p2
+				
+				
+	===================
+	convert(DATE, lsDrop.DropStartDateTime) between @StartDt and @ThroughDt
+	===================
+
+				
+				
+				
+				
+
+
+
+
+asdf
+
+
+
+
+iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @StartDt and @ThroughDt
+iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @StartDt and @ThroughDt
+
+
+
+
+
+
+
+
+

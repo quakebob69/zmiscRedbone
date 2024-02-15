@@ -1,0 +1,5 @@
+--SELECT COUNT(*) FROM [RedBone].[main].[PersonGender] WHERE [GenderDescription] = 'Other'
+--INSERT INTO [RedBone].[main].[PersonGender] ([PersonGenderId], [GenderDescription]) values (3, 'Other')
+--SELECT COUNT(*) FROM [RedBone].[main].[PersonGender] WHERE [GenderDescription] = 'Other'
+--SELECT COUNT(*) FROM [RedBone].[main].[PersonGender]
+--delete FROM [RedBone].[main].[PersonGender] WHERE [GenderDescription] = 'Other'

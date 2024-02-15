@@ -1,0 +1,36 @@
+WHERE
+	(
+		(FirstName = 'Allen' and LastName = 'Jones')
+		OR
+		(FirstName = 'Jack' and LastName = 'Cole')
+		OR
+		(FirstName = 'John' and LastName = 'Spencer')
+		OR
+		(FirstName = 'Valmore' and LastName = 'Soto')
+		OR
+		(FirstName = 'Willem' and LastName = 'Vanyzeren')
+		OR
+		(FirstName = 'William' and LastName = 'Tribe')
+
+
+		OR
+		(FirstName = 'Al' and LastName = 'Jones')
+		OR
+		(FirstName = 'James' and LastName = 'Young')
+		OR
+		(FirstName = 'Jason' and LastName = 'Shaw')
+		OR
+		(FirstName = 'Jerry' and LastName = 'Adams')
+		OR
+		(FirstName = 'Jerry' and LastName = 'Norton')
+		OR
+		(FirstName = 'John' and LastName = 'Norris')
+		OR
+		(FirstName = 'Kirt' and LastName = 'Williams')
+		OR
+		(FirstName = 'Leslie' and LastName = 'Eklund')
+		OR
+		(FirstName = 'Patrick' and LastName = 'Kelleher')
+		OR
+		(FirstName = 'Richard' and LastName = 'Houston')
+	)

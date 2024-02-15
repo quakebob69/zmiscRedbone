@@ -1,0 +1,1871 @@
+rya_$/T@KHy~Je8o
+
+
+
+
+
+
+<add name="RedBoneConnectionString" connectionString="Data Source=.;Initial Catalog=RedBone;Persist Security Info=True;User ID=redboneDB3;Password=Kd2GP#Wlrt9Ws" providerName="System.Data.SqlClient"/>
+	
+	
+SQL Server
+redboneDB3
+
+
+*.55
+redboneDB3
+Kd2GP#Wlrt9Ws
+
+
+
+
+
+CVIuxwVk8jaE
+
+rbPlatform2
+tohMdbJzg$
+
+
+
+sp_Recruiting_File_Delete	dbo	RedBone	Procedures	Text	CREATE PROCEDURE [dbo].sp_Recruiting_File_Delete  (   @Original_ProfileFileId int  )  AS   SET NOCOUNT OFF;  DELETE FROM [recruiting].[ProfileFile] WHERE (([ProfileFileId] = @Original_ProfileFileId))
+sp_Recruiting_File_Insert	dbo	RedBone	Procedures	Text	CREATE PROCEDURE [dbo].sp_Recruiting_File_Insert  (   @Name nvarchar(50),   @Data varbinary(MAX),   @MimeType nvarchar(50)  )  AS   SET NOCOUNT OFF;  INSERT INTO [recruiting].[ProfileFile] ([Name], [Data], [MimeType]) VALUES (@Name, @Data, @MimeType);     SELECT ProfileFileId, Name, Data, MimeType FROM recruiting.ProfileFile WHERE (ProfileFileId = SCOPE_IDENTITY())
+sp_Recruiting_File_Select	dbo	RedBone	Procedures	Text	CREATE PROCEDURE [dbo].sp_Recruiting_File_Select  AS   SET NOCOUNT ON;  select * from recruiting.ProfileFile
+sp_Recruiting_File_Update	dbo	RedBone	Procedures	Text	CREATE PROCEDURE [dbo].sp_Recruiting_File_Update  (   @Name nvarchar(50),   @Data varbinary(MAX),   @MimeType nvarchar(50),   @Original_ProfileFileId int,   @ProfileFileId int  )  AS   SET NOCOUNT OFF;  UPDATE [recruiting].[ProfileFile] SET [Name] = @Name, [Data] = @Data, [MimeType] = @MimeType WHERE (([ProfileFileId] = @Original_ProfileFileId));     SELECT ProfileFileId, Name, Data, MimeType FROM recruiting.ProfileFile WHERE (ProfileFileId = @ProfileFileId)
+
+
+
+
+dbo.sp_PR_OTRMileageByDriver
+DriverPaidMilesDetail
+
+
+PABLO ROBLEDO
+
+
+C:\Users\danny.call\zmisc\SQL\PLATFORM\DRIVER_REPORT
+
+
+sp_PR_OTRMileageByDriver____DROP_CREATE
+
+
+
+C:\Users\danny.call\zmisc\SQL\PLATFORM_DEPLOY\DRIVER_REPORT
+
+sp_LoadsForStatus_Get________CREATE
+
+
+
+h.PayPeriodEnding between @BeginDate and @EndDate
+
+
+
+
+	SELECT        PersonId, FirstName, MiddleInitial, LastName
+	FROM            main.Person
+	WHERE        (PersonId <> @PersonId) AND (TIN = @TIN)
+	
+	
+		Person Types
+		Gender:
+		Birthday:
+		Active:
+		Availability:
+		Region:
+		
+		
+ProfileFile
+DriversLicense
+
+
+
+                    <telerik:RadAsyncUpload ID="Attachment" runat="server" TabIndex="24" MaxFileInputsCount="1" MultipleFileSelection="Disabled" Width="250px" 
+                        AllowedFileExtensions="pdf" MaxFileSize="20480000" UploadedFilesRendering="BelowFileInput" HideFileInput="true"  >
+                    </telerik:RadAsyncUpload>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					CausesValidation="false"
+					
+					
+					
+					
+					
+					
+
+Open Enrollment
+
+					
+	https://test.truckingwizard.com/RedbonePlatform/Pages/Main
+	https://test.truckingwizard.com/RedbonePlatform/Pages/Main
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+project manager
+
+
+
+
+
+
+Requirement Gathering & Analysis Phase in SDLC
+	https://www.youtube.com/watch?v=uo98gmTYmxg&t=8s
+	
+
+SRS
+	Software Requirements Specification
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+private void PopulateDriverInfo()
+
+if (!row.IsDriverIdNull()) RadTextBox_DriverId.Text = row.DriverId;
+
+
+
+
+            if (auth.Entitlements.Contains(2508))    //Fuel-Card-Number
+            {
+                RadNumericTextBox_FuelCardNumber.Visible = true;
+            }
+            else
+            {
+                RadNumericTextBox_FuelCardNumber.Visible = false;
+            }
+
+
+
+
+
+
+
+
+
+
+TypeError: window.parent.UpdateHiddenField_Certifications_UnsavedData is not a function
+
+
+(137?)
+
+
+tohMdbJzg$
+
+
+UpdateHiddenField_Certifications_UnsavedData
+HiddenField_PersonEdit_AddressContact_UnsavedData
+
+
+
+
+$(".k-grid-add").first().on("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+
+
+
+any of
+	4 driver types requires
+		1) CDL A
+		2) medical card
+
+
+
+(require for required docs:  require document [image or pdf], exp date, number, state, doc number? for required docs)
+
+
+
+CertificationTypeId	CertificationDescription	Enabled
+
+
+
+
+
+
+
+
+
+4:'Driver License - Class A'
+5:'Medical Card'
+
+
+
+
+
+
+
+
+
+
+
+	<telerik:RadCheckBox ID="RadCheckBox_PersonActive" runat="server" Text="" AutoPostBack="false"
+		OnClientCheckedChanging="OnPersonActiveCheckedChanging" Skin="MyCustomSkin" EnableEmbeddedSkins="false">
+	</telerik:RadCheckBox>
+
+
+
+
+
+
+            function OnPersonActiveCheckedChanging(sender, args) {
+                var isDriver1 = true;
+                var isDriver2 = true;
+
+
+
+                var isDriver = true;
+
+                var hasCert1 = true;
+                var hasCert2 = true;
+
+                if (!(isDriver && hasCert1 && hasCert2)) {
+                    //
+                }
+                else {
+                    alert('you need more shit bruh');
+                    args.set_cancel(true);
+                }
+            }
+
+
+
+
+ObjectDataSource_Certifications
+
+
+
+
+
+                
+                Boolean personActiveStatusOld = prsn.IsActive;
+                Boolean personActiveStatusNew = Convert.ToBoolean(RadCheckBox_PersonActive.Checked);
+                if (((personActiveStatusNew && isADriver && (doesntHaveDriverLicenseClassA || doesntHaveMedicalCard))
+                {
+                    vld.ErrorMessage = "Drivers can only be activated if they have the required documents:<br/>&nbsp;&nbsp;&nbsp;1) 'Driver License - Class A'<br/>&nbsp;&nbsp;&nbsp;2) 'Medical Card'";
+                    args.IsValid = false;
+                }
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				                vld.ErrorMessage = "First Name is Required!";
+                RadTextBox_FirstName.Focus();
+                RadTextBox_FirstName.BorderColor = System.Drawing.Color.Red;
+                args.IsValid = false;
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				        private string validateRequiredCertifications()
+        {
+            return "";
+        }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		        //protected void RadGrid_Certifications_ItemDeleted(object sender, GridDeletedEventArgs e)
+        //{
+        //    GridDataItem item = (GridDataItem)e.Item;
+        //    string value1 = item["CertificationDescription"].Text;
+
+        //    if (isPersonADriverAndActive())
+        //    {
+        //        if (HiddenField_CertificationTypeId.Value == "4" || HiddenField_CertificationTypeId.Value == "5")
+        //        {
+        //            string asdf = "delete";
+        //        }
+        //    }
+        //}
+
+		
+		
+		
+		
+		
+		RadNumericTextBox_FuelCardNumber
+
+
+Main-Human Resources-People Management-PII
+
+
+1035120020
+
+
+
+
+
+
+
+
+
+<td style="text-align: right;">
+                                                                                <span id="RadGrid_Certifications_ctl00_ctl05_RadLabelActive" class="RadLabel RadLabel_Black">Active:</span>
+                                                                                <button type="button" name="RadGrid_Certifications$ctl00$ctl05$RadCheckBox_Active" value="" id="RadGrid_Certifications_ctl00_ctl05_RadCheckBox_Active" class="RadCheckBox RadButton RadButton_Black rbCheckBox rbRounded rbIconOnly" tabindex="0"><span class="rbIcon p-icon p-i-checkbox-checked rbToggleCheckboxChecked"></span><span class="rbText"></span><input id="RadGrid_Certifications_ctl00_ctl05_RadCheckBox_Active_ClientState" name="RadGrid_Certifications_ctl00_ctl05_RadCheckBox_Active_ClientState" type="hidden" autocomplete="off" value="{&quot;text&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;,&quot;enabled&quot;:true,&quot;autoPostBack&quot;:false,&quot;commandName&quot;:&quot;&quot;,&quot;commandArgument&quot;:&quot;&quot;,&quot;validationGroup&quot;:null,&quot;checked&quot;:true}"></button>
+                                                                            </td>
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			<td style="text-align: right;">
+                                                                                <span id="RadGrid_Certifications_ctl00_ctl05_RadLabelActive" class="RadLabel RadLabel_Black">Active:</span>
+                                                                                <button type="button" name="RadGrid_Certifications$ctl00$ctl05$RadCheckBox_Active" value="" id="RadGrid_Certifications_ctl00_ctl05_RadCheckBox_Active" class="RadCheckBox RadButton RadButton_Black rbCheckBox rbRounded rbIconOnly" tabindex="0"><span class="rbIcon p-icon p-i-checkbox-checked rbToggleCheckboxChecked"></span><span class="rbText"></span><input id="RadGrid_Certifications_ctl00_ctl05_RadCheckBox_Active_ClientState" name="RadGrid_Certifications_ctl00_ctl05_RadCheckBox_Active_ClientState" type="hidden" autocomplete="off" value="{&quot;text&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;,&quot;enabled&quot;:true,&quot;autoPostBack&quot;:false,&quot;commandName&quot;:&quot;&quot;,&quot;commandArgument&quot;:&quot;&quot;,&quot;validationGroup&quot;:null,&quot;checked&quot;:true}"></button>
+                                                                            </td>
+																			
+																			
+																			                                          <td>
+																													  
+																													  
+																													  
+																													  
+																													  
+<telerik:RadCheckBox ID="RadCheckBox_ShowInactive" Text="Show Inactive Certifications" runat="server" 
+
+
+
+
+OnClick="RadCheckBox_ShowInactive_Click"></telerik:RadCheckBox>
+
+OnClick="RadCheckBox_ShowInactive_Click"
+
+
+
+
+
+
+
+
+
+																			
+																			
+								
+								
+								
+								
+								
+								
+								
+								addresses, phone numbers, emails and certifications not inserting/updating/selecting after adding a new person
+								
+								
+								
+								
+
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+						
+								
+								
+								
+								
+								
+								
+TITLE: Microsoft SQL Server Management Studio ------------------------------ Restore of database 'RedBone' failed. (Microsoft.SqlServer.Management.RelationalEngineTasks) ------------------------------ ADDITIONAL INFORMATION: System.Data.SqlClient.SqlError: There is insufficient free space on disk volume 'C:\' to create the database. The database requires 168495611904 additional free bytes, while only 52103696384 bytes are available. (Microsoft.SqlServer.SmoExtended) For help, click: http://go.microsoft.com/fwlink?ProdName=Microsoft+SQL+Server&ProdVer=14.0.17277.0+((SSMS_Rel_17_4).180625-0100)&LinkId=20476 ------------------------------ BUTTONS: OK ------------------------------
+
+
+
+
+
+
+168 495 611 904
+52 103 696 384
+
+
+
+
+57703
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--WHERE        (@ShowInActiveInd = 0) AND (p.ActiveInd = 1) OR
+  WHERE (@ShowInActiveInd = 0) 
+  AND ((getdate() between pm.effectivedate and pm.expirationdate) and pm.PUnitActiveTypeId = 1) 
+  AND p.EquipTypeId = 1 --trucks
+  OR ((@ShowInActiveInd = 1) AND p.EquipTypeId = 1 ) --trucks
+
+
+
+
+
+
+
+
+
+/DispatchSheet_LoadLockedViewer
+
+
+
+
+
+
+
+
+FEDEX	
+	1235	166121
+			166667
+
+
+
+OTR
+	1555	242
+			243
+
+
+
+
+
+
+
+
+
+
+
+
+ObjectDataSource_PUnit
+	ClientDataKeyNames="PUnitId, Unit_ID, Indicator, Indicatoryellow"
+	DataKeyNames="PUnitId,PUnitMakeId,PUnitMakeModelId,Unit_ID,EquipTypeId" ShowExportToExcelButton="true" >
+		HiddenField_ShowInactivePUnit
+
+
+
+
+
+
+
+
+
+
+https://test.truckingwizard.com/RedbonePlatform/Pages/ContainerPages
+	/Equipment_PUnitEdit
+		?
+			PUnitId=1555
+				&
+					EquipTypeId=1
+
+
+
+
+sp_Equipment_PUnit_For_Grid
+
+
+
+WHERE
+	(@ShowInActiveInd = 0) 
+		AND
+	(
+		(getdate() between pm.effectivedate and pm.expirationdate)
+			and
+		pm.PUnitActiveTypeId = 1
+	)
+		AND
+	p.EquipTypeId = 1 --trucks
+
+
+		OR
+
+
+	(
+		(@ShowInActiveInd = 1)
+			AND
+		p.EquipTypeId = 1 --trucks
+	) 
+	
+
+
+
+
+
+
+
+
+Assigning Vehicle Identification (ID) to Your One Network Movement
+
+
+
+Data
+	currently allocated space:	162865.94 MB
+	avabilable free space:		43.87 MB (0%)
+	
+Log 1
+	RebBone_log
+		currently allocated space:	132960.94 MB
+		avabilable free space:		57.20 MB (0%)
+					
+Log 2
+	RebBone_log2
+		currently allocated space:	27384.00 MB
+		avabilable free space:		11.78 MB (0%)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+PR_OTRSummary_NoPay.trdp
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		PR_OTR_HISTORY
+		
+		
+		
+		REVIEWTOHISTORY
+		
+		
+		
+PaidPetDeposit
+HasPassengerInsurance
+		
+		
+		
+		if (!prsn.IsIsActiveNull()) RadCheckBox_PersonActive.Checked = prsn.IsActive;
+		
+		
+		row.IsActive = Convert.ToBoolean(RadCheckBox_PersonActive.Checked);
+		
+		
+		
+		
+<telerik:RadCheckBox ID="RadCheckBox_PersonActive" runat="server" Text="" >
+</telerik:RadCheckBox>
+
+
+
+
+
+
+
+<telerik:RadCheckBox ID="RadCheckBox_PaidPetDeposit" Text="Pet Deposit" runat="server"/>
+
+
+
+
+RadCheckBox_PaidPetDeposit
+
+RadCheckBox_PassengerInsurance
+
+
+
+
+
+
+
+
+
+
+
+
+DriverName, PersonId
+FROM            main.Person
+WHERE        (IsActive = 1) AND (PersonId IN
+                             (SELECT        PersonId
+                               FROM            main.PersonTypeMapping
+                               WHERE        (PersonTypeId IN (4, 5, 6)))) OR
+                         (PersonId = @AssignedPersonId)
+ORDER BY DriverName
+
+
+
+
+asdfqwerty
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE procedure [dbo].[sp_PR_OTRMileageByDriver]
+
+/*This sproc is used for the OTR ranking by miles for a dashboard report*/
+
+(
+
+@BeginDate date,
+@EndDate date
+
+--EXEC sp_PR_OTRMileageByDriver '10/22/2023', '11/28/2023'
+--
+)
+
+AS
+BEGIN
+
+/*
+Declare @BeginDate date
+declare @EndDate date
+set @BeginDate = '09/01/2021'
+set @EndDate = '09/30/2021'
+*/
+
+SELECT  
+	Name
+	,TripNumber
+	,PickupBy
+	,DeliverBy 
+	,LegInd 
+	,PickOrigin 
+	,DropDest 
+	,PayCode 
+	,Quantity 
+	,PayPeriodEnding 
+	,P.PersonId
+
+FROM dispatch.
+
+
+
+
+
+
+ h
+JOIN main.person p on p.PersonId = h.DriverPersonId
+JOIN main.PersonTypeMapping ptm on ptm.PersonId = p.PersonId
+
+WHERE paycode like '%Per Mile%'
+AND paycode not like '%Doubles%'
+AND ptm.PersonTypeId = 4
+AND p.PersonId NOT in (8,73,1599)	--Exlude Al Jones, John Norris, James Young
+AND p.IsActive = 1
+AND h.PayPeriodEnding between @BeginDate and @EndDate
+
+union all
+
+
+select 
+
+p.FirstName + ' ' + p.LastName as [name],
+--vp.VendorId,
+vp.TripNumber,
+'' as PickupBy,
+'' as DeliverBy,
+0 as LegInd,
+'' as PickOrgin,
+'' as DropDest,
+CAST(vp.VendorPayCodeId as varchar) as PayCode,
+vp.PayQuantity,
+vp.PayDate as PayPeriodEnding,
+vp.Driver1PersonId
+
+
+
+from vendor.VendorPay as VP
+
+join main.person as P on p.PersonId = vp.Driver1PersonId
+
+
+where vp.PayDate between @BeginDate and @EndDate
+and vp.VendorPayCodeId = 79
+
+order by name desc
+
+
+END
+
+
+
+
+
+
+
+
+CREATE procedure [dbo].[sp_PR_OTRReview]
+(
+	@PayPeriodBeginDate datetime
+	,@PayPeriodEndDate datetime
+
+)
+
+AS
+
+/*
+
+	exec sp_PR_OTRReview '03-24-2022','03-30-2022'
+	05/10/2022 replaced select * with acutal fields in the first part of the union query
+	Also, did not update this query to include PUnit fields
+
+*/
+
+SET NOCOUNT ON;
+IF 1=0 BEGIN
+SET FMTONLY OFF
+END
+
+--DELETE FROM dispatch.PR_OTR_Processing
+
+DROP TABLE IF EXISTS #TEMP_OTR_Pay
+DROP TABLE IF EXISTS #TEMP_OTR_OtherPay
+
+CREATE TABLE #TEMP_OTR_Pay(
+	[Name] [varchar](max) NULL,
+	[LoadId] [int] NULL,
+	[TripNumber] varchar(15) NULL,
+	[TruckNumber] [int] NULL,
+	[Client_Id] [varchar](max) NULL,
+	[PickupBy] [datetime] NULL,
+	[DeliverBy] [datetime] NULL,
+	[DriverType] [varchar](max) NULL,
+	[LegInd] [varchar] (max) NULL,
+	[PickOrigin] [varchar](max) NULL,
+	[DropDest] [varchar](max) NULL,
+	[DriverPersonId] [int] NULL,
+	[PayCode] [varchar](max) NULL,
+	[PayId] [int] NULL,
+	[Quantity] [decimal](10, 2) NULL,
+	[PayRateAmount] [decimal](10, 2) NULL,
+	[PUnitId] [int] NULL
+)
+
+INSERT INTO #TEMP_OTR_Pay
+
+EXEC	sp_DriverPayRollByDeliveryDate_Pay @PayPeriodBeginDate, @PayPeriodEndDate
+
+
+
+--INSERT INTO [dispatch].[PR_OTR_Processing] (Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding)
+
+
+
+CREATE TABLE #TEMP_OTR_OtherPay
+(
+	DriverId varchar(max) NULL
+	,DriverName varchar(max)
+	,PayCode varchar(max)
+	,PayCodeDescription varchar(max)
+	,PayNotes varchar(max)
+	,PayQuantity decimal(10,2)
+	,PayRate decimal(10,2)
+	,TotalPay decimal(10,2)
+	,TripNumber varchar(15)
+	,PayDate datetime
+	,FirstName varchar(max)
+	,DriverPersonId int
+)
+
+INSERT INTO #TEMP_OTR_OtherPay
+
+EXEC [dbo].[sp_DriverPayRollByDeliveryDate_sub_Processing] @PayPeriodBeginDate, @PayPeriodEndDate
+
+
+--INSERT INTO [dispatch].[PR_OTR_Processing] (Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding)
+
+
+SELECT A.* FROM
+(
+SELECT 
+	[Name]
+	, [LoadId]
+	, [TripNumber]
+	, [TruckNumber]
+	, [Client_Id]
+	, [PickupBy]
+	, [DeliverBy]
+	, [DriverType]
+	, [LegInd]
+	, [PickOrigin]
+	, [DropDest]
+	, [DriverPersonId]
+	, [PayCode]
+	, [PayId]
+	, [Quantity]
+	, [PayRateAmount]
+	, TotalPay = Quantity * PayRateAmount
+	, PayPeriodEndDate = @PayPeriodEndDate 
+
+FROM #TEMP_OTR_Pay
+
+WHERE DriverPersonId NOT in (8,73)	--Exlude Al Jones, John Norris
+
+UNION ALL
+
+SELECT 
+	Name = p.FirstName + ' ' + p.LastName
+	,LoadId = NULL
+	,TripNumber = TripNumber
+	,TruckNumber = NULL
+	,Client_Id = NULL
+	,PickupBy = PayDate
+	,DeliverBy = PayDate
+	,DriverType = NULL
+	,LegInd = NULL
+	,PickOrigin = PayCode
+	,DropDest = PayNotes
+	,DriverPersonId 
+	,PayCode = 'Other Pay'
+	,PayId = NULL
+	,Quantity = PayQuantity	
+	,PayRateAmount = PayRate
+	,TotalPay = PayQuantity * PayRate
+	,PayPeriodEnding = @PayPeriodEndDate
+
+FROM #TEMP_OTR_OtherPay op
+
+JOIN main.person p on p.personid = op.DriverPersonId
+
+WHERE DriverPersonId NOT in (8,73)	--Exlude Al Jones, John Norris
+
+) A
+
+ORDER BY Name
+
+
+
+PRPayrollProcessing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE procedure [dbo].[sp_PR_SettlementProcessing_ReportSummary]
+--(
+--	@PayPeriodEndDate datetime
+
+--)
+
+AS
+
+
+SELECT A.* FROM
+(
+
+
+--Number of Days for P&D Drivers
+--------------------------------------------------------------------
+select 
+
+	Company = 	BET.BusinessEntity
+	,Emp_Location = lt.Location
+	,s.FedExId 
+	,FullName = p.FirstName + ' ' + p.LastName
+	,Origin = 'Days Total'
+	,Type = ''
+	,pprpd.Description
+	,PayRate = pppd.PayRateAmount
+	--,MilesDays = count(distinct(TripDate))
+	,MilesDays
+	,PaidMiles = 0
+	,TotalAmount
+--	,Extended = count(distinct(TripDate)) * pppd.PayRateAmount
+	,Extended
+	,DefaultDriverType = 'P&D'
+	,s.PersonId 
+	,PayPeriodEnding 
+
+FROM dispatch.PR_SettlementStmt_Processing s
+	LEFT JOIN main.BusinessEnityType BET on BET.BusinessEntityTypeId = s.BusinessEntityTypeId
+	LEFT JOIN main.LocationType lt on lt.LocationTypeId = s.LocationTypeId
+	LEFT JOIN main.person p on p.PersonId = s.PersonId
+	--LEFT JOIN dispatch.TerminalList tlo on tlo.TerminalNumber = s.OriginTerminalListId
+	--LEFT JOIN dispatch.TerminalList tld on tld.TerminalNumber = s.DestinationTerminalListId
+	LEFT JOIN main.PersonPay_FedExDriver_Default FedD on FedD.PersonId = s.PersonId
+	LEFT JOIN main.PersonPay pppd on p.PersonId = pppd.PersonId and pppd.PersonPayId = (select PersonPayId from main.personpay where PayRateId in (67) and PersonId=p.PersonId and PayPeriodEnding between PayRateBeginDate and PayRateEndDate)
+	LEFT JOIN main.PersonPayRate pprpd on pprpd.PersonPayRateId = pppd.PayRateId
+
+WHERE FedD.FedExType = 2
+AND TripNumber = '999999999'
+
+GROUP BY bet.BusinessEntity, LT.Location, s.FedExId, p.FirstName + ' ' + p.LastName, PayPeriodEnding, pprpd.Description, pppd.PayRateAmount, s.PersonId, MilesDays, TotalAmount, Extended
+
+--TOTAL SPOT PAY
+--------------------------------------------------------------------------
+UNION ALL
+
+select 
+
+	Company = 	BET.BusinessEntity
+	,Emp_Location = lt.Location
+	,s.FedExId 
+	,FullName = p.FirstName + ' ' + p.LastName
+	,Description = 'Spot Total'
+	,Type = ''
+	,pprpd.Description
+	,PayRate = pppd.PayRateAmount
+	,MilesDays = 0
+	,PaidMiles = 0
+	,TotalAmount = sum(TotalAmount)
+	,Extended = sum(Extended)
+	,DefaultDriverType = 'P&D'
+	,s.PersonId 
+	,PayPeriodEnding 
+
+FROM dispatch.PR_SettlementStmt_Processing s
+	LEFT JOIN main.BusinessEnityType BET on BET.BusinessEntityTypeId = s.BusinessEntityTypeId
+	LEFT JOIN main.LocationType lt on lt.LocationTypeId = s.LocationTypeId
+	LEFT JOIN main.person p on p.PersonId = s.PersonId
+	--LEFT JOIN dispatch.TerminalList tlo on tlo.TerminalNumber = s.OriginTerminalListId
+	--LEFT JOIN dispatch.TerminalList tld on tld.TerminalNumber = s.DestinationTerminalListId
+	LEFT JOIN main.PersonPay_FedExDriver_Default FedD on FedD.PersonId = s.PersonId
+	LEFT JOIN main.PersonPay pppd on p.PersonId = pppd.PersonId and pppd.PersonPayId = (select PersonPayId from main.personpay where PayRateId in (66) and PersonId=p.PersonId and PayPeriodEnding between PayRateBeginDate and PayRateEndDate)
+	LEFT JOIN main.PersonPayRate pprpd on pprpd.PersonPayRateId = pppd.PayRateId
+
+WHERE FedD.FedExType = 2
+AND TripNumber <> '999999999'
+
+GROUP BY bet.BusinessEntity, LT.Location, s.FedExId, p.FirstName + ' ' + p.LastName, PayPeriodEnding, pprpd.Description, pppd.PayRateAmount, s.PersonId
+
+--TOTAL LINEHAUL DRIVERS
+--------------------------------------------------------------------------
+UNION ALL
+
+select 
+
+	Company = 	BET.BusinessEntity
+	,Emp_Location = lt.Location
+	,s.FedExId 
+	,FullName = p.FirstName + ' ' + p.LastName
+	,Origin = 'Linehaul Total'
+	,Type 
+	,s.Description
+	,PayRate 
+	,MilesDays = sum(MilesDays)
+	,PaidMiles = sum(PaidMiles)
+	,TotalAmount = 0--sum(TotalAmount)
+	,Extended = sum(Extended)
+	,DefaultDriverType = 'Linehaul'
+	,s.PersonId 
+	,PayPeriodEnding 
+
+
+FROM dispatch.PR_SettlementStmt_Processing s
+	LEFT JOIN main.BusinessEnityType BET on BET.BusinessEntityTypeId = s.BusinessEntityTypeId
+	LEFT JOIN main.LocationType lt on lt.LocationTypeId = s.LocationTypeId
+	LEFT JOIN main.person p on p.PersonId = s.PersonId
+	--LEFT JOIN dispatch.TerminalList tlo on tlo.TerminalNumber = s.OriginTerminalListId
+	--LEFT JOIN dispatch.TerminalList tld on tld.TerminalNumber = s.DestinationTerminalListId
+	LEFT JOIN main.PersonPay_FedExDriver_Default FedD on FedD.PersonId = s.PersonId
+
+
+WHERE FedD.FedExType = 1
+
+GROUP BY bet.BusinessEntity, LT.Location, s.FedExId, p.FirstName + ' ' + p.LastName, PayPeriodEnding, s.Description, s.PersonId, Type, PayRate--, PunitId
+) A
+
+ORDER BY Company, FullName, case when Origin in ('Linehaul Total','Spot Total','Days Total') Then 2 else 1 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	
+OTR Finalize and Generate PTO	
+Reload
+Close
+ 
+ 		 
+ 	
+../Reports/ReportViewer_OTRPayroll.aspx
+ 
+ 	 	 
+ 	
+People Management E1035120000	
+Pin on
+Reload
+Minimize
+Maximize
+Close
+ 
+ 		 
+ 	
+../Pages/ContainerPages/PersonMaintenance.aspx
+ 
+ 	 	 
+
+Open Tenders: 2
+
+OperationsEquipmentClientsVendorsPayrollHuman ResourcesSafetyShopRecruitingFactoringReportsSettingsHelp
+DANIEL CALL
+Logout
+s]
+(
+
+@BeginDate date = NULL,
+@EndDate date = NULL
+
+--EXEC sp_PR_DriversNoMiles '11-01-2021', '12-15-2021'
+
+)
+
+AS
+
+/*
+
+	EXEC sp_PR_DriversNoMiles '11-01-2021', '12-15-2021'
+
+
+*/
+
+SET NOCOUNT ON;
+IF 1=0 BEGIN
+SET FMTONLY OFF
+END
+
+--DELETE FROM dispatch.PR_OTR_Processing
+
+DROP TABLE IF EXISTS #TEMP_OTR
+DROP TABLE IF EXISTS #TEMP_FEDEX
+DROP TABLE IF EXISTS #TEMP_FEDEX_CURRENT
+
+select 
+	PersonId = DriverPersonId
+	, PayPeriodEnding 
+	, Type = 'OTR'
+INTO #TEMP_OTR
+from dispatch.PR_OTR_History 
+where PayPeriodEnding between 
+	ISNULL(@BeginDate, (select MAX(payperiodending) from dispatch.PR_OTR_History)) and 
+	ISNULL(@EndDate, (select MAX(payperiodEnding) from dispatch.PR_OTR_History))
+and DriverPersonId Is Not Null
+group by DriverPersonId, PayPeriodEnding
+
+
+
+------------------------
+--This sproc needs to look to history file for one report and the processing file for the other
+select 
+	PersonId
+	, PayPeriodEnding 
+	, Type = 'FedEx'
+INTO #TEMP_FedEx
+from dispatch.PR_SettlementStmt_History 
+where PayPeriodEnding between 
+	ISNULL(@BeginDate, '01-01-2021') and 
+	ISNULL(@EndDate, '01-01-2021')
+and PersonId is not null
+group by PersonId, PayPeriodEnding
+
+--------------------------
+
+select 
+	PersonId
+	, PayPeriodEnding 
+	, Type = 'FedEx'
+INTO #TEMP_FedEx_CURRENT
+from [dispatch].[PR_SettlementStmt_Processing]
+where PersonId is not null
+group by PersonId, PayPeriodEnding
+
+-----------------------COMBINE
+
+SELECT A.*
+FROM
+(
+SELECT 
+	FullName = p.FirstName + ' ' + p.LastName
+	, PayPeriodEnding
+	, Type
+from main.person p
+join main.PersonTypeMapping ptm on ptm.PersonId = p.PersonId
+CROSS join #TEMP_OTR
+where ptm.PersonTypeId = 4
+and p.IsActive = 1
+and cast(p.personId as varchar) + ' ' + cast(cast(PayPeriodEnding as date) as varchar)
+not in (select cast(personId as varchar) + ' ' + cast(cast(PayPeriodEnding as date) as varchar) from #TEMP_OTR)
+AND p.PersonId NOT in (8,73,1599)	--Exlude Al Jones, John Norris, James Young
+group by p.FirstName + ' ' + p.LastName, PayPeriodEnding, Type
+
+UNION ALL
+
+SELECT 
+	FullName = p.FirstName + ' ' + p.LastName
+	, PayPeriodEnding
+	, Type
+from main.person p
+join main.PersonTypeMapping ptm on ptm.PersonId = p.PersonId
+CROSS join #TEMP_FEDEX 
+where ptm.PersonTypeId = 3
+and p.IsActive = 1
+and cast(p.personId as varchar) + ' ' + cast(cast(PayPeriodEnding as date) as varchar)
+not in (select cast(b.personId as varchar) + ' ' + cast(cast(b.PayPeriodEnding as date) as varchar) from #TEMP_FedEx b)
+AND p.PersonId NOT in (8,73,1599)	--Exlude Al Jones, John Norris, James Young
+group by p.FirstName + ' ' + p.LastName, PayPeriodEnding, p.PersonId, type
+
+UNION ALL
+
+SELECT 
+	FullName = p.FirstName + ' ' + p.LastName
+	, PayPeriodEnding
+	, Type
+from main.person p
+join main.PersonTypeMapping ptm on ptm.PersonId = p.PersonId
+CROSS JOIN #TEMP_FedEx_CURRENT
+where ptm.PersonTypeId = 3
+and p.IsActive = 1
+and p.personid not in (Select Personid from [dispatch].[PR_SettlementStmt_Processing])
+AND p.PersonId NOT in (8,73,1599)	--Exlude Al Jones, John Norris, James Young
+group by p.FirstName + ' ' + p.LastName, PayPeriodEnding, p.PersonId, type
+--order by p.FirstName + ' ' + p.LastName, PayPeriodEnding
+) A
+
+
+Employee Info
+
+
+
+
+
+
+Driver Dashbaord Report E200510000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+58454 - dispatched on accident
+
+Send Original	
+
+
+sp_LoadManagement_Windows_Select
+
+
+
+
+58462
+
+------------------------------------------------------------------------------
+
+Delete:
+	8b2bd652864c2892bbcc45bcc63a453d2df5505f
+	c54a32231568c0a2d40259bb824e9027452e61f1
+
+
+'Send Original':
+	6f4ae94542982e76328b21d220ba1876c806fa53
+		0f6c1cf938b5132b0ee74a6c4e2e1df0ba8ad29a	???
+	aaabb0a6fa04926fea15dfa51fdab2dacce9dd43
+
+PTO:
+		74832b3aab3c86fc1ef23a85f468d2e21cd963b5	???
+	8b2bd652864c2892bbcc45bcc63a453d2df5505f
+		c65296d089d18bdee62189eb5e938af4d3714e9c	???
+	c54a32231568c0a2d40259bb824e9027452e61f1
+	
+
+
+
+	6f4ae94542982e76328b21d220ba1876c806fa53	danny <danny@redbonetrucking.com>	1/26/2024 4:27:21 PM +00:00	remove 'Send Original'
+	0f6c1cf938b5132b0ee74a6c4e2e1df0ba8ad29a	danny <danny@redbonetrucking.com>	1/26/2024 3:29:44 PM +00:00	Merge branch 'master' of https://bitbucket.org/tbyers/redboneplatform
+d43f849c5b8e350bb8870271104807dc371006a8	David St. Germain <david@updownturnaround.com>	1/26/2024 3:26:36 PM +00:00	proj
+88a8555ff8a3d95803766aaedb445a1a0262118e	David St. Germain <david@updownturnaround.com>	1/26/2024 3:26:27 PM +00:00	edi
+	aaabb0a6fa04926fea15dfa51fdab2dacce9dd43	danny <danny@redbonetrucking.com>	1/25/2024 7:18:26 PM +00:00	remove 'Send Original'
+	74832b3aab3c86fc1ef23a85f468d2e21cd963b5	danny <danny@redbonetrucking.com>	1/22/2024 2:27:52 PM +00:00	Merge branch 'master' of https://bitbucket.org/tbyers/redboneplatform
+b12606912da4dd44055735c904d8ace157867cf1	David St. Germain <david@updownturnaround.com>	1/21/2024 10:33:40 PM +00:00	proj
+f96259b95e0ea55a89761207456fe5f17307692f	David St. Germain <david@updownturnaround.com>	1/21/2024 10:33:30 PM +00:00	edi
+	8b2bd652864c2892bbcc45bcc63a453d2df5505f	danny <danny@redbonetrucking.com>	1/19/2024 8:09:22 PM +00:00	Finalize OTR Payroll and Generate PTO For Pay Period
+	c65296d089d18bdee62189eb5e938af4d3714e9c	danny <danny@redbonetrucking.com>	1/19/2024 7:23:33 PM +00:00	Merge branch 'master' of https://bitbucket.org/tbyers/redboneplatform
+d0271957e32d30607195399d7ed5e2266e5fa11e	David St. Germain <david@updownturnaround.com>	1/18/2024 1:20:32 AM +00:00	Merge branch 'master' of https://bitbucket.org/tbyers/redboneplatform
+33fa91d562ec9992ac75503215889e24812735dd	David St. Germain <david@updownturnaround.com>	1/18/2024 1:20:11 AM +00:00	edi
+	c54a32231568c0a2d40259bb824e9027452e61f1	danny <danny@redbonetrucking.com>	1/19/2024 7:11:30 PM +00:00	Finalize OTR Payroll and Generate PTO For Pay Period
+
+--------------- (COMMIT/PUSH LINE)
+
+26ec01e877aae7c2f4f6782decde7d577a879206	danny <danny@redbonetrucking.com>	1/17/2024 7:57:23 PM +00:00	Add PaidPetDeposit and HasPassengerInsurance to Driver Info
+4bc043e87d4241b813f386a136a71c86fe950a00	David St. Germain <david@updownturnaround.com>	1/12/2024 1:19:04 AM +00:00	load tenders
+e90d4a26eb6d16ecb0dc76e8bf0b45e54ab09b4a	David St. Germain <david@updownturnaround.com>	1/11/2024 9:56:54 PM +00:00	load management
+b402becb360ae25509d228a187d5097ba8570919	David St. Germain <david@updownturnaround.com>	1/11/2024 5:39:54 PM +00:00	proj
+77712933403c3ba019dc80f7e02d99fb0baa28dc	David St. Germain <david@updownturnaround.com>	1/11/2024 5:39:47 PM +00:00	load management
+04a1f4f45000c599d0d867404f0f4646a1a6c0cf	David St. Germain <david@updownturnaround.com>	1/10/2024 3:55:54 PM +00:00	proj
+6ad904663ac55563813683163b8a39d172b01020	David St. Germain <david@updownturnaround.com>	1/10/2024 3:55:47 PM +00:00	proj
+74b75d595f751e7f33e7a5ec677a2846522c660d	David St. Germain <david@updownturnaround.com>	1/10/2024 1:18:47 AM +00:00	Merge branch 'master' of https://bitbucket.org/tbyers/redboneplatform
+cab8df011a680cc3b6813e0e29a1c51b15f49e94	danny <danny@redbonetrucking.com>	1/8/2024 4:28:28 PM +00:00	embiggen and enlargen email column
+5137685458140b26bdcc627768f1199f57c20c2b	danny <danny@redbonetrucking.com>	1/8/2024 4:19:16 PM +00:00	align labels and fields
+341fa94d4e904570b7cfcf1987170af2c037a7f3	danny <danny@redbonetrucking.com>	1/8/2024 3:30:55 PM +00:00	Merge branch 'master' of https://bitbucket.org/tbyers/redboneplatform
+039f545100f98a23573ac33c22b11f943bdeddfd	danny <danny@redbonetrucking.com>	1/8/2024 3:30:24 PM +00:00	uploads failure due to file name size being too large
+967e7d5c8f7b8355d01995af15b616c0fe0aaad0	David St. Germain <david@updownturnaround.com>	1/10/2024 1:18:19 AM +00:00	edi
+ffc472734e78ffce30bba47139b210126c7f9f64	David St. Germain <david@updownturnaround.com>	1/7/2024 10:28:58 PM +00:00	Merge branch 'master' of https://bitbucket.org/tbyers/redboneplatform
+bdfddb58740075261a57e13a695be2d4dd2edf6d	danny <danny@redbonetrucking.com>	1/5/2024 10:45:22 PM +00:00	change dispatch # from a label to a readonly textbox
+
+
+
+
+
+
+
+
+
+
+
+Revert "Finalize OTR Payroll and Generate PTO For Pay Period"
+
+
+
+
+
+
+
+
+.\bin\Reports\DispatchSheet.trdp
+.\bin\RedbonePlatform.dll
+.\Pages\ContainerPages\DispatchSheet.aspx
+.\Reports\DispatchSheet.trdp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS #TEMP_OTR_Pay
+DROP TABLE IF EXISTS #TEMP_OTR_OtherPay
+
+CREATE TABLE #TEMP_OTR_Pay(
+	[Name] [varchar](max) NULL,
+	[LoadId] [int] NULL,
+	[TripNumber] varchar(15) NULL,
+	[TruckNumber] [int] NULL,
+	[Client_Id] [varchar](max) NULL,
+	[PickupBy] [datetime] NULL,
+	[DeliverBy] [datetime] NULL,
+	[DriverType] [varchar](max) NULL,
+	[LegInd] [varchar] (max) NULL,
+	[PickOrigin] [varchar](max) NULL,
+	[DropDest] [varchar](max) NULL,
+	[DriverPersonId] [int] NULL,
+	[PayCode] [varchar](max) NULL,
+	[PayId] [int] NULL,
+	[Quantity] [decimal](10, 2) NULL,
+	[PayRateAmount] [decimal](10, 2) NULL,
+	[PUnitId] [int] NULL
+)
+
+INSERT INTO #TEMP_OTR_Pay
+
+EXEC	sp_DriverPayRollByDeliveryDate_Pay @PayPeriodBeginDate, @PayPeriodEndDate
+
+
+CREATE TABLE #TEMP_OTR_OtherPay
+(
+	DriverId varchar(max) NULL
+	,DriverName varchar(max)
+	,PayCode varchar(max)
+	,PayCodeDescription varchar(max)
+	,PayNotes varchar(max)
+	,PayQuantity decimal(10,2)
+	,PayRate decimal(10,2)
+	,TotalPay decimal(10,2)
+	,TripNumber varchar(15)
+	,PayDate datetime
+	,FirstName varchar(max)
+	,DriverPersonId int
+)
+
+INSERT INTO #TEMP_OTR_OtherPay
+
+EXEC [payroll].[sp_DriverPayRollByDeliveryDate_sub_Processing] @PayPeriodBeginDate, @PayPeriodEndDate
+
+
+
+INSERT INTO [dispatch].[PR_OTR_History] (Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
+SELECT 
+	Name = DriverName
+	,LoadId = NULL
+	,TripNumber = TripNumber
+	,TruckNumber = NULL
+	,Client_Id = NULL
+	,PickupBy = PayDate
+	,DeliverBy = PayDate
+	,DriverType = NULL
+	,LegInd = NULL
+	,PickOrigin = PayCode
+	,DropDest = PayNotes
+	,DriverPersonId 
+	,PayCode = 'Other Pay'
+	,PayId = NULL
+	,Quantity = PayQuantity	
+	,PayRateAmount = PayRate
+	,TotalPay = PayQuantity * PayRate
+	,PayPeriodEnding = @PayPeriodEndDate
+	,PayNotes
+	,LastUpdate = GETDATE()
+	,@LastUpdateBy
+	,PUnitId = NULL
+FROM #TEMP_OTR_OtherPay
+
+WHERE DriverPersonId NOT in (8,73)	--Exlude Al Jones, John Norris
+
+union all
+
+SELECT 
+	[Name]
+	, [LoadId]
+	, [TripNumber]
+	, [TruckNumber]
+	, [Client_Id]
+	, [PickupBy]
+	, [DeliverBy]
+	, [DriverType]
+	, [LegInd]
+	, [PickOrigin]
+	, [DropDest]
+	, [DriverPersonId]
+	, [PayCode]
+	, [PayId]
+	, [Quantity]
+	, [PayRateAmount]
+	, TotalPay = Quantity * PayRateAmount
+	, @PayPeriodEndDate 
+	, PayNotes = NULL
+	, LastUpdate = GETDATE()
+	, @LastUpdateBy
+	, PUnitId
+
+FROM #TEMP_OTR_Pay
+
+WHERE DriverPersonId NOT in (8,73)	--Exlude Al Jones, John Norris
+
+exec sp_Payroll_PTO_Accrual_OTR @PayPeriodEndDate, @LastUpdateBy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LocationPersonMapping
+
+
+
+
+LocationTypeId
+Location
+
+
+
+
+
+
+
+                            <telerik:RadComboBox ID="RadComboBox_PersonPTO" runat="server"
+                                DataSourceID="ObjectDataSource_PersonPTOGroupList" DataTextField="PersonPTOGroupName"
+                                DataValueField="PersonPTOGroupId" AutoPostBack="True" AppendDataBoundItems="true"
+                                Width="218px" OnDataBound="RadComboBox_PersonPTO_DataBound">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Text="-Select-" Value="0" />
+                                </Items>
+                            </telerik:RadComboBox>
+
+
+
+
+
+
+
+            // Load Location mappings that are enabled or assigned
+            Datasets.dsPartyMaintenanceTableAdapters.sp_LocationTypesWithPartyMappingTableAdapter adapt3 =
+                new Datasets.dsPartyMaintenanceTableAdapters.sp_LocationTypesWithPartyMappingTableAdapter();
+            Datasets.dsPartyMaintenance.sp_LocationTypesWithPartyMappingDataTable tbl3 = adapt3.GetData(PersonId);
+
+            foreach (Datasets.dsPartyMaintenance.sp_LocationTypesWithPartyMappingRow row in tbl3)
+            {
+                if (row.Enabled || row.Assigned)
+                {
+                    RadListBoxItem itm = new RadListBoxItem(row.Location, row.LocationTypeId.ToString());
+                    itm.Checked = row.Assigned;
+                    RadListBox_LocationMapping.Items.Add(itm);
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+dsLookupDataManagement
+
+
+
+
+LocationTypeTableAdapter
+
+
+
+
+
+SELECT TOP (1000) [PersonId]
+      ,[LocationTypeId]
+  FROM [RedBone].[main].[LocationPersonMapping]
+  where PersonId = 2256
+
+
+
+
+
+
+
+RedbonePlatform.Datasets.dsLookupDataManagementTableAdapters.LocationTypeTableAdapter">
+
+
+PopulateEmergencyContactPhoneNumber
+PopulateEmergencyContactInfo
+
+
+
+
+
+
+
+
+12/16/2023
+
+
+
+
+PayrollStagingOTR_10_10__10_17_____2023
+
+
+
+
+
+
+DROP TABLE IF EXISTS #TempTable;
+
+
+
+
+
+SELECT column1, column2, ...
+INTO #TempTable
+FROM SourceTable
+WHERE condition;
+
+This statement creates a temporary table #TempTable and inserts the specified columns from SourceTable into the temporary table based on the given condition. If the temporary table already exists, the statement will throw an error. To insert data into an existing temporary table, you can use the INSERT INTO statement:
+sql
+INSERT INTO #TempTable (column1, column2, ...)
+SELECT column1, column2, ...
+FROM SourceTable
+WHERE condition;
+
+
+
+
+
+
+
+
+wdustin99@gmail.com
+
+d.birch83@yahoo.com
+
+JENNY
+WOODARD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Other Pay1.00$13.50$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+															<telerik:RadComboBox ID="RadComboBox_Status" runat="server" OnClientFocus="OnClientFocusHandler" OnClientKeyPressing="radComboKeyPress"
+																EmptyMessage="-Status-" ToolTip="Status" MarkFirstMatch="true" BackColor="Green" ForeColor="White"
+																Filter="Contains" OnSelectedIndexChanged="RadComboBox_SelectedIndexChanged"
+																AutoPostBack="True" DataSourceID="ObjectDataSource_LoadStatusType"
+																DataTextField="LoadStatusTypeNm" DataValueField="LoadStatusTypeId" Width="110px"
+																OnClientSelectedIndexChanging="RadComboBox_Status_SelectedIndexChanging" TabIndex="25">
+															</telerik:RadComboBox>
+
+
+
+                <telerik:AjaxSetting AjaxControlID="RadButton_Dispatch">
+                    <UpdatedControls>
+                        <%--<telerik:AjaxUpdatedControl ControlID="HiddenField_PageGUID" UpdatePanelCssClass="" />--%>
+                        <telerik:AjaxUpdatedControl ControlID="RadButton_Dispatch" />
+                        <telerik:AjaxUpdatedControl ControlID="RadComboBox_Status" />
+						
+						
+
+                </telerik:AjaxSetting>
+                <telerik:AjaxSetting AjaxControlID="RadComboBox_Status">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="RadComboBox_Status" />
+
+
+
+
+
+						<telerik:AjaxSetting AjaxControlID="RadButton_StatusMoveNext">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="RadComboBox_Status" />
+                        <telerik:AjaxUpdatedControl ControlID="RadComboBox_HoldSub" />
+                        <telerik:AjaxUpdatedControl ControlID="RadTextBox_SubOther" />
+                        <telerik:AjaxUpdatedControl ControlID="RadButton_StatusMoveNext" />
+                        <telerik:AjaxUpdatedControl ControlID="RadButton_Dispatch" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+				
+				
+				
+				
+
+asdf
+
+
+
+Vacation Hours - 1
+
+
+ShowRefreshButton="False" 
+
+
+
+
+
+
+
+
+
+
+take out word from all asxp
+
+comment out j
+
+
+
+
+
+
+sp_Payroll_OTR_GetPayRecordsFrom__Load
+sp_Payroll_OTR_GetPayRecordsFrom__DriverPay
+
+sp_Payroll_PTO_Accrual
+
+
+exec sp_Payroll_PTO_Accrual_OTR @PayPeriodEndDate, @LastUpdateBy
+
+
+
+sp_Payroll_Admin_PTO_Accrual
+sp_Payroll_OTR_PTO_Accrual
+
+
+
+
+
+
+
+
+sp_StagePayrollOTR_old_has_both
+sp_StagePayrollOTR_old_has_both
+
+
+sp_Payroll_OTR_StagePayRecords__Load
+sp_Payroll_OTR_StagePayRecords__DriverPay
+
+
+
+
+
+[PayrollStagingOTR]
+
+
+
+
+	************************************************************************************************************************************************************************
+		----------------------------------------------------------------------------------------------
+
+		----------------------------------------------------------------------------------------------
+		
+	
+		===============================================================================================
+
+		===============================================================================================
+		
+	************************************************************************************************************************************************************************
+
+
+
+
+sp_DriverPayRollByDeliveryDate_Pay
+sp_DriverPayRollByDeliveryDate_DriverPay
+
+
+
+
+
+
+asdf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
