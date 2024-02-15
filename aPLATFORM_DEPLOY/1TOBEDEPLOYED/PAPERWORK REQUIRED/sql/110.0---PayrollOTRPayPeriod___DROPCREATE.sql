@@ -18,10 +18,12 @@ GO
 
 CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[PayrollOTRPayPeriodId] [int] IDENTITY(1,1) NOT NULL,
-	[Code] [varchar](4) NULL,
-	[PayrollOTRStatusId] [int] NULL,
-	[BeginDate] [datetime] NULL,
-	[EndDate] [datetime] NULL,
+	[Code] [varchar](4) NOT NULL,
+	[FY] [int] NOT NULL,
+	[Number] [int] NOT NULL,
+	[PayrollOTRStatusId] [int] NOT NULL,
+	[BeginDate] [datetime] NOT NULL,
+	[EndDate] [datetime] NOT NULL,
 	[OfficePayTotalAmount] [decimal](18, 2) NULL,
 	[OTRTotalMiles] [int] NULL,
 	[OTRTotalMilesValue] [decimal](18, 2) NULL,
@@ -32,6 +34,7 @@ CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[OTRPDF] [varbinary](max) NULL,
 	[LastUpdate] [datetime] NULL,
 	[LastUpdateBy] [int] NULL,
+	[Description] [varchar](256) NULL
  CONSTRAINT [PK_PayrollOTRPayPeriod] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRPayPeriodId] ASC
