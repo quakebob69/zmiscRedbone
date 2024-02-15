@@ -13,13 +13,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-
-
-
-
-
-
-
 CREATE procedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load]
 (
         @StartDt datetime 
