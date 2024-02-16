@@ -2,17 +2,15 @@ USE [RedBone]
 GO
 
 
-
-
 --TABLES
 	--TODO
 
 
-
 --STORED PROCEDURES
+	--DROP PROCEDURE IF EXISTS [asdf].[ASDF]
+	--GO
+
 	--PAY
-																--DROP PROCEDURE IF EXISTS [asdf].[ASDF]
-																--GO
 	sp_PR_OTRReviewToHistory
 	sp_DriverPayRollByDeliveryDate_Pay
 	sp_DriverPayRollByDeliveryDate_sub_Processing
