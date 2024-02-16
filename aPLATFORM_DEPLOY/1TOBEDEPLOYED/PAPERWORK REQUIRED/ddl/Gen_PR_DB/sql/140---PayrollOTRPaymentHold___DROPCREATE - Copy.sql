@@ -17,9 +17,11 @@ GO
 
 CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 	[PayrollOTRPaymentHoldId] [int] IDENTITY(1,1) NOT NULL,
-	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
+	--item
+	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
+	--others
  CONSTRAINT [PK_PayrollOTRPaymentHold] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRPaymentHoldId] ASC
