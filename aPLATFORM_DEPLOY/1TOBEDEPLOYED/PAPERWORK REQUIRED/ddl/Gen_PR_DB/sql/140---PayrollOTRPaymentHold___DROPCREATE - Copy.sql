@@ -59,6 +59,6 @@ ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPay
 GO	
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId], [PersonId], [OriginatingOTRPayPeriodId]) VALUES (1, 6, 1);
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId], [PersonId], [OriginatingOTRPayPeriodId]) VALUES (1, 8, 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1);
 --INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
