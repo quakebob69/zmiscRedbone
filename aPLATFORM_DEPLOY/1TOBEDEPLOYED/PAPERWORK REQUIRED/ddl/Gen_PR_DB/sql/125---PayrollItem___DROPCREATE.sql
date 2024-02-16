@@ -1,12 +1,12 @@
 USE [RedBone]
 GO
 
-/****** Object:  Table [payroll].[PayrollItem]    Script Date: 2/16/2024 11:13:05 AM ******/
+/****** Object:  Table [payroll].[PayrollItem]    Script Date: 2/16/2024 1:15:01 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollItem]') AND type in (N'U'))
 DROP TABLE [payroll].[PayrollItem]
 GO
 
-/****** Object:  Table [payroll].[PayrollItem]    Script Date: 2/16/2024 11:13:05 AM ******/
+/****** Object:  Table [payroll].[PayrollItem]    Script Date: 2/16/2024 1:15:01 PM ******/
 SET ANSI_NULLS ON
 GO
 
