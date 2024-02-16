@@ -6,7 +6,7 @@ delete from payroll.PayrollOTRPaymentHold;
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
 	DROP TABLE [payroll].[PayrollOTRPaymentHold]
 	GO
-delete from payroll.PayrollOTRPaymentHold;
+
 
 
 SET ANSI_NULLS ON
@@ -28,9 +28,8 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 (
 
 
-
-
-	PersonId
+	PersonId, OriginatingOTRPayPeriodId
+	--PersonId, OriginatingOTRPayPeriodId, payroll item Id
 
 
 
@@ -58,6 +57,6 @@ ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPay
 GO	
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId], [PersonId], [OriginatingOTRPayPeriodId]) VALUES (1, 8, 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId], [PersonId], [OriginatingOTRPayPeriodId]) VALUES (1, 6, 1);
 INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId], [PersonId], [OriginatingOTRPayPeriodId]) VALUES (1, 8, 1);
 --INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
