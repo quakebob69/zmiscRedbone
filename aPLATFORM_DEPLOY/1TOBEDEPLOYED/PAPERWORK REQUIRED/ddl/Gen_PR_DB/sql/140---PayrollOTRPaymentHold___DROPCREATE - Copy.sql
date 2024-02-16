@@ -20,10 +20,22 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 	[PersonId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
 
+
+
+
+
+
 	--asdf
 	--item
+
+
+
+
+
 	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
-	--others
+	[Quantity] [decimal](10, 2) NULL,
+	[PayRateAmount] [decimal](10, 2) NULL,
+	[TotalPay] [decimal](10, 2) NULL,
  CONSTRAINT [PK_PayrollOTRPaymentHold] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRPaymentHoldId] ASC
