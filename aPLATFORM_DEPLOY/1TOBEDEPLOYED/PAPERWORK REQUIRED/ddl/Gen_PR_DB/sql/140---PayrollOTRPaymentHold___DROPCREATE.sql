@@ -1,12 +1,24 @@
 USE [RedBone]
 GO
 
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
+GO
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
-	DROP TABLE [payroll].[PayrollOTRPaymentHold]
-	GO
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
+GO
 
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
+GO
 
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem]
+GO
+
+/****** Object:  Table [payroll].[PayrollOTRPaymentHold]    Script Date: 2/16/2024 1:17:28 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
+DROP TABLE [payroll].[PayrollOTRPaymentHold]
+GO
+
+/****** Object:  Table [payroll].[PayrollOTRPaymentHold]    Script Date: 2/16/2024 1:17:28 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -28,42 +40,40 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_PayrollOTRPaymentHold] UNIQUE NONCLUSTERED 
 (
-	PersonId, OriginatingOTRPayPeriodId, PayrollItemId
+	[PersonId] ASC,
+	[OriginatingOTRPayPeriodId] ASC,
+	[PayrollItemId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem] FOREIGN KEY([PayrollItemId])
+REFERENCES [payroll].[PayrollItem] ([PayrollItemId])
+GO
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem]
 GO
 
 ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
 REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId])
 GO
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
-GO	
 
-ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_Person] FOREIGN KEY([PersonId])
-REFERENCES [main].[Person] ([PersonId])
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
 GO
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
-GO	
 
 ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
 REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
 GO
+
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
-GO	
-
-
-
-
-
-ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem] FOREIGN KEY([PayrollItemId])
-REFERENCES [payroll].[PayrollItem] ([PayrollItemId])
 GO
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem]
-GO	
 
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_Person] FOREIGN KEY([PersonId])
+REFERENCES [main].[Person] ([PersonId])
+GO
 
-
-
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
+GO
 
 
 --TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
