@@ -19,6 +19,8 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 	[PayrollOTRPaymentHoldId] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
+
+	--asdf
 	--item
 	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
 	--others
@@ -31,6 +33,8 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 
 
 	PersonId, OriginatingOTRPayPeriodId
+
+	--asdf
 	--PersonId, OriginatingOTRPayPeriodId, payroll item Id
 
 
@@ -59,6 +63,8 @@ ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPay
 GO	
 
 -----------------------------------------
+
+--asdf
 INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1);
 INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1);
 --INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
