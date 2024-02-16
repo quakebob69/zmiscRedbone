@@ -1,17 +1,17 @@
 USE [RedBone]
 GO
 
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
-GO
+--ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
+--GO
 
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
-GO
+--ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
+--GO
 
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
-GO
+--ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
+--GO
 
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem]
-GO
+--ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem]
+--GO
 
 /****** Object:  Table [payroll].[PayrollOTRPaymentHold]    Script Date: 2/16/2024 1:17:28 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
