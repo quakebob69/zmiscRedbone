@@ -29,4 +29,5 @@ GO
 
 
 --TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollItem], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
+INSERT INTO [payroll].[PayrollItem] ([Name]) VALUES ('Payroll Item 1');
+INSERT INTO [payroll].[PayrollItem] ([Name]) VALUES ('Payroll Item 2');
