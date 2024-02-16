@@ -27,10 +27,22 @@ GO
 ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
 REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
 GO	
 
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
+REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId])
+GO
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
+GO	
+
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
+REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId])
+GO
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
+GO	
 
 -----------------------------------------
 INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
