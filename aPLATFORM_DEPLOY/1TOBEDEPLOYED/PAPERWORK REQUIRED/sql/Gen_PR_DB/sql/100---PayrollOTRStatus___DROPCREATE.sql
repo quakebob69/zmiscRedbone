@@ -22,7 +22,7 @@ CREATE TABLE [payroll].[PayrollOTRStatus](
 (
 	[PayrollOTRStatusId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [UQ_Name] UNIQUE NONCLUSTERED 
+ CONSTRAINT [UQ_PayrollOTRStatusName] UNIQUE NONCLUSTERED 
 (
 	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -30,11 +30,11 @@ CREATE TABLE [payroll].[PayrollOTRStatus](
 GO
 
 
-------------------
-insert into [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) values (1, 'NOTSTARTED', 'OTR Payroll has not started for this PayPeriod.', 1);
-insert into [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) values (2, 'STAGING', 'OTR payroll is being staged.', 1);
-insert into [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) values (3, 'STAGED', 'OTR payroll has been staged and is ready to be entered into QuickBooks.', 1);
-insert into [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) values (4, 'ENTERED', 'OTR payroll has been entered into QuickBooks and is ready to be Validated.', 1);;
-insert into [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) values (5, 'VALIDATED', 'OTR payroll has been Validated is ready to be Finalized.', 1);
-insert into [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) values (6, 'FINALIZED', 'OTR payroll has been entered Finalized.', 1);
-insert into [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) values (7, 'HISTORY', 'Use For Historical Purposes.', 0);
+-----------------------------------------
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) VALUES (1, 'NOTSTARTED', 'OTR Payroll has not started for this PayPeriod.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) VALUES (2, 'STAGING', 'OTR payroll is being staged.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) VALUES (3, 'STAGED', 'OTR payroll has been staged and is ready to be entered into QuickBooks.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) VALUES (4, 'ENTERED', 'OTR payroll has been entered into QuickBooks and is ready to be Validated.', 1);;
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) VALUES (5, 'VALIDATED', 'OTR payroll has been Validated is ready to be Finalized.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) VALUES (6, 'FINALIZED', 'OTR payroll has been entered Finalized.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Description], [UseForPayroll]) VALUES (7, 'HISTORY', 'Use For Historical Purposes.', 0);
