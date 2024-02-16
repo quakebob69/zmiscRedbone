@@ -18,7 +18,7 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 	[PayrollOTRPaymentHoldId] [int] IDENTITY(1,1) NOT NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
 	[PersonId] [int] NOT NULL,
-	[originatingPayPeriodId] [int] NOT NULL,
+	[OriginatingOTRPayPeriodId] [int] NOT NULL,
  CONSTRAINT [PK_PayrollOTRPaymentHold] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRPaymentHoldId] ASC
@@ -42,12 +42,12 @@ GO
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
 GO	
 
-ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_Person] FOREIGN KEY([PersonId])
-REFERENCES [main].[Person] ([PersonId])
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
+REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
 GO
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
 GO	
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1, 55555, 55555);
+--INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
