@@ -32,4 +32,4 @@ GO
 
 -----------------------------------------
 INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
---INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (2);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
