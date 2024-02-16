@@ -26,7 +26,15 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_PayrollOTRPaymentHold] UNIQUE NONCLUSTERED 
 (
-	PayrollOTRPaymentHoldReasonId, PersonId
+
+
+
+
+	PersonId
+
+
+
+
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -51,5 +59,5 @@ GO
 
 -----------------------------------------
 INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId], [PersonId], [OriginatingOTRPayPeriodId]) VALUES (1, 8, 1);
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId], [PersonId], [OriginatingOTRPayPeriodId]) VALUES (1, 6, 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId], [PersonId], [OriginatingOTRPayPeriodId]) VALUES (1, 8, 1);
 --INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
