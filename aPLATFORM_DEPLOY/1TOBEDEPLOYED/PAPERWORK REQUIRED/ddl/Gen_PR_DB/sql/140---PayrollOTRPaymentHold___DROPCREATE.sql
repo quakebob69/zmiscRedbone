@@ -7,7 +7,7 @@ delete from payroll.PayrollOTRPaymentHold;
 	DROP TABLE [payroll].[PayrollOTRPaymentHold]
 	GO
 
-
+delete from payroll.PayrollOTRPaymentHold;
 
 SET ANSI_NULLS ON
 GO
@@ -19,24 +19,7 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 	[PayrollOTRPaymentHoldId] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
-
-
-
-
-
-
-SELECT TOP (1000) [PersonPayRateId]
-      ,[Description]
-      ,[SyncToQB]
-      ,[SortOrder]
-      ,[SyncToQBAvoidInd]
-  FROM [RedBone].[main].[PersonPayRate]
-
-
-
-
-
-
+	[PayrollItemId] [int] NOT NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
 	[Quantity] [decimal](10, 2) NULL,
 	[PayRateAmount] [decimal](10, 2) NULL,
@@ -47,18 +30,7 @@ SELECT TOP (1000) [PersonPayRateId]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_PayrollOTRPaymentHold] UNIQUE NONCLUSTERED 
 (
-
-
-	PersonId, OriginatingOTRPayPeriodId
-
-
-
-	--asdf
-	--PersonId, OriginatingOTRPayPeriodId, payroll item Id
-
-
-
-
+	PersonId, OriginatingOTRPayPeriodId, PayrollItem
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -81,9 +53,7 @@ GO
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
 GO	
 
------------------------------------------
-
---asdf
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1);
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1);
+--TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollItem], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollItem], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1, 1);
 --INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);

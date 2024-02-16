@@ -28,3 +28,5 @@ CREATE TABLE [payroll].[PayrollItem](
 GO
 
 
+--TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollItem], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
