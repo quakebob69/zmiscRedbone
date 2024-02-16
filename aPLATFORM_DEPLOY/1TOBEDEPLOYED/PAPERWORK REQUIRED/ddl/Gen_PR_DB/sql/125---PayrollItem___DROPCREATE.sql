@@ -14,7 +14,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [payroll].[PayrollItem](
-	[PayrollItemId] [smallint] IDENTITY(1,1) NOT NULL,
+	[PayrollItemId] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](100) NOT NULL,
  CONSTRAINT [PK_PayrollItem] PRIMARY KEY CLUSTERED 
 (

@@ -37,24 +37,26 @@ USE [RedBone]
 
 
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
-	DROP TABLE [payroll].[PayrollOTRPaymentHold]
-	GO
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
-	DROP TABLE [payroll].[PayrollOTRPaymentHoldReason]
-	GO
+
+					IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
+					DROP TABLE [payroll].[PayrollOTRPaymentHold]
+					GO
 
 
 
 
+					IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
+					DROP TABLE [payroll].[PayrollOTRPaymentHoldReason]
+					GO
 
 
 
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollItem]') AND type in (N'U'))
-	DROP TABLE [payroll].[PayrollItem]
-	GO
+					IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollItem]') AND type in (N'U'))
+					DROP TABLE [payroll].[PayrollItem]
+					GO
+
 
 
 

@@ -1,13 +1,11 @@
 USE [RedBone]
 GO
 
-delete from payroll.PayrollOTRPaymentHold;
 
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
 	DROP TABLE [payroll].[PayrollOTRPaymentHold]
 	GO
 
-delete from payroll.PayrollOTRPaymentHold;
 
 SET ANSI_NULLS ON
 GO
@@ -53,7 +51,22 @@ GO
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
 GO	
 
+
+
+
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem] FOREIGN KEY([PayrollItemId])
+REFERENCES [payroll].[PayrollItem] ([PayrollItemId])
+GO
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem]
+GO	
+
+
+
+
+
+
 --TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1, 1);
 INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [PayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
 --INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);
