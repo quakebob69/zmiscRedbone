@@ -1,6 +1,3 @@
-USE [RedBone]
-GO
-
 --ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
 --GO
 

@@ -1,6 +1,3 @@
-USE [RedBone]
-GO
-
 /****** Object:  Table [payroll].[PayrollOTRStatus]    Script Date: 2/14/2024 1:12:38 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
 DROP TABLE [payroll].[PayrollOTRStatus]

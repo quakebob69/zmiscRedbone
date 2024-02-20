@@ -1,6 +1,3 @@
-USE [RedBone]
-
-
 --STORED PROCEDURES
 	DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_OTR_Accrual]
 	GO

@@ -1,6 +1,3 @@
-USE [RedBone]
-GO
-
 /****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__DriverPay]    Script Date: 2/14/2024 10:05:27 AM ******/
 DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__DriverPay]
 GO
