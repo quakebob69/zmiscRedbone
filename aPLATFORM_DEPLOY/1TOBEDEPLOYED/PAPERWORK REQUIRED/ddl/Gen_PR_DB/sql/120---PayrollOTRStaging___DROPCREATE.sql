@@ -1,6 +1,9 @@
 --ALTER TABLE [payroll].[PayrollOTRStaging] DROP CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRPayPeriod]
 --GO
 
+--ALTER TABLE [payroll].[PayrollOTRStaging] DROP CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRDataSource]
+--GO
+
 /****** Object:  Table [payroll].[PayrollOTRStaging]    Script Date: 2/14/2024 1:09:25 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStaging]') AND type in (N'U'))
 DROP TABLE [payroll].[PayrollOTRStaging]
@@ -16,8 +19,7 @@ GO
 CREATE TABLE [payroll].[PayrollOTRStaging](
 	[PayrollOTRStagingId] [int] IDENTITY(1,1) NOT NULL,
 	[PayrollOTRPayPeriodId] [int] NOT NULL,
-	[isSourceLoad] [bit] NOT NULL,
-	[isSourceDriverPay] [bit] NOT NULL,
+	[PayrollOTRDataSourceId] [int] NOT NULL,
 	[Name] [varchar](128) NULL,
 	[LoadId] [int] NULL,
 	[TripNumber] [varchar](15) NULL,
@@ -52,6 +54,13 @@ REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
 GO
 
 ALTER TABLE [payroll].[PayrollOTRStaging] CHECK CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRPayPeriod]
+GO
+
+ALTER TABLE [payroll].[PayrollOTRStaging]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRDataSource] FOREIGN KEY([PayrollOTRDataSourceId])
+REFERENCES [payroll].[PayrollOTRDataSource] ([PayrollOTRDataSourceId])
+GO
+
+ALTER TABLE [payroll].[PayrollOTRStaging] CHECK CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRDataSource]
 GO
 
 
