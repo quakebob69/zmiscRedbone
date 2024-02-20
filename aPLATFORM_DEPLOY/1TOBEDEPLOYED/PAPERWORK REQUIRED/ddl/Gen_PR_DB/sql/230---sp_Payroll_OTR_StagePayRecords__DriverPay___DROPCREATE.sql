@@ -46,7 +46,7 @@ END
 		DELETE FROM [payroll].[PayrollOTRStaging] WHERE
 		PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId
 		AND
-		isSourceDriverPay = 1;
+		PayrollOTRDataSourceId = asdf;
 
 --TEMP_OTR_DATA__DriverPay inserts
 	DROP TABLE IF EXISTS #TEMP_OTR_DATA__DriverPay
@@ -69,11 +69,10 @@ END
 	EXEC payroll.sp_Payroll_OTR_GetPayRecordsFrom__DriverPay @PayPeriodBeginDate, @PayPeriodEndDate
 
 --PayrollOTRStaging inserts
-	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, isSourceLoad, isSourceDriverPay, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
+	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
 		SELECT 
 			@PayrollOTRPayPeriodId
-			,isSourceLoad = 0
-			,isSourceDriverPay = 1
+			,PayrollOTRDataSourceId = asdf
 			,Name = DriverName
 			,LoadId = NULL
 			,TripNumber = TripNumber
