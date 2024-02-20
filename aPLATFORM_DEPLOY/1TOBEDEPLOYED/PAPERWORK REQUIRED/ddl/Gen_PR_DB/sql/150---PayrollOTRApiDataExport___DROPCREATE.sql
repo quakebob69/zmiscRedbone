@@ -15,7 +15,7 @@ GO
 
 CREATE TABLE [payroll].[PayrollOTRApiDataExport](
 	[PayrollOTRApiDataExportId] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](128) NOT NULL,
+	[EmployeeNameWithLastFourSSN] [varchar](128) NOT NULL,
 	[PayrollOTRApiDataExportTypeId] [int] NOT NULL,
 	[PayrollItemName] [varchar](128) NOT NULL,
 	[Quantity] [decimal](10, 2) NULL,
@@ -26,7 +26,7 @@ CREATE TABLE [payroll].[PayrollOTRApiDataExport](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_PayrollOTRApiDataExport] UNIQUE NONCLUSTERED 
 (
-	[Name] ASC,
+	[EmployeeNameWithLastFourSSN] ASC,
 	[PayrollOTRApiDataExportTypeId] ASC,
 	[PayrollItemName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
