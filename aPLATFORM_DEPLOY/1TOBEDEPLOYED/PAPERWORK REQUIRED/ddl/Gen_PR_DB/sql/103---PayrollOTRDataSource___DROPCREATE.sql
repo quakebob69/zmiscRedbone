@@ -13,8 +13,6 @@ GO
 CREATE TABLE [payroll].[PayrollOTRDataSource](
 	[PayrollOTRDataSourceId] [int] NOT NULL,
 	[Name] [varchar](50) NOT NULL,
-	[Description] [varchar](128) NOT NULL,
-	[Resolution] [varchar](128) NOT NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollOTRDataSource] PRIMARY KEY CLUSTERED 
 (
@@ -29,5 +27,5 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRDataSource] ([PayrollOTRDataSourceId], [Name], [Description], [Resolution], [Enabled]) VALUES (1, 'INCOMPLETELOADPAPER', 'The load is missing paperwork.', 'The payment will be sent after all paperwork is recieved for the Load.', 1);
-INSERT INTO [payroll].[PayrollOTRDataSource] ([PayrollOTRDataSourceId], [Name], [Description], [Resolution], [Enabled]) VALUES (2, 'ZEROOTRMILES', 'The driver has zero OTR miles.', 'The payment will be sent after the driver has been paid for OTR miles.', 1);
+INSERT INTO [payroll].[PayrollOTRDataSource] ([PayrollOTRDataSourceId], [Name], [Enabled]) VALUES (1, 'LOAD', 1);
+INSERT INTO [payroll].[PayrollOTRDataSource] ([PayrollOTRDataSourceId], [Name], [Enabled]) VALUES (2, 'DRIVERPAY', 1);
