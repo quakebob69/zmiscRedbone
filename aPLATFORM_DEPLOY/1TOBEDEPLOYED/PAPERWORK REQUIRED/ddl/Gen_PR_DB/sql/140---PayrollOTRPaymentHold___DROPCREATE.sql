@@ -29,8 +29,7 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 	[PayrollItemId] [int] NOT NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
 	[Quantity] [decimal](10, 2) NULL,
-	[PayRateAmount] [decimal](10, 2) NULL,
-	[TotalPay] [decimal](10, 2) NULL,
+	[Rate] [decimal](10, 2) NULL
  CONSTRAINT [PK_PayrollOTRPaymentHold] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRPaymentHoldId] ASC
