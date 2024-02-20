@@ -31,11 +31,6 @@
 
 
 
-
-
-
-
-
 					IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
 					DROP TABLE [payroll].[PayrollOTRPaymentHold]
 					GO
@@ -43,9 +38,30 @@
 
 
 
+
+
+
+
+
+
+
+
 					IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
 					DROP TABLE [payroll].[PayrollOTRPaymentHoldReason]
 					GO
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -68,22 +84,20 @@
 
 
 
-	ALTER TABLE [payroll].[PayrollOTRStaging] DROP CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRPayPeriod]
-	GO
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStaging]') AND type in (N'U'))
-	DROP TABLE [payroll].[PayrollOTRStaging]
+		ALTER TABLE [payroll].[PayrollOTRStaging] DROP CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRPayPeriod]
+		DROP TABLE [payroll].[PayrollOTRStaging]
 	GO
 
 
-	ALTER TABLE [payroll].[PayrollOTRPayPeriod] DROP CONSTRAINT [FK_PayrollOTRPayPeriod_PayrollOTRStatus]
-	GO
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPayPeriod]') AND type in (N'U'))
-	DROP TABLE [payroll].[PayrollOTRPayPeriod]
+		ALTER TABLE [payroll].[PayrollOTRPayPeriod] DROP CONSTRAINT [FK_PayrollOTRPayPeriod_PayrollOTRStatus]
+		DROP TABLE [payroll].[PayrollOTRPayPeriod]
 	GO
 
 
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
-	DROP TABLE [payroll].[PayrollOTRStatus]
+		DROP TABLE [payroll].[PayrollOTRStatus]
 	GO
 
 
