@@ -52,17 +52,17 @@ END
 	DROP TABLE IF EXISTS #TEMP_OTR_DATA__DriverPay
 	CREATE TABLE #TEMP_OTR_DATA__DriverPay
 	(
-		DriverId varchar(255) NULL
-		,DriverName varchar(255)
-		,PayCode varchar(255)
-		,PayCodeDescription varchar(255)
-		,PayNotes varchar(255)
+		DriverId varchar(10) NULL
+		,DriverName varchar(128)
+		,PayCode varchar(128)
+		,PayCodeDescription varchar(128)
+		,PayNotes varchar(128)
 		,PayQuantity decimal(10,2)
 		,PayRate decimal(10,2)
 		,TotalPay decimal(10,2)
 		,TripNumber varchar(15)
 		,PayDate datetime
-		,FirstName varchar(255)
+		,FirstName varchar(128)
 		,DriverPersonId int
 	)
 	INSERT INTO #TEMP_OTR_DATA__DriverPay

@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS #WEEKLYTOTAL
 
 DELETE FROM main.PersonPTO 
 WHERE len(cast(notes as varchar))>15
-AND substring(cast(notes as varchar(max)), len(cast(notes as varchar(max)))-15,18)
+AND substring(cast(notes as varchar(256)), len(cast(notes as varchar(256)))-15,18)
 ='OTRPPE' + CAST(year(@PayPeriodEndDate) as VARCHAR) + '-' + right('0' + CAST(month(@PayPeriodEndDate) AS VARCHAR),2) + '-' +  right('0' + CAST(day(@PayPeriodEndDate) AS VARCHAR),2)
 
 /*SELECT THE MOST RECENT HIRE/REHIRE DATE, WHICH WILL BE TREATED AS HIRE DATE FOR PURPOSES OF PTO CALC*/

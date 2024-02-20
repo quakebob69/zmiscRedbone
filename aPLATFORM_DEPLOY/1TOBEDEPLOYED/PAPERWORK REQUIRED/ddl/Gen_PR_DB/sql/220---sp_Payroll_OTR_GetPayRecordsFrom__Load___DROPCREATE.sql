@@ -137,7 +137,7 @@ BEGIN
         declare @tempA table (
                 DriverTag char(1)
                 ,LoadId int
-                ,TruckNumber varchar(255)
+                ,TruckNumber varchar(30)
                 ,Client_Id nchar(10)
                 ,DriverId varchar(10)
                 ,Driver varchar(100)

@@ -40,7 +40,7 @@ DELETE FROM main.PersonPTO
 WHERE len(cast(notes as varchar))>17
 AND 
 (
-substring(cast(notes as varchar(max)), len(cast(notes as varchar(max)))-17,20)
+substring(cast(notes as varchar(256)), len(cast(notes as varchar(256)))-17,20)
 ='ADMINPPE' + CAST(year(@PayPeriodEndDate) as VARCHAR) + '-' + right('0' + CAST(month(@PayPeriodEndDate) AS VARCHAR),2) + '-' +  right('0' + CAST(day(@PayPeriodEndDate) AS VARCHAR),2)
 )
 

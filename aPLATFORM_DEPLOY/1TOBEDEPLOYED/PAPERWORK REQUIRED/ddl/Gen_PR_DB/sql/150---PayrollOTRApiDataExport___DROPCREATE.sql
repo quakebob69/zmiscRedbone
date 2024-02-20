@@ -12,7 +12,7 @@ GO
 
 CREATE TABLE [payroll].[PayrollOTRApiDataExport](
 	[PayrollOTRApiDataExportId] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](255) NOT NULL,
+	[Name] [varchar](128) NOT NULL,
 	[PayrollOTRApiDataExportTypeId] [int] NOT NULL,
 	[PayrollItemId] [int] NOT NULL,
 	[Quantity] [decimal](10, 2) NULL,
