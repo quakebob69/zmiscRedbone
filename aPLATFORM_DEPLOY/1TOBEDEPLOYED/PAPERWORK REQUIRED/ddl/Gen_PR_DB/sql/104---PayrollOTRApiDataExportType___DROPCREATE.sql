@@ -28,4 +28,4 @@ GO
 
 -----------------------------------------
 INSERT INTO [payroll].[PayrollOTRApiDataExportType] ([PayrollOTRApiDataExportTypeId], [Name], [Enabled]) VALUES (1, 'EARNINGS', 1);
-INSERT INTO [payroll].[PayrollOTRApiDataExportType] ([PayrollOTRApiDataExportTypeId], [Name], [Enabled]) VALUES (2, 'OTHERPAY', 1);
+INSERT INTO [payroll].[PayrollOTRApiDataExportType] ([PayrollOTRApiDataExportTypeId], [Name], [Enabled]) VALUES (2, 'OTHERPAYROLLITEMS', 1);

@@ -36,6 +36,11 @@ END
 		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE Code = @CurrentPayPeriodCode);
 		SET @PayPeriodEndDate = (SELECT FORMAT(DATEADD(HOUR, -12, EndDate), 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE Code = @CurrentPayPeriodCode);
 
+	DECLARE @DataSourceName_LOAD NVARCHAR(4)
+	SET @DataSourceName_LOAD = 'LOAD'
+	DECLARE @PayrollOTRDataSourceId_LOAD INT
+		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
+
 --init tables
 	--PayrollOTRPayPeriod
 		UPDATE payroll.PayrollOTRPayPeriod
@@ -46,7 +51,7 @@ END
 		DELETE FROM [payroll].[PayrollOTRStaging] WHERE
 		PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId
 		AND
-		PayrollOTRDataSourceId = asdf;
+		PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
 
 --TEMP_OTR_DATA__Load inserts
 	DROP TABLE IF EXISTS #TEMP_OTR_DATA__Load
@@ -76,7 +81,7 @@ END
 	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
 		SELECT
 			@PayrollOTRPayPeriodId
-			,PayrollOTRDataSourceId = asdf
+			,PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
 			,Name
 			,LoadId
 			,TripNumber
