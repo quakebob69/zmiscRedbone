@@ -102,4 +102,3 @@ END
 			,PUnitId = NULL
 		FROM #TEMP_OTR_DATA__DriverPay
 GO
-
