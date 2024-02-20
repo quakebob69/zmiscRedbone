@@ -29,5 +29,5 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId], [Name], [Description], [Resolution], [Enabled]) VALUES (1, 'INCOMPLETELOADPAPER', 'The load is missing paperwork.', 'The payment will be sent after all paperwork is recieved for the Load.', 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId], [Name], [Description], [Resolution], [Enabled]) VALUES (1, 'INCOMPLETELOADPAPERWORK', 'The load is missing paperwork.', 'The payment will be sent after all paperwork is recieved for the Load.', 1);
 INSERT INTO [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId], [Name], [Description], [Resolution], [Enabled]) VALUES (2, 'ZEROOTRMILES', 'The driver has zero OTR miles.', 'The payment will be sent after the driver has been paid for OTR miles.', 1);
