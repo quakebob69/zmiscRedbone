@@ -12,7 +12,7 @@ GO
 
 CREATE TABLE [payroll].[PayrollItem](
 	[PayrollItemId] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](100) NOT NULL,
+	[Name] [varchar](128) NOT NULL,
  CONSTRAINT [PK_PayrollItem] PRIMARY KEY CLUSTERED 
 (
 	[PayrollItemId] ASC
