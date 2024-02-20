@@ -1,3 +1,6 @@
+--ALTER TABLE [payroll].[PayrollOTRApiDataExport] DROP CONSTRAINT [FK_PayrollOTRApiDataExport_PayrollOTRApiDataExportType]
+--GO
+
 /****** Object:  Table [payroll].[PayrollOTRApiDataExport]    Script Date: 2/20/2024 9:39:54 AM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRApiDataExport]') AND type in (N'U'))
 DROP TABLE [payroll].[PayrollOTRApiDataExport]
@@ -20,13 +23,12 @@ CREATE TABLE [payroll].[PayrollOTRApiDataExport](
  CONSTRAINT [PK_PayrollOTRApiDataExport] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRApiDataExportId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY],
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_PayrollOTRApiDataExport] UNIQUE NONCLUSTERED 
 (
-	[PersonId] ASC,
-	[OriginatingOTRPayPeriodId] ASC,
-	[PayrollItemId] ASC
+	[Name] ASC,
+	[PayrollOTRApiDataExportTypeId] ASC,
+	[PayrollItemName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
