@@ -1,0 +1,4 @@
+USE [RedBone]
+
+SELECT COUNT(*) FROM MAIN.PERSON;
+GO

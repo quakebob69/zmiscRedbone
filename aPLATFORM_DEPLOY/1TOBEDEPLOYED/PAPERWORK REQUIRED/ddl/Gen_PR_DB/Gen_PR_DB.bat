@@ -5,7 +5,10 @@ set "sqlDir=C:\Users\danny.call\zmiscRedbone\aPLATFORM_DEPLOY\1TOBEDEPLOYED\PAPE
 
 for %%f in ("%sqlDir%\*.sql") do (
     	echo. & echo. & echo. & echo.*** "%%~nxf" ***& echo.
-		sqlcmd -S .\SQLEXPRESS -E -i "%%f"
+		rem local
+			rem sqlcmd -S .\SQLEXPRESS -E -i "%%f"
+		rem remote
+			sqlcmd -S 40.78.62.55 -U redboneDB3 -P Kd2GP#Wlrt9Ws -d RedboneThomas -i "%%f"
 )
 
 pause
