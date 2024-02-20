@@ -6,8 +6,10 @@
 	DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_Admin_Accrual]
 	GO
 	
+	
 	DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayRecords__ALL_SOURCES]
 	GO
+
 
 	DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayRecords__Load]
 	GO
@@ -43,13 +45,13 @@
 
 
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStaging]') AND type in (N'U'))
-		ALTER TABLE [payroll].[PayrollOTRStaging] DROP CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRPayPeriod]
+		--ALTER TABLE [payroll].[PayrollOTRStaging] DROP CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRPayPeriod]
 		DROP TABLE [payroll].[PayrollOTRStaging]
 	GO
 
 
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPayPeriod]') AND type in (N'U'))
-		ALTER TABLE [payroll].[PayrollOTRPayPeriod] DROP CONSTRAINT [FK_PayrollOTRPayPeriod_PayrollOTRStatus]
+		--ALTER TABLE [payroll].[PayrollOTRPayPeriod] DROP CONSTRAINT [FK_PayrollOTRPayPeriod_PayrollOTRStatus]
 		DROP TABLE [payroll].[PayrollOTRPayPeriod]
 	GO
 
