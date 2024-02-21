@@ -19,7 +19,7 @@ GO
 
 CREATE TABLE [payroll].[PayrollItem](
 	[PayrollItemId] [int] IDENTITY(1,1) NOT NULL,
-	[QuickbooksCompanyId] [int) NOT NULL,
+	[QuickbooksCompanyId] [int] NOT NULL,
 	[PayrollOTRApiDataExportTypeId] [int] NOT NULL,
 	[Name] [varchar](128) NOT NULL,
 	[Enabled] [bit] NOT NULL,
