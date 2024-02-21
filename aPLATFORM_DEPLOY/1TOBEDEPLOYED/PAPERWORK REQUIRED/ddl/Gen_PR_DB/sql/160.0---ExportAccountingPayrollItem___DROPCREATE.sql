@@ -48,9 +48,3 @@ REFERENCES [payroll].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrol
 GO
 ALTER TABLE [payroll].[ExportAccountingPayrollItem] CHECK CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingPayrollEntryType]
 GO
-
-
-
---TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
-INSERT INTO [payroll].[ExportAccountingPayrollItem] ([ExportAccountingCompanyId], [ExportAccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Payroll Item 1', 1);
-INSERT INTO [payroll].[ExportAccountingPayrollItem] ([ExportAccountingCompanyId], [ExportAccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Payroll Item 2', 1);
