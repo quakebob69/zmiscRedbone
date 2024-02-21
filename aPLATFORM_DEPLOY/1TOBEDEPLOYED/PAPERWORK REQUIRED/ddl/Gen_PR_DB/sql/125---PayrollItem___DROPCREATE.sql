@@ -51,5 +51,5 @@ GO
 
 
 --TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
-INSERT INTO [payroll].[PayrollItem] ([Name], [Enabled]) VALUES ('Payroll Item 1', 1);
-INSERT INTO [payroll].[PayrollItem] ([Name], [Enabled]) VALUES ('Payroll Item 2', 1);
+INSERT INTO [payroll].[PayrollItem] ([QuickbooksCompanyId], [PayrollOTRApiDataExportTypeId], [Name], [Enabled]) VALUES (1, 1, 'Payroll Item 1', 1);
+INSERT INTO [payroll].[PayrollItem] ([QuickbooksCompanyId], [PayrollOTRApiDataExportTypeId], [Name], [Enabled]) VALUES (1, 1, 'Payroll Item 2', 1);
