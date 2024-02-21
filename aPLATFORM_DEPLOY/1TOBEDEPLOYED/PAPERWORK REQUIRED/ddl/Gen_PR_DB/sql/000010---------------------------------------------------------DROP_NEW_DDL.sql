@@ -56,6 +56,29 @@
 
 
 	--'export' schema 
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollData]') AND type in (N'U'))
+		DROP TABLE [export].[ExportAccountingPayrollData]
+	GO
+
+	
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollItem]') AND type in (N'U'))
+		DROP TABLE [export].[ExportAccountingPayrollItem]
+	GO
+
+
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollEntryType]') AND type in (N'U'))
+		DROP TABLE [export].[ExportAccountingPayrollEntryType]
+	GO
+
+
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingCompany]') AND type in (N'U'))
+		DROP TABLE [export].[ExportAccountingCompany]
+	GO
+
+
+
+
+	--'export' schema 
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollData]') AND type in (N'U'))
 		DROP TABLE [payroll].[ExportAccountingPayrollData]
 	GO
