@@ -13,6 +13,7 @@ GO
 CREATE TABLE [payroll].[PayrollItem](
 	[PayrollItemId] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](128) NOT NULL,
+	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollItem] PRIMARY KEY CLUSTERED 
 (
 	[PayrollItemId] ASC
@@ -26,5 +27,5 @@ GO
 
 
 --TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
-INSERT INTO [payroll].[PayrollItem] ([Name]) VALUES ('Payroll Item 1');
-INSERT INTO [payroll].[PayrollItem] ([Name]) VALUES ('Payroll Item 2');
+INSERT INTO [payroll].[PayrollItem] ([Name], [Enabled]) VALUES ('Payroll Item 1', 1);
+INSERT INTO [payroll].[PayrollItem] ([Name], [Enabled]) VALUES ('Payroll Item 2', 1);
