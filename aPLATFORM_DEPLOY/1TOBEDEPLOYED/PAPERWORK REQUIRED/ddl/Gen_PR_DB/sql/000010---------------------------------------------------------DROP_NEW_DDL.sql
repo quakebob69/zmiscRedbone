@@ -29,8 +29,8 @@
 
 
 --TABLES
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayroll]') AND type in (N'U'))
-		DROP TABLE [payroll].[ExportAccountingPayroll]
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollData]') AND type in (N'U'))
+		DROP TABLE [payroll].[ExportAccountingPayrollData]
 	GO
 	
 
@@ -59,8 +59,8 @@
 	GO
 
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[AccountingPayrollEntryType]') AND type in (N'U'))
-		DROP TABLE [payroll].[AccountingPayrollEntryType]
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollEntryType]') AND type in (N'U'))
+		DROP TABLE [payroll].[ExportAccountingPayrollEntryType]
 	GO
 
 

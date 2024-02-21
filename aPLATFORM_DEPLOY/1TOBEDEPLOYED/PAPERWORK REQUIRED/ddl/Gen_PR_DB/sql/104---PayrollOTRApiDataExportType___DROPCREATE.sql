@@ -1,24 +1,24 @@
-/****** Object:  Table [payroll].[AccountingPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[AccountingPayrollEntryType]') AND type in (N'U'))
-DROP TABLE [payroll].[AccountingPayrollEntryType]
+/****** Object:  Table [payroll].[ExportAccountingPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollEntryType]') AND type in (N'U'))
+DROP TABLE [payroll].[ExportAccountingPayrollEntryType]
 GO
 
-/****** Object:  Table [payroll].[AccountingPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
+/****** Object:  Table [payroll].[ExportAccountingPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [payroll].[AccountingPayrollEntryType](
-	[AccountingPayrollEntryTypeId] [int] NOT NULL,
+CREATE TABLE [payroll].[ExportAccountingPayrollEntryType](
+	[ExportAccountingPayrollEntryTypeId] [int] NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[Enabled] [bit] NOT NULL,
- CONSTRAINT [PK_AccountingPayrollEntryType] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_ExportAccountingPayrollEntryType] PRIMARY KEY CLUSTERED 
 (
-	[AccountingPayrollEntryTypeId] ASC
+	[ExportAccountingPayrollEntryTypeId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [UQ_AccountingPayrollEntryType] UNIQUE NONCLUSTERED 
+ CONSTRAINT [UQ_ExportAccountingPayrollEntryType] UNIQUE NONCLUSTERED 
 (
 	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -27,5 +27,5 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[AccountingPayrollEntryType] ([AccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 'EARNINGS', 1);
-INSERT INTO [payroll].[AccountingPayrollEntryType] ([AccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (2, 'OTHERPAYROLLITEMS', 1);
+INSERT INTO [payroll].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 'EARNINGS', 1);
+INSERT INTO [payroll].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (2, 'OTHERPAYROLLITEMS', 1);
