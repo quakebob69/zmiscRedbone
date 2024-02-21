@@ -1,11 +1,11 @@
 --STORED PROCEDURES
+	DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_Admin_Accrual]
+	GO
+
+	
 	DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_OTR_Accrual]
 	GO
 
-
-	DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_Admin_Accrual]
-	GO
-	
 	
 	DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayRecords__ALL_SOURCES]
 	GO
@@ -29,8 +29,8 @@
 
 
 --TABLES
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRApiDataExport]') AND type in (N'U'))
-		DROP TABLE [payroll].[PayrollOTRApiDataExport]
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayroll]') AND type in (N'U'))
+		DROP TABLE [payroll].[ExportAccountingPayroll]
 	GO
 	
 
@@ -59,8 +59,8 @@
 	GO
 
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRApiDataExportType]') AND type in (N'U'))
-		DROP TABLE [payroll].[PayrollOTRApiDataExportType]
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[AccountingPayrollEntryType]') AND type in (N'U'))
+		DROP TABLE [payroll].[AccountingPayrollEntryType]
 	GO
 
 
@@ -69,7 +69,9 @@
 	GO
 
 
+	qb
+
+
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
 		DROP TABLE [payroll].[PayrollOTRStatus]
 	GO
-

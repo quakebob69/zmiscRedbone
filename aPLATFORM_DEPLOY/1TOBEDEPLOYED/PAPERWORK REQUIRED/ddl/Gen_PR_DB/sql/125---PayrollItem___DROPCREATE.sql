@@ -1,7 +1,7 @@
---ALTER TABLE [payroll].[PayrollItem] DROP CONSTRAINT [FK_PayrollItem_QuickbooksCompany]
+--ALTER TABLE [payroll].[PayrollItem] DROP CONSTRAINT [FK_PayrollItem_AccountingCompany]
 --GO
 
---ALTER TABLE [payroll].[PayrollOTRApiDataExport] DROP CONSTRAINT [FK_PayrollItem_PayrollOTRApiDataExportType]
+--ALTER TABLE [payroll].[PayrollItem] DROP CONSTRAINT [FK_PayrollItem_AccountingPayrollEntryType]
 --GO
 
 
@@ -19,8 +19,8 @@ GO
 
 CREATE TABLE [payroll].[PayrollItem](
 	[PayrollItemId] [int] IDENTITY(1,1) NOT NULL,
-	[QuickbooksCompanyId] [int] NOT NULL,
-	[PayrollOTRApiDataExportTypeId] [int] NOT NULL,
+	[AccountingCompanyId] [int] NOT NULL,
+	[AccountingPayrollEntryTypeId] [int] NOT NULL,
 	[Name] [varchar](128) NOT NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollItem] PRIMARY KEY CLUSTERED 
@@ -29,28 +29,28 @@ CREATE TABLE [payroll].[PayrollItem](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_PayrollItem] UNIQUE NONCLUSTERED 
 (
-	[QuickbooksCompanyId] ASC,
-	[PayrollOTRApiDataExportTypeId] ASC,
+	[AccountingCompanyId] ASC,
+	[AccountingPayrollEntryTypeId] ASC,
 	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [payroll].[PayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_PayrollItem_QuickbooksCompany] FOREIGN KEY([QuickbooksCompanyId])
-REFERENCES [payroll].[QuickbooksCompany] ([QuickbooksCompanyId])
+ALTER TABLE [payroll].[PayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_PayrollItem_AccountingCompany] FOREIGN KEY([AccountingCompanyId])
+REFERENCES [payroll].[AccountingCompany] ([AccountingCompanyId])
 GO
-ALTER TABLE [payroll].[PayrollItem] CHECK CONSTRAINT [FK_PayrollItem_QuickbooksCompany]
+ALTER TABLE [payroll].[PayrollItem] CHECK CONSTRAINT [FK_PayrollItem_AccountingCompany]
 GO
 
 
-ALTER TABLE [payroll].[PayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_PayrollItem_PayrollOTRApiDataExportType] FOREIGN KEY([PayrollOTRApiDataExportTypeId])
-REFERENCES [payroll].[PayrollOTRApiDataExportType] ([PayrollOTRApiDataExportTypeId])
+ALTER TABLE [payroll].[PayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_PayrollItem_AccountingPayrollEntryType] FOREIGN KEY([AccountingPayrollEntryTypeId])
+REFERENCES [payroll].[AccountingPayrollEntryType] ([AccountingPayrollEntryTypeId])
 GO
-ALTER TABLE [payroll].[PayrollItem] CHECK CONSTRAINT [FK_PayrollItem_PayrollOTRApiDataExportType]
+ALTER TABLE [payroll].[PayrollItem] CHECK CONSTRAINT [FK_PayrollItem_AccountingPayrollEntryType]
 GO
 
 
 
 --TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
-INSERT INTO [payroll].[PayrollItem] ([QuickbooksCompanyId], [PayrollOTRApiDataExportTypeId], [Name], [Enabled]) VALUES (1, 1, 'Payroll Item 1', 1);
-INSERT INTO [payroll].[PayrollItem] ([QuickbooksCompanyId], [PayrollOTRApiDataExportTypeId], [Name], [Enabled]) VALUES (1, 1, 'Payroll Item 2', 1);
+INSERT INTO [payroll].[PayrollItem] ([AccountingCompanyId], [AccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Payroll Item 1', 1);
+INSERT INTO [payroll].[PayrollItem] ([AccountingCompanyId], [AccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Payroll Item 2', 1);
