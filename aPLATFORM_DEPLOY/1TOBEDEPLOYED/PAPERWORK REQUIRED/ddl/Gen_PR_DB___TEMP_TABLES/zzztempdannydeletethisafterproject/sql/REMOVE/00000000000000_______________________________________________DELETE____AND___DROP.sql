@@ -1,13 +1,19 @@
+USE [RedBoneThomas]
+GO
+
+
+
+
 DELETE FROM [zzztempdannydeletethisafterproject].[PR_OTR_History___zzztempdannydeletethisafterproject];
 GO
 DELETE FROM [zzztempdannydeletethisafterproject].[PersonPTO___zzztempdannydeletethisafterproject];
 GO
 
 
-ALTER TABLE [zzztempdannydeletethisafterproject].[PersonPTO___zzztempdannydeletethisafterproject] DROP CONSTRAINT [FK_PersonPTO___zzztempdannydeletethisafterproject_PersonPTOType]
-GO
-ALTER TABLE [zzztempdannydeletethisafterproject].[PersonPTO___zzztempdannydeletethisafterproject] DROP CONSTRAINT [FK_PersonPTO___zzztempdannydeletethisafterproject_Person]
-GO
+--ALTER TABLE [zzztempdannydeletethisafterproject].[PersonPTO___zzztempdannydeletethisafterproject] DROP CONSTRAINT [FK_PersonPTO___zzztempdannydeletethisafterproject_PersonPTOType]
+--GO
+--ALTER TABLE [zzztempdannydeletethisafterproject].[PersonPTO___zzztempdannydeletethisafterproject] DROP CONSTRAINT [FK_PersonPTO___zzztempdannydeletethisafterproject_Person]
+--GO
 
 
 

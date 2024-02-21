@@ -1,3 +1,6 @@
+USE [RedBoneThomas]
+GO
+
 --STORED PROCEDURES
 	--'payroll' schema 
 		DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_Admin_Accrual]
