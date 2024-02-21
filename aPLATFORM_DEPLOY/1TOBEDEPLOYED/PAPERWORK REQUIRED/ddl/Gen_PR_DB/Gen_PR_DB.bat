@@ -1,6 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
+rem TEMP TABLES
+call asdf
+
 set "sqlDir=C:\Users\danny.call\zmiscRedbone\aPLATFORM_DEPLOY\1TOBEDEPLOYED\PAPERWORK REQUIRED\ddl\Gen_PR_DB\sql"
 
 for %%f in ("%sqlDir%\*.sql") do (
