@@ -34,26 +34,6 @@
 	GO
 
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollData]') AND type in (N'U'))
-		DROP TABLE [payroll].[ExportAccountingPayrollData]
-	GO
-
-	
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollItem]') AND type in (N'U'))
-		DROP TABLE [payroll].[ExportAccountingPayrollItem]
-	GO
-
-
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollEntryType]') AND type in (N'U'))
-		DROP TABLE [payroll].[ExportAccountingPayrollEntryType]
-	GO
-
-
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingCompany]') AND type in (N'U'))
-		DROP TABLE [payroll].[ExportAccountingCompany]
-	GO
-	
-
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
 		DROP TABLE [payroll].[PayrollOTRPaymentHoldReason]
 	GO
@@ -76,4 +56,24 @@
 
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
 		DROP TABLE [payroll].[PayrollOTRStatus]
+	GO
+
+
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollData]') AND type in (N'U'))
+		DROP TABLE [payroll].[ExportAccountingPayrollData]
+	GO
+
+	
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollItem]') AND type in (N'U'))
+		DROP TABLE [payroll].[ExportAccountingPayrollItem]
+	GO
+
+
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollEntryType]') AND type in (N'U'))
+		DROP TABLE [payroll].[ExportAccountingPayrollEntryType]
+	GO
+
+
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingCompany]') AND type in (N'U'))
+		DROP TABLE [payroll].[ExportAccountingCompany]
 	GO
