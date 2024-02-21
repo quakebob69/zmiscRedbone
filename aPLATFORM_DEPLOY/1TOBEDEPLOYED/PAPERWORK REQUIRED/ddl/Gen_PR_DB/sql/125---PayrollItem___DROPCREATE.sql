@@ -12,12 +12,8 @@ GO
 
 CREATE TABLE [payroll].[PayrollItem](
 	[PayrollItemId] [int] IDENTITY(1,1) NOT NULL,
-	
-	
-	[payroll].[QuickbooksCompany]
-	
-	
-	
+	[QuickbooksCompanyId] [int) NOT NULL,
+	[PayrollOTRApiDataExportTypeId] [int] NOT NULL,
 	[Name] [varchar](128) NOT NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollItem] PRIMARY KEY CLUSTERED 
@@ -30,6 +26,21 @@ CREATE TABLE [payroll].[PayrollItem](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+
+ALTER TABLE [payroll].[PayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_PayrollItem_QuickbooksCompany] FOREIGN KEY([QuickbooksCompanyId])
+REFERENCES [payroll].[QuickbooksCompany] ([QuickbooksCompanyId])
+GO
+ALTER TABLE [payroll].[PayrollItem] CHECK CONSTRAINT [FK_PayrollItem_QuickbooksCompany]
+GO
+
+
+ALTER TABLE [payroll].[PayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_PayrollItem_PayrollOTRApiDataExportType] FOREIGN KEY([PayrollOTRApiDataExportTypeId])
+REFERENCES [payroll].[PayrollOTRApiDataExportType] ([PayrollOTRApiDataExportTypeId])
+GO
+ALTER TABLE [payroll].[PayrollItem] CHECK CONSTRAINT [FK_PayrollItem_PayrollOTRApiDataExportType]
+GO
+
 
 
 --TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP

@@ -44,10 +44,10 @@ CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 ) ON [PRIMARY]
 GO
 
+
 ALTER TABLE [payroll].[PayrollOTRPayPeriod]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPayPeriod_PayrollOTRStatus] FOREIGN KEY([PayrollOTRStatusId])
 REFERENCES [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRPayPeriod] CHECK CONSTRAINT [FK_PayrollOTRPayPeriod_PayrollOTRStatus]
 GO
 

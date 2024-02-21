@@ -43,31 +43,31 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 ) ON [PRIMARY]
 GO
 
+
 ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem] FOREIGN KEY([PayrollItemId])
 REFERENCES [payroll].[PayrollItem] ([PayrollItemId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollItem]
 GO
+
 
 ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
 REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
 GO
+
 
 ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
 REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
 GO
+
 
 ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_Person] FOREIGN KEY([PersonId])
 REFERENCES [main].[Person] ([PersonId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
 GO
 

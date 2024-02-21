@@ -49,18 +49,17 @@ CREATE TABLE [payroll].[PayrollOTRStaging](
 ) ON [PRIMARY]
 GO
 
+
 ALTER TABLE [payroll].[PayrollOTRStaging]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRPayPeriod] FOREIGN KEY([PayrollOTRPayPeriodId])
 REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRStaging] CHECK CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRPayPeriod]
 GO
+
 
 ALTER TABLE [payroll].[PayrollOTRStaging]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRDataSource] FOREIGN KEY([PayrollOTRDataSourceId])
 REFERENCES [payroll].[PayrollOTRDataSource] ([PayrollOTRDataSourceId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRStaging] CHECK CONSTRAINT [FK_PayrollOTRStaging_PayrollOTRDataSource]
 GO
-
 
