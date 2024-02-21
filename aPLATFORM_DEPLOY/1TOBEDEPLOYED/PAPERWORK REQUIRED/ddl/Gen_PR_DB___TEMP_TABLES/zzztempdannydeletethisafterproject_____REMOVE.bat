@@ -10,5 +10,3 @@ for %%f in ("%sqlDir%\*.sql") do (
 		rem remote
 			sqlcmd -S 40.78.62.55 -U redboneDB3 -P Kd2GP#Wlrt9Ws -d RedboneThomas -i "%%f"
 )
-
-pause
