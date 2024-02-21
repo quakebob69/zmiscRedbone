@@ -56,21 +56,21 @@
 
 
 	--'export' schema 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollData]') AND type in (N'U'))
-		DROP TABLE [export].[ExportAccountingPayrollData]
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollData]') AND type in (N'U'))
+		DROP TABLE [export].[AccountingExportPayrollData]
 	GO
 
 	
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollItem]') AND type in (N'U'))
-		DROP TABLE [export].[ExportAccountingPayrollItem]
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollItem]') AND type in (N'U'))
+		DROP TABLE [export].[AccountingExportPayrollItem]
 	GO
 
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollEntryType]') AND type in (N'U'))
-		DROP TABLE [export].[ExportAccountingPayrollEntryType]
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollEntryType]') AND type in (N'U'))
+		DROP TABLE [export].[AccountingExportPayrollEntryType]
 	GO
 
 
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingCompany]') AND type in (N'U'))
-		DROP TABLE [export].[ExportAccountingCompany]
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportCompany]') AND type in (N'U'))
+		DROP TABLE [export].[AccountingExportCompany]
 	GO

@@ -7,7 +7,7 @@
 --ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
 --GO
 
---ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_ExportAccountingPayrollItem]
+--ALTER TABLE [payroll].[PayrollOTRPaymentHold] DROP CONSTRAINT [FK_PayrollOTRPaymentHold_AccountingExportPayrollItem]
 --GO
 
 /****** Object:  Table [payroll].[PayrollOTRPaymentHold]    Script Date: 2/16/2024 1:17:28 PM ******/
@@ -26,7 +26,7 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 	[PayrollOTRPaymentHoldId] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
-	[ExportAccountingPayrollItemId] [int] NOT NULL,
+	[AccountingExportPayrollItemId] [int] NOT NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
 	[Quantity] [decimal](10, 2) NULL,
 	[Rate] [decimal](10, 2) NULL
@@ -38,16 +38,16 @@ CREATE TABLE [payroll].[PayrollOTRPaymentHold](
 (
 	[PersonId] ASC,
 	[OriginatingOTRPayPeriodId] ASC,
-	[ExportAccountingPayrollItemId] ASC
+	[AccountingExportPayrollItemId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
 
-ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_ExportAccountingPayrollItem] FOREIGN KEY([ExportAccountingPayrollItemId])
-REFERENCES [export].[ExportAccountingPayrollItem] ([ExportAccountingPayrollItemId])
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_AccountingExportPayrollItem] FOREIGN KEY([AccountingExportPayrollItemId])
+REFERENCES [export].[AccountingExportPayrollItem] ([AccountingExportPayrollItemId])
 GO
-ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_ExportAccountingPayrollItem]
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_AccountingExportPayrollItem]
 GO
 
 
@@ -73,6 +73,6 @@ GO
 
 
 --TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [ExportAccountingPayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1, 1);
-INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [ExportAccountingPayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [AccountingExportPayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1, 1);
+INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [AccountingExportPayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
 --INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PayrollOTRPaymentHoldReasonId]) VALUES (1);

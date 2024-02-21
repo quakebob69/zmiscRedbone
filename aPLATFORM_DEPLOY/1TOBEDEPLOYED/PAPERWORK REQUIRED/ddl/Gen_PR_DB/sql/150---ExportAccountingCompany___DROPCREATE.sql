@@ -1,24 +1,24 @@
-/****** Object:  Table [export].[ExportAccountingCompany]    Script Date: 2/14/2024 1:12:38 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingCompany]') AND type in (N'U'))
-DROP TABLE [export].[ExportAccountingCompany]
+/****** Object:  Table [export].[AccountingExportCompany]    Script Date: 2/14/2024 1:12:38 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportCompany]') AND type in (N'U'))
+DROP TABLE [export].[AccountingExportCompany]
 GO
 
-/****** Object:  Table [export].[ExportAccountingCompany]    Script Date: 2/14/2024 1:12:38 PM ******/
+/****** Object:  Table [export].[AccountingExportCompany]    Script Date: 2/14/2024 1:12:38 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [export].[ExportAccountingCompany](
-	[ExportAccountingCompanyId] [int] NOT NULL,
+CREATE TABLE [export].[AccountingExportCompany](
+	[AccountingExportCompanyId] [int] NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
 	[Description] [nvarchar](250) NOT NULL
- CONSTRAINT [PK_ExportAccountingCompany] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_AccountingExportCompany] PRIMARY KEY CLUSTERED 
 (
-	[ExportAccountingCompanyId] ASC
+	[AccountingExportCompanyId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [UQ_ExportAccountingCompany] UNIQUE NONCLUSTERED 
+ CONSTRAINT [UQ_AccountingExportCompany] UNIQUE NONCLUSTERED 
 (
 	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -27,5 +27,5 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [export].[ExportAccountingCompany] ([ExportAccountingCompanyId], [Name], [Description]) VALUES (1, 'REDBONE', 'OTR, Local Drivers, Diesel Shop');
-INSERT INTO [export].[ExportAccountingCompany] ([ExportAccountingCompanyId], [Name], [Description]) VALUES (2, 'DOUBLEDOWN', 'FedEx, Admin');
+INSERT INTO [export].[AccountingExportCompany] ([AccountingExportCompanyId], [Name], [Description]) VALUES (1, 'REDBONE', 'OTR, Local Drivers, Diesel Shop');
+INSERT INTO [export].[AccountingExportCompany] ([AccountingExportCompanyId], [Name], [Description]) VALUES (2, 'DOUBLEDOWN', 'FedEx, Admin');
