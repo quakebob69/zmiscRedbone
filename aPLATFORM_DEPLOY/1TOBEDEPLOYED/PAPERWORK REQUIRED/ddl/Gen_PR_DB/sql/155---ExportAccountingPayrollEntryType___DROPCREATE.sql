@@ -1,16 +1,16 @@
-/****** Object:  Table [payroll].[ExportAccountingPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollEntryType]') AND type in (N'U'))
-DROP TABLE [payroll].[ExportAccountingPayrollEntryType]
+/****** Object:  Table [export].[ExportAccountingPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollEntryType]') AND type in (N'U'))
+DROP TABLE [export].[ExportAccountingPayrollEntryType]
 GO
 
-/****** Object:  Table [payroll].[ExportAccountingPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
+/****** Object:  Table [export].[ExportAccountingPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [payroll].[ExportAccountingPayrollEntryType](
+CREATE TABLE [export].[ExportAccountingPayrollEntryType](
 	[ExportAccountingPayrollEntryTypeId] [int] NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[Enabled] [bit] NOT NULL,
@@ -27,5 +27,5 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 'EARNINGS', 1);
-INSERT INTO [payroll].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (2, 'OTHERPAYROLLITEMS', 1);
+INSERT INTO [export].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 'EARNINGS', 1);
+INSERT INTO [export].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId], [Name], [Enabled]) VALUES (2, 'OTHERPAYROLLITEMS', 1);

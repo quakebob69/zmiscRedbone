@@ -1,19 +1,19 @@
---ALTER TABLE [payroll].[ExportAccountingPayrollData] DROP CONSTRAINT [FK_ExportAccountingPayrollData_ExportAccountingPayrollEntryType]
+--ALTER TABLE [export].[ExportAccountingPayrollData] DROP CONSTRAINT [FK_ExportAccountingPayrollData_ExportAccountingPayrollEntryType]
 --GO
 
-/****** Object:  Table [payroll].[ExportAccountingPayrollData]    Script Date: 2/20/2024 9:39:54 AM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollData]') AND type in (N'U'))
-DROP TABLE [payroll].[ExportAccountingPayrollData]
+/****** Object:  Table [export].[ExportAccountingPayrollData]    Script Date: 2/20/2024 9:39:54 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollData]') AND type in (N'U'))
+DROP TABLE [export].[ExportAccountingPayrollData]
 GO
 
-/****** Object:  Table [payroll].[ExportAccountingPayrollData]    Script Date: 2/20/2024 9:39:54 AM ******/
+/****** Object:  Table [export].[ExportAccountingPayrollData]    Script Date: 2/20/2024 9:39:54 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [payroll].[ExportAccountingPayrollData](
+CREATE TABLE [export].[ExportAccountingPayrollData](
 	[ExportAccountingPayrollDataId] [int] IDENTITY(1,1) NOT NULL,
 	[EmployeeNameWithLastFourSSN] [varchar](128) NOT NULL,
 	[ExportAccountingPayrollEntryTypeId] [int] NOT NULL,
@@ -34,9 +34,9 @@ CREATE TABLE [payroll].[ExportAccountingPayrollData](
 GO
 
 
-ALTER TABLE [payroll].[ExportAccountingPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_ExportAccountingPayrollData_ExportAccountingPayrollEntryType] FOREIGN KEY([ExportAccountingPayrollEntryTypeId])
-REFERENCES [payroll].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId])
+ALTER TABLE [export].[ExportAccountingPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_ExportAccountingPayrollData_ExportAccountingPayrollEntryType] FOREIGN KEY([ExportAccountingPayrollEntryTypeId])
+REFERENCES [export].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId])
 GO
-ALTER TABLE [payroll].[ExportAccountingPayrollData] CHECK CONSTRAINT [FK_ExportAccountingPayrollData_ExportAccountingPayrollEntryType]
+ALTER TABLE [export].[ExportAccountingPayrollData] CHECK CONSTRAINT [FK_ExportAccountingPayrollData_ExportAccountingPayrollEntryType]
 GO
 

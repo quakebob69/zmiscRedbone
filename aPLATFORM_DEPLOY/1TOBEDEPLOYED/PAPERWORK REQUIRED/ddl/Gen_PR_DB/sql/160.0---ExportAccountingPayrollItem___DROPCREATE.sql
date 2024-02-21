@@ -1,23 +1,23 @@
---ALTER TABLE [payroll].[ExportAccountingPayrollItem] DROP CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingCompany]
+--ALTER TABLE [export].[ExportAccountingPayrollItem] DROP CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingCompany]
 --GO
 
---ALTER TABLE [payroll].[ExportAccountingPayrollItem] DROP CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingPayrollEntryType]
+--ALTER TABLE [export].[ExportAccountingPayrollItem] DROP CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingPayrollEntryType]
 --GO
 
 
-/****** Object:  Table [payroll].[ExportAccountingPayrollItem]    Script Date: 2/16/2024 1:15:01 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[ExportAccountingPayrollItem]') AND type in (N'U'))
-DROP TABLE [payroll].[ExportAccountingPayrollItem]
+/****** Object:  Table [export].[ExportAccountingPayrollItem]    Script Date: 2/16/2024 1:15:01 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[ExportAccountingPayrollItem]') AND type in (N'U'))
+DROP TABLE [export].[ExportAccountingPayrollItem]
 GO
 
-/****** Object:  Table [payroll].[ExportAccountingPayrollItem]    Script Date: 2/16/2024 1:15:01 PM ******/
+/****** Object:  Table [export].[ExportAccountingPayrollItem]    Script Date: 2/16/2024 1:15:01 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [payroll].[ExportAccountingPayrollItem](
+CREATE TABLE [export].[ExportAccountingPayrollItem](
 	[ExportAccountingPayrollItemId] [int] IDENTITY(1,1) NOT NULL,
 	[ExportAccountingCompanyId] [int] NOT NULL,
 	[ExportAccountingPayrollEntryTypeId] [int] NOT NULL,
@@ -36,15 +36,15 @@ CREATE TABLE [payroll].[ExportAccountingPayrollItem](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [payroll].[ExportAccountingPayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingCompany] FOREIGN KEY([ExportAccountingCompanyId])
-REFERENCES [payroll].[ExportAccountingCompany] ([ExportAccountingCompanyId])
+ALTER TABLE [export].[ExportAccountingPayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingCompany] FOREIGN KEY([ExportAccountingCompanyId])
+REFERENCES [export].[ExportAccountingCompany] ([ExportAccountingCompanyId])
 GO
-ALTER TABLE [payroll].[ExportAccountingPayrollItem] CHECK CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingCompany]
+ALTER TABLE [export].[ExportAccountingPayrollItem] CHECK CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingCompany]
 GO
 
 
-ALTER TABLE [payroll].[ExportAccountingPayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingPayrollEntryType] FOREIGN KEY([ExportAccountingPayrollEntryTypeId])
-REFERENCES [payroll].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId])
+ALTER TABLE [export].[ExportAccountingPayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingPayrollEntryType] FOREIGN KEY([ExportAccountingPayrollEntryTypeId])
+REFERENCES [export].[ExportAccountingPayrollEntryType] ([ExportAccountingPayrollEntryTypeId])
 GO
-ALTER TABLE [payroll].[ExportAccountingPayrollItem] CHECK CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingPayrollEntryType]
+ALTER TABLE [export].[ExportAccountingPayrollItem] CHECK CONSTRAINT [FK_ExportAccountingPayrollItem_ExportAccountingPayrollEntryType]
 GO

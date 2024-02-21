@@ -45,7 +45,7 @@ GO
 
 
 ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_ExportAccountingPayrollItem] FOREIGN KEY([ExportAccountingPayrollItemId])
-REFERENCES [payroll].[ExportAccountingPayrollItem] ([ExportAccountingPayrollItemId])
+REFERENCES [export].[ExportAccountingPayrollItem] ([ExportAccountingPayrollItemId])
 GO
 ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_ExportAccountingPayrollItem]
 GO
