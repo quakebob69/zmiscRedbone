@@ -12,6 +12,12 @@ GO
 
 CREATE TABLE [payroll].[PayrollItem](
 	[PayrollItemId] [int] IDENTITY(1,1) NOT NULL,
+	
+	
+	[payroll].[QuickbooksCompany]
+	
+	
+	
 	[Name] [varchar](128) NOT NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollItem] PRIMARY KEY CLUSTERED 
