@@ -36,36 +36,6 @@ CREATE TABLE [payroll].[PayrollItem](
 ) ON [PRIMARY]
 GO
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ALTER TABLE [payroll].[PayrollItem]  WITH CHECK ADD  CONSTRAINT [FK_PayrollItem_QuickbooksCompany] FOREIGN KEY([QuickbooksCompanyId])
 REFERENCES [payroll].[QuickbooksCompany] ([QuickbooksCompanyId])
 GO
