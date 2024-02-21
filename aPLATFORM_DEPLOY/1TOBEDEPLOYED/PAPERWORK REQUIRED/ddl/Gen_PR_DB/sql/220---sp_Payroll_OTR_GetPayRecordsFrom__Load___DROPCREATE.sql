@@ -19,7 +19,7 @@ as
 /*
 
 
-exec sp_Payroll_OTR_GetPayRecordsFrom__Load '10/31/2021', '11/06/2021'
+exec sp_Payroll_OTR_GetPayRecordsFrom__Load '12/10/2023', '12/16/2023'
 
 
 */
