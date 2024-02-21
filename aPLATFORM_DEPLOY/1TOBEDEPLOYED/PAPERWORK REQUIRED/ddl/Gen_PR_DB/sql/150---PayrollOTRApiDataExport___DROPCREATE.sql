@@ -37,7 +37,6 @@ GO
 ALTER TABLE [payroll].[PayrollOTRApiDataExport]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRApiDataExport_PayrollOTRApiDataExportType] FOREIGN KEY([PayrollOTRApiDataExportTypeId])
 REFERENCES [payroll].[PayrollOTRApiDataExportType] ([PayrollOTRApiDataExportTypeId])
 GO
-
 ALTER TABLE [payroll].[PayrollOTRApiDataExport] CHECK CONSTRAINT [FK_PayrollOTRApiDataExport_PayrollOTRApiDataExportType]
 GO
 

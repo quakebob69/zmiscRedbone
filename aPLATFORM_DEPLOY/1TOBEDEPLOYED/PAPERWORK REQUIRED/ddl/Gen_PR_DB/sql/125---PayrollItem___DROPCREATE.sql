@@ -1,3 +1,10 @@
+--ALTER TABLE [payroll].[PayrollItem] DROP CONSTRAINT [FK_PayrollItem_QuickbooksCompany]
+--GO
+
+--ALTER TABLE [payroll].[PayrollOTRApiDataExport] DROP CONSTRAINT [FK_PayrollItem_PayrollOTRApiDataExportType]
+--GO
+
+
 /****** Object:  Table [payroll].[PayrollItem]    Script Date: 2/16/2024 1:15:01 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollItem]') AND type in (N'U'))
 DROP TABLE [payroll].[PayrollItem]
