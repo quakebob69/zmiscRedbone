@@ -2,7 +2,8 @@
 setlocal enabledelayedexpansion
 
 rem TEMP TABLES
-call "..\Gen_PR_DB___TEMP_TABLES\zzztempdannydeletethisafterproject\sql\CREATE\zzztempdannydeletethisafterproject_____CREATE.bat"
+cd /d "C:\Users\danny.call\zmiscRedbone\aPLATFORM_DEPLOY\1TOBEDEPLOYED\PAPERWORK REQUIRED\ddl\Gen_PR_DB___TEMP_TABLES\zzztempdannydeletethisafterproject\sql\CREATE\"
+call zzztempdannydeletethisafterproject_____CREATE.bat"
 
 set "sqlDir=C:\Users\danny.call\zmiscRedbone\aPLATFORM_DEPLOY\1TOBEDEPLOYED\PAPERWORK REQUIRED\ddl\Gen_PR_DB\sql"
 
