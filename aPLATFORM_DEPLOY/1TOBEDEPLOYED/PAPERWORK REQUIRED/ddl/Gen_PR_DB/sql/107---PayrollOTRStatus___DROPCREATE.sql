@@ -12,9 +12,12 @@ GO
 
 CREATE TABLE [payroll].[PayrollOTRStatus](
 	[PayrollOTRStatusId] [int] NOT NULL,
-	[Name] [nvarchar](100) NOT NULL,
-	[Description] [nvarchar](250) NOT NULL,
-	[UseForPayroll] [bit] NOT NULL,
+	[Name] [varchar](30) NOT NULL,
+	[Order] [int] NULL,
+	[Description] [varchar](128) NOT NULL,
+	[HasUserAction] [int] NOT NULL,
+	[UserAction] [varchar](128) NULL,
+	[UseForPayrollProcess] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollOTRStatus] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRStatusId] ASC
