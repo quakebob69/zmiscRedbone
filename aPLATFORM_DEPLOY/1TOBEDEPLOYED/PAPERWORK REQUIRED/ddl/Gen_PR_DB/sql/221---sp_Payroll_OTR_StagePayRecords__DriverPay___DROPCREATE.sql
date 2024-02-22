@@ -32,23 +32,12 @@ END
 
 
 
+    DECLARE @PayrollOTRPayPeriodId INT
+    EXEC @PayrollOTRPayPeriodId = [payroll].[sp_Payroll_OTR_GetActivePayPeriodId]
 
-
-    DECLARE @PayrollOTRPayPeriodId INT;
-    EXEC @PayrollOTRPayPeriodId = [payroll].[sp_Payroll_OTR_GetActivePayPeriodId];
 	
 	
 	
-	
-
-
-
-
-
-
-
-
-
 
 
 
