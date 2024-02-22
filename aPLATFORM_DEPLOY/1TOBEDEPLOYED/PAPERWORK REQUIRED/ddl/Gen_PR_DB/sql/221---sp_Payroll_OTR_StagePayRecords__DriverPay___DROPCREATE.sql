@@ -12,7 +12,7 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_StagePayRecords__DriverPay]
 (
-	@LastUpdateBy Int
+	@LastUpdateBy INT
 )
 
 AS
@@ -26,9 +26,37 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
+
+
+
+
+
+
+
+
+    DECLARE @PayrollOTRPayPeriodId INT;
+    EXEC @PayrollOTRPayPeriodId = [payroll].[sp_Payroll_OTR_GetActivePayPeriodId];
+	
+	
+	
+	
+    --RETURN @returnValue;
+
+
+
+
+
+
+
+
+
+
+
+
+
 --vars
-	DECLARE @PayrollOTRPayPeriodId int
-		SET @PayrollOTRPayPeriodId = (select PayrollOTRPayPeriodId from [payroll].[PayrollOTRPayPeriod] where Code = @CurrentPayPeriodCode);
+	DECLARE @PayrollOTRPayPeriodId INT
+		SET @PayrollOTRPayPeriodId = (SELECT PayrollOTRPayPeriodId FROM [payroll].[PayrollOTRPayPeriod] WHERE Code = @CurrentPayPeriodCode);
 
 	DECLARE @PayPeriodBeginDate VARCHAR(25)
 	DECLARE @PayPeriodEndDate VARCHAR(25)

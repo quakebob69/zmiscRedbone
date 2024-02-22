@@ -21,16 +21,11 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	DECLARE @PayrollOTRStatusName_NotStarted VARCHAR(20)
-	SET @PayrollOTRStatusName_NotStarted = 'NOTSTARTED'
-	DECLARE @PayrollOTRStatusId_NotStarted INT
-	SET @PayrollOTRStatusId_NotStarted = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = @PayrollOTRStatusName_NotStarted)
-
 	SELECT
 	TOP 1 PayrollOTRPayPeriodId 
 	FROM [payroll].[PayrollOTRPayPeriod]
 	WHERE
-	PayrollOTRStatusId = @PayrollOTRStatusId_NotStarted
+	PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = 'NOTSTARTED')
 	ORDER BY 
 	FY DESC, Number
 
