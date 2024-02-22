@@ -27,6 +27,9 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load]
 		GO
 		
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetActivePayPeriodId]
+		GO
+		
 
 --TABLES
 	--'payroll' schema 
