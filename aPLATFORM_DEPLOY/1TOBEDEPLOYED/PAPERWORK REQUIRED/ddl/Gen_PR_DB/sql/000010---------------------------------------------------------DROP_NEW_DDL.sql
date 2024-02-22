@@ -9,7 +9,7 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_OTR_Accrual]
 		GO
 		
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_FinalizePayRecords__ALL_SOURCES]
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_FinalizePayPeriod]
 		GO
 		
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_FinalizePayRecords__DriverPay]
