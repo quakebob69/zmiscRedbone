@@ -12,7 +12,7 @@ GO
 
 CREATE TABLE [export].[AccountingExportPayrollEntryType](
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL,
+	[Name] [varchar](20) NOT NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_AccountingExportPayrollEntryType] PRIMARY KEY CLUSTERED 
 (

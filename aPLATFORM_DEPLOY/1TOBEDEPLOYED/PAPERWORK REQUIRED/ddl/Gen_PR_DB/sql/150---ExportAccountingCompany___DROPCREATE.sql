@@ -12,8 +12,8 @@ GO
 
 CREATE TABLE [export].[AccountingExportCompany](
 	[AccountingExportCompanyId] [int] NOT NULL,
-	[Name] [nvarchar](100) NOT NULL,
-	[Description] [nvarchar](250) NOT NULL
+	[Name] [varchar](20) NOT NULL,
+	[Description] [varchar](128) NOT NULL
  CONSTRAINT [PK_AccountingExportCompany] PRIMARY KEY CLUSTERED 
 (
 	[AccountingExportCompanyId] ASC

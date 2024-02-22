@@ -12,7 +12,7 @@ GO
 
 CREATE TABLE [payroll].[PayrollOTRPaymentHoldReason](
 	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL,
+	[Name] [varchar](30) NOT NULL,
 	[Description] [varchar](128) NOT NULL,
 	[Resolution] [varchar](128) NOT NULL,
 	[Enabled] [bit] NOT NULL,
