@@ -15,7 +15,7 @@ GO
 CREATE procedure [payroll].[sp_Payroll_OTR_FinalizePayPeriod]
 (
 	@CurrentPayPeriodCode VARCHAR(4)
-	,@LastUpdateBy Int
+ ,@LastUpdateBy Int
 )
 
 AS
@@ -29,8 +29,10 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	--TODO
+	
+	INSERT INTO [dispatch].[PR_OTR_History] ([Name] ,[LoadId] ,[TripNumber] ,[TruckNumber] ,[Client_Id] ,[PickupBy] ,[DeliverBy] ,[DriverType] ,[LegInd] ,[PickOrigin] ,[DropDest] ,[DriverPersonId] ,[PayCode] ,[PayId] ,[Quantity] ,[PayRateAmount] ,[TotalPay] ,[PayPeriodEnding] ,[PayrollNotes] ,[LastUpdate] ,[LastUpdateBy] ,[PUnitId])
+		SELECT [Name] ,[LoadId] ,[TripNumber] ,[TruckNumber] ,[Client_Id] ,[PickupBy] ,[DeliverBy] ,[DriverType] ,[LegInd] ,[PickOrigin] ,[DropDest] ,[DriverPersonId] ,[PayCode] ,[PayId] ,[Quantity] ,[PayRateAmount] ,[TotalPay] ,[PayPeriodEnding] ,[PayrollNotes] ,[LastUpdate] ,[LastUpdateBy] ,[PUnitId]
+		FROM [payroll].[PayrollOTRStaging];
+
 
 GO
-
-
