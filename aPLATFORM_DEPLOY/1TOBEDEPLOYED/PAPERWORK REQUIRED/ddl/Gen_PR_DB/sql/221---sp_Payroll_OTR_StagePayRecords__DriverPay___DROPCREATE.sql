@@ -12,14 +12,13 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_StagePayRecords__DriverPay]
 (
-	@CurrentPayPeriodCode VARCHAR(4)
-	,@LastUpdateBy Int
+	@LastUpdateBy Int
 )
 
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_StagePayRecords__DriverPay] '2350', 2775
+	exec [payroll].[sp_Payroll_OTR_StagePayRecords__DriverPay] 2775
 */
 
 SET NOCOUNT ON;

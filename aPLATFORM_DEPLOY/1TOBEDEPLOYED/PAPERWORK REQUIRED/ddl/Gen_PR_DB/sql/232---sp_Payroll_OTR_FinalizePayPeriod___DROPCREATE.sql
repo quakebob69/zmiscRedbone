@@ -14,14 +14,13 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_FinalizePayPeriod]
 (
-	@CurrentPayPeriodCode VARCHAR(4)
- ,@LastUpdateBy Int
+	@LastUpdateBy Int
 )
 
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_FinalizePayPeriod] '2350', 2775
+	exec [payroll].[sp_Payroll_OTR_FinalizePayPeriod] 2775
 */
 
 SET NOCOUNT ON;

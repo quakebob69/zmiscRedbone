@@ -7,8 +7,7 @@ USE [RedBoneThomas]
 --================================================================
 	DECLARE @LastUpdateBy INT
 	SET @LastUpdateBy = 2775
-	DECLARE @payperiod NVARCHAR(25)
-	SET @payperiod = '2350'
+	---
 	DECLARE @numberBeforeHistoryRecs INT
 --================================================================
 		-------
@@ -22,14 +21,14 @@ USE [RedBoneThomas]
 
 		-------	
 			SELECT 'STAGE------------------------------------------------------------------------------------------------------------------------------'
-			exec [payroll].[sp_Payroll_OTR_StagePayRecords__DriverPay] @payperiod, @LastUpdateBy
+			exec [payroll].[sp_Payroll_OTR_StagePayRecords__DriverPay] @LastUpdateBy
 			SELECT COUNT(*) AS 'NUM history RECS - after staging' FROM [dispatch].[PR_OTR_History]
 			SELECT COUNT(*) AS 'NUM staging RECS - after staging' FROM [payroll].[PayrollOTRStaging]
 		-------	
 
 		-------
 			SELECT 'FINALIZE------------------------------------------------------------------------------------------------------------------------------'
-			exec [payroll].[sp_Payroll_OTR_FinalizePayPeriod] @payperiod, @LastUpdateBy
+			exec [payroll].[sp_Payroll_OTR_FinalizePayPeriod] @LastUpdateBy
 			SELECT COUNT(*) AS 'NUM history RECS - after finalizing' FROM [dispatch].[PR_OTR_History]
 			SELECT COUNT(*) - @numberBeforeHistoryRecs AS 'NUM history ADDED' FROM [dispatch].[PR_OTR_History]
 			SELECT COUNT(*) AS 'NUM staging RECS - after finalizing' FROM [payroll].[PayrollOTRStaging]
