@@ -21,12 +21,19 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	SELECT
-	TOP 1 PayrollOTRPayPeriodId 
-	FROM [payroll].[PayrollOTRPayPeriod]
-	WHERE
-	PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = 'NOTSTARTED')
-	ORDER BY 
-	FY DESC, Number
+	DECLARE @ActivePayPeriodId INT
+	
+	SET @ActivePayPeriodId =
+	(
+		SELECT
+		TOP 1 PayrollOTRPayPeriodId 
+		FROM [payroll].[PayrollOTRPayPeriod]
+		WHERE
+		PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = 'NOTSTARTED')
+		ORDER BY 
+		FY DESC, Number
+	)
+	
+    SELECT @ActivePayPeriodId	
 
 GO

@@ -55,13 +55,10 @@ END
 
 
 --vars
-	DECLARE @PayrollOTRPayPeriodId INT
-		SET @PayrollOTRPayPeriodId = (SELECT PayrollOTRPayPeriodId FROM [payroll].[PayrollOTRPayPeriod] WHERE Code = @CurrentPayPeriodCode);
-
 	DECLARE @PayPeriodBeginDate VARCHAR(25)
 	DECLARE @PayPeriodEndDate VARCHAR(25)
-		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE Code = @CurrentPayPeriodCode);
-		SET @PayPeriodEndDate = (SELECT FORMAT(DATEADD(HOUR, -12, EndDate), 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE Code = @CurrentPayPeriodCode);
+		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId);
+		SET @PayPeriodEndDate = (SELECT FORMAT(DATEADD(HOUR, -12, EndDate), 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId);
 
 	DECLARE @DataSourceName_DRIVERPAY VARCHAR(9)
 	SET @DataSourceName_DRIVERPAY = 'DRIVERPAY'
@@ -72,7 +69,7 @@ END
 	--PayrollOTRPayPeriod
 		UPDATE payroll.PayrollOTRPayPeriod
 		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
-		WHERE Code = @CurrentPayPeriodCode;
+		WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId;
 
 	--PayrollOTRStaging
 		DELETE FROM [payroll].[PayrollOTRStaging] WHERE
