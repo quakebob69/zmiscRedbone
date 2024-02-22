@@ -31,12 +31,12 @@ END
 	DECLARE @PayrollOTRPayPeriodId int
 		SET @PayrollOTRPayPeriodId = (select PayrollOTRPayPeriodId from [payroll].[PayrollOTRPayPeriod] where Code = @CurrentPayPeriodCode);
 
-	DECLARE @PayPeriodBeginDate NVARCHAR(25)
-	DECLARE @PayPeriodEndDate NVARCHAR(25)
+	DECLARE @PayPeriodBeginDate VARCHAR(25)
+	DECLARE @PayPeriodEndDate VARCHAR(25)
 		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE Code = @CurrentPayPeriodCode);
 		SET @PayPeriodEndDate = (SELECT FORMAT(DATEADD(HOUR, -12, EndDate), 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE Code = @CurrentPayPeriodCode);
 
-	DECLARE @DataSourceName_DRIVERPAY NVARCHAR(9)
+	DECLARE @DataSourceName_DRIVERPAY VARCHAR(9)
 	SET @DataSourceName_DRIVERPAY = 'DRIVERPAY'
 	DECLARE @PayrollOTRDataSourceId_DRIVERPAY INT
 		SET @PayrollOTRDataSourceId_DRIVERPAY = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_DRIVERPAY)
