@@ -21,6 +21,8 @@ CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[PayrollOTRStatusId] [int] NOT NULL,
 	[BeginDate] [datetime] NOT NULL,
 	[EndDate] [datetime] NOT NULL,
+	[LoadDataIsStaged] [bit] NOT NULL,
+	[DriverPayDataIsStaged] [bit] NOT NULL,
 	[TotalMiles] [int] NULL,
 	[TotalMilesValue] [decimal](18, 2) NULL,
 	[TotalHeldAmount] [decimal](18, 2) NULL,
