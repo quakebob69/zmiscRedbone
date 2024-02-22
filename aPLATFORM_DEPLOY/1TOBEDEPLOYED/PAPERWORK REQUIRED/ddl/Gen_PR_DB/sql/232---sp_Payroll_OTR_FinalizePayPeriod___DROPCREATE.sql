@@ -29,8 +29,7 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	exec payroll.sp_Payroll_OTR_FinalizePayRecords__DriverPay @CurrentPayPeriodCode, @LastUpdateBy;
-	exec payroll.sp_Payroll_OTR_FinalizePayRecords__Load @CurrentPayPeriodCode, @LastUpdateBy;
+	--TODO
 
 GO
 

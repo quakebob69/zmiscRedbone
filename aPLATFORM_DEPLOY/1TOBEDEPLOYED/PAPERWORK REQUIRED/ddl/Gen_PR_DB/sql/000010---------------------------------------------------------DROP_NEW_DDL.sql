@@ -11,13 +11,7 @@ GO
 		
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_FinalizePayPeriod]
 		GO
-		
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_FinalizePayRecords__DriverPay]
-		GO
-		  
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_FinalizePayRecords__Load]
-		GO
-			   
+				
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayRecords__ALL_SOURCES]
 		GO
 		   
