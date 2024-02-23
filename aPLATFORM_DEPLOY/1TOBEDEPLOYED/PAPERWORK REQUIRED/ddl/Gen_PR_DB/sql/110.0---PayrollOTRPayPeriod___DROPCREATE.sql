@@ -19,6 +19,7 @@ CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[FY] [int] NOT NULL,
 	[Number] [int] NOT NULL,
 	[PayrollOTRStatusId] [int] NOT NULL,
+	[IsOpen] [bit] NOT NULL,
 	[BeginDate] [datetime] NOT NULL,
 	[EndDate] [datetime] NOT NULL,
 	[LoadDataIsStaged] [bit] NOT NULL,
@@ -54,3 +55,6 @@ ALTER TABLE [payroll].[PayrollOTRPayPeriod] CHECK CONSTRAINT [FK_PayrollOTRPayPe
 GO
 
 
+--CREATE UNIQUE INDEX IX_PayrollOTRPayPeriod_IsOpen
+--ON [payroll].[PayrollOTRPayPeriod](IsOpen)
+--WHERE IsOpen = 1
