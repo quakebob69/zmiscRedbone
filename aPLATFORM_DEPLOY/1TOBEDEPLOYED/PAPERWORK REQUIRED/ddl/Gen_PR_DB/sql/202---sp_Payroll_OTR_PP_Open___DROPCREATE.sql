@@ -21,9 +21,9 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	DECLARE @ActivePayPeriodId INT
+	DECLARE @ActivePayPeriodToOpenId INT
 	
-	SET @ActivePayPeriodId =
+	SET @ActivePayPeriodToOpenId =
 	(
 		SELECT
 		TOP 1 PayrollOTRPayPeriodId 
@@ -34,6 +34,8 @@ END
 		FY DESC, Number
 	)
 	
-    RETURN @ActivePayPeriodId	
+	UPDATE [payroll].[PayrollOTRPayPeriod]
+	SET IsOpen = 1
+	WHERE PayrollOTRPayPeriodId = @ActivePayPeriodToOpenId
 
 GO

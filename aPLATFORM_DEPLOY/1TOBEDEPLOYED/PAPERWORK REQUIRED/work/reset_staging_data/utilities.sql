@@ -11,6 +11,10 @@ USE [RedBoneThomas]
 	DECLARE @numberBeforeHistoryRecs INT
 --================================================================
 		-------
+			exec [payroll].[sp_Payroll_OTR_PP_Open]
+		-------
+
+		-------
 			SELECT 'INIT DATA AND START------------------------------------------------------------------------------------------------------------------------------'
 			DELETE FROM [dispatch].[PR_OTR_History] WHERE LastUpdate > '2024-02-22 09:11:49.643' AND LastUpdateBy = @LastUpdateBy;
 			DELETE FROM [payroll].[PayrollOTRStaging];
