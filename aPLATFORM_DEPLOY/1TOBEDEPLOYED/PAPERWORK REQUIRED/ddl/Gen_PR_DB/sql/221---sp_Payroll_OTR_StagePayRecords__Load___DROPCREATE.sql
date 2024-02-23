@@ -32,8 +32,8 @@ END
 
 
 
-    DECLARE @PayrollOTRPayPeriodId INT
-    EXEC @PayrollOTRPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriod_GetOpen]
+    DECLARE @OpenPayPeriodId INT
+    EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriod_GetOpen]
 
 	
 	
@@ -46,8 +46,8 @@ END
 --vars
 	DECLARE @PayPeriodBeginDate VARCHAR(25)
 	DECLARE @PayPeriodEndDate VARCHAR(25)
-		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId);
-		SET @PayPeriodEndDate = (SELECT FORMAT(DATEADD(HOUR, -12, EndDate), 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId);
+		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId);
+		SET @PayPeriodEndDate = (SELECT FORMAT(DATEADD(HOUR, -12, EndDate), 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId);
 
 	DECLARE @DataSourceName_LOAD VARCHAR(4)
 	SET @DataSourceName_LOAD = 'LOAD'
@@ -58,11 +58,11 @@ END
 	--PayrollOTRPayPeriod
 		UPDATE payroll.PayrollOTRPayPeriod
 		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
-		WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId;
+		WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId;
 
 	--PayrollOTRStaging
 		DELETE FROM [payroll].[PayrollOTRStaging] WHERE
-		PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId
+		PayrollOTRPayPeriodId = @OpenPayPeriodId
 		AND
 		PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
 
@@ -93,7 +93,7 @@ END
 --PayrollOTRStaging inserts
 	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
 		SELECT
-			@PayrollOTRPayPeriodId
+			@OpenPayPeriodId
 			,PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
 			,Name
 			,LoadId
