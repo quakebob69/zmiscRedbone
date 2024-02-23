@@ -12,14 +12,13 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_StagePayRecords__Load]
 (
-	@CurrentPayPeriodCode VARCHAR(4)
-	,@LastUpdateBy Int
+	@LastUpdateBy Int
 )
 
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_StagePayRecords__Load] '2350', 2775
+	exec [payroll].[sp_Payroll_OTR_StagePayRecords__Load] 2775
 */
 
 SET NOCOUNT ON;
@@ -27,14 +26,28 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
---vars
-	DECLARE @PayrollOTRPayPeriodId int
-		SET @PayrollOTRPayPeriodId = (select PayrollOTRPayPeriodId from payroll.PayrollOTRPayPeriod where Code = @CurrentPayPeriodCode);
 
+
+
+
+
+
+    DECLARE @PayrollOTRPayPeriodId INT
+    EXEC @PayrollOTRPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriod_GetOpen]
+
+	
+	
+	
+
+
+
+
+
+--vars
 	DECLARE @PayPeriodBeginDate VARCHAR(25)
 	DECLARE @PayPeriodEndDate VARCHAR(25)
-		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE Code = @CurrentPayPeriodCode);
-		SET @PayPeriodEndDate = (SELECT FORMAT(DATEADD(HOUR, -12, EndDate), 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE Code = @CurrentPayPeriodCode);
+		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId);
+		SET @PayPeriodEndDate = (SELECT FORMAT(DATEADD(HOUR, -12, EndDate), 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId);
 
 	DECLARE @DataSourceName_LOAD VARCHAR(4)
 	SET @DataSourceName_LOAD = 'LOAD'
@@ -44,8 +57,8 @@ END
 --init tables
 	--PayrollOTRPayPeriod
 		UPDATE payroll.PayrollOTRPayPeriod
-		SET PayrollOTRStatusId = (select PayrollOTRStatusId from [payroll].[PayrollOTRStatus] where Name = 'STAGING')
-		WHERE Code = @CurrentPayPeriodCode;
+		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
+		WHERE PayrollOTRPayPeriodId = @PayrollOTRPayPeriodId;
 
 	--PayrollOTRStaging
 		DELETE FROM [payroll].[PayrollOTRStaging] WHERE
