@@ -15,7 +15,7 @@ echo.=========
 			rem remote
 				sqlcmd -S 40.78.62.55 -U redboneDB3 -P Kd2GP#Wlrt9Ws -d RedboneThomas -i "%%f"
 	)
-echo. & echo. & 
+echo. & echo. & echo. & 
 echo.=========& 
 echo.=========& 
 echo.========= "END TEMP STUFF" =========================================================& echo. & echo. & echo. & echo. & echo. & echo. & echo. & echo. & echo. & echo. & echo.
