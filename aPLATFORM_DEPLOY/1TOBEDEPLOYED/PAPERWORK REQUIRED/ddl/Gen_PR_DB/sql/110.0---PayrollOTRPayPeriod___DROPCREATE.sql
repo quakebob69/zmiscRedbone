@@ -10,8 +10,8 @@ GO
 SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON
-GO
+--SET QUOTED_IDENTIFIER ON
+--GO
 
 CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[PayrollOTRPayPeriodId] [int] IDENTITY(1,1) NOT NULL,
@@ -55,6 +55,8 @@ ALTER TABLE [payroll].[PayrollOTRPayPeriod] CHECK CONSTRAINT [FK_PayrollOTRPayPe
 GO
 
 
---CREATE UNIQUE INDEX IX_PayrollOTRPayPeriod_IsOpen
---ON [payroll].[PayrollOTRPayPeriod](IsOpen)
---WHERE IsOpen = 1
+SET QUOTED_IDENTIFIER ON
+CREATE UNIQUE INDEX IX_PayrollOTRPayPeriod_IsOpen
+ON [payroll].[PayrollOTRPayPeriod](IsOpen)
+WHERE IsOpen = 1
+GO
