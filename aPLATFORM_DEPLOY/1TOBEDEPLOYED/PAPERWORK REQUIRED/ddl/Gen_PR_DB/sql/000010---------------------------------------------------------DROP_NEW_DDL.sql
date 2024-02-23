@@ -27,7 +27,7 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load]
 		GO
 		
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetActivePayPeriodId]
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PP_GetOpen]
 		GO
 		
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PP_Open]
