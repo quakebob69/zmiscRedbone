@@ -34,6 +34,6 @@ END
 		FY DESC, Number
 	)
 	
-    SELECT @ActivePayPeriodId	
+    RETURN @ActivePayPeriodId	
 
 GO
