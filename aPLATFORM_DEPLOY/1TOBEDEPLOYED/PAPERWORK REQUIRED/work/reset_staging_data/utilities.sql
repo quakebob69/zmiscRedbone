@@ -11,7 +11,7 @@ USE [RedBoneThomas]
 	DECLARE @numberBeforeHistoryRecs INT
 --================================================================
 		-------
-			exec [payroll].[sp_Payroll_OTR_PP_Open]
+			exec [payroll].[sp_Payroll_OTR_PayPeriod_Open]
 		-------
 
 		-------
