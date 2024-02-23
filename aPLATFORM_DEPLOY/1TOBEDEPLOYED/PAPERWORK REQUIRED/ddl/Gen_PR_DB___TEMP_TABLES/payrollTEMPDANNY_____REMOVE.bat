@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "sqlDir=C:\Users\danny.call\zmiscRedbone\aPLATFORM_DEPLOY\1TOBEDEPLOYED\PAPERWORK REQUIRED\ddl\Gen_PR_DB___TEMP_TABLES\zzztempdannydeletethisafterproject\sql\REMOVE"
+set "sqlDir=C:\Users\danny.call\zmiscRedbone\aPLATFORM_DEPLOY\1TOBEDEPLOYED\PAPERWORK REQUIRED\ddl\Gen_PR_DB___TEMP_TABLES\payrollTEMPDANNY\sql\REMOVE"
 
 for %%f in ("%sqlDir%\*.sql") do (
     	echo. & echo. & echo. & echo.*** "%%~nxf" ***& echo.

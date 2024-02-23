@@ -1,19 +1,19 @@
 USE [RedBoneThomas]
 GO
 
-/****** Object:  Table [zzztempdannydeletethisafterproject].[[PR_OTR_History___zzztempdannydeletethisafterproject]]    Script Date: 2/21/2024 12:15:34 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[zzztempdannydeletethisafterproject].[PR_OTR_History___zzztempdannydeletethisafterproject]') AND type in (N'U'))
-DROP TABLE [zzztempdannydeletethisafterproject].[PR_OTR_History___zzztempdannydeletethisafterproject]
+/****** Object:  Table [payrollTEMPDANNY].[[PR_OTR_History___payrollTEMPDANNY]]    Script Date: 2/21/2024 12:15:34 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payrollTEMPDANNY].[PR_OTR_History___payrollTEMPDANNY]') AND type in (N'U'))
+DROP TABLE [payrollTEMPDANNY].[PR_OTR_History___payrollTEMPDANNY]
 GO
 
-/****** Object:  Table [zzztempdannydeletethisafterproject].[PR_OTR_History___zzztempdannydeletethisafterproject]    Script Date: 2/21/2024 12:15:34 PM ******/
+/****** Object:  Table [payrollTEMPDANNY].[PR_OTR_History___payrollTEMPDANNY]    Script Date: 2/21/2024 12:15:34 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [zzztempdannydeletethisafterproject].[PR_OTR_History___zzztempdannydeletethisafterproject](
+CREATE TABLE [payrollTEMPDANNY].[PR_OTR_History___payrollTEMPDANNY](
 	[HistoryId] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](max) NULL,
 	[LoadId] [int] NULL,
@@ -37,7 +37,7 @@ CREATE TABLE [zzztempdannydeletethisafterproject].[PR_OTR_History___zzztempdanny
 	[LastUpdate] [datetime] NOT NULL,
 	[LastUpdateBy] [int] NOT NULL,
 	[PUnitId] [int] NULL,
- CONSTRAINT [PK_PR_OTR_History___zzztempdannydeletethisafterproject] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_PR_OTR_History___payrollTEMPDANNY] PRIMARY KEY CLUSTERED 
 (
 	[HistoryId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]

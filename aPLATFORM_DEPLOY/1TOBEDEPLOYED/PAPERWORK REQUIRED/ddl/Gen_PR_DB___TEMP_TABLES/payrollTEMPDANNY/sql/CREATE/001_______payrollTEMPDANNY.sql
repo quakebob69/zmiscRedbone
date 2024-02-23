@@ -1,0 +1,8 @@
+USE [RedBoneThomas]
+GO
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'payrollTEMPDANNY')
+BEGIN
+    EXEC('CREATE SCHEMA payrollTEMPDANNY')
+END
+GO

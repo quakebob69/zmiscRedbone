@@ -1,12 +1,12 @@
 @echo off
 setlocal enabledelayedexpansion
-set "sqlDir=C:\Users\danny.call\zmiscRedbone\aPLATFORM_DEPLOY\1TOBEDEPLOYED\PAPERWORK REQUIRED\ddl\Gen_PR_DB___TEMP_TABLES\zzztempdannydeletethisafterproject\sql\CREATE"
+set "sqlDir=C:\Users\danny.call\zmiscRedbone\aPLATFORM_DEPLOY\1TOBEDEPLOYED\PAPERWORK REQUIRED\ddl\Gen_PR_DB___TEMP_TABLES\payrollTEMPDANNY\sql\CREATE"
 
 
 echo.========= "START TEMP STUFF" =========================================================
 echo.=========
 echo.=========
-	call zzztempdannydeletethisafterproject_____REMOVE.bat
+	call payrollTEMPDANNY_____REMOVE.bat
 
 	for %%f in ("%sqlDir%\*.sql") do (
 			echo. & echo. & echo. & echo.*** "%%~nxf" ***& echo.
