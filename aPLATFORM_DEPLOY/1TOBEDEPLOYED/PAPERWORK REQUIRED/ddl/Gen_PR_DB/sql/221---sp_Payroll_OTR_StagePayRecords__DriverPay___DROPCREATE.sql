@@ -33,7 +33,7 @@ END
 
 
     DECLARE @PayrollOTRPayPeriodId INT
-    EXEC @PayrollOTRPayPeriodId = [payroll].[sp_Payroll_OTR_PP_GetOpen]
+    EXEC @PayrollOTRPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriod_GetOpen]
 
 	
 	
