@@ -16,7 +16,7 @@ CREATE TABLE [payroll].[PayrollOTRStatus](
 	[Order] [int] NULL,
 	[Description] [varchar](128) NOT NULL,
 	[HasUserAction] [int] NOT NULL,
-	[UserAction] [varchar](128) NULL,
+	[UserAction] [varchar](200) NULL,
 	[UseForPayrollProcess] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollOTRStatus] PRIMARY KEY CLUSTERED 
 (
@@ -32,7 +32,7 @@ GO
 
 -----------------------------------------
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (1, 'NOTSTARTED', 1, 'OTR payroll has not started for this pay period.', 1, 'Initialize the pay period.', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (2, 'STAGING', 2, 'OTR payroll data is being corrected and staged.', 1, 'Correct any bad or missing data (in ''Trucking Loads'' and ''Driver Pay'') and re-stage it.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (2, 'STAGING', 2, 'OTR payroll data is being corrected and staged.', 1, 'Stage, review and correct bad or missing data in ''Trucking Loads'' and ''Driver Pay''.  Re-stage and review data after making corrections.', 1);
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (3, 'STAGED', 3, 'OTR payroll has been staged and is ready to be entered into QuickBooks.', 1, 'Print ''QuickBook Data Entry - OTR Payroll'' PDF document and enter its data into QuickBooks.', 1);
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (4, 'ENTERED', 4, 'OTR payroll has been entered into QuickBooks and is ready to be validated.', 1, 'Validate that the data entered into QuickBooks matches the data in the PDF file.', 1);
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (5, 'VALIDATED', 5, 'OTR payroll has been validated is ready to be vinalized.', 1, 'Finalize the pay period.', 1);
