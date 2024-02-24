@@ -31,7 +31,7 @@ END
 		WHERE
 		PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = 'NOTSTARTED')
 		ORDER BY 
-		FY DESC, Number
+		FY, Number
 	)
 	
 	UPDATE [payroll].[PayrollOTRPayPeriod]

@@ -40,17 +40,11 @@ END
 	DECLARE @PayrollOTRDataSourceId_DRIVERPAY INT
 		SET @PayrollOTRDataSourceId_DRIVERPAY = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_DRIVERPAY)
 
---init tables
-	--PayrollOTRPayPeriod
-		UPDATE payroll.PayrollOTRPayPeriod
-		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
-		WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId;
-
-	--PayrollOTRStaging
-		DELETE FROM [payroll].[PayrollOTRStaging] WHERE
-		PayrollOTRPayPeriodId = @OpenPayPeriodId
-		AND
-		PayrollOTRDataSourceId = @PayrollOTRDataSourceId_DRIVERPAY;
+--init PayrollOTRStaging
+	DELETE FROM [payroll].[PayrollOTRStaging] WHERE
+	PayrollOTRPayPeriodId = @OpenPayPeriodId
+	AND
+	PayrollOTRDataSourceId = @PayrollOTRDataSourceId_DRIVERPAY;
 
 --TEMP_OTR_DATA__DriverPay inserts
 	DROP TABLE IF EXISTS #TEMP_OTR_DATA__DriverPay

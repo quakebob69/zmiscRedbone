@@ -4,11 +4,11 @@ GO
 
 --PAST
 INSERT INTO [payroll].[PayrollOTRPayPeriod] ([FY], [NUMBER], [PayrollOTRStatusId], [IsOpen] ,[BeginDate] ,[EndDate], [LoadDataIsStaged], [DriverPayDataIsStaged]) VALUES (
-'2023', '46', 1, 0, '2023-11-19 00:00:00.000', '2023-11-26 00:00:00.000', 0, 0);
+'2023', '46', 6, 0, '2023-11-19 00:00:00.000', '2023-11-26 00:00:00.000', 0, 0);
 INSERT INTO [payroll].[PayrollOTRPayPeriod] ([FY], [NUMBER], [PayrollOTRStatusId], [IsOpen] ,[BeginDate] ,[EndDate], [LoadDataIsStaged], [DriverPayDataIsStaged]) VALUES (
-'2023', '47', 1, 0, '2023-11-26 00:00:00.000', '2023-12-03 00:00:00.000', 0, 0);
+'2023', '47', 6, 0, '2023-11-26 00:00:00.000', '2023-12-03 00:00:00.000', 0, 0);
 INSERT INTO [payroll].[PayrollOTRPayPeriod] ([FY], [NUMBER], [PayrollOTRStatusId], [IsOpen] ,[BeginDate] ,[EndDate], [LoadDataIsStaged], [DriverPayDataIsStaged]) VALUES (
-'2023', '48', 1, 0, '2023-12-03 00:00:00.000', '2023-12-10 00:00:00.000', 0, 0);
+'2023', '48', 6, 0, '2023-12-03 00:00:00.000', '2023-12-10 00:00:00.000', 0, 0);
 GO
 
 --FUTURE

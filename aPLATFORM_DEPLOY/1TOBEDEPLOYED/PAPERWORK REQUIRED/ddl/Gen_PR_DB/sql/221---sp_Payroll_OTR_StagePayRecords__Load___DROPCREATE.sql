@@ -40,17 +40,11 @@ END
 	DECLARE @PayrollOTRDataSourceId_LOAD INT
 		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
---init tables
-	--PayrollOTRPayPeriod
-		UPDATE payroll.PayrollOTRPayPeriod
-		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
-		WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId;
-
-	--PayrollOTRStaging
-		DELETE FROM [payroll].[PayrollOTRStaging] WHERE
-		PayrollOTRPayPeriodId = @OpenPayPeriodId
-		AND
-		PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
+--init PayrollOTRStaging
+	DELETE FROM [payroll].[PayrollOTRStaging] WHERE
+	PayrollOTRPayPeriodId = @OpenPayPeriodId
+	AND
+	PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
 
 --TEMP_OTR_DATA__Load inserts
 	DROP TABLE IF EXISTS #TEMP_OTR_DATA__Load
