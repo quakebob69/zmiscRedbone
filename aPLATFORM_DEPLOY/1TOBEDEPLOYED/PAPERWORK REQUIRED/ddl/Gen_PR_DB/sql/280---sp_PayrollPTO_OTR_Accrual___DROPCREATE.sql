@@ -102,7 +102,7 @@ SELECT
 
 INTO #WEEKLYTOTAL
 
-FROM dispatch.PR_OTR_History h
+FROM payrollTEMPDANNY.PR_OTR_History___payrollTEMPDANNY h
 LEFT JOIN main.PersonPay pp on pp.PersonId = h.DriverPersonId and h.PayId = pp.PayRateId 
 LEFT JOIN main.PersonPayRate ppr on ppr.PersonPayRateId = h.PayId
 
