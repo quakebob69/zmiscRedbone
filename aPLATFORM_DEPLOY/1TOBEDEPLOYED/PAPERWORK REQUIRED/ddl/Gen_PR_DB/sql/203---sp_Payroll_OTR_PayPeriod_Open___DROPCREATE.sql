@@ -21,21 +21,27 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	DECLARE @ActivePayPeriodToOpenId INT
+	--OpenPayPeriodId
+		DECLARE @OpenPayPeriodId INT
+		SET @OpenPayPeriodId =
+		(
+			SELECT
+			TOP 1 PayrollOTRPayPeriodId 
+			FROM [payroll].[PayrollOTRPayPeriod]
+			WHERE
+			PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = 'NOTSTARTED')
+			ORDER BY 
+			FY, Number
+		)
 	
-	SET @ActivePayPeriodToOpenId =
-	(
-		SELECT
-		TOP 1 PayrollOTRPayPeriodId 
-		FROM [payroll].[PayrollOTRPayPeriod]
-		WHERE
-		PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = 'NOTSTARTED')
-		ORDER BY 
-		FY, Number
-	)
-	
-	UPDATE [payroll].[PayrollOTRPayPeriod]
-	SET IsOpen = 1
-	WHERE PayrollOTRPayPeriodId = @ActivePayPeriodToOpenId
+	--IsOpen
+		UPDATE [payroll].[PayrollOTRPayPeriod]
+		SET IsOpen = 1
+		WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId
+
+	--PayrollOTRStatus ('STAGING')
+		UPDATE [payroll].[PayrollOTRPayPeriod]
+		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
+		WHERE IsOpen = 1
 
 GO

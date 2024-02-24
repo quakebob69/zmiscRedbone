@@ -17,6 +17,7 @@ CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[PayrollOTRPayPeriodId] [int] IDENTITY(1,1) NOT NULL,
 	[FY] [varchar](4) NOT NULL,
 	[Number] [varchar](2) NOT NULL,
+	[Code] [varchar](4) NOT NULL,
 	[PayrollOTRStatusId] [int] NOT NULL,
 	[IsOpen] [bit] NOT NULL,
 	[BeginDate] [datetime] NOT NULL,
