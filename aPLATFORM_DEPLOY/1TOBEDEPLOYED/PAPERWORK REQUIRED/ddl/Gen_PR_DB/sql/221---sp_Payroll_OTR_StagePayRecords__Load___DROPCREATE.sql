@@ -26,24 +26,10 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-
-
-
-
-
-
-    DECLARE @OpenPayPeriodId INT
-    EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriod_GetOpen]
-
-	
-	
-	
-
-
-
-
-
 --vars
+	DECLARE @OpenPayPeriodId INT
+	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriod_GetOpen]
+
 	DECLARE @PayPeriodBeginDate VARCHAR(25)
 	DECLARE @PayPeriodEndDate VARCHAR(25)
 		SET @PayPeriodBeginDate = (SELECT FORMAT(BeginDate, 'MM/dd/yyyy') FROM payroll.PayrollOTRPayPeriod WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId);
