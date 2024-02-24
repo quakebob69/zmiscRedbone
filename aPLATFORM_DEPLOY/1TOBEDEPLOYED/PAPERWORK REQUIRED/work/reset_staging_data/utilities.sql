@@ -26,6 +26,7 @@ USE [RedBoneThomas]
 		-------	
 			SELECT 'STAGE------------------------------------------------------------------------------------------------------------------------------'
 			exec [payroll].[sp_Payroll_OTR_StagePayRecords__DriverPay] @LastUpdateBy
+			--exec [payroll].[sp_Payroll_OTR_StagePayRecords__ALL_SOURCES] @LastUpdateBy
 			SELECT COUNT(*) AS 'NUM history RECS - after staging' FROM [payrollTEMPDANNY].[PR_OTR_History___payrollTEMPDANNY]
 			SELECT COUNT(*) AS 'NUM staging RECS - after staging' FROM [payroll].[PayrollOTRStaging]
 		-------	
