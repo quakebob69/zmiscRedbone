@@ -5,14 +5,13 @@ GO
 /****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_StagePayRecords__Load]    Script Date: 2/14/2024 11:23:30 AM ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
 
 CREATE procedure [payroll].[sp_Payroll_OTR_StagePayRecords__Load]
 (
-	@LastUpdateBy Int
+	@LastUpdateBy INT
 )
 
 AS

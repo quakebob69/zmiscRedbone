@@ -5,12 +5,8 @@ GO
 /****** Object:  StoredProcedure [payroll].[sp_PayrollPTO_OTR_Accrual]    Script Date: 2/14/2024 10:11:01 AM ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
 
 
 CREATE PROCEDURE [payroll].[sp_PayrollPTO_OTR_Accrual]

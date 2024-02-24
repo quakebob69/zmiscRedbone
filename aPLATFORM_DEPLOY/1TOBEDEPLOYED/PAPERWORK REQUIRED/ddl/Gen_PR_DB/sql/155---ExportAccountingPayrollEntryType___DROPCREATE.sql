@@ -6,7 +6,6 @@ GO
 /****** Object:  Table [export].[AccountingExportPayrollEntryType]    Script Date: 2/16/2024 1:16:15 PM ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 

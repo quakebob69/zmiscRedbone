@@ -5,7 +5,6 @@ GO
 /****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriod_Open]    Script Date: 2/14/2024 2:10:19 PM ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 

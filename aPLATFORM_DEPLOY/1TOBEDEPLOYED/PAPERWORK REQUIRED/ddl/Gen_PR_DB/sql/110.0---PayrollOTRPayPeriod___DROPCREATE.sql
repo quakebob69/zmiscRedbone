@@ -9,7 +9,6 @@ GO
 /****** Object:  Table [payroll].[PayrollOTRPayPeriod]    Script Date: 2/14/2024 1:12:28 PM ******/
 SET ANSI_NULLS ON
 GO
-
 --SET QUOTED_IDENTIFIER ON
 --GO
 
