@@ -15,7 +15,7 @@ CREATE TABLE [payroll].[PayrollOTRStatus](
 	[Order] [int] NULL,
 	[ShortDescription] [varchar](30) NOT NULL,
 	[Description] [varchar](128) NOT NULL,
-	[UserStepsJson] [varchar](512) NULL,
+	[UserStepsJson] [varchar](512) NOT NULL,
 	[UseForPayrollProcess] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollOTRStatus] PRIMARY KEY CLUSTERED 
 (
@@ -30,10 +30,10 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (1, 'NOTSTARTED', 1, 'Not Started', 'OTR payroll has not started for this pay period.', NULL, 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (2, 'STAGING', 2, 'Staging', 'OTR payroll data is being corrected and staged.', NULL, 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (3, 'STAGED', 3, 'Staged', 'OTR payroll has been staged and is ready to be entered into QuickBooks.', NULL, 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (4, 'ENTERED', 4, 'Entered', 'OTR payroll has been entered into QuickBooks and is ready to be validated.', NULL, 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (5, 'VALIDATED', 5, 'Validated', 'OTR payroll has been validated is ready to be vinalized.', NULL, 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (6, 'FINALIZED', 6, 'Finalized', 'OTR payroll has been finalized.', NULL, 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (7, 'HISTORY', NULL, 'History', 'Used for historical purposes.', NULL, 0);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (1, 'NOTSTARTED', 1, 'Not Started', 'OTR payroll has not started for this pay period.', 'None.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (2, 'STAGING', 2, 'Staging', 'OTR payroll data is being corrected and staged.', 'None.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (3, 'STAGED', 3, 'Staged', 'OTR payroll has been staged and is ready to be entered into QuickBooks.', 'None.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (4, 'ENTERED', 4, 'Entered', 'OTR payroll has been entered into QuickBooks and is ready to be validated.', 'None.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (5, 'VALIDATED', 5, 'Validated', 'OTR payroll has been validated is ready to be vinalized.', 'None.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (6, 'FINALIZED', 6, 'Finalized asdf', 'OTR payroll has been finalized.', 'None.', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (7, 'HISTORY', NULL, 'History', 'Used for historical purposes.', 'N/A.', 0);
