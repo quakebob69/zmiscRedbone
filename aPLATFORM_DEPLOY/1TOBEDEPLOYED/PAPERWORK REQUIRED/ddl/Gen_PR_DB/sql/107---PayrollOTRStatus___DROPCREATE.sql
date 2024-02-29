@@ -12,12 +12,10 @@ GO
 CREATE TABLE [payroll].[PayrollOTRStatus](
 	[PayrollOTRStatusId] [int] NOT NULL,
 	[Name] [varchar](30) NOT NULL,
-	[ShortDescription] [varchar](30) NOT NULL,
 	[Order] [int] NULL,
+	[ShortDescription] [varchar](30) NOT NULL,
 	[Description] [varchar](128) NOT NULL,
-	[StepsJson] [varchar](512) NULL,
-	[HasUserAction] [int] NOT NULL,
-	[UserAction] [varchar](200) NULL,
+	[UserStepsJson] [varchar](512) NULL,
 	[UseForPayrollProcess] [bit] NOT NULL,
  CONSTRAINT [PK_PayrollOTRStatus] PRIMARY KEY CLUSTERED 
 (
@@ -32,10 +30,10 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [ShortDescription], [StepsJson], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (1, 'NOTSTARTED', 'Not Started', NULL, 1, 'OTR payroll has not started for this pay period.', 1, 'Initialize the pay period.', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [ShortDescription], [StepsJson], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (2, 'STAGING', 'Staging', NULL, 2, 'OTR payroll data is being corrected and staged.', 1, 'Stage, review and correct bad or missing data in ''Trucking Loads'' and ''Driver Pay''.  Re-stage and review after making corrections.', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [ShortDescription], [StepsJson], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (3, 'STAGED', 'Staged', NULL, 3, 'OTR payroll has been staged and is ready to be entered into QuickBooks.', 1, 'Print ''QuickBook Data Entry - OTR Payroll'' PDF document and enter its data into QuickBooks.', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [ShortDescription], [StepsJson], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (4, 'ENTERED', 'Entered', NULL, 4, 'OTR payroll has been entered into QuickBooks and is ready to be validated.', 1, 'Validate that the data entered into QuickBooks matches the data in the PDF file.', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [ShortDescription], [StepsJson], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (5, 'VALIDATED', 'Validated', NULL, 5, 'OTR payroll has been validated is ready to be vinalized.', 1, 'Finalize the pay period.', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [ShortDescription], [StepsJson], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (6, 'FINALIZED', 'Finalized', NULL, 6, 'OTR payroll has been finalized.', 0, NULL, 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [ShortDescription], [StepsJson], [Order], [Description], [HasUserAction], [UserAction], [UseForPayrollProcess]) VALUES (7, 'HISTORY', 'History', NULL, NULL, 'Used for historical purposes.', 0, NULL, 0);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (1, 'NOTSTARTED', 1, 'Not Started', 'OTR payroll has not started for this pay period.', NULL, 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (2, 'STAGING', 2, 'Staging', 'OTR payroll data is being corrected and staged.', NULL, 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (3, 'STAGED', 3, 'Staged', 'OTR payroll has been staged and is ready to be entered into QuickBooks.', NULL, 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (4, 'ENTERED', 4, 'Entered', 'OTR payroll has been entered into QuickBooks and is ready to be validated.', NULL, 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (5, 'VALIDATED', 5, 'Validated', 'OTR payroll has been validated is ready to be vinalized.', NULL, 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (6, 'FINALIZED', 6, 'Finalized', 'OTR payroll has been finalized.', NULL, 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (7, 'HISTORY', NULL, 'History', 'Used for historical purposes.', NULL, 0);
