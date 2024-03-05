@@ -30,7 +30,6 @@ CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[TotalMiles] [int] NULL,
 	[TotalMilesValue] [decimal](18, 2) NULL,
 	[TotalHeldAmount] [decimal](18, 2) NULL,
-	[PTOTotalHoursAccrual] [int] NULL,
 	[UTOTotalDaysAccrual] [int] NULL,
 	[UTOTotalDaysValue] [int] NULL,
 	[LastUpdate] [datetime] NULL,
