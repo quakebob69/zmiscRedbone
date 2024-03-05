@@ -24,12 +24,15 @@ CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[CheckDate] [datetime] NOT NULL,
 	[LoadDataIsStaged] [bit] NOT NULL,
 	[DriverPayDataIsStaged] [bit] NOT NULL,
+	[TotalEarningsAmount] [decimal](18, 2) NULL,
+	[TotalOtherpayrollitemsAmount] [decimal](18, 2) NULL,
+	[TotalDriverPayAmount] [decimal](18, 2) NULL,
 	[TotalMiles] [int] NULL,
 	[TotalMilesValue] [decimal](18, 2) NULL,
 	[TotalHeldAmount] [decimal](18, 2) NULL,
-	[TotalOtherPayAmount] [decimal](18, 2) NULL,
-	[PTOTotalHrsAccrual] [int] NULL,
+	[PTOTotalHoursAccrual] [int] NULL,
 	[UTOTotalDaysAccrual] [int] NULL,
+	[UTOTotalDaysValue] [int] NULL,
 	[LastUpdate] [datetime] NULL,
 	[LastUpdateBy] [int] NULL
  CONSTRAINT [PK_PayrollOTRPayPeriod] PRIMARY KEY CLUSTERED 
