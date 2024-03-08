@@ -18,6 +18,7 @@ CREATE TABLE [payroll].[PayrollOTRPayPeriod](
 	[Number] [varchar](2) NOT NULL,
 	[Code] [varchar](4) NOT NULL,
 	[PayrollOTRStatusId] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
 	[IsOpen] [bit] NOT NULL,
 	[BeginDate] [datetime] NOT NULL,
 	[EndDate] [datetime] NOT NULL,
@@ -62,4 +63,11 @@ SET QUOTED_IDENTIFIER ON
 CREATE UNIQUE INDEX IX_PayrollOTRPayPeriod_IsOpen
 ON [payroll].[PayrollOTRPayPeriod](IsOpen)
 WHERE IsOpen = 1
+GO
+
+
+SET QUOTED_IDENTIFIER ON
+CREATE UNIQUE INDEX IX_PayrollOTRPayPeriod_IsActive
+ON [payroll].[PayrollOTRPayPeriod](IsActive)
+WHERE IsActive = 1
 GO
