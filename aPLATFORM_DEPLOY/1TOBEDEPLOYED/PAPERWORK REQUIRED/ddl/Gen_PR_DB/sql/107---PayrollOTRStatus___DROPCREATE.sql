@@ -30,7 +30,7 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (1, 'NOTOPENED', 1, 'Ready to Opened', 'OTR payroll has not been opened for this pay period.', '["asdf", "asdf"]', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (1, 'NOTOPENED', 1, 'Ready to Opened', 'OTR payroll has not been opened for this pay period.', '["OTR payroll has not started for this pay period.", "Click ''Open the Pay Period'' button."]', 1);
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (2, 'STAGING', 2, 'Staging', 'OTR payroll data is being corrected and staged.', '["asdf", "asdf"]', 1);
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (3, 'STAGED', 3, 'Staged', 'OTR payroll has been staged and is ready to be entered into QuickBooks.', '["asdf", "asdf"]', 1);
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [Description], [UserStepsJson], [UseForPayrollProcess]) VALUES (4, 'ENTERED', 4, 'Entered', 'OTR payroll has been entered into QuickBooks and is ready to be validated.', '["asdf", "asdf"]', 1);
