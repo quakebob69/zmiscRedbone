@@ -3,7 +3,7 @@ DELETE FROM [payroll].[PayrollOTRPayPeriod];
 GO
 
 DECLARE @PayrollOTRStatusId_FINALIZED INT
-SET @PayrollOTRStatusId_FINALIZED = 1;
+SET @PayrollOTRStatusId_FINALIZED = 7;
 
 --PAST
 INSERT INTO [payroll].[PayrollOTRPayPeriod] ([FY], [NUMBER], [CODE], [PayrollOTRStatusId], [IsActive],  [IsOpen], [BeginDate], [EndDate], [CheckDate], [LoadDataIsStaged], [DriverPayDataIsStaged], [TotalMiles], [TotalMilesValue], [TotalHeldAmount], [TotalOtherpayrollitemsAmount], [UTOTotalDaysAccrual], [UTOTotalDaysValue], [TotalEarningsAmount], [TotalDriverPayAmount])
