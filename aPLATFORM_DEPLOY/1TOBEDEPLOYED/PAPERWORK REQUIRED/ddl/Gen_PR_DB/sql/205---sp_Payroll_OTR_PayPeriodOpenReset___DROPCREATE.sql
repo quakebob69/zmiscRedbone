@@ -1,18 +1,17 @@
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriod_Open]    Script Date: 2/14/2024 2:10:19 PM ******/
-DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriod_Open]
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]    Script Date: 2/14/2024 2:10:19 PM ******/
+DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
 GO
 
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriod_Open]    Script Date: 2/14/2024 2:10:19 PM ******/
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]    Script Date: 2/14/2024 2:10:19 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
-CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriod_Open]
+CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
 AS
 /*
-	exec [payroll].[sp_Payroll_OTR_PayPeriod_Open]
+	exec [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
 */
 
 SET NOCOUNT ON;
