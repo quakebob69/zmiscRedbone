@@ -11,7 +11,7 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_StagePayrollAll]
 (
-	@LastUpdateBy Int
+	@LastUpdateBy INT
 )
 
 AS

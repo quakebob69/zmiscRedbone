@@ -11,8 +11,8 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]
 (
-	@PayDateStartDt date
-	,@PayDateEndDt date
+	@PayPeriodStart date
+	,@PayPeriodEnd date
 )
 as
 
@@ -39,7 +39,7 @@ as
 		inner join dispatch.PayCode pc on dp.PayCodeId = pc.PayCodeId
 		inner join main.Person pEntered on pEntered.PersonId = dp.UpdatedByPersonId
 	WHERE 
-		cast(dp.PayDate as date) between @PayDateStartDt and @PayDateEndDt
+		cast(dp.PayDate as date) between @PayPeriodStart and @PayPeriodEnd
 		and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
 		and p.PersonId in (select PersonId from main.BusinessEntityPersonMapping where PersonId = p.PersonId and BusinessEntityTypeId in (1,2)) -- Redbone Trucking Inc or Double Down Trucking Inc
 		and p.IsActive = 1

@@ -11,8 +11,8 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
 (
-        @StartDt datetime 
-        ,@ThroughDt datetime 
+	@PayPeriodStart date
+	,@PayPeriodEnd date
 )
 as
 /*
@@ -25,10 +25,10 @@ BEGIN
        SET FMTONLY OFF
      END
 
---declare @StartDt datetime 
---declare @ThroughDt datetime 
---set @StartDt = '10/31/2021'
---set @ThroughDt = '11/06/2021'
+--declare @PayPeriodStart datetime 
+--declare @PayPeriodEnd datetime 
+--set @PayPeriodStart = '12/10/2023'
+--set @PayPeriodEnd = '12/16/2023'
 
         DECLARE @crsV TABLE (
                 LoadId int
@@ -60,7 +60,7 @@ BEGIN
                 left outer join main.Person p2 on p2.PersonId = l.Driver2_PersonId
         where 
                 l.LoadStatusTypeId <> 100 -- don't include cancelled loads.
-                and convert(DATE, lsDrop.StartDateTime) between @StartDt and @ThroughDt
+                and convert(DATE, lsDrop.StartDateTime) between @PayPeriodStart and @PayPeriodEnd
                 and 
                 (
                         p1.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p1.PersonId and PersonTypeId = 4)
@@ -89,7 +89,7 @@ BEGIN
         where 
                 l.LoadStatusTypeId <> 100 -- don't include cancelled loads.
                 -- Pick either StartDateTime or DropStartDateTime based on if the stop is a LEG or not
-                and iif(lsDrop.LoadStopTypeId = 2, Convert(Date, lsDrop.DropStartDateTime), convert(DATE, lsDrop.StartDateTime)) between @StartDt and @ThroughDt
+                and iif(lsDrop.LoadStopTypeId = 2, Convert(Date, lsDrop.DropStartDateTime), convert(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
                 and
                 (
                         p1.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p1.PersonId and PersonTypeId = 4)
@@ -116,7 +116,7 @@ BEGIN
         where 
                 l.LoadStatusTypeId <> 100 -- don't include cancelled loads.
                 -- Look at Leg DropStartDateTime since this is a LEG drop.
-                and convert(DATE, lsDrop.DropStartDateTime) between @StartDt and @ThroughDt
+                and convert(DATE, lsDrop.DropStartDateTime) between @PayPeriodStart and @PayPeriodEnd
                 and
                 (
                         p1.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p1.PersonId and PersonTypeId = 4)
@@ -221,7 +221,7 @@ BEGIN
                         inner join main.Person p on p.PersonId = IIF(@LegInd = 0,  l.Driver1_PersonId, lsPick.Driver1_PersonId)
                         -- Get truck's Unit_Id
                         LEFT OUTER JOIN equipment.punit pt on pt.PunitId = IIF(@LegInd = 0, l.TruckPunitId, lsPick.TruckPunitId) 
-						LEFT OUTER JOIN equipment.punitmapping pm on pm.PUnitId = pt.PUnitId and @ThroughDt between pm.EffectiveDate and pm.ExpirationDate --Added 5/10
+						LEFT OUTER JOIN equipment.punitmapping pm on pm.PUnitId = pt.PUnitId and @PayPeriodEnd between pm.EffectiveDate and pm.ExpirationDate --Added 5/10
                         -- Get the Client_Id
                         LEFT OUTER JOIN main.Client cl on cl.ClientId = l.ClientId
                         -- Get DriverId (e.g. ABD1000)
@@ -251,7 +251,7 @@ BEGIN
                         -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
                         and  iif(lsDrop.LoadStopTypeId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime) is not null
                         -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
-                        and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @StartDt and @ThroughDt
+                        and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
 
                 insert into @tempA
                 SELECT
@@ -304,7 +304,7 @@ BEGIN
                         inner join main.Person p on p.PersonId = IIF(@LegInd = 0,  l.Driver2_PersonId, lsPick.Driver2_PersonId)
                         -- Get truck's Unit_Id
                         LEFT OUTER JOIN equipment.punit pt on pt.PunitId = IIF(@LegInd = 0, l.TruckPunitId, lsPick.TruckPunitId)
-						LEFT OUTER JOIN equipment.punitmapping pm on pm.PUnitId = pt.PUnitId and @ThroughDt between pm.EffectiveDate and pm.ExpirationDate --Added 5/10
+						LEFT OUTER JOIN equipment.punitmapping pm on pm.PUnitId = pt.PUnitId and @PayPeriodEnd between pm.EffectiveDate and pm.ExpirationDate --Added 5/10
                         -- Get the Client_Id
                         LEFT OUTER JOIN main.Client cl on cl.ClientId = l.ClientId
                         -- Get Driver (e.g. ABD1000)
@@ -332,7 +332,7 @@ BEGIN
                         -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
                         and  iif(lsDrop.LoadStopTypeId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime) is not null
                         -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
-                        and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @StartDt and @ThroughDt
+                        and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
 
         fetch next from curs 
                 into @LoadId, @LoadStopId_Pick, @LoadStopId_Drop, @LegInd
@@ -346,7 +346,7 @@ BEGIN
         into #TEMPOTR
         from main.personpay pp
         where pp.payrateid = 85
-        and @ThroughDt < pp.PayRateEndDate AND @ThroughDt > pp.PayRateBeginDate
+        and @PayPeriodEnd < pp.PayRateEndDate AND @PayPeriodEnd > pp.PayRateBeginDate
 
         IF OBJECT_ID('tempdb..#TEMPB') IS NOT NULL DROP TABLE #TEMPB
         
@@ -533,7 +533,7 @@ BEGIN
         FROM #TEMPB B 
         LEFT JOIN Main.Person p on p.PersonId = B.DriverPersonId
         LEFT JOIN Main.PersonPay pp on (pp.personid = cast(b.DriverPersonId as Int)) and (cast(pp.PayRateId as Int) = Cast(b.PayId as Int)) 
-                and (@ThroughDt < pp.PayRateEndDate) and (@ThroughDt > pp.PayRateBeginDate) --modified 11/18 db
+                and (@PayPeriodEnd < pp.PayRateEndDate) and (@PayPeriodEnd > pp.PayRateBeginDate) --modified 11/18 db
         --LEFT JOIN Main.PersonPayRate ppr on ppr.PersonPayRateId = b.PayId
         WHERE Quantity <> 0
         AND B.DriverPersonId NOT IN (Select PersonId from main.PersonPay where PayRateId = 69) -- Exclude salaried drivers
