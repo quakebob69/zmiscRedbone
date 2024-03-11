@@ -1,15 +1,15 @@
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_StagePayRecords__Load]    Script Date: 2/14/2024 11:23:30 AM ******/
-DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayRecords__Load]
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_StagePayrollLoad]    Script Date: 2/14/2024 11:23:30 AM ******/
+DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollLoad]
 GO
 
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_StagePayRecords__Load]    Script Date: 2/14/2024 11:23:30 AM ******/
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_StagePayrollLoad]    Script Date: 2/14/2024 11:23:30 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE procedure [payroll].[sp_Payroll_OTR_StagePayRecords__Load]
+CREATE procedure [payroll].[sp_Payroll_OTR_StagePayrollLoad]
 (
 	@LastUpdateBy INT
 )
@@ -17,7 +17,7 @@ CREATE procedure [payroll].[sp_Payroll_OTR_StagePayRecords__Load]
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_StagePayRecords__Load] 2775
+	exec [payroll].[sp_Payroll_OTR_StagePayrollLoad] 2775
 */
 
 SET NOCOUNT ON;
