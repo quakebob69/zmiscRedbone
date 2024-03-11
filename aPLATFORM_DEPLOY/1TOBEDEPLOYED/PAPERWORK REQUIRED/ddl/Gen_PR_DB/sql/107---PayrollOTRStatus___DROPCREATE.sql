@@ -14,8 +14,7 @@ CREATE TABLE [payroll].[PayrollOTRStatus](
 	[Name] [varchar](30) NOT NULL,
 	[Order] [int] NULL,
 	[ShortDescription] [varchar](30) NOT NULL,
-	[UserStepsJson] [varchar](1024) NOT NULL,
-	[UseForPayrollProcess] [bit] NOT NULL,
+	[UserStepsJson] [varchar](1024) NOT NULL
  CONSTRAINT [PK_PayrollOTRStatus] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRStatusId] ASC
@@ -29,16 +28,9 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (1, 'NOTOPENED', 1, 'Ready to Open', '["OTR payroll has not started for this pay period.", "1. Click ''Open the Pay Period'' button."]', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (2, 'STAGING', 2, 'Staging', '["1. Get, or refresh, payroll data using the data buttons.", "2. Generate ''QuickBooks Data Entry'' file by clicking the green ''qb'' button.", "3. If needed, correct ''Driver Pay'' and/or ''Load'' data, and repeat steps 1 and 2.", "4. Manually enter the data into QuickBooks.","5. Click ''Submit For Validation''."]', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (3, 'VALIDATING', 4, 'Validating', '["OTR payroll has been entered into QuickBooks and is ready to be validated.","1. Generate the ''QuickBooks Data Entry'' file by clicking on the green ''qb'' button.","2. Compare the contents of the file to what was entered into QuickBooks.","3. Pass or Fail the validation by clicking on the appropriate button."]', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (4, 'VALIDATION_FAILED', 5, 'Validation Failed', '["OTR payroll failed validation.", "1) Manually make the necessary corrections in QuickBooks.", "2) Click ''Submit For Validation''.","NOTE:  If ''Driver Pay'' and/or ''Load'' data need to be updated, click ''RESET THE PAY PERIOD''."]', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (5, 'VALIDATION_PASSED', 6, 'Validation Passed', '["OTR payroll has been successfully validated is ready to be finalized. This pay period will be closed and the next one will be initialzed.", "1. Click ''Finalize the Pay Period''"]', 1);
-
-
-
-
-
-
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (6, 'FINALIZED', 7, 'Finalized', '["OTR payroll has been finalized."]', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (7, 'HISTORY', NULL, 'History', '["Used for historical purposes."]', 0);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson]) VALUES (1, 'NOTOPENED', 1, 'Ready to Open', '["OTR payroll has not started for this pay period.", "1. Click ''Open the Pay Period'' button."]');
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson]) VALUES (2, 'STAGING', 2, 'Staging', '["1. Get, or refresh, payroll data using the data buttons.", "2. Generate ''QuickBooks Data Entry'' file by clicking the green ''qb'' button.", "3. If needed, correct ''Driver Pay'' and/or ''Load'' data, and repeat steps 1 and 2.", "4. Manually enter the data into QuickBooks.","5. Click ''Submit For Validation''."]');
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson]) VALUES (3, 'VALIDATING', 4, 'Validating', '["OTR payroll has been entered into QuickBooks and is ready to be validated.","1. Generate the ''QuickBooks Data Entry'' file by clicking on the green ''qb'' button.","2. Compare the contents of the file to what was entered into QuickBooks.","3. Pass or Fail the validation by clicking on the appropriate button."]');
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson]) VALUES (4, 'VALIDATION_FAILED', 5, 'Validation Failed', '["OTR payroll failed validation.", "1) Manually make the necessary corrections in QuickBooks.", "2) Click ''Submit For Validation''.","NOTE:  If ''Driver Pay'' and/or ''Load'' data need to be updated, click ''RESET THE PAY PERIOD''."]');
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson]) VALUES (5, 'VALIDATION_PASSED', 6, 'Validation Passed', '["OTR payroll has been successfully validated is ready to be finalized. This pay period will be closed and the next one will be initialzed.", "1. Click ''Finalize the Pay Period''"]');
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson]) VALUES (6, 'FINALIZED', 7, 'Finalized', '["OTR payroll has been finalized."]');
