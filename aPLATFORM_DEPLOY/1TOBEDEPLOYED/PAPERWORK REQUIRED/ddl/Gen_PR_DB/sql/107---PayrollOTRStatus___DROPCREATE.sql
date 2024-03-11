@@ -38,7 +38,13 @@ INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order],
 
 
 
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (5, 'VALIDATION_FAILED', 5, 'Validation Failed', '["OTR payroll failed validation.", "1) Manually make the necessary corrections in QuickBooks.", "2) Click ''Submit For Validation''."]', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (6, 'VALIDATED', 6, 'Validated', '["OTR payroll has been successfully validated is ready to be finalized.", "Click ''Finalize the Pay Period''", "This pay period will be closed and the next one will be initialzed."]', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (7, 'FINALIZED', 7, 'Finalized', '["OTR payroll has been finalized."]', 1);
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (8, 'HISTORY', NULL, 'History', '["Used for historical purposes."]', 0);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (4, 'VALIDATION_FAILED', 5, 'Validation Failed', '["OTR payroll failed validation.", "1) Manually make the necessary corrections in QuickBooks.", "2) Click ''Submit For Validation''."]', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (5, 'VALIDATED', 6, 'Validated', '["OTR payroll has been successfully validated is ready to be finalized.", "Click ''Finalize the Pay Period''", "This pay period will be closed and the next one will be initialzed."]', 1);
+
+
+
+
+
+
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (6, 'FINALIZED', 7, 'Finalized', '["OTR payroll has been finalized."]', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (7, 'HISTORY', NULL, 'History', '["Used for historical purposes."]', 0);
