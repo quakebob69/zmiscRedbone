@@ -37,9 +37,11 @@ GO
 				
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
 		GO
+				
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetOpen]	
+		GO
 		
-		
---TABLES
+		--TABLES
 	--'payroll' schema 
 		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRPaymentHold]
