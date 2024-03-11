@@ -16,7 +16,7 @@ SET @PayrollOTRStatusId_FINALIZED = 7;
 
 --FUTURE
 INSERT INTO [payroll].[PayrollOTRPayPeriod] ([FY], [NUMBER], [CODE], [PayrollOTRStatusId], [IsActive],  [IsOpen], [BeginDate], [EndDate], [CheckDate], [LoadDataIsStaged], [DriverPayDataIsStaged], [TotalMiles], [TotalMilesValue], [TotalHeldAmount], [TotalOtherpayrollitemsAmount], [UTOTotalDaysAccrual], [UTOTotalDaysValue], [TotalEarningsAmount], [TotalDriverPayAmount])
-VALUES ('2023', '49', '2349', 2, 1, 0, '2023-12-10 00:00:00.000', '2023-12-17 00:00:00.000', '2023-12-22 00:00:00.000', 0, 0, 62463, 53446.62, 7846.88, 728.00, 411, 1117.325, 53446.62, 12846.01);
+VALUES ('2023', '49', '2349', 1, 1, 0, '2023-12-10 00:00:00.000', '2023-12-17 00:00:00.000', '2023-12-22 00:00:00.000', 0, 0, 62463, 53446.62, 7846.88, 728.00, 411, 1117.325, 53446.62, 12846.01);
 INSERT INTO [payroll].[PayrollOTRPayPeriod] ([FY], [NUMBER], [CODE], [PayrollOTRStatusId], [IsActive],  [IsOpen], [BeginDate], [EndDate], [CheckDate], [LoadDataIsStaged], [DriverPayDataIsStaged], [TotalMiles], [TotalMilesValue], [TotalHeldAmount], [TotalOtherpayrollitemsAmount], [UTOTotalDaysAccrual], [UTOTotalDaysValue], [TotalEarningsAmount], [TotalDriverPayAmount])
 VALUES ('2023', '50', '2350', 1, 0, 0, '2023-12-17 00:00:00.000', '2023-12-24 00:00:00.000', '2023-12-29 00:00:00.000', 0, 0, 62463, 53446.62, 7846.88, 728.00, 411, 1117.325, 53446.62, 12846.01);
 INSERT INTO [payroll].[PayrollOTRPayPeriod] ([FY], [NUMBER], [CODE], [PayrollOTRStatusId], [IsActive],  [IsOpen], [BeginDate], [EndDate], [CheckDate], [LoadDataIsStaged], [DriverPayDataIsStaged], [TotalMiles], [TotalMilesValue], [TotalHeldAmount], [TotalOtherpayrollitemsAmount], [UTOTotalDaysAccrual], [UTOTotalDaysValue], [TotalEarningsAmount], [TotalDriverPayAmount])
