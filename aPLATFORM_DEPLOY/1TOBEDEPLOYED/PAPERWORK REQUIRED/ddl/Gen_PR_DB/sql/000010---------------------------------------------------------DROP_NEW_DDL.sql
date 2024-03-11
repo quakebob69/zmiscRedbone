@@ -9,37 +9,36 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_OTR_Accrual]
 		GO
 		
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_FinalizePayPeriod]
+
+		---------
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodFinalize]
+		GO
+						
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodValidate]
+		GO
+						
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodSubmitForValidation]
+		GO
+		
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollAll]
+		GO
+		
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollLoad]
+		GO
+
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollDriverPay]
+		GO		
+		
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
+		GO
+						  
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]
 		GO
 				
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayRecords__ALL_SOURCES]
-		GO
-		   
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayRecords__DriverPay]
-		GO
-			 
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayRecords__Load]
-		GO
-				  
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__DriverPay]
-		GO
-		   
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load]
-		GO
-
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PP_Close]
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
 		GO
 		
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriod_GetOpen]
-		GO
 		
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriod_OpenReset]
-		GO
-		
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriod_Open]
-		GO
-	
-
 --TABLES
 	--'payroll' schema 
 		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHold]') AND type in (N'U'))
