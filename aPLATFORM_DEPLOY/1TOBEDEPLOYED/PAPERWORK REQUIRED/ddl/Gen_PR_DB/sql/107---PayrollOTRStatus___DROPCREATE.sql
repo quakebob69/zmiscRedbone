@@ -31,13 +31,7 @@ GO
 -----------------------------------------
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (1, 'NOTOPENED', 1, 'Ready to Open', '["OTR payroll has not started for this pay period.", "1. Click ''Open the Pay Period'' button."]', 1);
 INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (2, 'STAGING', 2, 'Staging', '["1. Get, or refresh, payroll data using the data buttons.", "2. Generate ''QuickBooks Data Entry'' file by clicking the green ''qb'' button.", "3. If needed, correct ''Driver Pay'' and/or ''Load'' data, and repeat steps 1 and 2.", "4. Manually enter the data into QuickBooks.","5. Click ''Submit For Validation''."]', 1);
-
-
-
-
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (3, 'STAGED', 3, 'Staged', '["- OTR payroll has been staged and is ready to be entered into QuickBooks.", "1) Generate the ''QuickBooks Data Entry'' file by clicking on the green ''qb'' button.", "2) Manually enter the data into QuickBooks.", "3) Click ''Submit For Validation''."]', 1);
-
-INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (4, 'ENTERED', 4, 'Entered', '["OTR payroll has been entered into QuickBooks and is ready to be validated."]', 1);
+INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson], [UseForPayrollProcess]) VALUES (3, 'VALIDATING', 4, 'Validating', '["OTR payroll has been entered into QuickBooks and is ready to be validated.","1. Generate the ''QuickBooks Data Entry'' file by clicking on the green ''qb'' button.","2. Compare the contents of the file to what was entered into QuickBooks.","3. Pass or Fail the validation by clicking on the appropriate button."]', 1);
 
 
 
