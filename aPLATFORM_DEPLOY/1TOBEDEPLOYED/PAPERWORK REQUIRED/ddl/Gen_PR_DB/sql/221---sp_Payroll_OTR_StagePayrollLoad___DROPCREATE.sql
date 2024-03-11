@@ -27,7 +27,7 @@ END
 
 --vars
 	DECLARE @OpenPayPeriodId INT
-	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriod_GetOpen]
+	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen]
 
 	DECLARE @PayPeriodBeginDate VARCHAR(25)
 	DECLARE @PayPeriodEndDate VARCHAR(25)
@@ -67,7 +67,7 @@ END
 		PUnitId int NULL
 	)
 	INSERT INTO #TEMP_OTR_DATA__Load
-	EXEC [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load] @PayPeriodBeginDate, @PayPeriodEndDate
+	EXEC [payroll].[sp_Payroll_OTR_StagePayrollLoad] @PayPeriodBeginDate, @PayPeriodEndDate
 
 --PayrollOTRStaging inserts
 	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)

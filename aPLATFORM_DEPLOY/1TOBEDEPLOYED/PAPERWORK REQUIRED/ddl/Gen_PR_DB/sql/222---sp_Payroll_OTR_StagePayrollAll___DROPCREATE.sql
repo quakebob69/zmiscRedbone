@@ -25,8 +25,8 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	exec payroll.sp_Payroll_OTR_StagePayRecords__DriverPay @LastUpdateBy;
-	exec payroll.sp_Payroll_OTR_StagePayRecords__Load @LastUpdateBy;
+	exec payroll.sp_Payroll_OTR_StagePayrollDriverPay @LastUpdateBy;
+	exec payroll.sp_Payroll_OTR_StagePayrollLoad @LastUpdateBy;
 
 GO
 
