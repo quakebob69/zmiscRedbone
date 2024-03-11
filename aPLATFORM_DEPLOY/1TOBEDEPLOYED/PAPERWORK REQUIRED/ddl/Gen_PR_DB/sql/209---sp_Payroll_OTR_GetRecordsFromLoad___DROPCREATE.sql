@@ -16,11 +16,7 @@ CREATE procedure [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
 )
 as
 /*
-
-
-exec sp_Payroll_OTR_GetRecordsFromLoad '12/10/2023', '12/16/2023'
-
-
+	exec sp_Payroll_OTR_GetRecordsFromLoad '12/10/2023', '12/16/2023'
 */
 
 BEGIN

@@ -10,7 +10,7 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodFinalize]
 (
-	@LastUpdateBy Int
+	@LastUpdateBy INT
 )
 
 AS

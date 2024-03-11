@@ -9,9 +9,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
+(
+	@LastUpdateBy INT
+)
 AS
 /*
-	exec [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
+	exec [payroll].[sp_Payroll_OTR_PayPeriodOpenReset] 2775
 */
 
 SET NOCOUNT ON;

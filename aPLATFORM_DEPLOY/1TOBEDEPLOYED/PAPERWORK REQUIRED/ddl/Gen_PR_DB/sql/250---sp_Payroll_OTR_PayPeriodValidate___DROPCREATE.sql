@@ -10,13 +10,14 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodValidate]
 (
-	@LastUpdateBy Int
+	@ValidationResult INT /*1=Pass, 2=Fail*/
+	,@LastUpdateBy INT
 )
 
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_PayPeriodValidate]
+	exec [payroll].[sp_Payroll_OTR_PayPeriodValidate] 1, 2775
 */
 
 SET NOCOUNT ON;
