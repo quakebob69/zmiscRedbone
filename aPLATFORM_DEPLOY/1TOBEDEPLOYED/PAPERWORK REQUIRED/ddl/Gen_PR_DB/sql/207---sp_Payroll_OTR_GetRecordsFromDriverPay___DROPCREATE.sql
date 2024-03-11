@@ -1,15 +1,15 @@
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__DriverPay]    Script Date: 2/14/2024 10:05:27 AM ******/
-DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__DriverPay]
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]    Script Date: 2/14/2024 10:05:27 AM ******/
+DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]
 GO
 
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__DriverPay]    Script Date: 2/14/2024 10:05:27 AM ******/
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]    Script Date: 2/14/2024 10:05:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE procedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__DriverPay]
+CREATE procedure [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]
 (
 	@PayDateStartDt date
 	,@PayDateEndDt date
@@ -17,7 +17,7 @@ CREATE procedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__DriverPay]
 as
 
 /*
-	exec sp_Payroll_OTR_GetPayRecordsFrom__DriverPay '12/10/2023', '12/16/2023'
+	exec sp_Payroll_OTR_GetRecordsFromDriverPay '12/10/2023', '12/16/2023'
 */
 
 	SELECT 

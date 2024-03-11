@@ -1,15 +1,15 @@
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load]    Script Date: 2/14/2024 10:06:27 AM ******/
-DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load]
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]    Script Date: 2/14/2024 10:06:27 AM ******/
+DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
 GO
 
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load]    Script Date: 2/14/2024 10:06:27 AM ******/
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]    Script Date: 2/14/2024 10:06:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE procedure [payroll].[sp_Payroll_OTR_GetPayRecordsFrom__Load]
+CREATE procedure [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
 (
         @StartDt datetime 
         ,@ThroughDt datetime 
@@ -18,7 +18,7 @@ as
 /*
 
 
-exec sp_Payroll_OTR_GetPayRecordsFrom__Load '12/10/2023', '12/16/2023'
+exec sp_Payroll_OTR_GetRecordsFromLoad '12/10/2023', '12/16/2023'
 
 
 */
