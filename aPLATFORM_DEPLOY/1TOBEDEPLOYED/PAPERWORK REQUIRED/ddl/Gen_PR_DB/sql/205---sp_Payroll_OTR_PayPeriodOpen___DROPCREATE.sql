@@ -22,6 +22,9 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
+	DECLARE @ChangeToStatus VARCHAR(30)
+	SET @ChangeToStatus = 'STAGING'
+
 	DECLARE @ActivePayPeriodId INT
 	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
 	
@@ -31,7 +34,7 @@ END
 
 	--IsOpen/PayrollOTRStatus
 		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET IsOpen = 1, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
+		SET IsOpen = 1, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO
