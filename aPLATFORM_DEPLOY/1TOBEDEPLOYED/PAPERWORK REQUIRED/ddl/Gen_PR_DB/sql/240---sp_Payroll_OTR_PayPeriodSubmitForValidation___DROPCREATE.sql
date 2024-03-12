@@ -29,7 +29,7 @@ END
 	
 	--PayrollOTRStatus
 		UPDATE [payroll].[PayrollOTRPayPeriod]
-		PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'VALIDATING')
+		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'VALIDATING')
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO
