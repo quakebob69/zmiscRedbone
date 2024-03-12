@@ -26,12 +26,12 @@ SET FMTONLY OFF
 END
 
 	DECLARE @ChangeToStatus VARCHAR(30)
-    CASE 
-        WHEN (@ValidationResult IS NOT NULL) AND (@ValidationResult = 0) THEN
-            SET @ChangeToStatus = 'VALIDATION_FAILED'
-        WHEN (@ValidationResult IS NOT NULL) AND (@ValidationResult = 1) THEN
-            SET @ChangeToStatus = 'VALIDATION_PASSED'
-    END
+    SET @ChangeToStatus = CASE 
+        WHEN @ValidationResult = 1 THEN
+            'VALIDATION_PASSED'
+		ELSE
+            'VALIDATION_FAILED'
+    END AS  VARCHAR(30)
 	
 	DECLARE @ActivePayPeriodId INT
 	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
