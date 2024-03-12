@@ -26,18 +26,13 @@ SET FMTONLY OFF
 END
 
 	DECLARE @ChangeToStatus VARCHAR(30)
-	SET @ChangeToStatus = 'NOTOPENED'
+    CASE 
+        WHEN (@ValidationResult IS NOT NULL) AND (@ValidationResult = 0) THEN
+            SET @ChangeToStatus = 'VALIDATION_FAILED'
+        WHEN (@ValidationResult IS NOT NULL) AND (@ValidationResult = 1) THEN
+            SET @ChangeToStatus = 'VALIDATION_PASSED'
+    END
 	
-	DECLARE @ActivePayPeriodId INT
-	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
-	
-	--table(s)
-		DELETE FROM [payroll].[PayrollOTRStaging]
-		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
-
-	--IsOpen/PayrollOTRStatus
-		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET IsOpen = 0, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
-		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
+	asdf
 
 GO
