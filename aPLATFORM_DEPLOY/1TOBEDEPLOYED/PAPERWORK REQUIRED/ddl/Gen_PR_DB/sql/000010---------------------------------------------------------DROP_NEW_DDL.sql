@@ -38,7 +38,7 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
 		GO
 				
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetOpen]	
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetActive]	
 		GO
 		
 		--TABLES

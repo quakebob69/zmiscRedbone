@@ -27,7 +27,7 @@ END
 
 --vars
 	DECLARE @OpenPayPeriodId INT
-	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] @LastUpdateBy
+	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
 
 	DECLARE @PayPeriodBeginDate VARCHAR(25)
 	DECLARE @PayPeriodEndDate VARCHAR(25)
