@@ -22,9 +22,9 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	--OpenPayPeriodId
-		DECLARE @OpenPayPeriodId INT
-		SET @OpenPayPeriodId =
+	--ActivePayPeriodId
+		DECLARE @ActivePayPeriodId INT
+		SET @ActivePayPeriodId =
 		(
 			SELECT
 			TOP 1 PayrollOTRPayPeriodId 
@@ -33,6 +33,6 @@ END
 			IsActive = 1
 		)
 		
-		RETURN @OpenPayPeriodId
+		RETURN @ActivePayPeriodId
 
 GO
