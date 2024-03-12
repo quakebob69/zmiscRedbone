@@ -42,7 +42,8 @@ END
 			SET IsActive = 0, IsOpen = 0, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
 			WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
-		--open next
-			--
+		--activate next
+			--asdf
+			
 		
 GO
