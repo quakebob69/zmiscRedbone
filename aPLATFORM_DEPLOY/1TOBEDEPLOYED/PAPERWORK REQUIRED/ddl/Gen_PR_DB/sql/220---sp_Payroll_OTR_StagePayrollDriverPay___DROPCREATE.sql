@@ -63,7 +63,7 @@ END
 		,DriverPersonId int
 	)
 	INSERT INTO #TEMP_OTR_DATA__DriverPay
-	EXEC payroll.sp_Payroll_OTR_GetPayRecordsFrom__DriverPay @PayPeriodBeginDate, @PayPeriodEndDate
+	EXEC payroll.sp_Payroll_OTR_GetRecordsFromDriverPay @PayPeriodBeginDate, @PayPeriodEndDate
 
 --PayrollOTRStaging inserts
 	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
