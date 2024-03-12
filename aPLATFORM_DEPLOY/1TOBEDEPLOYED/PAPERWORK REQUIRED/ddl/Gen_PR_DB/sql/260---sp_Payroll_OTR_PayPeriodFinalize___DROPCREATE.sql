@@ -32,7 +32,9 @@ END
 	--pay periods
 	DECLARE @ChangeToStatus VARCHAR(30)
 	SET @ChangeToStatus = 'FINALIZED'
-		
+	DECLARE @StatusNotStarted VARCHAR(30)
+	SET @StatusNotStarted = 'NOTSTARTED'
+
 		--finalize current
 			DECLARE @ActivePayPeriodId INT
 			EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
@@ -43,7 +45,21 @@ END
 			WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 		--activate next
-			--asdf
-			
+			DECLARE @NextPayPeriodId INT
+			SET @NextPayPeriodId =
+			(
+				SELECT
+				TOP 1 PayrollOTRPayPeriodId 
+				FROM [payroll].[PayrollOTRPayPeriod]
+				WHERE
+				PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = @StatusNotStarted)
+				ORDER BY 
+				FY, Number
+			)
 		
+			--IsActive
+			UPDATE [payroll].[PayrollOTRPayPeriod]
+			SET IsActive = 1
+			WHERE PayrollOTRPayPeriodId = @NextPayPeriodId
+			
 GO
