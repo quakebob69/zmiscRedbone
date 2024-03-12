@@ -32,7 +32,7 @@ END
 	--pay periods
 	DECLARE @ChangeToStatus VARCHAR(30)
 	SET @ChangeToStatus = 'FINALIZED'
-	DECLARE @StatusNotStarted VARCHAR(30)
+	DECLARE @StatusNotOpened VARCHAR(30)
 	SET @StatusNotOpened = 'NOTOPENED'
 
 		--finalize current
