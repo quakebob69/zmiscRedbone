@@ -52,7 +52,7 @@ END
 				TOP 1 PayrollOTRPayPeriodId 
 				FROM [payroll].[PayrollOTRPayPeriod]
 				WHERE
-				PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @StatusNotStarted)
+				PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @StatusNotOpened)
 				ORDER BY 
 				FY, Number
 			)
