@@ -24,8 +24,25 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
+	--table(s)
 	INSERT INTO [payrollTEMPDANNY].[PR_OTR_History___payrollTEMPDANNY] ([Name] ,[LoadId] ,[TripNumber] ,[TruckNumber] ,[Client_Id] ,[PickupBy] ,[DeliverBy] ,[DriverType] ,[LegInd] ,[PickOrigin] ,[DropDest] ,[DriverPersonId] ,[PayCode] ,[PayId] ,[Quantity] ,[PayRateAmount] ,[TotalPay] ,[PayPeriodEnding] ,[PayrollNotes] ,[LastUpdate] ,[LastUpdateBy] ,[PUnitId])
 		SELECT [Name] ,[LoadId] ,[TripNumber] ,[TruckNumber] ,[Client_Id] ,[PickupBy] ,[DeliverBy] ,[DriverType] ,[LegInd] ,[PickOrigin] ,[DropDest] ,[DriverPersonId] ,[PayCode] ,[PayId] ,[Quantity] ,[PayRateAmount] ,[TotalPay] ,[PayPeriodEnding] ,[PayrollNotes] ,[LastUpdate] ,[LastUpdateBy] ,[PUnitId]
 		FROM [payroll].[PayrollOTRStaging];
+		
+	--pay periods
+	DECLARE @ChangeToStatus VARCHAR(30)
+	SET @ChangeToStatus = 'FINALIZED'
+		
+		--finalize current
+			DECLARE @ActivePayPeriodId INT
+			EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
 
+			--IsOpen/PayrollOTRStatus
+			UPDATE [payroll].[PayrollOTRPayPeriod]
+			SET IsActive = 0, IsOpen = 0, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
+			WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
+
+		--open next
+			--
+		
 GO
