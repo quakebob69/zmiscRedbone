@@ -33,7 +33,7 @@ END
 	DECLARE @ChangeToStatus VARCHAR(30)
 	SET @ChangeToStatus = 'FINALIZED'
 	DECLARE @StatusNotStarted VARCHAR(30)
-	SET @StatusNotStarted = 'NOTSTARTED'
+	SET @StatusNotOpened = 'NOTOPENED'
 
 		--finalize current
 			DECLARE @ActivePayPeriodId INT
@@ -52,7 +52,7 @@ END
 				TOP 1 PayrollOTRPayPeriodId 
 				FROM [payroll].[PayrollOTRPayPeriod]
 				WHERE
-				PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = @StatusNotStarted)
+				PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @StatusNotStarted)
 				ORDER BY 
 				FY, Number
 			)
