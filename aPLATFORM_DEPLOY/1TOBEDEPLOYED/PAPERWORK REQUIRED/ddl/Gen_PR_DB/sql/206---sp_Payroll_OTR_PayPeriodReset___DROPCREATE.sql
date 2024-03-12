@@ -29,14 +29,9 @@ END
 		DELETE FROM [payroll].[PayrollOTRStaging]
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
-	--IsOpen
+	--IsOpen/PayrollOTRStatus
 		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET IsOpen = 0
+		SET IsOpen = 0, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'NOTOPENED')
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
-
-	--PayrollOTRStatus ('STAGING')
-		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'NOTOPENED')
-		WHERE IsOpen = 1
 
 GO
