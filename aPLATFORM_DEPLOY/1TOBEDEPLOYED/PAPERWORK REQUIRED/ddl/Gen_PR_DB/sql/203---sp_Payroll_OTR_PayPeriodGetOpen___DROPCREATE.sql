@@ -30,19 +30,7 @@ END
 			TOP 1 PayrollOTRPayPeriodId 
 			FROM [payroll].[PayrollOTRPayPeriod]
 			WHERE
-			PayrollOTRStatusId = (SELECT PayrollOTRStatusId FROM [payroll].[PayrollOTRStatus] WHERE [Name] = 'NOTSTARTED')
-			ORDER BY 
-			FY, Number
+			IsActive = 1
 		)
-	
-	--IsOpen
-		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET IsOpen = 1
-		WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId
-
-	--PayrollOTRStatus ('STAGING')
-		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
-		WHERE IsOpen = 1
 
 GO
