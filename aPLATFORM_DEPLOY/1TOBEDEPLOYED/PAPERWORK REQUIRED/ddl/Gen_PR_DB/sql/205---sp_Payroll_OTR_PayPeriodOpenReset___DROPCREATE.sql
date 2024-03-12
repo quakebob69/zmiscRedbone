@@ -25,8 +25,9 @@ END
 	DECLARE @ActivePayPeriodId INT
 	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
 	
-	--
-		--
+	--tables
+		DELETE FROM [payroll].[PayrollOTRStaging]
+		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 	--IsOpen
 		UPDATE [payroll].[PayrollOTRPayPeriod]
