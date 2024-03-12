@@ -25,18 +25,13 @@ END
 	DECLARE @ActivePayPeriodId INT
 	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
 	
-	--tables
+	--table(s)
 		DELETE FROM [payroll].[PayrollOTRStaging]
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
-	--IsOpen
+	--IsOpen/PayrollOTRStatus
 		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET IsOpen = 1
+		SET IsOpen = 1, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
-
-	--PayrollOTRStatus ('STAGING')
-		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'STAGING')
-		WHERE IsOpen = 1
 
 GO

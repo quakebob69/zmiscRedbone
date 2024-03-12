@@ -24,6 +24,12 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
---
+	DECLARE @ActivePayPeriodId INT
+	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
+	
+	--PayrollOTRStatus
+		UPDATE [payroll].[PayrollOTRPayPeriod]
+		PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = 'VALIDATING')
+		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO
