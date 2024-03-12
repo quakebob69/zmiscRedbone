@@ -23,10 +23,16 @@ SET FMTONLY OFF
 END
 
 	--OpenPayPeriodId
-		SELECT
-		TOP 1 PayrollOTRPayPeriodId 
-		FROM [payroll].[PayrollOTRPayPeriod]
-		WHERE
-		IsActive = 1
+		DECLARE @OpenPayPeriodId INT
+		SET @OpenPayPeriodId =
+		(
+			SELECT
+			TOP 1 PayrollOTRPayPeriodId 
+			FROM [payroll].[PayrollOTRPayPeriod]
+			WHERE
+			IsActive = 1
+		)
+		
+		RETURN @OpenPayPeriodId
 
 GO
