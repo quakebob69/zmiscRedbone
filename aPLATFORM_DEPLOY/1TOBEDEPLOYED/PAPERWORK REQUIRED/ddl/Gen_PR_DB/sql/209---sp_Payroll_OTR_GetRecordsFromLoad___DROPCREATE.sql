@@ -20,10 +20,10 @@ as
 */
 
 BEGIN
-    SET NOCOUNT ON;
-     IF 1=0 BEGIN
-       SET FMTONLY OFF
-     END
+SET NOCOUNT ON;
+ IF 1=0 BEGIN
+   SET FMTONLY OFF
+ END
 
 --declare @PayPeriodStart datetime 
 --declare @PayPeriodEnd datetime 
