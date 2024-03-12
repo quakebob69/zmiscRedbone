@@ -35,7 +35,10 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]
 		GO
 				
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodOpenReset]
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodReset]
+		GO
+				
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodOpen]
 		GO
 				
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetOpen]
