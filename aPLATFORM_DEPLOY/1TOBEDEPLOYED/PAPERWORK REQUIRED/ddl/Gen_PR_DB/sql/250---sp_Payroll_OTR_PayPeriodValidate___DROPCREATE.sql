@@ -31,7 +31,7 @@ END
             'VALIDATION_PASSED'
 		ELSE
             'VALIDATION_FAILED'
-    END AS  VARCHAR(30)
+    END
 	
 	DECLARE @ActivePayPeriodId INT
 	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
