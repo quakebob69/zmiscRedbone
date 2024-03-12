@@ -33,6 +33,12 @@ END
             SET @ChangeToStatus = 'VALIDATION_PASSED'
     END
 	
-	asdf
+	DECLARE @ActivePayPeriodId INT
+	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
+	
+	--PayrollOTRStatus
+	UPDATE [payroll].[PayrollOTRPayPeriod]
+	SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
+	WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO

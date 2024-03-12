@@ -31,8 +31,8 @@ END
 	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
 	
 	--PayrollOTRStatus
-		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
-		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
+	UPDATE [payroll].[PayrollOTRPayPeriod]
+	SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
+	WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO
