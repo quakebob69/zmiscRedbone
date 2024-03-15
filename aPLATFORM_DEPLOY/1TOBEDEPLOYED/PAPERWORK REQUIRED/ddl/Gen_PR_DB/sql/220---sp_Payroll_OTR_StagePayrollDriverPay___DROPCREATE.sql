@@ -71,7 +71,7 @@ END
 	INSERT INTO #TEMP_OTR_DATA__DriverPay
 	EXEC payroll.sp_Payroll_OTR_GetRecordsFromDriverPay @PayPeriodBeginDate, @PayPeriodEndDate
 
---PayrollOTRStaging inserts
+--Table inserts
 	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
 		SELECT 
 			@OpenPayPeriodId
@@ -99,4 +99,12 @@ END
 			,@LastUpdateBy
 			,PUnitId = NULL
 		FROM #TEMP_OTR_DATA__DriverPay
+		
+	--export.AccountingExportPayrollData
+		--(create stored proc?)
+		
+--HOLD payments
+	--hold payments (by adding holdreason to held records on export) [for driverpay]
+	--(create stored proc?)
+		
 GO

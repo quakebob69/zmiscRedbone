@@ -74,7 +74,7 @@ END
 	INSERT INTO #TEMP_OTR_DATA__Load
 	EXEC [payroll].[sp_Payroll_OTR_StagePayrollLoad] @PayPeriodBeginDate, @PayPeriodEndDate
 
---PayrollOTRStaging inserts
+--table inserts
 	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
 		SELECT
 			@OpenPayPeriodId
@@ -102,4 +102,12 @@ END
 			,@LastUpdateBy
 			,PUnitId
 		FROM #TEMP_OTR_DATA__Load
+		
+	--export.AccountingExportPayrollData
+		--(create stored proc?)
+		
+--HOLD payments
+	--hold payments (by adding holdreason to held records on export) [for load]
+	--(create stored proc?)
+		
 GO
