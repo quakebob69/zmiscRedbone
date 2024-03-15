@@ -14,22 +14,39 @@ GO
 
 CREATE TABLE [export].[AccountingExportPayrollData](
 	[AccountingExportPayrollDataId] [int] IDENTITY(1,1) NOT NULL,
-	[EmployeeNameWithLastFourSSN] [varchar](128) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[OriginatingOTRPayPeriodId] [int] NOT NULL,
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
-	[AccountingExportPayrollItemName] [varchar](128) NOT NULL,
+	[AccountingExportPayrollItemId] [varchar](128) NOT NULL,
 	[Quantity] [decimal](10, 2) NULL,
-	[Rate] [decimal](10, 2) NULL
+	[Rate] [decimal](10, 2) NULL,
+	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL
  CONSTRAINT [PK_AccountingExportPayrollData] PRIMARY KEY CLUSTERED 
 (
 	[AccountingExportPayrollDataId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_AccountingExportPayrollData] UNIQUE NONCLUSTERED 
 (
-	[EmployeeNameWithLastFourSSN] ASC,
+	[PersonId] ASC,
+	[OriginatingOTRPayPeriodId] ASC,
 	[AccountingExportPayrollEntryTypeId] ASC,
-	[AccountingExportPayrollItemName] ASC
+	[AccountingExportPayrollItemId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_Person] FOREIGN KEY([PersonId])
+REFERENCES [main].[Person] ([PersonId])
+GO
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_Person]
+GO
+
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
+REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
+GO
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod]
 GO
 
 
@@ -39,3 +56,21 @@ GO
 ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollEntryType]
 GO
 
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_AccountingExportPayrollItem] FOREIGN KEY([AccountingExportPayrollItemId])
+REFERENCES [export].[AccountingExportPayrollItem] ([AccountingExportPayrollItemId])
+GO
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_AccountingExportPayrollItem]
+GO
+
+
+ALTER TABLE [payroll].[PayrollOTRPaymentHold]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
+REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId])
+GO
+ALTER TABLE [payroll].[PayrollOTRPaymentHold] CHECK CONSTRAINT [FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason]
+GO
+
+
+--TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
+--INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [AccountingExportPayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1, 1);
+--INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [AccountingExportPayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
