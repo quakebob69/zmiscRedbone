@@ -39,11 +39,16 @@ END
 	DECLARE @PayrollOTRDataSourceId_LOAD INT
 		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
---init PayrollOTRStaging
+--init tables
 	DELETE FROM [payroll].[PayrollOTRStaging] WHERE
 	PayrollOTRPayPeriodId = @OpenPayPeriodId
 	AND
 	PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
+
+	DELETE FROM [export].[AccountingExportPayrollData] WHERE
+	OriginatingOTRPayPeriodId = @OpenPayPeriodId
+	AND
+	OriginatingOTRPayPeriodId = @PayrollOTRDataSourceId_LOAD;
 
 --TEMP_OTR_DATA__Load inserts
 	DROP TABLE IF EXISTS #TEMP_OTR_DATA__Load
