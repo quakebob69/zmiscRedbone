@@ -17,7 +17,7 @@ CREATE TABLE [export].[AccountingExportPayrollData](
 	[PersonId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
-	[AccountingExportPayrollItemId] [varchar](128) NOT NULL,
+	[AccountingExportPayrollItemId] [int] NOT NULL,
 	[Quantity] [decimal](10, 2) NULL,
 	[Rate] [decimal](10, 2) NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NOT NULL
