@@ -30,7 +30,9 @@ END
 	
 	--table(s)
 		DELETE FROM [payroll].[PayrollOTRStaging]
-		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
+		
+		DELETE FROM [export].[AccountingExportPayrollData]
+		WHERE OriginatingOTRPayPeriodId = @ActivePayPeriodId
 
 	--IsOpen/PayrollOTRStatus
 		UPDATE [payroll].[PayrollOTRPayPeriod]
