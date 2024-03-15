@@ -38,6 +38,9 @@ END
 		--finalize current
 			DECLARE @ActivePayPeriodId INT
 			EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
+			
+			--
+				--Calculate totals etc.
 
 			--IsOpen/PayrollOTRStatus
 			UPDATE [payroll].[PayrollOTRPayPeriod]
