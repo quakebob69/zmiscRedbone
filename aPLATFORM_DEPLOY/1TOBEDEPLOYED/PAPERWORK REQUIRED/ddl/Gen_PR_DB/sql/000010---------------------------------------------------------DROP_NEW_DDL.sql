@@ -47,7 +47,29 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetActive]	
 		GO
 		
-		--TABLES
+		
+--TABLES
+	--'export' schema 
+		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollData]') AND type in (N'U'))
+			DROP TABLE [export].[AccountingExportPayrollData]
+		GO
+
+		
+		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollItem]') AND type in (N'U'))
+			DROP TABLE [export].[AccountingExportPayrollItem]
+		GO
+
+
+		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollEntryType]') AND type in (N'U'))
+			DROP TABLE [export].[AccountingExportPayrollEntryType]
+		GO
+
+
+		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportCompany]') AND type in (N'U'))
+			DROP TABLE [export].[AccountingExportCompany]
+		GO
+
+
 	--'payroll' schema 
 		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRPaymentHoldReason]
@@ -72,25 +94,3 @@ GO
 		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRStatus]
 		GO
-
-
-	--'export' schema 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollData]') AND type in (N'U'))
-			DROP TABLE [export].[AccountingExportPayrollData]
-		GO
-
-		
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollItem]') AND type in (N'U'))
-			DROP TABLE [export].[AccountingExportPayrollItem]
-		GO
-
-
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollEntryType]') AND type in (N'U'))
-			DROP TABLE [export].[AccountingExportPayrollEntryType]
-		GO
-
-
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportCompany]') AND type in (N'U'))
-			DROP TABLE [export].[AccountingExportCompany]
-		GO
-
