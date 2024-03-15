@@ -36,17 +36,17 @@ CREATE TABLE [export].[AccountingExportPayrollData](
 GO
 
 
-ALTER TABLE [payroll].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_Person] FOREIGN KEY([PersonId])
+ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_Person] FOREIGN KEY([PersonId])
 REFERENCES [main].[Person] ([PersonId])
 GO
-ALTER TABLE [payroll].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_Person]
+ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_Person]
 GO
 
 
-ALTER TABLE [payroll].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
+ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
 REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
 GO
-ALTER TABLE [payroll].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPayPeriod]
+ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPayPeriod]
 GO
 
 
@@ -57,17 +57,17 @@ ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_Accounti
 GO
 
 
-ALTER TABLE [payroll].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollItem] FOREIGN KEY([AccountingExportPayrollItemId])
+ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollItem] FOREIGN KEY([AccountingExportPayrollItemId])
 REFERENCES [export].[AccountingExportPayrollItem] ([AccountingExportPayrollItemId])
 GO
-ALTER TABLE [payroll].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollItem]
+ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollItem]
 GO
 
 
-ALTER TABLE [payroll].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
+ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
 REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId])
 GO
-ALTER TABLE [payroll].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPaymentHoldReason]
+ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPaymentHoldReason]
 GO
 
 
