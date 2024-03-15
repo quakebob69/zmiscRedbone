@@ -69,8 +69,3 @@ REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReason
 GO
 ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPaymentHoldReason]
 GO
-
-
---TEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMPTEMP
---INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [AccountingExportPayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (8, 1, 1, 1);
---INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [AccountingExportPayrollItemId], [PayrollOTRPaymentHoldReasonId]) VALUES (6, 1, 1, 1);
