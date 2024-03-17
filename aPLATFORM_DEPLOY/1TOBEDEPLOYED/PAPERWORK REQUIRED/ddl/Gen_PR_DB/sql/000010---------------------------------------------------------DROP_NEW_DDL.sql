@@ -13,13 +13,22 @@ GO
 		---------
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodFinalize]
 		GO
-						
+		
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodTotals]
+		GO
+									
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodValidate]
 		GO
 						
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodSubmitForValidation]
 		GO
 		
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments]
+		GO
+						
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]
+		GO
+						
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollAll]
 		GO
 		
@@ -27,7 +36,7 @@ GO
 		GO
 
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollDriverPay]
-		GO		
+		GO	
 		
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
 		GO
