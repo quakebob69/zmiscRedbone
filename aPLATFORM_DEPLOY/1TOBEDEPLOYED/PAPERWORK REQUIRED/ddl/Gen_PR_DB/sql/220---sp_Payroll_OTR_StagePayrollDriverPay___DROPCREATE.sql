@@ -72,39 +72,39 @@ END
 	EXEC payroll.sp_Payroll_OTR_GetRecordsFromDriverPay @PayPeriodBeginDate, @PayPeriodEndDate
 
 --Table inserts
-	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
-		SELECT 
-			@OpenPayPeriodId
-			,PayrollOTRDataSourceId = @PayrollOTRDataSourceId_DRIVERPAY
-			,Name = DriverName
-			,LoadId = NULL
-			,TripNumber = TripNumber
-			,TruckNumber = NULL
-			,Client_Id = NULL
-			,PickupBy = PayDate
-			,DeliverBy = PayDate
-			,DriverType = NULL
-			,LegInd = NULL
-			,PickOrigin = PayCode
-			,DropDest = PayNotes
-			,DriverPersonId 
-			,PayCode = 'Other Pay'
-			,PayId = NULL
-			,Quantity = PayQuantity	
-			,PayRateAmount = PayRate
-			,TotalPay = PayQuantity * PayRate
-			,PayPeriodEnding = @PayPeriodEndDate
-			,PayNotes
-			,LastUpdate = GETDATE()
-			,@LastUpdateBy
-			,PUnitId = NULL
-		FROM #TEMP_OTR_DATA__DriverPay
+	--payroll.PayrollOTRStaging
+		INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
+			SELECT 
+				@OpenPayPeriodId
+				,PayrollOTRDataSourceId = @PayrollOTRDataSourceId_DRIVERPAY
+				,Name = DriverName
+				,LoadId = NULL
+				,TripNumber = TripNumber
+				,TruckNumber = NULL
+				,Client_Id = NULL
+				,PickupBy = PayDate
+				,DeliverBy = PayDate
+				,DriverType = NULL
+				,LegInd = NULL
+				,PickOrigin = PayCode
+				,DropDest = PayNotes
+				,DriverPersonId 
+				,PayCode = 'Other Pay'
+				,PayId = NULL
+				,Quantity = PayQuantity	
+				,PayRateAmount = PayRate
+				,TotalPay = PayQuantity * PayRate
+				,PayPeriodEnding = @PayPeriodEndDate
+				,PayNotes
+				,LastUpdate = GETDATE()
+				,@LastUpdateBy
+				,PUnitId = NULL
+			FROM #TEMP_OTR_DATA__DriverPay
 		
 	--export.AccountingExportPayrollData
-		--(create stored proc?)
-		
---HOLD payments
-	--hold payments (by adding holdreason to held records on export) [for driverpay]
-	--(create stored proc?)
+		EXEC [export].[asdf] DriverPay
+			
+	--HOLD payments
+		EXEC [payroll].[asdf] DriverPay--hold payments (by adding holdreason to held records on export) [for DriverPay]
 		
 GO

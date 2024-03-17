@@ -104,10 +104,9 @@ END
 		FROM #TEMP_OTR_DATA__Load
 		
 	--export.AccountingExportPayrollData
-		--(create stored proc?)
-		
---HOLD payments
-	--hold payments (by adding holdreason to held records on export) [for load]
-	--(create stored proc?)
+		EXEC [export].[asdf] Load
+			
+	--HOLD payments
+		EXEC [payroll].[asdf] Load--hold payments (by adding holdreason to held records on export) [for Load]
 		
 GO
