@@ -101,10 +101,9 @@ END
 				,PUnitId = NULL
 			FROM #TEMP_OTR_DATA__DriverPay
 		
-	--export.AccountingExportPayrollData
-		EXEC [export].[asdf] DriverPay
-			
+		--export.AccountingExportPayrollData
+			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] DriverPay
+				
 	--HOLD payments
-		EXEC [payroll].[asdf] DriverPay--hold payments (by adding holdreason to held records on export) [for DriverPay]
-		
+		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] DriverPay
 GO

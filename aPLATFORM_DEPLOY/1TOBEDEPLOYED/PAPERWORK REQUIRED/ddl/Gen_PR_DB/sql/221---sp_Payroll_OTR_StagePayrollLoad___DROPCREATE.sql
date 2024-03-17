@@ -74,39 +74,40 @@ END
 	INSERT INTO #TEMP_OTR_DATA__Load
 	EXEC [payroll].[sp_Payroll_OTR_StagePayrollLoad] @PayPeriodBeginDate, @PayPeriodEndDate
 
---table inserts
-	INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
-		SELECT
-			@OpenPayPeriodId
-			,PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
-			,Name
-			,LoadId
-			,TripNumber
-			,TruckNumber
-			,Client_Id
-			,PickupBy
-			,DeliverBy
-			,DriverType
-			,LegInd
-			,PickOrigin
-			,DropDest
-			,DriverPersonId
-			,PayCode
-			,PayId
-			,Quantity
-			,PayRateAmount
-			,TotalPay = Quantity * PayRateAmount
-			,@PayPeriodEndDate 
-			,PayNotes = NULL
-			,LastUpdate = GETDATE()
-			,@LastUpdateBy
-			,PUnitId
-		FROM #TEMP_OTR_DATA__Load
-		
-	--export.AccountingExportPayrollData
-		EXEC [export].[asdf] Load
+--Table inserts
+	--payroll.PayrollOTRStaging
+		INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
+			SELECT
+				@OpenPayPeriodId
+				,PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
+				,Name
+				,LoadId
+				,TripNumber
+				,TruckNumber
+				,Client_Id
+				,PickupBy
+				,DeliverBy
+				,DriverType
+				,LegInd
+				,PickOrigin
+				,DropDest
+				,DriverPersonId
+				,PayCode
+				,PayId
+				,Quantity
+				,PayRateAmount
+				,TotalPay = Quantity * PayRateAmount
+				,@PayPeriodEndDate 
+				,PayNotes = NULL
+				,LastUpdate = GETDATE()
+				,@LastUpdateBy
+				,PUnitId
+			FROM #TEMP_OTR_DATA__Load
+			
+		--export.AccountingExportPayrollData
+			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] Load
 			
 	--HOLD payments
-		EXEC [payroll].[asdf] Load--hold payments (by adding holdreason to held records on export) [for Load]
+		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] Load
 		
 GO
