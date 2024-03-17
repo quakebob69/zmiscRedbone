@@ -1,0 +1,1331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsPayroll" targetNamespace="http://tempuri.org/dsPayroll.xsd" xmlns:mstns="http://tempuri.org/dsPayroll.xsd" xmlns="http://tempuri.org/dsPayroll.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="15" FunctionsComponentName="QueriesTableAdapter" GeneratorFunctionsComponentClassName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="QueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="Microsoft.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="Microsoft.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="Microsoft.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PayrollOTRStatusTableAdapter" GeneratorDataComponentClassName="PayrollOTRStatusTableAdapter" Name="PayrollOTRStatus" UserDataComponentName="PayrollOTRStatusTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.PayrollOTRStatus" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [payroll].[PayrollOTRStatus] WHERE (([PayrollOTRStatusId] = @Original_PayrollOTRStatusId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRStatusId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRStatusId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [payroll].[PayrollOTRStatus] ([PayrollOTRStatusId], [Name], [Order], [ShortDescription], [UserStepsJson]) VALUES (@PayrollOTRStatusId, @Name, @Order, @ShortDescription, @UserStepsJson)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRStatusId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRStatusId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Order" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Order" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@ShortDescription" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="ShortDescription" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@UserStepsJson" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="UserStepsJson" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT PayrollOTRStatusId, Name, [Order], ShortDescription, UserStepsJson FROM payroll.PayrollOTRStatus</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [payroll].[PayrollOTRStatus] SET [PayrollOTRStatusId] = @PayrollOTRStatusId, [Name] = @Name, [Order] = @Order, [ShortDescription] = @ShortDescription, [UserStepsJson] = @UserStepsJson WHERE (([PayrollOTRStatusId] = @Original_PayrollOTRStatusId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRStatusId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRStatusId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Order" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Order" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@ShortDescription" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="ShortDescription" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@UserStepsJson" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="UserStepsJson" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRStatusId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRStatusId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PayrollOTRStatusId" DataSetColumn="PayrollOTRStatusId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Order" DataSetColumn="Order" />
+              <Mapping SourceColumn="ShortDescription" DataSetColumn="ShortDescription" />
+              <Mapping SourceColumn="UserStepsJson" DataSetColumn="UserStepsJson" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PayrollOTRPayPeriodTableAdapter" GeneratorDataComponentClassName="PayrollOTRPayPeriodTableAdapter" Name="PayrollOTRPayPeriod" UserDataComponentName="PayrollOTRPayPeriodTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.PayrollOTRPayPeriod" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [payroll].[PayrollOTRPayPeriod] WHERE (([PayrollOTRPayPeriodId] = @Original_PayrollOTRPayPeriodId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRPayPeriodId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPayPeriodId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [payroll].[PayrollOTRPayPeriod] ([FY], [Number], [Code], [PayrollOTRStatusId], [IsActive], [IsOpen], [IsDataLocked], [BeginDate], [EndDate], [CheckDate], [LoadDataIsStaged], [DriverPayDataIsStaged], [TotalEarningsAmount], [TotalOtherpayrollitemsAmount], [TotalDriverPayAmount], [TotalMiles], [TotalMilesValue], [TotalHeldAmount], [UTOTotalDaysAccrual], [UTOTotalDaysValue], [LastUpdate], [LastUpdateBy]) VALUES (@FY, @Number, @Code, @PayrollOTRStatusId, @IsActive, @IsOpen, @IsDataLocked, @BeginDate, @EndDate, @CheckDate, @LoadDataIsStaged, @DriverPayDataIsStaged, @TotalEarningsAmount, @TotalOtherpayrollitemsAmount, @TotalDriverPayAmount, @TotalMiles, @TotalMilesValue, @TotalHeldAmount, @UTOTotalDaysAccrual, @UTOTotalDaysValue, @LastUpdate, @LastUpdateBy)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@FY" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="FY" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Number" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Number" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Code" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Code" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRStatusId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRStatusId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsActive" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsActive" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsOpen" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsOpen" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsDataLocked" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsDataLocked" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@BeginDate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="BeginDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@EndDate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="EndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@CheckDate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="CheckDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@LoadDataIsStaged" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="LoadDataIsStaged" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@DriverPayDataIsStaged" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="DriverPayDataIsStaged" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalEarningsAmount" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalEarningsAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalOtherpayrollitemsAmount" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalOtherpayrollitemsAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalDriverPayAmount" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalDriverPayAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@TotalMiles" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TotalMiles" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalMilesValue" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalMilesValue" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalHeldAmount" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalHeldAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UTOTotalDaysAccrual" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UTOTotalDaysAccrual" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UTOTotalDaysValue" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UTOTotalDaysValue" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@LastUpdate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="LastUpdate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LastUpdateBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT PayrollOTRPayPeriodId, FY, Number, Code, PayrollOTRStatusId, IsActive, IsOpen, IsDataLocked, BeginDate, EndDate, CheckDate, LoadDataIsStaged, DriverPayDataIsStaged, TotalEarningsAmount, TotalOtherpayrollitemsAmount, TotalDriverPayAmount, TotalMiles, TotalMilesValue, TotalHeldAmount, UTOTotalDaysAccrual, UTOTotalDaysValue, LastUpdate, LastUpdateBy FROM payroll.PayrollOTRPayPeriod</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [payroll].[PayrollOTRPayPeriod] SET [FY] = @FY, [Number] = @Number, [Code] = @Code, [PayrollOTRStatusId] = @PayrollOTRStatusId, [IsActive] = @IsActive, [IsOpen] = @IsOpen, [IsDataLocked] = @IsDataLocked, [BeginDate] = @BeginDate, [EndDate] = @EndDate, [CheckDate] = @CheckDate, [LoadDataIsStaged] = @LoadDataIsStaged, [DriverPayDataIsStaged] = @DriverPayDataIsStaged, [TotalEarningsAmount] = @TotalEarningsAmount, [TotalOtherpayrollitemsAmount] = @TotalOtherpayrollitemsAmount, [TotalDriverPayAmount] = @TotalDriverPayAmount, [TotalMiles] = @TotalMiles, [TotalMilesValue] = @TotalMilesValue, [TotalHeldAmount] = @TotalHeldAmount, [UTOTotalDaysAccrual] = @UTOTotalDaysAccrual, [UTOTotalDaysValue] = @UTOTotalDaysValue, [LastUpdate] = @LastUpdate, [LastUpdateBy] = @LastUpdateBy WHERE (([PayrollOTRPayPeriodId] = @Original_PayrollOTRPayPeriodId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@FY" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="FY" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Number" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Number" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Code" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Code" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRStatusId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRStatusId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsActive" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsActive" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsOpen" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsOpen" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsDataLocked" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsDataLocked" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@BeginDate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="BeginDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@EndDate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="EndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@CheckDate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="CheckDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@LoadDataIsStaged" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="LoadDataIsStaged" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@DriverPayDataIsStaged" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="DriverPayDataIsStaged" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalEarningsAmount" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalEarningsAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalOtherpayrollitemsAmount" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalOtherpayrollitemsAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalDriverPayAmount" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalDriverPayAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@TotalMiles" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TotalMiles" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalMilesValue" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalMilesValue" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalHeldAmount" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalHeldAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UTOTotalDaysAccrual" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UTOTotalDaysAccrual" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UTOTotalDaysValue" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UTOTotalDaysValue" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@LastUpdate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="LastUpdate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LastUpdateBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRPayPeriodId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPayPeriodId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PayrollOTRPayPeriodId" DataSetColumn="PayrollOTRPayPeriodId" />
+              <Mapping SourceColumn="FY" DataSetColumn="FY" />
+              <Mapping SourceColumn="Number" DataSetColumn="Number" />
+              <Mapping SourceColumn="Code" DataSetColumn="Code" />
+              <Mapping SourceColumn="PayrollOTRStatusId" DataSetColumn="PayrollOTRStatusId" />
+              <Mapping SourceColumn="IsActive" DataSetColumn="IsActive" />
+              <Mapping SourceColumn="IsOpen" DataSetColumn="IsOpen" />
+              <Mapping SourceColumn="IsDataLocked" DataSetColumn="IsDataLocked" />
+              <Mapping SourceColumn="BeginDate" DataSetColumn="BeginDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="CheckDate" DataSetColumn="CheckDate" />
+              <Mapping SourceColumn="LoadDataIsStaged" DataSetColumn="LoadDataIsStaged" />
+              <Mapping SourceColumn="DriverPayDataIsStaged" DataSetColumn="DriverPayDataIsStaged" />
+              <Mapping SourceColumn="TotalEarningsAmount" DataSetColumn="TotalEarningsAmount" />
+              <Mapping SourceColumn="TotalOtherpayrollitemsAmount" DataSetColumn="TotalOtherpayrollitemsAmount" />
+              <Mapping SourceColumn="TotalDriverPayAmount" DataSetColumn="TotalDriverPayAmount" />
+              <Mapping SourceColumn="TotalMiles" DataSetColumn="TotalMiles" />
+              <Mapping SourceColumn="TotalMilesValue" DataSetColumn="TotalMilesValue" />
+              <Mapping SourceColumn="TotalHeldAmount" DataSetColumn="TotalHeldAmount" />
+              <Mapping SourceColumn="UTOTotalDaysAccrual" DataSetColumn="UTOTotalDaysAccrual" />
+              <Mapping SourceColumn="UTOTotalDaysValue" DataSetColumn="UTOTotalDaysValue" />
+              <Mapping SourceColumn="LastUpdate" DataSetColumn="LastUpdate" />
+              <Mapping SourceColumn="LastUpdateBy" DataSetColumn="LastUpdateBy" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PayrollOTRPaymentHoldTableAdapter" GeneratorDataComponentClassName="PayrollOTRPaymentHoldTableAdapter" Name="PayrollOTRPaymentHold" UserDataComponentName="PayrollOTRPaymentHoldTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.PayrollOTRPaymentHold" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [payroll].[PayrollOTRPaymentHold] WHERE (([PayrollOTRPaymentHoldId] = @Original_PayrollOTRPaymentHoldId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRPaymentHoldId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [payroll].[PayrollOTRPaymentHold] ([PersonId], [OriginatingOTRPayPeriodId], [AccountingExportPayrollItemId], [PayrollOTRPaymentHoldReasonId], [Quantity], [Rate]) VALUES (@PersonId, @OriginatingOTRPayPeriodId, @AccountingExportPayrollItemId, @PayrollOTRPaymentHoldReasonId, @Quantity, @Rate)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PersonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PersonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OriginatingOTRPayPeriodId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OriginatingOTRPayPeriodId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollItemId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollItemId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRPaymentHoldReasonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldReasonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Quantity" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Quantity" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Rate" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Rate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT PayrollOTRPaymentHoldId, PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollItemId, PayrollOTRPaymentHoldReasonId, Quantity, Rate FROM payroll.PayrollOTRPaymentHold</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [payroll].[PayrollOTRPaymentHold] SET [PersonId] = @PersonId, [OriginatingOTRPayPeriodId] = @OriginatingOTRPayPeriodId, [AccountingExportPayrollItemId] = @AccountingExportPayrollItemId, [PayrollOTRPaymentHoldReasonId] = @PayrollOTRPaymentHoldReasonId, [Quantity] = @Quantity, [Rate] = @Rate WHERE (([PayrollOTRPaymentHoldId] = @Original_PayrollOTRPaymentHoldId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PersonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PersonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OriginatingOTRPayPeriodId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OriginatingOTRPayPeriodId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollItemId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollItemId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRPaymentHoldReasonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldReasonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Quantity" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Quantity" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Rate" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Rate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRPaymentHoldId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PayrollOTRPaymentHoldId" DataSetColumn="PayrollOTRPaymentHoldId" />
+              <Mapping SourceColumn="PersonId" DataSetColumn="PersonId" />
+              <Mapping SourceColumn="OriginatingOTRPayPeriodId" DataSetColumn="OriginatingOTRPayPeriodId" />
+              <Mapping SourceColumn="AccountingExportPayrollItemId" DataSetColumn="AccountingExportPayrollItemId" />
+              <Mapping SourceColumn="PayrollOTRPaymentHoldReasonId" DataSetColumn="PayrollOTRPaymentHoldReasonId" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="Rate" DataSetColumn="Rate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PayrollOTRPaymentHoldReasonTableAdapter" GeneratorDataComponentClassName="PayrollOTRPaymentHoldReasonTableAdapter" Name="PayrollOTRPaymentHoldReason" UserDataComponentName="PayrollOTRPaymentHoldReasonTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.PayrollOTRPaymentHoldReason" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [payroll].[PayrollOTRPaymentHoldReason] WHERE (([PayrollOTRPaymentHoldReasonId] = @Original_PayrollOTRPaymentHoldReasonId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRPaymentHoldReasonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldReasonId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId], [Name], [Description], [Resolution], [Enabled]) VALUES (@PayrollOTRPaymentHoldReasonId, @Name, @Description, @Resolution, @Enabled)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRPaymentHoldReasonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldReasonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Description" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Description" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Resolution" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Resolution" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Enabled" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Enabled" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT PayrollOTRPaymentHoldReasonId, Name, Description, Resolution, Enabled FROM payroll.PayrollOTRPaymentHoldReason</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [payroll].[PayrollOTRPaymentHoldReason] SET [PayrollOTRPaymentHoldReasonId] = @PayrollOTRPaymentHoldReasonId, [Name] = @Name, [Description] = @Description, [Resolution] = @Resolution, [Enabled] = @Enabled WHERE (([PayrollOTRPaymentHoldReasonId] = @Original_PayrollOTRPaymentHoldReasonId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRPaymentHoldReasonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldReasonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Description" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Description" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Resolution" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Resolution" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Enabled" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Enabled" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRPaymentHoldReasonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldReasonId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PayrollOTRPaymentHoldReasonId" DataSetColumn="PayrollOTRPaymentHoldReasonId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="Resolution" DataSetColumn="Resolution" />
+              <Mapping SourceColumn="Enabled" DataSetColumn="Enabled" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PayrollOTRDataSourceTableAdapter" GeneratorDataComponentClassName="PayrollOTRDataSourceTableAdapter" Name="PayrollOTRDataSource" UserDataComponentName="PayrollOTRDataSourceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.PayrollOTRDataSource" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [payroll].[PayrollOTRDataSource] WHERE (([PayrollOTRDataSourceId] = @Original_PayrollOTRDataSourceId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRDataSourceId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRDataSourceId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [payroll].[PayrollOTRDataSource] ([PayrollOTRDataSourceId], [Name], [Enabled]) VALUES (@PayrollOTRDataSourceId, @Name, @Enabled)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRDataSourceId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRDataSourceId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Enabled" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Enabled" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT PayrollOTRDataSourceId, Name, Enabled FROM payroll.PayrollOTRDataSource</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [payroll].[PayrollOTRDataSource] SET [PayrollOTRDataSourceId] = @PayrollOTRDataSourceId, [Name] = @Name, [Enabled] = @Enabled WHERE (([PayrollOTRDataSourceId] = @Original_PayrollOTRDataSourceId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRDataSourceId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRDataSourceId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Enabled" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Enabled" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRDataSourceId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRDataSourceId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PayrollOTRDataSourceId" DataSetColumn="PayrollOTRDataSourceId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Enabled" DataSetColumn="Enabled" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PayrollOTRStagingTableAdapter" GeneratorDataComponentClassName="PayrollOTRStagingTableAdapter" Name="PayrollOTRStaging" UserDataComponentName="PayrollOTRStagingTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.PayrollOTRStaging" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [payroll].[PayrollOTRStaging] WHERE (([PayrollOTRStagingId] = @Original_PayrollOTRStagingId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRStagingId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRStagingId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [payroll].[PayrollOTRStaging] ([PayrollOTRPayPeriodId], [PayrollOTRDataSourceId], [Name], [LoadId], [TripNumber], [TruckNumber], [Client_Id], [PickupBy], [DeliverBy], [DriverType], [LegInd], [PickOrigin], [DropDest], [DriverPersonId], [PayCode], [PayId], [Quantity], [PayRateAmount], [TotalPay], [PayPeriodEnding], [PayrollNotes], [LastUpdate], [LastUpdateBy], [PUnitId]) VALUES (@PayrollOTRPayPeriodId, @PayrollOTRDataSourceId, @Name, @LoadId, @TripNumber, @TruckNumber, @Client_Id, @PickupBy, @DeliverBy, @DriverType, @LegInd, @PickOrigin, @DropDest, @DriverPersonId, @PayCode, @PayId, @Quantity, @PayRateAmount, @TotalPay, @PayPeriodEnding, @PayrollNotes, @LastUpdate, @LastUpdateBy, @PUnitId)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRPayPeriodId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPayPeriodId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRDataSourceId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRDataSourceId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LoadId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LoadId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@TripNumber" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="TripNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@TruckNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TruckNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Client_Id" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Client_Id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@PickupBy" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="PickupBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@DeliverBy" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DeliverBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@DriverType" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="DriverType" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@LegInd" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="LegInd" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@PickOrigin" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="PickOrigin" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@DropDest" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="DropDest" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@DriverPersonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DriverPersonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@PayCode" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="PayCode" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Quantity" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Quantity" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@PayRateAmount" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PayRateAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalPay" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalPay" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@PayPeriodEnding" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="PayPeriodEnding" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@PayrollNotes" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="PayrollNotes" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@LastUpdate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="LastUpdate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LastUpdateBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PUnitId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PUnitId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT PayrollOTRStagingId, PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding, PayrollNotes, LastUpdate, LastUpdateBy, PUnitId FROM payroll.PayrollOTRStaging</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [payroll].[PayrollOTRStaging] SET [PayrollOTRPayPeriodId] = @PayrollOTRPayPeriodId, [PayrollOTRDataSourceId] = @PayrollOTRDataSourceId, [Name] = @Name, [LoadId] = @LoadId, [TripNumber] = @TripNumber, [TruckNumber] = @TruckNumber, [Client_Id] = @Client_Id, [PickupBy] = @PickupBy, [DeliverBy] = @DeliverBy, [DriverType] = @DriverType, [LegInd] = @LegInd, [PickOrigin] = @PickOrigin, [DropDest] = @DropDest, [DriverPersonId] = @DriverPersonId, [PayCode] = @PayCode, [PayId] = @PayId, [Quantity] = @Quantity, [PayRateAmount] = @PayRateAmount, [TotalPay] = @TotalPay, [PayPeriodEnding] = @PayPeriodEnding, [PayrollNotes] = @PayrollNotes, [LastUpdate] = @LastUpdate, [LastUpdateBy] = @LastUpdateBy, [PUnitId] = @PUnitId WHERE (([PayrollOTRStagingId] = @Original_PayrollOTRStagingId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRPayPeriodId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPayPeriodId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRDataSourceId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRDataSourceId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LoadId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LoadId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@TripNumber" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="TripNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@TruckNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TruckNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Client_Id" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Client_Id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@PickupBy" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="PickupBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@DeliverBy" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DeliverBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@DriverType" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="DriverType" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@LegInd" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="LegInd" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@PickOrigin" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="PickOrigin" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@DropDest" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="DropDest" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@DriverPersonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DriverPersonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@PayCode" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="PayCode" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Quantity" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Quantity" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@PayRateAmount" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PayRateAmount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@TotalPay" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="TotalPay" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@PayPeriodEnding" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="PayPeriodEnding" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@PayrollNotes" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="PayrollNotes" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@LastUpdate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="LastUpdate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LastUpdateBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PUnitId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PUnitId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PayrollOTRStagingId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRStagingId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PayrollOTRStagingId" DataSetColumn="PayrollOTRStagingId" />
+              <Mapping SourceColumn="PayrollOTRPayPeriodId" DataSetColumn="PayrollOTRPayPeriodId" />
+              <Mapping SourceColumn="PayrollOTRDataSourceId" DataSetColumn="PayrollOTRDataSourceId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="LoadId" DataSetColumn="LoadId" />
+              <Mapping SourceColumn="TripNumber" DataSetColumn="TripNumber" />
+              <Mapping SourceColumn="TruckNumber" DataSetColumn="TruckNumber" />
+              <Mapping SourceColumn="Client_Id" DataSetColumn="Client_Id" />
+              <Mapping SourceColumn="PickupBy" DataSetColumn="PickupBy" />
+              <Mapping SourceColumn="DeliverBy" DataSetColumn="DeliverBy" />
+              <Mapping SourceColumn="DriverType" DataSetColumn="DriverType" />
+              <Mapping SourceColumn="LegInd" DataSetColumn="LegInd" />
+              <Mapping SourceColumn="PickOrigin" DataSetColumn="PickOrigin" />
+              <Mapping SourceColumn="DropDest" DataSetColumn="DropDest" />
+              <Mapping SourceColumn="DriverPersonId" DataSetColumn="DriverPersonId" />
+              <Mapping SourceColumn="PayCode" DataSetColumn="PayCode" />
+              <Mapping SourceColumn="PayId" DataSetColumn="PayId" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="PayRateAmount" DataSetColumn="PayRateAmount" />
+              <Mapping SourceColumn="TotalPay" DataSetColumn="TotalPay" />
+              <Mapping SourceColumn="PayPeriodEnding" DataSetColumn="PayPeriodEnding" />
+              <Mapping SourceColumn="PayrollNotes" DataSetColumn="PayrollNotes" />
+              <Mapping SourceColumn="LastUpdate" DataSetColumn="LastUpdate" />
+              <Mapping SourceColumn="LastUpdateBy" DataSetColumn="LastUpdateBy" />
+              <Mapping SourceColumn="PUnitId" DataSetColumn="PUnitId" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="sp_Payroll_OTR_GetRecordsFromDriverPayTableAdapter" GeneratorDataComponentClassName="sp_Payroll_OTR_GetRecordsFromDriverPayTableAdapter" Name="sp_Payroll_OTR_GetRecordsFromDriverPay" UserDataComponentName="sp_Payroll_OTR_GetRecordsFromDriverPayTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_GetRecordsFromDriverPay" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>payroll.sp_Payroll_OTR_GetRecordsFromDriverPay</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@PayPeriodStart" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@PayPeriodEnd" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DriverId" DataSetColumn="DriverId" />
+              <Mapping SourceColumn="DriverName" DataSetColumn="DriverName" />
+              <Mapping SourceColumn="PayCode" DataSetColumn="PayCode" />
+              <Mapping SourceColumn="PayCodeDescription" DataSetColumn="PayCodeDescription" />
+              <Mapping SourceColumn="PayNotes" DataSetColumn="PayNotes" />
+              <Mapping SourceColumn="PayQuantity" DataSetColumn="PayQuantity" />
+              <Mapping SourceColumn="PayRate" DataSetColumn="PayRate" />
+              <Mapping SourceColumn="TotalPay" DataSetColumn="TotalPay" />
+              <Mapping SourceColumn="TripNumber" DataSetColumn="TripNumber" />
+              <Mapping SourceColumn="PayDate" DataSetColumn="PayDate" />
+              <Mapping SourceColumn="FirstName" DataSetColumn="FirstName" />
+              <Mapping SourceColumn="DriverPersonId" DataSetColumn="DriverPersonId" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="sp_Payroll_OTR_GetRecordsFromLoadTableAdapter" GeneratorDataComponentClassName="sp_Payroll_OTR_GetRecordsFromLoadTableAdapter" Name="sp_Payroll_OTR_GetRecordsFromLoad" UserDataComponentName="sp_Payroll_OTR_GetRecordsFromLoadTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_GetRecordsFromLoad" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>payroll.sp_Payroll_OTR_GetRecordsFromLoad</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@PayPeriodStart" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@PayPeriodEnd" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="LoadId" DataSetColumn="LoadId" />
+              <Mapping SourceColumn="TripNumber" DataSetColumn="TripNumber" />
+              <Mapping SourceColumn="TruckNumber" DataSetColumn="TruckNumber" />
+              <Mapping SourceColumn="Client_Id" DataSetColumn="Client_Id" />
+              <Mapping SourceColumn="PickupBy" DataSetColumn="PickupBy" />
+              <Mapping SourceColumn="DeliverBy" DataSetColumn="DeliverBy" />
+              <Mapping SourceColumn="DriverType" DataSetColumn="DriverType" />
+              <Mapping SourceColumn="LegInd" DataSetColumn="LegInd" />
+              <Mapping SourceColumn="PickOrigin" DataSetColumn="PickOrigin" />
+              <Mapping SourceColumn="DropDest" DataSetColumn="DropDest" />
+              <Mapping SourceColumn="DriverPersonId" DataSetColumn="DriverPersonId" />
+              <Mapping SourceColumn="PayCode" DataSetColumn="PayCode" />
+              <Mapping SourceColumn="PayId" DataSetColumn="PayId" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="PayRateAmount" DataSetColumn="PayRateAmount" />
+              <Mapping SourceColumn="PUnitId" DataSetColumn="PUnitId" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountingExportCompanyTableAdapter" GeneratorDataComponentClassName="AccountingExportCompanyTableAdapter" Name="AccountingExportCompany" UserDataComponentName="AccountingExportCompanyTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.export.AccountingExportCompany" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [export].[AccountingExportCompany] WHERE (([AccountingExportCompanyId] = @Original_AccountingExportCompanyId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_AccountingExportCompanyId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportCompanyId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [export].[AccountingExportCompany] ([AccountingExportCompanyId], [Name], [Description]) VALUES (@AccountingExportCompanyId, @Name, @Description)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportCompanyId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportCompanyId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Description" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Description" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT AccountingExportCompanyId, Name, Description FROM export.AccountingExportCompany</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [export].[AccountingExportCompany] SET [AccountingExportCompanyId] = @AccountingExportCompanyId, [Name] = @Name, [Description] = @Description WHERE (([AccountingExportCompanyId] = @Original_AccountingExportCompanyId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportCompanyId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportCompanyId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Description" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Description" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_AccountingExportCompanyId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportCompanyId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccountingExportCompanyId" DataSetColumn="AccountingExportCompanyId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountingExportPayrollItemTableAdapter" GeneratorDataComponentClassName="AccountingExportPayrollItemTableAdapter" Name="AccountingExportPayrollItem" UserDataComponentName="AccountingExportPayrollItemTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.export.AccountingExportPayrollItem" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [export].[AccountingExportPayrollItem] WHERE (([AccountingExportPayrollItemId] = @Original_AccountingExportPayrollItemId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_AccountingExportPayrollItemId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollItemId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (@AccountingExportCompanyId, @AccountingExportPayrollEntryTypeId, @Name, @Enabled)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportCompanyId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportCompanyId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollEntryTypeId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollEntryTypeId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Enabled" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Enabled" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT AccountingExportPayrollItemId, AccountingExportCompanyId, AccountingExportPayrollEntryTypeId, Name, Enabled FROM export.AccountingExportPayrollItem</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [export].[AccountingExportPayrollItem] SET [AccountingExportCompanyId] = @AccountingExportCompanyId, [AccountingExportPayrollEntryTypeId] = @AccountingExportPayrollEntryTypeId, [Name] = @Name, [Enabled] = @Enabled WHERE (([AccountingExportPayrollItemId] = @Original_AccountingExportPayrollItemId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportCompanyId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportCompanyId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollEntryTypeId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollEntryTypeId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Enabled" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Enabled" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_AccountingExportPayrollItemId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollItemId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccountingExportPayrollItemId" DataSetColumn="AccountingExportPayrollItemId" />
+              <Mapping SourceColumn="AccountingExportCompanyId" DataSetColumn="AccountingExportCompanyId" />
+              <Mapping SourceColumn="AccountingExportPayrollEntryTypeId" DataSetColumn="AccountingExportPayrollEntryTypeId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Enabled" DataSetColumn="Enabled" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountingExportPayrollDataTableAdapter" GeneratorDataComponentClassName="AccountingExportPayrollDataTableAdapter" Name="AccountingExportPayrollData" UserDataComponentName="AccountingExportPayrollDataTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.export.AccountingExportPayrollData" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [export].[AccountingExportPayrollData] WHERE (([AccountingExportPayrollDataId] = @Original_AccountingExportPayrollDataId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_AccountingExportPayrollDataId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollDataId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [export].[AccountingExportPayrollData] ([PersonId], [OriginatingOTRPayPeriodId], [AccountingExportPayrollEntryTypeId], [AccountingExportPayrollItemId], [Quantity], [Rate], [PayrollOTRPaymentHoldReasonId], [HeldPaymentHasBeenPaid]) VALUES (@PersonId, @OriginatingOTRPayPeriodId, @AccountingExportPayrollEntryTypeId, @AccountingExportPayrollItemId, @Quantity, @Rate, @PayrollOTRPaymentHoldReasonId, @HeldPaymentHasBeenPaid)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PersonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PersonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OriginatingOTRPayPeriodId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OriginatingOTRPayPeriodId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollEntryTypeId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollEntryTypeId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollItemId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollItemId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Quantity" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Quantity" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Rate" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Rate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRPaymentHoldReasonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldReasonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@HeldPaymentHasBeenPaid" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="HeldPaymentHasBeenPaid" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT AccountingExportPayrollDataId, PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity, Rate, PayrollOTRPaymentHoldReasonId, HeldPaymentHasBeenPaid FROM export.AccountingExportPayrollData</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [export].[AccountingExportPayrollData] SET [PersonId] = @PersonId, [OriginatingOTRPayPeriodId] = @OriginatingOTRPayPeriodId, [AccountingExportPayrollEntryTypeId] = @AccountingExportPayrollEntryTypeId, [AccountingExportPayrollItemId] = @AccountingExportPayrollItemId, [Quantity] = @Quantity, [Rate] = @Rate, [PayrollOTRPaymentHoldReasonId] = @PayrollOTRPaymentHoldReasonId, [HeldPaymentHasBeenPaid] = @HeldPaymentHasBeenPaid WHERE (([AccountingExportPayrollDataId] = @Original_AccountingExportPayrollDataId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PersonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PersonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OriginatingOTRPayPeriodId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OriginatingOTRPayPeriodId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollEntryTypeId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollEntryTypeId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollItemId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollItemId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Quantity" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Quantity" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Rate" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Rate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PayrollOTRPaymentHoldReasonId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PayrollOTRPaymentHoldReasonId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@HeldPaymentHasBeenPaid" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="HeldPaymentHasBeenPaid" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_AccountingExportPayrollDataId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollDataId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccountingExportPayrollDataId" DataSetColumn="AccountingExportPayrollDataId" />
+              <Mapping SourceColumn="PersonId" DataSetColumn="PersonId" />
+              <Mapping SourceColumn="OriginatingOTRPayPeriodId" DataSetColumn="OriginatingOTRPayPeriodId" />
+              <Mapping SourceColumn="AccountingExportPayrollEntryTypeId" DataSetColumn="AccountingExportPayrollEntryTypeId" />
+              <Mapping SourceColumn="AccountingExportPayrollItemId" DataSetColumn="AccountingExportPayrollItemId" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="Rate" DataSetColumn="Rate" />
+              <Mapping SourceColumn="PayrollOTRPaymentHoldReasonId" DataSetColumn="PayrollOTRPaymentHoldReasonId" />
+              <Mapping SourceColumn="HeldPaymentHasBeenPaid" DataSetColumn="HeldPaymentHasBeenPaid" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountingExportPayrollEntryTypeTableAdapter" GeneratorDataComponentClassName="AccountingExportPayrollEntryTypeTableAdapter" Name="AccountingExportPayrollEntryType" UserDataComponentName="AccountingExportPayrollEntryTypeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.export.AccountingExportPayrollEntryType" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [export].[AccountingExportPayrollEntryType] WHERE (([AccountingExportPayrollEntryTypeId] = @Original_AccountingExportPayrollEntryTypeId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_AccountingExportPayrollEntryTypeId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollEntryTypeId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [export].[AccountingExportPayrollEntryType] ([AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (@AccountingExportPayrollEntryTypeId, @Name, @Enabled)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollEntryTypeId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollEntryTypeId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Enabled" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Enabled" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT AccountingExportPayrollEntryTypeId, Name, Enabled FROM export.AccountingExportPayrollEntryType</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [export].[AccountingExportPayrollEntryType] SET [AccountingExportPayrollEntryTypeId] = @AccountingExportPayrollEntryTypeId, [Name] = @Name, [Enabled] = @Enabled WHERE (([AccountingExportPayrollEntryTypeId] = @Original_AccountingExportPayrollEntryTypeId))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AccountingExportPayrollEntryTypeId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollEntryTypeId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Enabled" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Enabled" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_AccountingExportPayrollEntryTypeId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AccountingExportPayrollEntryTypeId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccountingExportPayrollEntryTypeId" DataSetColumn="AccountingExportPayrollEntryTypeId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Enabled" DataSetColumn="Enabled" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_PayrollPTO_OTR_Accrual" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_PayrollPTO_OTR_Accrual" MethodsParameterType="CLR" Modifier="Public" Name="sp_PayrollPTO_OTR_Accrual" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="sp_PayrollPTO_OTR_Accrual">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_PayrollPTO_OTR_Accrual</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@PayPeriodEndDate" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_PayPeriodFinalize" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_PayPeriodFinalize" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_PayPeriodFinalize" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="sp_Payroll_OTR_PayPeriodFinalize">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_PayPeriodFinalize</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_PayPeriodGetActive" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_PayPeriodGetActive" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_PayPeriodGetActive" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="sp_Payroll_OTR_PayPeriodGetActive">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_PayPeriodGetActive</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_PayPeriodGetOpen" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_PayPeriodGetOpen" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_PayPeriodGetOpen" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="sp_Payroll_OTR_PayPeriodGetOpen">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_PayPeriodGetOpen</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_PayPeriodOpen" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_PayPeriodOpen" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_PayPeriodOpen" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="sp_Payroll_OTR_PayPeriodOpen">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_PayPeriodOpen</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_PayPeriodReset" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_PayPeriodReset" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_PayPeriodReset" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="sp_Payroll_OTR_PayPeriodReset">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_PayPeriodReset</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_PayPeriodSubmitForValidation" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_PayPeriodSubmitForValidation" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_PayPeriodSubmitForValidation" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="sp_Payroll_OTR_PayPeriodSubmitForValidation">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_PayPeriodSubmitForValidation</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_PayPeriodValidate" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_PayPeriodValidate" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_PayPeriodValidate" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="sp_Payroll_OTR_PayPeriodValidate">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_PayPeriodValidate</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ValidationResult" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_StagePayrollAll" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_StagePayrollAll" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_StagePayrollAll" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="sp_Payroll_OTR_StagePayrollAll">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_StagePayrollAll</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_StagePayrollDriverPay" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_StagePayrollDriverPay" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_StagePayrollDriverPay" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="sp_Payroll_OTR_StagePayrollDriverPay">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_StagePayrollDriverPay</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_Payroll_OTR_StagePayrollLoad" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_Payroll_OTR_StagePayrollLoad" MethodsParameterType="CLR" Modifier="Public" Name="sp_Payroll_OTR_StagePayrollLoad" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy10" UserSourceName="sp_Payroll_OTR_StagePayrollLoad">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_Payroll_OTR_StagePayrollLoad</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="RedBoneConnectionString (Web.config)" DbObjectName="RedBoneThomas.payroll.sp_PayrollPTO_Admin_Accrual" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="sp_PayrollPTO_Admin_Accrual" MethodsParameterType="CLR" Modifier="Public" Name="sp_PayrollPTO_Admin_Accrual" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="sp_PayrollPTO_Admin_Accrual">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>payroll.sp_PayrollPTO_Admin_Accrual</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@PayPeriodEndDate" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@LastUpdateBy" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsPayroll" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsPayroll" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsPayroll">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PayrollOTRStatus" msprop:Generator_RowEvHandlerName="PayrollOTRStatusRowChangeEventHandler" msprop:Generator_RowDeletedName="PayrollOTRStatusRowDeleted" msprop:Generator_RowDeletingName="PayrollOTRStatusRowDeleting" msprop:Generator_RowEvArgName="PayrollOTRStatusRowChangeEvent" msprop:Generator_TablePropName="PayrollOTRStatus" msprop:Generator_RowChangedName="PayrollOTRStatusRowChanged" msprop:Generator_UserTableName="PayrollOTRStatus" msprop:Generator_RowChangingName="PayrollOTRStatusRowChanging" msprop:Generator_RowClassName="PayrollOTRStatusRow" msprop:Generator_TableClassName="PayrollOTRStatusDataTable" msprop:Generator_TableVarName="tablePayrollOTRStatus">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PayrollOTRStatusId" msprop:Generator_ColumnPropNameInTable="PayrollOTRStatusIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRStatusId" msprop:Generator_UserColumnName="PayrollOTRStatusId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRStatusId" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnVarNameInTable="columnName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Order" msprop:Generator_ColumnPropNameInTable="OrderColumn" msprop:Generator_ColumnPropNameInRow="Order" msprop:Generator_UserColumnName="Order" msprop:Generator_ColumnVarNameInTable="columnOrder" type="xs:int" minOccurs="0" />
+              <xs:element name="ShortDescription" msprop:Generator_ColumnPropNameInTable="ShortDescriptionColumn" msprop:Generator_ColumnPropNameInRow="ShortDescription" msprop:Generator_UserColumnName="ShortDescription" msprop:Generator_ColumnVarNameInTable="columnShortDescription">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UserStepsJson" msprop:Generator_ColumnPropNameInTable="UserStepsJsonColumn" msprop:Generator_ColumnPropNameInRow="UserStepsJson" msprop:Generator_UserColumnName="UserStepsJson" msprop:Generator_ColumnVarNameInTable="columnUserStepsJson">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1024" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PayrollOTRPayPeriod" msprop:Generator_RowEvHandlerName="PayrollOTRPayPeriodRowChangeEventHandler" msprop:Generator_RowDeletedName="PayrollOTRPayPeriodRowDeleted" msprop:Generator_RowDeletingName="PayrollOTRPayPeriodRowDeleting" msprop:Generator_RowEvArgName="PayrollOTRPayPeriodRowChangeEvent" msprop:Generator_TablePropName="PayrollOTRPayPeriod" msprop:Generator_RowChangedName="PayrollOTRPayPeriodRowChanged" msprop:Generator_UserTableName="PayrollOTRPayPeriod" msprop:Generator_RowChangingName="PayrollOTRPayPeriodRowChanging" msprop:Generator_RowClassName="PayrollOTRPayPeriodRow" msprop:Generator_TableClassName="PayrollOTRPayPeriodDataTable" msprop:Generator_TableVarName="tablePayrollOTRPayPeriod">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PayrollOTRPayPeriodId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="PayrollOTRPayPeriodIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRPayPeriodId" msprop:Generator_UserColumnName="PayrollOTRPayPeriodId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRPayPeriodId" type="xs:int" />
+              <xs:element name="FY" msprop:Generator_ColumnPropNameInTable="FYColumn" msprop:Generator_ColumnPropNameInRow="FY" msprop:Generator_UserColumnName="FY" msprop:Generator_ColumnVarNameInTable="columnFY">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Number" msprop:Generator_ColumnPropNameInTable="NumberColumn" msprop:Generator_ColumnPropNameInRow="Number" msprop:Generator_UserColumnName="Number" msprop:Generator_ColumnVarNameInTable="columnNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Code" msprop:Generator_ColumnPropNameInTable="CodeColumn" msprop:Generator_ColumnPropNameInRow="Code" msprop:Generator_UserColumnName="Code" msprop:Generator_ColumnVarNameInTable="columnCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayrollOTRStatusId" msprop:Generator_ColumnPropNameInTable="PayrollOTRStatusIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRStatusId" msprop:Generator_UserColumnName="PayrollOTRStatusId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRStatusId" type="xs:int" />
+              <xs:element name="IsActive" msprop:Generator_ColumnPropNameInTable="IsActiveColumn" msprop:Generator_ColumnPropNameInRow="IsActive" msprop:Generator_UserColumnName="IsActive" msprop:Generator_ColumnVarNameInTable="columnIsActive" type="xs:boolean" />
+              <xs:element name="IsOpen" msprop:Generator_ColumnPropNameInTable="IsOpenColumn" msprop:Generator_ColumnPropNameInRow="IsOpen" msprop:Generator_UserColumnName="IsOpen" msprop:Generator_ColumnVarNameInTable="columnIsOpen" type="xs:boolean" />
+              <xs:element name="IsDataLocked" msprop:Generator_ColumnPropNameInTable="IsDataLockedColumn" msprop:Generator_ColumnPropNameInRow="IsDataLocked" msprop:Generator_UserColumnName="IsDataLocked" msprop:Generator_ColumnVarNameInTable="columnIsDataLocked" type="xs:boolean" />
+              <xs:element name="BeginDate" msprop:Generator_ColumnPropNameInTable="BeginDateColumn" msprop:Generator_ColumnPropNameInRow="BeginDate" msprop:Generator_UserColumnName="BeginDate" msprop:Generator_ColumnVarNameInTable="columnBeginDate" type="xs:dateTime" />
+              <xs:element name="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_UserColumnName="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" type="xs:dateTime" />
+              <xs:element name="CheckDate" msprop:Generator_ColumnPropNameInTable="CheckDateColumn" msprop:Generator_ColumnPropNameInRow="CheckDate" msprop:Generator_UserColumnName="CheckDate" msprop:Generator_ColumnVarNameInTable="columnCheckDate" type="xs:dateTime" />
+              <xs:element name="LoadDataIsStaged" msprop:Generator_ColumnPropNameInTable="LoadDataIsStagedColumn" msprop:Generator_ColumnPropNameInRow="LoadDataIsStaged" msprop:Generator_UserColumnName="LoadDataIsStaged" msprop:Generator_ColumnVarNameInTable="columnLoadDataIsStaged" type="xs:boolean" />
+              <xs:element name="DriverPayDataIsStaged" msprop:Generator_ColumnPropNameInTable="DriverPayDataIsStagedColumn" msprop:Generator_ColumnPropNameInRow="DriverPayDataIsStaged" msprop:Generator_UserColumnName="DriverPayDataIsStaged" msprop:Generator_ColumnVarNameInTable="columnDriverPayDataIsStaged" type="xs:boolean" />
+              <xs:element name="TotalEarningsAmount" msprop:Generator_ColumnPropNameInTable="TotalEarningsAmountColumn" msprop:Generator_ColumnPropNameInRow="TotalEarningsAmount" msprop:Generator_UserColumnName="TotalEarningsAmount" msprop:Generator_ColumnVarNameInTable="columnTotalEarningsAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalOtherpayrollitemsAmount" msprop:Generator_ColumnPropNameInTable="TotalOtherpayrollitemsAmountColumn" msprop:Generator_ColumnPropNameInRow="TotalOtherpayrollitemsAmount" msprop:Generator_UserColumnName="TotalOtherpayrollitemsAmount" msprop:Generator_ColumnVarNameInTable="columnTotalOtherpayrollitemsAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalDriverPayAmount" msprop:Generator_ColumnPropNameInTable="TotalDriverPayAmountColumn" msprop:Generator_ColumnPropNameInRow="TotalDriverPayAmount" msprop:Generator_UserColumnName="TotalDriverPayAmount" msprop:Generator_ColumnVarNameInTable="columnTotalDriverPayAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalMiles" msprop:Generator_ColumnPropNameInTable="TotalMilesColumn" msprop:Generator_ColumnPropNameInRow="TotalMiles" msprop:Generator_UserColumnName="TotalMiles" msprop:Generator_ColumnVarNameInTable="columnTotalMiles" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalMilesValue" msprop:Generator_ColumnPropNameInTable="TotalMilesValueColumn" msprop:Generator_ColumnPropNameInRow="TotalMilesValue" msprop:Generator_UserColumnName="TotalMilesValue" msprop:Generator_ColumnVarNameInTable="columnTotalMilesValue" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalHeldAmount" msprop:Generator_ColumnPropNameInTable="TotalHeldAmountColumn" msprop:Generator_ColumnPropNameInRow="TotalHeldAmount" msprop:Generator_UserColumnName="TotalHeldAmount" msprop:Generator_ColumnVarNameInTable="columnTotalHeldAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UTOTotalDaysAccrual" msprop:Generator_ColumnPropNameInTable="UTOTotalDaysAccrualColumn" msprop:Generator_ColumnPropNameInRow="UTOTotalDaysAccrual" msprop:Generator_UserColumnName="UTOTotalDaysAccrual" msprop:Generator_ColumnVarNameInTable="columnUTOTotalDaysAccrual" type="xs:int" minOccurs="0" />
+              <xs:element name="UTOTotalDaysValue" msprop:Generator_ColumnPropNameInTable="UTOTotalDaysValueColumn" msprop:Generator_ColumnPropNameInRow="UTOTotalDaysValue" msprop:Generator_UserColumnName="UTOTotalDaysValue" msprop:Generator_ColumnVarNameInTable="columnUTOTotalDaysValue" type="xs:int" minOccurs="0" />
+              <xs:element name="LastUpdate" msprop:Generator_ColumnPropNameInTable="LastUpdateColumn" msprop:Generator_ColumnPropNameInRow="LastUpdate" msprop:Generator_UserColumnName="LastUpdate" msprop:Generator_ColumnVarNameInTable="columnLastUpdate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="LastUpdateBy" msprop:Generator_ColumnPropNameInTable="LastUpdateByColumn" msprop:Generator_ColumnPropNameInRow="LastUpdateBy" msprop:Generator_UserColumnName="LastUpdateBy" msprop:Generator_ColumnVarNameInTable="columnLastUpdateBy" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PayrollOTRPaymentHold" msprop:Generator_RowEvHandlerName="PayrollOTRPaymentHoldRowChangeEventHandler" msprop:Generator_RowDeletedName="PayrollOTRPaymentHoldRowDeleted" msprop:Generator_RowDeletingName="PayrollOTRPaymentHoldRowDeleting" msprop:Generator_RowEvArgName="PayrollOTRPaymentHoldRowChangeEvent" msprop:Generator_TablePropName="PayrollOTRPaymentHold" msprop:Generator_RowChangedName="PayrollOTRPaymentHoldRowChanged" msprop:Generator_UserTableName="PayrollOTRPaymentHold" msprop:Generator_RowChangingName="PayrollOTRPaymentHoldRowChanging" msprop:Generator_RowClassName="PayrollOTRPaymentHoldRow" msprop:Generator_TableClassName="PayrollOTRPaymentHoldDataTable" msprop:Generator_TableVarName="tablePayrollOTRPaymentHold">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PayrollOTRPaymentHoldId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="PayrollOTRPaymentHoldIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRPaymentHoldId" msprop:Generator_UserColumnName="PayrollOTRPaymentHoldId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRPaymentHoldId" type="xs:int" />
+              <xs:element name="PersonId" msprop:Generator_ColumnPropNameInTable="PersonIdColumn" msprop:Generator_ColumnPropNameInRow="PersonId" msprop:Generator_UserColumnName="PersonId" msprop:Generator_ColumnVarNameInTable="columnPersonId" type="xs:int" />
+              <xs:element name="OriginatingOTRPayPeriodId" msprop:Generator_ColumnPropNameInTable="OriginatingOTRPayPeriodIdColumn" msprop:Generator_ColumnPropNameInRow="OriginatingOTRPayPeriodId" msprop:Generator_UserColumnName="OriginatingOTRPayPeriodId" msprop:Generator_ColumnVarNameInTable="columnOriginatingOTRPayPeriodId" type="xs:int" />
+              <xs:element name="AccountingExportPayrollItemId" msprop:Generator_ColumnPropNameInTable="AccountingExportPayrollItemIdColumn" msprop:Generator_ColumnPropNameInRow="AccountingExportPayrollItemId" msprop:Generator_UserColumnName="AccountingExportPayrollItemId" msprop:Generator_ColumnVarNameInTable="columnAccountingExportPayrollItemId" type="xs:int" />
+              <xs:element name="PayrollOTRPaymentHoldReasonId" msprop:Generator_ColumnPropNameInTable="PayrollOTRPaymentHoldReasonIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRPaymentHoldReasonId" msprop:Generator_UserColumnName="PayrollOTRPaymentHoldReasonId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRPaymentHoldReasonId" type="xs:int" />
+              <xs:element name="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_UserColumnName="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_UserColumnName="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PayrollOTRPaymentHoldReason" msprop:Generator_RowEvHandlerName="PayrollOTRPaymentHoldReasonRowChangeEventHandler" msprop:Generator_RowDeletedName="PayrollOTRPaymentHoldReasonRowDeleted" msprop:Generator_RowDeletingName="PayrollOTRPaymentHoldReasonRowDeleting" msprop:Generator_RowEvArgName="PayrollOTRPaymentHoldReasonRowChangeEvent" msprop:Generator_TablePropName="PayrollOTRPaymentHoldReason" msprop:Generator_RowChangedName="PayrollOTRPaymentHoldReasonRowChanged" msprop:Generator_UserTableName="PayrollOTRPaymentHoldReason" msprop:Generator_RowChangingName="PayrollOTRPaymentHoldReasonRowChanging" msprop:Generator_RowClassName="PayrollOTRPaymentHoldReasonRow" msprop:Generator_TableClassName="PayrollOTRPaymentHoldReasonDataTable" msprop:Generator_TableVarName="tablePayrollOTRPaymentHoldReason">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PayrollOTRPaymentHoldReasonId" msprop:Generator_ColumnPropNameInTable="PayrollOTRPaymentHoldReasonIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRPaymentHoldReasonId" msprop:Generator_UserColumnName="PayrollOTRPaymentHoldReasonId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRPaymentHoldReasonId" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnVarNameInTable="columnName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_UserColumnName="Description" msprop:Generator_ColumnVarNameInTable="columnDescription">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Resolution" msprop:Generator_ColumnPropNameInTable="ResolutionColumn" msprop:Generator_ColumnPropNameInRow="Resolution" msprop:Generator_UserColumnName="Resolution" msprop:Generator_ColumnVarNameInTable="columnResolution">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Enabled" msprop:Generator_ColumnPropNameInTable="EnabledColumn" msprop:Generator_ColumnPropNameInRow="Enabled" msprop:Generator_UserColumnName="Enabled" msprop:Generator_ColumnVarNameInTable="columnEnabled" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PayrollOTRDataSource" msprop:Generator_RowEvHandlerName="PayrollOTRDataSourceRowChangeEventHandler" msprop:Generator_RowDeletedName="PayrollOTRDataSourceRowDeleted" msprop:Generator_RowDeletingName="PayrollOTRDataSourceRowDeleting" msprop:Generator_RowEvArgName="PayrollOTRDataSourceRowChangeEvent" msprop:Generator_TablePropName="PayrollOTRDataSource" msprop:Generator_RowChangedName="PayrollOTRDataSourceRowChanged" msprop:Generator_UserTableName="PayrollOTRDataSource" msprop:Generator_RowChangingName="PayrollOTRDataSourceRowChanging" msprop:Generator_RowClassName="PayrollOTRDataSourceRow" msprop:Generator_TableClassName="PayrollOTRDataSourceDataTable" msprop:Generator_TableVarName="tablePayrollOTRDataSource">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PayrollOTRDataSourceId" msprop:Generator_ColumnPropNameInTable="PayrollOTRDataSourceIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRDataSourceId" msprop:Generator_UserColumnName="PayrollOTRDataSourceId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRDataSourceId" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnVarNameInTable="columnName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Enabled" msprop:Generator_ColumnPropNameInTable="EnabledColumn" msprop:Generator_ColumnPropNameInRow="Enabled" msprop:Generator_UserColumnName="Enabled" msprop:Generator_ColumnVarNameInTable="columnEnabled" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PayrollOTRStaging" msprop:Generator_RowEvHandlerName="PayrollOTRStagingRowChangeEventHandler" msprop:Generator_RowDeletedName="PayrollOTRStagingRowDeleted" msprop:Generator_RowDeletingName="PayrollOTRStagingRowDeleting" msprop:Generator_RowEvArgName="PayrollOTRStagingRowChangeEvent" msprop:Generator_TablePropName="PayrollOTRStaging" msprop:Generator_RowChangedName="PayrollOTRStagingRowChanged" msprop:Generator_UserTableName="PayrollOTRStaging" msprop:Generator_RowChangingName="PayrollOTRStagingRowChanging" msprop:Generator_RowClassName="PayrollOTRStagingRow" msprop:Generator_TableClassName="PayrollOTRStagingDataTable" msprop:Generator_TableVarName="tablePayrollOTRStaging">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PayrollOTRStagingId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="PayrollOTRStagingIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRStagingId" msprop:Generator_UserColumnName="PayrollOTRStagingId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRStagingId" type="xs:int" />
+              <xs:element name="PayrollOTRPayPeriodId" msprop:Generator_ColumnPropNameInTable="PayrollOTRPayPeriodIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRPayPeriodId" msprop:Generator_UserColumnName="PayrollOTRPayPeriodId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRPayPeriodId" type="xs:int" />
+              <xs:element name="PayrollOTRDataSourceId" msprop:Generator_ColumnPropNameInTable="PayrollOTRDataSourceIdColumn" msprop:Generator_ColumnPropNameInRow="PayrollOTRDataSourceId" msprop:Generator_UserColumnName="PayrollOTRDataSourceId" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRDataSourceId" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnVarNameInTable="columnName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LoadId" msprop:Generator_ColumnPropNameInTable="LoadIdColumn" msprop:Generator_ColumnPropNameInRow="LoadId" msprop:Generator_UserColumnName="LoadId" msprop:Generator_ColumnVarNameInTable="columnLoadId" type="xs:int" minOccurs="0" />
+              <xs:element name="TripNumber" msprop:Generator_ColumnPropNameInTable="TripNumberColumn" msprop:Generator_ColumnPropNameInRow="TripNumber" msprop:Generator_UserColumnName="TripNumber" msprop:Generator_ColumnVarNameInTable="columnTripNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TruckNumber" msprop:Generator_ColumnPropNameInTable="TruckNumberColumn" msprop:Generator_ColumnPropNameInRow="TruckNumber" msprop:Generator_UserColumnName="TruckNumber" msprop:Generator_ColumnVarNameInTable="columnTruckNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="Client_Id" msprop:Generator_ColumnPropNameInTable="Client_IdColumn" msprop:Generator_ColumnPropNameInRow="Client_Id" msprop:Generator_UserColumnName="Client_Id" msprop:Generator_ColumnVarNameInTable="columnClient_Id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PickupBy" msprop:Generator_ColumnPropNameInTable="PickupByColumn" msprop:Generator_ColumnPropNameInRow="PickupBy" msprop:Generator_UserColumnName="PickupBy" msprop:Generator_ColumnVarNameInTable="columnPickupBy" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DeliverBy" msprop:Generator_ColumnPropNameInTable="DeliverByColumn" msprop:Generator_ColumnPropNameInRow="DeliverBy" msprop:Generator_UserColumnName="DeliverBy" msprop:Generator_ColumnVarNameInTable="columnDeliverBy" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DriverType" msprop:Generator_ColumnPropNameInTable="DriverTypeColumn" msprop:Generator_ColumnPropNameInRow="DriverType" msprop:Generator_UserColumnName="DriverType" msprop:Generator_ColumnVarNameInTable="columnDriverType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LegInd" msprop:Generator_ColumnPropNameInTable="LegIndColumn" msprop:Generator_ColumnPropNameInRow="LegInd" msprop:Generator_UserColumnName="LegInd" msprop:Generator_ColumnVarNameInTable="columnLegInd" type="xs:boolean" minOccurs="0" />
+              <xs:element name="PickOrigin" msprop:Generator_ColumnPropNameInTable="PickOriginColumn" msprop:Generator_ColumnPropNameInRow="PickOrigin" msprop:Generator_UserColumnName="PickOrigin" msprop:Generator_ColumnVarNameInTable="columnPickOrigin" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DropDest" msprop:Generator_ColumnPropNameInTable="DropDestColumn" msprop:Generator_ColumnPropNameInRow="DropDest" msprop:Generator_UserColumnName="DropDest" msprop:Generator_ColumnVarNameInTable="columnDropDest" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DriverPersonId" msprop:Generator_ColumnPropNameInTable="DriverPersonIdColumn" msprop:Generator_ColumnPropNameInRow="DriverPersonId" msprop:Generator_UserColumnName="DriverPersonId" msprop:Generator_ColumnVarNameInTable="columnDriverPersonId" type="xs:int" minOccurs="0" />
+              <xs:element name="PayCode" msprop:Generator_ColumnPropNameInTable="PayCodeColumn" msprop:Generator_ColumnPropNameInRow="PayCode" msprop:Generator_UserColumnName="PayCode" msprop:Generator_ColumnVarNameInTable="columnPayCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayId" msprop:Generator_ColumnPropNameInTable="PayIdColumn" msprop:Generator_ColumnPropNameInRow="PayId" msprop:Generator_UserColumnName="PayId" msprop:Generator_ColumnVarNameInTable="columnPayId" type="xs:int" minOccurs="0" />
+              <xs:element name="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_UserColumnName="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PayRateAmount" msprop:Generator_ColumnPropNameInTable="PayRateAmountColumn" msprop:Generator_ColumnPropNameInRow="PayRateAmount" msprop:Generator_UserColumnName="PayRateAmount" msprop:Generator_ColumnVarNameInTable="columnPayRateAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalPay" msprop:Generator_ColumnPropNameInTable="TotalPayColumn" msprop:Generator_ColumnPropNameInRow="TotalPay" msprop:Generator_UserColumnName="TotalPay" msprop:Generator_ColumnVarNameInTable="columnTotalPay" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PayPeriodEnding" msprop:Generator_ColumnPropNameInTable="PayPeriodEndingColumn" msprop:Generator_ColumnPropNameInRow="PayPeriodEnding" msprop:Generator_UserColumnName="PayPeriodEnding" msprop:Generator_ColumnVarNameInTable="columnPayPeriodEnding" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PayrollNotes" msprop:Generator_ColumnPropNameInTable="PayrollNotesColumn" msprop:Generator_ColumnPropNameInRow="PayrollNotes" msprop:Generator_UserColumnName="PayrollNotes" msprop:Generator_ColumnVarNameInTable="columnPayrollNotes" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastUpdate" msprop:Generator_ColumnPropNameInTable="LastUpdateColumn" msprop:Generator_ColumnPropNameInRow="LastUpdate" msprop:Generator_UserColumnName="LastUpdate" msprop:Generator_ColumnVarNameInTable="columnLastUpdate" type="xs:dateTime" />
+              <xs:element name="LastUpdateBy" msprop:Generator_ColumnPropNameInTable="LastUpdateByColumn" msprop:Generator_ColumnPropNameInRow="LastUpdateBy" msprop:Generator_UserColumnName="LastUpdateBy" msprop:Generator_ColumnVarNameInTable="columnLastUpdateBy" type="xs:int" />
+              <xs:element name="PUnitId" msprop:Generator_ColumnPropNameInTable="PUnitIdColumn" msprop:Generator_ColumnPropNameInRow="PUnitId" msprop:Generator_UserColumnName="PUnitId" msprop:Generator_ColumnVarNameInTable="columnPUnitId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sp_Payroll_OTR_GetRecordsFromDriverPay" msprop:Generator_RowClassName="sp_Payroll_OTR_GetRecordsFromDriverPayRow" msprop:Generator_RowEvHandlerName="sp_Payroll_OTR_GetRecordsFromDriverPayRowChangeEventHandler" msprop:Generator_RowDeletedName="sp_Payroll_OTR_GetRecordsFromDriverPayRowDeleted" msprop:Generator_RowDeletingName="sp_Payroll_OTR_GetRecordsFromDriverPayRowDeleting" msprop:Generator_RowEvArgName="sp_Payroll_OTR_GetRecordsFromDriverPayRowChangeEvent" msprop:Generator_TablePropName="sp_Payroll_OTR_GetRecordsFromDriverPay" msprop:Generator_RowChangedName="sp_Payroll_OTR_GetRecordsFromDriverPayRowChanged" msprop:Generator_UserTableName="sp_Payroll_OTR_GetRecordsFromDriverPay" msprop:Generator_RowChangingName="sp_Payroll_OTR_GetRecordsFromDriverPayRowChanging" msprop:Generator_TableClassName="sp_Payroll_OTR_GetRecordsFromDriverPayDataTable" msprop:Generator_TableVarName="tablesp_Payroll_OTR_GetRecordsFromDriverPay">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DriverId" msprop:Generator_UserColumnName="DriverId" msprop:Generator_ColumnPropNameInTable="DriverIdColumn" msprop:Generator_ColumnPropNameInRow="DriverId" msprop:Generator_ColumnVarNameInTable="columnDriverId" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DriverName" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DriverName" msprop:Generator_ColumnPropNameInTable="DriverNameColumn" msprop:Generator_ColumnPropNameInRow="DriverName" msprop:Generator_ColumnVarNameInTable="columnDriverName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayCode" msprop:Generator_UserColumnName="PayCode" msprop:Generator_ColumnPropNameInTable="PayCodeColumn" msprop:Generator_ColumnPropNameInRow="PayCode" msprop:Generator_ColumnVarNameInTable="columnPayCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayCodeDescription" msprop:Generator_UserColumnName="PayCodeDescription" msprop:Generator_ColumnPropNameInTable="PayCodeDescriptionColumn" msprop:Generator_ColumnPropNameInRow="PayCodeDescription" msprop:Generator_ColumnVarNameInTable="columnPayCodeDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayNotes" msprop:Generator_UserColumnName="PayNotes" msprop:Generator_ColumnPropNameInTable="PayNotesColumn" msprop:Generator_ColumnPropNameInRow="PayNotes" msprop:Generator_ColumnVarNameInTable="columnPayNotes" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayQuantity" msdata:ReadOnly="true" msprop:Generator_UserColumnName="PayQuantity" msprop:Generator_ColumnPropNameInTable="PayQuantityColumn" msprop:Generator_ColumnPropNameInRow="PayQuantity" msprop:Generator_ColumnVarNameInTable="columnPayQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PayRate" msdata:ReadOnly="true" msprop:Generator_UserColumnName="PayRate" msprop:Generator_ColumnPropNameInTable="PayRateColumn" msprop:Generator_ColumnPropNameInRow="PayRate" msprop:Generator_ColumnVarNameInTable="columnPayRate" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalPay" msdata:ReadOnly="true" msprop:Generator_UserColumnName="TotalPay" msprop:Generator_ColumnPropNameInTable="TotalPayColumn" msprop:Generator_ColumnPropNameInRow="TotalPay" msprop:Generator_ColumnVarNameInTable="columnTotalPay" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TripNumber" msprop:Generator_UserColumnName="TripNumber" msprop:Generator_ColumnPropNameInTable="TripNumberColumn" msprop:Generator_ColumnPropNameInRow="TripNumber" msprop:Generator_ColumnVarNameInTable="columnTripNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayDate" msprop:Generator_UserColumnName="PayDate" msprop:Generator_ColumnPropNameInTable="PayDateColumn" msprop:Generator_ColumnPropNameInRow="PayDate" msprop:Generator_ColumnVarNameInTable="columnPayDate" type="xs:dateTime" />
+              <xs:element name="FirstName" msprop:Generator_UserColumnName="FirstName" msprop:Generator_ColumnPropNameInTable="FirstNameColumn" msprop:Generator_ColumnPropNameInRow="FirstName" msprop:Generator_ColumnVarNameInTable="columnFirstName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DriverPersonId" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DriverPersonId" msprop:Generator_ColumnPropNameInTable="DriverPersonIdColumn" msprop:Generator_ColumnPropNameInRow="DriverPersonId" msprop:Generator_ColumnVarNameInTable="columnDriverPersonId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sp_Payroll_OTR_GetRecordsFromLoad" msprop:Generator_RowClassName="sp_Payroll_OTR_GetRecordsFromLoadRow" msprop:Generator_RowEvHandlerName="sp_Payroll_OTR_GetRecordsFromLoadRowChangeEventHandler" msprop:Generator_RowDeletedName="sp_Payroll_OTR_GetRecordsFromLoadRowDeleted" msprop:Generator_RowDeletingName="sp_Payroll_OTR_GetRecordsFromLoadRowDeleting" msprop:Generator_RowEvArgName="sp_Payroll_OTR_GetRecordsFromLoadRowChangeEvent" msprop:Generator_TablePropName="sp_Payroll_OTR_GetRecordsFromLoad" msprop:Generator_RowChangedName="sp_Payroll_OTR_GetRecordsFromLoadRowChanged" msprop:Generator_UserTableName="sp_Payroll_OTR_GetRecordsFromLoad" msprop:Generator_RowChangingName="sp_Payroll_OTR_GetRecordsFromLoadRowChanging" msprop:Generator_TableClassName="sp_Payroll_OTR_GetRecordsFromLoadDataTable" msprop:Generator_TableVarName="tablesp_Payroll_OTR_GetRecordsFromLoad">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnVarNameInTable="columnName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LoadId" msprop:Generator_UserColumnName="LoadId" msprop:Generator_ColumnPropNameInTable="LoadIdColumn" msprop:Generator_ColumnPropNameInRow="LoadId" msprop:Generator_ColumnVarNameInTable="columnLoadId" type="xs:int" minOccurs="0" />
+              <xs:element name="TripNumber" msprop:Generator_UserColumnName="TripNumber" msprop:Generator_ColumnPropNameInTable="TripNumberColumn" msprop:Generator_ColumnPropNameInRow="TripNumber" msprop:Generator_ColumnVarNameInTable="columnTripNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TruckNumber" msdata:ReadOnly="true" msprop:Generator_UserColumnName="TruckNumber" msprop:Generator_ColumnPropNameInTable="TruckNumberColumn" msprop:Generator_ColumnPropNameInRow="TruckNumber" msprop:Generator_ColumnVarNameInTable="columnTruckNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="Client_Id" msprop:Generator_UserColumnName="Client_Id" msprop:Generator_ColumnPropNameInTable="Client_IdColumn" msprop:Generator_ColumnPropNameInRow="Client_Id" msprop:Generator_ColumnVarNameInTable="columnClient_Id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PickupBy" msprop:Generator_UserColumnName="PickupBy" msprop:Generator_ColumnPropNameInTable="PickupByColumn" msprop:Generator_ColumnPropNameInRow="PickupBy" msprop:Generator_ColumnVarNameInTable="columnPickupBy" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DeliverBy" msprop:Generator_UserColumnName="DeliverBy" msprop:Generator_ColumnPropNameInTable="DeliverByColumn" msprop:Generator_ColumnPropNameInRow="DeliverBy" msprop:Generator_ColumnVarNameInTable="columnDeliverBy" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DriverType" msprop:Generator_UserColumnName="DriverType" msprop:Generator_ColumnPropNameInTable="DriverTypeColumn" msprop:Generator_ColumnPropNameInRow="DriverType" msprop:Generator_ColumnVarNameInTable="columnDriverType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LegInd" msprop:Generator_UserColumnName="LegInd" msprop:Generator_ColumnPropNameInTable="LegIndColumn" msprop:Generator_ColumnPropNameInRow="LegInd" msprop:Generator_ColumnVarNameInTable="columnLegInd" type="xs:boolean" minOccurs="0" />
+              <xs:element name="PickOrigin" msprop:Generator_UserColumnName="PickOrigin" msprop:Generator_ColumnPropNameInTable="PickOriginColumn" msprop:Generator_ColumnPropNameInRow="PickOrigin" msprop:Generator_ColumnVarNameInTable="columnPickOrigin" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DropDest" msprop:Generator_UserColumnName="DropDest" msprop:Generator_ColumnPropNameInTable="DropDestColumn" msprop:Generator_ColumnPropNameInRow="DropDest" msprop:Generator_ColumnVarNameInTable="columnDropDest" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DriverPersonId" msprop:Generator_UserColumnName="DriverPersonId" msprop:Generator_ColumnPropNameInTable="DriverPersonIdColumn" msprop:Generator_ColumnPropNameInRow="DriverPersonId" msprop:Generator_ColumnVarNameInTable="columnDriverPersonId" type="xs:int" minOccurs="0" />
+              <xs:element name="PayCode" msprop:Generator_UserColumnName="PayCode" msprop:Generator_ColumnPropNameInTable="PayCodeColumn" msprop:Generator_ColumnPropNameInRow="PayCode" msprop:Generator_ColumnVarNameInTable="columnPayCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="29" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayId" msdata:ReadOnly="true" msprop:Generator_UserColumnName="PayId" msprop:Generator_ColumnPropNameInTable="PayIdColumn" msprop:Generator_ColumnPropNameInRow="PayId" msprop:Generator_ColumnVarNameInTable="columnPayId" type="xs:int" minOccurs="0" />
+              <xs:element name="Quantity" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PayRateAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="PayRateAmount" msprop:Generator_ColumnPropNameInTable="PayRateAmountColumn" msprop:Generator_ColumnPropNameInRow="PayRateAmount" msprop:Generator_ColumnVarNameInTable="columnPayRateAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PUnitId" msprop:Generator_UserColumnName="PUnitId" msprop:Generator_ColumnPropNameInTable="PUnitIdColumn" msprop:Generator_ColumnPropNameInRow="PUnitId" msprop:Generator_ColumnVarNameInTable="columnPUnitId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountingExportCompany" msprop:Generator_RowEvHandlerName="AccountingExportCompanyRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountingExportCompanyRowDeleted" msprop:Generator_RowDeletingName="AccountingExportCompanyRowDeleting" msprop:Generator_RowEvArgName="AccountingExportCompanyRowChangeEvent" msprop:Generator_TablePropName="AccountingExportCompany" msprop:Generator_RowChangedName="AccountingExportCompanyRowChanged" msprop:Generator_RowChangingName="AccountingExportCompanyRowChanging" msprop:Generator_TableClassName="AccountingExportCompanyDataTable" msprop:Generator_RowClassName="AccountingExportCompanyRow" msprop:Generator_TableVarName="tableAccountingExportCompany" msprop:Generator_UserTableName="AccountingExportCompany">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccountingExportCompanyId" msprop:Generator_ColumnPropNameInRow="AccountingExportCompanyId" msprop:Generator_ColumnPropNameInTable="AccountingExportCompanyIdColumn" msprop:Generator_ColumnVarNameInTable="columnAccountingExportCompanyId" msprop:Generator_UserColumnName="AccountingExportCompanyId" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_UserColumnName="Description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountingExportPayrollItem" msprop:Generator_RowEvHandlerName="AccountingExportPayrollItemRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountingExportPayrollItemRowDeleted" msprop:Generator_RowDeletingName="AccountingExportPayrollItemRowDeleting" msprop:Generator_RowEvArgName="AccountingExportPayrollItemRowChangeEvent" msprop:Generator_TablePropName="AccountingExportPayrollItem" msprop:Generator_RowChangedName="AccountingExportPayrollItemRowChanged" msprop:Generator_RowChangingName="AccountingExportPayrollItemRowChanging" msprop:Generator_TableClassName="AccountingExportPayrollItemDataTable" msprop:Generator_RowClassName="AccountingExportPayrollItemRow" msprop:Generator_TableVarName="tableAccountingExportPayrollItem" msprop:Generator_UserTableName="AccountingExportPayrollItem">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccountingExportPayrollItemId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="AccountingExportPayrollItemId" msprop:Generator_ColumnPropNameInTable="AccountingExportPayrollItemIdColumn" msprop:Generator_ColumnVarNameInTable="columnAccountingExportPayrollItemId" msprop:Generator_UserColumnName="AccountingExportPayrollItemId" type="xs:int" />
+              <xs:element name="AccountingExportCompanyId" msprop:Generator_ColumnPropNameInRow="AccountingExportCompanyId" msprop:Generator_ColumnPropNameInTable="AccountingExportCompanyIdColumn" msprop:Generator_ColumnVarNameInTable="columnAccountingExportCompanyId" msprop:Generator_UserColumnName="AccountingExportCompanyId" type="xs:int" />
+              <xs:element name="AccountingExportPayrollEntryTypeId" msprop:Generator_ColumnPropNameInRow="AccountingExportPayrollEntryTypeId" msprop:Generator_ColumnPropNameInTable="AccountingExportPayrollEntryTypeIdColumn" msprop:Generator_ColumnVarNameInTable="columnAccountingExportPayrollEntryTypeId" msprop:Generator_UserColumnName="AccountingExportPayrollEntryTypeId" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Enabled" msprop:Generator_ColumnPropNameInRow="Enabled" msprop:Generator_ColumnPropNameInTable="EnabledColumn" msprop:Generator_ColumnVarNameInTable="columnEnabled" msprop:Generator_UserColumnName="Enabled" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountingExportPayrollData" msprop:Generator_RowEvHandlerName="AccountingExportPayrollDataRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountingExportPayrollDataRowDeleted" msprop:Generator_RowDeletingName="AccountingExportPayrollDataRowDeleting" msprop:Generator_RowEvArgName="AccountingExportPayrollDataRowChangeEvent" msprop:Generator_TablePropName="AccountingExportPayrollData" msprop:Generator_RowChangedName="AccountingExportPayrollDataRowChanged" msprop:Generator_RowChangingName="AccountingExportPayrollDataRowChanging" msprop:Generator_TableClassName="AccountingExportPayrollDataDataTable" msprop:Generator_RowClassName="AccountingExportPayrollDataRow" msprop:Generator_TableVarName="tableAccountingExportPayrollData" msprop:Generator_UserTableName="AccountingExportPayrollData">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccountingExportPayrollDataId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="AccountingExportPayrollDataId" msprop:Generator_ColumnPropNameInTable="AccountingExportPayrollDataIdColumn" msprop:Generator_ColumnVarNameInTable="columnAccountingExportPayrollDataId" msprop:Generator_UserColumnName="AccountingExportPayrollDataId" type="xs:int" />
+              <xs:element name="PersonId" msprop:Generator_ColumnPropNameInRow="PersonId" msprop:Generator_ColumnPropNameInTable="PersonIdColumn" msprop:Generator_ColumnVarNameInTable="columnPersonId" msprop:Generator_UserColumnName="PersonId" type="xs:int" />
+              <xs:element name="OriginatingOTRPayPeriodId" msprop:Generator_ColumnPropNameInRow="OriginatingOTRPayPeriodId" msprop:Generator_ColumnPropNameInTable="OriginatingOTRPayPeriodIdColumn" msprop:Generator_ColumnVarNameInTable="columnOriginatingOTRPayPeriodId" msprop:Generator_UserColumnName="OriginatingOTRPayPeriodId" type="xs:int" />
+              <xs:element name="AccountingExportPayrollEntryTypeId" msprop:Generator_ColumnPropNameInRow="AccountingExportPayrollEntryTypeId" msprop:Generator_ColumnPropNameInTable="AccountingExportPayrollEntryTypeIdColumn" msprop:Generator_ColumnVarNameInTable="columnAccountingExportPayrollEntryTypeId" msprop:Generator_UserColumnName="AccountingExportPayrollEntryTypeId" type="xs:int" />
+              <xs:element name="AccountingExportPayrollItemId" msprop:Generator_ColumnPropNameInRow="AccountingExportPayrollItemId" msprop:Generator_ColumnPropNameInTable="AccountingExportPayrollItemIdColumn" msprop:Generator_ColumnVarNameInTable="columnAccountingExportPayrollItemId" msprop:Generator_UserColumnName="AccountingExportPayrollItemId" type="xs:int" />
+              <xs:element name="Quantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_UserColumnName="Quantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Rate" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_ColumnVarNameInTable="columnRate" msprop:Generator_UserColumnName="Rate" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PayrollOTRPaymentHoldReasonId" msprop:Generator_ColumnPropNameInRow="PayrollOTRPaymentHoldReasonId" msprop:Generator_ColumnPropNameInTable="PayrollOTRPaymentHoldReasonIdColumn" msprop:Generator_ColumnVarNameInTable="columnPayrollOTRPaymentHoldReasonId" msprop:Generator_UserColumnName="PayrollOTRPaymentHoldReasonId" type="xs:int" />
+              <xs:element name="HeldPaymentHasBeenPaid" msprop:Generator_ColumnPropNameInRow="HeldPaymentHasBeenPaid" msprop:Generator_ColumnPropNameInTable="HeldPaymentHasBeenPaidColumn" msprop:Generator_ColumnVarNameInTable="columnHeldPaymentHasBeenPaid" msprop:Generator_UserColumnName="HeldPaymentHasBeenPaid" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountingExportPayrollEntryType" msprop:Generator_RowEvHandlerName="AccountingExportPayrollEntryTypeRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountingExportPayrollEntryTypeRowDeleted" msprop:Generator_RowDeletingName="AccountingExportPayrollEntryTypeRowDeleting" msprop:Generator_RowEvArgName="AccountingExportPayrollEntryTypeRowChangeEvent" msprop:Generator_TablePropName="AccountingExportPayrollEntryType" msprop:Generator_RowChangedName="AccountingExportPayrollEntryTypeRowChanged" msprop:Generator_RowChangingName="AccountingExportPayrollEntryTypeRowChanging" msprop:Generator_TableClassName="AccountingExportPayrollEntryTypeDataTable" msprop:Generator_RowClassName="AccountingExportPayrollEntryTypeRow" msprop:Generator_TableVarName="tableAccountingExportPayrollEntryType" msprop:Generator_UserTableName="AccountingExportPayrollEntryType">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccountingExportPayrollEntryTypeId" msprop:Generator_ColumnPropNameInRow="AccountingExportPayrollEntryTypeId" msprop:Generator_ColumnPropNameInTable="AccountingExportPayrollEntryTypeIdColumn" msprop:Generator_ColumnVarNameInTable="columnAccountingExportPayrollEntryTypeId" msprop:Generator_UserColumnName="AccountingExportPayrollEntryTypeId" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Enabled" msprop:Generator_ColumnPropNameInRow="Enabled" msprop:Generator_ColumnPropNameInTable="EnabledColumn" msprop:Generator_ColumnVarNameInTable="columnEnabled" msprop:Generator_UserColumnName="Enabled" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PayrollOTRStatus" />
+      <xs:field xpath="mstns:PayrollOTRStatusId" />
+    </xs:unique>
+    <xs:unique name="PayrollOTRPayPeriod_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PayrollOTRPayPeriod" />
+      <xs:field xpath="mstns:PayrollOTRPayPeriodId" />
+    </xs:unique>
+    <xs:unique name="PayrollOTRPaymentHold_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PayrollOTRPaymentHold" />
+      <xs:field xpath="mstns:PayrollOTRPaymentHoldId" />
+    </xs:unique>
+    <xs:unique name="PayrollOTRPaymentHoldReason_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PayrollOTRPaymentHoldReason" />
+      <xs:field xpath="mstns:PayrollOTRPaymentHoldReasonId" />
+    </xs:unique>
+    <xs:unique name="PayrollOTRDataSource_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PayrollOTRDataSource" />
+      <xs:field xpath="mstns:PayrollOTRDataSourceId" />
+    </xs:unique>
+    <xs:unique name="PayrollOTRStaging_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PayrollOTRStaging" />
+      <xs:field xpath="mstns:PayrollOTRStagingId" />
+    </xs:unique>
+    <xs:unique name="AccountingExportCompany_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccountingExportCompany" />
+      <xs:field xpath="mstns:AccountingExportCompanyId" />
+    </xs:unique>
+    <xs:unique name="AccountingExportPayrollItem_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccountingExportPayrollItem" />
+      <xs:field xpath="mstns:AccountingExportPayrollItemId" />
+    </xs:unique>
+    <xs:unique name="AccountingExportPayrollData_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccountingExportPayrollData" />
+      <xs:field xpath="mstns:AccountingExportPayrollDataId" />
+    </xs:unique>
+    <xs:unique name="AccountingExportPayrollEntryType_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccountingExportPayrollEntryType" />
+      <xs:field xpath="mstns:AccountingExportPayrollEntryTypeId" />
+    </xs:unique>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="FK_PayrollOTRPayPeriod_PayrollOTRStatus" msdata:parent="PayrollOTRStatus" msdata:child="PayrollOTRPayPeriod" msdata:parentkey="PayrollOTRStatusId" msdata:childkey="PayrollOTRStatusId" msprop:Generator_UserParentTable="PayrollOTRStatus" msprop:Generator_UserChildTable="PayrollOTRPayPeriod" msprop:Generator_RelationVarName="relationFK_PayrollOTRPayPeriod_PayrollOTRStatus" msprop:Generator_ChildPropName="GetPayrollOTRPayPeriodRows" msprop:Generator_ParentPropName="PayrollOTRStatusRow" msprop:Generator_UserRelationName="FK_PayrollOTRPayPeriod_PayrollOTRStatus" />
+      <msdata:Relationship name="FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason" msdata:parent="PayrollOTRPaymentHoldReason" msdata:child="PayrollOTRPaymentHold" msdata:parentkey="PayrollOTRPaymentHoldReasonId" msdata:childkey="PayrollOTRPaymentHoldReasonId" msprop:Generator_UserParentTable="PayrollOTRPaymentHoldReason" msprop:Generator_UserChildTable="PayrollOTRPaymentHold" msprop:Generator_RelationVarName="relationFK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason" msprop:Generator_ChildPropName="GetPayrollOTRPaymentHoldRows" msprop:Generator_UserRelationName="FK_PayrollOTRPaymentHold_PayrollOTRPaymentHoldReason" msprop:Generator_ParentPropName="PayrollOTRPaymentHoldReasonRow" />
+      <msdata:Relationship name="FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod" msdata:parent="PayrollOTRPayPeriod" msdata:child="PayrollOTRPaymentHold" msdata:parentkey="PayrollOTRPayPeriodId" msdata:childkey="OriginatingOTRPayPeriodId" msprop:Generator_UserParentTable="PayrollOTRPayPeriod" msprop:Generator_UserChildTable="PayrollOTRPaymentHold" msprop:Generator_RelationVarName="relationFK_PayrollOTRPaymentHold_PayrollOTRPayPeriod" msprop:Generator_ChildPropName="GetPayrollOTRPaymentHoldRows" msprop:Generator_ParentPropName="PayrollOTRPayPeriodRow" msprop:Generator_UserRelationName="FK_PayrollOTRPaymentHold_PayrollOTRPayPeriod" />
+      <msdata:Relationship name="FK_PayrollOTRStaging_PayrollOTRDataSource" msdata:parent="PayrollOTRDataSource" msdata:child="PayrollOTRStaging" msdata:parentkey="PayrollOTRDataSourceId" msdata:childkey="PayrollOTRDataSourceId" msprop:Generator_UserParentTable="PayrollOTRDataSource" msprop:Generator_UserChildTable="PayrollOTRStaging" msprop:Generator_RelationVarName="relationFK_PayrollOTRStaging_PayrollOTRDataSource" msprop:Generator_ChildPropName="GetPayrollOTRStagingRows" msprop:Generator_ParentPropName="PayrollOTRDataSourceRow" msprop:Generator_UserRelationName="FK_PayrollOTRStaging_PayrollOTRDataSource" />
+      <msdata:Relationship name="FK_PayrollOTRStaging_PayrollOTRPayPeriod" msdata:parent="PayrollOTRPayPeriod" msdata:child="PayrollOTRStaging" msdata:parentkey="PayrollOTRPayPeriodId" msdata:childkey="PayrollOTRPayPeriodId" msprop:Generator_UserParentTable="PayrollOTRPayPeriod" msprop:Generator_UserChildTable="PayrollOTRStaging" msprop:Generator_RelationVarName="relationFK_PayrollOTRStaging_PayrollOTRPayPeriod" msprop:Generator_ChildPropName="GetPayrollOTRStagingRows" msprop:Generator_ParentPropName="PayrollOTRPayPeriodRow" msprop:Generator_UserRelationName="FK_PayrollOTRStaging_PayrollOTRPayPeriod" />
+      <msdata:Relationship name="FK_AccountingExportPayrollItem_AccountingExportCompany" msdata:parent="AccountingExportCompany" msdata:child="AccountingExportPayrollItem" msdata:parentkey="AccountingExportCompanyId" msdata:childkey="AccountingExportCompanyId" msprop:Generator_UserParentTable="AccountingExportCompany" msprop:Generator_UserChildTable="AccountingExportPayrollItem" msprop:Generator_RelationVarName="relationFK_AccountingExportPayrollItem_AccountingExportCompany" msprop:Generator_ChildPropName="GetAccountingExportPayrollItemRows" msprop:Generator_ParentPropName="AccountingExportCompanyRow" msprop:Generator_UserRelationName="FK_AccountingExportPayrollItem_AccountingExportCompany" />
+      <msdata:Relationship name="FK_AccountingExportPayrollItem_AccountingExportPayrollEntryType" msdata:parent="AccountingExportPayrollEntryType" msdata:child="AccountingExportPayrollItem" msdata:parentkey="AccountingExportPayrollEntryTypeId" msdata:childkey="AccountingExportPayrollEntryTypeId" msprop:Generator_UserParentTable="AccountingExportPayrollEntryType" msprop:Generator_UserChildTable="AccountingExportPayrollItem" msprop:Generator_RelationVarName="relationFK_AccountingExportPayrollItem_AccountingExportPayrollEntryType" msprop:Generator_UserRelationName="FK_AccountingExportPayrollItem_AccountingExportPayrollEntryType" msprop:Generator_ChildPropName="GetAccountingExportPayrollItemRows" msprop:Generator_ParentPropName="AccountingExportPayrollEntryTypeRow" />
+      <msdata:Relationship name="FK_AccountingExportPayrollData_AccountingExportPayrollEntryType" msdata:parent="AccountingExportPayrollEntryType" msdata:child="AccountingExportPayrollData" msdata:parentkey="AccountingExportPayrollEntryTypeId" msdata:childkey="AccountingExportPayrollEntryTypeId" msprop:Generator_UserParentTable="AccountingExportPayrollEntryType" msprop:Generator_UserChildTable="AccountingExportPayrollData" msprop:Generator_RelationVarName="relationFK_AccountingExportPayrollData_AccountingExportPayrollEntryType" msprop:Generator_UserRelationName="FK_AccountingExportPayrollData_AccountingExportPayrollEntryType" msprop:Generator_ChildPropName="GetAccountingExportPayrollDataRows" msprop:Generator_ParentPropName="AccountingExportPayrollEntryTypeRow" />
+      <msdata:Relationship name="FK_AccountingExportPayrollData_AccountingExportPayrollItem" msdata:parent="AccountingExportPayrollItem" msdata:child="AccountingExportPayrollData" msdata:parentkey="AccountingExportPayrollItemId" msdata:childkey="AccountingExportPayrollItemId" msprop:Generator_UserParentTable="AccountingExportPayrollItem" msprop:Generator_UserChildTable="AccountingExportPayrollData" msprop:Generator_RelationVarName="relationFK_AccountingExportPayrollData_AccountingExportPayrollItem" msprop:Generator_ChildPropName="GetAccountingExportPayrollDataRows" msprop:Generator_ParentPropName="AccountingExportPayrollItemRow" msprop:Generator_UserRelationName="FK_AccountingExportPayrollData_AccountingExportPayrollItem" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>
