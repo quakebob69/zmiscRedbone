@@ -106,4 +106,5 @@ END
 				
 	--HOLD payments
 		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 'DriverPay', @LastUpdateBy
+		
 GO
