@@ -17,7 +17,7 @@ CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments]
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 2775
+	exec [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] Load 2775
 */
 
 SET NOCOUNT ON;
