@@ -69,7 +69,7 @@ END
 		,DriverPersonId int
 	)
 	INSERT INTO #TEMP_OTR_DATA__DriverPay
-	EXEC payroll.sp_Payroll_OTR_GetRecordsFromDriverPay @PayPeriodBeginDate, @PayPeriodEndDate
+	EXEC [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay] @PayPeriodBeginDate, @PayPeriodEndDate
 
 --Table inserts
 	--payroll.PayrollOTRStaging

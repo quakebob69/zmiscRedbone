@@ -72,7 +72,7 @@ END
 		PUnitId int NULL
 	)
 	INSERT INTO #TEMP_OTR_DATA__Load
-	EXEC [payroll].[sp_Payroll_OTR_StagePayrollLoad] @LastUpdateBy
+	EXEC [payroll].[sp_Payroll_OTR_GetRecordsFromLoad] @PayPeriodBeginDate, @PayPeriodEndDate
 
 --Table inserts
 	--payroll.PayrollOTRStaging
