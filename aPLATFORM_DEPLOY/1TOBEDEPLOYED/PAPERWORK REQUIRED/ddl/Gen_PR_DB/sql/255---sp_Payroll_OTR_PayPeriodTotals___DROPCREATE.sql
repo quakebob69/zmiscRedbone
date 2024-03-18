@@ -10,6 +10,7 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodTotals]
 (
+	@PayrollOTRDataSource varchar(15),
 	@LastUpdateBy INT
 )
 
