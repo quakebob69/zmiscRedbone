@@ -38,7 +38,7 @@ END
 		--finalize current
 			DECLARE @ActivePayPeriodId INT
 			
-			EXEC [payroll].[sp_Payroll_OTR_PayPeriodTotals]
+			EXEC [payroll].[sp_Payroll_OTR_PayPeriodTotals] @LastUpdateBy
 
 			EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
 			
