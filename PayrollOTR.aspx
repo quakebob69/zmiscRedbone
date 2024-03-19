@@ -173,7 +173,7 @@
                     </div>
                     <div class="PPDivInner">
                         <div class="PPTopRightBtnReset">
-                            <telerik:RadButton ID="radBtnOTRPR_Reset" runat="server" Text="RESET THE PAY PERIOD"></telerik:RadButton>
+                            <telerik:RadButton ID="radBtnOTRPR_Reset" runat="server" Text="RESET THE PAY PERIOD" OnClick="Reset" OnClientClicking="radBtnOTRPR_Reset_Confirm"></telerik:RadButton>
                         </div>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
                             <div class="prOTRActionsDataRefresh">
-                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromDriverPay" Text="only DRIVER PAY data" runat="server" OnClientClicking="RefreshDataDriverPayfd" OnClick="RefreshDataDriverPay"></telerik:RadButton>
+                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromDriverPay" Text="only DRIVER PAY data" runat="server" OnClientClicking="RefreshDataDriverPay" OnClick="RefreshDataDriverPay"></telerik:RadButton>
                                 &nbsp;&nbsp;0 records
                             </div>
                             <div class="prOTRActionsDataRefreshLast">
@@ -419,8 +419,12 @@
                     oWindow = window.frameElement.radWindow; return oWindow;
             }
 
-            function asdfasdf(sender, eventArgs) {
+            function radBtnOTRPR_Reset_Confirm(sender, eventArgs) {
                 eventArgs.set_cancel(!window.confirm("Are you sure you want to ---RESET--- blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah?"));
+            }
+
+            function GetRadWindowManager() {
+                return $find("<%=RadWindowManager1.ClientID%>");
             }
 
             function RefreshDataAll(sender, eventArgs) {
@@ -432,54 +436,12 @@
                 var oWnd = window.radopen("PayrollOTRDataRefresh.aspx?DataSourceType=All", "RadWindow_PayrollOTRDataRefresh", null,);
             }
 
-            function RefreshDataDriverPayfd(sender, eventArgs) {
+            function RefreshDataDriverPay(sender, eventArgs) {
                 var modalPopupWnd = $find("<%= modalPopup.ClientID %>");
                 modalPopupWnd.show();
 
                 //var oWnd = window.radopen("PayrollOTRDataRefresh.aspx?DataSourceType=DriverPay", "RadWindow_PayrollOTRDataRefresh", null,);
             }
-
-            function f() {
-                var modalPopupWnd = $find("<%= modalPopup.ClientID %>");
-                modalPopupWnd.show();
-
-                //var oWnd = window.radopen("PayrollOTRDataRefresh.aspx?DataSourceType=DriverPay", "RadWindow_PayrollOTRDataRefresh", null,);
-            }
-
-            function asdflWindow(sender, eventArgs) {
-                alert('1234');
-
-                var manageWindow = GetRadWindowManager();
-                if (manageWindow) {
-                    var radWindow = manageWindow.open(null, "modalPopup");
-                    if (radWindow) {
-                        radWindow.set_initialBehaviors(Telerik.Web.UI.WindowBehaviors.None);
-                        radWindow.set_behaviors(Telerik.Web.UI.WindowBehaviors.Move + Telerik.Web.UI.WindowBehaviors.Close + Telerik.Web.UI.WindowBehaviors.Resize);
-                        radWindow.setActive(true);
-                        radWindow.SetModal(true);
-                        radWindow.center();
-                        radWindow.set_visibleStatusbar(false);
-                        radWindow.set_keepInScreenBounds(true);
-                        radWindow.set_minWidth(640);
-                        radWindow.set_minHeight(480);
-                        radWindow.setSize(640, 480);
-                        radWindow.set_destroyOnClose(true);
-                        radWindow.add_close(closeMyDialog);//after closing the RadWindow, closeMyDialog will be called
-                        radWindow.argument = args;//you can pass the value from parent page to RadWindow dialog as this line
-                    }
-                }
-
-
-                //var radWindow = $find("<%= modalPopup.ClientID %>");
-                //alert(radWindow);
-
-                //radWindow.show();
-            }
-
-            function GetRadWindowManager() {
-                return $find("<%=RadWindowManager1.ClientID%>");
-            }
-
             function RefreshDataLoads(sender, eventArgs) {
                 var confirmResult = window.confirm("Are you sure you ---Loads--- blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah?");
                 eventArgs.set_cancel(!confirmResult);
