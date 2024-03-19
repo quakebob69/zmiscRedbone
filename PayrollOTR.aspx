@@ -17,6 +17,10 @@
             overflow: hidden;
         }
 
+        .RadAjaxPanel {
+            display: inline !important;
+        }
+
         .PPDivOuter {
             display: flex;
             margin: 0px;
@@ -74,22 +78,6 @@
             padding: 20px 0px 10px 20px;
         }
 
-        #radBtnOTRPR_RefreshAllPanel {
-            display: inline !important;
-        }
-
-        #radBtnOTRPR_RefreshFromDriverPayPanel {
-            display: inline !important;
-        }
-
-        #RadLabel111Panel {
-            display: inline !important;
-        }
-
-        #radBtnOTRPR_RefreshFromLoadPanel {
-            display: inline !important;
-        }
-
         .prOTRLockData {
             float: right;
         }
@@ -134,11 +122,6 @@
 
         <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
             <AjaxSettings>
-
-
-
-
-
                 <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_RefreshAll">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshAll" LoadingPanelID="RadAjaxLoadingPanel1" />
@@ -156,13 +139,6 @@
                         <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshFromLoad" LoadingPanelID="RadAjaxLoadingPanel1" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
-                <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_RefreshFromDriverPay">
-                    <UpdatedControls>
-                        <telerik:AjaxUpdatedControl ControlID="Panel1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                        <telerik:AjaxUpdatedControl ControlID="Panel2" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    </UpdatedControls>
-                </telerik:AjaxSetting>
-
             </AjaxSettings>
         </telerik:RadAjaxManager>
         <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Default" Modal="true">
@@ -227,8 +203,10 @@
                             </div>
                             <div class="prOTRActionsDataRefresh" style="clear: both;">
                                 <telerik:RadButton ID="radBtnOTRPR_RefreshAll" Text="get/refresh ALL data" runat="server" OnClientClicking="RefreshDataAll"></telerik:RadButton>
-                                <div style="font-size: 1.5em; font-weight: bold; margin-top: 5px;">&nbsp;&nbsp;<telerik:RadLabel ID="RadLabel111" runat="server" />
-                                    <span style="font-size: initial; font-weight: 100;">records</span></div>
+                                <div style="font-size: 1.5em; font-weight: bold; margin-top: 5px;">
+                                    &nbsp;&nbsp;<telerik:RadLabel ID="RadLabel111" runat="server" />
+                                    <span style="font-size: initial; font-weight: 100;">records</span>
+                                </div>
                             </div>
                             <div class="prOTRActionsDataRefresh">
                                 <telerik:RadButton ID="radBtnOTRPR_RefreshFromDriverPay" Text="only DRIVER PAY data" runat="server" OnClientClicking="RefreshDataDriverPayfd" OnClick="RefreshDataDriverPay"></telerik:RadButton>
@@ -395,20 +373,17 @@
             </div>
 
         </div>
-        <asp:Button ID="Button1" runat="server" Text="Postback" OnClick="Button1_Click" />
-        <asp:Panel ID="Panel1" runat="server" Width="200px">
-            Panel 1
-        </asp:Panel>
-        <asp:Panel ID="Panel2" runat="server" Width="200px">
-            Panel 2
-        </asp:Panel>
 
-        <telerik:RadWindow ID="modalPopup" runat="server" Width="360px" Title="asdf asdf d" Height="365px" Modal="true" OffsetElementID="main">
+        <telerik:RadWindow ID="modalPopup" runat="server" Title="Data Retrieval" Width="375px" Height="200px" Modal="true" OffsetElementID="main">
             <ContentTemplate>
-                <div style="padding-top: 5px; width: 550px">
-                    <telerik:RadLabel ID="RadLabelqwerty" runat="server" /> records retrieved
-                    <telerik:RadButton ID="RadButton_Cancel" runat="server" Text="Close" OnClientClicked="closeLoadingWindow" Width="85px" Visible="true" />
+                <div style="font-size: 1.5em; font-weight: bold; margin-top: 5px; padding: 30px;">
+                    &nbsp;&nbsp;<telerik:RadLabel ID="RadLabelqwerty" runat="server" />
+                    <span style="font-size: initial; font-weight: 100;">records retrieved</span>
+                    <div style="float: right; margin-top:30px;">
+                        <telerik:RadButton ID="RadButton_Cancel" runat="server" Text="Close" OnClientClicked="closeLoadingWindow" Width="85px" Visible="true" />
+                    </div>
                 </div>
+
             </ContentTemplate>
         </telerik:RadWindow>
 

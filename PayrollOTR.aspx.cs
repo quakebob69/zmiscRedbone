@@ -90,6 +90,7 @@ namespace RedbonePlatform.Pages.ContainerPages
 
             setButtonStates(ppStatus.Name);
 
+            RadLabelqwerty.Text = "0";
             RadLabel111.Text = "0";
         }
 
@@ -258,7 +259,7 @@ namespace RedbonePlatform.Pages.ContainerPages
             qry.CommandTimeoutQry = 1000000;
             qry.sp_Payroll_OTR_StagePayrollDriverPay(auth.PersonId);
 
-            RadLabelqwerty.Text = "6376";
+            RadLabelqwerty.Text = "6376 'DriverPay'";
             RadLabel111.Text = "6376";
         }
 
