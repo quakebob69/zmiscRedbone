@@ -90,8 +90,10 @@ namespace RedbonePlatform.Pages.ContainerPages
 
             setButtonStates(ppStatus.Name);
 
-            RadLabelqwerty.Text = "0";
-            RadLabel111.Text = "0";
+            RadLabeldataRefreshPopup.Text = "0";
+            RadLabeRefreshDataAll.Text = "0";
+            RadLabeRefreshDataDriverPay.Text = "0";
+            RadLabeRefreshDataLoad.Text = "0";
         }
 
         protected List<string> getJsonUserStepsDataSources(Datasets.dsPayroll.PayrollOTRPayPeriodRow activePayPer)
@@ -252,15 +254,40 @@ namespace RedbonePlatform.Pages.ContainerPages
             LoadForm();
         }
 
-        protected void RefreshDataDriverPay(object sender, EventArgs e)
+        protected void RefreshDriverPayData(object sender, EventArgs e)
         {
             Thread.Sleep(1000);
             QueriesTableAdapter qry = new QueriesTableAdapter();
             qry.CommandTimeoutQry = 1000000;
-            qry.sp_Payroll_OTR_StagePayrollDriverPay(auth.PersonId);
+            qry.sp_Payroll_OTR_StagePayrollLoad(auth.PersonId);
 
-            RadLabelqwerty.Text = "6376 'DriverPay'";
-            RadLabel111.Text = "6376";
+            string recsRetrieved = "100";
+            RadLabeldataRefreshPopup.Text = recsRetrieved + " 'DriverPay'";
+            RadLabeRefreshDataLoad.Text = recsRetrieved;
+        }
+
+        protected void RefreshLoadsData(object sender, EventArgs e)
+        {
+            Thread.Sleep(2000);
+            QueriesTableAdapter qry = new QueriesTableAdapter();
+            qry.CommandTimeoutQry = 1000000;
+            qry.sp_Payroll_OTR_StagePayrollLoad(auth.PersonId);
+
+            string recsRetrieved = "100";
+            RadLabeldataRefreshPopup.Text = recsRetrieved + " 'Load'";
+            RadLabeRefreshDataDriverPay.Text = recsRetrieved;
+        }
+
+        protected void RefreshAllData(object sender, EventArgs e)
+        {
+            Thread.Sleep(3000);
+            QueriesTableAdapter qry = new QueriesTableAdapter();
+            qry.CommandTimeoutQry = 1000000;
+            qry.sp_Payroll_OTR_StagePayrollAll(auth.PersonId);
+
+            string recsRetrieved = "100";
+            RadLabeldataRefreshPopup.Text = recsRetrieved + " 'Total'";
+            RadLabeRefreshDataAll.Text = recsRetrieved;
         }
 
         protected void SubmitForVal(object sender, EventArgs e)

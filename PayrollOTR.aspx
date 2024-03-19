@@ -125,18 +125,19 @@
                 <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_RefreshAll">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshAll" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="RadLabeldataRefreshPopup" LoadingPanelID="RadAjaxLoadingPanel1" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
                 <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_RefreshFromDriverPay">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshFromDriverPay" LoadingPanelID="RadAjaxLoadingPanel1" />
-                        <telerik:AjaxUpdatedControl ControlID="RadLabelqwerty" LoadingPanelID="RadAjaxLoadingPanel1" />
-                        <telerik:AjaxUpdatedControl ControlID="RadLabel111" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="RadLabeldataRefreshPopup" LoadingPanelID="RadAjaxLoadingPanel1" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
                 <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_RefreshFromLoad">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshFromLoad" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="RadLabeldataRefreshPopup" LoadingPanelID="RadAjaxLoadingPanel1" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
             </AjaxSettings>
@@ -202,19 +203,21 @@
                                 <telerik:RadButton ID="radBtnOTRPR_LockData" Text="" runat="server" OnClick="LockDataToggle"></telerik:RadButton>
                             </div>
                             <div class="prOTRActionsDataRefresh" style="clear: both;">
-                                <telerik:RadButton ID="radBtnOTRPR_RefreshAll" Text="get/refresh ALL data" runat="server" OnClientClicking="RefreshDataAll"></telerik:RadButton>
+                                <telerik:RadButton ID="radBtnOTRPR_RefreshAll" Text="get/refresh ALL data" runat="server" OnClientClicking="ShowDataRefreshPopup" OnClick="RefreshAllData" />
                                 <div style="font-size: 1.5em; font-weight: bold; margin-top: 5px;">
-                                    &nbsp;&nbsp;<telerik:RadLabel ID="RadLabel111" runat="server" />
+                                    &nbsp;&nbsp;<telerik:RadLabel ID="RadLabeRefreshDataAll" runat="server" />
                                     <span style="font-size: initial; font-weight: 100;">records</span>
                                 </div>
                             </div>
                             <div class="prOTRActionsDataRefresh">
-                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromDriverPay" Text="only DRIVER PAY data" runat="server" OnClientClicking="RefreshDataDriverPay" OnClick="RefreshDataDriverPay"></telerik:RadButton>
-                                &nbsp;&nbsp;0 records
+                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromDriverPay" Text="only DRIVER PAY data" runat="server" OnClientClicking="ShowDataRefreshPopup" OnClick="RefreshDriverPayData" />
+                                &nbsp;&nbsp;<telerik:RadLabel ID="RadLabeRefreshDataDriverPay" runat="server" />
+                                records
                             </div>
                             <div class="prOTRActionsDataRefreshLast">
-                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromLoad" Text="only LOAD data" runat="server" OnClientClicking="RefreshDataLoads"></telerik:RadButton>
-                                &nbsp;&nbsp;345 records
+                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromLoad" Text="only LOAD data" runat="server" OnClientClicking="ShowDataRefreshPopup" OnClick="RefreshLoadsData" />
+                                &nbsp;&nbsp;<telerik:RadLabel ID="RadLabeRefreshDataLoad" runat="server" />
+                                records
                             </div>
                         </fieldset>
                     </div>
@@ -374,12 +377,12 @@
 
         </div>
 
-        <telerik:RadWindow ID="modalPopup" runat="server" Title="Data Retrieval" Width="375px" Height="200px" Modal="true" OffsetElementID="main">
+        <telerik:RadWindow ID="dataRefreshPopup" runat="server" Title="Data Retrieval" Width="375px" Height="200px" Modal="true" OffsetElementID="main">
             <ContentTemplate>
                 <div style="font-size: 1.5em; font-weight: bold; margin-top: 5px; padding: 30px;">
-                    &nbsp;&nbsp;<telerik:RadLabel ID="RadLabelqwerty" runat="server" />
+                    &nbsp;&nbsp;<telerik:RadLabel ID="RadLabeldataRefreshPopup" runat="server" />
                     <span style="font-size: initial; font-weight: 100;">records retrieved</span>
-                    <div style="float: right; margin-top:30px;">
+                    <div style="float: right; margin-top: 30px;">
                         <telerik:RadButton ID="RadButton_Cancel" runat="server" Text="Close" OnClientClicked="closeLoadingWindow" Width="85px" Visible="true" />
                     </div>
                 </div>
@@ -387,23 +390,10 @@
             </ContentTemplate>
         </telerik:RadWindow>
 
-        <telerik:RadMonthYearPicker RenderMode="Lightweight" ID="RadMonthYearPicker1" runat="server" ShowPopupOnFocus="true">
-            <DatePopupButton Visible="false" />
-        </telerik:RadMonthYearPicker>
-
     </form>
 
     <telerik:RadScriptBlock ID="RadScriptBlock2" runat="server">
         <script type="text/javascript">
-            function alertMe() {
-                alert('Hello');
-            }
-
-            function showMontYearPopup(sender, args) {
-                var picker = $find("<%= RadMonthYearPicker1.ClientID %>");
-                picker.showPopup();
-            }
-
 
             // resize the grid when browser is resized 
             window.addEventListener('resize', grid_resize);
@@ -420,7 +410,7 @@
             }
 
             function radBtnOTRPR_Reset_Confirm(sender, eventArgs) {
-                eventArgs.set_cancel(!window.confirm("Are you sure you want to ---RESET--- blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah?"));
+                eventArgs.set_cancel(!window.confirm("Are you sure you want to RESET this pay period?"));
             }
 
             function GetRadWindowManager() {
@@ -428,7 +418,7 @@
             }
 
             function RefreshDataAll(sender, eventArgs) {
-                var confirmResult = window.confirm("Are you sure you ---ALL--- blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah?");
+                var confirmResult = window.confirm("Retrieving ALL data may take up to 10 minutes.  Are you sure you want to continue?");
                 eventArgs.set_cancel(!confirmResult);
                 if (!confirmResult) {
                     return false;
@@ -436,14 +426,13 @@
                 var oWnd = window.radopen("PayrollOTRDataRefresh.aspx?DataSourceType=All", "RadWindow_PayrollOTRDataRefresh", null,);
             }
 
-            function RefreshDataDriverPay(sender, eventArgs) {
-                var modalPopupWnd = $find("<%= modalPopup.ClientID %>");
-                modalPopupWnd.show();
-
-                //var oWnd = window.radopen("PayrollOTRDataRefresh.aspx?DataSourceType=DriverPay", "RadWindow_PayrollOTRDataRefresh", null,);
+            function ShowDataRefreshPopup(sender, eventArgs) {
+                var dataRefreshPopupWnd = $find("<%= dataRefreshPopup.ClientID %>");
+                dataRefreshPopupWnd.show();
             }
+
             function RefreshDataLoads(sender, eventArgs) {
-                var confirmResult = window.confirm("Are you sure you ---Loads--- blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah?");
+                var confirmResult = window.confirm("Retrieving LOAD data may take up to 10 minutes.  Are you sure you want to continue?");
                 eventArgs.set_cancel(!confirmResult);
                 if (!confirmResult) {
                     return false;
@@ -452,7 +441,7 @@
             }
 
             function radBtnOTRPR_Finalize_Confirm(sender, eventArgs) {
-                eventArgs.set_cancel(!window.confirm("Are you sure you want to ---FINALIZE--- blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah?"));
+                eventArgs.set_cancel(!window.confirm("FINALIZING the pay period can not be undone.  Are you sure you want to continue?");
             }
 
             // Resize the grid when the window's height is changed otherwise the grid collapses when height is set at 100% (or not set)
@@ -470,7 +459,7 @@
             }
 
             function closeLoadingWindow() {
-                var radWindow = $find('<%=modalPopup.ClientID %>');
+                var radWindow = $find('<%=dataRefreshPopup.ClientID %>');
                 radWindow.close();
             }
         </script>

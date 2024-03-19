@@ -150,13 +150,13 @@ namespace RedbonePlatform.Pages.ContainerPages
         protected global::Telerik.Web.UI.RadButton radBtnOTRPR_RefreshAll;
 
         /// <summary>
-        /// RadLabel111 control.
+        /// RadLabeRefreshDataAll control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadLabel RadLabel111;
+        protected global::Telerik.Web.UI.RadLabel RadLabeRefreshDataAll;
 
         /// <summary>
         /// radBtnOTRPR_RefreshFromDriverPay control.
@@ -168,6 +168,15 @@ namespace RedbonePlatform.Pages.ContainerPages
         protected global::Telerik.Web.UI.RadButton radBtnOTRPR_RefreshFromDriverPay;
 
         /// <summary>
+        /// RadLabeRefreshDataDriverPay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadLabel RadLabeRefreshDataDriverPay;
+
+        /// <summary>
         /// radBtnOTRPR_RefreshFromLoad control.
         /// </summary>
         /// <remarks>
@@ -175,6 +184,15 @@ namespace RedbonePlatform.Pages.ContainerPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadButton radBtnOTRPR_RefreshFromLoad;
+
+        /// <summary>
+        /// RadLabeRefreshDataLoad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadLabel RadLabeRefreshDataLoad;
 
         /// <summary>
         /// radBtnOTRPR_SubmitForVal control.
@@ -348,22 +366,22 @@ namespace RedbonePlatform.Pages.ContainerPages
         protected global::Telerik.Web.UI.RadButton radBtnOTRPR_Finalize;
 
         /// <summary>
-        /// modalPopup control.
+        /// dataRefreshPopup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadWindow modalPopup;
+        protected global::Telerik.Web.UI.RadWindow dataRefreshPopup;
 
         /// <summary>
-        /// RadLabelqwerty control.
+        /// RadLabeldataRefreshPopup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadLabel RadLabelqwerty;
+        protected global::Telerik.Web.UI.RadLabel RadLabeldataRefreshPopup;
 
         /// <summary>
         /// RadButton_Cancel control.
@@ -373,15 +391,6 @@ namespace RedbonePlatform.Pages.ContainerPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadButton RadButton_Cancel;
-
-        /// <summary>
-        /// RadMonthYearPicker1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadMonthYearPicker RadMonthYearPicker1;
 
         /// <summary>
         /// RadScriptBlock2 control.
