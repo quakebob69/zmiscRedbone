@@ -24,7 +24,28 @@ SET NOCOUNT ON;
 IF 1=0 BEGIN
 SET FMTONLY OFF
 END
-
-	--
+	DECLARE @PayrollOTRStagingId INT
+	DECLARE @PayrollOTRPayPeriodId INT
+	DECLARE @PayrollOTRDataSourceId INT
+    -- DECLARE @Name NVARCHAR(50)
+   
+    DECLARE cur CURSOR FOR
+    SELECT PayrollOTRStagingId, PayrollOTRPayPeriodId, PayrollOTRDataSourceId FROM [payroll].[PayrollOTRStaging]
+    
+    OPEN cur
+    FETCH NEXT FROM cur INTO @PayrollOTRStagingId, @PayrollOTRPayPeriodId, @PayrollOTRDataSourceId
+    
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        INSERT INTO [export].[AccountingExportPayrollData]
+			(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId)
+		VALUES
+			(2775, @PayrollOTRPayPeriodId, 1, 1)
+        
+		FETCH NEXT FROM cur INTO @PayrollOTRStagingId, @PayrollOTRPayPeriodId, @PayrollOTRDataSourceId
+    END
+    
+    CLOSE cur
+    DEALLOCATE cur
 
 GO
