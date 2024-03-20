@@ -65,7 +65,7 @@
 --PER DIEM IS SET IN ONE PLACE IN QBs
 
 
-USE [RedBone]
+USE [RedBoneThomas]
 GO
 
 --#######################################################
@@ -175,7 +175,7 @@ CREATE TABLE #QuickBooksData
 						JOIN @PersonsWithOTRPersonType otr ON one.PersonId = otr.PersonId
 					--ORDER BY pm.PersonId
 				;
-			--SELECT * FROM @LegitOTRDrivers;
+			SELECT * FROM @LegitOTRDrivers;
 		
 		--@DriverPaidMilesLegit (exclude non-OTRs by joining with @LegitOTRDrivers)
 			DECLARE @DriverPaidMilesLegit TABLE (PersonId int NULL, DriverPaidMiles int NULL);
@@ -183,7 +183,8 @@ CREATE TABLE #QuickBooksData
 				SELECT
 					DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
 				FROM
-					payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+					payroll.PayrollOTRStaging ps
 					JOIN @LegitOTRDrivers legit ON ps.DriverPersonId = legit.PersonId
 				WHERE
 					PayCode = @PerDiemPayCode
@@ -198,13 +199,13 @@ CREATE TABLE #QuickBooksData
 --#QuickBooksData INSERTS
 --------------------------------------------------------------------------------------------------------------------------
 	--Driver Paid Miles (@DriverPaidMilesLegit)
-		85
+		--85
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
 			SELECT legit.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, legit.DriverPaidMiles, NULL
 			FROM @DriverPaidMilesLegit legit
 		;
 
-		76
+		--76
 	--Double Miles
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL
