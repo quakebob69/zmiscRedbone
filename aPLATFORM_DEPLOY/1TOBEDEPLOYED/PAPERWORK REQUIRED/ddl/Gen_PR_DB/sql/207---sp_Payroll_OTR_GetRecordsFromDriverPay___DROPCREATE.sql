@@ -42,7 +42,6 @@ as
 		cast(dp.PayDate as date) between @PayPeriodStart and @PayPeriodEnd
 		and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
 		and p.PersonId in (select PersonId from main.BusinessEntityPersonMapping where PersonId = p.PersonId and BusinessEntityTypeId in (1,2)) -- Redbone Trucking Inc or Double Down Trucking Inc
-		and p.IsActive = 1
 
 GO
 
