@@ -28,6 +28,9 @@ END
 	DECLARE @PayrollOTRPayPeriodId INT
 	DECLARE @PayrollOTRDataSourceId INT
     -- DECLARE @Name NVARCHAR(50)
+
+	DECLARE @Counter INT
+	SET @Counter = 1
    
     DECLARE cur CURSOR FOR
     SELECT PayrollOTRStagingId, PayrollOTRPayPeriodId, PayrollOTRDataSourceId FROM [payroll].[PayrollOTRStaging]
@@ -42,6 +45,7 @@ END
 		VALUES
 			(2775, @PayrollOTRPayPeriodId, 1, 1)
         
+		SET @Counter = @Counter + 1
 		FETCH NEXT FROM cur INTO @PayrollOTRStagingId, @PayrollOTRPayPeriodId, @PayrollOTRDataSourceId
     END
     
