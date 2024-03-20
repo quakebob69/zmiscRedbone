@@ -43,7 +43,7 @@ END
         INSERT INTO [export].[AccountingExportPayrollData]
 			(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId)
 		VALUES
-			(2775, @PayrollOTRPayPeriodId, 1, 1)
+			(2775, @PayrollOTRPayPeriodId, @Counter, @Counter)
         
 		SET @Counter = @Counter + 1
 		FETCH NEXT FROM cur INTO @PayrollOTRStagingId, @PayrollOTRPayPeriodId, @PayrollOTRDataSourceId
