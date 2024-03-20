@@ -209,27 +209,33 @@ CREATE TABLE #QuickBooksData
 	--Double Miles
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL
-			FROM payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+				FROM
+					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+					payroll.PayrollOTRStaging ps
 			WHERE 
 			PayId = @PAYID_DOUBLEMILES
 			GROUP BY ps.DriverPersonId
 		;
 
-		73
+		--73
 	--Drop & Hook
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DROPANDHOOK, ROUND(SUM(Quantity), 2), NULL
-			FROM payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+				FROM
+					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+					payroll.PayrollOTRStaging ps
 			WHERE
 			paycode = @PAYCODE_DROPANDHOOK
 			GROUP BY ps.DriverPersonId
 		;
 
-		73
+		--73
 	--Extra Stops
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_EXTRASTOPS, ROUND(SUM(Quantity), 2), NULL
-			FROM payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+				FROM
+					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+					payroll.PayrollOTRStaging ps
 			WHERE
 			paycode = @PAYCODE_EXTRASTOPS
 			GROUP BY ps.DriverPersonId
@@ -239,7 +245,9 @@ CREATE TABLE #QuickBooksData
 	--Other Pay
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_OTHERPAYROLLITEMS, PickOrigin, ROUND(SUM(Quantity), 2), ROUND(SUM(TOTALPAY), 2)
-			FROM payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+				FROM
+					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+					payroll.PayrollOTRStaging ps
 			WHERE
 			paycode = @PAYCODE_OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
