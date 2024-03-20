@@ -175,7 +175,7 @@ CREATE TABLE #QuickBooksData
 						JOIN @PersonsWithOTRPersonType otr ON one.PersonId = otr.PersonId
 					--ORDER BY pm.PersonId
 				;
-			SELECT * FROM @LegitOTRDrivers;
+			--SELECT * FROM @LegitOTRDrivers;
 		
 		--@DriverPaidMilesLegit (exclude non-OTRs by joining with @LegitOTRDrivers)
 			DECLARE @DriverPaidMilesLegit TABLE (PersonId int NULL, DriverPaidMiles int NULL);
