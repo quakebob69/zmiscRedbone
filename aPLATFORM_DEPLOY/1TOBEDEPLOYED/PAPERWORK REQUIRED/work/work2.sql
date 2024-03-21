@@ -185,7 +185,7 @@ CREATE TABLE #QuickBooksData
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
 					payroll.PayrollOTRStaging ps
-					JOIN @LegitOTRDrivers legit ON ps.DriverPersonId = legit.PersonId
+					--JOIN @LegitOTRDrivers legit ON ps.DriverPersonId = legit.PersonId
 				WHERE
 					PayCode = @PerDiemPayCode
 				GROUP BY
@@ -264,9 +264,20 @@ CREATE TABLE #QuickBooksData
 		JOIN main.Person p ON qbd.personId = p.PersonId
 		group by itemName
 		ORDER BY
-		itemName
+		'pay total'
+		;
+	
+			SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 1) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
+		FROM
+		#QuickBooksData qbd
+		JOIN main.Person p ON qbd.personId = p.PersonId
+		where itemName= 'Extra Stops'
+		ORDER BY
+		p.FirstName, p.LastName, entryType, itemName
 		;
 		
+		
+
 		
 		SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 1) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
 		FROM
