@@ -184,7 +184,7 @@ CREATE TABLE #QuickBooksData
 					DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.PayrollOTRStaging ps
+					payroll.vPayrollOTRStaging ps
 					--JOIN @LegitOTRDrivers legit ON ps.DriverPersonId = legit.PersonId
 				WHERE
 					PayCode = @PerDiemPayCode
@@ -211,7 +211,7 @@ CREATE TABLE #QuickBooksData
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.PayrollOTRStaging ps
+					payroll.vPayrollOTRStaging ps
 			WHERE 
 			PayId = @PAYID_DOUBLEMILES
 			GROUP BY ps.DriverPersonId
@@ -223,7 +223,7 @@ CREATE TABLE #QuickBooksData
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DROPANDHOOK, ROUND(SUM(Quantity), 2), NULL
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.PayrollOTRStaging ps
+					payroll.vPayrollOTRStaging ps
 			WHERE
 			paycode = @PAYCODE_DROPANDHOOK
 			GROUP BY ps.DriverPersonId
@@ -235,7 +235,7 @@ CREATE TABLE #QuickBooksData
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_EXTRASTOPS, ROUND(SUM(Quantity), 2), NULL
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.PayrollOTRStaging ps
+					payroll.vPayrollOTRStaging ps
 			WHERE
 			paycode = @PAYCODE_EXTRASTOPS
 			GROUP BY ps.DriverPersonId
@@ -247,7 +247,7 @@ CREATE TABLE #QuickBooksData
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_OTHERPAYROLLITEMS, PickOrigin, ROUND(SUM(Quantity), 2), ROUND(SUM(TOTALPAY), 2)
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.PayrollOTRStaging ps
+					payroll.vPayrollOTRStaging ps
 			WHERE
 			paycode = @PAYCODE_OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
@@ -289,8 +289,8 @@ CREATE TABLE #QuickBooksData
 		
 		
 		
---SELECT ps.name, driverpersonid, * FROM payroll.PayrollOTRStaging ps where driverpersonid = 2518 order by ps.name, paycode 
-SELECT ps.name, driverpersonid, * FROM payroll.PayrollOTRStaging ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
+--SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging ps where driverpersonid = 2518 order by ps.name, paycode 
+SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
 SELECT ps.name, driverpersonid, * FROM dispatch.PR_OTR_History ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
 
 
