@@ -1,6 +1,15 @@
 USE [RedBoneThomas]
 GO
 
+
+--VIEWS
+	DROP VIEW IF EXISTS [payroll].[vPR_OTR_History]
+	GO
+
+	DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging]
+	GO
+		
+
 --STORED PROCEDURES
 	--'payroll' schema 
 		DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_Admin_Accrual]
