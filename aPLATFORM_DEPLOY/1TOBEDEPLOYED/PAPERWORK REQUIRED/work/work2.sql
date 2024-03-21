@@ -255,8 +255,18 @@ CREATE TABLE #QuickBooksData
 
 
 		
+--======================================================================
 
-
+		
+		SELECT itemName, sum(quantity) as 'quantity total', sum(otherPayrollItemsPay) as 'pay total'
+		FROM
+		#QuickBooksData qbd
+		JOIN main.Person p ON qbd.personId = p.PersonId
+		group by itemName
+		ORDER BY
+		itemName
+		;
+		
 		
 		SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 1) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
 		FROM
@@ -270,3 +280,7 @@ CREATE TABLE #QuickBooksData
 		
 --SELECT ps.name, driverpersonid, * FROM payroll.PayrollOTRStaging ps where driverpersonid = 2518 order by ps.name, paycode 
 SELECT ps.name, driverpersonid, * FROM payroll.PayrollOTRStaging ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
+SELECT ps.name, driverpersonid, * FROM dispatch.PR_OTR_History ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
+
+
+
