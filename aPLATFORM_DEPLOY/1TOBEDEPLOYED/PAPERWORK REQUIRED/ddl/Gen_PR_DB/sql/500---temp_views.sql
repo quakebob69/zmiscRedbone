@@ -1,12 +1,12 @@
-DROP VIEW IF EXISTS [payroll].[vPR_OTR_History]
+DROP VIEW IF EXISTS [payroll].[vPR_OTR_History___withpersonsremoved]
 GO
 
-DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging]
+DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging___withpersonsremoved]
 GO
 	
 
 
-CREATE VIEW [payroll].[vPayrollOTRStaging] AS
+CREATE VIEW [payroll].[vPayrollOTRStaging___withpersonsremoved] AS
 SELECT *
 FROM [payroll].[PayrollOTRStaging] AS s
 WHERE 
@@ -27,7 +27,7 @@ s.DriverPersonId
 GO
 
 
-CREATE VIEW [payroll].[vPR_OTR_History] AS
+CREATE VIEW [payroll].[vPR_OTR_History___withpersonsremoved] AS
 SELECT *
 FROM [dispatch].[PR_OTR_History] AS h
 WHERE 

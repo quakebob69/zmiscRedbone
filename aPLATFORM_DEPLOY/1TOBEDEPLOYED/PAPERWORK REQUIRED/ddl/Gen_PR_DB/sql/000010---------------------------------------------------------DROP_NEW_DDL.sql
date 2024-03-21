@@ -3,11 +3,12 @@ GO
 
 
 --VIEWS
-	DROP VIEW IF EXISTS [payroll].[vPR_OTR_History]
+	DROP VIEW IF EXISTS [payroll].[vPR_OTR_History___withpersonsremoved]
 	GO
 
-	DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging]
+	DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging___withpersonsremoved]
 	GO
+	
 		
 
 --STORED PROCEDURES
