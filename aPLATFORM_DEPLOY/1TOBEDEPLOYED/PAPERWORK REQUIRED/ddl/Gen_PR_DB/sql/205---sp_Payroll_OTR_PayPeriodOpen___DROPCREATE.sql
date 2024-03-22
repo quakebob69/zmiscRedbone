@@ -44,7 +44,7 @@ END
 		SET
 			IsDataLocked = 0,
 			LoadDataIsStaged = 0,
-			DriverPayDataIsStaged = 0,
+			DriverPayDataIsStaged = 0--,
 			--TotalMiles = 0,
 			--TotalMilesValue = 0,
 			--TotalHeldAmount = 0,
