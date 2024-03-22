@@ -41,25 +41,21 @@ END
 		
 	--Zero out pay period
 		UPDATE [payroll].[PayrollOTRPayPeriod]
-		
-		
-		
-		
-		PayrollOTRStatusId], [IsActive],  [IsOpen], [IsDataLocked],
-		1, 1, 0, 0, 
-
-		[LoadDataIsStaged], [DriverPayDataIsStaged], 
-		0, 0, 
-
-		all zero;
-		[TotalMiles], [TotalMilesValue], [TotalHeldAmount], [TotalOtherpayrollitemsAmount], [UTOTotalDaysAccrual], [UTOTotalDaysValue], [TotalEarningsAmount], [TotalDriverPayAmount]
-
-
-
-		
-		
-		
-		
+		SET		
+			PayrollOTRStatusId] = 1,
+			[IsActive] = 1,
+			[IsOpen] = 0,
+			[IsDataLocked] = 0,
+			[LoadDataIsStaged] = 0,
+			[DriverPayDataIsStaged] = 0,
+			[TotalMiles] = 0,
+			[TotalMilesValue] = 0,
+			[TotalHeldAmount] = 0,
+			[TotalOtherpayrollitemsAmount] = 0,
+			[UTOTotalDaysAccrual] = 0,
+			[UTOTotalDaysValue] = 0,
+			[TotalEarningsAmount] = 0,
+			[TotalDriverPayAmount] = 0
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO
