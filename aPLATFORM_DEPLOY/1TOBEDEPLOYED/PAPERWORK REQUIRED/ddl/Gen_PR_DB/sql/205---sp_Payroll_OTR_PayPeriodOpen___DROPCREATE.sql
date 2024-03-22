@@ -44,15 +44,15 @@ END
 		SET
 			IsDataLocked = 0,
 			LoadDataIsStaged = 0,
-			DriverPayDataIsStaged = 0--,
-			--TotalMiles = 0,
-			--TotalMilesValue = 0,
-			--TotalHeldAmount = 0,
-			--TotalOtherpayrollitemsAmount = 0,
-			--UTOTotalDaysAccrual = 0,
-			--UTOTotalDaysValue = 0,
-			--TotalEarningsAmount = 0,
-			--TotalDriverPayAmount = 0
+			DriverPayDataIsStaged = 0,
+			TotalMiles = 0,
+			TotalMilesValue = 0,
+			TotalHeldAmount = 0,
+			TotalOtherpayrollitemsAmount = 0,
+			UTOTotalDaysAccrual = 0,
+			UTOTotalDaysValue = 0,
+			TotalEarningsAmount = 0,
+			TotalDriverPayAmount = 0
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO
