@@ -126,18 +126,56 @@
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshAll" LoadingPanelID="RadAjaxLoadingPanel1" />
                         <telerik:AjaxUpdatedControl ControlID="RadLabeldataRefreshPopup" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_LockData" LoadingPanelID="RadAjaxLoadingPanel1" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
                 <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_RefreshFromDriverPay">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshFromDriverPay" LoadingPanelID="RadAjaxLoadingPanel1" />
                         <telerik:AjaxUpdatedControl ControlID="RadLabeldataRefreshPopup" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_LockData" LoadingPanelID="RadAjaxLoadingPanel1" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
                 <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_RefreshFromLoad">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshFromLoad" LoadingPanelID="RadAjaxLoadingPanel1" />
                         <telerik:AjaxUpdatedControl ControlID="RadLabeldataRefreshPopup" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_LockData" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+                <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_LockData">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_LockData" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshAll" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshFromDriverPay" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_RefreshFromLoad" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_SubmitForVal" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_DownloadPDF" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+                <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_SubmitForVal">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_SubmitForVal" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_PassValidation" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_FailValidation" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_LockData" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+                <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_FailValidation">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_FailValidation" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_PassValidation" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_SubmitForVal" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_LockData" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+                <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_PassValidation">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_PassValidation" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_FailValidation" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_SubmitForVal" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_LockData" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="radBtnOTRPR_Finalize" LoadingPanelID="RadAjaxLoadingPanel1" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
             </AjaxSettings>
@@ -203,21 +241,21 @@
                                 <telerik:RadButton ID="radBtnOTRPR_LockData" Text="" runat="server" OnClick="LockDataToggle"></telerik:RadButton>
                             </div>
                             <div class="prOTRActionsDataRefresh" style="clear: both;">
-                                <telerik:RadButton ID="radBtnOTRPR_RefreshAll" Text="get/refresh ALL data" runat="server" OnClientClicking="ShowDataRefreshPopup" OnClick="RefreshAllData" />
+                                <telerik:RadButton ID="radBtnOTRPR_RefreshAll" Text="get/refresh ALL data" runat="server" OnClientClicking="RefreshDataAll" OnClick="RefreshAllData" />
                                 <div style="font-size: 1.5em; font-weight: bold; margin-top: 5px;">
                                     &nbsp;&nbsp;<telerik:RadLabel ID="RadLabeRefreshDataAll" runat="server" />
-                                    <span style="font-size: initial; font-weight: 100;">records</span>
+                                    <span style="font-size: initial; font-weight: 100;">RECORDS LOADED</span>
                                 </div>
                             </div>
                             <div class="prOTRActionsDataRefresh">
-                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromDriverPay" Text="only DRIVER PAY data" runat="server" OnClientClicking="ShowDataRefreshPopup" OnClick="RefreshDriverPayData" />
+                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromDriverPay" Text="only DRIVER PAY data" runat="server" OnClientClicking="RefreshDataDriverPay" OnClick="RefreshDriverPayData" />
                                 &nbsp;&nbsp;<telerik:RadLabel ID="RadLabeRefreshDataDriverPay" runat="server" />
-                                records
+                                recs
                             </div>
                             <div class="prOTRActionsDataRefreshLast">
-                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromLoad" Text="only LOAD data" runat="server" OnClientClicking="ShowDataRefreshPopup" OnClick="RefreshLoadsData" />
+                                <telerik:RadButton ID="radBtnOTRPR_RefreshFromLoad" Text="only LOAD data" runat="server" OnClientClicking="RefreshDataLoad" OnClick="RefreshLoadsData" />
                                 &nbsp;&nbsp;<telerik:RadLabel ID="RadLabeRefreshDataLoad" runat="server" />
-                                records
+                                recs
                             </div>
                         </fieldset>
                     </div>
@@ -403,27 +441,12 @@
                 //grid_resize();
             }
 
-            function GetRadWindow() {
-                var oWindow = null; if (window.radWindow)
-                    oWindow = window.radWindow; else if (window.frameElement.radWindow)
-                    oWindow = window.frameElement.radWindow; return oWindow;
-            }
-
             function radBtnOTRPR_Reset_Confirm(sender, eventArgs) {
-                eventArgs.set_cancel(!window.confirm("Are you sure you want to RESET this pay period?"));
-            }
-
-            function GetRadWindowManager() {
-                return $find("<%=RadWindowManager1.ClientID%>");
-            }
-
-            function RefreshDataAll(sender, eventArgs) {
-                var confirmResult = window.confirm("Retrieving ALL data may take up to 10 minutes.  Are you sure you want to continue?");
+                var confirmResult = window.confirm("\nAre you sure you want to RESET this pay period?");
                 eventArgs.set_cancel(!confirmResult);
                 if (!confirmResult) {
                     return false;
                 }
-                var oWnd = window.radopen("PayrollOTRDataRefresh.aspx?DataSourceType=All", "RadWindow_PayrollOTRDataRefresh", null,);
             }
 
             function ShowDataRefreshPopup(sender, eventArgs) {
@@ -431,17 +454,37 @@
                 dataRefreshPopupWnd.show();
             }
 
-            function RefreshDataLoads(sender, eventArgs) {
-                var confirmResult = window.confirm("Retrieving LOAD data may take up to 10 minutes.  Are you sure you want to continue?");
+            function RefreshDataAll(sender, eventArgs) {
+                var confirmResult = window.confirm("\nRetrieving ALL data may take up to 10 minutes.\n\nAre you sure you want to continue?");
                 eventArgs.set_cancel(!confirmResult);
                 if (!confirmResult) {
                     return false;
                 }
-                var oWnd = window.radopen("PayrollOTRDataRefresh.aspx?DataSourceType=Loads", "RadWindow_PayrollOTRDataRefresh", null,);
+
+                ShowDataRefreshPopup(sender, eventArgs);
+            }
+
+
+            function RefreshDataDriverPay(sender, eventArgs) {
+                ShowDataRefreshPopup(sender, eventArgs);
+            }
+
+            function RefreshDataLoad(sender, eventArgs) {
+                var confirmResult = window.confirm("\nRetrieving LOAD data may take up to 10 minutes.\n\nAre you sure you want to continue?");
+                eventArgs.set_cancel(!confirmResult);
+                if (!confirmResult) {
+                    return false;
+                }
+
+                ShowDataRefreshPopup(sender, eventArgs);
             }
 
             function radBtnOTRPR_Finalize_Confirm(sender, eventArgs) {
-                eventArgs.set_cancel(!window.confirm("FINALIZING the pay period can not be undone.  Are you sure you want to continue?");
+                var confirmResult = window.confirm("\nFINALIZING the pay period can not be undone.\n\nAre you sure you want to continue?");
+                eventArgs.set_cancel(!confirmResult);
+                if (!confirmResult) {
+                    return false;
+                }
             }
 
             // Resize the grid when the window's height is changed otherwise the grid collapses when height is set at 100% (or not set)

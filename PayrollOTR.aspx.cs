@@ -88,12 +88,11 @@ namespace RedbonePlatform.Pages.ContainerPages
             RadListViewSteps.DataSource = getJsonUserStepsDataSources(activePayPer);
             RadListViewSteps.DataBind();
 
-            setButtonStates(ppStatus.Name);
+            setAllRecsLabel();
+            setDriverPayRecsLabel();
+            setLoadRecsLabel();
 
-            RadLabeldataRefreshPopup.Text = "0";
-            RadLabeRefreshDataAll.Text = "0";
-            RadLabeRefreshDataDriverPay.Text = "0";
-            RadLabeRefreshDataLoad.Text = "0";
+            setButtonStates(ppStatus.Name);
         }
 
         protected List<string> getJsonUserStepsDataSources(Datasets.dsPayroll.PayrollOTRPayPeriodRow activePayPer)
@@ -111,6 +110,7 @@ namespace RedbonePlatform.Pages.ContainerPages
             {
                 case "NOTOPENED":
                     radBtnOTRPR_LockData.Text = BTN_TEXT_LOCK;
+
                     radBtnOTRPR_Open.Enabled = true;
                     radBtnOTRPR_Reset.Enabled = false;
                     radBtnOTRPR_LockData.Enabled = false;
@@ -207,7 +207,25 @@ namespace RedbonePlatform.Pages.ContainerPages
                 radBtnOTRPR_SubmitForVal.Enabled = false;
             }
 
-            radBtnOTRPR_LockData.Enabled = true;
+            //lock btn
+            if (activePayPer.DriverPayDataIsStaged && activePayPer.LoadDataIsStaged)
+            {
+                radBtnOTRPR_LockData.Enabled = true;
+            }
+            else
+            {
+                radBtnOTRPR_LockData.Enabled = false;
+            }
+
+            //qb btn
+            if (activePayPer.DriverPayDataIsStaged || activePayPer.LoadDataIsStaged)
+            {
+                radBtnOTRPR_DownloadPDF.Enabled = true;
+            }
+            else
+            {
+                radBtnOTRPR_DownloadPDF.Enabled = false;
+            }
         }
 
         protected void Open(object sender, EventArgs e)
@@ -256,14 +274,14 @@ namespace RedbonePlatform.Pages.ContainerPages
 
         protected void RefreshDriverPayData(object sender, EventArgs e)
         {
-            Thread.Sleep(1000);
             QueriesTableAdapter qry = new QueriesTableAdapter();
             qry.CommandTimeoutQry = 1000000;
-            qry.sp_Payroll_OTR_StagePayrollLoad(auth.PersonId);
+            qry.sp_Payroll_OTR_StagePayrollDriverPay(auth.PersonId);
 
-            string recsRetrieved = "100";
+            string recsRetrieved = setDriverPayRecsLabel();
             RadLabeldataRefreshPopup.Text = recsRetrieved + " 'DriverPay'";
-            RadLabeRefreshDataLoad.Text = recsRetrieved;
+
+            LoadForm();
         }
 
         protected void RefreshLoadsData(object sender, EventArgs e)
@@ -273,21 +291,68 @@ namespace RedbonePlatform.Pages.ContainerPages
             qry.CommandTimeoutQry = 1000000;
             qry.sp_Payroll_OTR_StagePayrollLoad(auth.PersonId);
 
-            string recsRetrieved = "100";
+            string recsRetrieved = setLoadRecsLabel();
             RadLabeldataRefreshPopup.Text = recsRetrieved + " 'Load'";
-            RadLabeRefreshDataDriverPay.Text = recsRetrieved;
+
+            LoadForm();
         }
 
         protected void RefreshAllData(object sender, EventArgs e)
         {
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             QueriesTableAdapter qry = new QueriesTableAdapter();
             qry.CommandTimeoutQry = 1000000;
             qry.sp_Payroll_OTR_StagePayrollAll(auth.PersonId);
 
-            string recsRetrieved = "100";
+            string recsRetrieved = setAllRecsLabel();
             RadLabeldataRefreshPopup.Text = recsRetrieved + " 'Total'";
+
+            LoadForm();
+        }
+
+        private string setDriverPayRecsLabel()
+        {
+            PayrollOTRStagingTableAdapter payrollOTRStagingTableAdapter = new PayrollOTRStagingTableAdapter();
+            Datasets.dsPayrollTableAdapters.PayrollOTRPayPeriodTableAdapter payrollOTRPayPeriodAdapter = new Datasets.dsPayrollTableAdapters.PayrollOTRPayPeriodTableAdapter();
+            Datasets.dsPayroll.PayrollOTRPayPeriodRow activePayPer = payrollOTRPayPeriodAdapter.GetData().Where(pp => pp.IsActive == true).FirstOrDefault();
+            string recsRetrieved = payrollOTRStagingTableAdapter
+                .GetData()
+                .Where(stag => (stag.PayrollOTRPayPeriodId == activePayPer.PayrollOTRPayPeriodId) && (stag.PayrollOTRDataSourceId == 2))
+                .Count<Datasets.dsPayroll.PayrollOTRStagingRow>()
+                .ToString();
+
+            RadLabeRefreshDataDriverPay.Text = recsRetrieved;
+            return recsRetrieved;
+        }
+
+        private string setLoadRecsLabel()
+        {
+            PayrollOTRStagingTableAdapter payrollOTRStagingTableAdapter = new PayrollOTRStagingTableAdapter();
+            Datasets.dsPayrollTableAdapters.PayrollOTRPayPeriodTableAdapter payrollOTRPayPeriodAdapter = new Datasets.dsPayrollTableAdapters.PayrollOTRPayPeriodTableAdapter();
+            Datasets.dsPayroll.PayrollOTRPayPeriodRow activePayPer = payrollOTRPayPeriodAdapter.GetData().Where(pp => pp.IsActive == true).FirstOrDefault();
+            string recsRetrieved = payrollOTRStagingTableAdapter
+                .GetData()
+                .Where(stag => (stag.PayrollOTRPayPeriodId == activePayPer.PayrollOTRPayPeriodId) && (stag.PayrollOTRDataSourceId == 1))
+                .Count<Datasets.dsPayroll.PayrollOTRStagingRow>()
+                .ToString();
+
+            RadLabeRefreshDataLoad.Text = recsRetrieved;
+            return recsRetrieved;
+        }
+
+        private string setAllRecsLabel()
+        {
+            Datasets.dsPayrollTableAdapters.PayrollOTRPayPeriodTableAdapter payrollOTRPayPeriodAdapter = new Datasets.dsPayrollTableAdapters.PayrollOTRPayPeriodTableAdapter();
+            Datasets.dsPayroll.PayrollOTRPayPeriodRow activePayPer = payrollOTRPayPeriodAdapter.GetData().Where(pp => pp.IsActive == true).FirstOrDefault();
+            PayrollOTRStagingTableAdapter payrollOTRStagingTableAdapter = new PayrollOTRStagingTableAdapter();
+            string recsRetrieved = payrollOTRStagingTableAdapter
+                .GetData()
+                .Where(stag => stag.PayrollOTRPayPeriodId == activePayPer.PayrollOTRPayPeriodId)
+                .Count<Datasets.dsPayroll.PayrollOTRStagingRow>()
+                .ToString();
+
             RadLabeRefreshDataAll.Text = recsRetrieved;
+            return recsRetrieved;
         }
 
         protected void SubmitForVal(object sender, EventArgs e)
