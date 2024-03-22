@@ -38,5 +38,28 @@ END
 		UPDATE [payroll].[PayrollOTRPayPeriod]
 		SET IsOpen = 1, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
 		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
+		
+	--Zero out pay period
+		UPDATE [payroll].[PayrollOTRPayPeriod]
+		
+		
+		
+		
+		PayrollOTRStatusId], [IsActive],  [IsOpen], [IsDataLocked],
+		1, 1, 0, 0, 
+
+		[LoadDataIsStaged], [DriverPayDataIsStaged], 
+		0, 0, 
+
+		all zero;
+		[TotalMiles], [TotalMilesValue], [TotalHeldAmount], [TotalOtherpayrollitemsAmount], [UTOTotalDaysAccrual], [UTOTotalDaysValue], [TotalEarningsAmount], [TotalDriverPayAmount]
+
+
+
+		
+		
+		
+		
+		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO
