@@ -112,6 +112,8 @@ END
 		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 'Load', @LastUpdateBy
 		
 	--update pay period
-		asdf
+		UPDATE [payroll].[PayrollOTRPayPeriod]
+		SET LoadDataIsStaged = 1
+		WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId
 		
 GO

@@ -108,6 +108,8 @@ END
 		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 'DriverPay', @LastUpdateBy
 		
 	--update pay period
-		asdf
+		UPDATE [payroll].[PayrollOTRPayPeriod]
+		SET DriverPayDataIsStaged = 1
+		WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId
 		
 GO
