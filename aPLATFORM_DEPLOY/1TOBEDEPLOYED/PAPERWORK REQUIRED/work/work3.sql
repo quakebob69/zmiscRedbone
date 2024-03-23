@@ -27,6 +27,9 @@ GO
 		SET @QBITEMNAME_OTHERPAY = 'Other Pay';
 
 		--wizard pay ids and paycodes
+		DECLARE @PAYID_PERDIEM INT
+		SET @PAYID_PERDIEM = 84;
+
 		DECLARE @PAYID_DOUBLEMILES INT
 		SET @PAYID_DOUBLEMILES = 76;
 
@@ -53,8 +56,13 @@ GO
 		DECLARE @PerDiemPayCode VARCHAR(8)
 		SET @PerDiemPayCode = 'Per Diem';
 
-		DECLARE @DriverPaidMiles TABLE (PersonId int NULL, DriverPaidMiles int NULL);
-			INSERT INTO @DriverPaidMiles
+		DECLARE @DriverPaidMiles
+		TABLE (
+			PersonId int NULL,
+			DriverPaidMiles int NULL
+		);
+		
+		INSERT INTO @DriverPaidMiles
 			SELECT
 				DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
 			FROM
@@ -91,14 +99,10 @@ GO
 
 
 
-
-
-
-
 	--Driver Paid Miles (@@DriverPaidMiles)
 		--85
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId, PayCode, PickOrigin)
-			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, NULL, NULL
+			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, @PerDiemPayCode, NULL
 			FROM @DriverPaidMiles dpm
 		;
 
