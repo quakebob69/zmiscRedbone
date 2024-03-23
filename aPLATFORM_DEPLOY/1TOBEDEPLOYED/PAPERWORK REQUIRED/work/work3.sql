@@ -81,7 +81,7 @@ CREATE TABLE #QuickBooksData
 				DriverPersonId
 			--ORDER BY pm.PersonId
 			;
-		SELECT * FROM @DriverPaidMiles;
+			--SELECT * FROM @DriverPaidMiles;
 
 
 
@@ -142,6 +142,36 @@ CREATE TABLE #QuickBooksData
 			paycode = @PAYCODE_OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
 		;
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--asdf
+--------------------------------------------------------------------------------------------------------------------------
+	select * from #QuickBooksData
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 		
@@ -237,6 +267,19 @@ CREATE TABLE #QuickBooksData
 */
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 					--****
 						SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode FROM #QuickBooksData qbd JOIN main.Person p ON qbd.personId = p.PersonId
@@ -345,3 +388,4 @@ CREATE TABLE #QuickBooksData
 
 
 
+*/
