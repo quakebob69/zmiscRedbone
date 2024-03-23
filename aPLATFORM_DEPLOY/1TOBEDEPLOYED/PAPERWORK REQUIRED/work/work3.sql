@@ -93,11 +93,6 @@ GO
 			PayCode VARCHAR(25)
 		);
 
-
-
-
-
-
 	--Driver Paid Miles (@@DriverPaidMiles)
 		--85
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PickOrigin, PayId, PayCode)
@@ -105,6 +100,18 @@ GO
 			FROM @DriverPaidMiles dpm
 		;
 
+
+		--76
+		--Double Miles
+			INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId)
+				SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, @PAYID_DOUBLEMILES
+					FROM
+						--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+						payroll.vPayrollOTRStaging___withpersonsremoved ps
+				WHERE 
+				PayId = @PAYID_DOUBLEMILES
+				GROUP BY ps.DriverPersonId
+			;
 
 
 
@@ -126,18 +133,6 @@ GO
 
 
 	/*
-
-		--76
-	--Double Miles
-		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId)
-			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, @PAYID_DOUBLEMILES
-				FROM
-					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
-			WHERE 
-			PayId = @PAYID_DOUBLEMILES
-			GROUP BY ps.DriverPersonId
-		;
 
 		--73
 	--Drop & Hook
