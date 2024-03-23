@@ -409,6 +409,9 @@ CREATE TABLE #QuickBooksData
 
 
 
+
+
+
 									--**PayId/PayCode
 										SELECT 
 											 payid, paycode
@@ -427,7 +430,9 @@ CREATE TABLE #QuickBooksData
 										FROM
 											dispatch.PR_OTR_History ps
 										WHERE
-											PayPeriodEnding = '2023-12-16 00:00:00.000'
+											payid is null
+											and
+											PayPeriodEnding = '2023-12-16 00:00:00.000'										
 										group by PayCode, PickOrigin
 										order by PayCode, PickOrigin
 
