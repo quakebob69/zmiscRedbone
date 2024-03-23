@@ -185,7 +185,7 @@ CREATE TABLE #QuickBooksData
 					DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.vPayrollOTRStaging ps
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
 					--JOIN @LegitOTRDrivers legit ON ps.DriverPersonId = legit.PersonId
 				WHERE
 					PayCode = @PerDiemPayCode
@@ -212,7 +212,7 @@ CREATE TABLE #QuickBooksData
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.vPayrollOTRStaging ps
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
 			WHERE 
 			PayId = @PAYID_DOUBLEMILES
 			GROUP BY ps.DriverPersonId
@@ -224,7 +224,7 @@ CREATE TABLE #QuickBooksData
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DROPANDHOOK, ROUND(SUM(Quantity), 2), NULL
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.vPayrollOTRStaging ps
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
 			WHERE
 			paycode = @PAYCODE_DROPANDHOOK
 			GROUP BY ps.DriverPersonId
@@ -236,7 +236,7 @@ CREATE TABLE #QuickBooksData
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_EXTRASTOPS, ROUND(SUM(Quantity), 2), NULL
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.vPayrollOTRStaging ps
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
 			WHERE
 			paycode = @PAYCODE_EXTRASTOPS
 			GROUP BY ps.DriverPersonId
@@ -248,7 +248,7 @@ CREATE TABLE #QuickBooksData
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_OTHERPAYROLLITEMS, PickOrigin, ROUND(SUM(Quantity), 2), ROUND(SUM(TOTALPAY), 2)
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.vPayrollOTRStaging ps
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
 			WHERE
 			paycode = @PAYCODE_OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
@@ -276,14 +276,16 @@ CREATE TABLE #QuickBooksData
 		p.FirstName, p.LastName, entryType, itemName
 		;
 		
-
-			SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
-			FROM
-			#QuickBooksData qbd
-			JOIN main.Person p ON qbd.personId = p.PersonId
-			ORDER BY
-			p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay
-			;
+		----------------------
+					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
+					FROM
+					#QuickBooksData qbd
+					JOIN main.Person p ON qbd.personId = p.PersonId
+					--WHERE LastName = 'ONTIVEROS'
+					ORDER BY
+					p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay
+					;
+		----------------------
 		
 			SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
 			FROM
@@ -307,15 +309,56 @@ CREATE TABLE #QuickBooksData
 		SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 1) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
 		FROM
 		#QuickBooksData qbd
-		WHERE ASDF = ASDF
+		--WHERE ASDF = ASDF
 		JOIN main.Person p ON qbd.personId = p.PersonId
 		ORDER BY
 		p.FirstName, p.LastName, entryType, itemName
 		;
 		
---SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging ps where driverpersonid = 2518 order by ps.name, paycode 
---SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
+--SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging___withpersonsremoved ps where driverpersonid = 2518 order by ps.name, paycode 
+--SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging___withpersonsremoved ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
 --SELECT ps.name, driverpersonid, * FROM dispatch.PR_OTR_History ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
+
+
+
+
+
+		SELECT distinct(itemName) FROM #QuickBooksData qbd 
+		WHERE otherPayrollItemsPay is null
+		ORDER BY  itemName
+
+		SELECT distinct(itemName) FROM #QuickBooksData qbd 
+		WHERE otherPayrollItemsPay is not null
+		ORDER BY  itemName
+			
+		--Double Miles
+		--Drop & Hook
+		--Extra Stops
+		--Per Mile (Redbone - OTR)
+
+		--ADVANCE
+		--ADVANCE FEE
+		--Clean Inspection
+		--DETENTION
+		--LAYOVER
+		--Orientation Bonus
+		--REIMBURSE
+		
+
+
+
+					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay' FROM #QuickBooksData qbd JOIN main.Person p ON qbd.personId = p.PersonId
+					--WHERE LastName = 'ONTIVEROS'
+					WHERE otherPayrollItemsPay is not null
+					ORDER BY p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay;
+
+
+
+
+		
+
+
+
 
 
 
