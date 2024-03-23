@@ -14,11 +14,7 @@ GO
 		DECLARE @QBENTRYTYPE_OTHERPAYROLLITEMS VARCHAR(25)
 		SET @QBENTRYTYPE_OTHERPAYROLLITEMS = 'Other Payroll Items';
 
-		--qb item names
-		DECLARE @QBITEMNAME_PERMILEOTR VARCHAR(25)
-		SET @QBITEMNAME_PERMILEOTR = 'Per Mile (Redbone - OTR)';
-		DECLARE @QBITEMNAME_DOUBLEMILES VARCHAR(25)
-		SET @QBITEMNAME_DOUBLEMILES = 'Double Miles';
+		--qb item name
 		DECLARE @QBITEMNAME_DROPANDHOOK VARCHAR(25)
 		SET @QBITEMNAME_DROPANDHOOK = 'Drop & Hook';
 		DECLARE @QBITEMNAME_EXTRASTOPS VARCHAR(25)
@@ -27,12 +23,6 @@ GO
 		SET @QBITEMNAME_OTHERPAY = 'Other Pay';
 
 		--wizard pay ids and paycodes
-		DECLARE @PAYID_PERDIEM INT
-		SET @PAYID_PERDIEM = 84;
-
-		DECLARE @PAYID_DOUBLEMILES INT
-		SET @PAYID_DOUBLEMILES = 76;
-
 		DECLARE @PAYCODE_DROPANDHOOK VARCHAR(25)
 		SET @PAYCODE_DROPANDHOOK = 'Drop & Hook';
 
@@ -94,30 +84,38 @@ GO
 		);
 
 	--Driver Paid Miles (@@DriverPaidMiles)
-		--85
+		DECLARE @PAYID_PERDIEM INT
+		SET @PAYID_PERDIEM = 84;
+		DECLARE @QBITEMNAME_PERMILEOTR VARCHAR(25)
+		SET @QBITEMNAME_PERMILEOTR = 'Per Mile (Redbone - OTR)';
+
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PickOrigin, PayId, PayCode)
 			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, @PAYID_PERDIEM, @PerDiemPayCode
 			FROM @DriverPaidMiles dpm
 		;
 
+	--76
+	--Double Miles
+		DECLARE @PAYID_DOUBLEMILES INT
+		SET @PAYID_DOUBLEMILES = 76;
+		DECLARE @QBITEMNAME_DOUBLEMILES VARCHAR(25)
+		SET @QBITEMNAME_DOUBLEMILES = 'Double Miles';
 
-		--76
-		--Double Miles
-			INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId)
-				SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, @PAYID_DOUBLEMILES
-					FROM
-						--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-						payroll.vPayrollOTRStaging___withpersonsremoved ps
-				WHERE 
-				PayId = @PAYID_DOUBLEMILES
-				GROUP BY ps.DriverPersonId
-			;
+		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PickOrigin, PayId, PayCode)
+			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, NULL, @PAYID_DOUBLEMILES, NULL
+				FROM
+					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
+			WHERE 
+			PayId = @PAYID_DOUBLEMILES
+			GROUP BY ps.DriverPersonId
+		;
 
 
 
 
 
-					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'Entry Type', itemName as 'Item Type', quantity as 'Quantity', otherPayrollItemsPay as 'Other Pay', PickOrigin, PayId, PayCode
+					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'Entry Type', itemName as 'FAKE Item Type', quantity as 'Quantity', otherPayrollItemsPay as 'Other Pay', PickOrigin, PayId, PayCode
 					FROM
 					#QuickBooksData qbd
 					JOIN main.Person p ON qbd.personId = p.PersonId
@@ -412,6 +410,49 @@ GO
 						- code = 'Other Pay'
 
 				*/
+
+
+
+
+
+	SELECT 
+      [Quantity]
+	  ,[TotalPay]
+	  ,[PickOrigin]
+	  ,[PayId]
+      ,[PayCode]
+      ,'================='
+[PayrollOTRStagingId]
+      ,[PayrollOTRPayPeriodId]
+      ,[PayrollOTRDataSourceId]
+      ,[Name]
+      ,[LoadId]
+      ,[TripNumber]
+      ,[TruckNumber]
+      ,[Client_Id]
+      ,[PickupBy]
+      ,[DeliverBy]
+      ,[DriverType]
+      ,[LegInd]
+      ,[PickOrigin]
+      ,[DropDest]
+      ,[DriverPersonId]
+      ,[PayCode]
+      ,[PayId]
+      ,[Quantity]
+      ,[PayRateAmount]
+      ,[TotalPay]
+      ,[PayPeriodEnding]
+      ,[PayrollNotes]
+      ,[LastUpdate]
+      ,[LastUpdateBy]
+      ,[PUnitId]
+  FROM [RedBoneThomas].[payroll].[PayrollOTRStaging]
+
+  where payid = 76
+
+
+
 
 
 
