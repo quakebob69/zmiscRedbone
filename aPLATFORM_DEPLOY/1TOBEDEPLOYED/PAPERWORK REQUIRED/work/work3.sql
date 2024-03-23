@@ -62,16 +62,6 @@ CREATE TABLE #QuickBooksData
 		DECLARE @OTRPERSONTID int
 		SET @OTRPERSONTID = (SELECT PersonTypeId FROM main.PersonTypes pt WHERE PersonType = @OTRPERSONTYPE);
 
-
-
-
-
-
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------------
 --DriverPaidMiles
 --------------------------------------------------------------------------------------------------------------------------	
@@ -95,27 +85,10 @@ CREATE TABLE #QuickBooksData
 
 
 
-
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------------
 --#QuickBooksData INSERTS
 --------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-	--Driver Paid Miles (@DriverPaidMilesLegit)
+	--Driver Paid Miles (@@DriverPaidMiles)
 		--85
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
 			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL
