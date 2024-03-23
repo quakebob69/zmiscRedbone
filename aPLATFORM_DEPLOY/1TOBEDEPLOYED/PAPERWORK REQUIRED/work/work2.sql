@@ -1,4 +1,5 @@
---either select otr or local on load (then check if they should be paid for it or not (per leg?)
+
+ --either select otr or local on load (then check if they should be paid for it or not (per leg?)
 
 --ask alyssa what qb rates, amouts (eg my salary) are not stored in qb and only stored in the wizard (need to think about this in terms of history [eg employee raises history] - could you get this from qb?  the question is, what can''t you get from qb???)
 
@@ -257,7 +258,6 @@ CREATE TABLE #QuickBooksData
 		
 --======================================================================
 
-		
 		SELECT itemName, sum(quantity) as 'quantity total', sum(otherPayrollItemsPay) as 'pay total'
 		FROM
 		#QuickBooksData qbd
@@ -267,7 +267,7 @@ CREATE TABLE #QuickBooksData
 		'pay total'
 		;
 	
-			SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 1) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
+		SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 1) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
 		FROM
 		#QuickBooksData qbd
 		JOIN main.Person p ON qbd.personId = p.PersonId
@@ -276,22 +276,46 @@ CREATE TABLE #QuickBooksData
 		p.FirstName, p.LastName, entryType, itemName
 		;
 		
-		
 
+			SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
+			FROM
+			#QuickBooksData qbd
+			JOIN main.Person p ON qbd.personId = p.PersonId
+			ORDER BY
+			p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay
+			;
 		
+			SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
+			FROM
+			#QuickBooksData qbd
+			JOIN main.Person p ON qbd.personId = p.PersonId
+			WHERE entryType = 'Earnings'
+			ORDER BY
+			p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay
+			;
+		
+			SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
+			FROM
+			#QuickBooksData qbd
+			JOIN main.Person p ON qbd.personId = p.PersonId
+			WHERE entryType = 'Other Payroll Items'
+			ORDER BY
+			p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay
+			;
+
+
 		SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 1) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'--, p.PersonId
 		FROM
 		#QuickBooksData qbd
+		WHERE ASDF = ASDF
 		JOIN main.Person p ON qbd.personId = p.PersonId
 		ORDER BY
 		p.FirstName, p.LastName, entryType, itemName
 		;
 		
-		
-		
 --SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging ps where driverpersonid = 2518 order by ps.name, paycode 
-SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
-SELECT ps.name, driverpersonid, * FROM dispatch.PR_OTR_History ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
+--SELECT ps.name, driverpersonid, * FROM payroll.vPayrollOTRStaging ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
+--SELECT ps.name, driverpersonid, * FROM dispatch.PR_OTR_History ps where totalPay = '50.00' and payperiodending = '2023-12-16 00:00:00.000' order by ps.name, paycode 
 
 
 
