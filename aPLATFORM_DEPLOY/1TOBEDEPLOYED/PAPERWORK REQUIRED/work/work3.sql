@@ -102,7 +102,7 @@ GO
 	--Driver Paid Miles (@@DriverPaidMiles)
 		--85
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId, PayCode, PickOrigin)
-			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, @PerDiemPayCode, NULL
+			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, @PAYID_PERDIEM, @PerDiemPayCode, NULL
 			FROM @DriverPaidMiles dpm
 		;
 
