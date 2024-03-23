@@ -170,14 +170,26 @@ CREATE TABLE #QuickBooksData
 			DECLARE @LegitOTRDrivers TABLE (PersonId int NULL);
 				INSERT INTO @LegitOTRDrivers
 					SELECT
-						one.PersonId
+						p.PersonId
 					FROM
-						@PersonsWithOnePersonType one
-						JOIN @PersonsWithOTRPersonType otr ON one.PersonId = otr.PersonId
-					--ORDER BY pm.PersonId
+						main.Person P
 				;
-			--SELECT * FROM @LegitOTRDrivers;
-		
+			SELECT * FROM @LegitOTRDrivers;
+
+				/*
+				OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD 
+					DECLARE @LegitOTRDrivers TABLE (PersonId int NULL);
+						INSERT INTO @LegitOTRDrivers
+							SELECT
+								one.PersonId
+							FROM
+								@PersonsWithOnePersonType one
+								JOIN @PersonsWithOTRPersonType otr ON one.PersonId = otr.PersonId
+							--ORDER BY pm.PersonId
+						;
+					--SELECT * FROM @LegitOTRDrivers;
+				*/
+
 		--@DriverPaidMilesLegit (exclude non-OTRs by joining with @LegitOTRDrivers)
 			DECLARE @DriverPaidMilesLegit TABLE (PersonId int NULL, DriverPaidMiles int NULL);
 				INSERT INTO @DriverPaidMilesLegit
