@@ -14,7 +14,7 @@ GO
 		DECLARE @QBENTRYTYPE_OTHERPAYROLLITEMS VARCHAR(25)
 		SET @QBENTRYTYPE_OTHERPAYROLLITEMS = 'Other Payroll Items';
 
-		--qb item name
+	--qb item name
 		DECLARE @QBITEMNAME_DROPANDHOOK VARCHAR(25)
 		SET @QBITEMNAME_DROPANDHOOK = 'Drop & Hook';
 		DECLARE @QBITEMNAME_EXTRASTOPS VARCHAR(25)
@@ -22,7 +22,7 @@ GO
 		DECLARE @QBITEMNAME_OTHERPAY VARCHAR(25)
 		SET @QBITEMNAME_OTHERPAY = 'Other Pay';
 
-		--wizard pay ids and paycodes
+	--wizard pay ids and paycodes
 		DECLARE @PAYCODE_DROPANDHOOK VARCHAR(25)
 		SET @PAYCODE_DROPANDHOOK = 'Drop & Hook';
 
@@ -84,17 +84,14 @@ GO
 		);
 
 	--Driver Paid Miles (@@DriverPaidMiles)
-		DECLARE @PAYID_PERDIEM INT
-		SET @PAYID_PERDIEM = 84;
 		DECLARE @QBITEMNAME_PERMILEOTR VARCHAR(25)
 		SET @QBITEMNAME_PERMILEOTR = 'Per Mile (Redbone - OTR)';
 
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PickOrigin, PayId, PayCode)
-			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, @PAYID_PERDIEM, @PerDiemPayCode
+			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, NULL, @PerDiemPayCode
 			FROM @DriverPaidMiles dpm
 		;
 
-	--76
 	--Double Miles
 		DECLARE @PAYID_DOUBLEMILES INT
 		SET @PAYID_DOUBLEMILES = 76;
@@ -115,7 +112,7 @@ GO
 
 
 
-					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'Entry Type', itemName as 'FAKE Item Type', quantity as 'Quantity', otherPayrollItemsPay as 'Other Pay', PickOrigin, PayId, PayCode
+					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'Entry Type', itemName as 'FAKE Item Type', '' as 'REAL ---------->>>>>', quantity as 'Quantity', otherPayrollItemsPay as 'Other Pay', '' as 'WHERE ---------->>>>>', PickOrigin, PayId, PayCode
 					FROM
 					#QuickBooksData qbd
 					JOIN main.Person p ON qbd.personId = p.PersonId
