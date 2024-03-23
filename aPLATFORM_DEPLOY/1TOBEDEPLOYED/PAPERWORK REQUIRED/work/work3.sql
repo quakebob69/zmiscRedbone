@@ -97,13 +97,23 @@ GO
 
 	--Driver Paid Miles (@@DriverPaidMiles)
 		--85
-		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity)
-			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles
+		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId, PayCode, PickOrigin)
+			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, NULL, NULL
 			FROM @DriverPaidMiles dpm
 		;
 
 
-	select * from #QuickBooksData
+
+
+
+					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'
+					FROM
+					#QuickBooksData qbd
+					JOIN main.Person p ON qbd.personId = p.PersonId
+					--WHERE LastName = 'ONTIVEROS'
+					ORDER BY
+					p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay
+					;
 
 
 
