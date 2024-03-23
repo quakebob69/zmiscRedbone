@@ -385,7 +385,7 @@ CREATE TABLE #QuickBooksData
 					dispatch.PR_OTR_History ps
 					--JOIN @LegitOTRDrivers legit ON ps.DriverPersonId = legit.PersonId
 				WHERE
-					PayPeriodEnding = '2023-12-09 00:00:00.000'
+					PayPeriodEnding = '2023-12-16 00:00:00.000'
 					--PayCode = @PerDiemPayCode
 
 
