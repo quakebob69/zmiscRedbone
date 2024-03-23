@@ -83,15 +83,14 @@ GO
 		DROP TABLE IF EXISTS #QuickBooksData;
 		CREATE TABLE #QuickBooksData
 		(
-
 			personId INT,
 			entryType VARCHAR(50),
 			itemName VARCHAR(50),
 			quantity INT,
 			otherPayrollItemsPay decimal(18,2),
+			PickOrigin VARCHAR(25),
 			PayId INT,
-			PayCode VARCHAR(25),
-			PickOrigin VARCHAR(25)
+			PayCode VARCHAR(25)
 		);
 
 
@@ -101,8 +100,8 @@ GO
 
 	--Driver Paid Miles (@@DriverPaidMiles)
 		--85
-		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId, PayCode, PickOrigin)
-			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, @PAYID_PERDIEM, @PerDiemPayCode, NULL
+		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PickOrigin, PayId, PayCode)
+			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, @PAYID_PERDIEM, @PerDiemPayCode
 			FROM @DriverPaidMiles dpm
 		;
 
@@ -111,7 +110,7 @@ GO
 
 
 
-					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'Entry Type', itemName as 'Item Type', quantity as 'Quantity', otherPayrollItemsPay as 'Other Pay', PayId, PayCode, PickOrigin
+					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'Entry Type', itemName as 'Item Type', quantity as 'Quantity', otherPayrollItemsPay as 'Other Pay', PickOrigin, PayId, PayCode
 					FROM
 					#QuickBooksData qbd
 					JOIN main.Person p ON qbd.personId = p.PersonId
