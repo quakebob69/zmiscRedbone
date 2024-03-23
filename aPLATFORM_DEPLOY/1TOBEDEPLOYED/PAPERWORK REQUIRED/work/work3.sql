@@ -104,9 +104,7 @@ GO
 
 
 
-
-
-					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay'
+					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'Entry Type', itemName as 'Item Type', quantity as 'Quantity', otherPayrollItemsPay as 'Other Pay', PayId, PayCode, PickOrigin
 					FROM
 					#QuickBooksData qbd
 					JOIN main.Person p ON qbd.personId = p.PersonId
