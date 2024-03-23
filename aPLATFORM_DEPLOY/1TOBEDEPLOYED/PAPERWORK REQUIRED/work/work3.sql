@@ -2,25 +2,8 @@ USE [RedBoneThomas]
 GO
 
 --#######################################################
---SOURCE TABLE = PayrollStagingOTR_10_10__10_17_____2023
+--SOURCE: vPayrollOTRStaging___withpersonsremoved
 --#######################################################
-
---------------------------------------------------------------------------------------------------------------------------
---Return Data (#QuickBooksData)
---------------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS #QuickBooksData;
-CREATE TABLE #QuickBooksData
-(
-
-	personId INT,
-	entryType VARCHAR(50),
-	itemName VARCHAR(50),
-	quantity INT,
-	otherPayrollItemsPay decimal(18,2),
-	PayId INT,
-	PayCode VARCHAR(25)
-);
-
 
 --------------------------------------------------------------------------------------------------------------------------
 --SETUP
@@ -88,6 +71,33 @@ CREATE TABLE #QuickBooksData
 --------------------------------------------------------------------------------------------------------------------------
 --#QuickBooksData INSERTS
 --------------------------------------------------------------------------------------------------------------------------
+	-- #QuickBooksData
+		DROP TABLE IF EXISTS #QuickBooksData;
+		CREATE TABLE #QuickBooksData
+		(
+
+			personId INT,
+			entryType VARCHAR(50),
+			itemName VARCHAR(50),
+			quantity INT,
+			otherPayrollItemsPay decimal(18,2),
+			PayId INT,
+			PayCode VARCHAR(25)
+		);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	--Driver Paid Miles (@@DriverPaidMiles)
 		--85
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
