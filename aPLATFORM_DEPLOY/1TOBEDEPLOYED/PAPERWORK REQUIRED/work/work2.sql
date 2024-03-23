@@ -409,33 +409,27 @@ CREATE TABLE #QuickBooksData
 
 
 
-				--**PayId/PayCode
-					SELECT 
-						 payid, paycode
-					FROM
-						dispatch.PR_OTR_History ps
-					WHERE
-						PayPeriodEnding = '2023-12-16 00:00:00.000'
-						--and payid is null
-						--and payid is not null
-						--and paycode = 'Other Pay'
-						group by payid, paycode
-					order by payid, paycode
+									--**PayId/PayCode
+										SELECT 
+											 payid, paycode
+										FROM
+											dispatch.PR_OTR_History ps
+										WHERE
+											PayPeriodEnding = '2023-12-16 00:00:00.000'
+										group by payid, paycode
+										order by payid, paycode
 
 
 
-				--PayCode/PickOrigin
-					SELECT 
-						 name, PayCode, PickOrigin, *
-					FROM
-						dispatch.PR_OTR_History ps
-					WHERE
-						PayPeriodEnding = '2023-12-16 00:00:00.000'
-						and payid is null
-						--and payid is not null
-						--and paycode = 'Other Pay'
-						--group by payid, paycode
-					--order by payid, paycode
+									--**PayCode/PickOrigin
+										SELECT 
+											 PayCode, PickOrigin
+										FROM
+											dispatch.PR_OTR_History ps
+										WHERE
+											PayPeriodEnding = '2023-12-16 00:00:00.000'
+										group by PayCode, PickOrigin
+										order by PayCode, PickOrigin
 
 
 
