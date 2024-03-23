@@ -374,10 +374,6 @@ CREATE TABLE #QuickBooksData
 
 
 
-
-				DECLARE @PerDiemPayCode VARCHAR(8)
-				SET @PerDiemPayCode = 'Per Diem';
-
 				SELECT top 2000
 					 name, PayCode, payid, PickOrigin, *
 				FROM
@@ -392,9 +388,6 @@ CREATE TABLE #QuickBooksData
 				
 
 
-
-				DECLARE @PerDiemPayCode VARCHAR(8)
-				SET @PerDiemPayCode = 'Per Diem';
 
 				SELECT top 2000
 					 name, PayCode, payid, PickOrigin, *
@@ -447,9 +440,6 @@ CREATE TABLE #QuickBooksData
 
 
 
-					
-				DECLARE @PerDiemPayCode VARCHAR(8)
-				SET @PerDiemPayCode = 'Per Diem';
 
 				SELECT
 					 name, PayCode, payid, PickOrigin, *

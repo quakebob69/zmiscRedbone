@@ -45,6 +45,7 @@ GO
 		DECLARE @OTRPERSONTID int
 		SET @OTRPERSONTID = (SELECT PersonTypeId FROM main.PersonTypes pt WHERE PersonType = @OTRPERSONTYPE);
 
+
 --------------------------------------------------------------------------------------------------------------------------
 --DriverPaidMiles
 --------------------------------------------------------------------------------------------------------------------------	
@@ -67,7 +68,6 @@ GO
 			--SELECT * FROM @DriverPaidMiles;
 
 
-
 --------------------------------------------------------------------------------------------------------------------------
 --#QuickBooksData INSERTS
 --------------------------------------------------------------------------------------------------------------------------
@@ -82,12 +82,9 @@ GO
 			quantity INT,
 			otherPayrollItemsPay decimal(18,2),
 			PayId INT,
-			PayCode VARCHAR(25)
+			PayCode VARCHAR(25),
+			PickOrigin VARCHAR(25)
 		);
-
-
-
-
 
 
 
@@ -100,10 +97,21 @@ GO
 
 	--Driver Paid Miles (@@DriverPaidMiles)
 		--85
-		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
-			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL
+		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity)
+			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles
 			FROM @DriverPaidMiles dpm
 		;
+
+
+	select * from #QuickBooksData
+
+
+
+
+
+
+
+	/*
 
 		--76
 	--Double Miles
@@ -157,8 +165,8 @@ GO
 --------------------------------------------------------------------------------------------------------------------------
 --asdf
 --------------------------------------------------------------------------------------------------------------------------
-	select * from #QuickBooksData
 
+*/
 
 
 
