@@ -363,11 +363,11 @@ CREATE TABLE #QuickBooksData
 
 
 
-
-					SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode FROM #QuickBooksData qbd JOIN main.Person p ON qbd.personId = p.PersonId
-					--WHERE LastName = 'ONTIVEROS'
-					--WHERE otherPayrollItemsPay is not null
-					ORDER BY p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay;
+					--****
+						SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode FROM #QuickBooksData qbd JOIN main.Person p ON qbd.personId = p.PersonId
+						--WHERE LastName = 'ONTIVEROS'
+						--WHERE otherPayrollItemsPay is not null
+						ORDER BY p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay;
 
 
 
