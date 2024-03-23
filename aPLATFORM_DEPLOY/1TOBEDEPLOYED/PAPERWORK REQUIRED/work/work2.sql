@@ -84,7 +84,9 @@ CREATE TABLE #QuickBooksData
 	entryType VARCHAR(50),
 	itemName VARCHAR(50),
 	quantity INT,
-	otherPayrollItemsPay decimal(18,2)
+	otherPayrollItemsPay decimal(18,2),
+	PayId INT,
+	PayCode VARCHAR(25)
 );
 
 
