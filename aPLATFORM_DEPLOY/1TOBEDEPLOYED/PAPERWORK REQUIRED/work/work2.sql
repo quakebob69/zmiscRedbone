@@ -379,13 +379,62 @@ CREATE TABLE #QuickBooksData
 				SET @PerDiemPayCode = 'Per Diem';
 
 				SELECT top 2000
-					 PayCode, payid, PickOrigin, *
+					 name, PayCode, payid, PickOrigin, *
 				FROM
-					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
 					dispatch.PR_OTR_History ps
-					--JOIN @LegitOTRDrivers legit ON ps.DriverPersonId = legit.PersonId
 				WHERE
 					PayPeriodEnding = '2023-12-16 00:00:00.000'
-					--PayCode = @PerDiemPayCode
+					--and name like '%Ont%'
+
+				order by ps.name
+
+
+				
+
+
+
+				DECLARE @PerDiemPayCode VARCHAR(8)
+				SET @PerDiemPayCode = 'Per Diem';
+
+				SELECT top 2000
+					 name, PayCode, payid, PickOrigin, *
+				FROM
+					dispatch.PR_OTR_History ps
+				WHERE
+					PayPeriodEnding = '2023-12-16 00:00:00.000'
+					--and payid is null
+					and payid is not null
+					--and paycode = 'Other Pay'
+				order by ps.name
+
+
+
+				--PayId/PayCode
+					DECLARE @PerDiemPayCode VARCHAR(8)
+					SET @PerDiemPayCode = 'Per Diem';
+
+					SELECT 
+						 payid, paycode
+					FROM
+						dispatch.PR_OTR_History ps
+					WHERE
+						PayPeriodEnding = '2023-12-16 00:00:00.000'
+						--and payid is null
+						--and payid is not null
+						--and paycode = 'Other Pay'
+						group by payid, paycode
+					order by payid, paycode
+
+
+
+				/*
+				PayId/PayCode rules:
+					- id is null
+						- code = 'Other Pay'
+					- id is not null
+						- code = 'Other Pay'
+
+				*/
+
 
 
