@@ -61,19 +61,65 @@ CREATE TABLE #QuickBooksData
 		SET @OTRPERSONTYPE = 'OTR';
 		DECLARE @OTRPERSONTID int
 		SET @OTRPERSONTID = (SELECT PersonTypeId FROM main.PersonTypes pt WHERE PersonType = @OTRPERSONTYPE);
-				
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--DriverPaidMiles
+--------------------------------------------------------------------------------------------------------------------------	
 	--'Per Diem' Pay Code
 		DECLARE @PerDiemPayCode VARCHAR(8)
 		SET @PerDiemPayCode = 'Per Diem';
 
+		DECLARE @DriverPaidMiles TABLE (PersonId int NULL, DriverPaidMiles int NULL);
+			INSERT INTO @DriverPaidMiles
+			SELECT
+				DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
+			FROM
+				payroll.vPayrollOTRStaging___withpersonsremoved ps
+			WHERE
+				PayCode = @PerDiemPayCode
+			GROUP BY
+				DriverPersonId
+			--ORDER BY pm.PersonId
+			;
+		SELECT * FROM @DriverPaidMiles;
+
+
+
+
+
+
+
+
+
 --------------------------------------------------------------------------------------------------------------------------
 --#QuickBooksData INSERTS
 --------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 	--Driver Paid Miles (@DriverPaidMilesLegit)
 		--85
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
-			SELECT legit.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, legit.DriverPaidMiles, NULL
-			FROM @DriverPaidMilesLegit legit
+			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL
+			FROM @DriverPaidMiles dpm
 		;
 
 		--76
@@ -231,8 +277,6 @@ CREATE TABLE #QuickBooksData
 
 
 
-				DECLARE @PerDiemPayCode VARCHAR(8)
-				SET @PerDiemPayCode = 'Per Diem';
 
 				SELECT top 2000
 					 name, PayCode, payid, PickOrigin, *
@@ -248,9 +292,6 @@ CREATE TABLE #QuickBooksData
 				
 
 
-
-				DECLARE @PerDiemPayCode VARCHAR(8)
-				SET @PerDiemPayCode = 'Per Diem';
 
 				SELECT top 2000
 					 name, PayCode, payid, PickOrigin, *
@@ -304,8 +345,6 @@ CREATE TABLE #QuickBooksData
 
 
 					
-				DECLARE @PerDiemPayCode VARCHAR(8)
-				SET @PerDiemPayCode = 'Per Diem';
 
 				SELECT
 					 name, PayCode, payid, PickOrigin, *
