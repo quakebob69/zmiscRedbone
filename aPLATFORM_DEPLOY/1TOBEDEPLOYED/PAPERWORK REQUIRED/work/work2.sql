@@ -411,7 +411,7 @@ CREATE TABLE #QuickBooksData
 
 
 
-
+						--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 									--**PayId/PayCode
 										SELECT 
 											 payid, paycode
@@ -435,6 +435,7 @@ CREATE TABLE #QuickBooksData
 											PayPeriodEnding = '2023-12-16 00:00:00.000'										
 										group by PayCode, PickOrigin
 										order by PayCode, PickOrigin
+						--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
