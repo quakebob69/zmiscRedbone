@@ -16,7 +16,7 @@ CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsDriverP
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsDriverPay] 'Load', 2775
+	exec [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsDriverPay] 2775
 */
 
 SET NOCOUNT ON;
