@@ -2,7 +2,8 @@ USE [RedBoneThomas]
 GO
 
 /*
-SELECT TOP (1000) [AccountingExportPayrollDataId]
+SELECT TOP (1000) 
+[AccountingExportPayrollDataId]
       ,[PersonId]
       ,[OriginatingOTRPayPeriodId]
       ,[AccountingExportPayrollEntryTypeId]
@@ -14,3 +15,4 @@ SELECT TOP (1000) [AccountingExportPayrollDataId]
   FROM [RedBoneThomas].[export].[AccountingExportPayrollData]
   */
 
+  sp_Payroll_OTR_PayPeriodGetOpen

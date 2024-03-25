@@ -124,8 +124,7 @@ END
 
 
 
-	--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+	
 /*
 	SELECT TOP (1000) [AccountingExportPayrollDataId]
 		  ,[PersonId]
@@ -140,9 +139,30 @@ END
 */
 
 
+INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Per Mile (Redbone - Dedicated)', 1);
+
+
+
+
+
+
+
+
+
+		PayrollItemasdf
+		PayrollItemasdfId
+
+		INSERT INTO [export].[AccountingExportPayrollData]
+			(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId)
+		SELECT dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, dpm.DriverPaidMiles, 1
+			FROM @DriverPaidMiles dpm
+        
+
+
 	--Driver Paid Miles (@@DriverPaidMiles)
 		DECLARE @QBITEMNAME_PERMILEOTR VARCHAR(25)
 		SET @QBITEMNAME_PERMILEOTR = 'Per Mile (Redbone - OTR)';
+
 
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PickOrigin, PayId, PayCode)
 			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, NULL, @PerDiemPayCode
@@ -152,35 +172,6 @@ END
 
 
 
-
-
-
-		DECLARE @PayrollOTRStagingId INT
-		DECLARE @PayrollOTRPayPeriodId INT
-		DECLARE @PayrollOTRDataSourceId INT
-
-		DECLARE @Counter INT
-		SET @Counter = 1
-   
-		DECLARE cur CURSOR FOR
-		SELECT PayrollOTRStagingId, PayrollOTRPayPeriodId, PayrollOTRDataSourceId FROM [payroll].[PayrollOTRStaging]
-    
-		OPEN cur
-		FETCH NEXT FROM cur INTO @PayrollOTRStagingId, @PayrollOTRPayPeriodId, @PayrollOTRDataSourceId
-    
-		WHILE @@FETCH_STATUS = 0 AND @Counter < 3
-		BEGIN
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId)
-			VALUES
-				(2775, @PayrollOTRPayPeriodId, @Counter, @Counter)
-        
-			SET @Counter = @Counter + 1
-			FETCH NEXT FROM cur INTO @PayrollOTRStagingId, @PayrollOTRPayPeriodId, @PayrollOTRDataSourceId
-		END
-    
-		CLOSE cur
-		DEALLOCATE cur
 
 
 
