@@ -1,23 +1,22 @@
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]    Script Date: 2/14/2024 2:10:19 PM ******/
-DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsLoad]    Script Date: 2/14/2024 2:10:19 PM ******/
+DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsLoad]
 GO
 
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]    Script Date: 2/14/2024 2:10:19 PM ******/
+/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsLoad]    Script Date: 2/14/2024 2:10:19 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]
+CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsLoad]
 (
-	@PayrollOTRDataSource varchar(15),
 	@LastUpdateBy INT
 )
 
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] 'Load', 2775
+	exec [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsLoad] 'Load', 2775
 */
 
 SET NOCOUNT ON;
