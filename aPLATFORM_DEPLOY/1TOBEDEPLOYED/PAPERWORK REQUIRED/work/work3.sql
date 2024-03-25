@@ -83,6 +83,36 @@ GO
 			PayCode VARCHAR(25)
 		);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/*
+	SELECT TOP (1000) [AccountingExportPayrollDataId]
+		  ,[PersonId]
+		  ,[OriginatingOTRPayPeriodId]
+		  ,[AccountingExportPayrollEntryTypeId]
+		  ,[AccountingExportPayrollItemId]
+		  ,[Quantity]
+		  ,[Rate]
+		  ,[PayrollOTRPaymentHoldReasonId]
+		  ,[HeldPaymentHasBeenPaid]
+	  FROM [RedBoneThomas].[export].[AccountingExportPayrollData]
+*/
+
+
 	--Driver Paid Miles (@@DriverPaidMiles)
 		DECLARE @QBITEMNAME_PERMILEOTR VARCHAR(25)
 		SET @QBITEMNAME_PERMILEOTR = 'Per Mile (Redbone - OTR)';
