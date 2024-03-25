@@ -160,29 +160,15 @@ END
 			Name = @PayrollItemEARNINGSDoubles
 		)
 
-
-
-
-				--76
-	--Double Miles
-		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId)
-			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, @PAYID_DOUBLEMILES
-				FROM
-					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
-			WHERE 
-			PayId = @PAYID_DOUBLEMILES
-			GROUP BY ps.DriverPersonId
-		;
-
-
-
-
 			INSERT INTO [export].[AccountingExportPayrollData]
 				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, dpm.PersonId, dpm.DriverPaidMiles
-				FROM @DriverPaidMiles dpm
+				ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, @PAYID_DOUBLEMILES
+				FROM
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
+				WHERE 
+					PayId = @PAYID_DOUBLEMILES
+				GROUP BY ps.DriverPersonId
 
 
 /*
@@ -192,6 +178,20 @@ EARNINGS
 	'OTR Drop Solo'
 	'Per Mile (Trainee)'
 	'Per Mile (Trainer)'
+
+
+					--76
+	--Double Miles
+		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId)
+			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, @PAYID_DOUBLEMILES
+				FROM
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
+			WHERE 
+			PayId = @PAYID_DOUBLEMILES
+			GROUP BY ps.DriverPersonId
+		;
+
+
 */
 
 
