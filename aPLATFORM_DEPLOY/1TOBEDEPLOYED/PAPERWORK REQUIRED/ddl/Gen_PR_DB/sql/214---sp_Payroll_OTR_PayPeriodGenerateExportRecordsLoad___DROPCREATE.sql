@@ -61,8 +61,7 @@ END
 		)
 
 
-------------------------------------------------------------------------
-	--Driver Paid Miles
+	 --Driver Paid Miles
 		--'Per Diem' Pay Code
 			DECLARE @PR_OTR_History__PayCode__PerDiem VARCHAR(8)
 			SET @PR_OTR_History__PayCode__PerDiem = 'Per Diem';
@@ -85,48 +84,74 @@ END
 			;
 				--SELECT * FROM @DriverPaidMiles;
 
-		--EARNINGS
-			DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
-			SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
-			DECLARE @PayrollItemEARNINGSPerDiemId INT
-			SET @PayrollItemEARNINGSPerDiemId =
-			(
-				SELECT
-				TOP 1 AccountingExportPayrollItemId 
-				FROM [export].[AccountingExportPayrollItem]
-				WHERE
-				Name = @PayrollItemEARNINGSPerDiem
-			)
+
+--1) Driver Paid Miles - Earnings
+	------------------------------------------------------------------------------------------------------------------
+		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
+		SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
+		DECLARE @PayrollItemEARNINGSPerDiemId INT
+		SET @PayrollItemEARNINGSPerDiemId =
+		(
+			SELECT
+			TOP 1 AccountingExportPayrollItemId 
+			FROM [export].[AccountingExportPayrollItem]
+			WHERE
+			Name = @PayrollItemEARNINGSPerDiem
+		)
 				
-				INSERT INTO [export].[AccountingExportPayrollData]
-					(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
-				SELECT
-					dpm.PersonId, @OpenPayPeriodId, 1, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
-					FROM @DriverPaidMiles dpm
-
-		--OTHER
-			DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
-			SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
-			DECLARE @PayrollItemOTHERPAYPerDiemId INT
-			SET @PayrollItemOTHERPAYPerDiemId =
-			(
-				SELECT
-				TOP 1 AccountingExportPayrollItemId 
-				FROM [export].[AccountingExportPayrollItem]
-				WHERE
-				Name = @PayrollItemOTHERPAYPerDiem
-			)
-
-				INSERT INTO [export].[AccountingExportPayrollData]
-					(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
-				SELECT
-					dpm.PersonId, @OpenPayPeriodId, 2, @PayrollItemOTHERPAYPerDiemId, dpm.DriverPaidMiles
-					FROM @DriverPaidMiles dpm
-        
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+			SELECT
+				dpm.PersonId, @OpenPayPeriodId, 1, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
+				FROM @DriverPaidMiles dpm
 
 
-------------------------------------------------------------------------
-	--ASDF
+--2) Driver Paid Miles - Per Diem
+	------------------------------------------------------------------------------------------------------------------
+		DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
+		SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
+		DECLARE @PayrollItemOTHERPAYPerDiemId INT
+		SET @PayrollItemOTHERPAYPerDiemId =
+		(
+			SELECT
+			TOP 1 AccountingExportPayrollItemId 
+			FROM [export].[AccountingExportPayrollItem]
+			WHERE
+			Name = @PayrollItemOTHERPAYPerDiem
+		)
+
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+			SELECT
+				dpm.PersonId, @OpenPayPeriodId, 2, @PayrollItemOTHERPAYPerDiemId, dpm.DriverPaidMiles
+				FROM @DriverPaidMiles dpm
+
+
+--3) Driver Paid Miles - Per Diem
+	------------------------------------------------------------------------------------------------------------------
+		asdf
+
+
+
+
+/*
+	--EARNINGS
+		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Doubles (Albertsons)', 1);
+		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Drop & Hook (Doubles)', 1);
+		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'OTR Drop Solo', 1);
+		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Per Mile (Trainee)', 1);
+		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Per Mile (Trainer)', 1);
+
+	--OTHER
+*/
+
+
+
+
+
+
+
+
 
 
 
