@@ -118,9 +118,9 @@ END
 		)
 				
 			INSERT INTO [export].[AccountingExportPayrollData]
-				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				dpm.PersonId, @OpenPayPeriodId, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
 
 
@@ -139,9 +139,9 @@ END
 		)
 
 			INSERT INTO [export].[AccountingExportPayrollData]
-				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				dpm.PersonId, @OpenPayPeriodId, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.DriverPaidMiles
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
 
 /*
