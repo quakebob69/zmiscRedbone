@@ -102,7 +102,7 @@ END
 			;
 				--SELECT * FROM @DriverPaidMiles;
 
-/*
+/**/
 --1) Per Mile (Redbone - OTR)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
@@ -143,13 +143,13 @@ END
 			SELECT
 				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
-*/
+
 
 
 --3) Doubles (Albertsons)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSDoubles  VARCHAR(30)
-		SET @PayrollItemEARNINGSDoubles = 'Per Mile (Redbone - OTR)';
+		SET @PayrollItemEARNINGSDoubles = 'Doubles (Albertsons)';
 		DECLARE @PayrollItemEARNINGSDoublesId INT
 		SET @PayrollItemEARNINGSDoublesId =
 		(
@@ -166,7 +166,7 @@ END
 			INSERT INTO [export].[AccountingExportPayrollData]
 				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
 
 				FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
