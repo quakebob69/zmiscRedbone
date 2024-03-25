@@ -53,11 +53,17 @@ END
 		)
 
 	--
+		DECLARE @DataSourceName_LOAD VARCHAR(4)
+		SET @DataSourceName_LOAD = 'LOAD'
+		DECLARE @PayrollOTRDataSourceId_LOAD INT
+		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
+
+	--
 		DELETE FROM [export].[AccountingExportPayrollData]
 		WHERE
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
-			--asdfAND
-			--asdfAccountingExportPayrollEntryTypeId = @PayrollEntryTypeId;
+			AND
+			PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
 
 	--
 		DECLARE @AccountingExportCompany VARCHAR(30)
