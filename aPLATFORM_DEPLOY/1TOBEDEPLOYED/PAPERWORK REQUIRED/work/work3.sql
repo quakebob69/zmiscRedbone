@@ -63,7 +63,7 @@ GO
 				DriverPersonId
 			--ORDER BY pm.PersonId
 			;
-			--SELECT * FROM @DriverPaidMiles;
+			SELECT * FROM @DriverPaidMiles;
 
 
 --------------------------------------------------------------------------------------------------------------------------
