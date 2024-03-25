@@ -24,8 +24,24 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
+	DECLARE @PayrollEntryType VARCHAR(30)
+	SET @PayrollEntryType = 'EARNINGS';
+
+	DECLARE @PayrollEntryTypeId INT
+	
+	DECLARE @ActivePayPeriodId INT
+	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] @LastUpdateBy
+
 	--
-		DELETE FROM [export].[AccountingExportPayrollData];
+		ASDF = 
+
+		QWERTY = 
+	--
+		DELETE FROM [export].[AccountingExportPayrollData]
+			WHERE
+				OriginatingOTRPayPeriodId = @OpenPayPeriodId
+				AND
+				AccountingExportPayrollEntryTypeId = QWERTY;
 
 	--
 		DECLARE @PayrollOTRStagingId INT
