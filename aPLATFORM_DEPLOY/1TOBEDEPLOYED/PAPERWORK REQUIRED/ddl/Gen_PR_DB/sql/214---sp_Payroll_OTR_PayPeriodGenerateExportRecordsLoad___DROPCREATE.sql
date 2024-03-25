@@ -160,23 +160,48 @@ END
 			Name = @PayrollItemEARNINGSDoubles
 		)
 
-			DECLARE @PR_OTR_History__PayId__Doubles INT
-			SET @PR_OTR_History__PayId__Doubles = 76;
+		DECLARE @PR_OTR_History__PayId__Doubles INT
+		SET @PR_OTR_History__PayId__Doubles = 76;
 
 			INSERT INTO [export].[AccountingExportPayrollData]
 				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
 				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
-
-				FROM
+					FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
-				WHERE 
+					WHERE 
 					PayId = @PR_OTR_History__PayId__Doubles
-				GROUP BY ps.DriverPersonId
+					GROUP BY
+					ps.DriverPersonId
 */
 
 
 
+		DECLARE @PayrollItemEARNINGSDropNHook  VARCHAR(30)
+		SET @PayrollItemEARNINGSDropNHook = 'Drop & Hook (Doubles)';
+		DECLARE @PayrollItemEARNINGSDropNHookId INT
+		SET @PayrollItemEARNINGSDropNHookId =
+		(
+			SELECT
+			TOP 1 AccountingExportPayrollItemId 
+			FROM [export].[AccountingExportPayrollItem]
+			WHERE
+			Name = @PayrollItemEARNINGSDropNHook
+		)
+
+		DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
+		SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
+
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+			SELECT
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+				FROM
+				payroll.vPayrollOTRStaging___withpersonsremoved ps
+				WHERE 
+				paycode = @PR_OTR_History__PayId__DropNHook
+				GROUP BY
+				ps.DriverPersonId
 
 
 
@@ -190,9 +215,6 @@ END
 
 
 /*
-EARNINGS
-	
-	'Drop & Hook (Doubles)'
 	'OTR Drop Solo'
 	'Per Mile (Trainee)'
 	'Per Mile (Trainer)'
