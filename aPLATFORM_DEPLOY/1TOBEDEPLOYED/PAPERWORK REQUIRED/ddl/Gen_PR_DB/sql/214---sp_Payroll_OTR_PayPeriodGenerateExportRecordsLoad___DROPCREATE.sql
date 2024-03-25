@@ -171,7 +171,7 @@ END
 					PayId = @PR_OTR_History__PayId__Doubles
 					GROUP BY
 					ps.DriverPersonId
-*/
+
 
 
 --4) Drop & Hook (Doubles)
@@ -201,7 +201,7 @@ END
 				paycode = @PR_OTR_History__PayId__DropNHook
 				GROUP BY
 				ps.DriverPersonId
-
+*/
 
 
 
