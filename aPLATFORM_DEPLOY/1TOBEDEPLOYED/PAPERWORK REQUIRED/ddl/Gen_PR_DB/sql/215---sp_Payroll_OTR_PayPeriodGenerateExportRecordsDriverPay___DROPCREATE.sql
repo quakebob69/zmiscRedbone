@@ -40,6 +40,7 @@ END
 			Name = @PayrollEntryType
 		)
 
+
 	--
 		DELETE FROM [export].[AccountingExportPayrollData]
 		WHERE
@@ -48,12 +49,26 @@ END
 			AccountingExportPayrollEntryTypeId = @PayrollEntryTypeId;
 
 
-
 	--
+		DECLARE @AccountingExportCompany VARCHAR(30)
+		SET @AccountingExportCompany = 'REDBONE';
+		DECLARE @AccountingExportCompanyId INT
+		SET @AccountingExportCompanyId =
+		(
+			SELECT
+			TOP 1 AccountingExportCompanyId 
+			FROM [export].[AccountingExportCompany]
+			WHERE
+			Name = @AccountingExportCompany
+		)
+
+
+
+
+
 		DECLARE @PayrollOTRStagingId INT
 		DECLARE @PayrollOTRPayPeriodId INT
 		DECLARE @PayrollOTRDataSourceId INT
-		-- DECLARE @Name NVARCHAR(50)
 
 		DECLARE @Counter INT
 		SET @Counter = 1
