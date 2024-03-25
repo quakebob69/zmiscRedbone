@@ -102,7 +102,7 @@ END
 			INSERT INTO [export].[AccountingExportPayrollData]
 				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
 			SELECT
-				dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
+				dpm.PersonId, @OpenPayPeriodId, 1, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
 
 		--OTHER
