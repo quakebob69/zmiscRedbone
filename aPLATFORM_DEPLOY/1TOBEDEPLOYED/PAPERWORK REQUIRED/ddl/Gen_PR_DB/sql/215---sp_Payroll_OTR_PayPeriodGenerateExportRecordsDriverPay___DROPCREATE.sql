@@ -24,6 +24,8 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
+		'OTHERPAYROLLITEMS'
+
 	--
 		DELETE FROM [export].[AccountingExportPayrollData];
 
