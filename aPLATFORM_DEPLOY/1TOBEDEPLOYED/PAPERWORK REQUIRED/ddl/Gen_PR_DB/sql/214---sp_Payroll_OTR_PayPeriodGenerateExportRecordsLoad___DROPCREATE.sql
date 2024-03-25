@@ -102,7 +102,7 @@ END
 			;
 				--SELECT * FROM @DriverPaidMiles;
 
-/**/
+/*
 --1) Per Mile (Redbone - OTR)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
@@ -173,29 +173,6 @@ END
 				WHERE 
 					PayId = @PR_OTR_History__PayId__Doubles
 				GROUP BY ps.DriverPersonId
-
-
-/*
-EARNINGS
-	
-	'Drop & Hook (Doubles)'
-	'OTR Drop Solo'
-	'Per Mile (Trainee)'
-	'Per Mile (Trainer)'
-
-
-					--76
-	--Double Miles
-		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PayId)
-			SELECT ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, @PAYID_DOUBLEMILES
-				FROM
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
-			WHERE 
-			PayId = @PAYID_DOUBLEMILES
-			GROUP BY ps.DriverPersonId
-		;
-
-
 */
 
 
@@ -208,4 +185,16 @@ EARNINGS
 
 
 
+
+
+
+
+/*
+EARNINGS
+	
+	'Drop & Hook (Doubles)'
+	'OTR Drop Solo'
+	'Per Mile (Trainee)'
+	'Per Mile (Trainer)'
+*/
 GO
