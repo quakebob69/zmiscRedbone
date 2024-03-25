@@ -160,14 +160,18 @@ END
 			Name = @PayrollItemEARNINGSDoubles
 		)
 
+			DECLARE @PR_OTR_History__PayId__Doubles INT
+			SET @PR_OTR_History__PayId__Doubles = 76;
+
 			INSERT INTO [export].[AccountingExportPayrollData]
 				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				ps.DriverPersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_DOUBLEMILES, ROUND(SUM(Quantity), 2), NULL, @PAYID_DOUBLEMILES
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+
 				FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
 				WHERE 
-					PayId = @PAYID_DOUBLEMILES
+					PayId = @PR_OTR_History__PayId__Doubles
 				GROUP BY ps.DriverPersonId
 
 
