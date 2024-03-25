@@ -164,25 +164,12 @@ END
 		)
 
 
-
-
 		INSERT INTO [export].[AccountingExportPayrollData]
-			(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId)
-		SELECT dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, dpm.DriverPaidMiles, 1
+			(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+		SELECT
+			dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, @PayrollItemPerDiemId, dpm.DriverPaidMiles
 			FROM @DriverPaidMiles dpm
         
-
-
-	--Driver Paid Miles (@@DriverPaidMiles)
-		DECLARE @QBITEMNAME_PERMILEOTR VARCHAR(25)
-		SET @QBITEMNAME_PERMILEOTR = 'Per Mile (Redbone - OTR)';
-
-
-		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PickOrigin, PayId, PayCode)
-			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, NULL, @PerDiemPayCode
-			FROM @DriverPaidMiles dpm
-		;
-
 
 
 
