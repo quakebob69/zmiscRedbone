@@ -41,7 +41,7 @@ END
 		)
 
 		DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
-		SET @PayrollEntryOTHERPAYType = 'EARNINGS';
+		SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
 		DECLARE @PayrollEntryOTHERPAYTypeId INT
 		SET @PayrollEntryOTHERPAYTypeId =
 		(
