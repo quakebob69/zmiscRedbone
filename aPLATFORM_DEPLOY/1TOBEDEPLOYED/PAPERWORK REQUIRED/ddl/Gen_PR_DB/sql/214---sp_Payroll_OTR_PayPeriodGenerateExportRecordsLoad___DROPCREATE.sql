@@ -100,9 +100,8 @@ END
 				GROUP BY
 					DriverPersonId
 			;
-				--SELECT * FROM @DriverPaidMiles;
 
-/*
+/**/
 --1) Per Mile (Redbone - OTR)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
@@ -145,7 +144,6 @@ END
 				FROM @DriverPaidMiles dpm
 
 
-
 --3) Doubles (Albertsons)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSDoubles  VARCHAR(30)
@@ -173,10 +171,10 @@ END
 					PayId = @PR_OTR_History__PayId__Doubles
 					GROUP BY
 					ps.DriverPersonId
-*/
 
 
-
+--4) Drop & Hook (Doubles)
+	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSDropNHook  VARCHAR(30)
 		SET @PayrollItemEARNINGSDropNHook = 'Drop & Hook (Doubles)';
 		DECLARE @PayrollItemEARNINGSDropNHookId INT
