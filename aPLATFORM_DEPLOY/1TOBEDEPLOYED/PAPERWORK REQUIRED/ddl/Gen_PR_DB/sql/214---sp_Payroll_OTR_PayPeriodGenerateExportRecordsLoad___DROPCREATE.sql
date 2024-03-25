@@ -148,22 +148,22 @@ END
 
 --3) Doubles (Albertsons)
 	------------------------------------------------------------------------------------------------------------------
-		DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
-		SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
-		DECLARE @PayrollItemOTHERPAYPerDiemId INT
-		SET @PayrollItemOTHERPAYPerDiemId =
+		DECLARE @PayrollItemEARNINGSDoubles  VARCHAR(30)
+		SET @PayrollItemEARNINGSDoubles = 'Per Mile (Redbone - OTR)';
+		DECLARE @PayrollItemEARNINGSDoublesId INT
+		SET @PayrollItemEARNINGSDoublesId =
 		(
 			SELECT
 			TOP 1 AccountingExportPayrollItemId 
 			FROM [export].[AccountingExportPayrollItem]
 			WHERE
-			Name = @PayrollItemOTHERPAYPerDiem
+			Name = @PayrollItemEARNINGSDoubles
 		)
-
+				
 			INSERT INTO [export].[AccountingExportPayrollData]
 				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, dpm.PersonId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
 
 
