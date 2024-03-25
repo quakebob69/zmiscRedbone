@@ -28,7 +28,6 @@ END
 		DECLARE @OpenPayPeriodId INT
 		EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
 
-	
 		DECLARE @PayrollEntryType VARCHAR(30)
 		SET @PayrollEntryType = 'EARNINGS';
 		DECLARE @PayrollEntryTypeId INT
@@ -40,10 +39,6 @@ END
 			WHERE
 			Name = @PayrollEntryType
 		)
-	
-
-
-
 
 	--
 		DELETE FROM [export].[AccountingExportPayrollData]
@@ -51,6 +46,7 @@ END
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND
 			AccountingExportPayrollEntryTypeId = @PayrollEntryTypeId;
+
 
 
 

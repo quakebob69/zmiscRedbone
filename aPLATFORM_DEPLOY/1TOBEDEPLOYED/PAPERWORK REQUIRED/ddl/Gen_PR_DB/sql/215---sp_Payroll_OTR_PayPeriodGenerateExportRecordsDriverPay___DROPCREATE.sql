@@ -24,10 +24,30 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-		'OTHERPAYROLLITEMS'
+	--
+		DECLARE @OpenPayPeriodId INT
+		EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
+
+		DECLARE @PayrollEntryType VARCHAR(30)
+		SET @PayrollEntryType = 'OTHERPAYROLLITEMS';
+		DECLARE @PayrollEntryTypeId INT
+		SET @PayrollEntryTypeId =
+		(
+			SELECT
+			TOP 1 AccountingExportPayrollEntryTypeId 
+			FROM [EXPORT].[AccountingExportPayrollEntryType]
+			WHERE
+			Name = @PayrollEntryType
+		)
 
 	--
-		DELETE FROM [export].[AccountingExportPayrollData];
+		DELETE FROM [export].[AccountingExportPayrollData]
+		WHERE
+			OriginatingOTRPayPeriodId = @OpenPayPeriodId
+			AND
+			AccountingExportPayrollEntryTypeId = @PayrollEntryTypeId;
+
+
 
 	--
 		DECLARE @PayrollOTRStagingId INT
