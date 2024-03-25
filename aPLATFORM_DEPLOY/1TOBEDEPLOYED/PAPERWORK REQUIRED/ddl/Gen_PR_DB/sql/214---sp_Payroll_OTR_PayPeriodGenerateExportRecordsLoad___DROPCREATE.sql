@@ -102,7 +102,7 @@ END
 			;
 				--SELECT * FROM @DriverPaidMiles;
 
-
+/*
 --1) Per Mile (Redbone - OTR)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
@@ -143,29 +143,28 @@ END
 			SELECT
 				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
+*/
 
-/*
+
 --3) Doubles (Albertsons)
 	------------------------------------------------------------------------------------------------------------------
-		DECLARE @PayrollItemDoubles  VARCHAR(10)
-		SET @PayrollItemDoubles = 'Doubles (Albertsons)';
-		DECLARE @PayrollItemDoublesId INT
-		SET @PayrollItemDoublesId =
+		DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
+		SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
+		DECLARE @PayrollItemOTHERPAYPerDiemId INT
+		SET @PayrollItemOTHERPAYPerDiemId =
 		(
 			SELECT
 			TOP 1 AccountingExportPayrollItemId 
 			FROM [export].[AccountingExportPayrollItem]
 			WHERE
-			Name = @PayrollItemDoubles
+			Name = @PayrollItemOTHERPAYPerDiem
 		)
 
 			INSERT INTO [export].[AccountingExportPayrollData]
-				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				dpm.PersonId, @OpenPayPeriodId, 2, @PayrollItemDoublesId, dpm.DriverPaidMiles
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
-
-*/
 
 
 /*
