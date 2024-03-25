@@ -86,7 +86,7 @@ END
 				--SELECT * FROM @DriverPaidMiles;
 
 		--EARNINGS
-			DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(10)
+			DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
 			SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
 			DECLARE @PayrollItemEARNINGSPerDiemId INT
 			SET @PayrollItemEARNINGSPerDiemId =
