@@ -40,14 +40,12 @@ END
 			Name = @PayrollEntryType
 		)
 
-
 	--
 		DELETE FROM [export].[AccountingExportPayrollData]
 		WHERE
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND
 			AccountingExportPayrollEntryTypeId = @PayrollEntryTypeId;
-
 
 	--
 		DECLARE @AccountingExportCompany VARCHAR(30)
@@ -63,129 +61,74 @@ END
 		)
 
 
+------------------------------------------------------------------------
+	--Driver Paid Miles
+		--'Per Diem' Pay Code
+			DECLARE @PR_OTR_History__PayCode__PerDiem VARCHAR(8)
+			SET @PR_OTR_History__PayCode__PerDiem = 'Per Diem';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
---------------------------------------------------------------------------------------------------------------------------
---DriverPaidMiles
---------------------------------------------------------------------------------------------------------------------------	
-	--'Per Diem' Pay Code
-		DECLARE @PR_OTR_History__PayCode__PerDiem VARCHAR(8)
-		SET @PR_OTR_History__PayCode__PerDiem = 'Per Diem';
-
-		DECLARE @DriverPaidMiles
-		TABLE (
-			PersonId int NULL,
-			DriverPaidMiles int NULL
-		);
+			DECLARE @DriverPaidMiles
+			TABLE (
+				PersonId int NULL,
+				DriverPaidMiles int NULL
+			);
 		
-		INSERT INTO @DriverPaidMiles
+			INSERT INTO @DriverPaidMiles
+				SELECT
+					DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
+				FROM
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
+				WHERE
+					PayCode = @PR_OTR_History__PayCode__PerDiem
+				GROUP BY
+					DriverPersonId
+			;
+				--SELECT * FROM @DriverPaidMiles;
+
+		--EARNINGS
+			DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(10)
+			SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
+			DECLARE @PayrollItemEARNINGSPerDiemId INT
+			SET @PayrollItemEARNINGSPerDiemId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				Name = @PayrollItemEARNINGSPerDiem
+			)
+
+
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
 			SELECT
-				DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
-			FROM
-				payroll.vPayrollOTRStaging___withpersonsremoved ps
-			WHERE
-				PayCode = @PR_OTR_History__PayCode__PerDiem
-			GROUP BY
-				DriverPersonId
-		;
-			--SELECT * FROM @DriverPaidMiles;
+				dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
+				FROM @DriverPaidMiles dpm
 
-/*
-
---------------------------------------------------------------------------------------------------------------------------
---#QuickBooksData INSERTS
---------------------------------------------------------------------------------------------------------------------------
-	-- #QuickBooksData
-		DROP TABLE IF EXISTS #QuickBooksData;
-		CREATE TABLE #QuickBooksData
-		(
-			personId INT,
-			entryType VARCHAR(50),
-			itemName VARCHAR(50),
-			quantity INT,
-			otherPayrollItemsPay decimal(18,2),
-			PickOrigin VARCHAR(25),
-			PayId INT,
-			PayCode VARCHAR(25)
-		);
+		--OTHER
+			DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
+			SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
+			DECLARE @PayrollItemOTHERPAYPerDiemId INT
+			SET @PayrollItemOTHERPAYPerDiemId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				Name = @PayrollItemOTHERPAYPerDiem
+			)
 
 
-
-
-	
-	SELECT TOP (1000) [AccountingExportPayrollDataId]
-		  ,[PersonId]
-		  ,[OriginatingOTRPayPeriodId]
-		  ,[AccountingExportPayrollEntryTypeId]
-		  ,[AccountingExportPayrollItemId]
-		  ,[Quantity]
-		  ,[Rate]
-		  ,[PayrollOTRPaymentHoldReasonId]
-		  ,[HeldPaymentHasBeenPaid]
-	  FROM [RedBoneThomas].[export].[AccountingExportPayrollData]
-
-	--EARNINGS
-		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Doubles (Albertsons)', 1);
-		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Drop & Hook (Doubles)', 1);
-		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'OTR Drop Solo', 1);
-		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Per Mile (Redbone - OTR)', 1);
-		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Per Mile (Trainee)', 1);
-		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 1, 'Per Mile (Trainer)', 1);
-
-	--OTHER
-		INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 2, 'Per Diem', 1);
-*/
-
-
-
-
-		DECLARE @PayrollItemPerDiem  VARCHAR(10)
-		SET @PayrollItemPerDiem = 'Per Diem';
-		DECLARE @PayrollItemPerDiemId INT
-		SET @PayrollItemPerDiemId =
-		(
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
 			SELECT
-			TOP 1 AccountingExportPayrollItemId 
-			FROM [export].[AccountingExportPayrollItem]
-			WHERE
-			Name = @PayrollItemPerDiem
-		)
-
-
-		INSERT INTO [export].[AccountingExportPayrollData]
-			(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
-		SELECT
-			dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, @PayrollItemPerDiemId, dpm.DriverPaidMiles
-			FROM @DriverPaidMiles dpm
+				dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.DriverPaidMiles
+				FROM @DriverPaidMiles dpm
         
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+------------------------------------------------------------------------
+	--ASDF
 
 
 
