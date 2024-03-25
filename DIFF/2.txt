@@ -1,0 +1,21 @@
+
+		--OTHER
+			DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
+			SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
+			DECLARE @PayrollItemOTHERPAYPerDiemId INT
+			SET @PayrollItemOTHERPAYPerDiemId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				Name = @PayrollItemOTHERPAYPerDiem
+			)
+
+
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+			SELECT
+				dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.DriverPaidMiles
+				FROM @DriverPaidMiles dpm
+        

@@ -1,0 +1,20 @@
+
+		--EARNINGS
+			DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(10)
+			SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
+			DECLARE @PayrollItemEARNINGSPerDiemId INT
+			SET @PayrollItemEARNINGSPerDiemId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				Name = @PayrollItemEARNINGSPerDiem
+			)
+
+
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+			SELECT
+				dpm.PersonId, @OpenPayPeriodId, @PayrollEntryTypeId, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
+				FROM @DriverPaidMiles dpm
