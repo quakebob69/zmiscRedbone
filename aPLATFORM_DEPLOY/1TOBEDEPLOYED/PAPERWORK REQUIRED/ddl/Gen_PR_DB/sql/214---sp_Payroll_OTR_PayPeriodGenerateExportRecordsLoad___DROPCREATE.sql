@@ -97,13 +97,12 @@ END
 				WHERE
 				Name = @PayrollItemEARNINGSPerDiem
 			)
-
-
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
-			SELECT
-				dpm.PersonId, @OpenPayPeriodId, 1, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
-				FROM @DriverPaidMiles dpm
+				
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+				SELECT
+					dpm.PersonId, @OpenPayPeriodId, 1, @PayrollItemEARNINGSPerDiemId, dpm.DriverPaidMiles
+					FROM @DriverPaidMiles dpm
 
 		--OTHER
 			DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
@@ -118,12 +117,11 @@ END
 				Name = @PayrollItemOTHERPAYPerDiem
 			)
 
-
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
-			SELECT
-				dpm.PersonId, @OpenPayPeriodId, 2, @PayrollItemOTHERPAYPerDiemId, dpm.DriverPaidMiles
-				FROM @DriverPaidMiles dpm
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(PersonId, OriginatingOTRPayPeriodId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, Quantity)
+				SELECT
+					dpm.PersonId, @OpenPayPeriodId, 2, @PayrollItemOTHERPAYPerDiemId, dpm.DriverPaidMiles
+					FROM @DriverPaidMiles dpm
         
 
 
