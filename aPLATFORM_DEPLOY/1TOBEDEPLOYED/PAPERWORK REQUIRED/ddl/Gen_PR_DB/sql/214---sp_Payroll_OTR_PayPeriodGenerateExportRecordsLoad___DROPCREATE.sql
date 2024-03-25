@@ -69,6 +69,92 @@ END
 
 
 
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--DriverPaidMiles
+--------------------------------------------------------------------------------------------------------------------------	
+	--'Per Diem' Pay Code
+		DECLARE @PerDiemPayCode VARCHAR(8)
+		SET @PerDiemPayCode = 'Per Diem';
+
+		DECLARE @DriverPaidMiles
+		TABLE (
+			PersonId int NULL,
+			DriverPaidMiles int NULL
+		);
+		
+		INSERT INTO @DriverPaidMiles
+			SELECT
+				DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
+			FROM
+				payroll.vPayrollOTRStaging___withpersonsremoved ps
+			WHERE
+				PayCode = @PerDiemPayCode
+			GROUP BY
+				DriverPersonId
+			--ORDER BY pm.PersonId
+			;
+			SELECT * FROM @DriverPaidMiles;
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--#QuickBooksData INSERTS
+--------------------------------------------------------------------------------------------------------------------------
+	-- #QuickBooksData
+		DROP TABLE IF EXISTS #QuickBooksData;
+		CREATE TABLE #QuickBooksData
+		(
+			personId INT,
+			entryType VARCHAR(50),
+			itemName VARCHAR(50),
+			quantity INT,
+			otherPayrollItemsPay decimal(18,2),
+			PickOrigin VARCHAR(25),
+			PayId INT,
+			PayCode VARCHAR(25)
+		);
+
+
+
+
+	--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/*
+	SELECT TOP (1000) [AccountingExportPayrollDataId]
+		  ,[PersonId]
+		  ,[OriginatingOTRPayPeriodId]
+		  ,[AccountingExportPayrollEntryTypeId]
+		  ,[AccountingExportPayrollItemId]
+		  ,[Quantity]
+		  ,[Rate]
+		  ,[PayrollOTRPaymentHoldReasonId]
+		  ,[HeldPaymentHasBeenPaid]
+	  FROM [RedBoneThomas].[export].[AccountingExportPayrollData]
+*/
+
+
+	--Driver Paid Miles (@@DriverPaidMiles)
+		DECLARE @QBITEMNAME_PERMILEOTR VARCHAR(25)
+		SET @QBITEMNAME_PERMILEOTR = 'Per Mile (Redbone - OTR)';
+
+		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay, PickOrigin, PayId, PayCode)
+			SELECT dpm.PersonId, @QBENTRYTYPE_EARNINGS, @QBITEMNAME_PERMILEOTR, dpm.DriverPaidMiles, NULL, NULL, NULL, @PerDiemPayCode
+			FROM @DriverPaidMiles dpm
+		;
+
+
+
+
+
+
+
 		DECLARE @PayrollOTRStagingId INT
 		DECLARE @PayrollOTRPayPeriodId INT
 		DECLARE @PayrollOTRDataSourceId INT
@@ -95,5 +181,20 @@ END
     
 		CLOSE cur
 		DEALLOCATE cur
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 GO
