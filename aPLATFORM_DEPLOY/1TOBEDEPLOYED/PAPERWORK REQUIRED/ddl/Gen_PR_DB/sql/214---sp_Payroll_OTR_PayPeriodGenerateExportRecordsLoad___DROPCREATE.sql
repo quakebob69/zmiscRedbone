@@ -101,7 +101,7 @@ END
 					DriverPersonId
 			;
 
-/**/
+/*
 --1) Per Mile (Redbone - OTR)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
@@ -171,6 +171,7 @@ END
 					PayId = @PR_OTR_History__PayId__Doubles
 					GROUP BY
 					ps.DriverPersonId
+*/
 
 
 --4) Drop & Hook (Doubles)
