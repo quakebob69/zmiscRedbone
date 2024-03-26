@@ -21,7 +21,8 @@ CREATE TABLE [export].[AccountingExportPayrollItem](
 	[AccountingExportCompanyId] [int] NOT NULL,
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
 	[NameQB] [varchar](50) NOT NULL,
-	[NameLegacy] [varchar](50) NOT NULL,
+	[PayCodeLegacy] [varchar](50) NULL,
+	[PayIdLegacy] int NULL,
 	[Order] int NOT NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_AccountingExportPayrollItem] PRIMARY KEY CLUSTERED 
