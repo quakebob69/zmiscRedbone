@@ -26,7 +26,7 @@ END
 
 -- WHERE VARS
 ------------------------------------------------------------------------------------------------------------------
-	asdf
+	DECLARE @PR_OTR_History__PayId__Doubles INT
 	DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
 ------------------------------------------------------------------------------------------------------------------
 
@@ -152,8 +152,29 @@ END
 
 --3) Doubles (Albertsons)
 	------------------------------------------------------------------------------------------------------------------
+		--WHERE VAR
+		SET @PR_OTR_History__PayId__Doubles = 76;
 
+		DECLARE @PayrollItemEARNINGSDoublesId INT
+		SET @PayrollItemEARNINGSDoublesId =
+		(
+			SELECT
+			TOP 1 AccountingExportPayrollItemId 
+			FROM [export].[AccountingExportPayrollItem]
+			WHERE
+			NameQB = @PayrollItemEARNINGSDoubles
+		)
 
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+			SELECT
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+					FROM
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
+					WHERE 
+					PayId = @PR_OTR_History__PayId__Doubles
+					GROUP BY
+					ps.DriverPersonId
 
 
 
@@ -198,9 +219,8 @@ END
 
 --4) Drop & Hook (Doubles)
 	------------------------------------------------------------------------------------------------------------------
+		--WHERE VAR
 		SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
-
-
 
 		DECLARE @PayrollItemEARNINGSDropNHookId INT
 		SET @PayrollItemEARNINGSDropNHookId =
