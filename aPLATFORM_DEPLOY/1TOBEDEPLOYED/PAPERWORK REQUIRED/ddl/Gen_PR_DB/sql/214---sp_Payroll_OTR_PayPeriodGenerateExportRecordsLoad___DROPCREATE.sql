@@ -162,7 +162,7 @@ END
 			TOP 1 AccountingExportPayrollItemId 
 			FROM [export].[AccountingExportPayrollItem]
 			WHERE
-			NameQB = @PayrollItemEARNINGSDoubles
+			PayIdLegacy = @PR_OTR_History__PayId__Doubles
 		)
 
 			INSERT INTO [export].[AccountingExportPayrollData]
@@ -175,16 +175,6 @@ END
 					PayId = @PR_OTR_History__PayId__Doubles
 					GROUP BY
 					ps.DriverPersonId
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -229,7 +219,7 @@ END
 			TOP 1 AccountingExportPayrollItemId 
 			FROM [export].[AccountingExportPayrollItem]
 			WHERE
-			NameLegacy = @PR_OTR_History__PayId__DropNHook
+			PayCodeLegacy = @PR_OTR_History__PayId__DropNHook
 		)
 
 			INSERT INTO [export].[AccountingExportPayrollData]
