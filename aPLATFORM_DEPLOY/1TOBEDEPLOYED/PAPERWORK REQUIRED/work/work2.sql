@@ -69,6 +69,7 @@
 USE [RedBoneThomas]
 GO
 
+
 --#######################################################
 --SOURCE TABLE = PayrollStagingOTR_10_10__10_17_____2023
 --#######################################################
@@ -140,6 +141,7 @@ CREATE TABLE #QuickBooksData
 		SET @PerDiemPayCode = 'Per Diem';
 
 
+/*
 --------------------------------------------------------------------------------------------------------------------------
 --Driver Paid Miles (@DriverPaidMilesLegit)
 --------------------------------------------------------------------------------------------------------------------------
@@ -260,7 +262,7 @@ CREATE TABLE #QuickBooksData
 			paycode = @PAYCODE_EXTRASTOPS
 			GROUP BY ps.DriverPersonId
 		;
-
+*/
 
 	--Other Pay
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
