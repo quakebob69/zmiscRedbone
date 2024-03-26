@@ -269,6 +269,7 @@ END
 
 
 
+	'Drop & Hook (Doubles)'
 	'OTR Drop Solo'
 	'Per Mile (Trainee)'
 	'Per Mile (Trainer)'
