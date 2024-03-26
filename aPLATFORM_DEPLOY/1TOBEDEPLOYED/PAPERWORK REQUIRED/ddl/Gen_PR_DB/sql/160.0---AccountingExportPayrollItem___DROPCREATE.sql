@@ -20,7 +20,8 @@ CREATE TABLE [export].[AccountingExportPayrollItem](
 	[AccountingExportPayrollItemId] [int] IDENTITY(1,1) NOT NULL,
 	[AccountingExportCompanyId] [int] NOT NULL,
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL,
+	[NameQB] [varchar](50) NOT NULL,
+	[NameLegacy] [varchar](50) NOT NULL,
 	[Order] int NOT NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_AccountingExportPayrollItem] PRIMARY KEY CLUSTERED 
@@ -31,7 +32,7 @@ CREATE TABLE [export].[AccountingExportPayrollItem](
 (
 	[AccountingExportCompanyId] ASC,
 	[AccountingExportPayrollEntryTypeId] ASC,
-	[Name] ASC
+	[NameQB] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO

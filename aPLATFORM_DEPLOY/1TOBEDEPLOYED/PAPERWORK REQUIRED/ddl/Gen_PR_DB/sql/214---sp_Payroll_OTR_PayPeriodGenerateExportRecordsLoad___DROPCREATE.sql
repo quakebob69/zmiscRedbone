@@ -101,7 +101,7 @@ END
 					DriverPersonId
 			;
 
-/*
+/**/
 --1) Per Mile (Redbone - OTR)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
@@ -113,7 +113,7 @@ END
 			TOP 1 AccountingExportPayrollItemId 
 			FROM [export].[AccountingExportPayrollItem]
 			WHERE
-			Name = @PayrollItemEARNINGSPerDiem
+			NameQB = @PayrollItemEARNINGSPerDiem
 		)
 				
 			INSERT INTO [export].[AccountingExportPayrollData]
@@ -134,7 +134,7 @@ END
 			TOP 1 AccountingExportPayrollItemId 
 			FROM [export].[AccountingExportPayrollItem]
 			WHERE
-			Name = @PayrollItemOTHERPAYPerDiem
+			NameQB = @PayrollItemOTHERPAYPerDiem
 		)
 
 			INSERT INTO [export].[AccountingExportPayrollData]
@@ -155,7 +155,7 @@ END
 			TOP 1 AccountingExportPayrollItemId 
 			FROM [export].[AccountingExportPayrollItem]
 			WHERE
-			Name = @PayrollItemEARNINGSDoubles
+			NameQB = @PayrollItemEARNINGSDoubles
 		)
 
 		DECLARE @PR_OTR_History__PayId__Doubles INT
@@ -185,7 +185,7 @@ END
 			TOP 1 AccountingExportPayrollItemId 
 			FROM [export].[AccountingExportPayrollItem]
 			WHERE
-			Name = @PayrollItemEARNINGSDropNHook
+			NameQB = @PayrollItemEARNINGSDropNHook
 		)
 
 		DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
@@ -201,7 +201,7 @@ END
 				paycode = @PR_OTR_History__PayId__DropNHook
 				GROUP BY
 				ps.DriverPersonId
-*/
+
 
 
 
