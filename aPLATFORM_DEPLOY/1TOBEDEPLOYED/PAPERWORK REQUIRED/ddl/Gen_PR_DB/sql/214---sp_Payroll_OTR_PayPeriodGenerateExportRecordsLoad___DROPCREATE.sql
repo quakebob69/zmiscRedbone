@@ -53,6 +53,9 @@ END
 
 	DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
 	SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
+
+	DECLARE @PR_OTR_History__PayId__DropSolo VARCHAR(25)
+	SET @PR_OTR_History__PayId__DropSolo = 'Extra Stops';
 ------------------------------------------------------------------------------------------------------------------
 
 	--
@@ -212,24 +215,24 @@ END
 
 	-- Drop Solo
 		------------------------------------------------------------------------------------------------------------------
-			DECLARE @PayrollItemEARNINGSDropNHookId INT
-			SET @PayrollItemEARNINGSDropNHookId =
+			DECLARE @PayrollItemEARNINGSDropSolo INT
+			SET @PayrollItemEARNINGSDropSolo =
 			(
 				SELECT
 				TOP 1 AccountingExportPayrollItemId 
 				FROM [export].[AccountingExportPayrollItem]
 				WHERE
-				PayCodeLegacy = @PR_OTR_History__PayId__DropNHook
+				PayCodeLegacy = @PR_OTR_History__PayId__DropSolo
 			)
 
 				INSERT INTO [export].[AccountingExportPayrollData]
 					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropSolo, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
 					FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
 					WHERE 
-					paycode = @PR_OTR_History__PayId__DropNHook
+					paycode = @PR_OTR_History__PayId__DropSolo
 					GROUP BY
 					ps.DriverPersonId
 
