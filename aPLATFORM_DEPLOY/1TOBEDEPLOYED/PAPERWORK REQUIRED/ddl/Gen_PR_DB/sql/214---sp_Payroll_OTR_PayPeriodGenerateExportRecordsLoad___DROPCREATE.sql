@@ -26,28 +26,38 @@ END
 
 -- WHERE VARS
 ------------------------------------------------------------------------------------------------------------------
-	ALL THE WHERES...
+	DECLARE @PayrollEntryEARNINGSType VARCHAR(30)
+	SET @PayrollEntryEARNINGSType = 'EARNINGS';
 
-	@PayrollEntryEARNINGSType
-	@PayrollEntryOTHERPAYType
-	@DataSourceName_LOAD
-	@PayrollOTRDataSourceId_LOAD
-	@AccountingExportCompany
+	DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
+	SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
 
+	DECLARE @DataSourceName_LOAD VARCHAR(4)
+	SET @DataSourceName_LOAD = 'LOAD'
 
+	DECLARE @AccountingExportCompany VARCHAR(30)
+	SET @AccountingExportCompany = 'REDBONE';
 
+	DECLARE @PR_OTR_History__PayCode__PerDiem VARCHAR(8)
+	SET @PR_OTR_History__PayCode__PerDiem = 'Per Diem';
+
+	DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
+	SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
+	
+	DECLARE @PayrollItemOTHERPAYPerDiem VARCHAR(10)
+	SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
+		
 	DECLARE @PR_OTR_History__PayId__Doubles INT
 	SET @PR_OTR_History__PayId__Doubles = 76; 
 
 	DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
-	SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';------------------------------------------------------------------------------------------------------------------
+	SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
+------------------------------------------------------------------------------------------------------------------
 
 	--
 		DECLARE @OpenPayPeriodId INT
 		EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
 
-		DECLARE @PayrollEntryEARNINGSType VARCHAR(30)
-		SET @PayrollEntryEARNINGSType = 'EARNINGS';
 		DECLARE @PayrollEntryEARNINGSTypeId INT
 		SET @PayrollEntryEARNINGSTypeId =
 		(
@@ -58,8 +68,6 @@ END
 			Name = @PayrollEntryEARNINGSType
 		)
 
-		DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
-		SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
 		DECLARE @PayrollEntryOTHERPAYTypeId INT
 		SET @PayrollEntryOTHERPAYTypeId =
 		(
@@ -71,8 +79,6 @@ END
 		)
 
 	--
-		DECLARE @DataSourceName_LOAD VARCHAR(4)
-		SET @DataSourceName_LOAD = 'LOAD'
 		DECLARE @PayrollOTRDataSourceId_LOAD INT
 		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
@@ -84,8 +90,6 @@ END
 			PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
 
 	--
-		DECLARE @AccountingExportCompany VARCHAR(30)
-		SET @AccountingExportCompany = 'REDBONE';
 		DECLARE @AccountingExportCompanyId INT
 		SET @AccountingExportCompanyId =
 		(
@@ -99,9 +103,6 @@ END
 
 	 --Driver Paid Miles
 		--'Per Diem' Pay Code
-			DECLARE @PR_OTR_History__PayCode__PerDiem VARCHAR(8)
-			SET @PR_OTR_History__PayCode__PerDiem = 'Per Diem';
-
 			DECLARE @DriverPaidMiles
 			TABLE (
 				PersonId int NULL,
@@ -117,8 +118,6 @@ END
 					PayCode = @PR_OTR_History__PayCode__PerDiem
 				GROUP BY
 					DriverPersonId
-			;
-
 
 
 --=============================================================================================
@@ -126,9 +125,6 @@ END
 --=============================================================================================
 	--1) Per Mile
 		------------------------------------------------------------------------------------------------------------------
-			DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
-			SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
-
 			DECLARE @PayrollItemEARNINGSPerDiemId INT
 			SET @PayrollItemEARNINGSPerDiemId =
 			(
@@ -148,9 +144,6 @@ END
 
 	--2) Per Diem
 		------------------------------------------------------------------------------------------------------------------
-			DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
-			SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
-			
 			DECLARE @PayrollItemOTHERPAYPerDiemId INT
 			SET @PayrollItemOTHERPAYPerDiemId =
 			(
