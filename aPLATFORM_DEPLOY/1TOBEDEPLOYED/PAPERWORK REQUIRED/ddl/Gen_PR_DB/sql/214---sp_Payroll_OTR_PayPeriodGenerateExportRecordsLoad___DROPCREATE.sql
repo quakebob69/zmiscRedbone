@@ -120,7 +120,7 @@ END
 		GROUP BY
 			DriverPersonId
 
-
+/*
 --=============================================================================================
 -- INSERTS
 --=============================================================================================
@@ -208,11 +208,30 @@ END
 					paycode = @PR_OTR_History__PayId__DropNHook
 					GROUP BY
 					ps.DriverPersonId
-
+*/
 
 	-- Drop Solo
 		------------------------------------------------------------------------------------------------------------------
-			asdf
+			DECLARE @PayrollItemEARNINGSDropNHookId INT
+			SET @PayrollItemEARNINGSDropNHookId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				PayCodeLegacy = @PR_OTR_History__PayId__DropNHook
+			)
+
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+					FROM
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
+					WHERE 
+					paycode = @PR_OTR_History__PayId__DropNHook
+					GROUP BY
+					ps.DriverPersonId
 
 
 
