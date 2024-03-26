@@ -49,7 +49,7 @@ END
 	SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
 		
 	DECLARE @PR_OTR_History__PayId__Doubles INT
-	SET @PR_OTR_History__PayId__Doubles = 76; 
+	SET @PR_OTR_History__PayId__Doubles = 76;
 
 	DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
 	SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
