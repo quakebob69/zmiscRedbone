@@ -24,6 +24,7 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
+------------------------------------------------------------------------------------------------------------------
 -- WHERE VARS
 ------------------------------------------------------------------------------------------------------------------
 	DECLARE @PayrollEntryEARNINGSType VARCHAR(30)
@@ -100,24 +101,24 @@ END
 			Name = @AccountingExportCompany
 		)
 
-
-	 --Driver Paid Miles
-		--'Per Diem' Pay Code
-			DECLARE @DriverPaidMiles
-			TABLE (
-				PersonId int NULL,
-				DriverPaidMiles int NULL
-			);
+--*********************************************************************************************
+-- Driver Paid Miles
+--*********************************************************************************************
+	DECLARE @DriverPaidMiles
+	TABLE (
+		PersonId int NULL,
+		DriverPaidMiles int NULL
+	);
 		
-			INSERT INTO @DriverPaidMiles
-				SELECT
-					DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
-				FROM
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
-				WHERE
-					PayCode = @PR_OTR_History__PayCode__PerDiem
-				GROUP BY
-					DriverPersonId
+	INSERT INTO @DriverPaidMiles
+		SELECT
+			DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
+		FROM
+			payroll.vPayrollOTRStaging___withpersonsremoved ps
+		WHERE
+			PayCode = @PR_OTR_History__PayCode__PerDiem
+		GROUP BY
+			DriverPersonId
 
 
 --=============================================================================================
@@ -213,11 +214,10 @@ END
 
 
 
+
+
+
 /*
-	'Drop & Hook (Doubles)'
-
-
-
 	'OTR Drop Solo'
 	'Per Mile (Trainee)'
 	'Per Mile (Trainer)'
