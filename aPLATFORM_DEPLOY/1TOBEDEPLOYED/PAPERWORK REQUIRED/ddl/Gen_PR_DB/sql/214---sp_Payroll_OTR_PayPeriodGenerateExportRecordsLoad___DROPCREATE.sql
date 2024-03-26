@@ -124,7 +124,7 @@ END
 --=============================================================================================
 -- INSERTS
 --=============================================================================================
-	--1) Per Mile
+	-- Per Mile
 		------------------------------------------------------------------------------------------------------------------
 			DECLARE @PayrollItemEARNINGSPerDiemId INT
 			SET @PayrollItemEARNINGSPerDiemId =
@@ -143,7 +143,7 @@ END
 					FROM @DriverPaidMiles dpm
 
 
-	--2) Per Diem
+	-- Per Diem
 		------------------------------------------------------------------------------------------------------------------
 			DECLARE @PayrollItemOTHERPAYPerDiemId INT
 			SET @PayrollItemOTHERPAYPerDiemId =
@@ -162,7 +162,7 @@ END
 					FROM @DriverPaidMiles dpm
 
 
-	--3) Doubles Miles
+	-- Doubles Miles
 		------------------------------------------------------------------------------------------------------------------
 			DECLARE @PayrollItemEARNINGSDoublesId INT
 			SET @PayrollItemEARNINGSDoublesId =
@@ -186,7 +186,7 @@ END
 						ps.DriverPersonId
 
 
-	--4) Drop and Hook
+	-- Drop and Hook
 		------------------------------------------------------------------------------------------------------------------
 			DECLARE @PayrollItemEARNINGSDropNHookId INT
 			SET @PayrollItemEARNINGSDropNHookId =
