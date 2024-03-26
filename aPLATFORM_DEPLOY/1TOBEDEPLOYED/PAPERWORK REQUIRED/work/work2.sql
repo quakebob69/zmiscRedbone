@@ -84,7 +84,7 @@ CREATE TABLE #QuickBooksData
 	personId INT,
 	entryType VARCHAR(50),
 	itemName VARCHAR(50),
-	quantity INT,
+	quantity decimal(10,2),
 	otherPayrollItemsPay decimal(18,2),
 	PayId INT,
 	PayCode VARCHAR(25)
@@ -371,16 +371,41 @@ CREATE TABLE #QuickBooksData
 
 
 					--****
-						SELECT p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode FROM #QuickBooksData qbd JOIN main.Person p ON qbd.personId = p.PersonId
+						SELECT 
+						--p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode
+						p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay as 'Other Pay'
+						FROM #QuickBooksData qbd 
+							JOIN main.Person p ON qbd.personId = p.PersonId
+						WHERE quantity = 0
 						--WHERE LastName = 'ONTIVEROS'
 						--WHERE otherPayrollItemsPay is not null
-						ORDER BY p.FirstName, p.LastName, entryType, itemName, quantity, otherPayrollItemsPay;
+						ORDER BY p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay;
+
+						SELECT 
+						--p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode
+						p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay as 'Other Pay'
+						FROM #QuickBooksData qbd 
+							JOIN main.Person p ON qbd.personId = p.PersonId
+						WHERE itemName = 'DETENTION'
+						--WHERE LastName = 'ONTIVEROS'
+						--WHERE otherPayrollItemsPay is not null
+						ORDER BY p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay;
+
+
+						SELECT 
+						--p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode
+						p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay as 'Other Pay'
+						FROM #QuickBooksData qbd 
+							JOIN main.Person p ON qbd.personId = p.PersonId
+						--WHERE LastName = 'ONTIVEROS'
+						--WHERE otherPayrollItemsPay is not null
+						ORDER BY p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay;
 
 
 
 
 
-
+/*
 				SELECT top 2000
 					 name, PayCode, payid, PickOrigin, *
 				FROM
@@ -457,7 +482,7 @@ CREATE TABLE #QuickBooksData
 					--and name like '%Ont%'
 
 				order by ps.name
-
+*/
 
 				
 
