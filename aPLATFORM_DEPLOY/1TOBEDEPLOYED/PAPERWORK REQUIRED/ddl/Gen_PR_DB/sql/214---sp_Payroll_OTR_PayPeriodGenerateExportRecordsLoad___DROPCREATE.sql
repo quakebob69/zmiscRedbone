@@ -116,6 +116,7 @@ END
 		------------------------------------------------------------------------------------------------------------------
 			DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
 			SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
+
 			DECLARE @PayrollItemEARNINGSPerDiemId INT
 			SET @PayrollItemEARNINGSPerDiemId =
 			(
@@ -137,6 +138,7 @@ END
 		------------------------------------------------------------------------------------------------------------------
 			DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
 			SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
+			
 			DECLARE @PayrollItemOTHERPAYPerDiemId INT
 			SET @PayrollItemOTHERPAYPerDiemId =
 			(
