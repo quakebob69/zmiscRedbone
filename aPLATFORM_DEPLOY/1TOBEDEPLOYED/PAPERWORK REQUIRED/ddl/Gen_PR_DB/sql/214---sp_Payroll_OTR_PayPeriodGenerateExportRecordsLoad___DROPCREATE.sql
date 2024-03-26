@@ -107,7 +107,7 @@ END
 					DriverPersonId
 			;
 
-/*
+
 --1) Per Mile (Redbone - OTR)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
@@ -148,7 +148,7 @@ END
 			SELECT
 				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
-*/
+
 
 --3) Doubles (Albertsons)
 	------------------------------------------------------------------------------------------------------------------
