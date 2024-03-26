@@ -177,36 +177,6 @@ END
 					ps.DriverPersonId
 
 
-
-/*
-		DECLARE @PayrollItemEARNINGSDoubles  VARCHAR(30)
-		SET @PayrollItemEARNINGSDoubles = 'Doubles (Albertsons)';
-		DECLARE @PayrollItemEARNINGSDoublesId INT
-		SET @PayrollItemEARNINGSDoublesId =
-		(
-			SELECT
-			TOP 1 AccountingExportPayrollItemId 
-			FROM [export].[AccountingExportPayrollItem]
-			WHERE
-			NameQB = @PayrollItemEARNINGSDoubles
-		)
-
-		DECLARE @PR_OTR_History__PayId__Doubles INT
-		SET @PR_OTR_History__PayId__Doubles = 76;
-
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
-					FROM
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
-					WHERE 
-					PayId = @PR_OTR_History__PayId__Doubles
-					GROUP BY
-					ps.DriverPersonId
-*/
-
-
 --4) Drop & Hook (Doubles)
 	------------------------------------------------------------------------------------------------------------------
 		--WHERE VAR
