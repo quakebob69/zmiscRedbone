@@ -101,7 +101,7 @@ END
 					DriverPersonId
 			;
 
-/**/
+/*
 --1) Per Mile (Redbone - OTR)
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
@@ -171,11 +171,49 @@ END
 					PayId = @PR_OTR_History__PayId__Doubles
 					GROUP BY
 					ps.DriverPersonId
-
+*/
 
 
 --4) Drop & Hook (Doubles)
 	------------------------------------------------------------------------------------------------------------------
+		DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
+		SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
+
+
+
+		DECLARE @PayrollItemEARNINGSDropNHookId INT
+		SET @PayrollItemEARNINGSDropNHookId =
+		(
+			SELECT
+			TOP 1 AccountingExportPayrollItemId 
+			FROM [export].[AccountingExportPayrollItem]
+			WHERE
+			NameLegacy = @PR_OTR_History__PayId__DropNHook
+		)
+
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+			SELECT
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+				FROM
+				payroll.vPayrollOTRStaging___withpersonsremoved ps
+				WHERE 
+				paycode = @PR_OTR_History__PayId__DropNHook
+				GROUP BY
+				ps.DriverPersonId
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 		DECLARE @PayrollItemEARNINGSDropNHook  VARCHAR(30)
 		SET @PayrollItemEARNINGSDropNHook = 'Drop & Hook (Doubles)';
 		DECLARE @PayrollItemEARNINGSDropNHookId INT
@@ -201,7 +239,7 @@ END
 				paycode = @PR_OTR_History__PayId__DropNHook
 				GROUP BY
 				ps.DriverPersonId
-
+*/
 
 
 
@@ -214,6 +252,23 @@ END
 
 
 /*
+    -- Declare variables to hold the values of the columns
+    DECLARE @Column1Value INT
+    DECLARE @Column2Value VARCHAR(50)
+    DECLARE @Column3Value DATETIME
+
+    -- Get the row from the table
+    SELECT TOP 1 @Column1Value = Column1, @Column2Value = Column2, @Column3Value = Column3
+    FROM MyTable
+    WHERE Column1 = 'SomeValue'
+
+    -- Assign the values to the variables
+    SET @Column1Value = @Column1Value
+    SET @Column2Value = @Column2Value
+    SET @Column3Value = @Column3Value
+
+
+
 	'OTR Drop Solo'
 	'Per Mile (Trainee)'
 	'Per Mile (Trainer)'
