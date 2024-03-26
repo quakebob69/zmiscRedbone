@@ -26,9 +26,21 @@ END
 
 -- WHERE VARS
 ------------------------------------------------------------------------------------------------------------------
+	ALL THE WHERES...
+
+	@PayrollEntryEARNINGSType
+	@PayrollEntryOTHERPAYType
+	@DataSourceName_LOAD
+	@PayrollOTRDataSourceId_LOAD
+	@AccountingExportCompany
+
+
+
 	DECLARE @PR_OTR_History__PayId__Doubles INT
+	SET @PR_OTR_History__PayId__Doubles = 76; 
+
 	DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
-------------------------------------------------------------------------------------------------------------------
+	SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';------------------------------------------------------------------------------------------------------------------
 
 	--
 		DECLARE @OpenPayPeriodId INT
@@ -158,9 +170,6 @@ END
 
 	--3) Doubles Miles
 		------------------------------------------------------------------------------------------------------------------
-			--WHERE VAR
-			SET @PR_OTR_History__PayId__Doubles = 76;
-
 			DECLARE @PayrollItemEARNINGSDoublesId INT
 			SET @PayrollItemEARNINGSDoublesId =
 			(
@@ -185,9 +194,6 @@ END
 
 	--4) Drop and Hook
 		------------------------------------------------------------------------------------------------------------------
-			--WHERE VAR
-			SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
-
 			DECLARE @PayrollItemEARNINGSDropNHookId INT
 			SET @PayrollItemEARNINGSDropNHookId =
 			(
