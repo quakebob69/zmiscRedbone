@@ -24,11 +24,11 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
---1) WHERE VARS
-	------------------------------------------------------------------------------------------------------------------
-		asdf
-
-
+-- WHERE VARS
+------------------------------------------------------------------------------------------------------------------
+	asdf
+	DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
+------------------------------------------------------------------------------------------------------------------
 
 	--
 		DECLARE @OpenPayPeriodId INT
@@ -152,6 +152,22 @@ END
 
 --3) Doubles (Albertsons)
 	------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 		DECLARE @PayrollItemEARNINGSDoubles  VARCHAR(30)
 		SET @PayrollItemEARNINGSDoubles = 'Doubles (Albertsons)';
 		DECLARE @PayrollItemEARNINGSDoublesId INT
@@ -177,12 +193,11 @@ END
 					PayId = @PR_OTR_History__PayId__Doubles
 					GROUP BY
 					ps.DriverPersonId
-
+*/
 
 
 --4) Drop & Hook (Doubles)
 	------------------------------------------------------------------------------------------------------------------
-		DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
 		SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
 
 
