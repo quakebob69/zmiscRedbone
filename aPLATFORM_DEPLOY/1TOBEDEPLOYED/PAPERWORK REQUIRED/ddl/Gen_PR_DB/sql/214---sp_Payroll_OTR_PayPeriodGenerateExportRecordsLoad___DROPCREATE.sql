@@ -24,6 +24,12 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
+--1) WHERE VARS
+	------------------------------------------------------------------------------------------------------------------
+		asdf
+
+
+
 	--
 		DECLARE @OpenPayPeriodId INT
 		EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
@@ -142,7 +148,7 @@ END
 			SELECT
 				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
 				FROM @DriverPaidMiles dpm
-
+*/
 
 --3) Doubles (Albertsons)
 	------------------------------------------------------------------------------------------------------------------
@@ -171,7 +177,7 @@ END
 					PayId = @PR_OTR_History__PayId__Doubles
 					GROUP BY
 					ps.DriverPersonId
-*/
+
 
 
 --4) Drop & Hook (Doubles)
@@ -207,69 +213,9 @@ END
 
 
 
-
-
-
-
-
-
 /*
-		DECLARE @PayrollItemEARNINGSDropNHook  VARCHAR(30)
-		SET @PayrollItemEARNINGSDropNHook = 'Drop & Hook (Doubles)';
-		DECLARE @PayrollItemEARNINGSDropNHookId INT
-		SET @PayrollItemEARNINGSDropNHookId =
-		(
-			SELECT
-			TOP 1 AccountingExportPayrollItemId 
-			FROM [export].[AccountingExportPayrollItem]
-			WHERE
-			NameQB = @PayrollItemEARNINGSDropNHook
-		)
-
-		DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
-		SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
-
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
-				FROM
-				payroll.vPayrollOTRStaging___withpersonsremoved ps
-				WHERE 
-				paycode = @PR_OTR_History__PayId__DropNHook
-				GROUP BY
-				ps.DriverPersonId
-*/
-
-
-
-
-
-
-
-
-
-
-
-/*
-    -- Declare variables to hold the values of the columns
-    DECLARE @Column1Value INT
-    DECLARE @Column2Value VARCHAR(50)
-    DECLARE @Column3Value DATETIME
-
-    -- Get the row from the table
-    SELECT TOP 1 @Column1Value = Column1, @Column2Value = Column2, @Column3Value = Column3
-    FROM MyTable
-    WHERE Column1 = 'SomeValue'
-
-    -- Assign the values to the variables
-    SET @Column1Value = @Column1Value
-    SET @Column2Value = @Column2Value
-    SET @Column3Value = @Column3Value
-
-
-
 	'Drop & Hook (Doubles)'
+
 
 
 	'OTR Drop Solo'
