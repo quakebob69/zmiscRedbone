@@ -112,100 +112,100 @@ END
 --=============================================================================================
 -- INSERTS
 --=============================================================================================
---1) Per Mile
-	------------------------------------------------------------------------------------------------------------------
-		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
-		SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
-		DECLARE @PayrollItemEARNINGSPerDiemId INT
-		SET @PayrollItemEARNINGSPerDiemId =
-		(
-			SELECT
-			TOP 1 AccountingExportPayrollItemId 
-			FROM [export].[AccountingExportPayrollItem]
-			WHERE
-			NameQB = @PayrollItemEARNINGSPerDiem
-		)
+	--1) Per Mile
+		------------------------------------------------------------------------------------------------------------------
+			DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
+			SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
+			DECLARE @PayrollItemEARNINGSPerDiemId INT
+			SET @PayrollItemEARNINGSPerDiemId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				NameQB = @PayrollItemEARNINGSPerDiem
+			)
 				
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
-				FROM @DriverPaidMiles dpm
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
+					FROM @DriverPaidMiles dpm
 
 
---2) Per Diem
-	------------------------------------------------------------------------------------------------------------------
-		DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
-		SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
-		DECLARE @PayrollItemOTHERPAYPerDiemId INT
-		SET @PayrollItemOTHERPAYPerDiemId =
-		(
-			SELECT
-			TOP 1 AccountingExportPayrollItemId 
-			FROM [export].[AccountingExportPayrollItem]
-			WHERE
-			NameQB = @PayrollItemOTHERPAYPerDiem
-		)
+	--2) Per Diem
+		------------------------------------------------------------------------------------------------------------------
+			DECLARE @PayrollItemOTHERPAYPerDiem  VARCHAR(10)
+			SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
+			DECLARE @PayrollItemOTHERPAYPerDiemId INT
+			SET @PayrollItemOTHERPAYPerDiemId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				NameQB = @PayrollItemOTHERPAYPerDiem
+			)
 
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
-				FROM @DriverPaidMiles dpm
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryOTHERPAYTypeId, @PayrollItemOTHERPAYPerDiemId, dpm.PersonId, dpm.DriverPaidMiles
+					FROM @DriverPaidMiles dpm
 
 
---3) Doubles Miles
-	------------------------------------------------------------------------------------------------------------------
-		--WHERE VAR
-		SET @PR_OTR_History__PayId__Doubles = 76;
+	--3) Doubles Miles
+		------------------------------------------------------------------------------------------------------------------
+			--WHERE VAR
+			SET @PR_OTR_History__PayId__Doubles = 76;
 
-		DECLARE @PayrollItemEARNINGSDoublesId INT
-		SET @PayrollItemEARNINGSDoublesId =
-		(
-			SELECT
-			TOP 1 AccountingExportPayrollItemId 
-			FROM [export].[AccountingExportPayrollItem]
-			WHERE
-			PayIdLegacy = @PR_OTR_History__PayId__Doubles
-		)
+			DECLARE @PayrollItemEARNINGSDoublesId INT
+			SET @PayrollItemEARNINGSDoublesId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				PayIdLegacy = @PR_OTR_History__PayId__Doubles
+			)
 
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+						FROM
+						payroll.vPayrollOTRStaging___withpersonsremoved ps
+						WHERE 
+						PayId = @PR_OTR_History__PayId__Doubles
+						GROUP BY
+						ps.DriverPersonId
+
+
+	--4) Drop and Hook
+		------------------------------------------------------------------------------------------------------------------
+			--WHERE VAR
+			SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
+
+			DECLARE @PayrollItemEARNINGSDropNHookId INT
+			SET @PayrollItemEARNINGSDropNHookId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				PayCodeLegacy = @PR_OTR_History__PayId__DropNHook
+			)
+
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
 					FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
 					WHERE 
-					PayId = @PR_OTR_History__PayId__Doubles
+					paycode = @PR_OTR_History__PayId__DropNHook
 					GROUP BY
 					ps.DriverPersonId
-
-
---4) Drop and Hook
-	------------------------------------------------------------------------------------------------------------------
-		--WHERE VAR
-		SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
-
-		DECLARE @PayrollItemEARNINGSDropNHookId INT
-		SET @PayrollItemEARNINGSDropNHookId =
-		(
-			SELECT
-			TOP 1 AccountingExportPayrollItemId 
-			FROM [export].[AccountingExportPayrollItem]
-			WHERE
-			PayCodeLegacy = @PR_OTR_History__PayId__DropNHook
-		)
-
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
-				FROM
-				payroll.vPayrollOTRStaging___withpersonsremoved ps
-				WHERE 
-				paycode = @PR_OTR_History__PayId__DropNHook
-				GROUP BY
-				ps.DriverPersonId
 
 
 
