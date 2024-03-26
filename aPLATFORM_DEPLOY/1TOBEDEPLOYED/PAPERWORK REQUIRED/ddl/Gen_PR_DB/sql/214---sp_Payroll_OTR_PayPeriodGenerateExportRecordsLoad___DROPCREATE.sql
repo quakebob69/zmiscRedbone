@@ -108,7 +108,7 @@ END
 			;
 
 
---1) Per Mile (Redbone - OTR)
+--1) Per Mile
 	------------------------------------------------------------------------------------------------------------------
 		DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
 		SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
@@ -150,7 +150,7 @@ END
 				FROM @DriverPaidMiles dpm
 
 
---3) Doubles (Albertsons)
+--3) Doubles Miles
 	------------------------------------------------------------------------------------------------------------------
 		--WHERE VAR
 		SET @PR_OTR_History__PayId__Doubles = 76;
@@ -177,7 +177,7 @@ END
 					ps.DriverPersonId
 
 
---4) Drop & Hook (Doubles)
+--4) Drop and Hook
 	------------------------------------------------------------------------------------------------------------------
 		--WHERE VAR
 		SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
