@@ -16,5 +16,16 @@ GO
 	--DRIVERPAY
 		--OTHER
 			INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [NameQB], [PayCodeLegacy], [PayIdLegacy], [Order], [Enabled]) VALUES (1, 2, 'QBASDFASDF', 'ADVANCE', NULL, 1, 1);
+			INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [NameQB], [PayCodeLegacy], [PayIdLegacy], [Order], [Enabled]) VALUES (1, 2, 'QBASDFASDF', 'ADVANCE FEE', NULL, 1, 1);
+
+		/*
+			ADVANCE
+			ADVANCE FEE
+			Clean Inspection
+			DETENTION
+			LAYOVER
+			Orientation Bonus
+			REIMBURSE
+		*/
 
 GO
