@@ -91,8 +91,19 @@ END
 DECLARE @CustomerId INT, @CustomerName VARCHAR(50)
 
 DECLARE customer_cursor CURSOR FOR
-SELECT CustomerId, CustomerName
-FROM Customers
+
+	/*
+		SELECT CustomerId, CustomerName
+		FROM Customers
+	*/
+
+		SELECT ps.DriverPersonId as CustomerId, PickOrigin as CustomerName
+			FROM
+				--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+				payroll.vPayrollOTRStaging___withpersonsremoved ps
+			WHERE
+				paycode = 'Other Pay'
+
 
 OPEN customer_cursor
 
@@ -103,9 +114,13 @@ BEGIN
     PRINT 'Processing customer: ' + @CustomerName
     -- Perform some operation on the current row
     -- For example, update the customer's record
-    UPDATE Customers
-    SET IsActive = 1
-    WHERE CustomerId = @CustomerId
+
+
+
+    
+		--UPDATE Customers
+		--SET IsActive = 1
+		--WHERE CustomerId = @CustomerId
 
     FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
 END
