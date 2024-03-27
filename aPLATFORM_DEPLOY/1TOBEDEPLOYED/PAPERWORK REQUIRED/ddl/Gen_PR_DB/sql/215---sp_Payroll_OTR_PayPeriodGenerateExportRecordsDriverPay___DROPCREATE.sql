@@ -88,8 +88,12 @@ END
 
 
 	
-
-
+		SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
+			FROM
+				payroll.vPayrollOTRStaging___withpersonsremoved ps
+			WHERE
+				paycode = @PR_OTR_History__PayCode__OTHERPAY
+			GROUP BY ps.DriverPersonId, PickOrigin
 
 
 
