@@ -35,10 +35,10 @@ END
 	DECLARE @DataSourceName_DRIVERPAY VARCHAR(10)
 	SET @DataSourceName_DRIVERPAY = 'DRIVERPAY'
 
-	DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
+	DECLARE @PayrollEntryOTHERPAYType VARCHAR(25)
 	SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
 
-	DECLARE @PR_OTR_History__PayCode__OTHERPAY VARCHAR(25)
+	DECLARE @PR_OTR_History__PayCode__OTHERPAY VARCHAR(12)
 	SET @PR_OTR_History__PayCode__OTHERPAY = 'Other Pay';
 
 ------------------------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ END
 								export.AccountingExportPayrollItem itm
 									ON ps.PickOrigin = itm.PayCodeLegacy
 					WHERE
-						paycode = 'Other Pay'
+						paycode = @PR_OTR_History__PayCode__OTHERPAY
 					GROUP BY ps.DriverPersonId, itm.AccountingExportPayrollItemId, itm.NameQB
 
 
