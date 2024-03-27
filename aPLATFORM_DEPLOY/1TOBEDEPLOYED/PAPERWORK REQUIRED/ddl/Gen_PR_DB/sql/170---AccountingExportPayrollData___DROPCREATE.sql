@@ -19,8 +19,9 @@ CREATE TABLE [export].[AccountingExportPayrollData](
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
 	[AccountingExportPayrollItemId] [int] NOT NULL,
 	[PersonId] [int] NOT NULL,
-	[Quantity] [decimal](10, 2) NULL,
 	[Rate] [decimal](10, 2) NULL,
+	[Hours] [decimal](10, 2) NULL,
+	[Quantity] [decimal](10, 2) NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NULL,
 	[HeldPaymentHasBeenPaid] [bit] NULL
  CONSTRAINT [PK_AccountingExportPayrollData] PRIMARY KEY CLUSTERED 
