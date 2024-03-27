@@ -120,16 +120,6 @@ CREATE TABLE #QuickBooksData
 		DECLARE @PAYCODE_EXTRASTOPS VARCHAR(25)
 		SET @PAYCODE_EXTRASTOPS = 'Extra Stops';
 
-
-
-						--DECLARE @QBITEMNAME_OTHERPAY VARCHAR(25)
-						--SET @QBITEMNAME_OTHERPAY = 'Other Pay';
-
-						DECLARE @PAYCODE_OTHERPAY VARCHAR(25)
-						SET @PAYCODE_OTHERPAY = 'Other Pay';
-
-
-
 	--get 'OTR' PersonTypeId
 		DECLARE @OTRPERSONTYPE VARCHAR(25)
 		SET @OTRPERSONTYPE = 'OTR';
@@ -265,6 +255,7 @@ CREATE TABLE #QuickBooksData
 */
 
 	--Other Pay
+/*
 		INSERT INTO #QuickBooksData (personId, entryType, itemName, quantity, otherPayrollItemsPay)
 			SELECT ps.DriverPersonId, @QBENTRYTYPE_OTHERPAYROLLITEMS, PickOrigin, ROUND(SUM(Quantity), 2), ROUND(SUM(TOTALPAY), 2)
 				FROM
@@ -274,8 +265,17 @@ CREATE TABLE #QuickBooksData
 			paycode = @PAYCODE_OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
 		;
+		*/
 
+			DECLARE @PAYCODE_OTHERPAY VARCHAR(25)
+			SET @PAYCODE_OTHERPAY = 'Other Pay';
 
+			SELECT ps.DriverPersonId, @QBENTRYTYPE_OTHERPAYROLLITEMS, PickOrigin, ROUND(SUM(Quantity), 2), ROUND(SUM(TOTALPAY), 2)
+				FROM
+					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
+			WHERE
+			paycode = @PAYCODE_OTHERPAY
 		
 --======================================================================
 /*
@@ -401,7 +401,7 @@ CREATE TABLE #QuickBooksData
 						--WHERE LastName = 'ONTIVEROS'
 						--WHERE otherPayrollItemsPay is not null
 						ORDER BY p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay;
-						*/
+						
 
 						SELECT 
 						--p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode
@@ -411,7 +411,7 @@ CREATE TABLE #QuickBooksData
 						--WHERE LastName = 'ONTIVEROS'
 						--WHERE otherPayrollItemsPay is not null
 						ORDER BY itemName, p.FirstName, p.LastName, quantity, otherPayrollItemsPay;
-						
+						*/
 
 
 
