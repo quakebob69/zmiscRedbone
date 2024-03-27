@@ -32,7 +32,7 @@ END
 	DECLARE @AccountingExportCompany VARCHAR(30)
 	SET @AccountingExportCompany = 'REDBONE';
 
-	DECLARE @DataSourceName_DRIVERPAY VARCHAR(4)
+	DECLARE @DataSourceName_DRIVERPAY VARCHAR(10)
 	SET @DataSourceName_DRIVERPAY = 'DRIVERPAY'
 
 	DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
