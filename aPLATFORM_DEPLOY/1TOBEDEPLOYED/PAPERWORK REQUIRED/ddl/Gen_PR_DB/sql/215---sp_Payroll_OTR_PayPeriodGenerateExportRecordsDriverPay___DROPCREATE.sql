@@ -28,33 +28,23 @@ END
 ------------------------------------------------------------------------------------------------------------------
 -- WHERE VARS
 ------------------------------------------------------------------------------------------------------------------
-	
-	DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
-	SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
-
-	DECLARE @DataSourceName_DRIVERPAY VARCHAR(4)
-	SET @DataSourceName_DRIVERPAY = 'DRIVERPAY'
 
 	DECLARE @AccountingExportCompany VARCHAR(30)
 	SET @AccountingExportCompany = 'REDBONE';
 
-	
+	DECLARE @DataSourceName_DRIVERPAY VARCHAR(4)
+	SET @DataSourceName_DRIVERPAY = 'DRIVERPAY'
+
+	DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
+	SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
+
 ------------------------------------------------------------------------------------------------------------------
+
 
 
 	--
 		DECLARE @OpenPayPeriodId INT
 		EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
-
-		DECLARE @PayrollEntryEARNINGSTypeId INT
-		SET @PayrollEntryEARNINGSTypeId =
-		(
-			SELECT
-			TOP 1 AccountingExportPayrollEntryTypeId 
-			FROM [export].[AccountingExportPayrollEntryType]
-			WHERE
-			Name = @PayrollEntryEARNINGSType
-		)
 
 		DECLARE @PayrollEntryOTHERPAYTypeId INT
 		SET @PayrollEntryOTHERPAYTypeId =
@@ -71,13 +61,13 @@ END
 		SET @PayrollOTRDataSourceId_DRIVERPAY = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_DRIVERPAY)
 
 	--
+
 		DELETE FROM [export].[AccountingExportPayrollData]
 		WHERE
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND
 			PayrollOTRDataSourceId = @PayrollOTRDataSourceId_DRIVERPAY;
 
-	--
 		DECLARE @AccountingExportCompanyId INT
 		SET @AccountingExportCompanyId =
 		(
@@ -89,6 +79,7 @@ END
 		)
 
 
+/*
 --*********************************************************************************************
 -- Driver Paid Miles
 --*********************************************************************************************
@@ -220,6 +211,21 @@ END
 					paycode = @PR_OTR_History__PayId__DropSolo
 					GROUP BY
 					ps.DriverPersonId
+*/
+
+
+
+		DECLARE @PAYCODE_OTHERPAY VARCHAR(25)
+		SET @PAYCODE_OTHERPAY = 'Other Pay';
+
+		SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
+			FROM
+				--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
+				payroll.vPayrollOTRStaging___withpersonsremoved ps
+			WHERE
+				paycode = @PAYCODE_OTHERPAY
+			GROUP BY ps.DriverPersonId, PickOrigin
+
 
 
 GO

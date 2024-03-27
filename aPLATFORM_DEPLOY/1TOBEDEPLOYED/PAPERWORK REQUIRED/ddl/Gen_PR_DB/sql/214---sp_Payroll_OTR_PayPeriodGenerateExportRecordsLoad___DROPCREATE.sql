@@ -28,17 +28,18 @@ END
 ------------------------------------------------------------------------------------------------------------------
 -- WHERE VARS
 ------------------------------------------------------------------------------------------------------------------
+
+	DECLARE @AccountingExportCompany VARCHAR(30)
+	SET @AccountingExportCompany = 'REDBONE';
+
+	DECLARE @DataSourceName_LOAD VARCHAR(4)
+	SET @DataSourceName_LOAD = 'LOAD'
+
 	DECLARE @PayrollEntryEARNINGSType VARCHAR(30)
 	SET @PayrollEntryEARNINGSType = 'EARNINGS';
 
 	DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
 	SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
-
-	DECLARE @DataSourceName_LOAD VARCHAR(4)
-	SET @DataSourceName_LOAD = 'LOAD'
-
-	DECLARE @AccountingExportCompany VARCHAR(30)
-	SET @AccountingExportCompany = 'REDBONE';
 
 	DECLARE @PR_OTR_History__PayCode__PerDiem VARCHAR(8)
 	SET @PR_OTR_History__PayCode__PerDiem = 'Per Diem';
@@ -57,6 +58,7 @@ END
 
 	DECLARE @PR_OTR_History__PayId__DropSolo VARCHAR(25)
 	SET @PR_OTR_History__PayId__DropSolo = 'Extra Stops';
+	
 ------------------------------------------------------------------------------------------------------------------
 
 
@@ -95,7 +97,6 @@ END
 			AND
 			PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
 
-	--
 		DECLARE @AccountingExportCompanyId INT
 		SET @AccountingExportCompanyId =
 		(
