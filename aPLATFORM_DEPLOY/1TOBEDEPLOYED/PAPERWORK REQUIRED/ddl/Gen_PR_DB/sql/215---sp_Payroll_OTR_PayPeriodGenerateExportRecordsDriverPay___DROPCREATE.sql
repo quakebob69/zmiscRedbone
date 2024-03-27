@@ -88,12 +88,15 @@ END
 
 
 	
-		SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
+		SELECT ps.DriverPersonId, itm.NameQB, ROUND(SUM(TOTALPAY), 2)
 			FROM
 				payroll.PayrollOTRStaging ps
+					JOIN
+						export.AccountingExportPayrollItem itm
+							ON ps.PickOrigin = itm.PayCodeLegacy
 			WHERE
-				paycode = @PR_OTR_History__PayCode__OTHERPAY
-			GROUP BY ps.DriverPersonId, PickOrigin
+				paycode = 'Other Pay'
+			GROUP BY ps.DriverPersonId, itm.NameQB
 
 
 
