@@ -95,8 +95,8 @@ END
 			)
 			*/
 
-				--INSERT INTO [export].[AccountingExportPayrollData]
-				--	(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 				SELECT
 					--ps.DriverPersonId, itm.NameQB, ROUND(SUM(TOTALPAY), 2)
 					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, @PayrollEntryOTHERPAYTypeId, itm.AccountingExportPayrollItemId, ps.DriverPersonId, ROUND(SUM(TOTALPAY), 2)
