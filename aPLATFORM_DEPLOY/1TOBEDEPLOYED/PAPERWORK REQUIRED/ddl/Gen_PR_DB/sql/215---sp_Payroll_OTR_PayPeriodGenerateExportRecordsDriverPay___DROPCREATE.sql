@@ -87,66 +87,45 @@ END
 
 
 
+	
 
-DECLARE @CustomerId INT, @CustomerName VARCHAR(50)
-DECLARE customer_cursor CURSOR FOR
 
-		SELECT ps.DriverPersonId as CustomerId, PickOrigin as CustomerName
-			FROM
-				payroll.vPayrollOTRStaging___withpersonsremoved ps
-			WHERE
-				paycode = 'Other Pay'
 
-OPEN customer_cursor
-FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
 
-	WHILE @@FETCH_STATUS = 0
-	BEGIN
-		PRINT 'Processing customer: ' + @CustomerName
-			--UPDATE Customers
-			--SET IsActive = 1
-			--WHERE CustomerId = @CustomerId
-		FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
-	END
 
-CLOSE customer_cursor
-DEALLOCATE customer_cursor
+
+
+
 
 
 
 
 
 /*
-DECLARE @CustomerId INT, @CustomerName VARCHAR(50)
+	DECLARE @CustomerId INT, @CustomerName VARCHAR(50)
+	DECLARE customer_cursor CURSOR FOR
 
-DECLARE customer_cursor CURSOR FOR
-SELECT CustomerId, CustomerName
-FROM Customers
+			SELECT ps.DriverPersonId as CustomerId, PickOrigin as CustomerName
+				FROM
+					payroll.vPayrollOTRStaging___withpersonsremoved ps
+				WHERE
+					paycode = 'Other Pay'
 
-OPEN customer_cursor
+	OPEN customer_cursor
+	FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
 
-FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			PRINT 'Processing customer: ' + @CustomerName
+				--UPDATE Customers
+				--SET IsActive = 1
+				--WHERE CustomerId = @CustomerId
+			FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
+		END
 
-WHILE @@FETCH_STATUS = 0
-BEGIN
-    PRINT 'Processing customer: ' + @CustomerName
-    -- Perform some operation on the current row
-    -- For example, update the customer's record
-    UPDATE Customers
-    SET IsActive = 1
-    WHERE CustomerId = @CustomerId
-
-    FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
-END
-
-CLOSE customer_cursor
-DEALLOCATE customer_cursor
+	CLOSE customer_cursor
+	DEALLOCATE customer_cursor
 */
-
-
-
-
-
 
 
 
