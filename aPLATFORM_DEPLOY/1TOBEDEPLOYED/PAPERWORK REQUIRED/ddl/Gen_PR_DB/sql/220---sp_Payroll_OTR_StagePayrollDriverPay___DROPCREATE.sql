@@ -48,7 +48,7 @@ END
 	DELETE FROM [export].[AccountingExportPayrollData] WHERE
 	OriginatingOTRPayPeriodId = @OpenPayPeriodId
 	AND
-	AccountingExportPayrollData = @PayrollOTRDataSourceId_DRIVERPAY;
+	AccountingExportPayrollDataId = @PayrollOTRDataSourceId_DRIVERPAY;
 
 
 --TEMP_OTR_DATA__DriverPay inserts
