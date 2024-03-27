@@ -219,8 +219,8 @@ END
 
 	-- Drop Solo
 		------------------------------------------------------------------------------------------------------------------
-			DECLARE @PayrollItemEARNINGSDropSolo INT
-			SET @PayrollItemEARNINGSDropSolo =
+			DECLARE @PayrollItemEARNINGSDropSoloId INT
+			SET @PayrollItemEARNINGSDropSoloId =
 			(
 				SELECT
 				TOP 1 AccountingExportPayrollItemId 
@@ -232,7 +232,7 @@ END
 				INSERT INTO [export].[AccountingExportPayrollData]
 					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropSolo, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropSoloId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
 					FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
 					WHERE 

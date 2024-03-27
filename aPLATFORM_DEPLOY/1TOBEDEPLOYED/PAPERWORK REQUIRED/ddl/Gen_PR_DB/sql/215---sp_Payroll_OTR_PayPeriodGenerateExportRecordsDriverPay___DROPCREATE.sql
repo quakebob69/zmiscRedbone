@@ -86,28 +86,42 @@ END
 
 
 
-	-- Drop and Hook
+
+
+
+
+
+
+
+	-- Drop Solo
 		------------------------------------------------------------------------------------------------------------------
-			DECLARE @PayrollItemEARNINGSDropNHookId INT
-			SET @PayrollItemEARNINGSDropNHookId =
+			DECLARE @PayrollItemEARNINGSDropSoloId INT
+			SET @PayrollItemEARNINGSDropSoloId =
 			(
 				SELECT
 				TOP 1 AccountingExportPayrollItemId 
 				FROM [export].[AccountingExportPayrollItem]
 				WHERE
-				PayCodeLegacy = @PR_OTR_History__PayCode__DropNHook
+				PayCodeLegacy = @PR_OTR_History__PayCode__DropSolo
 			)
 
 				INSERT INTO [export].[AccountingExportPayrollData]
 					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropSoloId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
 					FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
 					WHERE 
-					paycode = @PR_OTR_History__PayCode__DropNHook
+					paycode = @PR_OTR_History__PayCode__DropSolo
 					GROUP BY
 					ps.DriverPersonId
+
+
+
+
+
+
+
 
 
 
