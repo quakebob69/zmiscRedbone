@@ -97,8 +97,6 @@ CREATE TABLE #QuickBooksData
 	--literals
 		DECLARE @QBENTRYTYPE_EARNINGS VARCHAR(8)
 		SET @QBENTRYTYPE_EARNINGS = 'Earnings';
-		DECLARE @QBENTRYTYPE_OTHERPAYROLLITEMS VARCHAR(25)
-		SET @QBENTRYTYPE_OTHERPAYROLLITEMS = 'Other Payroll Items';
 
 		--qb item names
 		DECLARE @QBITEMNAME_PERMILEOTR VARCHAR(25)
@@ -267,6 +265,10 @@ CREATE TABLE #QuickBooksData
 		;
 		*/
 
+		
+			DECLARE @QBENTRYTYPE_OTHERPAYROLLITEMS VARCHAR(25)
+			SET @QBENTRYTYPE_OTHERPAYROLLITEMS = 'Other Payroll Items';
+
 			DECLARE @PAYCODE_OTHERPAY VARCHAR(25)
 			SET @PAYCODE_OTHERPAY = 'Other Pay';
 
@@ -274,9 +276,10 @@ CREATE TABLE #QuickBooksData
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
-			WHERE
-			paycode = @PAYCODE_OTHERPAY
-		
+				WHERE
+					paycode = @PAYCODE_OTHERPAY
+				GROUP BY ps.DriverPersonId, PickOrigin
+
 --======================================================================
 /*
 
