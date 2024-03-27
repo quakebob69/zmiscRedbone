@@ -81,22 +81,33 @@ END
 		)
 
 
+	-- Other Pay
+		------------------------------------------------------------------------------------------------------------------
+			/*
+			DECLARE @PayrollItemEARNINGSDropNHookId INT
+			SET @PayrollItemEARNINGSDropNHookId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				PayCodeLegacy = @PR_OTR_History__PayCode__DropNHook
+			)
+			*/
 
-
-
-
-
-
-	
-		SELECT ps.DriverPersonId, itm.NameQB, ROUND(SUM(TOTALPAY), 2)
-			FROM
-				payroll.PayrollOTRStaging ps
-					JOIN
-						export.AccountingExportPayrollItem itm
-							ON ps.PickOrigin = itm.PayCodeLegacy
-			WHERE
-				paycode = 'Other Pay'
-			GROUP BY ps.DriverPersonId, itm.NameQB
+				--INSERT INTO [export].[AccountingExportPayrollData]
+				--	(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					--ps.DriverPersonId, itm.NameQB, ROUND(SUM(TOTALPAY), 2)
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, @PayrollEntryOTHERPAYTypeId, itm.AccountingExportPayrollItemId, ps.DriverPersonId, ROUND(SUM(TOTALPAY), 2)
+					FROM
+						payroll.PayrollOTRStaging ps
+							JOIN
+								export.AccountingExportPayrollItem itm
+									ON ps.PickOrigin = itm.PayCodeLegacy
+					WHERE
+						paycode = 'Other Pay'
+					GROUP BY ps.DriverPersonId, itm.AccountingExportPayrollItemId, itm.NameQB
 
 
 
