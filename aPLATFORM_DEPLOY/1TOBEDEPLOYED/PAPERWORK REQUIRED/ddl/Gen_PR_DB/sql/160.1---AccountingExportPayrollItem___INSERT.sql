@@ -18,7 +18,7 @@ GO
 			INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [NameQB], [PayCodeLegacy], [PayIdLegacy], [Order], [Enabled]) VALUES (1, 2, 'QBADVANCE', 'ADVANCE', NULL, 1, 1);
 			INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [NameQB], [PayCodeLegacy], [PayIdLegacy], [Order], [Enabled]) VALUES (1, 2, 'QBADVANCEFEE', 'ADVANCE FEE', NULL, 1, 1);
 
-		/*
+		
 			ADVANCE
 			ADVANCE FEE
 			Clean Inspection
@@ -26,6 +26,6 @@ GO
 			LAYOVER
 			Orientation Bonus
 			REIMBURSE
-		*/
+		
 
 GO
