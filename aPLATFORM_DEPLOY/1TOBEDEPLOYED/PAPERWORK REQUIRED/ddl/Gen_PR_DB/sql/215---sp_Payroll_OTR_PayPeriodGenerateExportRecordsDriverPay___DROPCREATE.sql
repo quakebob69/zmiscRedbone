@@ -83,79 +83,18 @@ END
 
 	-- Other Pay
 		------------------------------------------------------------------------------------------------------------------
-			/*
-			DECLARE @PayrollItemEARNINGSDropNHookId INT
-			SET @PayrollItemEARNINGSDropNHookId =
-			(
-				SELECT
-				TOP 1 AccountingExportPayrollItemId 
-				FROM [export].[AccountingExportPayrollItem]
-				WHERE
-				PayCodeLegacy = @PR_OTR_History__PayCode__DropNHook
-			)
-			*/
-
-				INSERT INTO [export].[AccountingExportPayrollData]
-					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-				SELECT
-					--ps.DriverPersonId, itm.NameQB, ROUND(SUM(TOTALPAY), 2)
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, @PayrollEntryOTHERPAYTypeId, itm.AccountingExportPayrollItemId, ps.DriverPersonId, ROUND(SUM(TOTALPAY), 2)
-					FROM
-						payroll.PayrollOTRStaging ps
-							JOIN
-								export.AccountingExportPayrollItem itm
-									ON ps.PickOrigin = itm.PayCodeLegacy
-					WHERE
-						paycode = @PR_OTR_History__PayCode__OTHERPAY
-					GROUP BY ps.DriverPersonId, itm.AccountingExportPayrollItemId, itm.NameQB
-
-
-
-
-
-
-
-
-
-
-
-/*
-	DECLARE @CustomerId INT, @CustomerName VARCHAR(50)
-	DECLARE customer_cursor CURSOR FOR
-
-			SELECT ps.DriverPersonId as CustomerId, PickOrigin as CustomerName
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+			SELECT
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, @PayrollEntryOTHERPAYTypeId, itm.AccountingExportPayrollItemId, ps.DriverPersonId, ROUND(SUM(TOTALPAY), 2)
 				FROM
 					payroll.PayrollOTRStaging ps
+						JOIN
+							export.AccountingExportPayrollItem itm
+								ON ps.PickOrigin = itm.PayCodeLegacy
 				WHERE
-					paycode = 'Other Pay'
-
-	OPEN customer_cursor
-	FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
-
-		WHILE @@FETCH_STATUS = 0
-		BEGIN
-			PRINT 'Processing customer: ' + @CustomerName
-				--UPDATE Customers
-				--SET IsActive = 1
-				--WHERE CustomerId = @CustomerId
-			FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
-		END
-
-	CLOSE customer_cursor
-	DEALLOCATE customer_cursor
-*/
+					paycode = @PR_OTR_History__PayCode__OTHERPAY
+				GROUP BY ps.DriverPersonId, itm.AccountingExportPayrollItemId, itm.NameQB
 
 
-
-/*
-	GOOD
-
-		SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
-			FROM
-				--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-				payroll.PayrollOTRStaging ps
-			WHERE
-				paycode = @PR_OTR_History__PayCode__OTHERPAY
-			GROUP BY ps.DriverPersonId, PickOrigin
-*/
 GO
