@@ -38,11 +38,10 @@ END
 	DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
 	SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
 
-	DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
-	SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
+	DECLARE @PR_OTR_History__PayCode__OTHERPAY VARCHAR(25)
+	SET @PR_OTR_History__PayCode__OTHERPAY = 'Other Pay';
 
 ------------------------------------------------------------------------------------------------------------------
-
 
 
 	--
@@ -93,28 +92,6 @@ END
 
 
 
-	-- Drop Solo
-		------------------------------------------------------------------------------------------------------------------
-			DECLARE @PayrollItemEARNINGSDropSoloId INT
-			SET @PayrollItemEARNINGSDropSoloId =
-			(
-				SELECT
-				TOP 1 AccountingExportPayrollItemId 
-				FROM [export].[AccountingExportPayrollItem]
-				WHERE
-				PayCodeLegacy = @PR_OTR_History__PayCode__DropSolo
-			)
-
-				INSERT INTO [export].[AccountingExportPayrollData]
-					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropSoloId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
-					FROM
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
-					WHERE 
-					paycode = @PR_OTR_History__PayCode__DropSolo
-					GROUP BY
-					ps.DriverPersonId
 
 
 
@@ -123,24 +100,14 @@ END
 
 
 
-
-
-
-
-
-		DECLARE @PAYCODE_OTHERPAY VARCHAR(25)
-		SET @PAYCODE_OTHERPAY = 'Other Pay';
-
-
-/*
 		SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
 			FROM
 				--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
 				payroll.vPayrollOTRStaging___withpersonsremoved ps
 			WHERE
-				paycode = @PAYCODE_OTHERPAY
+				paycode = @PR_OTR_History__PayCode__OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
-*/
+
 
 
 GO
