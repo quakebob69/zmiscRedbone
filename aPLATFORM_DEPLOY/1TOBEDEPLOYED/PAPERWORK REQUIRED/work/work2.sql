@@ -265,20 +265,22 @@ CREATE TABLE #QuickBooksData
 		;
 		*/
 
-		
+			/*
 			DECLARE @QBENTRYTYPE_OTHERPAYROLLITEMS VARCHAR(25)
 			SET @QBENTRYTYPE_OTHERPAYROLLITEMS = 'Other Payroll Items';
+			*/
 
 			DECLARE @PAYCODE_OTHERPAY VARCHAR(25)
 			SET @PAYCODE_OTHERPAY = 'Other Pay';
 
-			SELECT ps.DriverPersonId, @QBENTRYTYPE_OTHERPAYROLLITEMS, PickOrigin, ROUND(SUM(Quantity), 2), ROUND(SUM(TOTALPAY), 2)
+			SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
 				FROM
 					--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
 				WHERE
 					paycode = @PAYCODE_OTHERPAY
 				GROUP BY ps.DriverPersonId, PickOrigin
+
 
 --======================================================================
 /*
