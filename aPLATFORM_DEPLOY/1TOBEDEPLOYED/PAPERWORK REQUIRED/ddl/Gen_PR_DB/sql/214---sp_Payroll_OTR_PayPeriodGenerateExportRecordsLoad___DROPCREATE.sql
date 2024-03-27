@@ -41,23 +41,23 @@ END
 	DECLARE @PayrollEntryOTHERPAYType VARCHAR(30)
 	SET @PayrollEntryOTHERPAYType = 'OTHERPAYROLLITEMS';
 
-	DECLARE @PR_OTR_History__PayCode__PerDiem VARCHAR(8)
-	SET @PR_OTR_History__PayCode__PerDiem = 'Per Diem';
-
 	DECLARE @PayrollItemEARNINGSPerDiem  VARCHAR(30)
 	SET @PayrollItemEARNINGSPerDiem = 'Per Mile (Redbone - OTR)';
 	
 	DECLARE @PayrollItemOTHERPAYPerDiem VARCHAR(10)
 	SET @PayrollItemOTHERPAYPerDiem = 'Per Diem';
 		
+	DECLARE @PR_OTR_History__PayCode__PerDiem VARCHAR(8)
+	SET @PR_OTR_History__PayCode__PerDiem = 'Per Diem';
+
 	DECLARE @PR_OTR_History__PayId__Doubles INT
 	SET @PR_OTR_History__PayId__Doubles = 76;
 
-	DECLARE @PR_OTR_History__PayId__DropNHook VARCHAR(25)
-	SET @PR_OTR_History__PayId__DropNHook = 'Drop & Hook';
+	DECLARE @PR_OTR_History__PayCode__DropNHook VARCHAR(25)
+	SET @PR_OTR_History__PayCode__DropNHook = 'Drop & Hook';
 
-	DECLARE @PR_OTR_History__PayId__DropSolo VARCHAR(25)
-	SET @PR_OTR_History__PayId__DropSolo = 'Extra Stops';
+	DECLARE @PR_OTR_History__PayCode__DropSolo VARCHAR(25)
+	SET @PR_OTR_History__PayCode__DropSolo = 'Extra Stops';
 	
 ------------------------------------------------------------------------------------------------------------------
 
@@ -202,7 +202,7 @@ END
 				TOP 1 AccountingExportPayrollItemId 
 				FROM [export].[AccountingExportPayrollItem]
 				WHERE
-				PayCodeLegacy = @PR_OTR_History__PayId__DropNHook
+				PayCodeLegacy = @PR_OTR_History__PayCode__DropNHook
 			)
 
 				INSERT INTO [export].[AccountingExportPayrollData]
@@ -212,7 +212,7 @@ END
 					FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
 					WHERE 
-					paycode = @PR_OTR_History__PayId__DropNHook
+					paycode = @PR_OTR_History__PayCode__DropNHook
 					GROUP BY
 					ps.DriverPersonId
 
@@ -226,7 +226,7 @@ END
 				TOP 1 AccountingExportPayrollItemId 
 				FROM [export].[AccountingExportPayrollItem]
 				WHERE
-				PayCodeLegacy = @PR_OTR_History__PayId__DropSolo
+				PayCodeLegacy = @PR_OTR_History__PayCode__DropSolo
 			)
 
 				INSERT INTO [export].[AccountingExportPayrollData]
@@ -236,7 +236,7 @@ END
 					FROM
 					payroll.vPayrollOTRStaging___withpersonsremoved ps
 					WHERE 
-					paycode = @PR_OTR_History__PayId__DropSolo
+					paycode = @PR_OTR_History__PayCode__DropSolo
 					GROUP BY
 					ps.DriverPersonId
 
