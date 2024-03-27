@@ -121,7 +121,7 @@ END
 		SELECT
 			DriverPersonId as PersonId, ROUND(SUM(Quantity), 2) as DriverPaidMiles
 		FROM
-			payroll.vPayrollOTRStaging___withpersonsremoved ps
+			payroll.PayrollOTRStaging ps
 		WHERE
 			PayCode = @PR_OTR_History__PayCode__PerDiem
 		GROUP BY
@@ -186,7 +186,7 @@ END
 				SELECT
 					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
 						FROM
-						payroll.vPayrollOTRStaging___withpersonsremoved ps
+						payroll.PayrollOTRStaging ps
 						WHERE 
 						PayId = @PR_OTR_History__PayId__Doubles
 						GROUP BY
@@ -210,7 +210,7 @@ END
 				SELECT
 					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
 					FROM
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
+					payroll.PayrollOTRStaging ps
 					WHERE 
 					paycode = @PR_OTR_History__PayCode__DropNHook
 					GROUP BY
@@ -234,7 +234,7 @@ END
 				SELECT
 					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropSoloId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
 					FROM
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
+					payroll.PayrollOTRStaging ps
 					WHERE 
 					paycode = @PR_OTR_History__PayCode__DropSolo
 					GROUP BY

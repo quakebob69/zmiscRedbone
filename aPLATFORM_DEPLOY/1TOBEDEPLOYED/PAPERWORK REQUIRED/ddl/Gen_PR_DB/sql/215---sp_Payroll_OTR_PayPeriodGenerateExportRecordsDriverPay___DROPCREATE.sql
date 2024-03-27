@@ -90,7 +90,7 @@ END
 	
 		SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
 			FROM
-				payroll.vPayrollOTRStaging___withpersonsremoved ps
+				payroll.PayrollOTRStaging ps
 			WHERE
 				paycode = @PR_OTR_History__PayCode__OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
@@ -111,7 +111,7 @@ END
 
 			SELECT ps.DriverPersonId as CustomerId, PickOrigin as CustomerName
 				FROM
-					payroll.vPayrollOTRStaging___withpersonsremoved ps
+					payroll.PayrollOTRStaging ps
 				WHERE
 					paycode = 'Other Pay'
 
@@ -139,7 +139,7 @@ END
 		SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
 			FROM
 				--payroll.PayrollStagingOTR_10_10__10_17_____2023 ps
-				payroll.vPayrollOTRStaging___withpersonsremoved ps
+				payroll.PayrollOTRStaging ps
 			WHERE
 				paycode = @PR_OTR_History__PayCode__OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
