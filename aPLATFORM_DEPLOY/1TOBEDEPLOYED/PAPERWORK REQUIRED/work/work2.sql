@@ -391,7 +391,7 @@ CREATE TABLE #QuickBooksData
 						--WHERE otherPayrollItemsPay is not null
 						ORDER BY p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay;
 
-
+						
 						SELECT 
 						--p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode
 						p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay as 'Other Pay'
@@ -401,6 +401,25 @@ CREATE TABLE #QuickBooksData
 						--WHERE otherPayrollItemsPay is not null
 						ORDER BY p.FirstName, p.LastName, itemName, quantity, otherPayrollItemsPay;
 
+
+						SELECT 
+						--p.FirstName, p.LastName, SUBSTRING(entryType, 1, 100) as 'tp', itemName, quantity as 'quant', otherPayrollItemsPay as 'Oth Pay', PayId, PayCode
+						itemName, p.FirstName, p.LastName, quantity, otherPayrollItemsPay as 'Other Pay'
+						FROM #QuickBooksData qbd 
+							JOIN main.Person p ON qbd.personId = p.PersonId
+						--WHERE LastName = 'ONTIVEROS'
+						--WHERE otherPayrollItemsPay is not null
+						ORDER BY itemName, p.FirstName, p.LastName, quantity, otherPayrollItemsPay;
+
+
+
+
+						/*
+							SELECT 
+							DISTINCT(itemName)
+							FROM #QuickBooksData qbd
+							ORDER BY ITEMNAME
+						*/
 
 
 
