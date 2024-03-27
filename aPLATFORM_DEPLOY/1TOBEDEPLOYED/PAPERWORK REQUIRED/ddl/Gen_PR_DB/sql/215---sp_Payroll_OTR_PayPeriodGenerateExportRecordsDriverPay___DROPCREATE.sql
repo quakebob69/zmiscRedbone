@@ -88,6 +88,61 @@ END
 
 
 
+DECLARE @CustomerId INT, @CustomerName VARCHAR(50)
+
+DECLARE customer_cursor CURSOR FOR
+SELECT CustomerId, CustomerName
+FROM Customers
+
+OPEN customer_cursor
+
+FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    PRINT 'Processing customer: ' + @CustomerName
+    -- Perform some operation on the current row
+    -- For example, update the customer's record
+    UPDATE Customers
+    SET IsActive = 1
+    WHERE CustomerId = @CustomerId
+
+    FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
+END
+
+CLOSE customer_cursor
+DEALLOCATE customer_cursor
+
+
+
+
+
+/*
+DECLARE @CustomerId INT, @CustomerName VARCHAR(50)
+
+DECLARE customer_cursor CURSOR FOR
+SELECT CustomerId, CustomerName
+FROM Customers
+
+OPEN customer_cursor
+
+FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    PRINT 'Processing customer: ' + @CustomerName
+    -- Perform some operation on the current row
+    -- For example, update the customer's record
+    UPDATE Customers
+    SET IsActive = 1
+    WHERE CustomerId = @CustomerId
+
+    FETCH NEXT FROM customer_cursor INTO @CustomerId, @CustomerName
+END
+
+CLOSE customer_cursor
+DEALLOCATE customer_cursor
+*/
 
 
 
@@ -96,9 +151,8 @@ END
 
 
 
-
-
-
+/*
+	GOOD
 
 		SELECT ps.DriverPersonId, PickOrigin, ROUND(SUM(TOTALPAY), 2)
 			FROM
@@ -107,7 +161,5 @@ END
 			WHERE
 				paycode = @PR_OTR_History__PayCode__OTHERPAY
 			GROUP BY ps.DriverPersonId, PickOrigin
-
-
-
+*/
 GO
