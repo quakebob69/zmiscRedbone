@@ -48,7 +48,7 @@ END
 	DELETE FROM [export].[AccountingExportPayrollData] WHERE
 	OriginatingOTRPayPeriodId = @OpenPayPeriodId
 	AND
-	AccountingExportPayrollDataId = @PayrollOTRDataSourceId_LOAD;
+	PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD;
 
 --TEMP_OTR_DATA__Load inserts
 	DROP TABLE IF EXISTS #TEMP_OTR_DATA__Load
