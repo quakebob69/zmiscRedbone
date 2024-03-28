@@ -23,5 +23,4 @@ GO
 			INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [NameQB], [PayCodeLegacy], [PayIdLegacy], [Order], [Enabled]) VALUES (1, 2, 'QBCHANGE13Orientation Bonus', 'Orientation Bonus', NULL, 1, 1);
 			INSERT INTO [export].[AccountingExportPayrollItem] ([AccountingExportCompanyId], [AccountingExportPayrollEntryTypeId], [NameQB], [PayCodeLegacy], [PayIdLegacy], [Order], [Enabled]) VALUES (1, 2, 'QBCHANGE14REIMBURSE', 'REIMBURSE', NULL, 1, 1);
 
-
 GO
