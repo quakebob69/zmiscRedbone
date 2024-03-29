@@ -171,53 +171,83 @@ END
 
 	-- Doubles Miles
 		------------------------------------------------------------------------------------------------------------------
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, itm.AccountingExportPayrollItemId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
-				FROM
-					payroll.PayrollOTRStaging ps
-						JOIN
-							export.AccountingExportPayrollItem itm
-								ON ps.PayId = itm.PayIdLegacy
-				WHERE 
-				PayId = @PR_OTR_History__PayId__Doubles
-				GROUP BY
-				itm.AccountingExportPayrollItemId, ps.DriverPersonId
+			DECLARE @PayrollItemEARNINGSDoublesId INT
+			SET @PayrollItemEARNINGSDoublesId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				PayIdLegacy = @PR_OTR_History__PayId__Doubles
+			)
+
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDoublesId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+					FROM
+						payroll.PayrollOTRStaging ps
+							--JOIN
+								--export.AccountingExportPayrollItem itm
+									--ON ps.PickOrigin = itm.PayCodeLegacy
+					WHERE 
+					PayId = @PR_OTR_History__PayId__Doubles
+					GROUP BY
+					ps.DriverPersonId
 
 
 	-- Drop and Hook
 		------------------------------------------------------------------------------------------------------------------
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, itm.AccountingExportPayrollItemId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
-				FROM
-					payroll.PayrollOTRStaging ps
-						JOIN
-							export.AccountingExportPayrollItem itm
-								ON ps.PayCode = itm.PayCodeLegacy
-				WHERE 
-				paycode = @PR_OTR_History__PayCode__DropNHook
-				GROUP BY
-				itm.AccountingExportPayrollItemId, ps.DriverPersonId
+			DECLARE @PayrollItemEARNINGSDropNHookId INT
+			SET @PayrollItemEARNINGSDropNHookId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				PayCodeLegacy = @PR_OTR_History__PayCode__DropNHook
+			)
+
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropNHookId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+					FROM
+						payroll.PayrollOTRStaging ps
+							--JOIN
+								--export.AccountingExportPayrollItem itm
+									--ON ps.PickOrigin = itm.PayCodeLegacy
+					WHERE 
+					paycode = @PR_OTR_History__PayCode__DropNHook
+					GROUP BY
+					ps.DriverPersonId
 
 
 	-- Drop Solo
 		------------------------------------------------------------------------------------------------------------------
-			INSERT INTO [export].[AccountingExportPayrollData]
-				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-			SELECT
-				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, itm.AccountingExportPayrollItemId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
-				FROM
-					payroll.PayrollOTRStaging ps
-						JOIN
-							export.AccountingExportPayrollItem itm
-								ON ps.PayCode = itm.PayCodeLegacy
-				WHERE 
-				paycode = @PR_OTR_History__PayCode__DropSolo
-				GROUP BY
-				itm.AccountingExportPayrollItemId, ps.DriverPersonId
+			DECLARE @PayrollItemEARNINGSDropSoloId INT
+			SET @PayrollItemEARNINGSDropSoloId =
+			(
+				SELECT
+				TOP 1 AccountingExportPayrollItemId 
+				FROM [export].[AccountingExportPayrollItem]
+				WHERE
+				PayCodeLegacy = @PR_OTR_History__PayCode__DropSolo
+			)
+
+				INSERT INTO [export].[AccountingExportPayrollData]
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+				SELECT
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, @PayrollEntryEARNINGSTypeId, @PayrollItemEARNINGSDropSoloId, ps.DriverPersonId, ROUND(SUM(Quantity), 2)
+					FROM
+						payroll.PayrollOTRStaging ps
+							--JOIN
+								--export.AccountingExportPayrollItem itm
+									--ON ps.PickOrigin = itm.PayCodeLegacy
+					WHERE 
+					paycode = @PR_OTR_History__PayCode__DropSolo
+					GROUP BY
+					ps.DriverPersonId
 
 
 GO
