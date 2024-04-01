@@ -33,7 +33,7 @@ END
 		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
 
-	SELECT DISTINCT(stag.LoadId), ld.PaperworkRecvdDate
+	SELECT DISTINCT(stag.LoadId)
 	FROM
 		[payroll].[PayrollOTRStaging] stag
 			JOIN
@@ -41,6 +41,8 @@ END
 				ON stag.LoadId = ld.LoadId
 	WHERE
 		stag.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
+		AND
+		ld.PaperworkRecvdDate IS NULL
 
 
 GO
