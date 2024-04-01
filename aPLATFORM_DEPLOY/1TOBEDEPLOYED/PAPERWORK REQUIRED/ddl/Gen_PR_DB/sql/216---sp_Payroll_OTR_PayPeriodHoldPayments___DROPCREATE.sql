@@ -10,14 +10,13 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments]
 (
-	@PayrollOTRDataSource varchar(15),
 	@LastUpdateBy INT
 )
 
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] LOAD 2775
+	exec [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 2775
 */
 
 SET NOCOUNT ON;

@@ -105,7 +105,7 @@ END
 			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] 'DRIVERPAY', @LastUpdateBy
 				
 	--HOLD payments
-		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 'DRIVERPAY', @LastUpdateBy
+		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] @LastUpdateBy
 		
 	--update pay period
 		UPDATE [payroll].[PayrollOTRPayPeriod]
