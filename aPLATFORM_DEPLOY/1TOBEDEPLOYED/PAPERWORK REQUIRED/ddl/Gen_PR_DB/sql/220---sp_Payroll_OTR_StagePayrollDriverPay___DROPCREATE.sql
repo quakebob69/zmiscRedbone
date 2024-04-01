@@ -102,10 +102,10 @@ END
 			FROM #TEMP_OTR_DATA__DriverPay
 		
 		--export.AccountingExportPayrollData
-			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsDriverPay] @LastUpdateBy
+			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] 'DRIVERPAY', @LastUpdateBy
 				
 	--HOLD payments
-		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 'DriverPay', @LastUpdateBy
+		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 'DRIVERPAY', @LastUpdateBy
 		
 	--update pay period
 		UPDATE [payroll].[PayrollOTRPayPeriod]

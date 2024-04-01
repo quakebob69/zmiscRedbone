@@ -105,10 +105,10 @@ END
 			FROM #TEMP_OTR_DATA__Load
 			
 		--export.AccountingExportPayrollData
-			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecordsLoad] @LastUpdateBy
+			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] 'LOAD', @LastUpdateBy
 			
 	--HOLD payments
-		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 'Load', @LastUpdateBy
+		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] 'LOAD', @LastUpdateBy
 		
 	--update pay period
 		UPDATE [payroll].[PayrollOTRPayPeriod]
