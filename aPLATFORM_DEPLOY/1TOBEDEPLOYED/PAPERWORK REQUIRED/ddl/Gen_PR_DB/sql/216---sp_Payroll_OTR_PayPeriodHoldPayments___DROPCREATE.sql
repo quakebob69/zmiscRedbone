@@ -32,17 +32,17 @@ END
 	DECLARE @PayrollOTRDataSourceId_LOAD INT
 		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
-
-	SELECT DISTINCT(stag.LoadId)
-	FROM
-		[payroll].[PayrollOTRStaging] stag
-			JOIN
-				[dispatch].[Load] ld
-				ON stag.LoadId = ld.LoadId
-	WHERE
-		stag.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
-		AND
-		ld.PaperworkRecvdDate IS NULL
+	--HELD LOADIDs
+		SELECT DISTINCT(stag.LoadId)
+		FROM
+			[payroll].[PayrollOTRStaging] stag
+				JOIN
+					[dispatch].[Load] ld
+					ON stag.LoadId = ld.LoadId
+		WHERE
+			stag.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
+			AND
+			ld.PaperworkRecvdDate IS NULL
 
 
 GO
