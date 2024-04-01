@@ -25,6 +25,15 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	--
+
+--vars
+	DECLARE @DataSourceName_LOAD VARCHAR(4)
+	SET @DataSourceName_LOAD = 'LOAD'
+	DECLARE @PayrollOTRDataSourceId_LOAD INT
+		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
+
+
+	SELECT * FROM [payroll].[PayrollOTRStaging] s
+	WHERE s.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
 
 GO
