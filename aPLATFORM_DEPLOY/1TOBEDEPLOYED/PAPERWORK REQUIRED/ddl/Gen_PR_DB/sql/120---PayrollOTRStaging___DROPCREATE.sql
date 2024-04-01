@@ -19,6 +19,7 @@ CREATE TABLE [payroll].[PayrollOTRStaging](
 	[PayrollOTRStagingId] [int] IDENTITY(1,1) NOT NULL,
 	[PayrollOTRPayPeriodId] [int] NOT NULL,
 	[PayrollOTRDataSourceId] [int] NOT NULL,
+	[IsHeld] [bit] NULL,
 	[Name] [varchar](128) NULL,
 	[LoadId] [int] NULL,
 	[TripNumber] [varchar](15) NULL,
