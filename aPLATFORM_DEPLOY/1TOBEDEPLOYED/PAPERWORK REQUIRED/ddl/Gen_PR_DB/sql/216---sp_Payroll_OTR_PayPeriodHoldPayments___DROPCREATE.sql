@@ -61,8 +61,8 @@ END
 		SET
 			isHeld = 1
 		WHERE
-			--(LoadId in (SELECT LoadId FROM @LoadsToHold))
-			--OR
+			(LoadId in (SELECT LoadId FROM @LoadsToHold))
+			OR
 			(TripNumber in (SELECT LoadId FROM @LoadsToHold))
 
 GO
