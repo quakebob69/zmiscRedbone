@@ -33,7 +33,14 @@ END
 		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
 
-	SELECT * FROM [payroll].[PayrollOTRStaging] s
-	WHERE s.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
+	SELECT DISTINCT(stag.LoadId), ld.PaperworkRecvdDate
+	FROM
+		[payroll].[PayrollOTRStaging] stag
+			JOIN
+				[dispatch].[Load] ld
+				ON stag.LoadId = ld.LoadId
+	WHERE
+		stag.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
+
 
 GO
