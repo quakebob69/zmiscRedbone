@@ -11,14 +11,15 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_StagePayroll]
 (
-	@OnlyGetDriverPayData BIT,
+	@GetDriverPayData BIT,
+	@GetLoadData BIT,
 	@LastUpdateBy INT
 )
 
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_StagePayroll] 0, 2775
+	exec [payroll].[sp_Payroll_OTR_StagePayroll] 0, 1, 2775
 */
 
 SET NOCOUNT ON;
@@ -34,13 +35,16 @@ END
 	--STAGE
 		--GET DATA
 			--DriverPay
-			exec payroll.sp_Payroll_OTR_StagePayrollDriverPay @LastUpdateBy;
-			
+				IF @GetDriverPayData = 1
+				BEGIN
+					exec payroll.sp_Payroll_OTR_StagePayrollDriverPay @LastUpdateBy;
+				END
+
 			--LOAD
-			IF @OnlyGetDriverPayData = 0
-			BEGIN
-				exec payroll.sp_Payroll_OTR_StagePayrollLoad @LastUpdateBy;			
-			END
+				IF @GetLoadData = 1
+				BEGIN
+					exec payroll.sp_Payroll_OTR_StagePayrollLoad @LastUpdateBy;			
+				END
 			
 
 		--AccountingExportPayrollData
