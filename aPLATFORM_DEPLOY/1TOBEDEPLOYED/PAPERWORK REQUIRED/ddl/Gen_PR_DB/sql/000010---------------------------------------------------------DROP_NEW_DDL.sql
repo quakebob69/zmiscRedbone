@@ -39,7 +39,7 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]
 		GO
 						
-		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollAll]
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayroll]
 		GO
 		
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollLoad]

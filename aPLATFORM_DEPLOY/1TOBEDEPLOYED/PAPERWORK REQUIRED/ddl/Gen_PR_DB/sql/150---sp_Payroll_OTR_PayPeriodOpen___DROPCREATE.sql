@@ -43,8 +43,7 @@ END
 		UPDATE [payroll].[PayrollOTRPayPeriod]
 		SET
 			IsDataLocked = 0,
-			LoadDataIsStaged = 0,
-			DriverPayDataIsStaged = 0,
+			IsDataStaged = 0,
 			TotalMiles = 0,
 			TotalMilesValue = 0,
 			TotalHeldAmount = 0,

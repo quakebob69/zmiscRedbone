@@ -103,16 +103,5 @@ END
 				,@LastUpdateBy
 				,PUnitId
 			FROM #TEMP_OTR_DATA__Load
-			
-		--export.AccountingExportPayrollData
-			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] 'LOAD', @LastUpdateBy
-			
-	--HOLD payments
-		EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] @LastUpdateBy
-		
-	--update pay period
-		UPDATE [payroll].[PayrollOTRPayPeriod]
-		SET LoadDataIsStaged = 1
-		WHERE PayrollOTRPayPeriodId = @OpenPayPeriodId
 		
 GO

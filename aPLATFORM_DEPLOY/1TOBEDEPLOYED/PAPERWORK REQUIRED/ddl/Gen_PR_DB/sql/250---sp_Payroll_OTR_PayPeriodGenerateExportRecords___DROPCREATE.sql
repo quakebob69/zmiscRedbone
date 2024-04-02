@@ -10,14 +10,13 @@ GO
 
 CREATE procedure [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]
 (
-	@PayrollOTRDataSource varchar(15),
 	@LastUpdateBy INT
 )
 
 AS
 
 /*
-	exec [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] LOAD 2775
+	exec [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] 2775
 */
 
 SET NOCOUNT ON;
@@ -27,20 +26,24 @@ END
 
 
 ------------------------------------------------------------------------------------------------------------------
--- WHERE
+-- VARS
 ------------------------------------------------------------------------------------------------------------------
 	DECLARE @PR_OTR_History__PayCode__OTHERPAY VARCHAR(12)
 	SET @PR_OTR_History__PayCode__OTHERPAY = 'Other Pay';
 
+	DECLARE @DataSourceName_LOAD VARCHAR(4)
+	SET @DataSourceName_LOAD = 'LOAD'
+	DECLARE @PayrollOTRDataSourceId_LOAD INT
+		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
-------------------------------------------------------------------------------------------------------------------
--- VARS
-------------------------------------------------------------------------------------------------------------------
+
+	DECLARE @DataSourceName_DRIVERPAY VARCHAR(9)
+	SET @DataSourceName_DRIVERPAY = 'DRIVERPAY'
+	DECLARE @PayrollOTRDataSourceId_DRIVERPAY INT
+		SET @PayrollOTRDataSourceId_DRIVERPAY = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_DRIVERPAY)
+
 	DECLARE @OpenPayPeriodId INT
 	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
-
-	DECLARE @PayrollOTRDataSourceId INT
-	SET @PayrollOTRDataSourceId = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @PayrollOTRDataSource)
 
 
 ------------------------------------------------------------------------------------------------------------------
@@ -49,64 +52,75 @@ END
 	DELETE FROM [export].[AccountingExportPayrollData]
 	WHERE
 		OriginatingOTRPayPeriodId = @OpenPayPeriodId
-		AND
-		PayrollOTRDataSourceId = @PayrollOTRDataSourceId;
 			
 			
 --=============================================================================================
--- GET PAYROLL ITEMS
+--INSERT
 --=============================================================================================	
-	DECLARE @PayrollRecs
-	TABLE (
-		PersonId int,
-		AccountingExportPayrollEntryTypeId int,
-		AccountingExportPayrollItemId int,
-		Quantity decimal(10, 2)
-	);
-	
+	--LOAD
+		--TEMP TABLE
+			DECLARE @PayrollRecs__LOAD
+			TABLE (
+				PersonId int,
+				AccountingExportPayrollEntryTypeId int,
+				AccountingExportPayrollItemId int,
+				Quantity decimal(10, 2)
+			);
 
-	IF @PayrollOTRDataSource = 'LOAD'
-	BEGIN
-		INSERT INTO @PayrollRecs
+		--GET RECORDS
+			INSERT INTO @PayrollRecs__LOAD
+				SELECT
+					DriverPersonId as PersonId, itm.AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, ROUND(SUM(Quantity), 2) as Quantity
+				FROM
+					payroll.PayrollOTRStaging ps
+						JOIN
+							export.AccountingExportPayrollItem itm
+								ON
+									(ps.PayCode = itm.PayCodeLegacy
+									OR
+									ps.PayId = itm.PayIdLegacy)
+				GROUP BY
+					DriverPersonId, PayCode, AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId			
+			
+		--INSERT
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				DriverPersonId as PersonId, itm.AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, ROUND(SUM(Quantity), 2) as Quantity
-			FROM
-				payroll.PayrollOTRStaging ps
-					JOIN
-						export.AccountingExportPayrollItem itm
-							ON
-								(ps.PayCode = itm.PayCodeLegacy
-								OR
-								ps.PayId = itm.PayIdLegacy)
-			GROUP BY
-				DriverPersonId, PayCode, AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId				
-	END
-	ELSE IF @PayrollOTRDataSource = 'DRIVERPAY'
-	BEGIN
-		INSERT INTO @PayrollRecs
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.Quantity
+			FROM @PayrollRecs__LOAD recs
+
+
+	--DRIVERPAY
+		--TEMP TABLE
+			DECLARE @PayrollRecs__DRIVERPAY
+			TABLE (
+				PersonId int,
+				AccountingExportPayrollEntryTypeId int,
+				AccountingExportPayrollItemId int,
+				Quantity decimal(10, 2)
+			);
+
+		--GET RECORDS
+			INSERT INTO @PayrollRecs__DRIVERPAY
+				SELECT
+					DriverPersonId as PersonId, itm.AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, ROUND(SUM(TOTALPAY), 2) as Quantity
+				FROM
+					payroll.PayrollOTRStaging ps
+						JOIN
+							export.AccountingExportPayrollItem itm
+								ON
+									ps.PickOrigin = itm.PayCodeLegacy
+				WHERE
+					paycode = @PR_OTR_History__PayCode__OTHERPAY
+				GROUP BY
+					DriverPersonId, PayCode, AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId			
+			
+		--INSERT
+			INSERT INTO [export].[AccountingExportPayrollData]
+				(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
 			SELECT
-				DriverPersonId as PersonId, itm.AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, ROUND(SUM(TOTALPAY), 2) as Quantity
-			FROM
-				payroll.PayrollOTRStaging ps
-					JOIN
-						export.AccountingExportPayrollItem itm
-							ON
-								ps.PickOrigin = itm.PayCodeLegacy
-			WHERE
-				paycode = @PR_OTR_History__PayCode__OTHERPAY
-			GROUP BY
-				DriverPersonId, PayCode, AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId  			
-	END
-
-
---=============================================================================================
--- INSERT
---=============================================================================================	
-	INSERT INTO [export].[AccountingExportPayrollData]
-		(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
-	SELECT
-		@OpenPayPeriodId, @PayrollOTRDataSourceId, li.AccountingExportPayrollEntryTypeId, li.AccountingExportPayrollItemId, li.PersonId, li.Quantity
-	FROM @PayrollRecs li
+				@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.Quantity
+			FROM @PayrollRecs__DRIVERPAY recs
 
 
 GO
