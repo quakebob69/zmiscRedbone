@@ -25,20 +25,38 @@ IF 1=0 BEGIN
 SET FMTONLY OFF
 END
 
-	DECLARE @ChangeToStatus VARCHAR(30)
-    SET @ChangeToStatus = CASE 
-        WHEN @ValidationResult = 1 THEN
-            'VALIDATION_PASSED'
-		ELSE
-            'VALIDATION_FAILED'
-    END
-	
-	DECLARE @ActivePayPeriodId INT
-	EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
-	
+	--VARS
+		DECLARE @PayrollOTRStatusNamePassed VARCHAR(20)
+		SET @PayrollOTRStatusNamePassed = 'VALIDATION_PASSED'
+		DECLARE @PayrollOTRStatusNameFailed VARCHAR(20)
+		SET @PayrollOTRStatusNameFailed = 'VALIDATION_FAILED'
+
 	--PayrollOTRStatus
-	UPDATE [payroll].[PayrollOTRPayPeriod]
-	SET PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
-	WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
+		DECLARE @ChangeToStatus VARCHAR(30)
+		SET @ChangeToStatus = CASE 
+			WHEN @ValidationResult = 1 THEN
+				@PayrollOTRStatusNamePassed
+			ELSE
+				@PayrollOTRStatusNameFailed
+		END
+
+	--IsDataLocked
+		DECLARE @IsDataLockedVal BIT
+		SET @IsDataLockedVal = CASE 
+			WHEN @ValidationResult = 1 THEN
+				1
+			ELSE
+				0
+		END
+
+	--SET PayrollOTRStatus/IsDataLocked
+		DECLARE @ActivePayPeriodId INT
+		EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
+	
+		UPDATE [payroll].[PayrollOTRPayPeriod]
+			SET
+				PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus),
+				IsDataLocked = @IsDataLockedVal
+		WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 GO
