@@ -44,16 +44,17 @@ END
 				IF @GetLoadData = 1
 				BEGIN
 					exec payroll.sp_Payroll_OTR_StagePayrollLoad @LastUpdateBy;			
-				END
-			
-
-		--AccountingExportPayrollData
-			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] @LastUpdateBy
-				
+				END			
 				
 		--HOLD
 			EXEC [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments] @LastUpdateBy		
 			
+		--UNHOLD
+			-- UNHOLD SHIZ IN EXPORTDATA TABLE
+			
+		--AccountingExportPayrollData
+			EXEC [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords] @LastUpdateBy
+
 
 		--PAY PERIOD
 			UPDATE [payroll].[PayrollOTRPayPeriod]

@@ -14,26 +14,28 @@ GO
 
 CREATE TABLE [export].[AccountingExportPayrollData](
 	[AccountingExportPayrollDataId] [int] IDENTITY(1,1) NOT NULL,
-	[PayrollOTRDataSourceId] [int] NOT NULL,
-	[OriginatingOTRPayPeriodId] [int] NOT NULL,
+	[PersonId] [int] NOT NULL,
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
 	[AccountingExportPayrollItemId] [int] NOT NULL,
-	[PersonId] [int] NOT NULL,
+	[OriginatingOTRPayPeriodId] [int] NOT NULL,
+	[PaidOTRPayPeriodId] [int] NULL,
+	[PayrollOTRDataSourceId] [int] NOT NULL,
+	[PayrollOTRPaymentHoldReasonId] [int] NULL,
+	[LoadId] [int] NULL,
 	[Rate] [decimal](10, 2) NULL,
 	[Hours] [decimal](10, 2) NULL,
 	[Quantity] [decimal](10, 2) NULL,
-	[PayrollOTRPaymentHoldReasonId] [int] NULL,
-	[HeldPaymentHasBeenPaid] [bit] NULL
  CONSTRAINT [PK_AccountingExportPayrollData] PRIMARY KEY CLUSTERED 
 (
 	[AccountingExportPayrollDataId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_AccountingExportPayrollData] UNIQUE NONCLUSTERED 
 (
-	[OriginatingOTRPayPeriodId] ASC,
+	[PersonId] ASC,
 	[AccountingExportPayrollEntryTypeId] ASC,
 	[AccountingExportPayrollItemId] ASC,
-	[PersonId] ASC
+	[OriginatingOTRPayPeriodId] ASC,
+	[PaidOTRPayPeriodId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -51,11 +53,19 @@ GO
 ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRDataSource]
 GO
 
-ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
+
+ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_OriginatingPayrollOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
 REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
 GO
-ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPayPeriod]
+ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_OriginatingPayrollOTRPayPeriod]
 GO
+
+ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PaidPayrollOTRPayPeriod] FOREIGN KEY([PaidOTRPayPeriodId])
+REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
+GO
+ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PaidPayrollOTRPayPeriod]
+GO
+
 
 ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollEntryType] FOREIGN KEY([AccountingExportPayrollEntryTypeId])
 REFERENCES [export].[AccountingExportPayrollEntryType] ([AccountingExportPayrollEntryTypeId])
