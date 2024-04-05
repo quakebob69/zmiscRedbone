@@ -6,6 +6,12 @@ GO
 	DROP VIEW IF EXISTS [payroll].[vAccountingExportPayrollDataCurrentPeriod]
 	GO
 
+	DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
+	GO
+
+	DROP VIEW IF EXISTS [payroll].[vPayrollOTROpenPayPeriod]
+	GO
+
 	--temp...
 		DROP VIEW IF EXISTS [payroll].[vPR_OTR_History___withpersonsremoved]
 		GO
