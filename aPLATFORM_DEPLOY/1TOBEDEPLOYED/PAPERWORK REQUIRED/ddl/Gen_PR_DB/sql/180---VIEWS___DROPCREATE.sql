@@ -13,9 +13,9 @@ CREATE VIEW [payroll].[vPayrollOTRCurrentPayPeriod] AS
 	SELECT
 		*
 	FROM
-		[payroll].PayrollOTRPayPeriod pp
+		[payroll].PayrollOTRPayPeriod
 	WHERE
-		pp.IsActive = 1
+		IsActive = 1
 
 GO
 
@@ -24,9 +24,9 @@ CREATE VIEW [payroll].[vPayrollOTROpenPayPeriod] AS
 	SELECT
 		*
 	FROM
-		[payroll].PayrollOTRPayPeriod pp
+		[payroll].PayrollOTRPayPeriod
 	WHERE
-		pp.IsOpen = 1
+		IsOpen = 1
 
 GO
 
