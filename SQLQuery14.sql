@@ -21,6 +21,8 @@
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND PaidOTRPayPeriodId IS NULL
 
+
+
 	--GROUPS
 		select
 			[PersonId],

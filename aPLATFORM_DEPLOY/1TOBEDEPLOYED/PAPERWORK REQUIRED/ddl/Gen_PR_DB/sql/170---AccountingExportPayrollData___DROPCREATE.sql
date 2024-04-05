@@ -15,10 +15,10 @@ GO
 CREATE TABLE [export].[AccountingExportPayrollData](
 	[AccountingExportPayrollDataId] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
-	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
-	[AccountingExportPayrollItemId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
 	[PaidOTRPayPeriodId] [int] NULL,
+	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
+	[AccountingExportPayrollItemId] [int] NOT NULL,
 	[PayrollOTRDataSourceId] [int] NOT NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NULL,
 	[LoadId] [int] NULL,
@@ -32,10 +32,10 @@ CREATE TABLE [export].[AccountingExportPayrollData](
  CONSTRAINT [UQ_AccountingExportPayrollData] UNIQUE NONCLUSTERED 
 (
 	[PersonId] ASC,
-	[AccountingExportPayrollEntryTypeId] ASC,
-	[AccountingExportPayrollItemId] ASC,
 	[OriginatingOTRPayPeriodId] ASC,
-	[PaidOTRPayPeriodId] ASC
+	[PaidOTRPayPeriodId] ASC,
+	[AccountingExportPayrollEntryTypeId] ASC,
+	[AccountingExportPayrollItemId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
