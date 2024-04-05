@@ -36,7 +36,7 @@ from
 	[export].[vAccountingExportPayrollDataCurrentPeriod] p
 --where PaidOTRPayPeriodId is null
 ORDER BY
-	p.PaidOTRPayPeriodId,
+	p.PaidOTRPayPeriodId desc,
 	p.PersonId,
 	p.AccountingExportPayrollEntryTypeId,
 	p.AccountingExportPayrollItemId
