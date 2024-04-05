@@ -20,13 +20,20 @@ exec [payroll].[sp_Payroll_OTR_StagePayroll] 1, 1, 775
 
 
 select
-	PaidOTRPayPeriodId,
-	PersonId,
-	AccountingExportPayrollEntryTypeId,
-	AccountingExportPayrollItemId,
-	*
+		--AccountingExportPayrollDataId,
+		OriginatingOTRPayPeriodId,
+		PaidOTRPayPeriodId,
+		PersonId,
+		AccountingExportPayrollEntryTypeId,
+		AccountingExportPayrollItemId,
+		PayrollOTRDataSourceId,
+		PayrollOTRPaymentHoldReasonId,
+		LoadId,
+		Rate,
+		Hours,
+		Quantity
 from
-	[export].[vAccountingExportPayrollDataCurrentPeriod] p 
+	[export].[vAccountingExportPayrollDataCurrentPeriod] p
 --where PaidOTRPayPeriodId is null
 ORDER BY
 	p.PaidOTRPayPeriodId,
