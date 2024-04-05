@@ -33,7 +33,18 @@ GO
 CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriod] AS
 
 	SELECT
-		*
+		AccountingExportPayrollDataId,
+		OriginatingOTRPayPeriodId,
+		PaidOTRPayPeriodId,
+		PersonId,
+		AccountingExportPayrollEntryTypeId,
+		AccountingExportPayrollItemId,
+		PayrollOTRDataSourceId,
+		PayrollOTRPaymentHoldReasonId,
+		LoadId,
+		Rate,
+		Hours,
+		Quantity
 	FROM
 		[export].[AccountingExportPayrollData] AS d
 	WHERE
