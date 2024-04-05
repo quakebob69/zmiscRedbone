@@ -3,13 +3,16 @@ GO
 
 
 --VIEWS
-	DROP VIEW IF EXISTS [payroll].[vPR_OTR_History___withpersonsremoved]
+	DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
 	GO
 
-	DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging___withpersonsremoved]
-	GO
+	--temp...
+		DROP VIEW IF EXISTS [payroll].[vPR_OTR_History___withpersonsremoved]
+		GO
+
+		DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging___withpersonsremoved]
+		GO
 	
-		
 
 --STORED PROCEDURES
 	--'payroll' schema 
