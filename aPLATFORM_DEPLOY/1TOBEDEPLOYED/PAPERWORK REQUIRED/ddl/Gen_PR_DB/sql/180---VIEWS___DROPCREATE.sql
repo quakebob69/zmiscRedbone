@@ -26,7 +26,7 @@ CREATE VIEW [payroll].[vPayrollOTROpenPayPeriod] AS
 	FROM
 		[payroll].PayrollOTRPayPeriod pp
 	WHERE
-		pp.IsActive = 1
+		pp.IsOpen = 1
 
 GO
 
