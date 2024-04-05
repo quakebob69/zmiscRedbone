@@ -1,13 +1,10 @@
-
-
-DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
+DROP VIEW IF EXISTS [payroll].[vAccountingExportPayrollDataCurrentPeriod]
 GO
 	
 
-
-CREATE VIEW [payroll].[vPayrollOTRCurrentPayPeriod] AS
+CREATE VIEW [payroll].[vAccountingExportPayrollDataCurrentPeriod] AS
 SELECT *
-FROM [payroll].[PayrollOTRStaging] AS s
+FROM [export].[AccountingExportPayrollData] AS d
 /*
 WHERE 
 s.DriverPersonId

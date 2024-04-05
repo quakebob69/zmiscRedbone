@@ -3,7 +3,7 @@ GO
 
 
 --VIEWS
-	DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
+	DROP VIEW IF EXISTS [payroll].[vAccountingExportPayrollDataCurrentPeriod]
 	GO
 
 	--temp...
