@@ -1,22 +1,50 @@
-DROP VIEW IF EXISTS [payroll].[vAccountingExportPayrollDataCurrentPeriod]
+DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriod]
 GO
-	
 
-CREATE VIEW [payroll].[vAccountingExportPayrollDataCurrentPeriod] AS
+DROP VIEW IF EXISTS [payroll].[vPayrollOTROpenPayPeriod]
+GO
+
+DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
+GO
+
+
+CREATE VIEW [payroll].[vPayrollOTRCurrentPayPeriod] AS
+
+	SELECT
+		*
+	FROM
+		[payroll].PayrollOTRPayPeriod pp
+	WHERE
+		pp.IsActive = 1
+
+GO
+
+CREATE VIEW [payroll].[vPayrollOTROpenPayPeriod] AS
+
+	SELECT
+		*
+	FROM
+		[payroll].PayrollOTRPayPeriod pp
+	WHERE
+		pp.IsActive = 1
+
+GO
+
+CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriod] AS
 
 	SELECT
 		*
 	FROM
 		[export].[AccountingExportPayrollData] AS d
 	WHERE
-		D.OriginatingOTRPayPeriodId = 
+		d.OriginatingOTRPayPeriodId = 
 			(
 				SELECT
-					pp.IsActive
+					pp.PayrollOTRPayPeriodId
 				FROM
-					[payroll].PayrollOTRPayPeriod pp
-				WHERE
-					pp.IsActive = 1
+					[payroll].[vPayrollOTRCurrentPayPeriod] pp
 			)
 
 GO
+
+
