@@ -14,11 +14,11 @@ GO
 
 CREATE TABLE [export].[AccountingExportPayrollData](
 	[AccountingExportPayrollDataId] [int] IDENTITY(1,1) NOT NULL,
-	[OriginatingOTRPayPeriodId] [int] NOT NULL,
-	[PaidOTRPayPeriodId] [int] NULL,
+	[PayPeriodId] [int] NULL,
 	[PersonId] [int] NOT NULL,
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
 	[AccountingExportPayrollItemId] [int] NOT NULL,
+	[OriginatingOTRPayPeriodId] [int] NOT NULL,
 	[PayrollOTRDataSourceId] [int] NOT NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NULL,
 	[LoadId] [int] NULL,
@@ -31,11 +31,11 @@ CREATE TABLE [export].[AccountingExportPayrollData](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_AccountingExportPayrollData] UNIQUE NONCLUSTERED 
 (
-	[OriginatingOTRPayPeriodId] ASC,
-	[PaidOTRPayPeriodId] ASC,
+	[PayPeriodId] ASC,
 	[PersonId] ASC,
 	[AccountingExportPayrollEntryTypeId] ASC,
-	[AccountingExportPayrollItemId] ASC
+	[AccountingExportPayrollItemId] ASC,
+	[OriginatingOTRPayPeriodId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -60,10 +60,10 @@ GO
 ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_OriginatingPayrollOTRPayPeriod]
 GO
 
-ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PaidPayrollOTRPayPeriod] FOREIGN KEY([PaidOTRPayPeriodId])
+ALTER TABLE [export].[AccountingExportPayrollData]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPayPeriod] FOREIGN KEY([PayPeriodId])
 REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
 GO
-ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PaidPayrollOTRPayPeriod]
+ALTER TABLE [export].[AccountingExportPayrollData] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPayPeriod]
 GO
 
 
