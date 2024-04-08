@@ -1,9 +1,6 @@
 	DECLARE @OpenPayPeriodId INT
 	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
-																							
-																							
-																							
-																							
+																																										
 -------------------------------------
 SET @OpenPayPeriodId = 2
 -------------------------------------
@@ -48,7 +45,7 @@ SET @OpenPayPeriodId = 2
 			AND PayPeriodId IS NULL
 
 
-
+/*
 	--GROUPS
 		select
 			[PersonId],
@@ -64,5 +61,5 @@ SET @OpenPayPeriodId = 2
 			[AccountingExportPayrollItemId],
 			[OriginatingOTRPayPeriodId],
 			[PayPeriodId]
-
+*/
 
