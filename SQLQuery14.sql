@@ -2,7 +2,8 @@
 	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
 																																										
 -------------------------------------
-SET @OpenPayPeriodId = 2
+SET @OpenPayPeriodId = (select top 1 AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayPeriodId desc) + 0
+--SELECT @OpenPayPeriodId
 -------------------------------------
 --TOTALS
 	-- CURRENT PP ONLY
@@ -30,7 +31,8 @@ SET @OpenPayPeriodId = 2
 			AND AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
 
 
-
+			--select top 1 AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc
+			--select AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc
 
 
 			/*

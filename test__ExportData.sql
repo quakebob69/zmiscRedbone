@@ -31,14 +31,13 @@ VALUES
 
 
 
-delete from [export].[AccountingExportPayrollData] where AccountingExportPayrollDataId = (select top 1 AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayPeriodId desc)
+delete from [export].[AccountingExportPayrollData] where AccountingExportPayrollDataId = (select top 1 AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc)
 	INSERT INTO [export].[AccountingExportPayrollData]
 	(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 	VALUES		
 (3,							2,						2775,		1,									1,							1,							1,								5000,		100)
 ,(3,							3,						2775,		1,									1,							1,							NULL,							5000,		100)
 ,(NULL,							3,						2775,		1,									1,							1,							1,								5000,		100)
-
 
 
 
