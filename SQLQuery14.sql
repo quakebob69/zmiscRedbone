@@ -5,12 +5,11 @@
 SET @OpenPayPeriodId = 2
 -------------------------------------
 --TOTALS
-	-- CURRENT PP
+	-- CURRENT PP ONLY
 		select
 			count(*) as 'PP ALL'
 		from 
 		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
-
 
 		select
 			count(*) as 'PP PAID'
@@ -19,7 +18,13 @@ SET @OpenPayPeriodId = 2
 			AND OriginatingOTRPayPeriodId = @OpenPayPeriodId
 
 		select
-			count(*) as 'PP HELD'
+			count(*) as 'PP IS HELD'
+		from 
+		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
+			AND PayPeriodId IS NULL
+
+		select
+			count(*) as 'PP WAS HELD'
 		from 
 		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
 			AND PayPeriodId IS NULL
@@ -30,7 +35,9 @@ SET @OpenPayPeriodId = 2
 		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
 			AND PayPeriodId IS NULL
 
-	-- ALL
+		select ' --------------------------------------------- ---------------------------------------------'
+
+	-- ALL HISTORY
 		select
 			count(*) as 'ALL HELD'
 		from 
