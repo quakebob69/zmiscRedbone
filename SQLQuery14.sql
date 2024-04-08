@@ -1,5 +1,5 @@
-	DECLARE @OpenPayPeriodId INT
-	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
+DECLARE @OpenPayPeriodId INT
+EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
 																																										
 -------------------------------------
 SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc)
@@ -37,6 +37,25 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND AccountingExportPayPeriodId IS NULL
+
+
+		select
+			AccountingExportPayPeriodId,
+			OriginatingOTRPayPeriodId,
+			PersonId,
+			AccountingExportPayrollEntryTypeId,
+			AccountingExportPayrollItemId,
+		PayrollOTRDataSourceId,
+		PayrollOTRPaymentHoldReasonId,
+		Quantity,
+		LoadId
+		--count(*) as 'PP UNHOLD'
+		from 
+		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
+			AND AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
+
+
+
 
 
 		select
