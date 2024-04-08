@@ -39,8 +39,6 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 
 
 
-
-
 		select AccountingExportPayrollDataId as 'ID',  'PP UNHELD ---> '
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
@@ -57,8 +55,6 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 
 
 
-
-
 		select AccountingExportPayrollDataId as 'ID',  'PP PAID ---> '
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
@@ -71,6 +67,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		LoadId
 		from 
 		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
+
 
 
 			/*
