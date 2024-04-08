@@ -2,7 +2,7 @@
 	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
 																																										
 -------------------------------------
-SET @OpenPayPeriodId = 2
+SET @OpenPayPeriodId = 1
 -------------------------------------
 --TOTALS
 	-- CURRENT PP ONLY
@@ -27,15 +27,17 @@ SET @OpenPayPeriodId = 2
 			count(*) as 'PP WAS HELD'
 		from 
 		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
-			AND PayPeriodId IS NULL
+			AND OriginatingOTRPayPeriodId != PayPeriodId
 
 		select
-			count(*) as 'PP UNHELD'
+			count(*) as 'UNHOLDING'
 		from 
 		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
-			AND PayPeriodId IS NULL
+			AND OriginatingOTRPayPeriodId = @OpenPayPeriodId
+			AND OriginatingOTRPayPeriodId != PayPeriodId
 
-		select ' --------------------------------------------- ---------------------------------------------'
+			/*
+	select ' --------------------------------------------- ---------------------------------------------'
 
 	-- ALL HISTORY
 		select
@@ -50,7 +52,7 @@ SET @OpenPayPeriodId = 2
 		from 
 		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
 			AND PayPeriodId IS NULL
-
+			*/
 
 /*
 	--GROUPS
