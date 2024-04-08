@@ -1,25 +1,51 @@
 	DECLARE @OpenPayPeriodId INT
 	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
-
-
--- CURRENT PP
-	--TOTALS
+																							
+																							
+																							
+																							
+-------------------------------------
+SET @OpenPayPeriodId = 2
+-------------------------------------
+--TOTALS
+	-- CURRENT PP
 		select
-			count(*) as 'ALL'
+			count(*) as 'PP ALL'
 		from 
-		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
+		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
+
 
 		select
-			count(*) as 'PAID'
+			count(*) as 'PP PAID'
 		from 
-		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
-			AND PaidOTRPayPeriodId = @OpenPayPeriodId
+		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
+			AND OriginatingOTRPayPeriodId = @OpenPayPeriodId
 
 		select
-			count(*) as 'HELD'
+			count(*) as 'PP HELD'
 		from 
-		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
-			AND PaidOTRPayPeriodId IS NULL
+		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
+			AND PayPeriodId IS NULL
+
+		select
+			count(*) as 'PP UNHELD'
+		from 
+		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
+			AND PayPeriodId IS NULL
+
+	-- ALL
+		select
+			count(*) as 'ALL HELD'
+		from 
+		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
+			AND PayPeriodId IS NULL
+
+
+		select
+			count(*) as 'ALL UNHELD'
+		from 
+		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
+			AND PayPeriodId IS NULL
 
 
 
@@ -29,7 +55,7 @@
 			[AccountingExportPayrollEntryTypeId],
 			[AccountingExportPayrollItemId],
 			[OriginatingOTRPayPeriodId],
-			[PaidOTRPayPeriodId]
+			[PayPeriodId]
 		from 
 			export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
 		group by
@@ -37,6 +63,6 @@
 			[AccountingExportPayrollEntryTypeId],
 			[AccountingExportPayrollItemId],
 			[OriginatingOTRPayPeriodId],
-			[PaidOTRPayPeriodId]
+			[PayPeriodId]
 
 
