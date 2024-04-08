@@ -10,7 +10,7 @@ GO
 	--[OriginatingOTRPayPeriodId] ASC
 
 INSERT INTO [export].[AccountingExportPayrollData]
-(PayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId,	OriginatingOTRPayPeriodId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
+(AccountingExportPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId,	OriginatingOTRPayPeriodId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 VALUES
 (1,			2775,		1,									1,								1,							1,							NULL,							5000,		100),
 (2,			2775,		1,									1,								2,							1,							NULL,							5000,		100),
