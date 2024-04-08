@@ -14,11 +14,6 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
 
 		select
-			count(*) as 'PP PAID'
-		from 
-		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
-
-		select
 			count(*) as 'PP HELD'
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
@@ -30,13 +25,18 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
 			AND AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
 
-
-			--select top 1 AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc
-			--select AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc
+		select
+			count(*) as 'PP PAID'
+		from 
+		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
 
 
 			/*
 	select ' --------------------------------------------- ---------------------------------------------'
+
+			--select top 1 AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc
+			--select AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc
+
 
 	-- ALL HISTORY
 		select
