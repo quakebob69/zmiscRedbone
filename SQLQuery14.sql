@@ -16,8 +16,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		select
 			count(*) as 'PP PAID'
 		from 
-		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
-			AND AccountingExportPayPeriodId = OriginatingOTRPayPeriodId
+		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
 
 		select
 			count(*) as 'PP HELD'
@@ -26,9 +25,9 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 			AND AccountingExportPayPeriodId IS NULL
 
 		select
-			count(*) as 'PP UNHOLDING'
+			count(*) as 'PP UNHOLD'
 		from 
-		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
+		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
 			AND AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
 
 

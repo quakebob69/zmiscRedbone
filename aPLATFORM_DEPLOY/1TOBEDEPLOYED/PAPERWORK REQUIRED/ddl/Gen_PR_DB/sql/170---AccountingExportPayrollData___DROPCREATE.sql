@@ -145,7 +145,7 @@ GO
 
 
 
-/*
+
 
 --1
 	--new
@@ -177,15 +177,15 @@ GO
 		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 		VALUES
 			(3,							3,						2775,		1,									1,							1,							NULL,							5000,		100)
-			,(NULL,							3,						2775,		1,									1,							1,							1,								5000,		100)
+			,(NULL,						3,						2775,		1,									1,							1,							1,								5000,		100)
 
 	--hold
 		
 	--unhold
-		select AccountingExportPayrollDataID from [export].[AccountingExportPayrollData] where AccountingExportPayPeriodId is NULL
+		--select AccountingExportPayrollDataID from [export].[AccountingExportPayrollData] where AccountingExportPayPeriodId is NULL
 		UPDATE [export].[AccountingExportPayrollData] SET AccountingExportPayPeriodId = 3 where AccountingExportPayrollDataId = 4
 
-
+/*
 */
 
 
