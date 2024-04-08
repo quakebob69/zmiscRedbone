@@ -95,7 +95,7 @@ END
 			--NOT HELD
 				INSERT INTO [export].[AccountingExportPayrollData]
 					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity,
-						PaidOTRPayPeriodId)
+						PayPeriodId)
 				SELECT
 					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.Quantity,
 						@OpenPayPeriodId
@@ -141,7 +141,7 @@ END
 			--NOT HELD
 				INSERT INTO [export].[AccountingExportPayrollData]
 					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity,
-						PaidOTRPayPeriodId)
+						PayPeriodId)
 				SELECT
 					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.Quantity,
 						@OpenPayPeriodId
