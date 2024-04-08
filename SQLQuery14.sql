@@ -9,24 +9,47 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 --TOTALS
 	-- CURRENT PP ONLY
 		select
-			count(*) as 'PP NEW'
+			AccountingExportPayPeriodId,
+			OriginatingOTRPayPeriodId,
+			PersonId,
+			AccountingExportPayrollEntryTypeId,
+			AccountingExportPayrollItemId,
+		PayrollOTRDataSourceId,
+		PayrollOTRPaymentHoldReasonId,
+		Quantity,
+		LoadId
+		--count(*) as 'PP NEW'
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
 
+
 		select
-			count(*) as 'PP HELD'
+			AccountingExportPayPeriodId,
+			OriginatingOTRPayPeriodId,
+			PersonId,
+			AccountingExportPayrollEntryTypeId,
+			AccountingExportPayrollItemId,
+		PayrollOTRDataSourceId,
+		PayrollOTRPaymentHoldReasonId,
+		Quantity,
+		LoadId
+		--count(*) as 'PP HELD'
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND AccountingExportPayPeriodId IS NULL
 
-		select
-			count(*) as 'PP UNHOLD'
-		from 
-		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
-			AND AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
 
 		select
-			count(*) as 'PP PAID'
+			AccountingExportPayPeriodId,
+			OriginatingOTRPayPeriodId,
+			PersonId,
+			AccountingExportPayrollEntryTypeId,
+			AccountingExportPayrollItemId,
+		PayrollOTRDataSourceId,
+		PayrollOTRPaymentHoldReasonId,
+		Quantity,
+		LoadId
+		--count(*) as 'PP PAID'
 		from 
 		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
 
