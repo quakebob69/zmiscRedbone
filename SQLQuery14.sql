@@ -8,6 +8,23 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 -------------------------------------
 --TOTALS
 	-- CURRENT PP ONLY
+		select AccountingExportPayrollDataId as 'ID',  'PP ALL ---> '
+			AccountingExportPayPeriodId,
+			OriginatingOTRPayPeriodId,
+			PersonId,
+			AccountingExportPayrollEntryTypeId,
+			AccountingExportPayrollItemId,
+		PayrollOTRDataSourceId,
+		PayrollOTRPaymentHoldReasonId,
+		Quantity,
+		LoadId
+		from 
+		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
+		or
+		AccountingExportPayPeriodId = @OpenPayPeriodId
+
+
+
 		select AccountingExportPayrollDataId as 'ID',  'PP NEW ---> '
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
@@ -20,22 +37,6 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		LoadId
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
-
-
-
-		select AccountingExportPayrollDataId as 'ID',  'PP HELD ---> '
-			AccountingExportPayPeriodId,
-			OriginatingOTRPayPeriodId,
-			PersonId,
-			AccountingExportPayrollEntryTypeId,
-			AccountingExportPayrollItemId,
-		PayrollOTRDataSourceId,
-		PayrollOTRPaymentHoldReasonId,
-		Quantity,
-		LoadId
-		from 
-		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
-			AND AccountingExportPayPeriodId IS NULL
 
 
 
@@ -52,6 +53,22 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		from 
 		export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
 			AND AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
+
+
+
+		select AccountingExportPayrollDataId as 'ID',  'PP HELD ---> '
+			AccountingExportPayPeriodId,
+			OriginatingOTRPayPeriodId,
+			PersonId,
+			AccountingExportPayrollEntryTypeId,
+			AccountingExportPayrollItemId,
+		PayrollOTRDataSourceId,
+		PayrollOTRPaymentHoldReasonId,
+		Quantity,
+		LoadId
+		from 
+		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
+			AND AccountingExportPayPeriodId IS NULL
 
 
 
