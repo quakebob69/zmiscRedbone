@@ -145,14 +145,14 @@ GO
 
 
 
-
+/*
 
 --1
 	--new
 		INSERT INTO [export].[AccountingExportPayrollData]
 		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 		VALUES		
-		(1,								1,						2775,		1,									1,							1,							NULL,							5000,		100)
+			(1,								1,						2775,		1,									1,							1,							NULL,							5000,		100)
 		
 
 
@@ -161,8 +161,8 @@ GO
 		INSERT INTO [export].[AccountingExportPayrollData]
 		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 		VALUES		
-		(2,								2,						2775,		1,									1,							1,							NULL,							5000,		100)
-		,(2,							2,						2775,		1,									2,							1,							NULL,							5000,		100)
+			(2,								2,						2775,		1,									1,							1,							NULL,							5000,		100)
+			,(2,							2,						2775,		1,									2,							1,							NULL,							5000,		100)
 	
 	--hold
 		,(NULL,							2,						2775,		1,									1,							1,							1,								5000,		100)
@@ -176,8 +176,8 @@ GO
 		INSERT INTO [export].[AccountingExportPayrollData]
 		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 		VALUES
-		(3,							3,						2775,		1,									1,							1,							NULL,							5000,		100)
-		,(NULL,							3,						2775,		1,									1,							1,							1,								5000,		100)
+			(3,							3,						2775,		1,									1,							1,							NULL,							5000,		100)
+			,(NULL,							3,						2775,		1,									1,							1,							1,								5000,		100)
 
 	--hold
 		
@@ -185,7 +185,7 @@ GO
 		select AccountingExportPayrollDataID from [export].[AccountingExportPayrollData] where AccountingExportPayPeriodId is NULL
 		UPDATE [export].[AccountingExportPayrollData] SET AccountingExportPayPeriodId = 3 where AccountingExportPayrollDataId = 4
 
-/*
+
 */
 
 
