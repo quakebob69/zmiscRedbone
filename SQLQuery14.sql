@@ -2,12 +2,12 @@
 	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
 																																										
 -------------------------------------
-SET @OpenPayPeriodId = 1
+SET @OpenPayPeriodId = 2
 -------------------------------------
 --TOTALS
 	-- CURRENT PP ONLY
 		select
-			count(*) as 'PP ALL'
+			count(*) as 'PP NEW'
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
 
@@ -15,19 +15,20 @@ SET @OpenPayPeriodId = 1
 			count(*) as 'PP PAID'
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
-			AND AccountingExportPayPeriodId = @OpenPayPeriodId
+			AND AccountingExportPayPeriodId = OriginatingOTRPayPeriodId
 
 		select
 			count(*) as 'PP HELD'
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
-			AND OriginatingOTRPayPeriodId IS NULL
+			AND AccountingExportPayPeriodId IS NULL
 
 		select
 			count(*) as 'PP UNHOLDING'
 		from 
 		export.AccountingExportPayrollData exdata where OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
+
 
 
 
