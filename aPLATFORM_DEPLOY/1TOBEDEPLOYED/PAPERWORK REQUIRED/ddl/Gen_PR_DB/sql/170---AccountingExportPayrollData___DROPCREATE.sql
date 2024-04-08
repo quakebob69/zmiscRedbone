@@ -147,31 +147,45 @@ GO
 
 
 
+--1
+	--new
+		INSERT INTO [export].[AccountingExportPayrollData]
+		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
+		VALUES		
+		(1,								1,						2775,		1,									1,							1,							NULL,							5000,		100)
+		
 
-INSERT INTO [export].[AccountingExportPayrollData]
-(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
-VALUES		
-(1,								1,						2775,		1,									1,							1,							NULL,							5000,		100)
+
+--2
+	--new
+		INSERT INTO [export].[AccountingExportPayrollData]
+		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
+		VALUES		
+		(2,								2,						2775,		1,									1,							1,							NULL,							5000,		100)
+		,(2,							2,						2775,		1,									2,							1,							NULL,							5000,		100)
+	
+	--hold
+		,(NULL,							2,						2775,		1,									1,							1,							1,								5000,		100)
+
+	--unhold
 
 
 
-INSERT INTO [export].[AccountingExportPayrollData]
-(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
-VALUES		
-(2,							2,						2775,		1,									1,							1,							NULL,							5000,		100)
-,(2,							2,						2775,		1,									2,							1,							NULL,							5000,		100)
-,(NULL,							2,						2775,		1,									1,							1,							1,								5000,		100)
+--3
+	--new
+		INSERT INTO [export].[AccountingExportPayrollData]
+		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
+		VALUES
+		(3,							3,						2775,		1,									1,							1,							NULL,							5000,		100)
+		,(NULL,							3,						2775,		1,									1,							1,							1,								5000,		100)
+
+	--hold
+		
+	--unhold
+		select AccountingExportPayrollDataID from [export].[AccountingExportPayrollData] where AccountingExportPayPeriodId is NULL
+		UPDATE [export].[AccountingExportPayrollData] SET AccountingExportPayPeriodId = 3 where AccountingExportPayrollDataId = 4
 
 /*
-
-delete from [export].[AccountingExportPayrollData] where AccountingExportPayrollDataId = (select top 1 AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc)
-	INSERT INTO [export].[AccountingExportPayrollData]
-	(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
-	VALUES		
-(3,							2,						2775,		1,									1,							1,							1,								5000,		100)
-,(3,							3,						2775,		1,									1,							1,							NULL,							5000,		100)
-,(NULL,							3,						2775,		1,									1,							1,							1,								5000,		100)
-
 */
 
 
@@ -179,11 +193,13 @@ delete from [export].[AccountingExportPayrollData] where AccountingExportPayroll
 
 select 
 	AccountingExportPayrollDataId,
+
 	AccountingExportPayPeriodId,
 	OriginatingOTRPayPeriodId,
 	PersonId,
 	AccountingExportPayrollEntryTypeId,
 	AccountingExportPayrollItemId,
+
 		PayrollOTRDataSourceId,
 		PayrollOTRPaymentHoldReasonId,
 		Quantity,
