@@ -11,18 +11,18 @@ GO
 	--[OriginatingOTRPayPeriodId] ASC
 
 INSERT INTO [export].[AccountingExportPayrollData]
-(AccountingExportPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId,	OriginatingOTRPayPeriodId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
+(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 VALUES
-(1,			2775,		1,									1,								1,							1,							NULL,							5000,		100)
+(1,			1, 2775,		1,									1,															1,							NULL,							5000,		100)
 
-,(2,			2775,		1,									1,								2,							1,							NULL,							5000,		100)
-,(2,			2775,		1,									2,								2,							1,							NULL,							5000,		100)
-,(NULL,		2775,		1,									1,								2,							1,							1,						 		5000,		100)
+,(2,			2, 2775,		1,									1,															1,							NULL,							5000,		100)
+,(2,			2, 2775,		1,									2,															1,							NULL,							5000,		100)
+,(NULL,		2, 2775,		1,									1,															1,							1,						 		5000,		100)
 
 
-,(3,			2775,		1,									1,								2,							1,							1,						 		5000,		100)
-,(3,			2775,		1,									1,								3,							1,							NULL,							5000,		100)
-,(NULL,		2775,		1,									1,								3,							1,							1,								5000,		100)
+,(3,			2, 2775,		1,									1,															1,							1,						 		5000,		100)
+,(3,			3, 2775,		1,									1,															1,							NULL,							5000,		100)
+,(NULL,		3, 2775,		1,									1,															1,							1,								5000,		100)
 
 select 
 	AccountingExportPayPeriodId,
