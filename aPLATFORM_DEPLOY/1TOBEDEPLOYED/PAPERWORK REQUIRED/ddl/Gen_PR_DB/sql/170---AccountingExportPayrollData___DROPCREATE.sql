@@ -163,10 +163,10 @@ GO
 		INSERT INTO [export].[AccountingExportPayrollData]
 		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 		VALUES		
-			(2,								2,						2775,		1,									1,							1,							NULL,							5000,		100)
-			,(2,							2,						2775,		1,									2,							1,							NULL,							5000,		100)
+			(2,								2,						2775,		1,									1,							1,							NULL,							5000,		200)
+			,(2,							2,						2775,		1,									2,							1,							NULL,							5000,		201)
 			--hold
-			,(NULL,							2,						2775,		1,									1,							1,							1,								5000,		100)
+			,(NULL,							2,						2775,		1,									1,							1,							1,								5000,		203)
 
 	--unhold
 
