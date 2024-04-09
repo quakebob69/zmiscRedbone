@@ -20,7 +20,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		Quantity
 		from 
 			export.AccountingExportPayrollData exdata
-		where
+		where------------------------------------------------------------------------
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			OR
 			AccountingExportPayPeriodId = @OpenPayPeriodId
@@ -39,7 +39,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		Quantity
 		from 
 			export.AccountingExportPayrollData exdata
-		where
+		where------------------------------------------------------------------------
 			AccountingExportPayPeriodId = @OpenPayPeriodId
 			AND
 			AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
@@ -58,7 +58,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		Quantity
 		from 
 			export.AccountingExportPayrollData exdata 
-		where
+		where------------------------------------------------------------------------
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
 
 
@@ -75,7 +75,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		Quantity
 		from 
 			export.AccountingExportPayrollData exdata 
-		where
+		where------------------------------------------------------------------------
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND
 			AccountingExportPayPeriodId IS NULL
@@ -94,7 +94,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		Quantity
 		from 
 			export.AccountingExportPayrollData exdata
-		where
+		where------------------------------------------------------------------------
 			AccountingExportPayPeriodId = @OpenPayPeriodId
 
 
@@ -111,7 +111,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		Quantity
 		from 
 			export.AccountingExportPayrollData exdata
-		where
+		where------------------------------------------------------------------------
 			AccountingExportPayPeriodId = @OpenPayPeriodId
 
 
