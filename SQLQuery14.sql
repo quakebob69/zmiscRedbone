@@ -115,6 +115,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		from 
 			export.AccountingExportPayrollData exdata
 		where------------------------------------------------------------------------
+			PersonId = 2451 and
 			AccountingExportPayPeriodId = @OpenPayPeriodId
 		group by
 			AccountingExportPayPeriodId,
@@ -122,45 +123,4 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId
-
-
-			/*
-	select ' --------------------------------------------- ---------------------------------------------'
-
-			--select top 1 AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc
-			--select AccountingExportPayrollDataId from [export].[AccountingExportPayrollData] order by AccountingExportPayrollDataId desc
-
-
-	-- ALL HISTORY
-		select
-			count(*) as 'ALL HELD'
-		from 
-		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
-			AND PayPeriodId IS NULL
-
-
-		select
-			count(*) as 'ALL UNHELD'
-		from 
-		export.AccountingExportPayrollData exdata where PayPeriodId = @OpenPayPeriodId
-			AND PayPeriodId IS NULL
-			*/
-
-/*
-	--GROUPS
-		select
-			[PersonId],
-			[AccountingExportPayrollEntryTypeId],
-			[AccountingExportPayrollItemId],
-			[AccountingExportPayPeriodId],
-			[PayPeriodId]
-		from 
-			export.AccountingExportPayrollData exdata where AccountingExportPayPeriodId = @OpenPayPeriodId
-		group by
-			[PersonId],
-			[AccountingExportPayrollEntryTypeId],
-			[AccountingExportPayrollItemId],
-			[AccountingExportPayPeriodId],
-			[PayPeriodId]
-*/
 
