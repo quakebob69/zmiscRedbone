@@ -19,9 +19,9 @@ CREATE TABLE [export].[AccountingExportPayrollData](
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
 	[AccountingExportPayrollItemId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
+	[LoadId] [int] NOT NULL,
 	[PayrollOTRDataSourceId] [int] NOT NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NULL,
-	[LoadId] [int] NULL,
 	[Rate] [decimal](10, 2) NULL,
 	[Hours] [decimal](10, 2) NULL,
 	[Quantity] [decimal](10, 2) NULL,
@@ -31,11 +31,12 @@ CREATE TABLE [export].[AccountingExportPayrollData](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_AccountingExportPayrollData] UNIQUE NONCLUSTERED 
 (
-	[AccountingExportPayPeriodId] ASC,
-	[PersonId] ASC,
-	[AccountingExportPayrollEntryTypeId] ASC,
-	[AccountingExportPayrollItemId] ASC,
-	[OriginatingOTRPayPeriodId] ASC
+	[AccountingExportPayPeriodId],
+	[PersonId],
+	[AccountingExportPayrollEntryTypeId],
+	[AccountingExportPayrollItemId],
+	[OriginatingOTRPayPeriodId],
+	[LoadId]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -153,8 +154,9 @@ GO
 		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
 		VALUES		
 			(1,								1,						2775,		1,									1,							1,							NULL,							5000,		100)
+			,(1,							1,						2775,		1,									1,							1,							NULL,							5000,		101)
 	
-
+	/*
 
 --2
 	--new
@@ -184,7 +186,7 @@ GO
 		--select AccountingExportPayrollDataID from [export].[AccountingExportPayrollData] where AccountingExportPayPeriodId is NULL
 		UPDATE [export].[AccountingExportPayrollData] SET AccountingExportPayPeriodId = 3 where AccountingExportPayrollDataId = 4
 
-				/*		
+						
 
 */
 
