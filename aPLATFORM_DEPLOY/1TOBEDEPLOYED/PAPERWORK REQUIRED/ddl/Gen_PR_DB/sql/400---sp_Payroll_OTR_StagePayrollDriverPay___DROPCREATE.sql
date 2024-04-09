@@ -67,18 +67,20 @@ END
 		,PayDate datetime
 		,FirstName varchar(128)
 		,DriverPersonId int
+		,DriverPayId int
 	)
 	INSERT INTO #TEMP_OTR_DATA__DriverPay
 	EXEC [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay] @PayPeriodBeginDate, @PayPeriodEndDate
 
 --Table inserts
 	--payroll.PayrollOTRStaging
-		INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
+		INSERT INTO payroll.PayrollOTRStaging (PayrollOTRPayPeriodId, PayrollOTRDataSourceId, Name, LoadId, DriverPayId, TripNumber, TruckNumber, Client_Id, PickupBy, DeliverBy, DriverType, LegInd, PickOrigin, DropDest, DriverPersonId, PayCode, PayId, Quantity, PayRateAmount, TotalPay, PayPeriodEnding,PayrollNotes,LastUpdate,LastUpdateBy,PUnitId)
 			SELECT 
 				@OpenPayPeriodId
 				,PayrollOTRDataSourceId = @PayrollOTRDataSourceId_DRIVERPAY
 				,Name = DriverName
 				,LoadId = NULL
+				,DriverPayId
 				,TripNumber = TripNumber
 				,TruckNumber = NULL
 				,Client_Id = NULL

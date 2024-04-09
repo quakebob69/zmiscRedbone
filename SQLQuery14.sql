@@ -14,7 +14,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
-			LoadId,
+			LoadIdOrDriverPayId,
 		PayrollOTRPaymentHoldReasonId,
 		Quantity
 		from 
@@ -32,7 +32,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
-			LoadId,
+			LoadIdOrDriverPayId,
 		PayrollOTRPaymentHoldReasonId,
 		Quantity
 		from 
@@ -50,7 +50,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
-			LoadId,
+			LoadIdOrDriverPayId,
 		PayrollOTRPaymentHoldReasonId,
 		Quantity
 		from 
@@ -66,7 +66,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
-			LoadId,
+			LoadIdOrDriverPayId,
 		PayrollOTRPaymentHoldReasonId,
 		Quantity
 		from 
@@ -84,7 +84,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
-			LoadId,
+			LoadIdOrDriverPayId,
 		PayrollOTRPaymentHoldReasonId,
 		Quantity
 		from 

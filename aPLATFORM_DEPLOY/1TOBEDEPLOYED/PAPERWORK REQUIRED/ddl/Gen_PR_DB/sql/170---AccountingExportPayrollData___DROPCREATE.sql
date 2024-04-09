@@ -19,7 +19,7 @@ CREATE TABLE [export].[AccountingExportPayrollData](
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
 	[AccountingExportPayrollItemId] [int] NOT NULL,
 	[OriginatingOTRPayPeriodId] [int] NOT NULL,
-	[LoadId] [int] NOT NULL,
+	[LoadIdOrDriverPayId] [int] NOT NULL,
 	[PayrollOTRDataSourceId] [int] NOT NULL,
 	[PayrollOTRPaymentHoldReasonId] [int] NULL,
 	[Rate] [decimal](10, 2) NULL,
@@ -36,7 +36,7 @@ CREATE TABLE [export].[AccountingExportPayrollData](
 	[AccountingExportPayrollEntryTypeId],
 	[AccountingExportPayrollItemId],
 	[OriginatingOTRPayPeriodId],
-	[LoadId]
+	[LoadIdOrDriverPayId]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -135,7 +135,7 @@ GO
 
 
 
-
+	/*
 	delete from [export].[AccountingExportPayrollData];
 		--[PayPeriodId] ASC,
 		--[PersonId] ASC,
@@ -151,17 +151,17 @@ GO
 --1
 	--new
 		INSERT INTO [export].[AccountingExportPayrollData]
-		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
+		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadIdOrDriverPayId)
 		VALUES		
 			(1,								1,						2775,		1,									1,							1,							NULL,							5000,		100)
 			,(1,							1,						2775,		1,									1,							1,							NULL,							5000,		101)
 	
-	/*
+
 
 --2
 	--new
 		INSERT INTO [export].[AccountingExportPayrollData]
-		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
+		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadIdOrDriverPayId)
 		VALUES		
 			(2,								2,						2775,		1,									1,							1,							NULL,							5000,		200)
 			,(2,							2,						2775,		1,									2,							1,							NULL,							5000,		201)
@@ -175,7 +175,7 @@ GO
 --3
 	--new
 		INSERT INTO [export].[AccountingExportPayrollData]
-		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadId)
+		(AccountingExportPayPeriodId, OriginatingOTRPayPeriodId, PersonId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PayrollOTRDataSourceId,	PayrollOTRPaymentHoldReasonId, Quantity,	LoadIdOrDriverPayId)
 		VALUES
 			(3,							3,						2775,		1,									1,							1,							NULL,							5000,		100)
 			,(NULL,						3,						2775,		1,									1,							1,							1,								5000,		100)
@@ -191,7 +191,7 @@ GO
 */
 
 
-
+/*
 
 select 
 	AccountingExportPayrollDataId,
@@ -205,7 +205,7 @@ select
 		PayrollOTRDataSourceId,
 		PayrollOTRPaymentHoldReasonId,
 		Quantity,
-		LoadId
+		LoadIdOrDriverPayId
 from
 	[export].[AccountingExportPayrollData]
 where
@@ -227,7 +227,7 @@ select
 		PayrollOTRDataSourceId,
 		PayrollOTRPaymentHoldReasonId,
 		Quantity,
-		LoadId
+		LoadIdOrDriverPayId
 from
 	[export].[AccountingExportPayrollData]
 where
@@ -239,7 +239,7 @@ order by
 	AccountingExportPayrollEntryTypeId,
 	AccountingExportPayrollItemId
 
-
+	*/
 
 
 

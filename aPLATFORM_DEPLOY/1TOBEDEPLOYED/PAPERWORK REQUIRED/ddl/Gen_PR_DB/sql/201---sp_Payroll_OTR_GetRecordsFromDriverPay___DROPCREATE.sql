@@ -17,7 +17,7 @@ CREATE procedure [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]
 as
 
 /*
-	exec sp_Payroll_OTR_GetRecordsFromDriverPay '12/10/2023', '12/16/2023'
+	exec payroll.sp_Payroll_OTR_GetRecordsFromDriverPay '12/10/2023', '12/16/2023'
 */
 
 	SELECT 
@@ -33,6 +33,7 @@ as
 		,dp.PayDate
 		,pEntered.FirstName
 		,DriverPersonId = cast(p.PersonId as int)
+		,dp.DriverPayId
 	FROM
 		dispatch.DriverPay dp inner join main.Person p on dp.PersonId = p.PersonId
 		inner join main.Driver d on d.PersonId = dp.PersonId

@@ -64,6 +64,7 @@ END
 				PersonId int,
 				AccountingExportPayrollEntryTypeId int,
 				AccountingExportPayrollItemId int,
+				LoadId int,
 				IsHeld bit,
 				Quantity decimal(10, 2)
 			);
@@ -71,7 +72,7 @@ END
 		--GET RECORDS
 			INSERT INTO @PayrollRecs__LOAD
 				SELECT
-					DriverPersonId as PersonId, itm.AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, IsHeld, ROUND(SUM(Quantity), 2) as Quantity
+					DriverPersonId as PersonId, itm.AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, LoadId, IsHeld, ROUND(SUM(Quantity), 2) as Quantity
 				FROM
 					payroll.PayrollOTRStaging ps
 						JOIN
@@ -81,23 +82,23 @@ END
 									OR
 									ps.PayId = itm.PayIdLegacy)
 				GROUP BY
-					DriverPersonId, PayCode, AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, IsHeld
+					DriverPersonId, PayCode, AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, LoadId, IsHeld
 					
 		--INSERT
 			--HELD
 				INSERT INTO [export].[AccountingExportPayrollData]
-					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.Quantity
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.LoadId, recs.Quantity
 				FROM @PayrollRecs__LOAD recs
 				WHERE IsHeld = 1;
 
 			--NOT HELD
 				INSERT INTO [export].[AccountingExportPayrollData]
-					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity,
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity,
 						AccountingExportPayPeriodId)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.Quantity,
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.LoadId, recs.Quantity,
 						@OpenPayPeriodId
 				FROM @PayrollRecs__LOAD recs
 				WHERE IsHeld = 0;
@@ -110,6 +111,7 @@ END
 				PersonId int,
 				AccountingExportPayrollEntryTypeId int,
 				AccountingExportPayrollItemId int,
+				DriverPayId int,
 				IsHeld bit,
 				Quantity decimal(10, 2)
 			);
@@ -117,7 +119,7 @@ END
 		--GET RECORDS
 			INSERT INTO @PayrollRecs__DRIVERPAY
 				SELECT
-					DriverPersonId as PersonId, itm.AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, IsHeld, ROUND(SUM(TOTALPAY), 2) as Quantity
+					DriverPersonId as PersonId, itm.AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, DriverPayId, IsHeld, ROUND(SUM(TOTALPAY), 2) as Quantity
 				FROM
 					payroll.PayrollOTRStaging ps
 						JOIN
@@ -127,23 +129,23 @@ END
 				WHERE
 					paycode = @PR_OTR_History__PayCode__OTHERPAY
 				GROUP BY
-					DriverPersonId, PayCode, AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, IsHeld
+					DriverPersonId, PayCode, AccountingExportPayrollEntryTypeId, itm.AccountingExportPayrollItemId, DriverPayId, IsHeld
 					
 		--INSERT
 			--HELD
 				INSERT INTO [export].[AccountingExportPayrollData]
-					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity)
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.Quantity
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.DriverPayId, recs.Quantity
 				FROM @PayrollRecs__DRIVERPAY recs
 				WHERE IsHeld = 1;
 
 			--NOT HELD
 				INSERT INTO [export].[AccountingExportPayrollData]
-					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, Quantity,
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity,
 						AccountingExportPayPeriodId)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.Quantity,
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.DriverPayId, recs.Quantity,
 						@OpenPayPeriodId
 				FROM @PayrollRecs__DRIVERPAY recs
 				WHERE IsHeld = 0;

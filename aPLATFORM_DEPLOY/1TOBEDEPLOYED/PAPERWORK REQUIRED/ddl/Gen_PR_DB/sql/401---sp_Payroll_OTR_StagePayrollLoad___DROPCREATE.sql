@@ -81,7 +81,7 @@ END
 				@OpenPayPeriodId
 				,PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
 				,Name
-				,LoadId
+				,LoadIdOrDriverPayId = LoadId
 				,TripNumber
 				,TruckNumber
 				,Client_Id

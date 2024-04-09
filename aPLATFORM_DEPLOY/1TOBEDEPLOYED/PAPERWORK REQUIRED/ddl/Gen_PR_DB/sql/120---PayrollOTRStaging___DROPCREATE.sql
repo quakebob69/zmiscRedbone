@@ -22,6 +22,7 @@ CREATE TABLE [payroll].[PayrollOTRStaging](
 	[IsHeld] [bit] NULL,
 	[Name] [varchar](128) NULL,
 	[LoadId] [int] NULL,
+	[DriverPayId] [int] NULL,
 	[TripNumber] [varchar](15) NULL,
 	[TruckNumber] [int] NULL,
 	[Client_Id] [varchar](30) NULL,
@@ -41,7 +42,7 @@ CREATE TABLE [payroll].[PayrollOTRStaging](
 	[PayrollNotes] [varchar](128) NULL,
 	[LastUpdate] [datetime] NOT NULL,
 	[LastUpdateBy] [int] NOT NULL,
-	[PUnitId] [int] NULL,
+	[PUnitId] [int] NULL
  CONSTRAINT [PK_PayrollOTRStaging] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRStagingId] ASC
