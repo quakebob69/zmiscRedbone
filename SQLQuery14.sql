@@ -11,7 +11,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		select
 		--AccountingExportPayrollDataId as 'ID', 
 		'ALL ---> ' as ' ',
-			AccountingExportPayPeriodId,
+			--AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
@@ -104,7 +104,8 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 
 
 
-		select 'QB ---> ' as ' ',
+		select
+		'QB ---> ' as ' ',
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
