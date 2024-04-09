@@ -99,21 +99,23 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 
 
 
-		select AccountingExportPayrollDataId as 'ID',  'QB ---> ' as ' ',
+		select 'QB ---> ' as ' ',
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
-			LoadId,
-		--PayrollOTRDataSourceId,
-		PayrollOTRPaymentHoldReasonId,
-		Quantity
+			Sum(Quantity) as 'Quantity'
 		from 
 			export.AccountingExportPayrollData exdata
 		where------------------------------------------------------------------------
 			AccountingExportPayPeriodId = @OpenPayPeriodId
-
+		group by
+			AccountingExportPayPeriodId,
+			OriginatingOTRPayPeriodId,
+			PersonId,
+			AccountingExportPayrollEntryTypeId,
+			AccountingExportPayrollItemId
 
 
 			/*
