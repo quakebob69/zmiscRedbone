@@ -4,8 +4,7 @@ GO
 CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDF] AS
 
 	
-		select
-		'QB ---> ' as ' ',
+		select TOP (1000000) 
 			AccountingExportPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
@@ -20,11 +19,13 @@ CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDF] AS
 											FROM [payroll].[PayrollOTRPayPeriod]
 											WHERE
 											IsActive = 1)
-		order by 
-			
 		group by
 			AccountingExportPayPeriodId,
-			OriginatingOTRPayPeriodId,
+			PersonId,
+			AccountingExportPayrollEntryTypeId,
+			AccountingExportPayrollItemId
+		order by 
+			AccountingExportPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId
