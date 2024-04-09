@@ -115,11 +115,10 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		from 
 			export.AccountingExportPayrollData exdata
 		where------------------------------------------------------------------------
-			PersonId = 2451 and
+			--(PersonId = 2451 OR PersonId =  1252) and
 			AccountingExportPayPeriodId = @OpenPayPeriodId
 		group by
 			AccountingExportPayPeriodId,
-			OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId
