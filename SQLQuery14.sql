@@ -8,7 +8,9 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 -------------------------------------
 --TOTALS
 	-- CURRENT PP ONLY
-		select AccountingExportPayrollDataId as 'ID',  'ALL ---> ' as ' ',
+		select
+		--AccountingExportPayrollDataId as 'ID', 
+		'ALL ---> ' as ' ',
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
@@ -26,7 +28,9 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 
 
 
-		select AccountingExportPayrollDataId as 'ID',  'RELEASED ---> ' as ' ',
+		select
+		--AccountingExportPayrollDataId as 'ID', 
+		'RELEASED ---> ' as ' ',
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
@@ -44,7 +48,9 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 
 
 
-		select AccountingExportPayrollDataId as 'ID',  'NEW ---> ' as ' ',
+		select
+		--AccountingExportPayrollDataId as 'ID', 
+		'NEW ---> ' as ' ',
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
@@ -60,7 +66,9 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 
 
 
-		select AccountingExportPayrollDataId as 'ID',  'HELD ---> ' as ' ',
+		select
+		--AccountingExportPayrollDataId as 'ID', 
+		'HELD ---> ' as ' ',
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
@@ -78,7 +86,9 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 
 
 
-		select AccountingExportPayrollDataId as 'ID',  'PAID ---> ' as ' ',
+		select
+		--AccountingExportPayrollDataId as 'ID', 
+		'PAID ---> ' as ' ',
 			AccountingExportPayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
