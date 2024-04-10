@@ -18,10 +18,10 @@ exec [payroll].[sp_Payroll_OTR_StagePayroll] 1, 1, 775
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-select AccountingExportPayPeriodId, PersonId, PayrollOTRDataSourceId, *
+select PayPeriodId, PersonId, PayrollOTRDataSourceId, *
 from [export].[vAccountingExportPayrollDataCurrentPeriod] d
 --where PaidOTRPayPeriodId is null
-order by d.AccountingExportPayPeriodId, d.PayrollOTRDataSourceId, d.PersonId
+order by d.PayPeriodId, d.PayrollOTRDataSourceId, d.PersonId
 
 ---------------------------------------------------------------------------------------------------------------------------------
 

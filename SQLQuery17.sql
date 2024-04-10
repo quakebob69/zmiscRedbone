@@ -4,7 +4,7 @@ GO
 	CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDF] AS
 
 			select TOP (1000000) 
-				AccountingExportPayPeriodId,
+				PayPeriodId,
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
 				AccountingExportPayrollEntryTypeId,
 				AccountingExportPayrollItemId,
@@ -14,18 +14,18 @@ GO
 				join main.Person pers on exdata.PersonId = pers.PersonId
 			where------------------------------------------------------------------------
 				(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
-				AccountingExportPayPeriodId = (SELECT
+				PayPeriodId = (SELECT
 												TOP 1 PayrollOTRPayPeriodId 
 												FROM [payroll].[PayrollOTRPayPeriod]
 												WHERE
 												IsActive = 1)
 			group by
-				AccountingExportPayPeriodId,
+				PayPeriodId,
 				CONCAT(pers.firstName, ' ', pers.lastName),
 				AccountingExportPayrollEntryTypeId,
 				AccountingExportPayrollItemId
 			order by 
-				AccountingExportPayPeriodId,
+				PayPeriodId,
 				full_name,
 				AccountingExportPayrollEntryTypeId,
 				AccountingExportPayrollItemId
@@ -49,7 +49,7 @@ GO
 	CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDFDetail] AS
 
 			select TOP (1000000) 
-				AccountingExportPayPeriodId,
+				PayPeriodId,
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
 				AccountingExportPayrollEntryTypeId,
 				AccountingExportPayrollItemId,
@@ -59,13 +59,13 @@ GO
 				join main.Person pers on exdata.PersonId = pers.PersonId
 			where------------------------------------------------------------------------
 				(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
-				AccountingExportPayPeriodId = (SELECT
+				PayPeriodId = (SELECT
 												TOP 1 PayrollOTRPayPeriodId 
 												FROM [payroll].[PayrollOTRPayPeriod]
 												WHERE
 												IsActive = 1)
 			order by 
-				AccountingExportPayPeriodId,
+				PayPeriodId,
 				full_name,
 				AccountingExportPayrollEntryTypeId,
 				AccountingExportPayrollItemId

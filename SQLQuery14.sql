@@ -11,7 +11,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		select
 		--AccountingExportPayrollDataId as 'ID', 
 		'ALL ---> ' as ' ',
-			--AccountingExportPayPeriodId,
+			--PayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
@@ -24,14 +24,14 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		where------------------------------------------------------------------------
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			OR
-			AccountingExportPayPeriodId = @OpenPayPeriodId
+			PayPeriodId = @OpenPayPeriodId
 
 
 
 		select
 		--AccountingExportPayrollDataId as 'ID', 
 		'RELEASED ---> ' as ' ',
-			AccountingExportPayPeriodId,
+			PayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
@@ -42,16 +42,16 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		from 
 			export.AccountingExportPayrollData exdata
 		where------------------------------------------------------------------------
-			AccountingExportPayPeriodId = @OpenPayPeriodId
+			PayPeriodId = @OpenPayPeriodId
 			AND
-			AccountingExportPayPeriodId != OriginatingOTRPayPeriodId
+			PayPeriodId != OriginatingOTRPayPeriodId
 
 
 
 		select
 		--AccountingExportPayrollDataId as 'ID', 
 		'NEW ---> ' as ' ',
-			AccountingExportPayPeriodId,
+			PayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
@@ -69,7 +69,7 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		select
 		--AccountingExportPayrollDataId as 'ID', 
 		'HELD ---> ' as ' ',
-			AccountingExportPayPeriodId,
+			PayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
@@ -82,14 +82,14 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		where------------------------------------------------------------------------
 			OriginatingOTRPayPeriodId = @OpenPayPeriodId
 			AND
-			AccountingExportPayPeriodId IS NULL
+			PayPeriodId IS NULL
 
 
 
 		select
 		--AccountingExportPayrollDataId as 'ID', 
 		'PAID ---> ' as ' ',
-			AccountingExportPayPeriodId,
+			PayPeriodId,
 			OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
@@ -100,13 +100,13 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 		from 
 			export.AccountingExportPayrollData exdata
 		where------------------------------------------------------------------------
-			AccountingExportPayPeriodId = @OpenPayPeriodId
+			PayPeriodId = @OpenPayPeriodId
 
 
 
 		select
 		'QB ---> ' as ' ',
-			AccountingExportPayPeriodId,
+			PayPeriodId,
 			--OriginatingOTRPayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
@@ -116,9 +116,9 @@ SET @OpenPayPeriodId = (select top 1 OriginatingOTRPayPeriodId from [export].[Ac
 			export.AccountingExportPayrollData exdata
 		where------------------------------------------------------------------------
 			--(PersonId = 2451 OR PersonId =  1252) and
-			AccountingExportPayPeriodId = @OpenPayPeriodId
+			PayPeriodId = @OpenPayPeriodId
 		group by
-			AccountingExportPayPeriodId,
+			PayPeriodId,
 			PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId
