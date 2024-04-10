@@ -51,7 +51,7 @@ GO
 			select TOP (1000000) 
 				PayPeriodId,
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
-				AccountingExportPayrollEntryTypeId,
+				typ.Name,
 				AccountingExportPayrollItemId,
 				OriginatingOTRPayPeriodId,
 				LoadIdOrDriverPayId,
@@ -62,6 +62,7 @@ GO
 			from 
 				export.AccountingExportPayrollData exdata
 				join main.Person pers on exdata.PersonId = pers.PersonId
+				join export.AccountingExportPayrollEntryType typ on exdata.AccountingExportPayrollEntryTypeId = typ.AccountingExportPayrollEntryTypeId
 			where------------------------------------------------------------------------
 				(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 				PayPeriodId = (SELECT
@@ -72,7 +73,7 @@ GO
 			order by 
 				PayPeriodId,
 				full_name,
-				AccountingExportPayrollEntryTypeId,
+				exdata.AccountingExportPayrollEntryTypeId,
 				AccountingExportPayrollItemId
 
 	GO
