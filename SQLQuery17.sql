@@ -3,18 +3,15 @@ GO
 
 CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDF] AS
 
-	
 		select TOP (1000000) 
 			AccountingExportPayPeriodId,
-			pers.firstName || ' ' || pers.lastName as fullName,
-			exdata.PersonId as 'asdf'
+			CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
 			Sum(Quantity) as 'Quantity'
 		from 
 			export.AccountingExportPayrollData exdata
-			join main.Person pers on exdata.PersonId = p.PersonId
-
+			join main.Person pers on exdata.PersonId = pers.PersonId
 		where------------------------------------------------------------------------
 			(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 			AccountingExportPayPeriodId = (SELECT
@@ -24,17 +21,16 @@ CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDF] AS
 											IsActive = 1)
 		group by
 			AccountingExportPayPeriodId,
-			exdata.PersonId,
+			CONCAT(pers.firstName, ' ', pers.lastName),
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId
 		order by 
 			AccountingExportPayPeriodId,
-			PersonId,
+			full_name,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId
 
 GO
-
 
 SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDF
 
@@ -52,17 +48,17 @@ GO
 
 CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDFDetail] AS
 
-	
 		select TOP (1000000) 
 			AccountingExportPayPeriodId,
-			PersonId,
+			CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
 			Quantity
 		from 
 			export.AccountingExportPayrollData exdata
+			join main.Person pers on exdata.PersonId = pers.PersonId
 		where------------------------------------------------------------------------
-			(PersonId = 2451 OR PersonId =  1252) and
+			(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 			AccountingExportPayPeriodId = (SELECT
 											TOP 1 PayrollOTRPayPeriodId 
 											FROM [payroll].[PayrollOTRPayPeriod]
@@ -70,12 +66,11 @@ CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDFDetail] AS
 											IsActive = 1)
 		order by 
 			AccountingExportPayPeriodId,
-			PersonId,
+			full_name,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId
 
 GO
-
 
 SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFDetail
 
