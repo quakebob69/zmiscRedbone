@@ -6,14 +6,17 @@ CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDF] AS
 	
 		select TOP (1000000) 
 			AccountingExportPayPeriodId,
-			PersonId,
+			pers.firstName || ' ' || pers.lastName as fullName,
+			exdata.PersonId as 'asdf'
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId,
 			Sum(Quantity) as 'Quantity'
 		from 
 			export.AccountingExportPayrollData exdata
+			join main.Person pers on exdata.PersonId = p.PersonId
+
 		where------------------------------------------------------------------------
-			(PersonId = 2451 OR PersonId =  1252) and
+			(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 			AccountingExportPayPeriodId = (SELECT
 											TOP 1 PayrollOTRPayPeriodId 
 											FROM [payroll].[PayrollOTRPayPeriod]
@@ -21,7 +24,7 @@ CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDF] AS
 											IsActive = 1)
 		group by
 			AccountingExportPayPeriodId,
-			PersonId,
+			exdata.PersonId,
 			AccountingExportPayrollEntryTypeId,
 			AccountingExportPayrollItemId
 		order by 
