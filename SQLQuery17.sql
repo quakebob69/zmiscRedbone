@@ -56,7 +56,7 @@ GO
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
 				typ.Name as type_name,
 				itm.Name as item_name,
-				OriginatingOTRPayPeriodId,
+				ppo.Code as period_code_orig,
 				LoadIdOrDriverPayId,
 				PayrollOTRPaymentHoldReasonId,
 				Rate,
@@ -68,6 +68,7 @@ GO
 				join export.AccountingExportPayrollEntryType typ on exdata.AccountingExportPayrollEntryTypeId = typ.AccountingExportPayrollEntryTypeId
 				join export.AccountingExportPayrollItem itm on exdata.AccountingExportPayrollItemId = itm.AccountingExportPayrollItemId
 				join payroll.PayrollOTRPayPeriod pp on exdata.PayPeriodId = pp.PayrollOTRPayPeriodId
+				join payroll.PayrollOTRPayPeriod ppo on exdata.OriginatingOTRPayPeriodId = ppo.PayrollOTRPayPeriodId
 			where------------------------------------------------------------------------
 				(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 				PayPeriodId = (SELECT
