@@ -20,7 +20,7 @@ CREATE TABLE [export].[AccountingExportPayrollItem](
 	[AccountingExportPayrollItemId] [int] IDENTITY(1,1) NOT NULL,
 	[AccountingExportCompanyId] [int] NOT NULL,
 	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
-	[NameQB] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
 	[PayCodeLegacy] [varchar](50) NULL,
 	[PayIdLegacy] int NULL,
 	[Order] int NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE [export].[AccountingExportPayrollItem](
 (
 	[AccountingExportCompanyId] ASC,
 	[AccountingExportPayrollEntryTypeId] ASC,
-	[NameQB] ASC
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
