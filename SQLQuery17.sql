@@ -53,6 +53,11 @@ GO
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
 				AccountingExportPayrollEntryTypeId,
 				AccountingExportPayrollItemId,
+				OriginatingOTRPayPeriodId,
+				LoadIdOrDriverPayId,
+				PayrollOTRPaymentHoldReasonId,
+				Rate,
+				Hours,
 				Quantity
 			from 
 				export.AccountingExportPayrollData exdata
@@ -73,8 +78,3 @@ GO
 	GO
 
 SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFDetail
-
-
-
-
-
