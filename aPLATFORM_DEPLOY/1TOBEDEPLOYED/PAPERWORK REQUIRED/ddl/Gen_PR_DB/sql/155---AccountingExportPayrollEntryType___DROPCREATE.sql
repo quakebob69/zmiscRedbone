@@ -27,4 +27,4 @@ GO
 
 -----------------------------------------
 INSERT INTO [export].[AccountingExportPayrollEntryType] ([AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (1, 'EARNINGS', 1);
-INSERT INTO [export].[AccountingExportPayrollEntryType] ([AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (2, 'OTHERPAYROLLITEMS', 1);
+INSERT INTO [export].[AccountingExportPayrollEntryType] ([AccountingExportPayrollEntryTypeId], [Name], [Enabled]) VALUES (2, 'OTHER PAYROLL ITEMS', 1);
