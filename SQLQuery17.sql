@@ -6,12 +6,13 @@ GO
 			select TOP (1000000) 
 				PayPeriodId,
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
-				AccountingExportPayrollEntryTypeId,
+				typ.Name,
 				AccountingExportPayrollItemId,
 				Sum(Quantity) as 'Quantity'
 			from 
 				export.AccountingExportPayrollData exdata
 				join main.Person pers on exdata.PersonId = pers.PersonId
+				join export.AccountingExportPayrollEntryType typ on exdata.AccountingExportPayrollEntryTypeId = typ.AccountingExportPayrollEntryTypeId
 			where------------------------------------------------------------------------
 				(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 				PayPeriodId = (SELECT
@@ -22,12 +23,12 @@ GO
 			group by
 				PayPeriodId,
 				CONCAT(pers.firstName, ' ', pers.lastName),
-				AccountingExportPayrollEntryTypeId,
+				typ.Name,
 				AccountingExportPayrollItemId
 			order by 
 				PayPeriodId,
 				full_name,
-				AccountingExportPayrollEntryTypeId,
+				typ.Name,
 				AccountingExportPayrollItemId
 
 	GO
@@ -73,7 +74,7 @@ GO
 			order by 
 				PayPeriodId,
 				full_name,
-				exdata.AccountingExportPayrollEntryTypeId,
+				typ.Name,
 				AccountingExportPayrollItemId
 
 	GO
