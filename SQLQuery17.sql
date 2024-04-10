@@ -28,7 +28,7 @@ GO
 				typ.Name,
 				itm.Name
 			order by 
-				pp.Code,
+				period_code,
 				full_name,
 				typ.Name,
 				itm.Name
@@ -52,7 +52,7 @@ GO
 	CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDFDetail] AS
 
 			select TOP (1000000) 
-				PayPeriodId,
+				pp.Code as period_code,
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
 				typ.Name as type_name,
 				itm.Name as item_name,
@@ -67,6 +67,7 @@ GO
 				join main.Person pers on exdata.PersonId = pers.PersonId
 				join export.AccountingExportPayrollEntryType typ on exdata.AccountingExportPayrollEntryTypeId = typ.AccountingExportPayrollEntryTypeId
 				join export.AccountingExportPayrollItem itm on exdata.AccountingExportPayrollItemId = itm.AccountingExportPayrollItemId
+				join payroll.PayrollOTRPayPeriod pp on exdata.PayPeriodId = pp.PayrollOTRPayPeriodId
 			where------------------------------------------------------------------------
 				(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 				PayPeriodId = (SELECT
@@ -75,7 +76,7 @@ GO
 												WHERE
 												IsActive = 1)
 			order by 
-				PayPeriodId,
+				period_code,
 				full_name,
 				typ.Name,
 				itm.Name
