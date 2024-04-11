@@ -102,6 +102,7 @@ GO
 	CREATE VIEW [export].[vAccountingExportPayrollDataPastPDFHeld] AS
 
 			select TOP (1000000) 
+				exdata.PayPeriodId as period_code,
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
 				typ.Name as type_name,
 				itm.Name as item_name,
@@ -123,11 +124,11 @@ GO
 													TOP 1 PayrollOTRPayPeriodId 
 													FROM [payroll].[PayrollOTRPayPeriod]
 													WHERE
-													IsActive = 0)
+													IsActive = 1)
 				AND
 				PayPeriodId IS NULL
 			order by 
-				period_code_orig,
+				period_code,
 				full_name,
 				typ.Name,
 				itm.Name
