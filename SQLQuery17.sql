@@ -16,7 +16,7 @@ GO
 				join export.AccountingExportPayrollItem itm on exdata.AccountingExportPayrollItemId = itm.AccountingExportPayrollItemId
 				join payroll.PayrollOTRPayPeriod pp on exdata.PayPeriodId = pp.PayrollOTRPayPeriodId
 			where------------------------------------------------------------------------
-				(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
+				--(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 				PayPeriodId = (SELECT
 												TOP 1 PayrollOTRPayPeriodId 
 												FROM [payroll].[PayrollOTRPayPeriod]
@@ -70,7 +70,7 @@ GO
 				join payroll.PayrollOTRPayPeriod pp on exdata.PayPeriodId = pp.PayrollOTRPayPeriodId
 				join payroll.PayrollOTRPayPeriod ppo on exdata.OriginatingOTRPayPeriodId = ppo.PayrollOTRPayPeriodId
 			where------------------------------------------------------------------------
-				(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
+				--(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 				PayPeriodId = (SELECT
 												TOP 1 PayrollOTRPayPeriodId 
 												FROM [payroll].[PayrollOTRPayPeriod]
