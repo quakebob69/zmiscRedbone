@@ -1,3 +1,4 @@
+@ -1,187 +1,187 @@
 --PDF
 DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDF]
 GO
@@ -96,10 +97,10 @@ SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFDetail
 
 
 --Held
-DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFReleased]
+DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFHeld]
 GO
 
-	CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDFReleased] AS
+	CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriodPDFHeld] AS
 
 			select TOP (1000000) 
 				CONCAT(pers.firstName, ' ', pers.lastName) AS full_name,
@@ -134,7 +135,7 @@ GO
 
 	GO
 
-SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFReleased
+SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFHeld
 
 
 
