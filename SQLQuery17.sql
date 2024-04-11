@@ -119,21 +119,13 @@ GO
 				join payroll.PayrollOTRPayPeriod ppo on exdata.OriginatingOTRPayPeriodId = ppo.PayrollOTRPayPeriodId
 			where------------------------------------------------------------------------
 				--(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
-				PayPeriodId = (SELECT
-									TOP 1 PayrollOTRPayPeriodId 
-									FROM [payroll].[PayrollOTRPayPeriod]
-									WHERE
-									IsActive = 1)
+				OriginatingOTRPayPeriodId = (SELECT
+													TOP 1 PayrollOTRPayPeriodId 
+													FROM [payroll].[PayrollOTRPayPeriod]
+													WHERE
+													IsActive = 1)
 				AND
-					(
-						OriginatingOTRPayPeriodId = (SELECT
-															TOP 1 PayrollOTRPayPeriodId 
-															FROM [payroll].[PayrollOTRPayPeriod]
-															WHERE
-															IsActive = 1)
-						AND
-						PayPeriodId IS NULL
-					)
+				PayPeriodId IS NULL
 			order by 
 				period_code_orig,
 				full_name,
