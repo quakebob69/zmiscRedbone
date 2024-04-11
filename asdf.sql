@@ -38,8 +38,11 @@ delete from [export].[AccountingExportPayrollData];
 		--select AccountingExportPayrollDataID from [export].[AccountingExportPayrollData] where AccountingExportPayPeriodId is NULL
 		UPDATE [export].[AccountingExportPayrollData] SET PayPeriodId = 3 where AccountingExportPayrollDataId = 4
 
-						
-
+		UPDATE [payroll].PayrollOTRPayPeriod SET IsActive = 0, IsOpen = 0
+		UPDATE [payroll].PayrollOTRPayPeriod SET IsActive = 1, IsOpen = 1 where PayrollOTRPayPeriodId = 3;
+				
+				--select * from [payroll].PayrollOTRPayPeriod
+				
 
 
 select 
