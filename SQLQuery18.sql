@@ -124,7 +124,7 @@ GO
 													TOP 1 PayrollOTRPayPeriodId 
 													FROM [payroll].[PayrollOTRPayPeriod]
 													WHERE
-													IsActive = 1)
+													IsActive = 0)
 				AND
 				PayPeriodId IS NULL
 			order by 
