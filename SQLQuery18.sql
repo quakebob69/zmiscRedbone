@@ -1,3 +1,4 @@
+--PDF
 DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDF]
 GO
 
@@ -45,7 +46,7 @@ SELECT * from export.vAccountingExportPayrollDataPastPDF
 --------------
 
 
-
+--DETAIL
 DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDFDetail]
 GO
 
@@ -85,3 +86,11 @@ GO
 	GO
 
 SELECT * from export.vAccountingExportPayrollDataPastPDFDetail
+
+
+
+--------------
+--------------
+--------------
+--------------
+
