@@ -15,8 +15,13 @@ GO
 				join export.AccountingExportPayrollEntryType typ on exdata.AccountingExportPayrollEntryTypeId = typ.AccountingExportPayrollEntryTypeId
 				join export.AccountingExportPayrollItem itm on exdata.AccountingExportPayrollItemId = itm.AccountingExportPayrollItemId
 				join payroll.PayrollOTRPayPeriod pp on exdata.PayPeriodId = pp.PayrollOTRPayPeriodId
-			--where------------------------------------------------------------------------
+			where------------------------------------------------------------------------
 				--(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
+				PayPeriodId = (SELECT
+												TOP 1 PayrollOTRPayPeriodId 
+												FROM [payroll].[PayrollOTRPayPeriod]
+												WHERE
+												IsActive = 0)
 			group by
 				pp.Code,
 				CONCAT(pers.firstName, ' ', pers.lastName),
@@ -30,7 +35,7 @@ GO
 
 	GO
 
-SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDF
+SELECT * from export.vAccountingExportPayrollDataPastPDF
 
 
 
@@ -64,8 +69,13 @@ GO
 				join export.AccountingExportPayrollItem itm on exdata.AccountingExportPayrollItemId = itm.AccountingExportPayrollItemId
 				join payroll.PayrollOTRPayPeriod pp on exdata.PayPeriodId = pp.PayrollOTRPayPeriodId
 				join payroll.PayrollOTRPayPeriod ppo on exdata.OriginatingOTRPayPeriodId = ppo.PayrollOTRPayPeriodId
-			--where------------------------------------------------------------------------
+			where------------------------------------------------------------------------
 				--(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
+				PayPeriodId = (SELECT
+												TOP 1 PayrollOTRPayPeriodId 
+												FROM [payroll].[PayrollOTRPayPeriod]
+												WHERE
+												IsActive = 0)
 			order by 
 				period_code,
 				full_name,
@@ -74,4 +84,4 @@ GO
 
 	GO
 
-SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFDetail
+SELECT * from export.vAccountingExportPayrollDataPastPDFDetail
