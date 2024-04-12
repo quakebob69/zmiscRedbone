@@ -1,34 +1,7 @@
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]    Script Date: 2/14/2024 10:06:27 AM ******/
-DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
-GO
-
-/****** Object:  StoredProcedure [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]    Script Date: 2/14/2024 10:06:27 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE procedure [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
-(
-	@PayPeriodStart date
-	,@PayPeriodEnd date
-)
-as
-/*
-	exec payroll.sp_Payroll_OTR_GetRecordsFromLoad '12/10/2023', '12/16/2023'
-*/
-
-BEGIN
-SET NOCOUNT ON;
- IF 1=0 BEGIN
-   SET FMTONLY OFF
- END
-
---declare @PayPeriodStart datetime 
---declare @PayPeriodEnd datetime 
---set @PayPeriodStart = '12/10/2023'
---set @PayPeriodEnd = '12/16/2023'
+declare	@PayPeriodStart date
+declare @PayPeriodEnd date
+set	@PayPeriodStart='12/10/2023'
+SET @PayPeriodEnd='12/16/2023'
 
         DECLARE @crsV TABLE (
                 LoadId int
@@ -67,7 +40,7 @@ SET NOCOUNT ON;
                         or isnull(p2.PersonId,0) in (select PersonId from main.PersonTypeMapping where PersonId = p2.PersonId and PersonTypeId = 4)
                 )
                 AND NOT EXISTS (SELECT 1 FROM dispatch.LoadStop where LoadId = l.LoadId and LoadStopTypeId = 2)
-        union all
+		/*        union all
 
         -- get legs 
         select 
@@ -95,7 +68,7 @@ SET NOCOUNT ON;
                         p1.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p1.PersonId and PersonTypeId = 4)
                         or isnull(p2.PersonId,0) in (select PersonId from main.PersonTypeMapping where PersonId = p2.PersonId and PersonTypeId = 4)
                 )
-
+				*/
         -- get Loads that have legs
         union all
         select 
@@ -545,7 +518,6 @@ SET NOCOUNT ON;
                 WHEN 'Per Mile - Doubles' THEN 4
                 ELSE 5 END
 
-END
-GO
+
 
 
