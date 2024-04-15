@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS [payroll].[getCurrentPayPeriodMinus8DaysLoadRecs]
+DROP FUNCTION IF EXISTS [payroll].[getLoadCurrentPayPeriodMinus8Days]
 GO
 
-CREATE FUNCTION [payroll].[getCurrentPayPeriodMinus8DaysLoadRecs] ()
+CREATE FUNCTION [payroll].[getLoadCurrentPayPeriodMinus8Days] ()
 RETURNS TABLE
 AS
 RETURN
@@ -9,8 +9,14 @@ RETURN
 	SELECT
 		*
 	FROM
-		dispatch.LoadStop
+		dispatch.Load
 	WHERE
-		(StartDateTime >= DATEADD(day, -8, (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod)))
+		LoadId in 
+		(
+			SELECT
+				LoadId
+			FROM
+				payroll.getLsDropCurrentPayPeriodMinus8Days()
+		)
 )
 

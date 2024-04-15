@@ -25,5 +25,11 @@ GO
 
 
 
-select * from [payroll].[vLoadCurrentPayPeriodMinus8Days];
-select * from [payroll].[vLsDropCurrentPayPeriodMinus8Days];
+select * from [payroll].[vLoadCurrentPayPeriodMinus8Days] order by loadid;
+
+
+
+
+
+
+select * from [payroll].[vLsDropCurrentPayPeriodMinus8Days] order by loadid;

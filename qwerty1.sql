@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS [payroll].[getCurrentPayPeriodMinus8DaysLsDropRecs]
+DROP FUNCTION IF EXISTS [payroll].[getLsDropCurrentPayPeriodMinus8Days]
 GO
 
-CREATE FUNCTION [payroll].[getCurrentPayPeriodMinus8DaysLsDropRecs] ()
+CREATE FUNCTION [payroll].[getLsDropCurrentPayPeriodMinus8Days] ()
 RETURNS TABLE
 AS
 RETURN
