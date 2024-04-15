@@ -9,7 +9,7 @@ CREATE VIEW [payroll].[vLsDropCurrentPayPeriodMinus8Days] AS
 	SELECT
 		*
 	FROM
-		payroll.getCurrentPayPeriodMinus8DaysLsDropRecs()
+		payroll.getLsDropCurrentPayPeriodMinus8Days()
 
 GO
 
@@ -19,7 +19,7 @@ CREATE VIEW [payroll].[vLoadCurrentPayPeriodMinus8Days] AS
 	SELECT
 		*
 	FROM
-		payroll.getCurrentPayPeriodMinus8DaysLoadRecs()
+		payroll.getLoadCurrentPayPeriodMinus8Days()
 
 GO
 
