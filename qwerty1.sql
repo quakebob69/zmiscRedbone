@@ -11,7 +11,8 @@ RETURN
 	FROM
 		dispatch.LoadStop
 	WHERE
-		(StartDateTime >= DATEADD(day, -4, (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod)))
+		(StartDateTime >= DATEADD(day, -10, (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod)))
+		--LoadId >= 56201 and LoadId <= 56769 
 )
 
 
