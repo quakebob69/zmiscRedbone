@@ -29,12 +29,12 @@ exec [payroll].[sp_Payroll_OTR_StagePayroll] 1, 1, 2775
 	--419
 		select COUNT(*) from payroll.PayrollOTRStaging WHERE PayrollOTRDataSourceId = 1;
 	--59
-		--select COUNT(*) from payroll.PayrollOTRStaging WHERE PayrollOTRDataSourceId = 2;
+		select COUNT(*) from payroll.PayrollOTRStaging WHERE PayrollOTRDataSourceId = 2;
 
 	--296
 		select COUNT(*) from export.AccountingExportPayrollData WHERE PayrollOTRDataSourceId = 1;
 	--59
-		--select COUNT(*) from export.AccountingExportPayrollData WHERE PayrollOTRDataSourceId = 2;
+		select COUNT(*) from export.AccountingExportPayrollData WHERE PayrollOTRDataSourceId = 2;
 	--355
 		--select COUNT(*) from export.AccountingExportPayrollData;
 
