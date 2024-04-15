@@ -72,9 +72,9 @@ END
 		PUnitId int NULL
 	)
 	INSERT INTO #TEMP_OTR_DATA__Load
-	EXEC [payroll].[sp_Payroll_OTR_GetRecordsFromLoad] @PayPeriodBeginDate, @PayPeriodEndDate
+	--EXEC [payroll].[sp_Payroll_OTR_GetRecordsFromLoad] @PayPeriodBeginDate, @PayPeriodEndDate
 	--EXEC [payroll].[sp_Payroll_OTR_GetRecordsFromLoad_____loaddata___payrollTEMPDANNY] @PayPeriodBeginDate, @PayPeriodEndDate
-	--EXEC [payroll].[sp_Payroll_OTR_GetRecordsFromLoad_____loaddata___payrollTEMPDANNY2] @PayPeriodBeginDate, @PayPeriodEndDate
+	EXEC [payroll].[sp_Payroll_OTR_GetRecordsFromLoad_____loaddata___payrollTEMPDANNY2] @PayPeriodBeginDate, @PayPeriodEndDate
 
 --Table inserts
 	--payroll.PayrollOTRStaging
