@@ -11,7 +11,12 @@ GO
 
 	DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
 	GO
+	
+	DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriodMinus8Days]
+	GO
 
+	DROP VIEW IF EXISTS [payroll].[vLsDropCurrentPayPeriodMinus8Days]
+	GO
 
 	--temp...
 		DROP VIEW IF EXISTS [payroll].[vPR_OTR_History___withpersonsremoved]
@@ -19,6 +24,14 @@ GO
 
 		DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging___withpersonsremoved]
 		GO
+	
+	
+--USER DEFINED FUNCTIONS
+	DROP FUNCTION IF EXISTS [payroll].[getLsDropCurrentPayPeriodMinus8Days]
+	GO
+
+	DROP FUNCTION IF EXISTS [payroll].[getLoadCurrentPayPeriodMinus8Days]
+	GO
 	
 
 --STORED PROCEDURES

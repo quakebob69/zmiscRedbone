@@ -22,9 +22,3 @@ CREATE VIEW [payroll].[vLoadCurrentPayPeriodMinus8Days] AS
 		payroll.getLoadCurrentPayPeriodMinus8Days()
 
 GO
-
-
-/*
-	select * from [payroll].[vLoadCurrentPayPeriodMinus8Days] order by loadid;
-	select * from [payroll].[vLsDropCurrentPayPeriodMinus8Days] order by loadid;
-*/

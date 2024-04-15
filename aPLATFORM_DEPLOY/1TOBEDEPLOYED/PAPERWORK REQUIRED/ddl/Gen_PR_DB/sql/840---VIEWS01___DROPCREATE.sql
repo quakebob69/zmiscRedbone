@@ -46,5 +46,3 @@ CREATE VIEW [export].[vAccountingExportPayrollDataCurrentPeriod] AS
 			)
 
 GO
-
-
