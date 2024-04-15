@@ -27,8 +27,8 @@ exec [payroll].[sp_Payroll_OTR_StagePayroll] 1, 1, 775
 --select * from export
 ---------------------------------------------------------------------------------------------------------------------------------
 
---select * from export.AccountingExportPayrollData
-
+select COUNT(*) from export.AccountingExportPayrollData WHERE PayrollOTRDataSourceId = 1
+--select COUNT(*) from export.AccountingExportPayrollData WHERE PayrollOTRDataSourceId = 2
 
 
 
