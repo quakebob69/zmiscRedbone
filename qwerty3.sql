@@ -10,10 +10,10 @@ CREATE VIEW [payroll].[vLsDropCurrentPayPeriodMinus8Days] AS
 	SELECT
 		*
 	FROM
-		payroll.getCurrentPayPeriodMinus8DaysLsDropRecs('12/10/2023')
+		payroll.getCurrentPayPeriodMinus8DaysLsDropRecs()
 
 GO
 
 
 
-select * from [payroll].[vLsDropCurrentPayPeriodMinus8Days];
+--select * from [payroll].[vLsDropCurrentPayPeriodMinus8Days];
