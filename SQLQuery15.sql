@@ -4,7 +4,7 @@ exec [payroll].[sp_Payroll_OTR_PayPeriodOpen] 2775
 --exec [payroll].[sp_Payroll_OTR_StagePayroll] 1, 0, 775
 --exec [payroll].[sp_Payroll_OTR_StagePayroll] 0, 1, 775
 
-exec [payroll].[sp_Payroll_OTR_StagePayroll] 1, 1, 775
+exec [payroll].[sp_Payroll_OTR_StagePayroll] 1, 1, 2775
 
 
 
