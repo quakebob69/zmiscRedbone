@@ -1,6 +1,5 @@
-
-/*DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriod]
-GO*/
+DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriodMinus8Days]
+GO
 
 DROP VIEW IF EXISTS [payroll].[vLsDropCurrentPayPeriodMinus8Days]
 GO
@@ -15,5 +14,16 @@ CREATE VIEW [payroll].[vLsDropCurrentPayPeriodMinus8Days] AS
 GO
 
 
+CREATE VIEW [payroll].[vLoadCurrentPayPeriodMinus8Days] AS
 
---select * from [payroll].[vLsDropCurrentPayPeriodMinus8Days];
+	SELECT
+		*
+	FROM
+		payroll.getCurrentPayPeriodMinus8DaysLoadRecs()
+
+GO
+
+
+
+select * from [payroll].[vLoadCurrentPayPeriodMinus8Days];
+select * from [payroll].[vLsDropCurrentPayPeriodMinus8Days];

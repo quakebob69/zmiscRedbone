@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS [payroll].[getCurrentPayPeriodLoadRecs]
+DROP FUNCTION IF EXISTS [payroll].[getCurrentPayPeriodMinus8DaysLoadRecs]
 GO
 
-CREATE FUNCTION [payroll].[getCurrentPayPeriodLoadRecs] ()
+CREATE FUNCTION [payroll].[getCurrentPayPeriodMinus8DaysLoadRecs] ()
 RETURNS TABLE
 AS
 RETURN
