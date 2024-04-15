@@ -1,9 +1,7 @@
 DROP FUNCTION IF EXISTS [payroll].[getCurrentPayPeriodLoadRecs]
 GO
 
-CREATE FUNCTION [payroll].[getCurrentPayPeriodLoadRecs] (
-    @PayPeriodStart DATE
-)
+CREATE FUNCTION [payroll].[getCurrentPayPeriodLoadRecs] ()
 RETURNS TABLE
 AS
 RETURN
@@ -13,5 +11,6 @@ RETURN
 	FROM
 		dispatch.LoadStop
 	WHERE
-		(StartDateTime >= DATEADD(day, -8, @PayPeriodStart))
-);
+		(StartDateTime >= DATEADD(day, -8, (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod)))
+)
+
