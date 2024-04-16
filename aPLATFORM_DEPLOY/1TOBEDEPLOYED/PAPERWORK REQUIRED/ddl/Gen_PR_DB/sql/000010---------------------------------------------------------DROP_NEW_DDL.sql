@@ -3,6 +3,29 @@ GO
 
 
 --VIEWS
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDF]
+	GO
+
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDFDetail]
+	GO
+
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDFHeld]
+	GO
+
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDF]
+	GO
+
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFDetail]
+	GO
+
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFHeld]
+	GO
+
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFReleased]
+	GO
+
+
+
 	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriod]
 	GO
 
