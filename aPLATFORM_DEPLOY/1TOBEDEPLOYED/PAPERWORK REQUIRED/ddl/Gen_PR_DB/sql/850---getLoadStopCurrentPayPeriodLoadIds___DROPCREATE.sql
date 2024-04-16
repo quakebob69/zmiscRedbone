@@ -26,7 +26,7 @@ BEGIN
 		FROM
 			dispatch.LoadStop
 		WHERE
-			--get earlier of 2 dates
+			--get smaller loadid of 2 dates
 			LoadId >=
 				IIF(
 						@DropStartDateTimeLoadId

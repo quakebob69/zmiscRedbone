@@ -9,7 +9,15 @@ CREATE VIEW [payroll].[vLoadStopCurrentPayPeriod] AS
 	SELECT
 		*
 	FROM
-		payroll.getLoadStopCurrentPayPeriod()
+		dispatch.LoadStop
+	WHERE
+		LoadId in 
+		(
+			SELECT
+				LoadId
+			FROM
+				payroll.getLoadStopCurrentPayPeriodLoadIds()
+		)
 
 GO
 
@@ -19,6 +27,14 @@ CREATE VIEW [payroll].[vLoadCurrentPayPeriod] AS
 	SELECT
 		*
 	FROM
-		payroll.getLoadCurrentPayPeriod()
+		dispatch.Load
+	WHERE
+		LoadId in 
+		(
+			SELECT
+				LoadId
+			FROM
+				payroll.getLoadStopCurrentPayPeriodLoadIds()
+		)
 
 GO

@@ -25,10 +25,46 @@ SET NOCOUNT ON;
    SET FMTONLY OFF
  END
 
---declare @PayPeriodStart datetime 
---declare @PayPeriodEnd datetime 
---set @PayPeriodStart = '12/10/2023'
---set @PayPeriodEnd = '12/16/2023'
+
+
+
+
+
+
+
+
+
+
+ --Load And LoadStop records for this pay period
+	--#LoadCurrentPayPeriod
+	--#LoadStopCurrentPayPeriod
+
+DROP TABLE IF EXISTS #LoadCurrentPayPeriod
+DROP TABLE IF EXISTS #LoadStopCurrentPayPeriod
+
+	SELECT * INTO
+#LoadCurrentPayPeriod
+	FROM payroll.vLoadCurrentPayPeriod
+
+	SELECT * INTO
+#LoadStopCurrentPayPeriod
+	FROM payroll.vLoadStopCurrentPayPeriod
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         DECLARE @crsV TABLE (
                 LoadId int

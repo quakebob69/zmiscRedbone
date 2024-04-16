@@ -50,12 +50,6 @@ GO
 	
 	
 --USER DEFINED FUNCTIONS
-	DROP FUNCTION IF EXISTS [payroll].[getLoadCurrentPayPeriod]
-	GO
-
-	DROP FUNCTION IF EXISTS [payroll].[getLoadStopCurrentPayPeriod]
-	GO
-
 	DROP FUNCTION IF EXISTS [payroll].[getLoadStopCurrentPayPeriodLoadIds]
 	GO
 
