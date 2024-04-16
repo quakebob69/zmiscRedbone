@@ -56,18 +56,17 @@ RETURN
 
 
 						
-    SELECT *
-    FROM dispatch.LoadStop
-    WHERE LoadId =
-					IIF(
-						(SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1) > (SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1)
-						,(SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1)
-						,(SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1)
-					)
-
-
-
-
+    SELECT
+		*
+    FROM
+		dispatch.LoadStop
+    WHERE
+		LoadId =
+				IIF(
+					(SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1) > (SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1)
+					,(SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1)
+					,(SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1)
+				)
 )
 
 
