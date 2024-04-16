@@ -58,7 +58,7 @@ RETURN
 						
     SELECT c.LoadId, c.StartDateTime, c.DropStartDateTime
     FROM dispatch.LoadStop c
-    WHERE c.LoadId = IIF((SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1) > (SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1), (SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1), 0)
+    WHERE c.LoadId = IIF((SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1) > (SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1), (SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1), (SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1))
 
 
 
