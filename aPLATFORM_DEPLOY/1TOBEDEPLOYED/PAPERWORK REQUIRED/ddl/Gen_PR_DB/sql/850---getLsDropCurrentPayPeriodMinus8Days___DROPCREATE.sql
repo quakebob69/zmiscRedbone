@@ -63,9 +63,9 @@ RETURN
     WHERE
 		LoadId =
 				IIF(
-					(SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1) > (SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1)
-					,(SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1)
-					,(SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1)
+					(SELECT top 1 s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1) > (SELECT top 1 s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1)
+					,(SELECT top 1 s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1)
+					,(SELECT top 1 s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1)
 				)
 )
 
