@@ -1,7 +1,7 @@
 DROP FUNCTION IF EXISTS [payroll].[getLsDropCurrentPayPeriodMinus8Days]
 GO
 
-CREATE FUNCTION [payroll].[getLsDropCurrentPayPeriodMinus8Days] ()
+CREATE FUNCTION [payroll].[getLsDropCurrentPayPeriodMinus8Days] (@Status INT)
 RETURNS TABLE
 AS
 RETURN
@@ -37,6 +37,7 @@ RETURN
 		*/
 
 
+		/*
 	SELECT c.LoadId, c.StartDateTime, c.DropStartDateTime
     FROM dispatch.LoadStop c
     WHERE c.LoadId =
@@ -49,7 +50,16 @@ RETURN
 						0
 	
 	
-						)
+						)*/
+
+
+
+
+						
+    SELECT c.LoadId, c.StartDateTime, c.DropStartDateTime
+    FROM dispatch.LoadStop c
+    WHERE c.LoadId = IIF((SELECT s.LOAdid FROM dispatch.LoadStop s WHERE s.LOAdid = 1) = 1, (SELECT s.loadid FROM dispatch.LoadStop s WHERE s.loadid = 1), 0)
+
 
 
 
