@@ -1,25 +1,42 @@
-DROP FUNCTION IF EXISTS [payroll].[getLsDropCurrentPayPeriodMinus8Days]
+DROP FUNCTION IF EXISTS [payroll].[getLoadStopCurrentPayPeriodLoadIds]
 GO
 
-CREATE FUNCTION [payroll].[getLsDropCurrentPayPeriodMinus8Days] ()
-RETURNS TABLE
+CREATE FUNCTION [payroll].[getLoadStopCurrentPayPeriodLoadIds] ()
+RETURNS @LoadIds TABLE(loadid int)
 AS
-RETURN
-(
+BEGIN
 
-	SELECT
-		*
-	FROM
-		dispatch.LoadStop
-	WHERE
-		LoadId > = 
-			IIF(
-					(select top 1 loadid from dispatch.LoadStop where StartDateTime >= (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod))
-					<=
-					(select top 1 loadid from dispatch.LoadStop where DropStartDateTime >= (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod))
+	--VARS
+		DECLARE @StartDateTimeLoadId INT
+		DECLARE @DropStartDateTimeLoadId INT
 
-					,(select top 1 loadid from dispatch.LoadStop where StartDateTime >= (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod))
-					,(select top 1 loadid from dispatch.LoadStop where DropStartDateTime >= (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod))
-			)
+		SELECT TOP 1 @StartDateTimeLoadId = loadid
+		FROM dispatch.LoadStop
+		WHERE StartDateTime >= (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod)
 
-)
+		SELECT top 1 @DropStartDateTimeLoadId = loadid
+		FROM dispatch.LoadStop
+		WHERE DropStartDateTime >= (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod)
+	
+	--get loadids
+		INSERT INTO
+			@LoadIds
+		SELECT
+			loadid
+		FROM
+			dispatch.LoadStop
+		WHERE
+			--get earlier of 2 dates
+			LoadId >=
+				IIF(
+						@DropStartDateTimeLoadId
+						<=
+						@StartDateTimeLoadId
+
+						,@DropStartDateTimeLoadId
+						,@StartDateTimeLoadId
+				)
+			
+	RETURN		
+
+END

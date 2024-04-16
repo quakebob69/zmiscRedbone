@@ -12,10 +12,10 @@ GO
 	DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
 	GO
 	
-	DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriodMinus8Days]
+	DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriod]
 	GO
 
-	DROP VIEW IF EXISTS [payroll].[vLsDropCurrentPayPeriodMinus8Days]
+	DROP VIEW IF EXISTS [payroll].[vLoadStopCurrentPayPeriod]
 	GO
 
 	--temp...
@@ -27,12 +27,15 @@ GO
 	
 	
 --USER DEFINED FUNCTIONS
-	DROP FUNCTION IF EXISTS [payroll].[getLsDropCurrentPayPeriodMinus8Days]
+	DROP FUNCTION IF EXISTS [payroll].[getLoadCurrentPayPeriod]
 	GO
 
-	DROP FUNCTION IF EXISTS [payroll].[getLoadCurrentPayPeriodMinus8Days]
+	DROP FUNCTION IF EXISTS [payroll].[getLoadStopCurrentPayPeriod]
 	GO
-	
+
+	DROP FUNCTION IF EXISTS [payroll].[getLoadStopCurrentPayPeriodLoadIds]
+	GO
+
 
 --STORED PROCEDURES
 	--'payroll' schema 

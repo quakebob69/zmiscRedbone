@@ -1,24 +1,24 @@
-DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriodMinus8Days]
+DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriod]
 GO
 
-DROP VIEW IF EXISTS [payroll].[vLsDropCurrentPayPeriodMinus8Days]
+DROP VIEW IF EXISTS [payroll].[vLoadStopCurrentPayPeriod]
 GO
 
-CREATE VIEW [payroll].[vLsDropCurrentPayPeriodMinus8Days] AS
+CREATE VIEW [payroll].[vLoadStopCurrentPayPeriod] AS
 
 	SELECT
 		*
 	FROM
-		payroll.getLsDropCurrentPayPeriodMinus8Days()
+		payroll.getLoadStopCurrentPayPeriod()
 
 GO
 
 
-CREATE VIEW [payroll].[vLoadCurrentPayPeriodMinus8Days] AS
+CREATE VIEW [payroll].[vLoadCurrentPayPeriod] AS
 
 	SELECT
 		*
 	FROM
-		payroll.getLoadCurrentPayPeriodMinus8Days()
+		payroll.getLoadCurrentPayPeriod()
 
 GO
