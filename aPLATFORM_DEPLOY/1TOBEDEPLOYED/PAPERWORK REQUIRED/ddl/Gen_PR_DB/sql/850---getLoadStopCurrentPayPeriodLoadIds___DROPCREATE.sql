@@ -2,25 +2,25 @@ DROP FUNCTION IF EXISTS [payroll].[getLoadStopCurrentPayPeriodLoadIds]
 GO
 
 CREATE FUNCTION [payroll].[getLoadStopCurrentPayPeriodLoadIds] ()
-RETURNS @LoadIds TABLE(loadid int)
+RETURNS @CurrentPayPeriodLoadIds TABLE(loadid int)
 AS
 BEGIN
 
 	--VARS
-		DECLARE @StartDateTimeLoadId INT
-		DECLARE @DropStartDateTimeLoadId INT
+		DECLARE @FirstStartDateTimeLoadId INT
+		DECLARE @FirstDropStartDateTimeLoadId INT
 
-		SELECT TOP 1 @StartDateTimeLoadId = loadid
+		SELECT TOP 1 @FirstStartDateTimeLoadId = loadid
 		FROM dispatch.LoadStop
 		WHERE StartDateTime >= (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod)
 
-		SELECT top 1 @DropStartDateTimeLoadId = loadid
+		SELECT top 1 @FirstDropStartDateTimeLoadId = loadid
 		FROM dispatch.LoadStop
 		WHERE DropStartDateTime >= (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod)
 	
 	--get loadids
 		INSERT INTO
-			@LoadIds
+			@CurrentPayPeriodLoadIds
 		SELECT
 			loadid
 		FROM
@@ -29,12 +29,12 @@ BEGIN
 			--get smaller loadid of 2 dates
 			LoadId >=
 				IIF(
-						@DropStartDateTimeLoadId
+						@FirstDropStartDateTimeLoadId
 						<=
-						@StartDateTimeLoadId
+						@FirstStartDateTimeLoadId
 
-						,@DropStartDateTimeLoadId
-						,@StartDateTimeLoadId
+						,@FirstDropStartDateTimeLoadId
+						,@FirstStartDateTimeLoadId
 				)
 			
 	RETURN		
