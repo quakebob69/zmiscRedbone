@@ -24,48 +24,23 @@ SET NOCOUNT ON;
  IF 1=0 BEGIN
    SET FMTONLY OFF
  END
+	--vars
+		--Load And LoadStop records for this pay period
+			--#LoadCurrentPayPeriod
+			--#LoadStopCurrentPayPeriod
+			DROP TABLE IF EXISTS #LoadCurrentPayPeriod
+			DROP TABLE IF EXISTS #LoadStopCurrentPayPeriod
+
+			SELECT * INTO
+			#LoadCurrentPayPeriod
+			FROM payroll.vLoadCurrentPayPeriod
+
+			SELECT * INTO
+			#LoadStopCurrentPayPeriod
+			FROM payroll.vLoadStopCurrentPayPeriod
 
 
-
-
-
-
-
-
-
-
-
- --Load And LoadStop records for this pay period
-	--#LoadCurrentPayPeriod
-	--#LoadStopCurrentPayPeriod
-
-DROP TABLE IF EXISTS #LoadCurrentPayPeriod
-DROP TABLE IF EXISTS #LoadStopCurrentPayPeriod
-
-	SELECT * INTO
-#LoadCurrentPayPeriod
-	FROM payroll.vLoadCurrentPayPeriod
-
-	SELECT * INTO
-#LoadStopCurrentPayPeriod
-	FROM payroll.vLoadStopCurrentPayPeriod
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	--
         DECLARE @crsV TABLE (
                 LoadId int
                 ,LoadStopId_Pick int 
