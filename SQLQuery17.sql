@@ -36,7 +36,7 @@ GO
 
 	GO
 
-SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDF
+--SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDF
 
 
 
@@ -85,7 +85,7 @@ GO
 
 	GO
 
-SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFDetail
+--SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFDetail
 
 
 
@@ -135,7 +135,7 @@ GO
 
 	GO
 
-SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFHeld
+--SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFHeld
 
 
 
@@ -186,4 +186,4 @@ GO
 
 	GO
 
-SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFReleased
+--SELECT * from export.vAccountingExportPayrollDataCurrentPeriodPDFReleased
