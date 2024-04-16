@@ -24,14 +24,12 @@ BEGIN
 	WHERE DropStartDateTime > (select BeginDate from payroll.vPayrollOTRCurrentPayPeriod) order by loadid
 
 					SELECT TOP 1 @LastStartDateTimeLoadId = loadid
-					--SELECT TOP 1 loadid
 					FROM dispatch.LoadStop
-					WHERE StartDateTime < (select EndDate from payroll.vPayrollOTRCurrentPayPeriod) order by loadid
+					WHERE StartDateTime < (select EndDate from payroll.vPayrollOTRCurrentPayPeriod) order by loadid desc
 
 					SELECT TOP 1 @LastStartDateTimeLoadId = loadid
-					--SELECT TOP 1 loadid
 					FROM dispatch.LoadStop
-					WHERE DropStartDateTime < (select EndDate from payroll.vPayrollOTRCurrentPayPeriod) order by loadid
+					WHERE DropStartDateTime < (select EndDate from payroll.vPayrollOTRCurrentPayPeriod) order by loadid desc
 
 
 	--get loadids
@@ -42,17 +40,33 @@ BEGIN
 		FROM
 			dispatch.LoadStop
 		WHERE
-			--get smaller loadid of 2 dates
-			LoadId >=
-				IIF(
-						@FirstDropStartDateTimeLoadId
-						<=
-						@FirstStartDateTimeLoadId
+			(
+				LoadId >=
+					--get smaller loadid of 2 dates
+					IIF(
+							@FirstDropStartDateTimeLoadId
+							<=
+							@FirstStartDateTimeLoadId
 
-						,@FirstDropStartDateTimeLoadId
-						,@FirstStartDateTimeLoadId
-				)
-			
+							,@FirstDropStartDateTimeLoadId
+							,@FirstStartDateTimeLoadId
+					)
+			)
+			AND
+			(
+				LoadId >=
+					--get smaller loadid of 2 dates
+					IIF(
+							@FirstDropStartDateTimeLoadId
+							<=
+							@FirstStartDateTimeLoadId
+
+							,@FirstDropStartDateTimeLoadId
+							,@FirstStartDateTimeLoadId
+					)
+			)
+
 	RETURN		
 
 END
+
