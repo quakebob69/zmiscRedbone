@@ -55,14 +55,14 @@ BEGIN
 			AND
 			(
 				LoadId >=
-					--get smaller loadid of 2 dates
+					--get larger loadid of 2 dates
 					IIF(
-							@FirstDropStartDateTimeLoadId
+							@LastDropStartDateTimeLoadId
 							<=
-							@FirstStartDateTimeLoadId
+							@LastStartDateTimeLoadId
 
-							,@FirstDropStartDateTimeLoadId
-							,@FirstStartDateTimeLoadId
+							,@LastDropStartDateTimeLoadId
+							,@LastStartDateTimeLoadId
 					)
 			)
 
