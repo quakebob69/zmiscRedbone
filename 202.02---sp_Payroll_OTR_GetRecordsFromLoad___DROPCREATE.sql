@@ -223,13 +223,14 @@ SET NOCOUNT ON;
                         ,DriverPersonId = p.PersonId
                         ,Driver2PersonId = p2.PersonId--Added
                         ,LegInd = @LegInd
-                        ,PickOrigin = claddrorigin.City + ', ' + claddrorigin.State        --Added
+                        /*
+						,PickOrigin = claddrorigin.City + ', ' + claddrorigin.State        --Added
                         ,DropDest = cladddest.City + ', ' + cladddest.State        --Added
+						*/
+						,PickOrigin = 'asdf'
+						,DropDest = 'asdf'
                         ,pt.PUnitId
                 FROM
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
---CHANGE TO IMPROVE PERFORMANCE-------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------	
                         #CurrentPayPeriodLoad l
                         INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = @LoadStopId_Pick
                         INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
@@ -244,6 +245,10 @@ SET NOCOUNT ON;
                         -- Get Driver 2 name
                         --LEFT OUTER JOIN main.Driver dr2 on dr2.PersonId = l.Driver2_PersonId
                         LEFT OUTER JOIN main.Person p2 on p2.PersonId = IIF(@LegInd = 0, l.Driver2_PersonId, lsPick.Driver2_PersonId)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--CHANGE TO IMPROVE PERFORMANCE-------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+						/*
                         LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  IIF(@LegInd = 0,  
                                                                                                                                                                                                         (SELECT        TOP (1) ClientId
                                                                                                                                                                                                         FROM            main.ClientAddress
@@ -260,6 +265,10 @@ SET NOCOUNT ON;
                                                                                                                                                                                                 FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
                                                                                                                                                                                                 WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))
                                                                                                                                                                                         , lsDrop.ClientId) And cladddest.AddressTypeId = 2         --Added
+						*/
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--CHANGE TO IMPROVE PERFORMANCE-------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------	
                 WHERE 
                         L.LoadId = @LoadId 
                         and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
@@ -267,9 +276,7 @@ SET NOCOUNT ON;
                         and  iif(lsDrop.LoadStopTypeId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime) is not null
                         -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
                         and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
---CHANGE TO IMPROVE PERFORMANCE-------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
 
                 insert into @tempA
                 SELECT
