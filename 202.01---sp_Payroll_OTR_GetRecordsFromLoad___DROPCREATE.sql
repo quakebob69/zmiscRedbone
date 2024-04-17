@@ -53,9 +53,9 @@ SET NOCOUNT ON;
         declare @LegInd bit
 
         insert into @crsV (LoadId, LoadStopId_Pick, LoadStopId_Drop, LegInd)
-/*
-*/
-        -- Get loads without Legs
+
+
+        --1 Get loads without Legs
         select 
                 l.LoadId
                 -- First Pick
@@ -78,9 +78,10 @@ SET NOCOUNT ON;
                         or isnull(p2.PersonId,0) in (select PersonId from main.PersonTypeMapping where PersonId = p2.PersonId and PersonTypeId = 4)
                 )
                 AND NOT EXISTS (SELECT 1 FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId = 2)
-        union all
 
-        -- get legs 
+
+        --2 get legs 
+        union all
         select 
                 l.LoadId
                 -- First Pick
@@ -106,13 +107,9 @@ SET NOCOUNT ON;
                         p1.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p1.PersonId and PersonTypeId = 4)
                         or isnull(p2.PersonId,0) in (select PersonId from main.PersonTypeMapping where PersonId = p2.PersonId and PersonTypeId = 4)
                 )
-		
 
 
-		
-
-
-        -- get Loads that have legs
+        --3 get Loads that have legs
         union all
         select 
                 l.LoadId
@@ -139,11 +136,9 @@ SET NOCOUNT ON;
                         or isnull(p2.PersonId,0) in (select PersonId from main.PersonTypeMapping where PersonId = p2.PersonId and PersonTypeId = 4)
                 )
                 AND EXISTS (SELECT LoadStopId FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId = 2)
-        
-        --select * from #CurrentPayPeriodLoad where LoadId = 606
-        --select * from #CurrentPayPeriodLoadStop where Loadid = 606 order by StopNumber
-        --select * from @crsV 
-        --order by LoadId
+
+
+
 
         declare @tempA table (
                 DriverTag char(1)
@@ -183,6 +178,10 @@ SET NOCOUNT ON;
         fetch next from curs 
         into @LoadId, @LoadStopId_Pick, @LoadStopId_Drop, @LegInd
         
+
+
+
+
 
 
 
@@ -403,6 +402,18 @@ SET NOCOUNT ON;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         select distinct
         pp.personid
         into #TEMPOTR
@@ -411,7 +422,6 @@ SET NOCOUNT ON;
         and @PayPeriodEnd < pp.PayRateEndDate AND @PayPeriodEnd > pp.PayRateBeginDate
 
         IF OBJECT_ID('tempdb..#TEMPB') IS NOT NULL DROP TABLE #TEMPB
-        
 
         SELECT B.* 
         INTO #TEMPB
@@ -451,8 +461,8 @@ SET NOCOUNT ON;
         FROM @tempA
         WHERE Driver2PersonId is null
 
---TEAM--------------
 
+--TEAM--------------
         UNION ALL
 
         --TEAM LOADED MILES
@@ -515,8 +525,8 @@ SET NOCOUNT ON;
         FROM @tempA
         WHERE Driver2PersonId is not null AND DriverPersonId NOT IN (select PersonId from main.PersonTypeMapping where PersonTypeId = 16)
 
------------------------
 
+-----------------------
         UNION ALL
 
         --TEAM PERDIEM
@@ -609,5 +619,3 @@ SET NOCOUNT ON;
 
 END
 GO
-
-
