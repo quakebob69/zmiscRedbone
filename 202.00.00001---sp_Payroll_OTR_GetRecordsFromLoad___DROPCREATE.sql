@@ -244,8 +244,18 @@ SET NOCOUNT ON;
                         -- Get Driver 2 name
                         --LEFT OUTER JOIN main.Driver dr2 on dr2.PersonId = l.Driver2_PersonId
                         LEFT OUTER JOIN main.Person p2 on p2.PersonId = IIF(@LegInd = 0, l.Driver2_PersonId, lsPick.Driver2_PersonId)
-                        LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  lsPick.ClientId And claddrorigin.AddressTypeId = 2 --Added
-                        LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  lsDrop.ClientId  And cladddest.AddressTypeId = 2         --Added
+                        LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                        FROM            main.ClientAddress
+                                                                                                                                                                                                        WHERE        (UseForBillingInd = 1 AND ClientId =
+                                                                                                                                                                                                        (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                        FROM            #CurrentPayPeriodLoadStop
+                                                                                                                                                                                                        WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 1) AND (StopTypeNumber = 1)))) And claddrorigin.AddressTypeId = 2 --Added
+                        LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                FROM            main.ClientAddress AS ClientAddress_1
+                                                                                                                                                                                                WHERE        (UseForBillingInd = 1 AND ClientId =
+                                                                                                                                                                                                (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
+                                                                                                                                                                                                WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))  And cladddest.AddressTypeId = 2         --Added
                 WHERE 
                         L.LoadId = @LoadId 
                         and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
