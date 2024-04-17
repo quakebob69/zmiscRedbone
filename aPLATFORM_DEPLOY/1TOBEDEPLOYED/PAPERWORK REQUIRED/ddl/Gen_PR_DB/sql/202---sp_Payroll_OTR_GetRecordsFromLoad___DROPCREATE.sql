@@ -26,17 +26,17 @@ SET NOCOUNT ON;
  END
 	--vars
 		--Load And LoadStop records for this pay period
-			--#LoadCurrentPayPeriod
-			--#LoadStopCurrentPayPeriod
-			DROP TABLE IF EXISTS #LoadCurrentPayPeriod
-			DROP TABLE IF EXISTS #LoadStopCurrentPayPeriod
+			--#CurrentPayPeriodLoad
+			--#CurrentPayPeriodLoadStop
+			DROP TABLE IF EXISTS #CurrentPayPeriodLoad
+			DROP TABLE IF EXISTS #CurrentPayPeriodLoadStop
 
 			SELECT * INTO
-			#LoadCurrentPayPeriod
+			#CurrentPayPeriodLoad
 			FROM payroll.vLoadCurrentPayPeriod
 			
 			SELECT * INTO
-			#LoadStopCurrentPayPeriod
+			#CurrentPayPeriodLoadStop
 			FROM payroll.vLoadStopCurrentPayPeriod
 
 
@@ -64,9 +64,9 @@ SET NOCOUNT ON;
                 ,LoadStop_Drop = lsDrop.LoadStopId
                 ,Legind = 0
         from 
-                #LoadCurrentPayPeriod l
-                inner join #LoadStopCurrentPayPeriod lsPick on lsPick.LoadStopId = (SELECT TOP 1 LoadStopId FROM #LoadStopCurrentPayPeriod WHERE LoadId = l.LoadId AND LoadStopTypeId = 1 ORDER BY StopNumber ASC)
-                inner join #LoadStopCurrentPayPeriod lsDrop on lsDrop.LoadStopId = (SELECT TOP 1 LoadStopId FROM #LoadStopCurrentPayPeriod WHERE LoadId = l.LoadId AND LoadStopTypeId = 3 ORDER BY StopNumber DESC)
+                #CurrentPayPeriodLoad l
+                inner join #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = (SELECT TOP 1 LoadStopId FROM #CurrentPayPeriodLoadStop WHERE LoadId = l.LoadId AND LoadStopTypeId = 1 ORDER BY StopNumber ASC)
+                inner join #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = (SELECT TOP 1 LoadStopId FROM #CurrentPayPeriodLoadStop WHERE LoadId = l.LoadId AND LoadStopTypeId = 3 ORDER BY StopNumber DESC)
                 inner join main.Person p1 on p1.PersonId = l.Driver1_PersonId
                 left outer join main.Person p2 on p2.PersonId = l.Driver2_PersonId
         where 
@@ -77,7 +77,7 @@ SET NOCOUNT ON;
                         p1.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p1.PersonId and PersonTypeId = 4)
                         or isnull(p2.PersonId,0) in (select PersonId from main.PersonTypeMapping where PersonId = p2.PersonId and PersonTypeId = 4)
                 )
-                AND NOT EXISTS (SELECT 1 FROM #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId = 2)
+                AND NOT EXISTS (SELECT 1 FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId = 2)
         union all
 
         -- get legs 
@@ -89,12 +89,12 @@ SET NOCOUNT ON;
                 ,LoadStopId_Drop =  lsDrop.LoadStopId
                 ,LegInd = 1
         from 
-                #LoadCurrentPayPeriod l
-                INNER JOIN #LoadStopCurrentPayPeriod lsPick on lsPick.LoadId = l.LoadId and lsPick.LoadStopTypeId = 2
+                #CurrentPayPeriodLoad l
+                INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadId = l.LoadId and lsPick.LoadStopTypeId = 2
                 -- get the next leg or last drop
-                INNER JOIN #LoadStopCurrentPayPeriod lsDrop on lsDrop.LoadStopId = iif(exists(select top 1 LoadStopId from #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId = 2 and StopNumber > lsPick.StopNumber order by StopNumber asc)
-                                                                ,(select top 1 LoadStopId from #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId = 2 and StopNumber > lsPick.StopNumber order by StopNumber)
-                                                                ,(SELECT TOP 1 LoadStopId FROM #LoadStopCurrentPayPeriod WHERE LoadId = l.LoadId AND LoadStopTypeId = 3 ORDER BY StopNumber desc))
+                INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = iif(exists(select top 1 LoadStopId from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId = 2 and StopNumber > lsPick.StopNumber order by StopNumber asc)
+                                                                ,(select top 1 LoadStopId from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId = 2 and StopNumber > lsPick.StopNumber order by StopNumber)
+                                                                ,(SELECT TOP 1 LoadStopId FROM #CurrentPayPeriodLoadStop WHERE LoadId = l.LoadId AND LoadStopTypeId = 3 ORDER BY StopNumber desc))
                 inner join main.Person p1 on p1.PersonId = lsPick.Driver1_PersonId
                 left outer join main.Person p2 on p2.PersonId = isnull(lsPick.Driver2_PersonId,0)
         where 
@@ -117,11 +117,11 @@ SET NOCOUNT ON;
                 ,LoadStopId_Drop =  lsDrop.LoadStopId
                 ,LegInd = 0
         from 
-                #LoadCurrentPayPeriod l
+                #CurrentPayPeriodLoad l
                 -- Get the first Pick
-                INNER JOIN #LoadStopCurrentPayPeriod lsPick on lsPick.LoadStopId = (select Top 1 LoadStopId from #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId = 1 order by StopNumber asc)  
+                INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = (select Top 1 LoadStopId from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId = 1 order by StopNumber asc)  
                 -- Get the first LEG
-                INNER JOIN #LoadStopCurrentPayPeriod lsDrop on lsDrop.LoadStopId = (select top 1 LoadStopId from #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId = 2 order by StopNumber asc)
+                INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = (select top 1 LoadStopId from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId = 2 order by StopNumber asc)
                 inner join main.Person p1 on p1.PersonId = l.Driver1_PersonId
                 left outer join main.Person p2 on p2.PersonId = l.Driver2_PersonId
         where 
@@ -133,10 +133,10 @@ SET NOCOUNT ON;
                         p1.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p1.PersonId and PersonTypeId = 4)
                         or isnull(p2.PersonId,0) in (select PersonId from main.PersonTypeMapping where PersonId = p2.PersonId and PersonTypeId = 4)
                 )
-                AND EXISTS (SELECT LoadStopId FROM #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId = 2)
+                AND EXISTS (SELECT LoadStopId FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId = 2)
         
-        --select * from #LoadCurrentPayPeriod where LoadId = 606
-        --select * from #LoadStopCurrentPayPeriod where Loadid = 606 order by StopNumber
+        --select * from #CurrentPayPeriodLoad where LoadId = 606
+        --select * from #CurrentPayPeriodLoadStop where Loadid = 606 order by StopNumber
         --select * from @crsV 
         --order by LoadId
 
@@ -213,11 +213,11 @@ SET NOCOUNT ON;
                         ,DriverType = 'C'
                         ,l.InvoiceDate
                         -- Ask Matt if the below would still be correct in the new platform the way stops are done (we have legs, fuel stops, Each location including the initial pick is a stop).
-                --        ,StopCount = (iif(cl.Client_Id = 'ALB1000', (SELECT COUNT(*) -1 from #LoadStopCurrentPayPeriod where LoadId = l.LoadId), 
-                --                                        (SELECT COUNT(*) -2 from #LoadStopCurrentPayPeriod where LoadId = l.LoadId)))
+                --        ,StopCount = (iif(cl.Client_Id = 'ALB1000', (SELECT COUNT(*) -1 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId), 
+                --                                        (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId)))
                         ,StopCount = IIF(@LegInd = 0, 
-                                                                                (SELECT COUNT(*) -2 from #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
-                                                                                ,(SELECT COUNT(*) - 2 FROM #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId in (1,2,3) and StopNumber between lsPick.StopNumber and lsDrop.StopNumber)
+                                                                                (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
+                                                                                ,(SELECT COUNT(*) - 2 FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,2,3) and StopNumber between lsPick.StopNumber and lsDrop.StopNumber)
                                                         )
                         ,DriverPersonId = p.PersonId
                         ,Driver2PersonId = p2.PersonId--Added
@@ -226,9 +226,9 @@ SET NOCOUNT ON;
                         ,DropDest = cladddest.City + ', ' + cladddest.State        --Added
                         ,pt.PUnitId
                 FROM
-                        #LoadCurrentPayPeriod l
-                        INNER JOIN #LoadStopCurrentPayPeriod lsPick on lsPick.LoadStopId = @LoadStopId_Pick
-                        INNER JOIN #LoadStopCurrentPayPeriod lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
+                        #CurrentPayPeriodLoad l
+                        INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = @LoadStopId_Pick
+                        INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
                         inner join main.Person p on p.PersonId = IIF(@LegInd = 0,  l.Driver1_PersonId, lsPick.Driver1_PersonId)
                         -- Get truck's Unit_Id
                         LEFT OUTER JOIN equipment.punit pt on pt.PunitId = IIF(@LegInd = 0, l.TruckPunitId, lsPick.TruckPunitId) 
@@ -245,7 +245,7 @@ SET NOCOUNT ON;
                                                                                                                                                                                                         FROM            main.ClientAddress
                                                                                                                                                                                                         WHERE        (UseForBillingInd = 1 AND ClientId =
                                                                                                                                                                                                         (SELECT        TOP (1) ClientId
-                                                                                                                                                                                                        FROM            #LoadStopCurrentPayPeriod
+                                                                                                                                                                                                        FROM            #CurrentPayPeriodLoadStop
                                                                                                                                                                                                         WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 1) AND (StopTypeNumber = 1))))  
                                                                                                                                                                                         , lsPick.ClientId) And claddrorigin.AddressTypeId = 2 --Added
                         LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  IIF(@LegInd = 0,  
@@ -253,7 +253,7 @@ SET NOCOUNT ON;
                                                                                                                                                                                                 FROM            main.ClientAddress AS ClientAddress_1
                                                                                                                                                                                                 WHERE        (UseForBillingInd = 1 AND ClientId =
                                                                                                                                                                                                 (SELECT        TOP (1) ClientId
-                                                                                                                                                                                                FROM            #LoadStopCurrentPayPeriod AS LoadStop_3
+                                                                                                                                                                                                FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
                                                                                                                                                                                                 WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))
                                                                                                                                                                                         , lsDrop.ClientId) And cladddest.AddressTypeId = 2         --Added
                 WHERE 
@@ -295,12 +295,12 @@ SET NOCOUNT ON;
                         ,DriverType = 'C'
                         ,l.InvoiceDate
                         -- Ask Matt if the below would still be correct in the new platform the way stops are done (we have legs, fuel stops, Each location including the initial pick is a stop).
-                --        ,StopCount = (iif(cl.Client_Id = 'ALB1000', (SELECT COUNT(*) -1 from #LoadStopCurrentPayPeriod where LoadId = l.LoadId), 
-                --                                        (SELECT COUNT(*) -2 from #LoadStopCurrentPayPeriod where LoadId = l.LoadId)))
-                        --,StopCount = (SELECT COUNT(*) -2 from #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
+                --        ,StopCount = (iif(cl.Client_Id = 'ALB1000', (SELECT COUNT(*) -1 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId), 
+                --                                        (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId)))
+                        --,StopCount = (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
                         ,StopCount = IIF(@LegInd = 0, 
-                                                        (SELECT COUNT(*) -2 from #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
-                                                        ,(SELECT COUNT(*) - 2 FROM #LoadStopCurrentPayPeriod where LoadId = l.LoadId and LoadStopTypeId in (1,2,3) and StopNumber between lsPick.StopNumber and lsDrop.StopNumber)
+                                                        (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
+                                                        ,(SELECT COUNT(*) - 2 FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,2,3) and StopNumber between lsPick.StopNumber and lsDrop.StopNumber)
                                 )
                         ,DriverPersonId = p.PersonId
                         ,Driver2PersonId = p2.PersonId--Added
@@ -309,9 +309,9 @@ SET NOCOUNT ON;
                         ,DropDest = cladddest.City + ', ' + cladddest.State        --Added
 						,pt.PUnitId
                 FROM
-                        #LoadCurrentPayPeriod l 
-                        INNER JOIN #LoadStopCurrentPayPeriod lsPick on lsPick.LoadStopId = @LoadStopId_Pick
-                        INNER JOIN #LoadStopCurrentPayPeriod lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
+                        #CurrentPayPeriodLoad l 
+                        INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = @LoadStopId_Pick
+                        INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
                         inner join main.Person p on p.PersonId = IIF(@LegInd = 0,  l.Driver2_PersonId, lsPick.Driver2_PersonId)
                         -- Get truck's Unit_Id
                         LEFT OUTER JOIN equipment.punit pt on pt.PunitId = IIF(@LegInd = 0, l.TruckPunitId, lsPick.TruckPunitId)
@@ -326,7 +326,7 @@ SET NOCOUNT ON;
                                                                                                                                                                                                         FROM            main.ClientAddress
                                                                                                                                                                                                         WHERE        (UseForBillingInd = 1 AND ClientId =
                                                                                                                                                                                                         (SELECT        TOP (1) ClientId
-                                                                                                                                                                                                        FROM            #LoadStopCurrentPayPeriod
+                                                                                                                                                                                                        FROM            #CurrentPayPeriodLoadStop
                                                                                                                                                                                                         WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 1) AND (StopTypeNumber = 1))))  
                                                                                                                                                                                         , lsPick.ClientId) And claddrorigin.AddressTypeId = 2 --Added
                         LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  IIF(@LegInd = 0,  
@@ -334,7 +334,7 @@ SET NOCOUNT ON;
                                                                                                                                                                                                 FROM            main.ClientAddress AS ClientAddress_1
                                                                                                                                                                                                 WHERE        (UseForBillingInd = 1 AND ClientId =
                                                                                                                                                                                                 (SELECT        TOP (1) ClientId
-                                                                                                                                                                                                FROM            #LoadStopCurrentPayPeriod AS LoadStop_3
+                                                                                                                                                                                                FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
                                                                                                                                                                                                 WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))
                                                                                                                                                                                         , lsDrop.ClientId) And cladddest.AddressTypeId = 2         --Added
                 WHERE 
