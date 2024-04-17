@@ -178,241 +178,179 @@ SET NOCOUNT ON;
         fetch next from curs 
         into @LoadId, @LoadStopId_Pick, @LoadStopId_Drop, @LegInd
         
+        while @@FETCH_STATUS = 0 
+        begin
+                insert into @tempA
+                SELECT
+                        DriverTag = '1'
+                        ,l.LoadId
+                        ,TruckNumber = pt.Unit_ID        
+                        ,cl.Client_Id
+                        ,dr1.DriverId
+                        ,Driver = p.FirstName + ' ' + p.LastName
+                        ,CODriver = p2.FirstName + ' ' + p2.LastName
+                        --,LoadedMiles = iif(l.PaidMiles is null, isnull(l.Miles,0), l.PaidMiles)
+                        ,LoadedMiles = iif(@LegInd = 0, (isnull(l.PaidMiles, isnull(l.Miles,0))), lsPick.PaidMiles)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-												while @@FETCH_STATUS = 0 
-												begin
-														insert into @tempA
-														SELECT
-																DriverTag = '1'
-																,l.LoadId
-																,TruckNumber = pt.Unit_ID        
-																,cl.Client_Id
-																,dr1.DriverId
-																,Driver = p.FirstName + ' ' + p.LastName
-																,CODriver = p2.FirstName + ' ' + p2.LastName
-																--,LoadedMiles = iif(l.PaidMiles is null, isnull(l.Miles,0), l.PaidMiles)
-																,LoadedMiles = iif(@LegInd = 0, (isnull(l.PaidMiles, isnull(l.Miles,0))), lsPick.PaidMiles)
-
-																--,Paid_Miles1 = iif(l.Driver2_PersonId is null, iif(l.PaidMiles IS NULL, isnull(l.miles,0), l.PaidMiles) + isnull(l.DeadHead,0), 
-																--                                                                (iif(l.PaidMiles is null, isnull(l.Miles,0), l.PaidMiles) + isnull(l.DeadHead,0)) / 2)
+                        --,Paid_Miles1 = iif(l.Driver2_PersonId is null, iif(l.PaidMiles IS NULL, isnull(l.miles,0), l.PaidMiles) + isnull(l.DeadHead,0), 
+                        --                                                                (iif(l.PaidMiles is null, isnull(l.Miles,0), l.PaidMiles) + isnull(l.DeadHead,0)) / 2)
                         
-																,Paid_Miles = iif(@LegInd = 0, (iif(l.Driver2_PersonId is null, isnull(l.PaidMiles, isnull(l.miles,0)) + isnull(l.DeadHead,0), 
-																																														   (isnull(l.PaidMiles, isnull(l.Miles,0)) + isnull(l.DeadHead,0)) / 2)),
-																								-- for LEGs
-																														   (iif(lsPick.Driver2_PersonId is null, isnull(lsPick.PaidMiles, 0) + isnull(lsPick.PaidEmpty,0), 
-																																																(isnull(lsPick.PaidMiles, 0) + isnull(lsPick.PaidEmpty,0)) / 2))
-																								)
-																,DoublesMiles = (select sum(Quantity) from dispatch.AccCharge where AccChargeTypeId = 4 and LoadId = l.LoadId) -- Doubles
-																,DH_QTY = (select sum(Quantity) from dispatch.AccCharge where AccChargeTypeId = 5 and LoadId = l.LoadId) -- Drop & Hook
-																,DeadHead = iif(@LegInd = 0, l.DeadHead, lsPick.PaidEmpty)
-																,l.TripNumber
-																-- Regardless of whether the pick is a LEG or not, use StartDateTime
-																,PickupBy = lsPick.StartDateTime
-																-- if the Drop is a leg, use the DropStartDateTime vs. StartDateTime
-																,DeliverBy = iif(lsDrop.LoadStopId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime)
-																,StopNumber = 0
-																,DriverType = 'C'
-																,l.InvoiceDate
-																-- Ask Matt if the below would still be correct in the new platform the way stops are done (we have legs, fuel stops, Each location including the initial pick is a stop).
-														--        ,StopCount = (iif(cl.Client_Id = 'ALB1000', (SELECT COUNT(*) -1 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId), 
-														--                                        (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId)))
-																,StopCount = IIF(@LegInd = 0, 
-																														(SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
-																														,(SELECT COUNT(*) - 2 FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,2,3) and StopNumber between lsPick.StopNumber and lsDrop.StopNumber)
-																								)
-																,DriverPersonId = p.PersonId
-																,Driver2PersonId = p2.PersonId--Added
-																,LegInd = @LegInd
-																,PickOrigin = claddrorigin.City + ', ' + claddrorigin.State        --Added
-																,DropDest = cladddest.City + ', ' + cladddest.State        --Added
-																,pt.PUnitId
-														FROM
-																#CurrentPayPeriodLoad l
-																INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = @LoadStopId_Pick
-																INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
-																inner join main.Person p on p.PersonId = IIF(@LegInd = 0,  l.Driver1_PersonId, lsPick.Driver1_PersonId)
-																-- Get truck's Unit_Id
-																LEFT OUTER JOIN equipment.punit pt on pt.PunitId = IIF(@LegInd = 0, l.TruckPunitId, lsPick.TruckPunitId) 
-																LEFT OUTER JOIN equipment.punitmapping pm on pm.PUnitId = pt.PUnitId and @PayPeriodEnd between pm.EffectiveDate and pm.ExpirationDate --Added 5/10
-																-- Get the Client_Id
-																LEFT OUTER JOIN main.Client cl on cl.ClientId = l.ClientId
-																-- Get DriverId (e.g. ABD1000)
-																LEFT OUTER JOIN main.Driver dr1 on dr1.PersonId = IIF(@LegInd = 0, l.Driver1_PersonId, lsPick.Driver1_PersonId)
-																-- Get Driver 2 name
-																--LEFT OUTER JOIN main.Driver dr2 on dr2.PersonId = l.Driver2_PersonId
-																LEFT OUTER JOIN main.Person p2 on p2.PersonId = IIF(@LegInd = 0, l.Driver2_PersonId, lsPick.Driver2_PersonId)
-																LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  IIF(@LegInd = 0,  
-																																																												(SELECT        TOP (1) ClientId
-																																																												FROM            main.ClientAddress
-																																																												WHERE        (UseForBillingInd = 1 AND ClientId =
-																																																												(SELECT        TOP (1) ClientId
-																																																												FROM            #CurrentPayPeriodLoadStop
-																																																												WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 1) AND (StopTypeNumber = 1))))  
-																																																								, lsPick.ClientId) And claddrorigin.AddressTypeId = 2 --Added
-																LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  IIF(@LegInd = 0,  
-																																																										(SELECT        TOP (1) ClientId
-																																																										FROM            main.ClientAddress AS ClientAddress_1
-																																																										WHERE        (UseForBillingInd = 1 AND ClientId =
-																																																										(SELECT        TOP (1) ClientId
-																																																										FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
-																																																										WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))
-																																																								, lsDrop.ClientId) And cladddest.AddressTypeId = 2         --Added
-														WHERE 
-																L.LoadId = @LoadId 
-																and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
-																-- If drop is a LEG, use DropStartDateTime vs. StartDateTime
-																and  iif(lsDrop.LoadStopTypeId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime) is not null
-																-- If drop is a LEG, use DropStartDateTime vs. StartDateTime
-																and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
+                        ,Paid_Miles = iif(@LegInd = 0, (iif(l.Driver2_PersonId is null, isnull(l.PaidMiles, isnull(l.miles,0)) + isnull(l.DeadHead,0), 
+                                                                                                                                                   (isnull(l.PaidMiles, isnull(l.Miles,0)) + isnull(l.DeadHead,0)) / 2)),
+                                                        -- for LEGs
+                                                                                   (iif(lsPick.Driver2_PersonId is null, isnull(lsPick.PaidMiles, 0) + isnull(lsPick.PaidEmpty,0), 
+                                                                                                                                                        (isnull(lsPick.PaidMiles, 0) + isnull(lsPick.PaidEmpty,0)) / 2))
+                                                        )
+                        ,DoublesMiles = (select sum(Quantity) from dispatch.AccCharge where AccChargeTypeId = 4 and LoadId = l.LoadId) -- Doubles
+                        ,DH_QTY = (select sum(Quantity) from dispatch.AccCharge where AccChargeTypeId = 5 and LoadId = l.LoadId) -- Drop & Hook
+                        ,DeadHead = iif(@LegInd = 0, l.DeadHead, lsPick.PaidEmpty)
+                        ,l.TripNumber
+                        -- Regardless of whether the pick is a LEG or not, use StartDateTime
+                        ,PickupBy = lsPick.StartDateTime
+                        -- if the Drop is a leg, use the DropStartDateTime vs. StartDateTime
+                        ,DeliverBy = iif(lsDrop.LoadStopId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime)
+                        ,StopNumber = 0
+                        ,DriverType = 'C'
+                        ,l.InvoiceDate
+                        -- Ask Matt if the below would still be correct in the new platform the way stops are done (we have legs, fuel stops, Each location including the initial pick is a stop).
+                --        ,StopCount = (iif(cl.Client_Id = 'ALB1000', (SELECT COUNT(*) -1 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId), 
+                --                                        (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId)))
+                        ,StopCount = IIF(@LegInd = 0, 
+                                                                                (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
+                                                                                ,(SELECT COUNT(*) - 2 FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,2,3) and StopNumber between lsPick.StopNumber and lsDrop.StopNumber)
+                                                        )
+                        ,DriverPersonId = p.PersonId
+                        ,Driver2PersonId = p2.PersonId--Added
+                        ,LegInd = @LegInd
+                        ,PickOrigin = claddrorigin.City + ', ' + claddrorigin.State        --Added
+                        ,DropDest = cladddest.City + ', ' + cladddest.State        --Added
+                        ,pt.PUnitId
+                FROM
+                        #CurrentPayPeriodLoad l
+                        INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = @LoadStopId_Pick
+                        INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
+                        inner join main.Person p on p.PersonId = IIF(@LegInd = 0,  l.Driver1_PersonId, lsPick.Driver1_PersonId)
+                        -- Get truck's Unit_Id
+                        LEFT OUTER JOIN equipment.punit pt on pt.PunitId = IIF(@LegInd = 0, l.TruckPunitId, lsPick.TruckPunitId) 
+						LEFT OUTER JOIN equipment.punitmapping pm on pm.PUnitId = pt.PUnitId and @PayPeriodEnd between pm.EffectiveDate and pm.ExpirationDate --Added 5/10
+                        -- Get the Client_Id
+                        LEFT OUTER JOIN main.Client cl on cl.ClientId = l.ClientId
+                        -- Get DriverId (e.g. ABD1000)
+                        LEFT OUTER JOIN main.Driver dr1 on dr1.PersonId = IIF(@LegInd = 0, l.Driver1_PersonId, lsPick.Driver1_PersonId)
+                        -- Get Driver 2 name
+                        --LEFT OUTER JOIN main.Driver dr2 on dr2.PersonId = l.Driver2_PersonId
+                        LEFT OUTER JOIN main.Person p2 on p2.PersonId = IIF(@LegInd = 0, l.Driver2_PersonId, lsPick.Driver2_PersonId)
+                        LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  IIF(@LegInd = 0,  
+                                                                                                                                                                                                        (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                        FROM            main.ClientAddress
+                                                                                                                                                                                                        WHERE        (UseForBillingInd = 1 AND ClientId =
+                                                                                                                                                                                                        (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                        FROM            #CurrentPayPeriodLoadStop
+                                                                                                                                                                                                        WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 1) AND (StopTypeNumber = 1))))  
+                                                                                                                                                                                        , lsPick.ClientId) And claddrorigin.AddressTypeId = 2 --Added
+                        LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  IIF(@LegInd = 0,  
+                                                                                                                                                                                                (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                FROM            main.ClientAddress AS ClientAddress_1
+                                                                                                                                                                                                WHERE        (UseForBillingInd = 1 AND ClientId =
+                                                                                                                                                                                                (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
+                                                                                                                                                                                                WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))
+                                                                                                                                                                                        , lsDrop.ClientId) And cladddest.AddressTypeId = 2         --Added
+                WHERE 
+                        L.LoadId = @LoadId 
+                        and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
+                        -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
+                        and  iif(lsDrop.LoadStopTypeId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime) is not null
+                        -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
+                        and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
 
-														insert into @tempA
-														SELECT
-																DriverTag = '2'
-																,l.LoadId
-																,TruckNumber = pt.Unit_ID
-																,cl.Client_Id
-																,dr2.DriverId
-																,Driver = p.FirstName + ' ' + p.LastName
-																,CODriver = p2.FirstName + ' ' + p2.LastName
-																--,LoadedMiles = iif(l.PaidMiles is null, isnull(l.Miles,0), l.PaidMiles)
-																,LoadedMiles = iif(@LegInd = 0, (isnull(l.PaidMiles, isnull(l.Miles,0))), lsPick.PaidMiles)
-																--,Paid_Miles =                                        iif(l.Driver2_PersonId is null, iif(l.PaidMiles IS NULL, isnull(l.miles,0), l.PaidMiles) + isnull(l.DeadHead,0), 
-																--                                                                (iif(l.PaidMiles is null, isnull(l.Miles,0), l.PaidMiles) +  isnull(l.DeadHead,0)) / 2)
-																,Paid_Miles = iif(@LegInd = 0, (iif(l.Driver2_PersonId is null, isnull(l.PaidMiles, isnull(l.miles,0)) + isnull(l.DeadHead,0), 
-																																														   (isnull(l.PaidMiles, isnull(l.Miles,0)) + isnull(l.DeadHead,0)) / 2)),
-																								-- for LEGs
-																																																(iif(lsPick.Driver2_PersonId is null, isnull(lsPick.PaidMiles, 0) + isnull(lsPick.PaidEmpty,0), 
-																																															(isnull(lsPick.PaidMiles, 0) + isnull(lsPick.PaidEmpty,0)) / 2))
-																								)
-																,DoublesMiles = (select sum(Quantity) from dispatch.AccCharge where AccChargeTypeId = 4 and LoadId = l.LoadId) -- Doubles
-																,DH_QTY = (select sum(Quantity) from dispatch.AccCharge where AccChargeTypeId = 5 and LoadId = l.LoadId) -- Drop & Hook
-																,l.DeadHead
-																,l.TripNumber
-																-- Regardless of whether the pick is a LEG or not, use StartDateTime
-																,PickupBy = lsPick.StartDateTime
-																-- if the Drop is a leg, use the DropStartDateTime vs. StartDateTime
-																,DeliverBy = iif(lsDrop.LoadStopId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime)
-																,StopNumber = 0
-																,DriverType = 'C'
-																,l.InvoiceDate
-																-- Ask Matt if the below would still be correct in the new platform the way stops are done (we have legs, fuel stops, Each location including the initial pick is a stop).
-														--        ,StopCount = (iif(cl.Client_Id = 'ALB1000', (SELECT COUNT(*) -1 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId), 
-														--                                        (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId)))
-																--,StopCount = (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
-																,StopCount = IIF(@LegInd = 0, 
-																								(SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
-																								,(SELECT COUNT(*) - 2 FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,2,3) and StopNumber between lsPick.StopNumber and lsDrop.StopNumber)
-																		)
-																,DriverPersonId = p.PersonId
-																,Driver2PersonId = p2.PersonId--Added
-																,LegInd = @LegInd
-																,PickOrigin = claddrorigin.City + ', ' + claddrorigin.State        --Added
-																,DropDest = cladddest.City + ', ' + cladddest.State        --Added
-																,pt.PUnitId
-														FROM
-																#CurrentPayPeriodLoad l 
-																INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = @LoadStopId_Pick
-																INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
-																inner join main.Person p on p.PersonId = IIF(@LegInd = 0,  l.Driver2_PersonId, lsPick.Driver2_PersonId)
-																-- Get truck's Unit_Id
-																LEFT OUTER JOIN equipment.punit pt on pt.PunitId = IIF(@LegInd = 0, l.TruckPunitId, lsPick.TruckPunitId)
-																LEFT OUTER JOIN equipment.punitmapping pm on pm.PUnitId = pt.PUnitId and @PayPeriodEnd between pm.EffectiveDate and pm.ExpirationDate --Added 5/10
-																-- Get the Client_Id
-																LEFT OUTER JOIN main.Client cl on cl.ClientId = l.ClientId
-																-- Get Driver (e.g. ABD1000)
-																LEFT OUTER JOIN main.Driver dr2 on dr2.PersonId = IIF(@LegInd = 0, l.Driver2_PersonId, lsPick.Driver2_PersonId)
-																LEFT OUTER JOIN main.Person p2 on p2.PersonId = IIF(@LegInd = 0, l.Driver1_PersonId, lsPick.Driver1_PersonId)
-																LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  IIF(@LegInd = 0,  
-																																																												(SELECT        TOP (1) ClientId
-																																																												FROM            main.ClientAddress
-																																																												WHERE        (UseForBillingInd = 1 AND ClientId =
-																																																												(SELECT        TOP (1) ClientId
-																																																												FROM            #CurrentPayPeriodLoadStop
-																																																												WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 1) AND (StopTypeNumber = 1))))  
-																																																								, lsPick.ClientId) And claddrorigin.AddressTypeId = 2 --Added
-																LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  IIF(@LegInd = 0,  
-																																																										(SELECT        TOP (1) ClientId
-																																																										FROM            main.ClientAddress AS ClientAddress_1
-																																																										WHERE        (UseForBillingInd = 1 AND ClientId =
-																																																										(SELECT        TOP (1) ClientId
-																																																										FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
-																																																										WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))
-																																																								, lsDrop.ClientId) And cladddest.AddressTypeId = 2         --Added
-														WHERE 
-																l.LoadId = @LoadId
-																and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
-																-- If drop is a LEG, use DropStartDateTime vs. StartDateTime
-																and  iif(lsDrop.LoadStopTypeId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime) is not null
-																-- If drop is a LEG, use DropStartDateTime vs. StartDateTime
-																and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
+                insert into @tempA
+                SELECT
+                        DriverTag = '2'
+                        ,l.LoadId
+                        ,TruckNumber = pt.Unit_ID
+                        ,cl.Client_Id
+                        ,dr2.DriverId
+                        ,Driver = p.FirstName + ' ' + p.LastName
+                        ,CODriver = p2.FirstName + ' ' + p2.LastName
+                        --,LoadedMiles = iif(l.PaidMiles is null, isnull(l.Miles,0), l.PaidMiles)
+                        ,LoadedMiles = iif(@LegInd = 0, (isnull(l.PaidMiles, isnull(l.Miles,0))), lsPick.PaidMiles)
+                        --,Paid_Miles =                                        iif(l.Driver2_PersonId is null, iif(l.PaidMiles IS NULL, isnull(l.miles,0), l.PaidMiles) + isnull(l.DeadHead,0), 
+                        --                                                                (iif(l.PaidMiles is null, isnull(l.Miles,0), l.PaidMiles) +  isnull(l.DeadHead,0)) / 2)
+                        ,Paid_Miles = iif(@LegInd = 0, (iif(l.Driver2_PersonId is null, isnull(l.PaidMiles, isnull(l.miles,0)) + isnull(l.DeadHead,0), 
+                                                                                                                                                   (isnull(l.PaidMiles, isnull(l.Miles,0)) + isnull(l.DeadHead,0)) / 2)),
+                                                        -- for LEGs
+                                                                                                                                                        (iif(lsPick.Driver2_PersonId is null, isnull(lsPick.PaidMiles, 0) + isnull(lsPick.PaidEmpty,0), 
+                                                                                                                                                    (isnull(lsPick.PaidMiles, 0) + isnull(lsPick.PaidEmpty,0)) / 2))
+                                                        )
+                        ,DoublesMiles = (select sum(Quantity) from dispatch.AccCharge where AccChargeTypeId = 4 and LoadId = l.LoadId) -- Doubles
+                        ,DH_QTY = (select sum(Quantity) from dispatch.AccCharge where AccChargeTypeId = 5 and LoadId = l.LoadId) -- Drop & Hook
+                        ,l.DeadHead
+                        ,l.TripNumber
+                        -- Regardless of whether the pick is a LEG or not, use StartDateTime
+                        ,PickupBy = lsPick.StartDateTime
+                        -- if the Drop is a leg, use the DropStartDateTime vs. StartDateTime
+                        ,DeliverBy = iif(lsDrop.LoadStopId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime)
+                        ,StopNumber = 0
+                        ,DriverType = 'C'
+                        ,l.InvoiceDate
+                        -- Ask Matt if the below would still be correct in the new platform the way stops are done (we have legs, fuel stops, Each location including the initial pick is a stop).
+                --        ,StopCount = (iif(cl.Client_Id = 'ALB1000', (SELECT COUNT(*) -1 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId), 
+                --                                        (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId)))
+                        --,StopCount = (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
+                        ,StopCount = IIF(@LegInd = 0, 
+                                                        (SELECT COUNT(*) -2 from #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,3)) -- Added, filtered for pick and drop
+                                                        ,(SELECT COUNT(*) - 2 FROM #CurrentPayPeriodLoadStop where LoadId = l.LoadId and LoadStopTypeId in (1,2,3) and StopNumber between lsPick.StopNumber and lsDrop.StopNumber)
+                                )
+                        ,DriverPersonId = p.PersonId
+                        ,Driver2PersonId = p2.PersonId--Added
+                        ,LegInd = @LegInd
+                        ,PickOrigin = claddrorigin.City + ', ' + claddrorigin.State        --Added
+                        ,DropDest = cladddest.City + ', ' + cladddest.State        --Added
+						,pt.PUnitId
+                FROM
+                        #CurrentPayPeriodLoad l 
+                        INNER JOIN #CurrentPayPeriodLoadStop lsPick on lsPick.LoadStopId = @LoadStopId_Pick
+                        INNER JOIN #CurrentPayPeriodLoadStop lsDrop on lsDrop.LoadStopId = @LoadStopId_Drop
+                        inner join main.Person p on p.PersonId = IIF(@LegInd = 0,  l.Driver2_PersonId, lsPick.Driver2_PersonId)
+                        -- Get truck's Unit_Id
+                        LEFT OUTER JOIN equipment.punit pt on pt.PunitId = IIF(@LegInd = 0, l.TruckPunitId, lsPick.TruckPunitId)
+						LEFT OUTER JOIN equipment.punitmapping pm on pm.PUnitId = pt.PUnitId and @PayPeriodEnd between pm.EffectiveDate and pm.ExpirationDate --Added 5/10
+                        -- Get the Client_Id
+                        LEFT OUTER JOIN main.Client cl on cl.ClientId = l.ClientId
+                        -- Get Driver (e.g. ABD1000)
+                        LEFT OUTER JOIN main.Driver dr2 on dr2.PersonId = IIF(@LegInd = 0, l.Driver2_PersonId, lsPick.Driver2_PersonId)
+                        LEFT OUTER JOIN main.Person p2 on p2.PersonId = IIF(@LegInd = 0, l.Driver1_PersonId, lsPick.Driver1_PersonId)
+                        LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  IIF(@LegInd = 0,  
+                                                                                                                                                                                                        (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                        FROM            main.ClientAddress
+                                                                                                                                                                                                        WHERE        (UseForBillingInd = 1 AND ClientId =
+                                                                                                                                                                                                        (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                        FROM            #CurrentPayPeriodLoadStop
+                                                                                                                                                                                                        WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 1) AND (StopTypeNumber = 1))))  
+                                                                                                                                                                                        , lsPick.ClientId) And claddrorigin.AddressTypeId = 2 --Added
+                        LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  IIF(@LegInd = 0,  
+                                                                                                                                                                                                (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                FROM            main.ClientAddress AS ClientAddress_1
+                                                                                                                                                                                                WHERE        (UseForBillingInd = 1 AND ClientId =
+                                                                                                                                                                                                (SELECT        TOP (1) ClientId
+                                                                                                                                                                                                FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
+                                                                                                                                                                                                WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))
+                                                                                                                                                                                        , lsDrop.ClientId) And cladddest.AddressTypeId = 2         --Added
+                WHERE 
+                        l.LoadId = @LoadId
+                        and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
+                        -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
+                        and  iif(lsDrop.LoadStopTypeId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime) is not null
+                        -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
+                        and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
 
-												fetch next from curs 
-														into @LoadId, @LoadStopId_Pick, @LoadStopId_Drop, @LegInd
-												end
+        fetch next from curs 
+                into @LoadId, @LoadStopId_Pick, @LoadStopId_Drop, @LegInd
+        end
 
-												close curs
-												deallocate curs
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        close curs
+        deallocate curs
 
         select distinct
         pp.personid
@@ -422,6 +360,7 @@ SET NOCOUNT ON;
         and @PayPeriodEnd < pp.PayRateEndDate AND @PayPeriodEnd > pp.PayRateBeginDate
 
         IF OBJECT_ID('tempdb..#TEMPB') IS NOT NULL DROP TABLE #TEMPB
+        
 
         SELECT B.* 
         INTO #TEMPB
