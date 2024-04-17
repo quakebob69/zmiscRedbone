@@ -181,6 +181,9 @@ SET NOCOUNT ON;
         while @@FETCH_STATUS = 0 
         begin
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--CHANGE TO IMPROVE PERFORMANCE-------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------	
                 insert into @tempA
                 SELECT
                         DriverTag = '1'
@@ -223,12 +226,8 @@ SET NOCOUNT ON;
                         ,DriverPersonId = p.PersonId
                         ,Driver2PersonId = p2.PersonId--Added
                         ,LegInd = @LegInd
-                        /*
-						,PickOrigin = claddrorigin.City + ', ' + claddrorigin.State        --Added
+                        ,PickOrigin = claddrorigin.City + ', ' + claddrorigin.State        --Added
                         ,DropDest = cladddest.City + ', ' + cladddest.State        --Added
-						*/
-						,PickOrigin = 'asdf'
-						,DropDest = 'asdf'
                         ,pt.PUnitId
                 FROM
                         #CurrentPayPeriodLoad l
@@ -245,30 +244,8 @@ SET NOCOUNT ON;
                         -- Get Driver 2 name
                         --LEFT OUTER JOIN main.Driver dr2 on dr2.PersonId = l.Driver2_PersonId
                         LEFT OUTER JOIN main.Person p2 on p2.PersonId = IIF(@LegInd = 0, l.Driver2_PersonId, lsPick.Driver2_PersonId)
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
---CHANGE TO IMPROVE PERFORMANCE-------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------	
-						/*
-                        LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  IIF(@LegInd = 0,  
-                                                                                                                                                                                                        (SELECT        TOP (1) ClientId
-                                                                                                                                                                                                        FROM            main.ClientAddress
-                                                                                                                                                                                                        WHERE        (UseForBillingInd = 1 AND ClientId =
-                                                                                                                                                                                                        (SELECT        TOP (1) ClientId
-                                                                                                                                                                                                        FROM            #CurrentPayPeriodLoadStop
-                                                                                                                                                                                                        WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 1) AND (StopTypeNumber = 1))))  
-                                                                                                                                                                                        , lsPick.ClientId) And claddrorigin.AddressTypeId = 2 --Added
-                        LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  IIF(@LegInd = 0,  
-                                                                                                                                                                                                (SELECT        TOP (1) ClientId
-                                                                                                                                                                                                FROM            main.ClientAddress AS ClientAddress_1
-                                                                                                                                                                                                WHERE        (UseForBillingInd = 1 AND ClientId =
-                                                                                                                                                                                                (SELECT        TOP (1) ClientId
-                                                                                                                                                                                                FROM            #CurrentPayPeriodLoadStop AS LoadStop_3
-                                                                                                                                                                                                WHERE        (LoadId = l.LoadId) AND (LoadStopTypeId = 3) order by StopTypeNumber desc )))
-                                                                                                                                                                                        , lsDrop.ClientId) And cladddest.AddressTypeId = 2         --Added
-						*/
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
---CHANGE TO IMPROVE PERFORMANCE-------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+                        LEFT OUTER JOIN main.ClientAddress claddrorigin on claddrorigin.ClientId  =  lsPick.ClientId And claddrorigin.AddressTypeId = 2 --Added
+                        LEFT OUTER JOIN main.ClientAddress cladddest    on cladddest.ClientId     =  lsDrop.ClientId  And cladddest.AddressTypeId = 2         --Added
                 WHERE 
                         L.LoadId = @LoadId 
                         and p.PersonId in (select PersonId from main.PersonTypeMapping where PersonId = p.PersonId and PersonTypeId = 4) -- PersonType OTR
@@ -276,7 +253,9 @@ SET NOCOUNT ON;
                         and  iif(lsDrop.LoadStopTypeId = 2, lsDrop.DropStartDateTime, lsDrop.StartDateTime) is not null
                         -- If drop is a LEG, use DropStartDateTime vs. StartDateTime
                         and iif(lsDrop.LoadStopTypeId = 2, CONVERT(DATE, lsDrop.DropStartDateTime), CONVERT(DATE, lsDrop.StartDateTime)) between @PayPeriodStart and @PayPeriodEnd
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--CHANGE TO IMPROVE PERFORMANCE-------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 
                 insert into @tempA
                 SELECT
