@@ -465,24 +465,6 @@ namespace RedbonePlatform.Pages.ContainerPages
         protected global::Telerik.Web.UI.RadCheckBox RadCheckBox_MileageOverride;
 
         /// <summary>
-        /// RadButton1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadButton RadButton1;
-
-        /// <summary>
-        /// RadButton2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadButton RadButton2;
-
-        /// <summary>
         /// Label_TripNumber control.
         /// </summary>
         /// <remarks>

@@ -184,7 +184,7 @@ namespace RedbonePlatform.Pages.ContainerPages
                 else
                 {
                     // Clear session var
-                    RadAjaxManager1.ResponseScripts.Add("responseEnd();");
+                    Session["StopsToLoadOnPostback"] = null;
                 }
             }
 		}
@@ -1054,7 +1054,6 @@ namespace RedbonePlatform.Pages.ContainerPages
 
         protected void RadDockLayout1_LoadDockLayout(object sender, DockLayoutEventArgs e)
         {
-            RadAjaxManager1.ResponseScripts.Add("requestStart();");
             foreach (DockState state in CurrentDockStates)
             {
                 e.Positions[state.UniqueName] = state.DockZoneID;

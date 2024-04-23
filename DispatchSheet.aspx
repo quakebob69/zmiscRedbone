@@ -635,7 +635,9 @@
             </AjaxSettings>
             <ClientEvents OnRequestStart="RequestStart" OnResponseEnd="ResponseEnd" />
         </telerik:RadAjaxManager>
-        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Default" Modal="true" />
+
+        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" MinDisplayTime="3000" Modal="true" />
+
         <telerik:RadSkinManager ID="RadSkinManager1" runat="server"></telerik:RadSkinManager>
         <telerik:RadFormDecorator ID="RadFormDecorator1" runat="server" DecoratedControls="All" />
         <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
@@ -2476,6 +2478,9 @@
             var currentLoadingPanel = null;
             var currentUpdatedControl = null;
             function RequestStart(sender, eventArgs) {
+
+
+
                 currentLoadingPanel = $find("<%=RadAjaxLoadingPanel1.ClientID%>");
                 if (currentLoadingPanel != null) {
                     //alert(currentLoadingPanel);
