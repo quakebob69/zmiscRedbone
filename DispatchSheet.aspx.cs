@@ -1,249 +1,240 @@
-﻿using System;
+﻿using RedbonePlatform.Classes;
+using RedbonePlatform.Services;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using Telerik.Web.UI;
-using RedbonePlatform.Classes;
-using System.Drawing;
-using System.IO;
-using Telerik.Web.UI.ImageEditor;
-using RedbonePlatform.Datasets;
-using Microsoft.Ajax.Utilities;
-using System.Configuration;
-using RedbonePlatform.Services;
-using System.Text;
-using System.Data.SqlClient;
-using Microsoft.AspNet.SignalR.Client;
-using System.Net;
-using System.Net.Http;
-using RedbonePlatform.Utils;
 
 namespace RedbonePlatform.Pages.ContainerPages
 {
-    public partial class DispatchSheet : System.Web.UI.Page
-    {
-		private int ? miLockedPersonId;
+	public partial class DispatchSheet : System.Web.UI.Page
+	{
+		private int? miLockedPersonId;
 		private Classes.Auth auth;
 
 		protected void Page_Init(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                CurrentDockStates.Clear();
-                HiddenField_PageGUID.Value = Guid.NewGuid().ToString();
+		{
+			if (!Page.IsPostBack)
+			{
+				CurrentDockStates.Clear();
+				HiddenField_PageGUID.Value = Guid.NewGuid().ToString();
 
-                // Prevent tabbing to RadNumericTextBox up down spinners.
-                foreach (Control ctl in Page.Controls)
-                {
-                    if (ctl is Telerik.Web.UI.RadNumericTextBox)
-                    {
-                        (ctl as RadNumericTextBox).ButtonDownContainer.Attributes.Add("tabindex", "-1");
-                        (ctl as RadNumericTextBox).ButtonUpContainer.Attributes.Add("tabindex", "-1");
-                    }
-                }
-            }
-            else
-            {
-                // Restore any RadDocks to their previous state
-                if (CurrentDockStates.Count > 0)
-                {
-                    Datasets.dsDispatchTableAdapters.LoadStopTableAdapter adapt = new Datasets.dsDispatchTableAdapters.LoadStopTableAdapter();
+				// Prevent tabbing to RadNumericTextBox up down spinners.
+				foreach (Control ctl in Page.Controls)
+				{
+					if (ctl is Telerik.Web.UI.RadNumericTextBox)
+					{
+						(ctl as RadNumericTextBox).ButtonDownContainer.Attributes.Add("tabindex", "-1");
+						(ctl as RadNumericTextBox).ButtonUpContainer.Attributes.Add("tabindex", "-1");
+					}
+				}
+			}
+			else
+			{
+				// Restore any RadDocks to their previous state
+				if (CurrentDockStates.Count > 0)
+				{
+					Datasets.dsDispatchTableAdapters.LoadStopTableAdapter adapt = new Datasets.dsDispatchTableAdapters.LoadStopTableAdapter();
 
-                    for (int i = 0; i < CurrentDockStates.Count; i++)
-                    {
-                        RadDock dock = new RadDock();
-                        dock.ID = string.Format("RadDock_{0}", i);
-                        dock.ApplyState(CurrentDockStates[i]);
-                        dock.AutoPostBack = true;
-                        dock.CommandsAutoPostBack = true;
-                        dock.DockMode = DockMode.Docked;
-                        dock.Command += new DockCommandEventHandler(RadDock_Command);
-                        dock.DockPositionChanged += new DockPositionChangedEventHandler(RadDock_DockPositionChanged);
-                        dock.DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.ExpandCollapse | Telerik.Web.UI.Dock.DefaultCommands.Close; // temporarily just providing the expand / collapse 
-                        
+					for (int i = 0; i < CurrentDockStates.Count; i++)
+					{
+						RadDock dock = new RadDock();
+						dock.ID = string.Format("RadDock_{0}", i);
+						dock.ApplyState(CurrentDockStates[i]);
+						dock.AutoPostBack = true;
+						dock.CommandsAutoPostBack = true;
+						dock.DockMode = DockMode.Docked;
+						dock.Command += new DockCommandEventHandler(RadDock_Command);
+						dock.DockPositionChanged += new DockPositionChangedEventHandler(RadDock_DockPositionChanged);
+						dock.DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.ExpandCollapse | Telerik.Web.UI.Dock.DefaultCommands.Close; // temporarily just providing the expand / collapse 
+
 						if (!CurrentDockStates[i].Closed)
-                        {
-                            Datasets.dsDispatch.LoadStopDataTable tblLoadStop = adapt.GetCertainStop(Convert.ToInt32(dock.UniqueName));
-                            LoadStopWidget(dock, tblLoadStop[0]);
-                        }
-                        
-						// Was playing with adding a Delete Dock confirmation. will revisit if requirement surfaces.
-                        //dock.OnClientCommand = "RadDock_Client_Command";
-                        // dock.OnClientCommand = "CloseDock";
-                        RadDockLayout1.Controls.Add(dock);
-                    }
-                }
-            }
-        }
+						{
+							Datasets.dsDispatch.LoadStopDataTable tblLoadStop = adapt.GetCertainStop(Convert.ToInt32(dock.UniqueName));
+							LoadStopWidget(dock, tblLoadStop[0]);
+						}
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
+						// Was playing with adding a Delete Dock confirmation. will revisit if requirement surfaces.
+						//dock.OnClientCommand = "RadDock_Client_Command";
+						// dock.OnClientCommand = "CloseDock";
+						RadDockLayout1.Controls.Add(dock);
+					}
+				}
+			}
+		}
+
+		protected void Page_Load(object sender, EventArgs e)
+		{
 			// Check Authorization
 			auth = (Classes.Auth)Session["Auth"];
-            if (auth == null)
-            {
-                Response.Redirect("~/Default.aspx?ShowLogin=true", true);
-                return;
-            }
-            else
-            {
-                if (!auth.Entitlements.Contains(900)) // RedbonePlatform-Dispatch-Loads
-                {
-                    Response.Redirect("~/AccessDenied.aspx", true);
-                    return;
-                }
-            }
+			if (auth == null)
+			{
+				Response.Redirect("~/Default.aspx?ShowLogin=true", true);
+				return;
+			}
+			else
+			{
+				if (!auth.Entitlements.Contains(900)) // RedbonePlatform-Dispatch-Loads
+				{
+					Response.Redirect("~/AccessDenied.aspx", true);
+					return;
+				}
+			}
 
 			if (!Page.IsPostBack)
-            {
+			{
 				// Adjust company logo according to config
 				Image_Logo.ImageUrl = ConfigurationManager.AppSettings.Get("DispatchSheet.aspx_Image");
 
-                // First Load - but if page is refreshed during new creation, should look at hiddenfield vs. QueryString.
-                if (HiddenField_LoadId.Value == "")
-                {
-                    HiddenField_LoadId.Value = Request.QueryString["LoadId"];
-                }
+				// First Load - but if page is refreshed during new creation, should look at hiddenfield vs. QueryString.
+				if (HiddenField_LoadId.Value == "")
+				{
+					HiddenField_LoadId.Value = Request.QueryString["LoadId"];
+				}
 
 
-                auth.LogUsageStatistic(Classes.Auth.UsageStatisticType.AccessedDispatchSheet);
-                ApplyUserSettings();
+				auth.LogUsageStatistic(Classes.Auth.UsageStatisticType.AccessedDispatchSheet);
+				ApplyUserSettings();
 
-                Datasets.dsDispatchTableAdapters.LoadStopTableAdapter adaptStop = new Datasets.dsDispatchTableAdapters.LoadStopTableAdapter();
-                Datasets.dsDispatch.LoadStopDataTable tblStop = null;
-                //Datasets.dsDispatch.LoadStopRow rowStop = null;
-                
-                Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
+				Datasets.dsDispatchTableAdapters.LoadStopTableAdapter adaptStop = new Datasets.dsDispatchTableAdapters.LoadStopTableAdapter();
+				Datasets.dsDispatch.LoadStopDataTable tblStop = null;
+				//Datasets.dsDispatch.LoadStopRow rowStop = null;
 
-                LoadPopulate();
+				Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
 
-                // Load the first stop and trigger others to be loaded on postback
-                tblStop = adaptStop.GetAllStopsForLoad(LoadId);
-                Int16 iCounter = 0;
+				LoadPopulate();
 
-                foreach (Datasets.dsDispatch.LoadStopRow row in tblStop)
-                {
-                    if (iCounter == 0)
-                        LoadStop(row);
-                    else
-                    {
-                        Session["StopsToLoadOnPostback"] = tblStop;
-                        HiddenField_StopToLoadNextOnPostback.Value = row.LoadStopId.ToString();
-                        break;
-                    }
+				// Load the first stop and trigger others to be loaded on postback
+				tblStop = adaptStop.GetAllStopsForLoad(LoadId);
+				Int16 iCounter = 0;
 
-                    iCounter++;
-                }
-                
-                // Sample accessing Dock.ContentContainer controls.
-                //UserControls.Pick pck = dock.ContentContainer.FindControl("Pick0") as UserControls.Pick;
-                //pck.CustomerPickupClientId = 1; // select Customer with ClientId 5
-                //pck.PopulateCustomerAddress();
+				foreach (Datasets.dsDispatch.LoadStopRow row in tblStop)
+				{
+					if (iCounter == 0)
+						LoadStop(row);
+					else
+					{
+						Session["StopsToLoadOnPostback"] = tblStop;
+						HiddenField_StopToLoadNextOnPostback.Value = row.LoadStopId.ToString();
+						break;
+					}
 
-                // Query the UserFiles folder for this load to determine how many files have been attached
-                UpdateFileCountOnFilesButton();
-            }
-            else
-            { // Postback section..
-              // Update Dock titles if recently re-ordered
-                if (HiddenField_UpdateDockTitles.Value == "true")
-                {
-                    DockTitleAndValidationUpdate();
-                    // Session["UpdateDockTitles"] = "";
-                    HiddenField_UpdateDockTitles.Value = "";
-                }
+					iCounter++;
+				}
 
-                // Load additional stops on postback
-                if (HiddenField_StopToLoadNextOnPostback.Value != "")
-                {
-                    // Find stop to load next
-                    Datasets.dsDispatch.LoadStopDataTable tbl = (Datasets.dsDispatch.LoadStopDataTable)Session["StopsToLoadOnPostback"];
-                    Boolean bNextToSave = false;
-                    if (tbl != null)
-                    {
-                        foreach (Datasets.dsDispatch.LoadStopRow row in tbl)
-                        {
-                            if (!bNextToSave && row.LoadStopId == Convert.ToInt32(HiddenField_StopToLoadNextOnPostback.Value))
-                            {
-                                LoadStop(row);
-                                HiddenField_StopToLoadNextOnPostback.Value = "";
-                                bNextToSave = true;
-                            }
-                            else if (bNextToSave)
-                            {
-                                HiddenField_StopToLoadNextOnPostback.Value = row.LoadStopId.ToString();
-                                bNextToSave = false;
-                                break;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    // Clear session var
-                    Session["StopsToLoadOnPostback"] = null;
-                }
-            }
+				// Sample accessing Dock.ContentContainer controls.
+				//UserControls.Pick pck = dock.ContentContainer.FindControl("Pick0") as UserControls.Pick;
+				//pck.CustomerPickupClientId = 1; // select Customer with ClientId 5
+				//pck.PopulateCustomerAddress();
+
+				// Query the UserFiles folder for this load to determine how many files have been attached
+				UpdateFileCountOnFilesButton();
+			}
+			else
+			{ // Postback section..
+			  // Update Dock titles if recently re-ordered
+				if (HiddenField_UpdateDockTitles.Value == "true")
+				{
+					DockTitleAndValidationUpdate();
+					// Session["UpdateDockTitles"] = "";
+					HiddenField_UpdateDockTitles.Value = "";
+				}
+
+				// Load additional stops on postback
+				if (HiddenField_StopToLoadNextOnPostback.Value != "")
+				{
+					// Find stop to load next
+					Datasets.dsDispatch.LoadStopDataTable tbl = (Datasets.dsDispatch.LoadStopDataTable)Session["StopsToLoadOnPostback"];
+					Boolean bNextToSave = false;
+					if (tbl != null)
+					{
+						foreach (Datasets.dsDispatch.LoadStopRow row in tbl)
+						{
+							if (!bNextToSave && row.LoadStopId == Convert.ToInt32(HiddenField_StopToLoadNextOnPostback.Value))
+							{
+								LoadStop(row);
+								HiddenField_StopToLoadNextOnPostback.Value = "";
+								bNextToSave = true;
+							}
+							else if (bNextToSave)
+							{
+								HiddenField_StopToLoadNextOnPostback.Value = row.LoadStopId.ToString();
+								bNextToSave = false;
+								break;
+							}
+						}
+					}
+				}
+				else
+				{
+					// Clear session var
+					Session["StopsToLoadOnPostback"] = null;
+				}
+			}
 		}
 
 		//RadComboBox_HoldSub_OnNeedDataSource
 		protected void RadComboBox_HoldSub_OnNeedDataSource(object source, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
-        {
-            // int clientId = auth.ClientIds[0];
+		{
+			// int clientId = auth.ClientIds[0];
 
-            RadComboBox_HoldSub.DataSource = GetSubTypes();
-        }
+			RadComboBox_HoldSub.DataSource = GetSubTypes();
+		}
 
-        private Datasets.dsLoadStatus.LoadStatusSubTypeDataTable GetSubTypes()
-        {
+		private Datasets.dsLoadStatus.LoadStatusSubTypeDataTable GetSubTypes()
+		{
 			Datasets.dsLoadStatusTableAdapters.LoadStatusSubTypeTableAdapter adapt = new Datasets.dsLoadStatusTableAdapters.LoadStatusSubTypeTableAdapter();
 			Datasets.dsLoadStatus.LoadStatusSubTypeDataTable tblStats = new Datasets.dsLoadStatus.LoadStatusSubTypeDataTable();
 
-            //DateTime currStrt = (DateTime)ViewState["currStart"];
-            //DateTime currEnd = (DateTime)ViewState["currEnd"];
-            //String currApprvd = ViewState["currApprvd"].ToString();
-            short id = short.Parse(RadComboBox_Status.SelectedValue);
-            
-            if(id > 0) 
-            { 
+			//DateTime currStrt = (DateTime)ViewState["currStart"];
+			//DateTime currEnd = (DateTime)ViewState["currEnd"];
+			//String currApprvd = ViewState["currApprvd"].ToString();
+			short id = short.Parse(RadComboBox_Status.SelectedValue);
+
+			if (id > 0)
+			{
 				tblStats = adapt.GetDataByTypeId(id, "T");
-            }
+			}
 
-            if(tblStats.Count <= 0)
-            {
-                RadComboBox_HoldSub.Visible = false;
-                RadTextBox_SubOther.Visible = false;
-            }
-            else
-            {
-                RadComboBox_HoldSub.Visible = true;
-            }  
+			if (tblStats.Count <= 0)
+			{
+				RadComboBox_HoldSub.Visible = false;
+				RadTextBox_SubOther.Visible = false;
+			}
+			else
+			{
+				RadComboBox_HoldSub.Visible = true;
+			}
 
-            return tblStats;
-        }
+			return tblStats;
+		}
 
-        public void LoadPopulate()
-        {
-            try
-            {
-                // Get existing load
-                Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
+		public void LoadPopulate()
+		{
+			try
+			{
+				// Get existing load
+				Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
 
-                Datasets.dsDispatchTableAdapters.LoadTableAdapter adaptLoad = new Datasets.dsDispatchTableAdapters.LoadTableAdapter();
-                Datasets.dsDispatch.LoadDataTable tblLoad = null;
-                Datasets.dsDispatch.LoadRow rowLoad = null;
+				Datasets.dsDispatchTableAdapters.LoadTableAdapter adaptLoad = new Datasets.dsDispatchTableAdapters.LoadTableAdapter();
+				Datasets.dsDispatch.LoadDataTable tblLoad = null;
+				Datasets.dsDispatch.LoadRow rowLoad = null;
 
-                // Populate Load details and LOAD section
-                tblLoad = adaptLoad.GetData(LoadId);
-                rowLoad = tblLoad[0];
+				// Populate Load details and LOAD section
+				tblLoad = adaptLoad.GetData(LoadId);
+				rowLoad = tblLoad[0];
 
-                if (rowLoad.IsLockedPersonIdNull())
-                    miLockedPersonId = null;
-                else
-                    miLockedPersonId = rowLoad.LockedPersonId;
+				if (rowLoad.IsLockedPersonIdNull())
+					miLockedPersonId = null;
+				else
+					miLockedPersonId = rowLoad.LockedPersonId;
 
 				HiddenField_Mode.Value = rowLoad.Mode;
 
@@ -255,139 +246,136 @@ namespace RedbonePlatform.Pages.ContainerPages
 
 
 				if (!rowLoad.IsMileageFromLEGOverrideIndNull())
-                {
-                    RadNumericTextBox_LoadedMiles.ReadOnly = (rowLoad.MileageFromLEGOverrideInd == false);
-                    RadNumericTextBox_EmptyMiles.ReadOnly = (rowLoad.MileageFromLEGOverrideInd == false);
-                    RadCheckBox_MileageOverride.Checked = (rowLoad.MileageFromLEGOverrideInd == true);
-                }
-                else
-                {
-                    RadNumericTextBox_LoadedMiles.ReadOnly = true;
-                    RadNumericTextBox_EmptyMiles.ReadOnly = true;
-                    RadCheckBox_MileageOverride.Checked = false;
-                }
+				{
+					RadNumericTextBox_LoadedMiles.ReadOnly = (rowLoad.MileageFromLEGOverrideInd == false);
+					RadNumericTextBox_EmptyMiles.ReadOnly = (rowLoad.MileageFromLEGOverrideInd == false);
+					RadCheckBox_MileageOverride.Checked = (rowLoad.MileageFromLEGOverrideInd == true);
+				}
+				else
+				{
+					RadNumericTextBox_LoadedMiles.ReadOnly = true;
+					RadNumericTextBox_EmptyMiles.ReadOnly = true;
+					RadCheckBox_MileageOverride.Checked = false;
+				}
 
-                RadNumericTextBox_LoadedMiles.DbValue = rowLoad.IsMilesNull() ? 0 : rowLoad.Miles;
-                RadNumericTextBox_EmptyMiles.DbValue = rowLoad.IsDeadHeadNull() ? 0 : rowLoad.DeadHead;
+				RadNumericTextBox_LoadedMiles.DbValue = rowLoad.IsMilesNull() ? 0 : rowLoad.Miles;
+				RadNumericTextBox_EmptyMiles.DbValue = rowLoad.IsDeadHeadNull() ? 0 : rowLoad.DeadHead;
 
-                PopulateCustomerDetails(rowLoad.IsClientIdNull() ? 0 : rowLoad.ClientId);
+				PopulateCustomerDetails(rowLoad.IsClientIdNull() ? 0 : rowLoad.ClientId);
 
-                HiddenField_LoadPlannerPersonId.Value = rowLoad.IsLoadPlannerPersonIdNull() ? "0" : rowLoad.LoadPlannerPersonId.ToString();
-                RadComboBox_LoadPlanner.Items.Clear();
-                RadComboBox_LoadPlanner.Items.Add(new RadComboBoxItem("-Load Planner-", "0"));
-                RadComboBox_LoadPlanner.DataBind();
-                RadComboBox_LoadPlanner.SelectedValue = rowLoad.IsLoadPlannerPersonIdNull() ? null : rowLoad.LoadPlannerPersonId.ToString();
+				HiddenField_LoadPlannerPersonId.Value = rowLoad.IsLoadPlannerPersonIdNull() ? "0" : rowLoad.LoadPlannerPersonId.ToString();
+				RadComboBox_LoadPlanner.Items.Clear();
+				RadComboBox_LoadPlanner.Items.Add(new RadComboBoxItem("-Load Planner-", "0"));
+				RadComboBox_LoadPlanner.DataBind();
+				RadComboBox_LoadPlanner.SelectedValue = rowLoad.IsLoadPlannerPersonIdNull() ? null : rowLoad.LoadPlannerPersonId.ToString();
 
-                HiddenField_DispatcherPersonId.Value = rowLoad.IsDispatcherPersonIdNull() ? "0" : rowLoad.DispatcherPersonId.ToString();
-                RadComboBox_Dispatcher.Items.Clear();
-                RadComboBox_Dispatcher.Items.Add(new RadComboBoxItem("-Dispatcher-", "0"));
-                RadComboBox_Dispatcher.DataBind();
-                RadComboBox_Dispatcher.SelectedValue = rowLoad.IsDispatcherPersonIdNull() ? null : rowLoad.DispatcherPersonId.ToString();
+				HiddenField_DispatcherPersonId.Value = rowLoad.IsDispatcherPersonIdNull() ? "0" : rowLoad.DispatcherPersonId.ToString();
+				RadComboBox_Dispatcher.Items.Clear();
+				RadComboBox_Dispatcher.Items.Add(new RadComboBoxItem("-Dispatcher-", "0"));
+				RadComboBox_Dispatcher.DataBind();
+				RadComboBox_Dispatcher.SelectedValue = rowLoad.IsDispatcherPersonIdNull() ? null : rowLoad.DispatcherPersonId.ToString();
 
-                RadComboBox_Commodity.SelectedValue = rowLoad.IsCommodityTypeIdNull() ? null : rowLoad.CommodityTypeId.ToString();
-                RadComboBox_TrailerType.SelectedValue = rowLoad.IsEquipmentTypeIdNull() ? null : rowLoad.EquipmentTypeId.ToString();
-                if (!rowLoad.IsTemperatureNull()) RadNumericTextBox_Temperature.DbValue = rowLoad.Temperature; else RadNumericTextBox_Temperature.DbValue = null;
-                //RadDropDownList_TempMode.SelectedValue = rowLoad.IsTemperatureTypeIdNull() ? null : rowLoad.TemperatureTypeId.ToString();
-                RadDropDownList_TempMode.SelectedValue = rowLoad.IsTemperatureTypeIdNull() ? "0" : rowLoad.TemperatureTypeId.ToString();
+				RadComboBox_Commodity.SelectedValue = rowLoad.IsCommodityTypeIdNull() ? null : rowLoad.CommodityTypeId.ToString();
+				RadComboBox_TrailerType.SelectedValue = rowLoad.IsEquipmentTypeIdNull() ? null : rowLoad.EquipmentTypeId.ToString();
+				if (!rowLoad.IsTemperatureNull()) RadNumericTextBox_Temperature.DbValue = rowLoad.Temperature; else RadNumericTextBox_Temperature.DbValue = null;
+				//RadDropDownList_TempMode.SelectedValue = rowLoad.IsTemperatureTypeIdNull() ? null : rowLoad.TemperatureTypeId.ToString();
+				RadDropDownList_TempMode.SelectedValue = rowLoad.IsTemperatureTypeIdNull() ? "0" : rowLoad.TemperatureTypeId.ToString();
 
-                HiddenField_Driver1PersonId.Value = rowLoad.IsDriver1_PersonIdNull() ? "0" : rowLoad.Driver1_PersonId.ToString();
-                RadComboBox_Driver1.Items.Clear();
-                RadComboBox_Driver1.Items.Add(new RadComboBoxItem("-Driver #1-", "0"));
-                RadComboBox_Driver1.DataBind();
-                RadComboBox_Driver1.SelectedValue = rowLoad.IsDriver1_PersonIdNull() ? null : rowLoad.Driver1_PersonId.ToString();
-                DriverExpirationLogic(Convert.ToInt32(HiddenField_Driver1PersonId.Value), RadComboBox_Driver1, RadToolTip_RadComboBox_Driver1, false);
+				HiddenField_Driver1PersonId.Value = rowLoad.IsDriver1_PersonIdNull() ? "0" : rowLoad.Driver1_PersonId.ToString();
+				RadComboBox_Driver1.Items.Clear();
+				RadComboBox_Driver1.Items.Add(new RadComboBoxItem("-Driver #1-", "0"));
+				RadComboBox_Driver1.DataBind();
+				RadComboBox_Driver1.SelectedValue = rowLoad.IsDriver1_PersonIdNull() ? null : rowLoad.Driver1_PersonId.ToString();
+				DriverExpirationLogic(Convert.ToInt32(HiddenField_Driver1PersonId.Value), RadComboBox_Driver1, RadToolTip_RadComboBox_Driver1, false);
 
-                HiddenField_Driver2PersonId.Value = rowLoad.IsDriver2_PersonIdNull() ? "0" : rowLoad.Driver2_PersonId.ToString();
-                RadComboBox_Driver2.Items.Clear();
-                RadComboBox_Driver2.Items.Add(new RadComboBoxItem("-Driver #2-", "0"));
-                RadComboBox_Driver2.DataBind();
-                RadComboBox_Driver2.SelectedValue = rowLoad.IsDriver2_PersonIdNull() ? null : rowLoad.Driver2_PersonId.ToString();
-                DriverExpirationLogic(Convert.ToInt32(HiddenField_Driver2PersonId.Value), RadComboBox_Driver2, RadToolTip_RadComboBox_Driver2, false);
+				HiddenField_Driver2PersonId.Value = rowLoad.IsDriver2_PersonIdNull() ? "0" : rowLoad.Driver2_PersonId.ToString();
+				RadComboBox_Driver2.Items.Clear();
+				RadComboBox_Driver2.Items.Add(new RadComboBoxItem("-Driver #2-", "0"));
+				RadComboBox_Driver2.DataBind();
+				RadComboBox_Driver2.SelectedValue = rowLoad.IsDriver2_PersonIdNull() ? null : rowLoad.Driver2_PersonId.ToString();
+				DriverExpirationLogic(Convert.ToInt32(HiddenField_Driver2PersonId.Value), RadComboBox_Driver2, RadToolTip_RadComboBox_Driver2, false);
 
-                HiddenField_TrailerId1.Value = rowLoad.IsTrailer1_TrailerIdNull() ? "0" : rowLoad.Trailer1_TrailerId.ToString();
-                RadComboBox_Trailer1.Items.Clear();
-                RadComboBox_Trailer1.Items.Add(new RadComboBoxItem("-Trailer #1-", "0"));
-                RadComboBox_Trailer1.DataBind();
-                RadComboBox_Trailer1.SelectedValue = rowLoad.IsTrailer1_TrailerIdNull() ? null : rowLoad.Trailer1_TrailerId.ToString();
-                TrailerExpirationLogic(Convert.ToInt16(HiddenField_TrailerId1.Value), RadComboBox_Trailer1, RadToolTip_RadComboBox_Trailer1, false);
+				HiddenField_TrailerId1.Value = rowLoad.IsTrailer1_TrailerIdNull() ? "0" : rowLoad.Trailer1_TrailerId.ToString();
+				RadComboBox_Trailer1.Items.Clear();
+				RadComboBox_Trailer1.Items.Add(new RadComboBoxItem("-Trailer #1-", "0"));
+				RadComboBox_Trailer1.DataBind();
+				RadComboBox_Trailer1.SelectedValue = rowLoad.IsTrailer1_TrailerIdNull() ? null : rowLoad.Trailer1_TrailerId.ToString();
+				TrailerExpirationLogic(Convert.ToInt16(HiddenField_TrailerId1.Value), RadComboBox_Trailer1, RadToolTip_RadComboBox_Trailer1, false);
 
-                HiddenField_TrailerId2.Value = rowLoad.IsTrailer2_TrailerIdNull() ? "0" : rowLoad.Trailer2_TrailerId.ToString();
-                RadComboBox_Trailer2.Items.Clear();
-                RadComboBox_Trailer2.Items.Add(new RadComboBoxItem("-Trailer #2-", "0"));
-                RadComboBox_Trailer2.DataBind();
-                RadComboBox_Trailer2.SelectedValue = rowLoad.IsTrailer2_TrailerIdNull() ? null : rowLoad.Trailer2_TrailerId.ToString();
-                TrailerExpirationLogic(Convert.ToInt16(HiddenField_TrailerId2.Value), RadComboBox_Trailer2, RadToolTip_RadComboBox_Trailer2, false);
+				HiddenField_TrailerId2.Value = rowLoad.IsTrailer2_TrailerIdNull() ? "0" : rowLoad.Trailer2_TrailerId.ToString();
+				RadComboBox_Trailer2.Items.Clear();
+				RadComboBox_Trailer2.Items.Add(new RadComboBoxItem("-Trailer #2-", "0"));
+				RadComboBox_Trailer2.DataBind();
+				RadComboBox_Trailer2.SelectedValue = rowLoad.IsTrailer2_TrailerIdNull() ? null : rowLoad.Trailer2_TrailerId.ToString();
+				TrailerExpirationLogic(Convert.ToInt16(HiddenField_TrailerId2.Value), RadComboBox_Trailer2, RadToolTip_RadComboBox_Trailer2, false);
 
-                HiddenField_PunitId.Value = rowLoad.IsTruckPunitIdNull() ? "0" : rowLoad.TruckPunitId.ToString();
-                RadComboBox_Truck1.Items.Clear();
-                RadComboBox_Truck1.Items.Add(new RadComboBoxItem("-Truck-", "0"));
-                RadComboBox_Truck1.DataBind();
-                RadComboBox_Truck1.SelectedValue = rowLoad.IsTruckPunitIdNull() ? "0" : rowLoad.TruckPunitId.ToString();
-                TruckExpirationLogic(Convert.ToInt32(HiddenField_PunitId.Value), RadComboBox_Truck1, RadToolTip_RadComboBox_Truck1, false);
+				HiddenField_PunitId.Value = rowLoad.IsTruckPunitIdNull() ? "0" : rowLoad.TruckPunitId.ToString();
+				RadComboBox_Truck1.Items.Clear();
+				RadComboBox_Truck1.Items.Add(new RadComboBoxItem("-Truck-", "0"));
+				RadComboBox_Truck1.DataBind();
+				RadComboBox_Truck1.SelectedValue = rowLoad.IsTruckPunitIdNull() ? "0" : rowLoad.TruckPunitId.ToString();
+				TruckExpirationLogic(Convert.ToInt32(HiddenField_PunitId.Value), RadComboBox_Truck1, RadToolTip_RadComboBox_Truck1, false);
 
-                //if (!rowLoad.IsNotesNull()) RadEditor_LoadDetailNotes.Content = rowLoad.Notes; else RadEditor_LoadDetailNotes.Content = "";
-                RadTextBox_CustomerLoadNumber.Text = rowLoad.IsCustomerLoadNumberNull() ? null : rowLoad.CustomerLoadNumber;
+				//if (!rowLoad.IsNotesNull()) RadEditor_LoadDetailNotes.Content = rowLoad.Notes; else RadEditor_LoadDetailNotes.Content = "";
+				RadTextBox_CustomerLoadNumber.Text = rowLoad.IsCustomerLoadNumberNull() ? null : rowLoad.CustomerLoadNumber;
 				HiddenField_TenderId.Value = rowLoad.IsTenderIdNull() ? "" : rowLoad.TenderId.ToString();
 				HiddenField_CustomerLoadNumber.Value = rowLoad.IsCustomerLoadNumberNull() ? "" : rowLoad.CustomerLoadNumber;
 				if (!rowLoad.IsWeightNull()) RadNumericText_Weight.Value = Convert.ToDouble(rowLoad.Weight);
-                if (!rowLoad.IsRateNull()) RadNumericTextBox_FlatRate.Value = Convert.ToDouble(rowLoad.Rate);
-                if (!rowLoad.IsGrossRevenueNull()) Label_GrossRevenue.Text = Decimal.Round(rowLoad.GrossRevenue, 2).ToString("C2");
-                if (!rowLoad.IsPiecesNull()) RadNumericTextBox_Pieces.Value = rowLoad.Pieces; else RadNumericTextBox_Pieces.Value = null;
-                if (!rowLoad.IsSendOriginalsIndNull()) RadCheckBox_SendOriginals.Checked = rowLoad.SendOriginalsInd; else RadCheckBox_SendOriginals.Checked = false;
-                if (!rowLoad.IsPaidEmptyNull()) RadNumericTextBox_PaidEmpty.Value = rowLoad.PaidEmpty; else RadNumericTextBox_PaidEmpty.Value = null;
-                if (!rowLoad.IsPaidMilesNull()) RadNumericTextBox_PaidLoaded.Value = rowLoad.PaidMiles; else RadNumericTextBox_PaidLoaded.Value = null;
-                if (!rowLoad.IsPaperworkRecvdDateNull()) RadDatePicker_PaperworkReceivedDate.SelectedDate = rowLoad.PaperworkRecvdDate; else RadDatePicker_PaperworkReceivedDate.SelectedDate = null;
-                if (!rowLoad.IsAvailableBillingNull()) RadCheckBox_BillingApproval.Checked = rowLoad.AvailableBilling; else RadCheckBox_BillingApproval.Checked = false;
+				if (!rowLoad.IsRateNull()) RadNumericTextBox_FlatRate.Value = Convert.ToDouble(rowLoad.Rate);
+				if (!rowLoad.IsGrossRevenueNull()) Label_GrossRevenue.Text = Decimal.Round(rowLoad.GrossRevenue, 2).ToString("C2");
+				if (!rowLoad.IsPiecesNull()) RadNumericTextBox_Pieces.Value = rowLoad.Pieces; else RadNumericTextBox_Pieces.Value = null;
+				if (!rowLoad.IsSendOriginalsIndNull()) RadCheckBox_SendOriginals.Checked = rowLoad.SendOriginalsInd; else RadCheckBox_SendOriginals.Checked = false;
+				if (!rowLoad.IsPaidEmptyNull()) RadNumericTextBox_PaidEmpty.Value = rowLoad.PaidEmpty; else RadNumericTextBox_PaidEmpty.Value = null;
+				if (!rowLoad.IsPaidMilesNull()) RadNumericTextBox_PaidLoaded.Value = rowLoad.PaidMiles; else RadNumericTextBox_PaidLoaded.Value = null;
+				if (!rowLoad.IsPaperworkRecvdDateNull()) RadDatePicker_PaperworkReceivedDate.SelectedDate = rowLoad.PaperworkRecvdDate; else RadDatePicker_PaperworkReceivedDate.SelectedDate = null;
+				if (!rowLoad.IsAvailableBillingNull()) RadCheckBox_BillingApproval.Checked = rowLoad.AvailableBilling; else RadCheckBox_BillingApproval.Checked = false;
 
-                RadComboBox_Status.SelectedValue = (rowLoad.IsLoadStatusTypeIdNull()) ? null : rowLoad.LoadStatusTypeId.ToString();
-                
-                RadComboBox_HoldSub.DataBind();
+				RadComboBox_Status.SelectedValue = (rowLoad.IsLoadStatusTypeIdNull()) ? null : rowLoad.LoadStatusTypeId.ToString();
 
-                RadComboBox_DriverStatus.SelectedValue = (rowLoad.IsLoadDriverStatusIdNull()) ? null : rowLoad.LoadDriverStatusId.ToString();
+				RadComboBox_HoldSub.DataBind();
 
+				RedbonePlatform.Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter comWorkTypeAdapt = new Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter();
+				Datasets.dsLoadStatus.LoadToLoadStatusSubTypeDataTable tblcomWorkType = comWorkTypeAdapt.GetDataByLoad_Status(LoadId, rowLoad.LoadStatusTypeId);
+				//RadComboBox_HoldSub.SelectedValue = (rowLoad.IsLoadStatusSubTypeIdNull()) ? null : rowLoad.LoadStatusSubTypeId.ToString();
+				RadComboBoxItemCollection collection = RadComboBox_HoldSub.Items;
 
-                RedbonePlatform.Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter comWorkTypeAdapt = new Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter();
-                Datasets.dsLoadStatus.LoadToLoadStatusSubTypeDataTable tblcomWorkType = comWorkTypeAdapt.GetDataByLoad_Status(LoadId, rowLoad.LoadStatusTypeId);
-                //RadComboBox_HoldSub.SelectedValue = (rowLoad.IsLoadStatusSubTypeIdNull()) ? null : rowLoad.LoadStatusSubTypeId.ToString();
-                RadComboBoxItemCollection collection = RadComboBox_HoldSub.Items;
+				RadTextBox_SubOther.Visible = false;
 
-                RadTextBox_SubOther.Visible = false;
+				if (collection.Count != 0)
+				{
+					foreach (RadComboBoxItem item in collection)
+					{
+						int numVal = int.Parse(item.Value);
+						var currObj = tblcomWorkType.Where(x => x.LoadStatusSubTypeId == numVal).FirstOrDefault();
 
-                if (collection.Count != 0)
-                {
-                    foreach (RadComboBoxItem item in collection)
-                    {
-                        int numVal = int.Parse(item.Value);
-                        var currObj = tblcomWorkType.Where(x => x.LoadStatusSubTypeId == numVal).FirstOrDefault();
+						if (currObj != null)
+						{
+							item.Checked = true;
 
-                        if (currObj != null)
-                        {
-                            item.Checked = true;
+							if (item.Text.Contains("Other"))
+							{
+								RadTextBox_SubOther.Visible = true;
 
-                            if(item.Text.Contains("Other"))
-                            {
-                                RadTextBox_SubOther.Visible = true;
+								if (!currObj.IsCustomValNull())
+								{
+									RadTextBox_SubOther.Text = currObj.CustomVal;
+									RadTextBox_SubOther.Visible = true;
+								}
+							}
+						}
+					}
+				}
 
-                                if(!currObj.IsCustomValNull())
-                                {
-                                    RadTextBox_SubOther.Text = currObj.CustomVal;
-                                    RadTextBox_SubOther.Visible = true;
-                                }
-                            }
-                        }
-                    }
-                }
+				Label_RPM1.Text = (rowLoad.IsRatePerMileNull() ? "TBD" : decimal.Round(rowLoad.RatePerMile, 2).ToString("C2"));
 
-                Label_RPM1.Text = (rowLoad.IsRatePerMileNull() ? "TBD" : decimal.Round(rowLoad.RatePerMile, 2).ToString("C2"));
+				Label_ACCTotal.Text = rowLoad.IsAccChargesTotalNull() ? 0.ToString("C2") : rowLoad.AccChargesTotal.ToString("C2");
+				Label_ACCBillable.Text = rowLoad.IsExtraChargesNull() ? 0.ToString("C2") : rowLoad.ExtraCharges.ToString("C2");
+				Label_Rate.Text = rowLoad.IsAccChargesTotalNull() ? 0.ToString("C2") : rowLoad.AccChargesTotal.ToString("C2");
 
-                Label_ACCTotal.Text = rowLoad.IsAccChargesTotalNull() ? 0.ToString("C2") : rowLoad.AccChargesTotal.ToString("C2");
-                Label_ACCBillable.Text = rowLoad.IsExtraChargesNull() ? 0.ToString("C2") : rowLoad.ExtraCharges.ToString("C2");
-                Label_Rate.Text = rowLoad.IsAccChargesTotalNull() ? 0.ToString("C2") : rowLoad.AccChargesTotal.ToString("C2");
+				RadCheckBox_AutoRatingInd.Checked = rowLoad.AutoRatingInd;
+				if (!rowLoad.IsAllowPerBOLIndNull()) RadCheckBox_AllowPerBOL.Checked = rowLoad.AllowPerBOLInd; else RadCheckBox_AllowPerBOL.Checked = false;
 
-                RadCheckBox_AutoRatingInd.Checked = rowLoad.AutoRatingInd;
-                if (!rowLoad.IsAllowPerBOLIndNull()) RadCheckBox_AllowPerBOL.Checked = rowLoad.AllowPerBOLInd; else RadCheckBox_AllowPerBOL.Checked = false;
-
-                if (rowLoad.IsBillableTotalNull()) Label_BillableTotal.Text = ""; else Label_BillableTotal.Text = rowLoad.BillableTotal.ToString("C2");
+				if (rowLoad.IsBillableTotalNull()) Label_BillableTotal.Text = ""; else Label_BillableTotal.Text = rowLoad.BillableTotal.ToString("C2");
 
 				//set up notes button
 				RadButton_Notes.Text = "Notes";
@@ -405,24 +393,24 @@ namespace RedbonePlatform.Pages.ContainerPages
 				}
 			}
 			catch (Exception ex)
-            {
-                throw;
-            }
-        }
+			{
+				throw;
+			}
+		}
 
-        private void SaveLoad()
-        {
-            // Check to see if Load is locked by another user:
-            if (LockedUserChanged())
-                return;
+		private void SaveLoad()
+		{
+			// Check to see if Load is locked by another user:
+			if (LockedUserChanged())
+				return;
 
-            Classes.Auth auth = (Classes.Auth)Session["Auth"];
-            Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			Classes.Auth auth = (Classes.Auth)Session["Auth"];
+			Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
 
-            // Get current load record
-            Datasets.dsDispatchTableAdapters.LoadTableAdapter adaptLoad = new Datasets.dsDispatchTableAdapters.LoadTableAdapter();
-            Datasets.dsDispatch.LoadDataTable tblLoad = adaptLoad.GetData(Convert.ToInt32(HiddenField_LoadId.Value));
-            Datasets.dsDispatch.LoadRow rowLoad = tblLoad[0];
+			// Get current load record
+			Datasets.dsDispatchTableAdapters.LoadTableAdapter adaptLoad = new Datasets.dsDispatchTableAdapters.LoadTableAdapter();
+			Datasets.dsDispatch.LoadDataTable tblLoad = adaptLoad.GetData(Convert.ToInt32(HiddenField_LoadId.Value));
+			Datasets.dsDispatch.LoadRow rowLoad = tblLoad[0];
 
 			//get selected status
 			int selectedStatusId = Convert.ToInt16(RadComboBox_Status.SelectedValue);
@@ -432,90 +420,81 @@ namespace RedbonePlatform.Pages.ContainerPages
 
 			rowLoad.MileageFromLEGOverrideInd = (RadCheckBox_MileageOverride.Checked == true);
 
-            if (rowLoad.MileageFromLEGOverrideInd)
-            {
-                rowLoad.Miles = Convert.ToInt32(RadNumericTextBox_LoadedMiles.Value);
-                rowLoad.DeadHead = Convert.ToInt32(RadNumericTextBox_EmptyMiles.Value);
-            }
+			if (rowLoad.MileageFromLEGOverrideInd)
+			{
+				rowLoad.Miles = Convert.ToInt32(RadNumericTextBox_LoadedMiles.Value);
+				rowLoad.DeadHead = Convert.ToInt32(RadNumericTextBox_EmptyMiles.Value);
+			}
 
-            //rowLoad.RatePerMile = Convert.ToDouble(HiddenField_RPM.Value);
-            
-            // save old ClientId to compare to determine if we should check for auto rating records in order to set the Auto rating indicator 
-            Int32? ClientIdOld = null;
+			//rowLoad.RatePerMile = Convert.ToDouble(HiddenField_RPM.Value);
 
-            if (!rowLoad.IsClientIdNull())
-                ClientIdOld = rowLoad.ClientId;
+			// save old ClientId to compare to determine if we should check for auto rating records in order to set the Auto rating indicator 
+			Int32? ClientIdOld = null;
 
-            if (RadComboBox_Customer.SelectedValue == "0" || RadComboBox_Customer.SelectedValue == "") rowLoad.SetClientIdNull(); else rowLoad.ClientId = Convert.ToInt32(RadComboBox_Customer.SelectedValue);
-            if (RadComboBox_LoadPlanner.SelectedValue == "0") rowLoad.SetLoadPlannerPersonIdNull(); else rowLoad.LoadPlannerPersonId = Convert.ToInt32(RadComboBox_LoadPlanner.SelectedValue);
-            if (RadComboBox_Dispatcher.SelectedValue == "0") rowLoad.SetDispatcherPersonIdNull(); else rowLoad.DispatcherPersonId = Convert.ToInt32(RadComboBox_Dispatcher.SelectedValue);
-            if (RadComboBox_Commodity.SelectedValue == "0") rowLoad.SetCommodityTypeIdNull(); else rowLoad.CommodityTypeId = Convert.ToInt16(RadComboBox_Commodity.SelectedValue);
-            if (RadComboBox_TrailerType.SelectedValue == "0") rowLoad.SetEquipmentTypeIdNull(); else rowLoad.EquipmentTypeId = Convert.ToInt16(RadComboBox_TrailerType.SelectedValue);
-            if (RadNumericTextBox_Temperature.Value != null) rowLoad.Temperature = Convert.ToDecimal(RadNumericTextBox_Temperature.Value); else rowLoad.SetTemperatureNull();
-            if (RadDropDownList_TempMode.SelectedValue == "0") rowLoad.SetTemperatureTypeIdNull(); else rowLoad.TemperatureTypeId = Convert.ToInt16(RadDropDownList_TempMode.SelectedValue);
-            if (RadComboBox_Driver1.SelectedValue == "0") rowLoad.SetDriver1_PersonIdNull(); else rowLoad.Driver1_PersonId = Convert.ToInt32(RadComboBox_Driver1.SelectedValue);
-            if (RadComboBox_Driver2.SelectedValue == "0") rowLoad.SetDriver2_PersonIdNull(); else rowLoad.Driver2_PersonId = Convert.ToInt32(RadComboBox_Driver2.SelectedValue);
-            if (RadComboBox_Trailer1.SelectedValue == "0") rowLoad.SetTrailer1_TrailerIdNull(); else rowLoad.Trailer1_TrailerId = Convert.ToInt16(RadComboBox_Trailer1.SelectedValue);
-            if (RadComboBox_Trailer2.SelectedValue == "0") rowLoad.SetTrailer2_TrailerIdNull(); else rowLoad.Trailer2_TrailerId = Convert.ToInt16(RadComboBox_Trailer2.SelectedValue);
-            if (RadComboBox_Truck1.SelectedValue == "0") rowLoad.SetTruckPunitIdNull(); else rowLoad.TruckPunitId = Convert.ToInt32(RadComboBox_Truck1.SelectedValue);
-            
-            // When in Billed status, don't do anything (was wiping out the content when disabled)
-            // if (rowLoad.LoadStatusTypeId != 8)
-            //if (RadEditor_LoadDetailNotes.Content.Trim() != "") rowLoad.Notes = RadEditor_LoadDetailNotes.Content; else rowLoad.Notes = "";
-            
-            if (RadTextBox_CustomerLoadNumber.Text.Trim() != "") rowLoad.CustomerLoadNumber = RadTextBox_CustomerLoadNumber.Text.Trim(); else rowLoad.SetCustomerLoadNumberNull();
-            if (RadNumericText_Weight.Value != null) rowLoad.Weight = Convert.ToDecimal(RadNumericText_Weight.Value); else rowLoad.SetWeightNull();
-            if (RadNumericTextBox_FlatRate.Value != null) rowLoad.Rate = Decimal.Round(Convert.ToDecimal(RadNumericTextBox_FlatRate.Value), 2); else rowLoad.SetRateNull();
+			if (!rowLoad.IsClientIdNull())
+				ClientIdOld = rowLoad.ClientId;
 
-            var ComWorkTypeItems = RadComboBox_HoldSub.CheckedItems;
+			if (RadComboBox_Customer.SelectedValue == "0" || RadComboBox_Customer.SelectedValue == "") rowLoad.SetClientIdNull(); else rowLoad.ClientId = Convert.ToInt32(RadComboBox_Customer.SelectedValue);
+			if (RadComboBox_LoadPlanner.SelectedValue == "0") rowLoad.SetLoadPlannerPersonIdNull(); else rowLoad.LoadPlannerPersonId = Convert.ToInt32(RadComboBox_LoadPlanner.SelectedValue);
+			if (RadComboBox_Dispatcher.SelectedValue == "0") rowLoad.SetDispatcherPersonIdNull(); else rowLoad.DispatcherPersonId = Convert.ToInt32(RadComboBox_Dispatcher.SelectedValue);
+			if (RadComboBox_Commodity.SelectedValue == "0") rowLoad.SetCommodityTypeIdNull(); else rowLoad.CommodityTypeId = Convert.ToInt16(RadComboBox_Commodity.SelectedValue);
+			if (RadComboBox_TrailerType.SelectedValue == "0") rowLoad.SetEquipmentTypeIdNull(); else rowLoad.EquipmentTypeId = Convert.ToInt16(RadComboBox_TrailerType.SelectedValue);
+			if (RadNumericTextBox_Temperature.Value != null) rowLoad.Temperature = Convert.ToDecimal(RadNumericTextBox_Temperature.Value); else rowLoad.SetTemperatureNull();
+			if (RadDropDownList_TempMode.SelectedValue == "0") rowLoad.SetTemperatureTypeIdNull(); else rowLoad.TemperatureTypeId = Convert.ToInt16(RadDropDownList_TempMode.SelectedValue);
+			if (RadComboBox_Driver1.SelectedValue == "0") rowLoad.SetDriver1_PersonIdNull(); else rowLoad.Driver1_PersonId = Convert.ToInt32(RadComboBox_Driver1.SelectedValue);
+			if (RadComboBox_Driver2.SelectedValue == "0") rowLoad.SetDriver2_PersonIdNull(); else rowLoad.Driver2_PersonId = Convert.ToInt32(RadComboBox_Driver2.SelectedValue);
+			if (RadComboBox_Trailer1.SelectedValue == "0") rowLoad.SetTrailer1_TrailerIdNull(); else rowLoad.Trailer1_TrailerId = Convert.ToInt16(RadComboBox_Trailer1.SelectedValue);
+			if (RadComboBox_Trailer2.SelectedValue == "0") rowLoad.SetTrailer2_TrailerIdNull(); else rowLoad.Trailer2_TrailerId = Convert.ToInt16(RadComboBox_Trailer2.SelectedValue);
+			if (RadComboBox_Truck1.SelectedValue == "0") rowLoad.SetTruckPunitIdNull(); else rowLoad.TruckPunitId = Convert.ToInt32(RadComboBox_Truck1.SelectedValue);
 
-            if (RadComboBox_Status.SelectedIndex != -1)
-            {
-                //int newId = Convert.ToInt16(RadComboBox_Status.SelectedValue);
-                
+			// When in Billed status, don't do anything (was wiping out the content when disabled)
+			// if (rowLoad.LoadStatusTypeId != 8)
+			//if (RadEditor_LoadDetailNotes.Content.Trim() != "") rowLoad.Notes = RadEditor_LoadDetailNotes.Content; else rowLoad.Notes = "";
+
+			if (RadTextBox_CustomerLoadNumber.Text.Trim() != "") rowLoad.CustomerLoadNumber = RadTextBox_CustomerLoadNumber.Text.Trim(); else rowLoad.SetCustomerLoadNumberNull();
+			if (RadNumericText_Weight.Value != null) rowLoad.Weight = Convert.ToDecimal(RadNumericText_Weight.Value); else rowLoad.SetWeightNull();
+			if (RadNumericTextBox_FlatRate.Value != null) rowLoad.Rate = Decimal.Round(Convert.ToDecimal(RadNumericTextBox_FlatRate.Value), 2); else rowLoad.SetRateNull();
+
+			var ComWorkTypeItems = RadComboBox_HoldSub.CheckedItems;
+
+			if (RadComboBox_Status.SelectedIndex != -1)
+			{
+				//int newId = Convert.ToInt16(RadComboBox_Status.SelectedValue);
+
 				if (selectedStatusId != rowLoad.LoadStatusTypeId)
-                {
-                    //check to see if there are any subitmes, if yes dont change status
-                    if(ComWorkTypeItems.Count() > 0)
-                    {
+				{
+					//check to see if there are any subitems, if yes dont change status
+					//status "Awaiting Cust Appr" (9) can have sub-statuses selected
+					if (ComWorkTypeItems.Count() > 0 && selectedStatusId != 9)
+					{
 						//prevent saving and show error
-						RadNotificationFail.Show("Status may not be changed until all substatuses have been removed"); 
+						RadNotificationFail.Show("Status may not be changed until all substatuses have been removed");
 						// e.Canceled = true;
 						// e.Item.Edit = true;
 						return;
-                    }
+					}
 
-                    statChanged = true;
+					statChanged = true;
 
-                    //if status changed to something other than hold billing then remove problem indicator
-                    short statType = Convert.ToInt16(RadComboBox_Status.SelectedValue);
-                    rowLoad.LoadStatusTypeId = statType;
+					//if status changed to something other than hold billing then remove problem indicator
+					//status "Awaiting Cust Appr" (9) can have sub-statuses selected
+					short statType = Convert.ToInt16(RadComboBox_Status.SelectedValue);
+					rowLoad.LoadStatusTypeId = statType;
 
-                    if (statType != 6)
-                    {
-                        rowLoad.ProblemInd = false;
-                    }
-                }
-            }
-            if (RadComboBox_DriverStatus.SelectedIndex != -1)
-            {
-                //int newId = Convert.ToInt16(RadComboBox_Status.SelectedValue);
+					if (statType != 6 && statType != 9)
+					{
+						rowLoad.ProblemInd = false;
+					}
+				}
+			}
 
-               
-                    
-                    //if status changed to something other than hold billing then remove problem indicator
-                    int statType = Convert.ToInt32(RadComboBox_DriverStatus.SelectedValue);
-                    rowLoad.LoadDriverStatusId = statType;
-                                  
-                
-            }
-            if (RadNumericTextBox_Pieces.Value != null) rowLoad.Pieces = Convert.ToInt32(RadNumericTextBox_Pieces.Value); else rowLoad.SetPiecesNull();
-            if (RadNumericTextBox_PaidEmpty.Value != null) rowLoad.PaidEmpty = Convert.ToInt32(RadNumericTextBox_PaidEmpty.Value); else rowLoad.SetPaidEmptyNull();
-            if (RadNumericTextBox_PaidLoaded.Value != null) rowLoad.PaidMiles = Convert.ToInt32(RadNumericTextBox_PaidLoaded.Value); else rowLoad.SetPaidMilesNull();
-            if (RadDatePicker_PaperworkReceivedDate.SelectedDate != null) rowLoad.PaperworkRecvdDate = Convert.ToDateTime(RadDatePicker_PaperworkReceivedDate.SelectedDate); else rowLoad.SetPaperworkRecvdDateNull();
-            
+			if (RadNumericTextBox_Pieces.Value != null) rowLoad.Pieces = Convert.ToInt32(RadNumericTextBox_Pieces.Value); else rowLoad.SetPiecesNull();
+			if (RadNumericTextBox_PaidEmpty.Value != null) rowLoad.PaidEmpty = Convert.ToInt32(RadNumericTextBox_PaidEmpty.Value); else rowLoad.SetPaidEmptyNull();
+			if (RadNumericTextBox_PaidLoaded.Value != null) rowLoad.PaidMiles = Convert.ToInt32(RadNumericTextBox_PaidLoaded.Value); else rowLoad.SetPaidMilesNull();
+			if (RadDatePicker_PaperworkReceivedDate.SelectedDate != null) rowLoad.PaperworkRecvdDate = Convert.ToDateTime(RadDatePicker_PaperworkReceivedDate.SelectedDate); else rowLoad.SetPaperworkRecvdDateNull();
+
 			rowLoad.AvailableBilling = (Convert.ToBoolean(RadCheckBox_BillingApproval.Checked));
-            
+
 			//save substatuses
 			// if (RadComboBox_HoldSub.SelectedIndex != -1) rowLoad.LoadStatusSubTypeId = Convert.ToInt16(RadComboBox_HoldSub.SelectedValue);
 			List<String> endlst = new List<string>();
@@ -523,78 +502,78 @@ namespace RedbonePlatform.Pages.ContainerPages
 
 			//var ComWorkTypeItems = RadComboBox_HoldSub.CheckedItems;
 
-            if (ComWorkTypeItems.Count != 0)
-            {
-                foreach (var item in ComWorkTypeItems)
-                {
-                    if (item.Checked)
-                    {
-                        lstComWorkType.Add(int.Parse(item.Value));
-                    }
-                }
+			if (ComWorkTypeItems.Count != 0)
+			{
+				foreach (var item in ComWorkTypeItems)
+				{
+					if (item.Checked)
+					{
+						lstComWorkType.Add(int.Parse(item.Value));
+					}
+				}
 
-                //create mapping objects in db
+				//create mapping objects in db
 
-                // addRow.Endorsements = string.Join(",", endlst);
-                int ldId = int.Parse(HiddenField_LoadId.Value);
-                RedbonePlatform.Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter comWorkTypeAdapt = new Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter();
-                Datasets.dsLoadStatus.LoadToLoadStatusSubTypeDataTable tblcomWorkType = comWorkTypeAdapt.GetDataByLoad(ldId);
-                // RedbonePlatform.Datasets.dsRecruiting.EmployerToCommercialWorkTypeRow comWorkTypeRow = tblcomWorkType.FirstOrDefault();
+				// addRow.Endorsements = string.Join(",", endlst);
+				int ldId = int.Parse(HiddenField_LoadId.Value);
+				RedbonePlatform.Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter comWorkTypeAdapt = new Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter();
+				Datasets.dsLoadStatus.LoadToLoadStatusSubTypeDataTable tblcomWorkType = comWorkTypeAdapt.GetDataByLoad(ldId);
+				// RedbonePlatform.Datasets.dsRecruiting.EmployerToCommercialWorkTypeRow comWorkTypeRow = tblcomWorkType.FirstOrDefault();
 
-                foreach (RedbonePlatform.Datasets.dsLoadStatus.LoadToLoadStatusSubTypeRow row in tblcomWorkType.Rows)
-                {
-                    row.Delete();
-                }
+				foreach (RedbonePlatform.Datasets.dsLoadStatus.LoadToLoadStatusSubTypeRow row in tblcomWorkType.Rows)
+				{
+					row.Delete();
+				}
 
-                if (!statChanged) 
-                { 
+				if (!statChanged)
+				{
 					foreach (var str in lstComWorkType)
 					{
 						RedbonePlatform.Datasets.dsLoadStatus.LoadToLoadStatusSubTypeRow comWorkTypeRow = tblcomWorkType.NewLoadToLoadStatusSubTypeRow();
 
-						if (ComWorkTypeItems.Where(x=>x.Value == str.ToString()).Select(x => x.Text).FirstOrDefault() == "Other")
+						if (ComWorkTypeItems.Where(x => x.Value == str.ToString()).Select(x => x.Text).FirstOrDefault() == "Other")
 						{
 							comWorkTypeRow.CustomVal = RadTextBox_SubOther.Text;
 						}
-            
+
 						comWorkTypeRow.LoadId = ldId;
 						comWorkTypeRow.LoadStatusSubTypeId = str;
 						tblcomWorkType.Rows.Add(comWorkTypeRow);
 					}
 
-                    if (ComWorkTypeItems.Any(x => x.Text.Contains("Other")))
-                    {
-                        RadTextBox_SubOther.Visible = true;
-                        //  if (RadTextBox_SubOther.Text.Trim() != "") rowLoad.CustomerLoadNumber = RadTextBox_CustomerLoadNumber.Text.Trim(); else rowLoad.SetCustomerLoadNumberNull();
-                    }
-                    else
-                    {
-                        RadTextBox_SubOther.Text = "";
-                        RadTextBox_SubOther.Visible = false;
-                    }
-                }
-                else
-                {
-                    RadTextBox_SubOther.Visible = false;
-                }
+					if (ComWorkTypeItems.Any(x => x.Text.Contains("Other")))
+					{
+						RadTextBox_SubOther.Visible = true;
+						//  if (RadTextBox_SubOther.Text.Trim() != "") rowLoad.CustomerLoadNumber = RadTextBox_CustomerLoadNumber.Text.Trim(); else rowLoad.SetCustomerLoadNumberNull();
+					}
+					else
+					{
+						RadTextBox_SubOther.Text = "";
+						RadTextBox_SubOther.Visible = false;
+					}
+				}
+				else
+				{
+					RadTextBox_SubOther.Visible = false;
+				}
 
-                comWorkTypeAdapt.Update(tblcomWorkType);
-            }
-            else
-            {
-                // there are no checkboxes so delete all linked subsatueses
-                int ldId = int.Parse(HiddenField_LoadId.Value);
-                RedbonePlatform.Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter comWorkTypeAdapt = new Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter();
-                Datasets.dsLoadStatus.LoadToLoadStatusSubTypeDataTable tblcomWorkType = comWorkTypeAdapt.GetDataByLoad(ldId);
-                // RedbonePlatform.Datasets.dsRecruiting.EmployerToCommercialWorkTypeRow comWorkTypeRow = tblcomWorkType.FirstOrDefault();
+				comWorkTypeAdapt.Update(tblcomWorkType);
+			}
+			else
+			{
+				// there are no checkboxes so delete all linked subsatueses
+				int ldId = int.Parse(HiddenField_LoadId.Value);
+				RedbonePlatform.Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter comWorkTypeAdapt = new Datasets.dsLoadStatusTableAdapters.LoadToLoadStatusSubTypeTableAdapter();
+				Datasets.dsLoadStatus.LoadToLoadStatusSubTypeDataTable tblcomWorkType = comWorkTypeAdapt.GetDataByLoad(ldId);
+				// RedbonePlatform.Datasets.dsRecruiting.EmployerToCommercialWorkTypeRow comWorkTypeRow = tblcomWorkType.FirstOrDefault();
 
-                foreach (RedbonePlatform.Datasets.dsLoadStatus.LoadToLoadStatusSubTypeRow row in tblcomWorkType.Rows)
-                {
-                    row.Delete();
-                }
+				foreach (RedbonePlatform.Datasets.dsLoadStatus.LoadToLoadStatusSubTypeRow row in tblcomWorkType.Rows)
+				{
+					row.Delete();
+				}
 
-                comWorkTypeAdapt.Update(tblcomWorkType);
-            }
+				comWorkTypeAdapt.Update(tblcomWorkType);
+			}
 
 			// set based on client having auto rating records (acc or detail) if previously not set (should still allow user to manage once a Client is assigned)
 			if (!rowLoad.IsClientIdNull())
@@ -615,38 +594,38 @@ namespace RedbonePlatform.Pages.ContainerPages
 				rowLoad.AutoRatingInd = false;
 			}
 
-            // Ensure unique Trip # is entered.
-            //if (RadNumericTextBox_TripNumber.Value != null)
-            //{
-            //    Boolean TripNumberInUse = false;
-            //    Int32 TripNumber = Convert.ToInt32(RadNumericTextBox_TripNumber.Value);
-            //    // Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            //    qry.sp_LoadTripNumberCheckForInUse(TripNumber, Convert.ToInt32(HiddenField_LoadId.Value), out TripNumberInUse);
-            //    if (TripNumberInUse)
-            //    {
-            //        RadWindowManager1.RadAlert("Trip # " + TripNumber.ToString("N0") + " is already in use.", 280, 150, "Trip Number In Use!", "");
-            //    }
-            //    else
-            //    {
-            //        rowLoad.TripNumber = Convert.ToInt32(RadNumericTextBox_TripNumber.Value);
-            //    }
-            //}
-            //else
-            //{
-            //    rowLoad.SetTripNumberNull();
-            //}
+			// Ensure unique Trip # is entered.
+			//if (RadNumericTextBox_TripNumber.Value != null)
+			//{
+			//    Boolean TripNumberInUse = false;
+			//    Int32 TripNumber = Convert.ToInt32(RadNumericTextBox_TripNumber.Value);
+			//    // Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			//    qry.sp_LoadTripNumberCheckForInUse(TripNumber, Convert.ToInt32(HiddenField_LoadId.Value), out TripNumberInUse);
+			//    if (TripNumberInUse)
+			//    {
+			//        RadWindowManager1.RadAlert("Trip # " + TripNumber.ToString("N0") + " is already in use.", 280, 150, "Trip Number In Use!", "");
+			//    }
+			//    else
+			//    {
+			//        rowLoad.TripNumber = Convert.ToInt32(RadNumericTextBox_TripNumber.Value);
+			//    }
+			//}
+			//else
+			//{
+			//    rowLoad.SetTripNumberNull();
+			//}
 
-            // if (RadNumericTextBox_TripNumber.Value != null) rowLoad.TripNumber = Convert.ToInt32(RadNumericTextBox_TripNumber.Value); else rowLoad.SetTripNumberNull();
+			// if (RadNumericTextBox_TripNumber.Value != null) rowLoad.TripNumber = Convert.ToInt32(RadNumericTextBox_TripNumber.Value); else rowLoad.SetTripNumberNull();
 
-            rowLoad.SendOriginalsInd = Convert.ToBoolean(RadCheckBox_SendOriginals.Checked);
-            rowLoad.AllowPerBOLInd = Convert.ToBoolean(RadCheckBox_AllowPerBOL.Checked);
+			rowLoad.SendOriginalsInd = Convert.ToBoolean(RadCheckBox_SendOriginals.Checked);
+			rowLoad.AllowPerBOLInd = Convert.ToBoolean(RadCheckBox_AllowPerBOL.Checked);
 
-            rowLoad.LastUpdtDt = DateTime.Now;
-            rowLoad.LastUpdtPersonId = auth.PersonId;
-            rowLoad.LockedPersonId = auth.PersonId;
+			rowLoad.LastUpdtDt = DateTime.Now;
+			rowLoad.LastUpdtPersonId = auth.PersonId;
+			rowLoad.LockedPersonId = auth.PersonId;
 
-            adaptLoad.Update(rowLoad);
-			
+			adaptLoad.Update(rowLoad);
+
 			//if (statChanged)
 			//{
 			//	//status changed so send EDI message to client based on current status type
@@ -654,219 +633,219 @@ namespace RedbonePlatform.Pages.ContainerPages
 			//	EDIService.SendStatusChangeToClient("L", rowLoad.LoadId, 0, customerLoadNumber, rowLoad.ClientId, (Int16)selectedStatusId);
 			//}
 			// refresh the page as additional auto rating and calculations may have occurred via sp_LoadCalculate
-			
+
 			LoadPopulate();
-        }
+		}
 
 
 		private void DriverExpirationLogic(Int32 PersonId, RadComboBox radComboBox, RadToolTip radToolTip, Boolean showPopupAlertAndReassignToDefaultIfNeeded)
-        {
-            String DriverText = radComboBox.ID.Contains("Driver1") ? "Driver 1" : "Driver 2";
-            
-            if (PersonId != 0 && radComboBox.SelectedIndex != 0)
-            {
-                Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
-                String MsgConsolidated = "";
-                Boolean CloseToExpiring = false;
-                Boolean AlreadyExpired = false;
+		{
+			String DriverText = radComboBox.ID.Contains("Driver1") ? "Driver 1" : "Driver 2";
 
-                qry.sp_DriverExpirations(PersonId, out MsgConsolidated, out CloseToExpiring, out AlreadyExpired);
-             
-                if (MsgConsolidated != "")
-                {
-                    radComboBox.BackColor = (AlreadyExpired ? Color.Red : Color.Yellow);
-                    radComboBox.ForeColor = (AlreadyExpired ? Color.White : Color.Black);
-                    // RadWindowManager1.RadAlert(MsgConsolidated, 280, 150, "Driver Issues!", "");
- 
-                    radToolTip.Text = DriverText + "<br />" + MsgConsolidated;
+			if (PersonId != 0 && radComboBox.SelectedIndex != 0)
+			{
+				Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
+				String MsgConsolidated = "";
+				Boolean CloseToExpiring = false;
+				Boolean AlreadyExpired = false;
 
-                    if (showPopupAlertAndReassignToDefaultIfNeeded)
-                        RadWindowManager1.RadAlert(MsgConsolidated, 400, 150, DriverText, "");
-                }
-                else
-                {
-                    radComboBox.BackColor = Color.Empty;
-                    radComboBox.ForeColor = Color.Empty;
+				qry.sp_DriverExpirations(PersonId, out MsgConsolidated, out CloseToExpiring, out AlreadyExpired);
 
-                    radToolTip.Text = DriverText +  " (OTR, Lease Operator, Owner Operator)";
-                }
-            }
-            else
-            {
-                radComboBox.BackColor = Color.Empty;
-                radComboBox.ForeColor = Color.Empty;
+				if (MsgConsolidated != "")
+				{
+					radComboBox.BackColor = (AlreadyExpired ? Color.Red : Color.Yellow);
+					radComboBox.ForeColor = (AlreadyExpired ? Color.White : Color.Black);
+					// RadWindowManager1.RadAlert(MsgConsolidated, 280, 150, "Driver Issues!", "");
 
-                radToolTip.Text = DriverText + " (OTR, Lease Operator, Owner Operator)";
-            }
-        }
+					radToolTip.Text = DriverText + "<br />" + MsgConsolidated;
 
-        private void TrailerExpirationLogic(Int16 TrailerId, RadComboBox radComboBox, RadToolTip radToolTip, Boolean showPopupAlertAndReassignToDefaultIfNeeded)
-        {
-            String TrailerText = radComboBox.ID.Contains("Trailer1") ? "Trailer 1" : "Trailer 2";
+					if (showPopupAlertAndReassignToDefaultIfNeeded)
+						RadWindowManager1.RadAlert(MsgConsolidated, 400, 150, DriverText, "");
+				}
+				else
+				{
+					radComboBox.BackColor = Color.Empty;
+					radComboBox.ForeColor = Color.Empty;
 
-            if (TrailerId != 0 && radComboBox.SelectedIndex != 0)
-            {
-                String MsgConsolidated = "";
-                Boolean CloseToExpiring = false;
-                Boolean AlreadyExpired = false;
-                Boolean TrailerCantBeAssigned = false;
+					radToolTip.Text = DriverText + " (OTR, Lease Operator, Owner Operator)";
+				}
+			}
+			else
+			{
+				radComboBox.BackColor = Color.Empty;
+				radComboBox.ForeColor = Color.Empty;
 
-                Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
-                qry.sp_TrailerExpirations(TrailerId, out MsgConsolidated, out CloseToExpiring, out AlreadyExpired, out TrailerCantBeAssigned);
+				radToolTip.Text = DriverText + " (OTR, Lease Operator, Owner Operator)";
+			}
+		}
 
-                if (MsgConsolidated != "")
-                {
-                    radComboBox.BackColor = (AlreadyExpired ? Color.Red : Color.Yellow);
-                    radComboBox.ForeColor = (AlreadyExpired ? Color.White : Color.Black);
-                    radToolTip.Text = TrailerText + "<br />" + MsgConsolidated;
+		private void TrailerExpirationLogic(Int16 TrailerId, RadComboBox radComboBox, RadToolTip radToolTip, Boolean showPopupAlertAndReassignToDefaultIfNeeded)
+		{
+			String TrailerText = radComboBox.ID.Contains("Trailer1") ? "Trailer 1" : "Trailer 2";
 
-                    if (showPopupAlertAndReassignToDefaultIfNeeded)
-                    {
-                        if (TrailerCantBeAssigned)
-                            radComboBox.SelectedIndex = 0;
+			if (TrailerId != 0 && radComboBox.SelectedIndex != 0)
+			{
+				String MsgConsolidated = "";
+				Boolean CloseToExpiring = false;
+				Boolean AlreadyExpired = false;
+				Boolean TrailerCantBeAssigned = false;
 
-                        RadWindowManager1.RadAlert(MsgConsolidated, 400, 150, TrailerText, "");
-                    }
-                }
-                else
-                {
-                    radComboBox.BackColor = Color.Empty;
-                    radComboBox.ForeColor = Color.Empty;
+				Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
+				qry.sp_TrailerExpirations(TrailerId, out MsgConsolidated, out CloseToExpiring, out AlreadyExpired, out TrailerCantBeAssigned);
 
-                    radToolTip.Text = TrailerText;
-                }
-            }
-            else
-            {
-                radComboBox.BackColor = Color.Empty;
-                radComboBox.ForeColor = Color.Empty;
+				if (MsgConsolidated != "")
+				{
+					radComboBox.BackColor = (AlreadyExpired ? Color.Red : Color.Yellow);
+					radComboBox.ForeColor = (AlreadyExpired ? Color.White : Color.Black);
+					radToolTip.Text = TrailerText + "<br />" + MsgConsolidated;
 
-                radToolTip.Text = TrailerText;
-            }
-        }
+					if (showPopupAlertAndReassignToDefaultIfNeeded)
+					{
+						if (TrailerCantBeAssigned)
+							radComboBox.SelectedIndex = 0;
 
-        private void TruckExpirationLogic(Int32 PunitId, RadComboBox radComboBox, RadToolTip radToolTip, Boolean showPopupAlertAndReassignToDefaultIfNeeded)
-        {
-            const String TruckText = "Truck";
-            String MsgConsolidated2 = "";
+						RadWindowManager1.RadAlert(MsgConsolidated, 400, 150, TrailerText, "");
+					}
+				}
+				else
+				{
+					radComboBox.BackColor = Color.Empty;
+					radComboBox.ForeColor = Color.Empty;
 
-            if (PunitId != 0)
-            {
-                String MsgConsolidated = "";
-                Boolean CloseToExpiring = false;
-                Boolean AlreadyExpired = false;
-                Boolean TruckCantBeAssigned = false;
+					radToolTip.Text = TrailerText;
+				}
+			}
+			else
+			{
+				radComboBox.BackColor = Color.Empty;
+				radComboBox.ForeColor = Color.Empty;
 
-                Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
-                qry.sp_TruckExpirations(PunitId, out MsgConsolidated, out CloseToExpiring, out AlreadyExpired, out TruckCantBeAssigned, Convert.ToInt32(HiddenField_LoadId.Value), null);
+				radToolTip.Text = TrailerText;
+			}
+		}
 
-                if (MsgConsolidated != "")
-                {
-                    radComboBox.BackColor = (AlreadyExpired ? Color.Red : Color.Yellow);
-                    radComboBox.ForeColor = (AlreadyExpired ? Color.White : Color.Black);
-                    radToolTip.Text = MsgConsolidated;
-                    MsgConsolidated2 = MsgConsolidated;
+		private void TruckExpirationLogic(Int32 PunitId, RadComboBox radComboBox, RadToolTip radToolTip, Boolean showPopupAlertAndReassignToDefaultIfNeeded)
+		{
+			const String TruckText = "Truck";
+			String MsgConsolidated2 = "";
 
-                    if (showPopupAlertAndReassignToDefaultIfNeeded)
-                    {
-                        if (TruckCantBeAssigned)
-                            radComboBox.SelectedIndex = 0;
+			if (PunitId != 0)
+			{
+				String MsgConsolidated = "";
+				Boolean CloseToExpiring = false;
+				Boolean AlreadyExpired = false;
+				Boolean TruckCantBeAssigned = false;
 
-                        RadWindowManager1.RadAlert(MsgConsolidated, 400, 150, "Truck #1", "");
-                    }
-                }
-                else
-                {
-                    radComboBox.BackColor = Color.Empty;
-                    radComboBox.ForeColor = Color.Empty;
+				Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
+				qry.sp_TruckExpirations(PunitId, out MsgConsolidated, out CloseToExpiring, out AlreadyExpired, out TruckCantBeAssigned, Convert.ToInt32(HiddenField_LoadId.Value), null);
 
-                    radToolTip.Text = TruckText;
-                }
-            }
-            else
-            {
-                radComboBox.BackColor = Color.Empty;
-                radComboBox.ForeColor = Color.Empty;
+				if (MsgConsolidated != "")
+				{
+					radComboBox.BackColor = (AlreadyExpired ? Color.Red : Color.Yellow);
+					radComboBox.ForeColor = (AlreadyExpired ? Color.White : Color.Black);
+					radToolTip.Text = MsgConsolidated;
+					MsgConsolidated2 = MsgConsolidated;
 
-                radToolTip.Text = TruckText;
-            }
-        }
+					if (showPopupAlertAndReassignToDefaultIfNeeded)
+					{
+						if (TruckCantBeAssigned)
+							radComboBox.SelectedIndex = 0;
 
+						RadWindowManager1.RadAlert(MsgConsolidated, 400, 150, "Truck #1", "");
+					}
+				}
+				else
+				{
+					radComboBox.BackColor = Color.Empty;
+					radComboBox.ForeColor = Color.Empty;
 
-        private void ApplyUserSettings()
-        {
-            // Set RibbonBar Skin 
-            if (Session["GlobalSkin"] is null) Session["GlobalSkin"] = "Black";
-            RadSkinManager1.Skin = Session["GlobalSkin"].ToString();
+					radToolTip.Text = TruckText;
+				}
+			}
+			else
+			{
+				radComboBox.BackColor = Color.Empty;
+				radComboBox.ForeColor = Color.Empty;
 
-            // Adjust Redbone Trucking image background if not a black skin
-            System.Drawing.Color color;
-            switch (Session["GlobalSkin"])
-            {
-                case "Black":
-                    Image_Logo.BackColor = default(Color);
-                    break;
-                case "WebBlue":
-                    color = System.Drawing.ColorTranslator.FromHtml("#728A9F");
-                    Image_Logo.BackColor = color;
-                    break;
-                case "Metro":
-                    color = System.Drawing.ColorTranslator.FromHtml("#8FC8E9");
-                    Image_Logo.BackColor = color;
-                    break;
-                default:
-                    break;
-            }
-
-        }
+				radToolTip.Text = TruckText;
+			}
+		}
 
 
-        protected void RadComboBox_Customer_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            Session["RadButton_Pick_DontClick"] = true;
-            // Auto Save (if not coming from LoadPopulate()
+		private void ApplyUserSettings()
+		{
+			// Set RibbonBar Skin 
+			if (Session["GlobalSkin"] is null) Session["GlobalSkin"] = "Black";
+			RadSkinManager1.Skin = Session["GlobalSkin"].ToString();
 
-            // Validate Customer
-            ValidateCustomerStatus(true);
+			// Adjust Redbone Trucking image background if not a black skin
+			System.Drawing.Color color;
+			switch (Session["GlobalSkin"])
+			{
+				case "Black":
+					Image_Logo.BackColor = default(Color);
+					break;
+				case "WebBlue":
+					color = System.Drawing.ColorTranslator.FromHtml("#728A9F");
+					Image_Logo.BackColor = color;
+					break;
+				case "Metro":
+					color = System.Drawing.ColorTranslator.FromHtml("#8FC8E9");
+					Image_Logo.BackColor = color;
+					break;
+				default:
+					break;
+			}
 
-            SaveLoad();
-        }
+		}
 
-        private void ValidateCustomerStatus(Boolean ShowPopup)
-        {
-            String MsgConsolidated = "";
-            RadComboBox cbo = (RadComboBox_Customer);
-            Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            qry.sp_CustomerStatusValidation(Convert.ToInt32(cbo.SelectedValue), out MsgConsolidated);
 
-            if (MsgConsolidated != "")
-            {
-                cbo.BackColor = Color.Red;
-                cbo.ForeColor = Color.White;
-                RadToolTip_CustomerMain.Text = MsgConsolidated;
-                cbo.Text = "";
-                cbo.SelectedValue = "";
+		protected void RadComboBox_Customer_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+		{
+			Session["RadButton_Pick_DontClick"] = true;
+			// Auto Save (if not coming from LoadPopulate()
 
-                if (ShowPopup)
-                    RadWindowManager1.RadAlert(MsgConsolidated, 400, 150, MsgConsolidated, "");
-            }
-            else
-            {
-                cbo.BackColor = Color.Empty;
-                cbo.ForeColor = Color.Empty;
+			// Validate Customer
+			ValidateCustomerStatus(true);
 
-                RadToolTip_CustomerMain.Text = "";
-            }
-        }
+			SaveLoad();
+		}
 
-        private void PopulateCustomerDetails(int ClientId)
-        {
-            // Lookup Customer Address to populate (if one is selected)
-            if (ClientId > 0)
-            {
-                // Set Customer Text in dropdown:
-                Datasets.dsDispatchTableAdapters.CustomerInfoTableAdapter adapt1 = new Datasets.dsDispatchTableAdapters.CustomerInfoTableAdapter();
-                Datasets.dsDispatch.CustomerInfoDataTable tblCustomerName = adapt1.GetDataBy(ClientId);
+		private void ValidateCustomerStatus(Boolean ShowPopup)
+		{
+			String MsgConsolidated = "";
+			RadComboBox cbo = (RadComboBox_Customer);
+			Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			qry.sp_CustomerStatusValidation(Convert.ToInt32(cbo.SelectedValue), out MsgConsolidated);
+
+			if (MsgConsolidated != "")
+			{
+				cbo.BackColor = Color.Red;
+				cbo.ForeColor = Color.White;
+				RadToolTip_CustomerMain.Text = MsgConsolidated;
+				cbo.Text = "";
+				cbo.SelectedValue = "";
+
+				if (ShowPopup)
+					RadWindowManager1.RadAlert(MsgConsolidated, 400, 150, MsgConsolidated, "");
+			}
+			else
+			{
+				cbo.BackColor = Color.Empty;
+				cbo.ForeColor = Color.Empty;
+
+				RadToolTip_CustomerMain.Text = "";
+			}
+		}
+
+		private void PopulateCustomerDetails(int ClientId)
+		{
+			// Lookup Customer Address to populate (if one is selected)
+			if (ClientId > 0)
+			{
+				// Set Customer Text in dropdown:
+				Datasets.dsDispatchTableAdapters.CustomerInfoTableAdapter adapt1 = new Datasets.dsDispatchTableAdapters.CustomerInfoTableAdapter();
+				Datasets.dsDispatch.CustomerInfoDataTable tblCustomerName = adapt1.GetDataBy(ClientId);
 
 				if (tblCustomerName.Rows.Count > 0)
 				{
@@ -879,119 +858,119 @@ namespace RedbonePlatform.Pages.ContainerPages
 				}
 
 				Datasets.dsDispatchTableAdapters.ClientAddressTableAdapter adapt = new Datasets.dsDispatchTableAdapters.ClientAddressTableAdapter();
-                Datasets.dsDispatch.ClientAddressDataTable tbl = adapt.GetData(ClientId);
+				Datasets.dsDispatch.ClientAddressDataTable tbl = adapt.GetData(ClientId);
 
-                RadComboBox cbo = RadComboBox_Customer;
+				RadComboBox cbo = RadComboBox_Customer;
 
-                // if there is an address, populate the Client Address under the Client
-                if (tbl.Rows.Count > 0)
-                {
-                    string Address = "";
-                    Datasets.dsDispatch.ClientAddressRow row = tbl[0];
-                    Address += row.IsAddressLine1Null() ? "" : row.AddressLine1.Trim() + "<br />";
-                    Address += row.IsAddressLine2Null() ? "" : row.AddressLine2.Trim() + "<br />";
-                    Address += row.IsCityNull() ? "" : row.City.Trim();
-                    Address += row.IsStateNull() ? "" : ", " + row.State.Trim();
-                    Address += row.IsZipCodeNull() ? "" : " " + row.ZipCode.Trim();
+				// if there is an address, populate the Client Address under the Client
+				if (tbl.Rows.Count > 0)
+				{
+					string Address = "";
+					Datasets.dsDispatch.ClientAddressRow row = tbl[0];
+					Address += row.IsAddressLine1Null() ? "" : row.AddressLine1.Trim() + "<br />";
+					Address += row.IsAddressLine2Null() ? "" : row.AddressLine2.Trim() + "<br />";
+					Address += row.IsCityNull() ? "" : row.City.Trim();
+					Address += row.IsStateNull() ? "" : ", " + row.State.Trim();
+					Address += row.IsZipCodeNull() ? "" : " " + row.ZipCode.Trim();
 
-                    // Lookup the first two contacts and their phone numbers. Put link to open each contact in People Management
-                    Datasets.dsDispatchTableAdapters.ContactAndPhoneNoTableAdapter adapt_Contact = new Datasets.dsDispatchTableAdapters.ContactAndPhoneNoTableAdapter();
-                    Datasets.dsDispatch.ContactAndPhoneNoDataTable tblContact = adapt_Contact.GetData(row.ClientId);
+					// Lookup the first two contacts and their phone numbers. Put link to open each contact in People Management
+					Datasets.dsDispatchTableAdapters.ContactAndPhoneNoTableAdapter adapt_Contact = new Datasets.dsDispatchTableAdapters.ContactAndPhoneNoTableAdapter();
+					Datasets.dsDispatch.ContactAndPhoneNoDataTable tblContact = adapt_Contact.GetData(row.ClientId);
 
-                    if (tblContact.Rows.Count > 0)
-                    {
-                        Int16 iCounter = 1;
-                        Address += "<br />";
-                        foreach (Datasets.dsDispatch.ContactAndPhoneNoRow rowContact in tblContact)
-                        {
-                            if (iCounter == 3) break; // display top 2
+					if (tblContact.Rows.Count > 0)
+					{
+						Int16 iCounter = 1;
+						Address += "<br />";
+						foreach (Datasets.dsDispatch.ContactAndPhoneNoRow rowContact in tblContact)
+						{
+							if (iCounter == 3) break; // display top 2
 
-                            Address += "<br />" + rowContact.ContactName + ' ' + rowContact.PhoneNumber;
-                            iCounter++;
-                        }
-                    }
-                    Label_CustomerAddressContact.Text = Address;
+							Address += "<br />" + rowContact.ContactName + ' ' + rowContact.PhoneNumber;
+							iCounter++;
+						}
+					}
+					Label_CustomerAddressContact.Text = Address;
 
-                }
-                else
-                {
-                    Label_CustomerAddressContact.Text = "No Address On File for this Customer!";
-                }
+				}
+				else
+				{
+					Label_CustomerAddressContact.Text = "No Address On File for this Customer!";
+				}
 
-                // if there is a change in Customer, populate Client Profile Notes into the Load Notes field, overwriting anything in there.
-                // DOING THIS IN THE sp_Load_Udate
-                //if (HiddenField_ClientId.Value == "0")
-                //{
-                //    RadEditor_LoadDetailNotes.Content = "";
-                //}
-                //else if (HiddenField_ClientId.Value != ClientId.ToString())
-                //{
-                //    RadEditor_LoadDetailNotes.Content = tblCustomerName[0].Notes;
+				// if there is a change in Customer, populate Client Profile Notes into the Load Notes field, overwriting anything in there.
+				// DOING THIS IN THE sp_Load_Udate
+				//if (HiddenField_ClientId.Value == "0")
+				//{
+				//    RadEditor_LoadDetailNotes.Content = "";
+				//}
+				//else if (HiddenField_ClientId.Value != ClientId.ToString())
+				//{
+				//    RadEditor_LoadDetailNotes.Content = tblCustomerName[0].Notes;
 
-                //}
-            }
-            else
-            {
-                RadComboBox_Customer.SelectedValue = "0";
-                Label_CustomerAddressContact.Text = "";
-                
-                // clear out any Notes from the Notes field.
-                // DOING THIS IN THE sp_Load_Udate
-                // RadEditor_LoadDetailNotes.Content = "";
+				//}
+			}
+			else
+			{
+				RadComboBox_Customer.SelectedValue = "0";
+				Label_CustomerAddressContact.Text = "";
 
-            }
+				// clear out any Notes from the Notes field.
+				// DOING THIS IN THE sp_Load_Udate
+				// RadEditor_LoadDetailNotes.Content = "";
 
-            // Save ClientId to hidden field to reference in order to determine if a new Client is being selected 
-            //  in order to either populate Client Profile Notes into the Load's Notes field. We only want to change this if a Client has changed.
-            HiddenField_ClientId.Value = ClientId.ToString();
+			}
 
-        }
+			// Save ClientId to hidden field to reference in order to determine if a new Client is being selected 
+			//  in order to either populate Client Profile Notes into the Load's Notes field. We only want to change this if a Client has changed.
+			HiddenField_ClientId.Value = ClientId.ToString();
 
-        private void LoadStop(Datasets.dsDispatch.LoadStopRow rowLoadStop)
-        {
-            RadDock dock = CreateRadDock(rowLoadStop);
-            LoadStopWidget(dock, rowLoadStop);
-            RadDockLayout1.Controls.Add(dock);
-            dock.Dock(RadDockZone1);
+		}
 
-            // Refresh the DockLayout clientside to get the stop's user control's events to register.
-            // 02/04/19 had to wrap this in a $(document).ready block due to RefreshDockLayout being undefined when internet connection is slow with multiple stops.
-            RadAjaxManager1.ResponseScripts.Add("$telerik.$(document).ready(function(){RefreshDockLayout();});");
-        }
+		private void LoadStop(Datasets.dsDispatch.LoadStopRow rowLoadStop)
+		{
+			RadDock dock = CreateRadDock(rowLoadStop);
+			LoadStopWidget(dock, rowLoadStop);
+			RadDockLayout1.Controls.Add(dock);
+			dock.Dock(RadDockZone1);
 
-        private RadDock CreateRadDock(Datasets.dsDispatch.LoadStopRow rowLoadStop)
-        {
-            Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            string StopNm = qry.LoadStopType_Get(rowLoadStop.LoadStopId);
+			// Refresh the DockLayout clientside to get the stop's user control's events to register.
+			// 02/04/19 had to wrap this in a $(document).ready block due to RefreshDockLayout being undefined when internet connection is slow with multiple stops.
+			RadAjaxManager1.ResponseScripts.Add("$telerik.$(document).ready(function(){RefreshDockLayout();});");
+		}
 
-            int docksCount = CurrentDockStates.Count;
-            RadDock dock = new RadDock
-            {
-                ID = string.Format("RadDock_{0}", docksCount),
-                Title = StopNm + ' ' + rowLoadStop.StopTypeNumber.ToString(),
-                Tag = rowLoadStop.LoadStopId.ToString(),
-                UniqueName = rowLoadStop.LoadStopId.ToString(), // Guid.NewGuid().ToString(),
-                DockMode = DockMode.Docked,
-                AutoPostBack = true,
-                CommandsAutoPostBack = true,
-                DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.ExpandCollapse | Telerik.Web.UI.Dock.DefaultCommands.Close // temporarily just providing the expand / collapse 
-                //OnClientCommand = "CloseDock"                
-            };
+		private RadDock CreateRadDock(Datasets.dsDispatch.LoadStopRow rowLoadStop)
+		{
+			Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			string StopNm = qry.LoadStopType_Get(rowLoadStop.LoadStopId);
 
-            return dock;
-        }
+			int docksCount = CurrentDockStates.Count;
+			RadDock dock = new RadDock
+			{
+				ID = string.Format("RadDock_{0}", docksCount),
+				Title = StopNm + ' ' + rowLoadStop.StopTypeNumber.ToString(),
+				Tag = rowLoadStop.LoadStopId.ToString(),
+				UniqueName = rowLoadStop.LoadStopId.ToString(), // Guid.NewGuid().ToString(),
+				DockMode = DockMode.Docked,
+				AutoPostBack = true,
+				CommandsAutoPostBack = true,
+				DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.ExpandCollapse | Telerik.Web.UI.Dock.DefaultCommands.Close // temporarily just providing the expand / collapse 
+																																 //OnClientCommand = "CloseDock"                
+			};
 
-        private void LoadStopWidget(RadDock dock, Datasets.dsDispatch.LoadStopRow rowLoadStop)
-        {
-            Control widget = null;
-            switch (rowLoadStop.LoadStopTypeId)
-            {
-                case 1:
-                    widget = LoadControl(@"~/UserControls/Pick.ascx");
-                    widget.ID = String.Format("Pick{0}", CurrentDockStates.Count);
-                    UserControls.Pick pck = widget as UserControls.Pick;
-                    // this loads it as well. This property will populate the Stop
-                    pck.LoadStopId = rowLoadStop.LoadStopId;
+			return dock;
+		}
+
+		private void LoadStopWidget(RadDock dock, Datasets.dsDispatch.LoadStopRow rowLoadStop)
+		{
+			Control widget = null;
+			switch (rowLoadStop.LoadStopTypeId)
+			{
+				case 1:
+					widget = LoadControl(@"~/UserControls/Pick.ascx");
+					widget.ID = String.Format("Pick{0}", CurrentDockStates.Count);
+					UserControls.Pick pck = widget as UserControls.Pick;
+					// this loads it as well. This property will populate the Stop
+					pck.LoadStopId = rowLoadStop.LoadStopId;
 
 					// Nice way to allow the user control to raise an event to this.
 					// pck.LoadCalcAndUiRefresh += new EventHandler(this.RadButton_RefreshACCTotal_Click);
@@ -999,110 +978,110 @@ namespace RedbonePlatform.Pages.ContainerPages
 					//event for pick user control to send status updates
 					pck.SendStatusEvent += new UserControls.Pick.SendStatusDelegate(this.SendStatusChangeToClient);
 					break;
-                case 3:
-                    widget = LoadControl(@"~/UserControls/Drop.ascx");
-                    widget.ID = String.Format("Drop{0}", CurrentDockStates.Count);
-                    UserControls.Drop drp = widget as UserControls.Drop;
-                    drp.LoadStopId = rowLoadStop.LoadStopId;
+				case 3:
+					widget = LoadControl(@"~/UserControls/Drop.ascx");
+					widget.ID = String.Format("Drop{0}", CurrentDockStates.Count);
+					UserControls.Drop drp = widget as UserControls.Drop;
+					drp.LoadStopId = rowLoadStop.LoadStopId;
 
 					//event for drop user control to send status updates
 					drp.SendStatusEvent += new UserControls.Drop.SendStatusDelegate(this.SendStatusChangeToClient);
 					break;
-                case 2:
-                    widget = LoadControl(@"~/UserControls/LEG.ascx");
-                    widget.ID = String.Format("LEG{0}", CurrentDockStates.Count);
-                    UserControls.LEG leg = widget as UserControls.LEG;
-                    leg.LoadStopId = rowLoadStop.LoadStopId;
+				case 2:
+					widget = LoadControl(@"~/UserControls/LEG.ascx");
+					widget.ID = String.Format("LEG{0}", CurrentDockStates.Count);
+					UserControls.LEG leg = widget as UserControls.LEG;
+					leg.LoadStopId = rowLoadStop.LoadStopId;
 					break;
-                case 4:
-                    widget = LoadControl(@"~/UserControls/FuelStop.ascx");
-                    widget.ID = String.Format("Fuel{0}", CurrentDockStates.Count);
-                    UserControls.FuelStop fuel = widget as UserControls.FuelStop;
-                    fuel.LoadStopId = rowLoadStop.LoadStopId;
-                    break;
-                default:
-                    break;
-            }
-            
-            dock.ContentContainer.Controls.Add(widget);
-        }
+				case 4:
+					widget = LoadControl(@"~/UserControls/FuelStop.ascx");
+					widget.ID = String.Format("Fuel{0}", CurrentDockStates.Count);
+					UserControls.FuelStop fuel = widget as UserControls.FuelStop;
+					fuel.LoadStopId = rowLoadStop.LoadStopId;
+					break;
+				default:
+					break;
+			}
+
+			dock.ContentContainer.Controls.Add(widget);
+		}
 
 
-        //Store the info about the added docks in the session.
-        private List<DockState> CurrentDockStates
-        {
-            get
-            {
-                List<DockState> _currentDockStates = (List<DockState>)Session["CurrentDockStates"];
-                if (Object.Equals(_currentDockStates, null))
-                {
-                    _currentDockStates = new List<DockState>();
-                    Session["CurrentDockStates"] = _currentDockStates;
-                }
-                return _currentDockStates;
-            }
-            set
-            {
-                Session["CurrentDockStates"] = value;
-            }
-        }
+		//Store the info about the added docks in the session.
+		private List<DockState> CurrentDockStates
+		{
+			get
+			{
+				List<DockState> _currentDockStates = (List<DockState>)Session["CurrentDockStates"];
+				if (Object.Equals(_currentDockStates, null))
+				{
+					_currentDockStates = new List<DockState>();
+					Session["CurrentDockStates"] = _currentDockStates;
+				}
+				return _currentDockStates;
+			}
+			set
+			{
+				Session["CurrentDockStates"] = value;
+			}
+		}
 
-        protected void RadDockLayout1_SaveDockLayout(object sender, DockLayoutEventArgs e)
-        {
-            CurrentDockStates = RadDockLayout1.GetRegisteredDocksState();
-        }
+		protected void RadDockLayout1_SaveDockLayout(object sender, DockLayoutEventArgs e)
+		{
+			CurrentDockStates = RadDockLayout1.GetRegisteredDocksState();
+		}
 
-        protected void RadDockLayout1_LoadDockLayout(object sender, DockLayoutEventArgs e)
-        {
-            foreach (DockState state in CurrentDockStates)
-            {
-                e.Positions[state.UniqueName] = state.DockZoneID;
-                e.Indices[state.UniqueName] = state.Index;
-            }
-        }
+		protected void RadDockLayout1_LoadDockLayout(object sender, DockLayoutEventArgs e)
+		{
+			foreach (DockState state in CurrentDockStates)
+			{
+				e.Positions[state.UniqueName] = state.DockZoneID;
+				e.Indices[state.UniqueName] = state.Index;
+			}
+		}
 
-        private void CreateStops(Int16 stopsToAdd, Int16 LoadStopTypeId)
-        {
-            Datasets.dsDispatch.LoadStopDataTable tblStop = CreateNewStopRecords(LoadStopTypeId, stopsToAdd);
+		private void CreateStops(Int16 stopsToAdd, Int16 LoadStopTypeId)
+		{
+			Datasets.dsDispatch.LoadStopDataTable tblStop = CreateNewStopRecords(LoadStopTypeId, stopsToAdd);
 
-            // load the first stop (will trigger postback)
-            LoadStop(tblStop[0]);
+			// load the first stop (will trigger postback)
+			LoadStop(tblStop[0]);
 
-            // If more than one stop should be added, setup session and hidden field to trigger additional loads be created on postback
-            if (stopsToAdd > 1)
-            {
-                Session["StopsToLoadOnPostback"] = tblStop;
-                HiddenField_StopToLoadNextOnPostback.Value = tblStop[1].LoadStopId.ToString();
-            }
+			// If more than one stop should be added, setup session and hidden field to trigger additional loads be created on postback
+			if (stopsToAdd > 1)
+			{
+				Session["StopsToLoadOnPostback"] = tblStop;
+				HiddenField_StopToLoadNextOnPostback.Value = tblStop[1].LoadStopId.ToString();
+			}
 
-            // Execute sp_LoadCalculate then refresh page
-            Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            qry.sp_LoadCalculate(Convert.ToInt32(HiddenField_LoadId.Value));
-            LoadPopulate();
-            // todo: add to radajaxmanager so that totals will update accordingly when LoadPopulate is called.
+			// Execute sp_LoadCalculate then refresh page
+			Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			qry.sp_LoadCalculate(Convert.ToInt32(HiddenField_LoadId.Value));
+			LoadPopulate();
+			// todo: add to radajaxmanager so that totals will update accordingly when LoadPopulate is called.
 
-        }
+		}
 
-        private Datasets.dsDispatch.LoadStopDataTable CreateNewStopRecords(Int16 LoadStopTypeId, Int16 numberOfStopsToAdd)
-        {
-            int LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
-            Datasets.dsDispatchTableAdapters.LoadStopTableAdapter adaptStop = new Datasets.dsDispatchTableAdapters.LoadStopTableAdapter();
-            Datasets.dsDispatchTableAdapters.StopNumbersNextTableAdapter adaptStopNumbers = new Datasets.dsDispatchTableAdapters.StopNumbersNextTableAdapter();
-            Datasets.dsDispatch.LoadStopDataTable tblStops = new Datasets.dsDispatch.LoadStopDataTable();
-            Datasets.dsDispatch.LoadStopRow rowStop = null;
-            Datasets.dsDispatch.StopNumbersNextDataTable tblStopNumbers = null;
+		private Datasets.dsDispatch.LoadStopDataTable CreateNewStopRecords(Int16 LoadStopTypeId, Int16 numberOfStopsToAdd)
+		{
+			int LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
+			Datasets.dsDispatchTableAdapters.LoadStopTableAdapter adaptStop = new Datasets.dsDispatchTableAdapters.LoadStopTableAdapter();
+			Datasets.dsDispatchTableAdapters.StopNumbersNextTableAdapter adaptStopNumbers = new Datasets.dsDispatchTableAdapters.StopNumbersNextTableAdapter();
+			Datasets.dsDispatch.LoadStopDataTable tblStops = new Datasets.dsDispatch.LoadStopDataTable();
+			Datasets.dsDispatch.LoadStopRow rowStop = null;
+			Datasets.dsDispatch.StopNumbersNextDataTable tblStopNumbers = null;
 
-            for (int i = 0; i < numberOfStopsToAdd; i++)
-            {
-                tblStopNumbers = adaptStopNumbers.GetData(LoadId, LoadStopTypeId);
-                Datasets.dsDispatch.StopNumbersNextRow rowStopNumbers = tblStopNumbers[0];
-                rowStop = tblStops.NewLoadStopRow();
-                rowStop.LoadId = LoadId;
+			for (int i = 0; i < numberOfStopsToAdd; i++)
+			{
+				tblStopNumbers = adaptStopNumbers.GetData(LoadId, LoadStopTypeId);
+				Datasets.dsDispatch.StopNumbersNextRow rowStopNumbers = tblStopNumbers[0];
+				rowStop = tblStops.NewLoadStopRow();
+				rowStop.LoadId = LoadId;
 				rowStop.LoadStopTypeId = LoadStopTypeId;
-                rowStop.StopNumber = Convert.ToInt16(rowStopNumbers.newStopNumber);
-                rowStop.StopTypeNumber = Convert.ToInt16(rowStopNumbers.newStopTypeNumber);
+				rowStop.StopNumber = Convert.ToInt16(rowStopNumbers.newStopNumber);
+				rowStop.StopTypeNumber = Convert.ToInt16(rowStopNumbers.newStopTypeNumber);
 
-				switch(LoadStopTypeId)
+				switch (LoadStopTypeId)
 				{
 					case (Int16)Enums.LoadStopType.Pick:
 						rowStop.LoadTypeId = (Int16)Enums.LoadType.HookOnly;
@@ -1119,10 +1098,10 @@ namespace RedbonePlatform.Pages.ContainerPages
 					default:
 						break;
 				}
-				
-                // When a LEG is added, default certain fields with values from the LOAD section, if they have been set.
-                if (LoadStopTypeId == 2)
-                {
+
+				// When a LEG is added, default certain fields with values from the LOAD section, if they have been set.
+				if (LoadStopTypeId == 2)
+				{
 
 					// Removed auto population of the below items
 					//if (RadComboBox_Driver1.SelectedValue == "0") rowStop.SetDriver1_PersonIdNull(); else rowStop.Driver1_PersonId = Convert.ToInt32(RadComboBox_Driver1.SelectedValue);
@@ -1132,303 +1111,299 @@ namespace RedbonePlatform.Pages.ContainerPages
 
 					//trailer1 may be overwritten in the insert stored procedure - DMS 2023-06-21
 					if (RadComboBox_Trailer1.SelectedValue == "0") rowStop.SetTrailer1_TrailerIdNull(); else rowStop.Trailer1_TrailerId = Convert.ToInt16(RadComboBox_Trailer1.SelectedValue);
-                    if (RadComboBox_Trailer2.SelectedValue == "0") rowStop.SetTrailer2_TrailerIdNull(); else rowStop.Trailer2_TrailerId = Convert.ToInt16(RadComboBox_Trailer2.SelectedValue);
-                }
+					if (RadComboBox_Trailer2.SelectedValue == "0") rowStop.SetTrailer2_TrailerIdNull(); else rowStop.Trailer2_TrailerId = Convert.ToInt16(RadComboBox_Trailer2.SelectedValue);
+				}
 
 				Auth auth = (Auth)Session["Auth"];
 				rowStop.LastUpdtPersonId = auth.PersonId;
 
 				tblStops.AddLoadStopRow(rowStop);
-                adaptStop.Update(tblStops);
-            }
+				adaptStop.Update(tblStops);
+			}
 
-            return tblStops;
-        }
+			return tblStops;
+		}
 
-        protected void RadButton_Pick_Click(object sender, EventArgs e)
-        {
-            // Check to see if Load is locked by another user:
-            if (LockedUserChanged())
-                return;
+		protected void RadButton_Pick_Click(object sender, EventArgs e)
+		{
+			// Check to see if Load is locked by another user:
+			if (LockedUserChanged())
+				return;
 
-            // When selecting a client in any stop using the Enter key, upon postback the Pick button has focus, gets the click, and erroneously creates a pick.
-            // This session var is set anytime a customer is selected in any stop
-            if (Convert.ToBoolean(Session["RadButton_Pick_DontClick"]) == true)
-            {
-                Session["RadButton_Pick_DontClick"] = false;
-                return;
-            }
+			// When selecting a client in any stop using the Enter key, upon postback the Pick button has focus, gets the click, and erroneously creates a pick.
+			// This session var is set anytime a customer is selected in any stop
+			if (Convert.ToBoolean(Session["RadButton_Pick_DontClick"]) == true)
+			{
+				Session["RadButton_Pick_DontClick"] = false;
+				return;
+			}
 
-            //Int16 stopsToAdd = Convert.ToInt16(RadNumericTextBox_PicksToAdd.Value);
+			//Int16 stopsToAdd = Convert.ToInt16(RadNumericTextBox_PicksToAdd.Value);
 
-            //// Determine how many Pick stops are already present and only add additinoal picks according to the shortage compared to the number.
-            //Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            //Int16 TotalStops = Convert.ToInt16(qry.LoadStop_GetTotalNumberOfStopsForTypeAndLoad(Convert.ToInt32(HiddenField_LoadId.Value), 1));
+			//// Determine how many Pick stops are already present and only add additinoal picks according to the shortage compared to the number.
+			//Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			//Int16 TotalStops = Convert.ToInt16(qry.LoadStop_GetTotalNumberOfStopsForTypeAndLoad(Convert.ToInt32(HiddenField_LoadId.Value), 1));
 
-            //Int16 stopsToAddFinal = Convert.ToInt16(stopsToAdd - TotalStops);
-            //if (stopsToAddFinal > 0)
-            //    CreateStops(stopsToAddFinal, 1);
+			//Int16 stopsToAddFinal = Convert.ToInt16(stopsToAdd - TotalStops);
+			//if (stopsToAddFinal > 0)
+			//    CreateStops(stopsToAddFinal, 1);
 
-            CreateStops(1, 1);
+			CreateStops(1, 1);
 
-        }
+		}
 
-        protected void RadButton_Drop_Click(object sender, EventArgs e)
-        {
-            // Check to see if Load is locked by another user:
-            if (LockedUserChanged())
-                return;
+		protected void RadButton_Drop_Click(object sender, EventArgs e)
+		{
+			// Check to see if Load is locked by another user:
+			if (LockedUserChanged())
+				return;
 
-            //Int16 stopsToAdd = Convert.ToInt16(RadNumericTextBox_DropsToAdd.Value);
+			//Int16 stopsToAdd = Convert.ToInt16(RadNumericTextBox_DropsToAdd.Value);
 
-            //// Determine how many Pick stops are already present and only add additinoal picks according to the shortage compared to the number.
-            //Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            //Int16 TotalStops = Convert.ToInt16(qry.LoadStop_GetTotalNumberOfStopsForTypeAndLoad(Convert.ToInt32(HiddenField_LoadId.Value), 3));
+			//// Determine how many Pick stops are already present and only add additinoal picks according to the shortage compared to the number.
+			//Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			//Int16 TotalStops = Convert.ToInt16(qry.LoadStop_GetTotalNumberOfStopsForTypeAndLoad(Convert.ToInt32(HiddenField_LoadId.Value), 3));
 
-            //Int16 stopsToAddFinal = Convert.ToInt16(stopsToAdd - TotalStops);
-            //if (stopsToAddFinal > 0)
-            //    CreateStops(stopsToAddFinal, 3);
+			//Int16 stopsToAddFinal = Convert.ToInt16(stopsToAdd - TotalStops);
+			//if (stopsToAddFinal > 0)
+			//    CreateStops(stopsToAddFinal, 3);
 
-            CreateStops(1, 3);
+			CreateStops(1, 3);
 
-        }
+		}
 
-        protected void RadButton_Leg_Click(object sender, EventArgs e)
-        {
-            // Check to see if Load is locked by another user:
-            if (LockedUserChanged())
-                return;
+		protected void RadButton_Leg_Click(object sender, EventArgs e)
+		{
+			// Check to see if Load is locked by another user:
+			if (LockedUserChanged())
+				return;
 
-            //Int16 stopsToAdd = Convert.ToInt16(RadNumericTextBox_LEGsToAdd.Value);
+			//Int16 stopsToAdd = Convert.ToInt16(RadNumericTextBox_LEGsToAdd.Value);
 
-            //// Determine how many Pick stops are already present and only add additinoal picks according to the shortage compared to the number.
-            //Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            //Int16 TotalStops = Convert.ToInt16(qry.LoadStop_GetTotalNumberOfStopsForTypeAndLoad(Convert.ToInt32(HiddenField_LoadId.Value), 2));
+			//// Determine how many Pick stops are already present and only add additinoal picks according to the shortage compared to the number.
+			//Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			//Int16 TotalStops = Convert.ToInt16(qry.LoadStop_GetTotalNumberOfStopsForTypeAndLoad(Convert.ToInt32(HiddenField_LoadId.Value), 2));
 
-            //Int16 stopsToAddFinal = Convert.ToInt16(stopsToAdd - TotalStops);
-            //if (stopsToAddFinal > 0)
-            //    CreateStops(stopsToAddFinal, 2);
+			//Int16 stopsToAddFinal = Convert.ToInt16(stopsToAdd - TotalStops);
+			//if (stopsToAddFinal > 0)
+			//    CreateStops(stopsToAddFinal, 2);
 
-            CreateStops(1, 2);
-        }
+			CreateStops(1, 2);
+		}
 
-        protected void RadButton_FuelStop_Click(object sender, EventArgs e)
-        {
-            // Check to see if Load is locked by another user:
-            if (LockedUserChanged())
-                return;
+		protected void RadButton_FuelStop_Click(object sender, EventArgs e)
+		{
+			// Check to see if Load is locked by another user:
+			if (LockedUserChanged())
+				return;
 
-            //Int16 stopsToAdd = Convert.ToInt16(RadNumericTextBox_FuelStopssToAdd.Value);
+			//Int16 stopsToAdd = Convert.ToInt16(RadNumericTextBox_FuelStopssToAdd.Value);
 
-            //// Determine how many Pick stops are already present and only add additinoal picks according to the shortage compared to the number.
-            //Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            //Int16 TotalStops = Convert.ToInt16(qry.LoadStop_GetTotalNumberOfStopsForTypeAndLoad(Convert.ToInt32(HiddenField_LoadId.Value), 4));
+			//// Determine how many Pick stops are already present and only add additinoal picks according to the shortage compared to the number.
+			//Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			//Int16 TotalStops = Convert.ToInt16(qry.LoadStop_GetTotalNumberOfStopsForTypeAndLoad(Convert.ToInt32(HiddenField_LoadId.Value), 4));
 
-            //Int16 stopsToAddFinal = Convert.ToInt16(stopsToAdd - TotalStops);
-            //if (stopsToAddFinal > 0)
-            //    CreateStops(stopsToAddFinal, 4);
+			//Int16 stopsToAddFinal = Convert.ToInt16(stopsToAdd - TotalStops);
+			//if (stopsToAddFinal > 0)
+			//    CreateStops(stopsToAddFinal, 4);
 
-            CreateStops(1, 4);
-        }
+			CreateStops(1, 4);
+		}
 
-        protected void RadNumericTextBox_TextChanged(object sender, EventArgs e)
-        {
-            SaveLoad();
-        }
+		protected void RadNumericTextBox_TextChanged(object sender, EventArgs e)
+		{
+			SaveLoad();
+		}
 
-        protected void RadNumericTextBox_EmptyMiles_TextChanged(object sender, EventArgs e)
-        {
-            // populate the RadNumericTextBox_PaidEmpty field if not already populated.
-            if (RadNumericTextBox_PaidEmpty.Value == null && RadCheckBox_AutoRatingInd.Checked == true)
-            {
-                RadNumericTextBox_PaidEmpty.Value = RadNumericTextBox_EmptyMiles.Value;
-            }
-            SaveLoad();
-        }
+		protected void RadNumericTextBox_EmptyMiles_TextChanged(object sender, EventArgs e)
+		{
+			// populate the RadNumericTextBox_PaidEmpty field if not already populated.
+			if (RadNumericTextBox_PaidEmpty.Value == null && RadCheckBox_AutoRatingInd.Checked == true)
+			{
+				RadNumericTextBox_PaidEmpty.Value = RadNumericTextBox_EmptyMiles.Value;
+			}
+			SaveLoad();
+		}
 
-        protected void RadNumericTextBox_LoadedMiles_TextChanged(object sender, EventArgs e)
-        {
-            // populate the RadNumericTextBox_PaidLoaded field if not already populated.
-            if (RadNumericTextBox_PaidLoaded.Value == null && RadCheckBox_AutoRatingInd.Checked == true) 
-            {
-                RadNumericTextBox_PaidLoaded.Value = RadNumericTextBox_LoadedMiles.Value;
-            }
-            SaveLoad();
-        }
+		protected void RadNumericTextBox_LoadedMiles_TextChanged(object sender, EventArgs e)
+		{
+			// populate the RadNumericTextBox_PaidLoaded field if not already populated.
+			if (RadNumericTextBox_PaidLoaded.Value == null && RadCheckBox_AutoRatingInd.Checked == true)
+			{
+				RadNumericTextBox_PaidLoaded.Value = RadNumericTextBox_LoadedMiles.Value;
+			}
+			SaveLoad();
+		}
 
-        protected void RadComboBox_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            // Prevent "In Transit" Load Status change when Customer Load #, Weight, ACC Charges, or Rate is null
-            // Clientside code is handling this.
-            //if (RadComboBox_Status.SelectedValue == "3" && !InTransitValidation())
-            //{
-            //    RadWindowManager1.RadAlert("Customer Load #, Weight, ACC Charges, and Rate are all required before you can change the status to In Transit!", 500, 130, "Missing Fields!", "");
-            //    return;
-            //}
+		protected void RadComboBox_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+		{
+			// Prevent "In Transit" Load Status change when Customer Load #, Weight, ACC Charges, or Rate is null
+			// Clientside code is handling this.
+			//if (RadComboBox_Status.SelectedValue == "3" && !InTransitValidation())
+			//{
+			//    RadWindowManager1.RadAlert("Customer Load #, Weight, ACC Charges, and Rate are all required before you can change the status to In Transit!", 500, 130, "Missing Fields!", "");
+			//    return;
+			//}
 
-            RadComboBox cbo = (sender as RadComboBox);
-            Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
-            Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
+			RadComboBox cbo = (sender as RadComboBox);
+			Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
+			Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
 
-            Int32? Driver1Id = null;
-            Int32? Driver2Id = null;
-            Int16? Trailer1_TrailerId = null;
-            Int16? Trailer2_TrailerId = null;
-            Int32? TruckPunitId = null;
+			Int32? Driver1Id = null;
+			Int32? Driver2Id = null;
+			Int16? Trailer1_TrailerId = null;
+			Int16? Trailer2_TrailerId = null;
+			Int32? TruckPunitId = null;
 
 			bool ediUpdateNeeded = false;
-			
+
 			switch (cbo.ID)
-            {
-            
-                case "RadComboBox_Status":
-                    // When the Load Status = Dispatched, show the Dispatch button.
-                    SaveLoad();
-                    RadButton_Dispatch.Visible = (cbo.SelectedValue == "2");
-                    RadComboBox_HoldSub.DataBind();
+			{
+				case "RadComboBox_Status":
+					// When the Load Status = Dispatched, show the Dispatch button.
+					SaveLoad();
+					RadButton_Dispatch.Visible = (cbo.SelectedValue == "2");
+					RadComboBox_HoldSub.DataBind();
 					//SendStatusToClient();
-                    break;
-                case "RadComboBox_Driver1":
-                    if (e.Value != e.OldValue)
-                    {
-                        Boolean DriverHasCharge = false;
-                        qry.sp_DriverInLoadHasChargeInd(LoadId, Convert.ToInt32(e.OldValue), out DriverHasCharge);
+					break;
+				case "RadComboBox_Driver1":
+					if (e.Value != e.OldValue)
+					{
+						Boolean DriverHasCharge = false;
+						qry.sp_DriverInLoadHasChargeInd(LoadId, Convert.ToInt32(e.OldValue), out DriverHasCharge);
 
-                        if (DriverHasCharge)
-                        {
-                            RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("This Driver has an associated Charge and can't be changed!"), 500, 130, "Driver has associated Charge!", "");
-                            // select old driver again.
-                            RadComboBox_Driver1.SelectedValue = e.OldValue;
-                            return;
-                        }
-                    }
+						if (DriverHasCharge)
+						{
+							RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("This Driver has an associated Charge and can't be changed!"), 500, 130, "Driver has associated Charge!", "");
+							// select old driver again.
+							RadComboBox_Driver1.SelectedValue = e.OldValue;
+							return;
+						}
+					}
 
-                    if (!DriversDuplicateCheck_IsValid())
-                        RadComboBox_Driver1.SelectedIndex = 0;
+					if (!DriversDuplicateCheck_IsValid())
+						RadComboBox_Driver1.SelectedIndex = 0;
 
-                    DriverExpirationLogic(Convert.ToInt32(e.Value), RadComboBox_Driver1, RadToolTip_RadComboBox_Driver1, true);
+					DriverExpirationLogic(Convert.ToInt32(e.Value), RadComboBox_Driver1, RadToolTip_RadComboBox_Driver1, true);
 
-                    if (RadComboBox_Driver1.SelectedValue != "0")
-                        Driver1Id = Convert.ToInt32(RadComboBox_Driver1.SelectedValue);
-                    else
-                        Driver1Id = null;
-                    if (RadComboBox_Driver2.SelectedValue != "0")
-                        Driver2Id = Convert.ToInt32(RadComboBox_Driver2.SelectedValue);
-                    else
-                        Driver2Id = null;
+					if (RadComboBox_Driver1.SelectedValue != "0")
+						Driver1Id = Convert.ToInt32(RadComboBox_Driver1.SelectedValue);
+					else
+						Driver1Id = null;
+					if (RadComboBox_Driver2.SelectedValue != "0")
+						Driver2Id = Convert.ToInt32(RadComboBox_Driver2.SelectedValue);
+					else
+						Driver2Id = null;
 
-                    // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
-                    qry.sp_Load_SaveDrivers(LoadId, Driver1Id, Driver2Id);
+					// Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
+					qry.sp_Load_SaveDrivers(LoadId, Driver1Id, Driver2Id);
 
 					// check for duplicate Drviers
 					// Page.Validate();
 					ediUpdateNeeded = true;
 					break;
-                case "RadComboBox_Driver2":
-                    if (e.Value != e.OldValue)
-                    {
-                        Boolean DriverHasCharge = false;
-                        qry.sp_DriverInLoadHasChargeInd(LoadId, Convert.ToInt32(e.OldValue), out DriverHasCharge);
+				case "RadComboBox_Driver2":
+					if (e.Value != e.OldValue)
+					{
+						Boolean DriverHasCharge = false;
+						qry.sp_DriverInLoadHasChargeInd(LoadId, Convert.ToInt32(e.OldValue), out DriverHasCharge);
 
-                        if (DriverHasCharge)
-                        {
-                            RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("This Driver has an associated Charge and can't be changed!"), 500, 130, "Driver has associated Charge!", "");
-                            // select old driver again.
-                            RadComboBox_Driver2.SelectedValue = e.OldValue;
-                            return;
-                        }
-                    }
+						if (DriverHasCharge)
+						{
+							RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("This Driver has an associated Charge and can't be changed!"), 500, 130, "Driver has associated Charge!", "");
+							// select old driver again.
+							RadComboBox_Driver2.SelectedValue = e.OldValue;
+							return;
+						}
+					}
 
-                    if (!DriversDuplicateCheck_IsValid())
-                        RadComboBox_Driver2.SelectedIndex = 0;
+					if (!DriversDuplicateCheck_IsValid())
+						RadComboBox_Driver2.SelectedIndex = 0;
 
-                    DriverExpirationLogic(Convert.ToInt32(e.Value), RadComboBox_Driver2, RadToolTip_RadComboBox_Driver2, true);
+					DriverExpirationLogic(Convert.ToInt32(e.Value), RadComboBox_Driver2, RadToolTip_RadComboBox_Driver2, true);
 
-                    if (RadComboBox_Driver1.SelectedValue != "0")
-                        Driver1Id = Convert.ToInt32(RadComboBox_Driver1.SelectedValue);
-                    else
-                        Driver1Id = null;
-                    if (RadComboBox_Driver2.SelectedValue != "0")
-                        Driver2Id = Convert.ToInt32(RadComboBox_Driver2.SelectedValue);
-                    else
-                        Driver2Id = null;
+					if (RadComboBox_Driver1.SelectedValue != "0")
+						Driver1Id = Convert.ToInt32(RadComboBox_Driver1.SelectedValue);
+					else
+						Driver1Id = null;
+					if (RadComboBox_Driver2.SelectedValue != "0")
+						Driver2Id = Convert.ToInt32(RadComboBox_Driver2.SelectedValue);
+					else
+						Driver2Id = null;
 
-                    // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
-                    qry.sp_Load_SaveDrivers(LoadId, Driver1Id, Driver2Id);
+					// Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
+					qry.sp_Load_SaveDrivers(LoadId, Driver1Id, Driver2Id);
 
-                    // check for duplicate Drviers
-                    Page.Validate();
+					// check for duplicate Drviers
+					Page.Validate();
 					ediUpdateNeeded = true;
 					break;
-                case "RadComboBox_Trailer1":
-                    if (!TrailersDuplicateCheck_IsValid())
-                        RadComboBox_Trailer1.SelectedIndex = 0;
+				case "RadComboBox_Trailer1":
+					if (!TrailersDuplicateCheck_IsValid())
+						RadComboBox_Trailer1.SelectedIndex = 0;
 
-                    TrailerExpirationLogic(Convert.ToInt16(e.Value), RadComboBox_Trailer1, RadToolTip_RadComboBox_Trailer1, true);
+					TrailerExpirationLogic(Convert.ToInt16(e.Value), RadComboBox_Trailer1, RadToolTip_RadComboBox_Trailer1, true);
 
-                    if (RadComboBox_Trailer1.SelectedValue != "0")
-                        Trailer1_TrailerId = Convert.ToInt16(RadComboBox_Trailer1.SelectedValue);
-                    if (RadComboBox_Trailer2.SelectedValue != "0")
-                        Trailer2_TrailerId = Convert.ToInt16(RadComboBox_Trailer2.SelectedValue);
+					if (RadComboBox_Trailer1.SelectedValue != "0")
+						Trailer1_TrailerId = Convert.ToInt16(RadComboBox_Trailer1.SelectedValue);
+					if (RadComboBox_Trailer2.SelectedValue != "0")
+						Trailer2_TrailerId = Convert.ToInt16(RadComboBox_Trailer2.SelectedValue);
 
-                    // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
-                    qry.sp_Load_SaveTrailers(LoadId, Trailer1_TrailerId, Trailer2_TrailerId);
+					// Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
+					qry.sp_Load_SaveTrailers(LoadId, Trailer1_TrailerId, Trailer2_TrailerId);
 
-                    //TruckExpirationLogic(Convert.ToInt32(RadComboBox_Truck1.SelectedValue), RadComboBox_Truck1, RadToolTip_RadComboBox_Truck1, true);
+					//TruckExpirationLogic(Convert.ToInt32(RadComboBox_Truck1.SelectedValue), RadComboBox_Truck1, RadToolTip_RadComboBox_Truck1, true);
 
-                    //if (RadComboBox_Truck1.SelectedValue != "0")
-                    //    TruckPunitId = Convert.ToInt16(RadComboBox_Truck1.SelectedValue);
+					//if (RadComboBox_Truck1.SelectedValue != "0")
+					//    TruckPunitId = Convert.ToInt16(RadComboBox_Truck1.SelectedValue);
 
-                    //qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
+					//qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
 
-                    // Check for Duplicate Trailers
-                    Page.Validate();
+					// Check for Duplicate Trailers
+					Page.Validate();
 					ediUpdateNeeded = true;
 					break;
-                case "RadComboBox_Trailer2":
-                    if (!TrailersDuplicateCheck_IsValid())
-                        RadComboBox_Trailer2.SelectedIndex = 0;
+				case "RadComboBox_Trailer2":
+					if (!TrailersDuplicateCheck_IsValid())
+						RadComboBox_Trailer2.SelectedIndex = 0;
 
-                    TrailerExpirationLogic(Convert.ToInt16(e.Value), RadComboBox_Trailer2, RadToolTip_RadComboBox_Trailer2, true);
+					TrailerExpirationLogic(Convert.ToInt16(e.Value), RadComboBox_Trailer2, RadToolTip_RadComboBox_Trailer2, true);
 
-                    if (RadComboBox_Trailer1.SelectedValue != "0")
-                        Trailer1_TrailerId = Convert.ToInt16(RadComboBox_Trailer1.SelectedValue);
-                    if (RadComboBox_Trailer2.SelectedValue != "0")
-                        Trailer2_TrailerId = Convert.ToInt16(RadComboBox_Trailer2.SelectedValue);
+					if (RadComboBox_Trailer1.SelectedValue != "0")
+						Trailer1_TrailerId = Convert.ToInt16(RadComboBox_Trailer1.SelectedValue);
+					if (RadComboBox_Trailer2.SelectedValue != "0")
+						Trailer2_TrailerId = Convert.ToInt16(RadComboBox_Trailer2.SelectedValue);
 
-                    // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
-                    qry.sp_Load_SaveTrailers(LoadId, Trailer1_TrailerId, Trailer2_TrailerId);
+					// Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
+					qry.sp_Load_SaveTrailers(LoadId, Trailer1_TrailerId, Trailer2_TrailerId);
 
-                    TruckExpirationLogic(Convert.ToInt32(RadComboBox_Truck1.SelectedValue), RadComboBox_Truck1, RadToolTip_RadComboBox_Truck1, true);
+					TruckExpirationLogic(Convert.ToInt32(RadComboBox_Truck1.SelectedValue), RadComboBox_Truck1, RadToolTip_RadComboBox_Truck1, true);
 
-                    if (RadComboBox_Truck1.SelectedValue != "0")
-                        TruckPunitId = Convert.ToInt16(RadComboBox_Truck1.SelectedValue);
+					if (RadComboBox_Truck1.SelectedValue != "0")
+						TruckPunitId = Convert.ToInt16(RadComboBox_Truck1.SelectedValue);
 
-                    qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
+					qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
 
-                    // Check for Duplicate Trailers
-                    Page.Validate();
+					// Check for Duplicate Trailers
+					Page.Validate();
 					ediUpdateNeeded = true;
 					break;
-                case "RadComboBox_Truck1":
-                    TruckExpirationLogic(Convert.ToInt32(RadComboBox_Truck1.SelectedValue), RadComboBox_Truck1, RadToolTip_RadComboBox_Truck1, true);
+				case "RadComboBox_Truck1":
+					TruckExpirationLogic(Convert.ToInt32(RadComboBox_Truck1.SelectedValue), RadComboBox_Truck1, RadToolTip_RadComboBox_Truck1, true);
 
-                    if (RadComboBox_Truck1.SelectedValue != "0")
-                        TruckPunitId = Convert.ToInt16(RadComboBox_Truck1.SelectedValue);
+					if (RadComboBox_Truck1.SelectedValue != "0")
+						TruckPunitId = Convert.ToInt16(RadComboBox_Truck1.SelectedValue);
 
-                    // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
-                    qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
+					// Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
+					qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
 					ediUpdateNeeded = true;
 					break;
-                default:
-                    SaveLoad();
-                    break;
-            }
+				default:
+					SaveLoad();
+					break;
+			}
 
-
-
-
-			if(ediUpdateNeeded)
+			if (ediUpdateNeeded)
 			{
 				//call to update truck/trailer through edi  We arent doing this for now
 				//SendStatusChangeToClient(LoadId, 0, int.Parse(HiddenField_ClientId.Value), "", DateTime.Now, "NS", EDIService.StatusDateType.Scheduled, EDIService.ShipmentStatusType.StatusChange);
@@ -1436,202 +1411,196 @@ namespace RedbonePlatform.Pages.ContainerPages
 
 		}
 
-        protected void RadDropDownList_TempMode_SelectedIndexChanged(object sender, DropDownListEventArgs e)
-        {
-            SaveLoad();
-        }
-        private void RadDock_DockPositionChanged(object sender, DockPositionChangedEventArgs e)
-        {
+		protected void RadDropDownList_TempMode_SelectedIndexChanged(object sender, DropDownListEventArgs e)
+		{
+			SaveLoad();
+		}
+		private void RadDock_DockPositionChanged(object sender, DockPositionChangedEventArgs e)
+		{
 
-            // This event will fire for every dock in the zone when one is moved, others move.
-            //  Correction, this only fires for the docks that are moved when one is repositioned. 
-            //  E.g. if the bottom is moved up one, then only bottom two docks change position. If bottom is moved to top, then all change position.
-            RadDock dock = sender as RadDock;
-            Int32 LoadStopId = Convert.ToInt32(dock.Tag);
-            Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
-            Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            qry.sp_LoadStopNumbersChange(LoadId, LoadStopId, Convert.ToInt16(e.Index + 1));
+			// This event will fire for every dock in the zone when one is moved, others move.
+			//  Correction, this only fires for the docks that are moved when one is repositioned. 
+			//  E.g. if the bottom is moved up one, then only bottom two docks change position. If bottom is moved to top, then all change position.
+			RadDock dock = sender as RadDock;
+			Int32 LoadStopId = Convert.ToInt32(dock.Tag);
+			Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
+			Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			qry.sp_LoadStopNumbersChange(LoadId, LoadStopId, Convert.ToInt16(e.Index + 1));
 
-            HiddenField_UpdateDockTitles.Value = "true";
-        }
+			HiddenField_UpdateDockTitles.Value = "true";
+		}
 
-        private void DockTitleAndValidationUpdate()
-        {
-            // Loop through all Docks and update Title
-            Int16 PickCount = 0, DropCount = 0, LEGCount = 0;
+		private void DockTitleAndValidationUpdate()
+		{
+			// Loop through all Docks and update Title
+			Int16 PickCount = 0, DropCount = 0, LEGCount = 0;
 
-            for (int i = 0; i < RadDockZone1.Docks.Count; i++)
-            {
-                if (!RadDockZone1.Docks[i].Closed)
-                {
+			for (int i = 0; i < RadDockZone1.Docks.Count; i++)
+			{
+				if (!RadDockZone1.Docks[i].Closed)
+				{
 					RadDockZone1.Docks[i].TitlebarContainer.Height = 5;
 
-                    if (RadDockZone1.Docks[i].Title.Contains("Pick"))
-                    {
-                        PickCount++;
-                        RadDockZone1.Docks[i].Title = "Pick " + PickCount.ToString();
+					if (RadDockZone1.Docks[i].Title.Contains("Pick"))
+					{
+						PickCount++;
+						RadDockZone1.Docks[i].Title = "Pick " + PickCount.ToString();
 
-                        // Cause Dispatch validation in Pick
-                        UserControls.Pick pck = RadDockZone1.Docks[i].ContentContainer.Controls[0] as UserControls.Pick;
-                        pck.DispatchValidation();
-                    }
-                    if (RadDockZone1.Docks[i].Title.Contains("LEG"))
-                    {
-                        LEGCount++;
-                        RadDockZone1.Docks[i].Title = "LEG " + LEGCount.ToString();
+						// Cause Dispatch validation in Pick
+						UserControls.Pick pck = RadDockZone1.Docks[i].ContentContainer.Controls[0] as UserControls.Pick;
+						pck.DispatchValidation();
+					}
+					if (RadDockZone1.Docks[i].Title.Contains("LEG"))
+					{
+						LEGCount++;
+						RadDockZone1.Docks[i].Title = "LEG " + LEGCount.ToString();
 
-                        // Cause Dispatch validation in Drop
-                        UserControls.LEG leg = RadDockZone1.Docks[i].ContentContainer.Controls[0] as UserControls.LEG;
-                        leg.DispatchValidation();
-                    }
-                    if (RadDockZone1.Docks[i].Title.Contains("Drop"))
-                    {
-                        DropCount++;
-                        RadDockZone1.Docks[i].Title = "Drop " + DropCount.ToString();
+						// Cause Dispatch validation in Drop
+						UserControls.LEG leg = RadDockZone1.Docks[i].ContentContainer.Controls[0] as UserControls.LEG;
+						leg.DispatchValidation();
+					}
+					if (RadDockZone1.Docks[i].Title.Contains("Drop"))
+					{
+						DropCount++;
+						RadDockZone1.Docks[i].Title = "Drop " + DropCount.ToString();
 
-                        // Cause Dispatch validation in Drop
-                        UserControls.Drop drp = RadDockZone1.Docks[i].ContentContainer.Controls[0] as UserControls.Drop;
-                        drp.DispatchValidation();
-                    }
-                    if (RadDockZone1.Docks[i].Title.Contains("Fuel"))
-                    {
-                        DropCount++;
-                        RadDockZone1.Docks[i].Title = "Fuel " + DropCount.ToString();
+						// Cause Dispatch validation in Drop
+						UserControls.Drop drp = RadDockZone1.Docks[i].ContentContainer.Controls[0] as UserControls.Drop;
+						drp.DispatchValidation();
+					}
+					if (RadDockZone1.Docks[i].Title.Contains("Fuel"))
+					{
+						DropCount++;
+						RadDockZone1.Docks[i].Title = "Fuel " + DropCount.ToString();
 
-                        // Cause Dispatch validation in Drop
-                        UserControls.FuelStop fuel = RadDockZone1.Docks[i].ContentContainer.Controls[0] as UserControls.FuelStop;
-                        fuel.DispatchValidation();
-                    }
-                }
-            }
-        }
+						// Cause Dispatch validation in Drop
+						UserControls.FuelStop fuel = RadDockZone1.Docks[i].ContentContainer.Controls[0] as UserControls.FuelStop;
+						fuel.DispatchValidation();
+					}
+				}
+			}
+		}
 
-        protected void RadDock_Command(object sender, Telerik.Web.UI.DockCommandEventArgs e)
-        {
-            // Check to see if Load is locked by another user:
-            if (LockedUserChanged())
-                return;
+		protected void RadDock_Command(object sender, Telerik.Web.UI.DockCommandEventArgs e)
+		{
+			// Check to see if Load is locked by another user:
+			if (LockedUserChanged())
+				return;
 
-            if (e.Command.Name == "Close")
-            {
-                RadDock dock = (RadDock)sender;
+			if (e.Command.Name == "Close")
+			{
+				RadDock dock = (RadDock)sender;
+				// remove stop from DB
+				Datasets.dsDispatchTableAdapters.LoadStopTableAdapter adapt = new Datasets.dsDispatchTableAdapters.LoadStopTableAdapter();
 
+				adapt.Delete(Convert.ToInt32(dock.Tag));
 
-                //remove any attached driver events
-                Datasets.dsDispatchTableAdapters.QueriesTableAdapter qadpt = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-                qadpt.DeleteDriverEvents(Convert.ToInt32(dock.Tag));
+				// renumber stops accordingly
+				Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+				qry.sp_LoadStopNumbersChangeWhenOneIsDeleted(Convert.ToInt32(HiddenField_LoadId.Value));
 
-                // remove stop from DB
-                Datasets.dsDispatchTableAdapters.LoadStopTableAdapter adapt = new Datasets.dsDispatchTableAdapters.LoadStopTableAdapter();
-                
-                adapt.Delete(Convert.ToInt32(dock.Tag));
+				// Recalculate and run Auto Rating
+				qry.sp_LoadCalculate(Convert.ToInt32(HiddenField_LoadId.Value));
 
-                // renumber stops accordingly
-                Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-                qry.sp_LoadStopNumbersChangeWhenOneIsDeleted(Convert.ToInt32(HiddenField_LoadId.Value));
+				// refresh stops in ui to reflect the new numbers
+				DockTitleAndValidationUpdate();
 
-                // Recalculate and run Auto Rating
-                qry.sp_LoadCalculate(Convert.ToInt32(HiddenField_LoadId.Value));
+				// Cause postback so that new Stops can be added (for some reason the ajax on the Pick/Drop/Leg buttons no longer posts the RadDockLayout1 back..
+				ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "RefreshDocks", "refreshDocks();", true);
 
-                // refresh stops in ui to reflect the new numbers
-                DockTitleAndValidationUpdate();
+				// reload load so that totals are updated 
+				LoadPopulate();
 
-                // Cause postback so that new Stops can be added (for some reason the ajax on the Pick/Drop/Leg buttons no longer posts the RadDockLayout1 back..
-                ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "RefreshDocks", "refreshDocks();", true);
+			}
+		}
 
-                // reload load so that totals are updated 
-                LoadPopulate();
+		protected void RadAjaxManager1_AjaxRequest(object sender, AjaxRequestEventArgs e)
+		{
+			//if (e.Argument == "SaveDispatchNotes")
+			//{
+			//// Check to see if Load is locked by another user:
+			//if (LockedUserChanged())
+			//    return;
 
-            }
-        }
+			//// Update RadEditor text to the DB..
+			//string content = RadEditor_LoadDetailNotes.Content;
+			//Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
+			//Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			//qry.LoadNotes_Update(content, LoadId);
+			//}
+			if (e.Argument == "LoadPopulate")
+			{
+				LoadPopulate();
+			}
+			else if (e.Argument == "RefreshFileCount")
+			{
+				UpdateFileCountOnFilesButton();
+			}
+			else if (e.Argument == "RefreshACCTotal")
+			{
+				// Execute sp_LoadCalculate then refresh page
+				Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+				qry.sp_LoadCalculate(Convert.ToInt32(HiddenField_LoadId.Value));
+				LoadPopulate();
+			}
+			else if (e.Argument == "Save")
+			{
+				// The control should call SaveLoad() just by doing this postback
+				// RadAjaxManager1.Alert("Save");
+			}
+		}
 
-        protected void RadAjaxManager1_AjaxRequest(object sender, AjaxRequestEventArgs e)
-        {
-            //if (e.Argument == "SaveDispatchNotes")
-            //{
-                //// Check to see if Load is locked by another user:
-                //if (LockedUserChanged())
-                //    return;
+		// This gets called when closing ACC Charges
+		public void RadButton_RefreshACCTotal_Click(object sender, EventArgs e)
+		{
+			// Execute sp_LoadCalculate then refresh page
+			// Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			// qry.sp_LoadCalculate(Convert.ToInt32(HiddenField_LoadId.Value));
+			// LoadPopulate();
 
-                //// Update RadEditor text to the DB..
-                //string content = RadEditor_LoadDetailNotes.Content;
-                //Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
-                //Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-                //qry.LoadNotes_Update(content, LoadId);
-            //}
-            if (e.Argument == "LoadPopulate")
-            {
-                LoadPopulate();
-            }
-            else if (e.Argument == "RefreshFileCount")
-            {
-                UpdateFileCountOnFilesButton();
-            }
-            else if (e.Argument == "RefreshACCTotal")
-            {
-                // Execute sp_LoadCalculate then refresh page
-                Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-                qry.sp_LoadCalculate(Convert.ToInt32(HiddenField_LoadId.Value));
-                LoadPopulate();
-            }
-            else if (e.Argument == "Save")
-            {
-                // The control should call SaveLoad() just by doing this postback
-                // RadAjaxManager1.Alert("Save");
-            }
-        }
+			// Refresh page (not refreshing page after LoadPopulate). This is called from Pick.ascx.cs SaveStop function.
+			// RadAjaxManager1.RaisePostBackEvent("LoadPopulate");
 
-        // This gets called when closing ACC Charges
-        public void RadButton_RefreshACCTotal_Click(object sender, EventArgs e)
-        {
-            // Execute sp_LoadCalculate then refresh page
-            // Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            // qry.sp_LoadCalculate(Convert.ToInt32(HiddenField_LoadId.Value));
-            // LoadPopulate();
+		}
 
-            // Refresh page (not refreshing page after LoadPopulate). This is called from Pick.ascx.cs SaveStop function.
-            // RadAjaxManager1.RaisePostBackEvent("LoadPopulate");
+		public void DoLoadPopulate()
+		{
 
-        }
+		}
 
-        public void DoLoadPopulate()
-        {
+		//private decimal ACCTotalDispay()
+		//{
+		//    // no longer in use..
+		//    // Total the ACC Charges and update the ACC Charges label and Load Total with just revenue ACC charges.
+		//    Datasets.dsDispatch_AccChargesTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatch_AccChargesTableAdapters.QueriesTableAdapter();
+		//    decimal accTotalRevenue = 0;
+		//    decimal accTotal = 0;
+		//    qry.sp_LoadAccChargesRevenue(Convert.ToInt32(HiddenField_LoadId.Value), out accTotal, out accTotalRevenue);
+		//    Label_ACCTotal.Text = accTotal.ToString("C2");
+		//    //Label_LoadTotal.Text = "TBD";
+		//    Label_ACCBillable.Text = accTotalRevenue.ToString("C2");
+		//    return accTotal;
+		//}
 
-        }
+		protected void RadButton_StatusMoveNext_Click(object sender, EventArgs e)
+		{
+			// Check to see if Load is locked by another user:
+			if (LockedUserChanged())
+				return;
 
-        //private decimal ACCTotalDispay()
-        //{
-        //    // no longer in use..
-        //    // Total the ACC Charges and update the ACC Charges label and Load Total with just revenue ACC charges.
-        //    Datasets.dsDispatch_AccChargesTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatch_AccChargesTableAdapters.QueriesTableAdapter();
-        //    decimal accTotalRevenue = 0;
-        //    decimal accTotal = 0;
-        //    qry.sp_LoadAccChargesRevenue(Convert.ToInt32(HiddenField_LoadId.Value), out accTotal, out accTotalRevenue);
-        //    Label_ACCTotal.Text = accTotal.ToString("C2");
-        //    //Label_LoadTotal.Text = "TBD";
-        //    Label_ACCBillable.Text = accTotalRevenue.ToString("C2");
-        //    return accTotal;
-        //}
-    
-        protected void RadButton_StatusMoveNext_Click(object sender, EventArgs e)
-        {
-            // Check to see if Load is locked by another user:
-            if (LockedUserChanged())
-                return;
+			// Increment the Load Status by 1 and then update the load.
+			try
+			{
+				// Prevent "In Transit" Load Status change when Customer Load #, Weight, ACC Charges, or Rate is null
+				if (RadComboBox_Status.SelectedValue == "3" && !InTransitValidation())
+				{
+					RadWindowManager1.RadAlert("Customer Load #, Weight, ACC Charges, and Rate are all required before you can change the status to In Transit!", 280, 190, "Missing Fields!", "");
+					return;
+				}
 
-            // Increment the Load Status by 1 and then update the load.
-            try
-            {
-                // Prevent "In Transit" Load Status change when Customer Load #, Weight, ACC Charges, or Rate is null
-                if (RadComboBox_Status.SelectedValue == "3" && !InTransitValidation())
-                {
-                    RadWindowManager1.RadAlert("Customer Load #, Weight, ACC Charges, and Rate are all required before you can change the status to In Transit!", 280, 190, "Missing Fields!", "");
-                    return;
-                }
-
-                RadComboBox_Status.SelectedIndex = RadComboBox_Status.SelectedIndex + 1;
-                Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-                Classes.Auth auth = (Classes.Auth)Session["Auth"];
+				RadComboBox_Status.SelectedIndex = RadComboBox_Status.SelectedIndex + 1;
+				Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+				Classes.Auth auth = (Classes.Auth)Session["Auth"];
 				qry.sp_Load_LoadStatus_UpdateInsert(Convert.ToInt32(HiddenField_LoadId.Value), Convert.ToInt16(RadComboBox_Status.SelectedValue), DateTime.Now, auth.PersonId, true);
 
 				// When the Load Status = Dispatched, show the Dispatch button.
@@ -1640,43 +1609,43 @@ namespace RedbonePlatform.Pages.ContainerPages
 				//load the sub types for on hold
 				RadComboBox_HoldSub.DataBind();
 			}
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
+			catch (Exception ex)
+			{
+				throw;
+			}
+		}
 
-        private Boolean InTransitValidation()
-        {
-            Boolean bValid = true;
-            bValid = (RadTextBox_CustomerLoadNumber.Text.Trim() != "" && RadNumericText_Weight.Value != null && Label_ACCTotal.Text != "$0.00" && RadNumericTextBox_FlatRate.Value != null);
-            return bValid;
-        }
+		private Boolean InTransitValidation()
+		{
+			Boolean bValid = true;
+			bValid = (RadTextBox_CustomerLoadNumber.Text.Trim() != "" && RadNumericText_Weight.Value != null && Label_ACCTotal.Text != "$0.00" && RadNumericTextBox_FlatRate.Value != null);
+			return bValid;
+		}
 
-        protected void RadButton_Dispatch_Click(object sender, EventArgs e)
-        {
-            // Check to see if Load is locked by another user:
-            if (LockedUserChanged())
-                return;
+		protected void RadButton_Dispatch_Click(object sender, EventArgs e)
+		{
+			// Check to see if Load is locked by another user:
+			if (LockedUserChanged())
+				return;
 
-            Page.Validate("Dispatch");
+			Page.Validate("Dispatch");
 
-            if (Page.IsValid)
-            {
-                // open the Dispatch report.
-                // ensure at least a pick and a drop exist. Client validation would have already ensured required fields exist for them.
-                int LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
-                Boolean PickAndDropExists = false;
-                Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-                qry.sp_LoadDispatchValidation(LoadId, out PickAndDropExists);
+			if (Page.IsValid)
+			{
+				// open the Dispatch report.
+				// ensure at least a pick and a drop exist. Client validation would have already ensured required fields exist for them.
+				int LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
+				Boolean PickAndDropExists = false;
+				Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+				qry.sp_LoadDispatchValidation(LoadId, out PickAndDropExists);
 
-                if (PickAndDropExists)
-                {
+				if (PickAndDropExists)
+				{
 					Auth auth = (Auth)Session["Auth"];
 
 					// Change status to Dispatched if current status is "being entered"
 					if (RadComboBox_Status.SelectedValue == "0" || RadComboBox_Status.SelectedValue == "1")
-                    {
+					{
 						qry.sp_Load_LoadStatus_UpdateInsert(Convert.ToInt32(HiddenField_LoadId.Value), 2, DateTime.Now, auth.PersonId, true);
 						RadComboBox_Status.SelectedValue = "2";
 						SaveLoad();
@@ -1688,302 +1657,224 @@ namespace RedbonePlatform.Pages.ContainerPages
 					}
 
 					RadAjaxManager1.ResponseScripts.Add("openDispatchSheetReport('" + LoadId + "','0');");
-
-
-                    try {
-                    SignalRNotificationService ldUtil = new SignalRNotificationService();
-                    ldUtil.SendLoadUpdatedNotification(HiddenField_LoadId.Value);
-                    }
-                    catch(Exception ex)
-                    {
-
-                    }
-
-                    List<string> idsToUpdate = new List<string>();
-                    idsToUpdate.Add(RadComboBox_Driver1.SelectedValue);
-                    idsToUpdate.Add(RadComboBox_Driver2.SelectedValue);
-
-                    //get a list of driver ids for every driver attached to load stops
-                    Datasets.dsPersonEdit_MessagesTableAdapters.LoadStopDriverNotifiesTableAdapter stpDriversAdapt = new Datasets.dsPersonEdit_MessagesTableAdapters.LoadStopDriverNotifiesTableAdapter();
-                    Datasets.dsPersonEdit_Messages.LoadStopDriverNotifiesDataTable driversTable = stpDriversAdapt.GetData(LoadId);
-
-
-                    foreach(var row in driversTable)
-                    {
-
-                        if(!row.IsDriver1_PersonIdNull())
-                        {
-                            idsToUpdate.Add(row.Driver1_PersonId.ToString());
-                        }
-
-                        if (!row.IsDriver2_PersonIdNull())
-                        {
-                            idsToUpdate.Add(row.Driver2_PersonId.ToString());
-                        }
-
-
-                    }
-
-                    //filter out any duplicates
-                    idsToUpdate = idsToUpdate.Distinct().ToList();
-
-            //CREATE LOAD UPDATE MESSAGE for every driver associated with this load
-                    Datasets.dsPersonEdit_MessagesTableAdapters.PersonMessageTableAdapter msgAdapt = new Datasets.dsPersonEdit_MessagesTableAdapters.PersonMessageTableAdapter();
-                    Datasets.dsPersonEdit_Messages.PersonMessageDataTable msgsTable = new dsPersonEdit_Messages.PersonMessageDataTable();
-
-
-                    Datasets.dsPersonEdit_MessagesTableAdapters.PersonMessageTypeTableAdapter msgTypeAdapt = new Datasets.dsPersonEdit_MessagesTableAdapters.PersonMessageTypeTableAdapter();
-                    Datasets.dsPersonEdit_Messages.PersonMessageTypeDataTable msgTypeTable = msgTypeAdapt.GetDataByName("System Alert Load Update");
-                    Datasets.dsPersonEdit_Messages.PersonMessageTypeRow typeRow = msgTypeTable[0];
-
-                    foreach (var id in idsToUpdate)
-                    {
-                        var newmsg = msgsTable.NewPersonMessageRow();
-
-                        newmsg.MessageDate = DateTime.Now;
-                        newmsg.MessageText = "Load: " + LoadId + " has been updated, please review the load Details to check for any new information";
-                        newmsg.Title = "Load: " + LoadId + " Updated";
-                        newmsg.ViewCount = 0;
-                        newmsg.IsBroadcast = false;
-                        newmsg.PersonId = int.Parse(id);
-                        newmsg.PersonMessageTypeId = typeRow.PersonMessageTypeId;
-                        newmsg.LoadId = LoadId;
-                        newmsg.CreatedBy = auth.PersonId;
-                        msgsTable.Rows.Add(newmsg);
-                    }
-             
-                    msgAdapt.Update(msgsTable);
-
-
-                }
-                else
-                {
-                    RadWindowManager1.RadAlert("You must have at least 1 Pick and 1 Drop in order to Dispatch!", 280, 150, "Missing Pick and Drop!", "");
 				}
+				else
+				{
+					RadWindowManager1.RadAlert("You must have at least 1 Pick and 1 Drop in order to Dispatch!", 280, 150, "Missing Pick and Drop!", "");
+				}
+			}
+		}
 
-            }
+		protected void RadCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			SaveLoad();
+		}
 
-            //string URI = $"https://localhost:7095/api/Load/TriggerLoadUpdateGet?LoadId={Convert.ToInt32(HiddenField_LoadId.Value)}";
-            // using (var client = new WebClient())
-            //{
-            //    string gg = client.DownloadString(URI);
+		protected void RadCheckBox_AutoRatingInd_Click(object sender, EventArgs e)
+		{
+			// Save AutoRatingInd to Load table
+			//int LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
 
-            //}
+			//Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			//qry.LoadUpdateAutoRatingInd(RadCheckBox_AutoRatingInd.Checked, LoadId);
 
+			SaveLoad();
+		}
+		protected void RadDatePicker_PaperworkReceivedDate_SelectedDateChanged(object sender, Telerik.Web.UI.Calendar.SelectedDateChangedEventArgs e)
+		{
+			SaveLoad();
+		}
 
+		private void UpdateFileCountOnFilesButton()
+		{
+			Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
+			String TotalFiles = "0";
 
-        }
+			//// Query the UserFiles folder for this load to determine how many files have been attached
+			//string sTopDirectory = Request.PhysicalApplicationPath + @"UserFiles\LoadDocuments\" + LoadId.ToString();
+			//if (Directory.Exists(sTopDirectory))
+			//    TotalFiles = Directory.GetFiles(sTopDirectory).Length.ToString();
+			//else
+			//    TotalFiles = "0";
 
-        protected void RadCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            SaveLoad();
-        }
+			// Query the LoadFile table for this Load to determine how many documents
+			Datasets.dsDispatch_FilesTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatch_FilesTableAdapters.QueriesTableAdapter();
+			TotalFiles = qry.LoadFileCount_Get(LoadId).ToString();
 
-        protected void RadCheckBox_AutoRatingInd_Click(object sender, EventArgs e)
-        {
-            // Save AutoRatingInd to Load table
-            //int LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
-            
-            //Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            //qry.LoadUpdateAutoRatingInd(RadCheckBox_AutoRatingInd.Checked, LoadId);
+			RadButton_FileManagement.Text = "Docs (" + TotalFiles + ")";
+		}
 
-            SaveLoad();
-        }
-        protected void RadDatePicker_PaperworkReceivedDate_SelectedDateChanged(object sender, Telerik.Web.UI.Calendar.SelectedDateChangedEventArgs e)
-        {
-            SaveLoad();
-        }
+		protected void CustomValidator_Drivers_ServerValidate(object source, ServerValidateEventArgs args)
+		{
+			// Ensure Driver1 and Drvier2 are unique
+			args.IsValid = DriversDuplicateCheck_IsValid();
+		}
 
-        private void UpdateFileCountOnFilesButton()
-        {
-            Int32 LoadId = Convert.ToInt32(HiddenField_LoadId.Value);
-            String TotalFiles = "0";
+		//Ensure unique drivers are entered
+		private Boolean DriversDuplicateCheck_IsValid()
+		{
+			Boolean bIsValid = true;
+			if (RadComboBox_Driver1.SelectedIndex == 0 || RadComboBox_Driver2.SelectedIndex == 0)
+				bIsValid = true;
+			else
+				bIsValid = (RadComboBox_Driver1.SelectedValue != RadComboBox_Driver2.SelectedValue);
 
-            //// Query the UserFiles folder for this load to determine how many files have been attached
-            //string sTopDirectory = Request.PhysicalApplicationPath + @"UserFiles\LoadDocuments\" + LoadId.ToString();
-            //if (Directory.Exists(sTopDirectory))
-            //    TotalFiles = Directory.GetFiles(sTopDirectory).Length.ToString();
-            //else
-            //    TotalFiles = "0";
+			if (!bIsValid)
+				RadWindowManager1.RadAlert("Drivers must be Unique!", 300, 150, "Duplicate Drivers", "");
 
-            // Query the LoadFile table for this Load to determine how many documents
-            Datasets.dsDispatch_FilesTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatch_FilesTableAdapters.QueriesTableAdapter();
-            TotalFiles = qry.LoadFileCount_Get(LoadId).ToString();
-            
-            RadButton_FileManagement.Text = "Docs (" + TotalFiles + ")";
-        }
+			return bIsValid;
+		}
 
-        protected void CustomValidator_Drivers_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            // Ensure Driver1 and Drvier2 are unique
-            args.IsValid = DriversDuplicateCheck_IsValid();
-        }
+		protected void CustomValidator_Trailers_ServerValidate(object source, ServerValidateEventArgs args)
+		{
+			// Ensure Driver1 and Drvier2 are unique
+			args.IsValid = TrailersDuplicateCheck_IsValid();
+		}
 
-        //Ensure unique drivers are entered
-        private Boolean DriversDuplicateCheck_IsValid()
-        {
-            Boolean bIsValid = true;
-            if (RadComboBox_Driver1.SelectedIndex == 0 || RadComboBox_Driver2.SelectedIndex == 0)
-                bIsValid = true;
-            else
-                bIsValid = (RadComboBox_Driver1.SelectedValue != RadComboBox_Driver2.SelectedValue);
+		private Boolean TrailersDuplicateCheck_IsValid()
+		{
+			Boolean bIsValid = true;
+			if (RadComboBox_Trailer1.SelectedIndex == 0 || RadComboBox_Trailer2.SelectedIndex == 0)
+				bIsValid = true;
+			else
+				// Trailer ALB1000 can be duplicated
+				bIsValid = ((RadComboBox_Trailer1.SelectedValue == "177") || (RadComboBox_Trailer1.SelectedValue != RadComboBox_Trailer2.SelectedValue));
 
-            if (!bIsValid)
-                RadWindowManager1.RadAlert("Drivers must be Unique!", 300, 150, "Duplicate Drivers", "");
+			if (!bIsValid)
+				RadWindowManager1.RadAlert("Trailers must be Unique!", 300, 150, "Duplicate Trailers", "");
 
-            return bIsValid;
-        }
+			return bIsValid;
+		}
 
-        protected void CustomValidator_Trailers_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            // Ensure Driver1 and Drvier2 are unique
-            args.IsValid = TrailersDuplicateCheck_IsValid();
-        }
+		protected void CustomValidator_Temperature_ServerValidate(object source, ServerValidateEventArgs args)
+		{
+			args.IsValid = true;
 
-        private Boolean TrailersDuplicateCheck_IsValid()
-        {
-            Boolean bIsValid = true;
-            if (RadComboBox_Trailer1.SelectedIndex == 0 || RadComboBox_Trailer2.SelectedIndex == 0)
-                bIsValid = true;
-            else
-                // Trailer ALB1000 can be duplicated
-                bIsValid = ((RadComboBox_Trailer1.SelectedValue == "177") || (RadComboBox_Trailer1.SelectedValue != RadComboBox_Trailer2.SelectedValue));
+			String trailerType = RadComboBox_TrailerType.SelectedValue;
 
-            if (!bIsValid)
-                RadWindowManager1.RadAlert("Trailers must be Unique!", 300, 150, "Duplicate Trailers", "");
+			if (trailerType == "6" || trailerType == "5" || trailerType == "1")
+				args.IsValid = true;
+			else
+			{
+				// if Per BOL is checked, don't validate temp or temp type
+				if (!Convert.ToBoolean(RadCheckBox_AllowPerBOL.Checked))
+				{
+					// require Temperature
+					String temp = RadNumericTextBox_Temperature.Value.ToString();
+					args.IsValid = (temp != "");
+				}
+			}
+		}
 
-            return bIsValid;
-        }
+		protected void CustomValidator_TempModeEquipment_ServerValidate(object source, ServerValidateEventArgs args)
+		{
+			args.IsValid = true;
 
-        protected void CustomValidator_Temperature_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            args.IsValid = true;
-            
-            String trailerType = RadComboBox_TrailerType.SelectedValue;
+			String trailerType = RadComboBox_TrailerType.SelectedValue;
 
-            if (trailerType == "6" || trailerType == "5" || trailerType == "1")
-                args.IsValid = true;
-            else
-            {
-                // if Per BOL is checked, don't validate temp or temp type
-                if (!Convert.ToBoolean(RadCheckBox_AllowPerBOL.Checked))
-                {
-                    // require Temperature
-                    String temp = RadNumericTextBox_Temperature.Value.ToString();
-                    args.IsValid = (temp != "");
-                }
-            }
-        }
+			if (trailerType == "6" || trailerType == "5" || trailerType == "1")
+				args.IsValid = true;
+			else
+			{
+				// if Per BOL is checked, don't validate temp or temp type
+				if (!Convert.ToBoolean(RadCheckBox_AllowPerBOL.Checked))
+				{
+					// require TempMode
+					string tempType = RadDropDownList_TempMode.SelectedValue;
+					args.IsValid = (tempType != "0");
+				}
+			}
+		}
 
-        protected void CustomValidator_TempModeEquipment_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            args.IsValid = true;
-            
-            String trailerType = RadComboBox_TrailerType.SelectedValue;
+		private Boolean LockedUserChanged()
+		{
+			// Determine if Load is currently locked by another user
+			Classes.Auth auth = (Classes.Auth)Session["Auth"];
+			Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
+			miLockedPersonId = qry.LockedUser_Get(Convert.ToInt32(HiddenField_LoadId.Value));
 
-            if (trailerType == "6" || trailerType == "5" || trailerType == "1")
-                args.IsValid = true;
-            else
-            {
-                // if Per BOL is checked, don't validate temp or temp type
-                if (!Convert.ToBoolean(RadCheckBox_AllowPerBOL.Checked))
-                {
-                    // require TempMode
-                    string tempType = RadDropDownList_TempMode.SelectedValue;
-                    args.IsValid = (tempType != "0");
-                }
-            }
-        }
+			if (auth.PersonId != miLockedPersonId)
+			{
+				RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("The Load's lock has been taken over by another user and saves are no loger permitted and the Load will be Closed!"), 500, 130, "Load is now Locked by another user!", "CloseMe2");
+				return true;
+			}
+			return false;
+		}
+		protected void Page_PreRenderComplete(object sender, EventArgs e)
+		{
+			Classes.Auth auth = (Classes.Auth)Session["Auth"];
 
-        private Boolean LockedUserChanged()
-        {
-            // Determine if Load is currently locked by another user
-            Classes.Auth auth = (Classes.Auth)Session["Auth"];
-            Datasets.dsDispatchTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchTableAdapters.QueriesTableAdapter();
-            miLockedPersonId = qry.LockedUser_Get(Convert.ToInt32(HiddenField_LoadId.Value));
-
-            if (auth.PersonId != miLockedPersonId)
-            {
-                RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("The Load's lock has been taken over by another user and saves are no loger permitted and the Load will be Closed!"), 500, 130, "Load is now Locked by another user!", "CloseMe2");
-                return true;
-            }
-            return false;
-        }
-        protected void Page_PreRenderComplete(object sender, EventArgs e)
-        {
-            Classes.Auth auth = (Classes.Auth)Session["Auth"];
-
-            // Disable controls if load is in billed status and user is not a Main-Operations-LoadBilledManagement
-            Boolean bEnabled = ((auth.Entitlements.Contains(910)) || (!(RadComboBox_Status.SelectedValue == "8")));
+			// Disable controls if load is in billed status and user is not a Main-Operations-LoadBilledManagement
+			Boolean bEnabled = ((auth.Entitlements.Contains(910)) || (!(RadComboBox_Status.SelectedValue == "8")));
 			Boolean billingApprovedEnabled = (auth.Entitlements.Contains(920)); //Main-Operations-LoadBilledIndicator
 
 			RadComboBox_Status.Enabled = bEnabled;
-            RadButton_StatusMoveNext.Enabled = bEnabled;
-            RadComboBox_Customer.Enabled = bEnabled;
-            RadButton_Pick.Enabled = bEnabled;
-            RadButton_Drop.Enabled = bEnabled;
-            RadButton_Leg.Enabled = bEnabled;
-            RadButton_FuelStop.Enabled = bEnabled;
-            RadComboBox_LoadPlanner.Enabled = bEnabled;
-            RadComboBox_Driver1.Enabled = bEnabled;
-            RadComboBox_Dispatcher.Enabled = bEnabled;
-            RadComboBox_Driver2.Enabled = bEnabled;
-            RadComboBox_Commodity.Enabled = bEnabled;
-            RadComboBox_Truck1.Enabled = bEnabled;
-            RadComboBox_TrailerType.Enabled = bEnabled;
-            RadComboBox_Trailer1.Enabled = bEnabled;
-            RadNumericTextBox_Temperature.Enabled = bEnabled;
-            RadComboBox_Trailer2.Enabled = bEnabled;
-            RadDropDownList_TempMode.Enabled = bEnabled;
-            
-            // When disabling the Notes field, causes issues. 
-            // need to figure out how to make read-only.
-            if (!bEnabled)
-            {
-                //RadEditor_LoadDetailNotes.Attributes["overflow"] = "scroll";
-                //RadEditor_LoadDetailNotes.Attributes["border"] = "1px solid white";
-            }
-            else
-            {
-                //RadEditor_LoadDetailNotes.Attributes.Clear();
-                //RadEditor_LoadDetailNotes.
-            }
-            //RadEditor_LoadDetailNotes.Enabled = bEnabled;
+			RadButton_StatusMoveNext.Enabled = bEnabled;
+			RadComboBox_Customer.Enabled = bEnabled;
+			RadButton_Pick.Enabled = bEnabled;
+			RadButton_Drop.Enabled = bEnabled;
+			RadButton_Leg.Enabled = bEnabled;
+			RadButton_FuelStop.Enabled = bEnabled;
+			RadComboBox_LoadPlanner.Enabled = bEnabled;
+			RadComboBox_Driver1.Enabled = bEnabled;
+			RadComboBox_Dispatcher.Enabled = bEnabled;
+			RadComboBox_Driver2.Enabled = bEnabled;
+			RadComboBox_Commodity.Enabled = bEnabled;
+			RadComboBox_Truck1.Enabled = bEnabled;
+			RadComboBox_TrailerType.Enabled = bEnabled;
+			RadComboBox_Trailer1.Enabled = bEnabled;
+			RadNumericTextBox_Temperature.Enabled = bEnabled;
+			RadComboBox_Trailer2.Enabled = bEnabled;
+			RadDropDownList_TempMode.Enabled = bEnabled;
 
-            RadNumericTextBox_PaidEmpty.Enabled = bEnabled;
-            RadNumericTextBox_PaidLoaded.Enabled = bEnabled;
-            RadNumericTextBox_Pieces.Enabled = bEnabled;
-            RadDatePicker_PaperworkReceivedDate.Enabled = bEnabled;
-            RadTextBox_CustomerLoadNumber.Enabled = bEnabled;
-            RadNumericText_Weight.Enabled = bEnabled;
-            RadNumericTextBox_FlatRate.Enabled = bEnabled;
-            RadCheckBox_SendOriginals.Enabled = bEnabled;
-            RadCheckBox_BillingApproval.Enabled = billingApprovedEnabled;
-            RadCheckBox_AllowPerBOL.Enabled = bEnabled;
-            RadCheckBox_AutoRatingInd.Enabled = bEnabled;
+			// When disabling the Notes field, causes issues. 
+			// need to figure out how to make read-only.
+			if (!bEnabled)
+			{
+				//RadEditor_LoadDetailNotes.Attributes["overflow"] = "scroll";
+				//RadEditor_LoadDetailNotes.Attributes["border"] = "1px solid white";
+			}
+			else
+			{
+				//RadEditor_LoadDetailNotes.Attributes.Clear();
+				//RadEditor_LoadDetailNotes.
+			}
+			//RadEditor_LoadDetailNotes.Enabled = bEnabled;
 
-            // This worked and disabled all controls in the Stop but the RadEditor didn't display correctly.
-            //foreach(Control doc in RadDockLayout1.Controls)
-            //{
-            //    if (doc is RadDock)
-            //    {
-            //        ((RadDock)doc).Enabled = bEnabled;
-            //    }
-            //}
-            foreach (RadDock doc in RadDockZone1.Docks)
-            {
-                //doc.Enabled = bEnabled;
-            }
-        }
-        protected void RadComboBox_HoldSub_DataBinding(object sender, EventArgs e)
-        {
-            RadComboBox_HoldSub.DataSource = GetSubTypes();
-        }
+			RadNumericTextBox_PaidEmpty.Enabled = bEnabled;
+			RadNumericTextBox_PaidLoaded.Enabled = bEnabled;
+			RadNumericTextBox_Pieces.Enabled = bEnabled;
+			RadDatePicker_PaperworkReceivedDate.Enabled = bEnabled;
+			RadTextBox_CustomerLoadNumber.Enabled = bEnabled;
+			RadNumericText_Weight.Enabled = bEnabled;
+			RadNumericTextBox_FlatRate.Enabled = bEnabled;
+			RadCheckBox_SendOriginals.Enabled = bEnabled;
+			RadCheckBox_BillingApproval.Enabled = billingApprovedEnabled;
+			RadCheckBox_AllowPerBOL.Enabled = bEnabled;
+			RadCheckBox_AutoRatingInd.Enabled = bEnabled;
 
-        protected void RadCheckBox_MileageOverride_CheckedChanged(object sender, EventArgs e)
-        {
-            SaveLoad();
-        }
+			// This worked and disabled all controls in the Stop but the RadEditor didn't display correctly.
+			//foreach(Control doc in RadDockLayout1.Controls)
+			//{
+			//    if (doc is RadDock)
+			//    {
+			//        ((RadDock)doc).Enabled = bEnabled;
+			//    }
+			//}
+			foreach (RadDock doc in RadDockZone1.Docks)
+			{
+				//doc.Enabled = bEnabled;
+			}
+		}
+		protected void RadComboBox_HoldSub_DataBinding(object sender, EventArgs e)
+		{
+			RadComboBox_HoldSub.DataSource = GetSubTypes();
+		}
+
+		protected void RadCheckBox_MileageOverride_CheckedChanged(object sender, EventArgs e)
+		{
+			SaveLoad();
+		}
 
 		//called by pick, drop, leg user controls on status change
 		//protected void SendStatusChangeToClient(int loadId, int loadStopId, DateTime statusUpdateDate)

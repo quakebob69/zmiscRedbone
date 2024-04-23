@@ -204,6 +204,15 @@ namespace RedbonePlatform.Pages.ContainerPages
         protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
 
         /// <summary>
+        /// RadAjaxLoadingPanel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel2;
+
+        /// <summary>
         /// RadSkinManager1 control.
         /// </summary>
         /// <remarks>
@@ -364,24 +373,6 @@ namespace RedbonePlatform.Pages.ContainerPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadButton RadButton_TraceNumber;
-
-        /// <summary>
-        /// RadComboBox_DriverStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadComboBox_DriverStatus;
-
-        /// <summary>
-        /// RadButton_DriverEvents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadButton RadButton_DriverEvents;
 
         /// <summary>
         /// lblCounter control.
@@ -1309,15 +1300,6 @@ namespace RedbonePlatform.Pages.ContainerPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource_LoadStatusType;
-
-        /// <summary>
-        /// ObjectDataSource_DriverStatusType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource_DriverStatusType;
 
         /// <summary>
         /// RadScriptBlock2 control.

@@ -636,7 +636,8 @@
             <ClientEvents OnRequestStart="RequestStart" OnResponseEnd="ResponseEnd" />
         </telerik:RadAjaxManager>
 
-        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" MinDisplayTime="3000" Modal="true" />
+        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" MinDisplayTime="1000" Modal="true" />
+        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel2" runat="server" MinDisplayTime="3000" Modal="true" />
 
         <telerik:RadSkinManager ID="RadSkinManager1" runat="server"></telerik:RadSkinManager>
         <telerik:RadFormDecorator ID="RadFormDecorator1" runat="server" DecoratedControls="All" />
@@ -646,7 +647,11 @@
                     ReloadOnShow="true" ShowContentDuringLoad="false" Modal="true" InitialBehaviors="Close,Move" Behaviors="Maximize,Minimize,Close,Move,Resize" 
 					KeepInScreenBounds="true" VisibleStatusbar="false" OnClientClose="HidingTenderDetails">
                 </telerik:RadWindow>
-                <telerik:RadWindow ID="RadWindow_accCharges" runat="server"></telerik:RadWindow>
+                <telerik:RadWindow ID="RadWindow_accCharges" runat="server" Title="Charges" Width="1100px" Height="500px" MinWidth="800px" MinHeight="300px"
+					KeepInScreenBounds="true" ReloadOnShow="true" ShowContentDuringLoad="false" DestroyOnClose="false" Modal="true" CenterIfModal="true"
+					IconUrl="../../images/16x16/truck-icon_16.png" VisibleStatusbar="false"
+					OnClientClose="RadWindow_accCharges_OnClientClose" InitialBehaviors="Close,Move,Resize" Behaviors="Close,Move,Resize">
+                </telerik:RadWindow>
                 <telerik:RadWindow ID="RadWindow_DispatchSheet_Files" runat="server"></telerik:RadWindow>
 				<telerik:RadWindow ID="RadWindow_LoadNotes" runat="server" Title="Load Notes" Height="600px" Width="1000px" MinWidth="600px" MinHeight="400px" Modal="true" 
 					ReloadOnShow="true" ShowContentDuringLoad="false" InitialBehaviors="Reload,Close,Move,Resize" Behaviors="Reload,Close,Move,Resize" VisibleStatusbar="false" OnClientClose="HidingLoadNotes">
@@ -673,12 +678,12 @@
 												<legend style="font-size: small;text-align: left"><strong>LOAD STATUS</strong></legend>
 												<table>
 													<tr>
-														<td>
+														<td style="width:140px;">
 															<telerik:RadComboBox ID="RadComboBox_Status" runat="server" OnClientFocus="OnClientFocusHandler" OnClientKeyPressing="radComboKeyPress"
 																EmptyMessage="-Status-" ToolTip="Status" MarkFirstMatch="true" BackColor="Green" ForeColor="White"
-																Filter="Contains" OnSelectedIndexChanged="RadComboBox_SelectedIndexChanged"
+																Filter="Contains" OnSelectedIndexChanged="RadComboBox_SelectedIndexChanged" DropDownAutoWidth="Enabled"
 																AutoPostBack="True" DataSourceID="ObjectDataSource_LoadStatusType"
-																DataTextField="LoadStatusTypeNm" DataValueField="LoadStatusTypeId" Width="110px"
+																DataTextField="LoadStatusTypeNm" DataValueField="LoadStatusTypeId" Width="140px"
 																OnClientSelectedIndexChanging="RadComboBox_Status_SelectedIndexChanging" TabIndex="25">
 															</telerik:RadComboBox>
 														</td>
@@ -688,7 +693,6 @@
 															</telerik:RadButton>
 														</td>
 													</tr>
-
 													<tr>
                                                         <td colspan="2">
 															<table class="nospacing">
@@ -712,52 +716,23 @@
 														</td>
 													</tr>
 													<tr>
-														<td style="font-size: small; padding-top:7px;">
-															<telerik:RadButton ID="RadButton_StatusHistory" OnClientClicking="RadButton_StatusHistory_Clicking" runat="server"
-																Text="Status History" Width="100px" TabIndex="26" ToolTip="Load Status History">
-															</telerik:RadButton>
+                                                        <td colspan="2">
+															<table class="nospacing">
+																<tr>
+																	<td style="font-size: small; padding-top:7px;">
+																		<telerik:RadButton ID="RadButton_StatusHistory" OnClientClicking="RadButton_StatusHistory_Clicking" runat="server"
+																			Text="Status History" Width="100px" TabIndex="26" ToolTip="Load Status History">
+																		</telerik:RadButton>
+																	</td>
+																	<td style="font-size: small; padding-top:7px;">
+																		<telerik:RadButton ID="RadButton_TraceNumber" runat="server" Text="Trace History" Width="100px"
+																			OnClientClicking="RadButton_TraceNumber_Clicking">
+																		</telerik:RadButton>
+																	</td>
+																</tr>
+															</table>
 														</td>
-														<td style="font-size: small; padding-top:7px;">
-                                                            <telerik:RadButton ID="RadButton_TraceNumber" runat="server" Text="Trace History" Width="100px"
-                                                                OnClientClicking="RadButton_TraceNumber_Clicking">
-                                                            </telerik:RadButton>
-                                                        </td>
 													</tr>
-                                                   
-												</table>
-											</fieldset>
-                                            <fieldset>
-												<legend style="font-size: small;text-align: left"><strong>DRIVER STATUS</strong></legend>
-												<table>
-													
-                                                    <tr >
-														
-                                                        <td>
-															
-                                                            <telerik:RadComboBox ID="RadComboBox_DriverStatus" runat="server" OnClientFocus="OnClientFocusHandler" OnClientKeyPressing="radComboKeyPress"
-																EmptyMessage="-Status-" ToolTip="Status" MarkFirstMatch="true" BackColor="Green" ForeColor="White"
-																Filter="Contains" OnSelectedIndexChanged="RadComboBox_SelectedIndexChanged"
-																AutoPostBack="True" DataSourceID="ObjectDataSource_DriverStatusType"
-																DataTextField="Name" DataValueField="LoadDriverStatusId" Width="110px"
-																 TabIndex="25">
-															</telerik:RadComboBox>
-														</td>
-														<%--<td class="nospacing" style="padding-left: 5px">
-															<telerik:RadButton ID="RadButton_DrivStatusMoveNext" runat="server" Text=">" Width="20px"
-																OnClick="RadButton_DriverStatusMoveNext_Click" TabIndex="27" ToolTip="Move to next Driver Status">
-															</telerik:RadButton>
-														</td>--%>
-													</tr>
-
-                                                    <tr>
-														<td style="font-size: small; padding-top:7px;">
-															<telerik:RadButton ID="RadButton_DriverEvents" OnClientClicking="RadButton_DriverEvents_Clicking" runat="server"
-																Text="Driver Events" Width="100px" TabIndex="26" ToolTip="View Driver Events">
-															</telerik:RadButton>
-														</td>
-														
-													</tr>
-
 												</table>
 											</fieldset>
 										</td>
@@ -1816,11 +1791,6 @@
                 <asp:Parameter Name="LoadStatusTypeId" Type="Int16" DefaultValue="-1" />
             </SelectParameters>
 		</asp:ObjectDataSource>
-        <asp:ObjectDataSource ID="ObjectDataSource_DriverStatusType" runat="server"
-            OldValuesParameterFormatString="original_{0}" SelectMethod="GetData"
-            TypeName="RedbonePlatform.Datasets.dsLoadStatusTableAdapters.LoadDriverStatusTableAdapter">
-           
-		</asp:ObjectDataSource>
 
     </form>
     <telerik:RadScriptBlock ID="RadScriptBlock2" runat="server">
@@ -1936,20 +1906,20 @@
                 //alert(LoadId);
                 var oWnd = radopen("DispatchSheet_AccCharges.aspx?LoadId=" + LoadId + "&LoadStopId=0", "RadWindow_accCharges");
 
-                oWnd.setSize(1050, 300); // width, height
-                oWnd.set_minWidth(800);
-                oWnd.set_minHeight(300);
-                oWnd.set_destroyOnClose(true);
-                oWnd.set_visibleStatusbar(true);
-                oWnd.set_iconUrl("../../images/16x16/truck-icon_16.png");
-                oWnd.set_title("Charges");
-                oWnd.set_behaviors(
-                    Telerik.Web.UI.WindowBehaviors.Move +
-                    Telerik.Web.UI.WindowBehaviors.Resize +
-                    Telerik.Web.UI.WindowBehaviors.Close);
-                oWnd.add_close(RadWindow_accCharges_OnClientClose);
-                oWnd.center();
-                oWnd.set_modal(true);
+                //oWnd.setSize(1050, 500); // width, height
+                //oWnd.set_minWidth(800);
+                //oWnd.set_minHeight(300);
+                //oWnd.set_destroyOnClose(true);
+                //oWnd.set_visibleStatusbar(true);
+                //oWnd.set_iconUrl("../../images/16x16/truck-icon_16.png");
+                //oWnd.set_title("Charges");
+                //oWnd.set_behaviors(
+                //    Telerik.Web.UI.WindowBehaviors.Move +
+                //    Telerik.Web.UI.WindowBehaviors.Resize +
+                //    Telerik.Web.UI.WindowBehaviors.Close);
+                //oWnd.add_close(RadWindow_accCharges_OnClientClose);
+                //oWnd.center();
+                //oWnd.set_modal(true);
             }
 
             function RadButton_AccCharges_Clicking(sender, args) {
@@ -1957,28 +1927,6 @@
                 args.set_cancel(true);
                 return false;
             }
-
-
-            function openDriverEvents() {
-                var LoadId = document.getElementById('<%= HiddenField_LoadId.ClientID %>').value;
-
-                //alert(LoadId);
-                var oWnd = radopen("DispatchSheet_DriverEvents.aspx?LoadId=" + LoadId, "RadWindow_DispatchSheet_DriverEvents");
-
-                oWnd.setSize(750, 300); // width, height
-                oWnd.set_minWidth(500);
-                oWnd.set_destroyOnClose(true);
-                oWnd.set_visibleStatusbar(true);
-                oWnd.set_iconUrl("../../images/16x16/truck-icon_16.png");
-                oWnd.set_title("Load Driver Events");
-                oWnd.set_behaviors(
-                    Telerik.Web.UI.WindowBehaviors.Move +
-                    Telerik.Web.UI.WindowBehaviors.Close +
-                    Telerik.Web.UI.WindowBehaviors.Resize);
-                oWnd.center();
-                oWnd.set_modal(true);
-            }
-
 
             function openStatusHistory() {
                 var LoadId = document.getElementById('<%= HiddenField_LoadId.ClientID %>').value;
@@ -2012,8 +1960,8 @@
                 //console.log("LoadId " + LoadId);
                 var oWnd = radopen("DispatchSheet_Files2.aspx?LoadId=" + LoadId, "RadWindow_DispatchSheet_Files");
 
-                oWnd.setSize(900, 500); // width, height
-                oWnd.set_minWidth(547);
+                oWnd.setSize(1000, 500); // width, height
+                oWnd.set_minWidth(600);
                 oWnd.set_minHeight(430);
                 oWnd.set_destroyOnClose(true);
                 oWnd.set_visibleStatusbar(true);
@@ -2067,14 +2015,6 @@
                 return false;
             }
 
-
-
-            function RadButton_DriverEvents_Clicking(sender, args) {
-                openDriverEvents();
-                args.set_cancel(true);
-                return false;
-            }
-
             function RadWindow_accCharges_OnClientClose(sender, args) {
                 // Refresh the ACC Total label
                 var ajaxManager = $find("<%= RadAjaxManager1.ClientID %>");
@@ -2098,27 +2038,33 @@
                 // Prevent skipping statuses (unless going straight to Cancel or coming from cancel)
                 // get current status and compare with new status. If current status = 1 through 5
 
-                //check if there are selected items in substatus box, is there? dont allow postback 
+				var ToBeSelectedValue = args.get_item().get_value();
+
+				//check if there are selected items in substatus box, is there? dont allow postback
+				//status 'Awaiting Cust Appr' (9) can have sub-statuses selected
                 var cmboSub = $find("RadComboBox_HoldSub");
 
-                if (cmboSub != null) {
-                var checkedItems = cmboSub.get_checkedItems();
-                if (checkedItems.length > 0)
-                {
-                    radalert('Status may not be changed until all substatuses have been removed');
-                    sender.set_cancel(true);
+				//alert(cmboSub);
+				//alert(ToBeSelectedValue);
 
+				if (cmboSub != null && ToBeSelectedValue != "9") {
+					var checkedItems = cmboSub.get_checkedItems();
+
+					if (checkedItems.length > 0)
+					{
+	                    radalert('Status may not be changed until all substatuses have been removed');
+						sender.set_cancel(true);
+					}
                 }
-                }
-                // Prevent "In Transit" Load Status change when Customer Load #, Weight, ACC Charges, or Rate is null
-                var ToBeSelectedValue = args.get_item().get_value();
+
+				// Prevent "In Transit" Load Status change when Customer Load #, Weight, ACC Charges, or Rate is null
                 if (ToBeSelectedValue == "4") {
                     <%--document.getElementById("<%= RequiredFieldValidator_Weight.ClientID %>").enabled = true;
                     var bValid = Page_ClientValidate("InTransit");--%>
 
                     var RadTextBox_CustomerLoadNumber = $find("RadTextBox_CustomerLoadNumber");
                     var RadNumericText_Weight = $find("RadNumericText_Weight");
-<%--                    var Label_ACCTotal = document.getElementById("<%= Label_ACCTotal.ClientID %>");--%>
+					<%--var Label_ACCTotal = document.getElementById("<%= Label_ACCTotal.ClientID %>");--%>
                     var RadNumericTextBox_FlatRate = $find("RadNumericTextBox_FlatRate");
 
                     if (RadTextBox_CustomerLoadNumber.get_value() == "" || RadNumericText_Weight.get_value() == ""
@@ -2128,19 +2074,13 @@
                     }
                 }
 
-
                 //if (ToBeSelectedValue == "6") //on hold
                 //{
-
                 //    document.getElementById("RadComboBox_HoldSub").style.display = "block";
-
-                   
-
                 //}
                 //else {
                 //    document.getElementById("RadComboBox_HoldSub").style.display = "none";
                 //}
-
             }
 
             function openDispatchSheetReport(LoadId, LoadStopId) {
@@ -2475,19 +2415,23 @@
 
 			//function HidingNoteAdd() {
 			//}
+
+            //Show Loading Panel when updating any control
             var currentLoadingPanel = null;
             var currentUpdatedControl = null;
+            var LOAD_STOP_TARGET = 'HiddenField_StopToLoadNextOnPostback';
             function RequestStart(sender, eventArgs) {
+                var eventTarget = eventArgs.get_eventTarget();
+                if (eventTarget != null && eventTarget == LOAD_STOP_TARGET) {
+                    currentLoadingPanel = $find("<%=RadAjaxLoadingPanel2.ClientID%>");
+                } else {
+                    currentLoadingPanel = $find("<%=RadAjaxLoadingPanel1.ClientID%>");
+                }
 
 
-
-                currentLoadingPanel = $find("<%=RadAjaxLoadingPanel1.ClientID%>");
                 if (currentLoadingPanel != null) {
-                    //alert(currentLoadingPanel);
                     currentUpdatedControl = "<%= divMain.ClientID %>";
-                    //alert(currentUpdatedControl);
                     try {
-                        //show the loading panel over the updated control
                         currentLoadingPanel.show(currentUpdatedControl);
                     }
                     catch (err) {
@@ -2496,16 +2440,16 @@
                 } else {
                     alert('didnt find loading page');
                 }
-                //alert('after');
             }
             function ResponseEnd() {
-                //alert('ttttttttttt');
                 //hide the loading panel and clean up the global variables
-                if (currentLoadingPanel != null)
+                if (currentLoadingPanel != null) {
                     currentLoadingPanel.hide(currentUpdatedControl);
+                }
                 currentUpdatedControl = null;
                 currentLoadingPanel = null;
             }
+
         </script>
     </telerik:RadScriptBlock>
 </body>
