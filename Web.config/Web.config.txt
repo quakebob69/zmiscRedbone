@@ -1,0 +1,5 @@
+LOCAL:
+	<add name="RedBoneConnectionString" connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=RedBone;Persist Security Info=True;User ID=redboneDB2;Password=oW9JlqE@1Xvh34" providerName="System.Data.SqlClient" />
+
+PROD:
+	<add name="RedBoneConnectionString" connectionString="Data Source=truckingwizard.com\;Initial Catalog=RedBone;Persist Security Info=True;User ID=redboneDB2;Password=oROd5ITSqEgh" providerName="System.Data.SqlClient" />
