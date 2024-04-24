@@ -1,7 +1,11 @@
 USE [RedBone]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_LoadsForStatus_Get]    Script Date: 4/24/2024 8:14:42 AM ******/
+/****** Object:  StoredProcedure [dbo].[sp_LoadsForStatus_Get]    Script Date: 4/24/2024 10:36:19 AM ******/
+DROP PROCEDURE [dbo].[sp_LoadsForStatus_Get]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_LoadsForStatus_Get]    Script Date: 4/24/2024 10:36:19 AM ******/
 SET ANSI_NULLS ON
 GO
 
