@@ -2491,6 +2491,38 @@ SELECT OriginatingOTRPayPeriodId, payrollOTRDATasourceid,  AccountingExportPayro
 	ufn_Load_Search_MultiFields
 	
 
+	
+        <asp:HiddenField ID="HiddenField_ShowBilledLoads" runat="server" /> 					(bool)		
+			<asp:HiddenField ID="HiddenField_ShowCancelledLoads" runat="server" Value="False" /> 	(bool)
+			<asp:HiddenField ID="HiddenField_ShowReimbursable" runat="server" /> 					(bool)
+			<asp:HiddenField ID="HiddenField_ShowMissingBol" runat="server" /> 						(bool)
+			<asp:HiddenField ID="HiddenField_ShowMissingDates" runat="server" /> 					(bool)
+        <asp:HiddenField ID="HiddenField_ShowClientType" runat="server" /> 						(String) ('A', 'B', 'D')
+        <asp:HiddenField ID="HiddenField_SearchText" runat="server" />							(String)
+
+
+		<SelectParameters>
+			<asp:ControlParameter ControlID="HiddenField_ShowBilledLoads" Name="ShowBilledLoads" PropertyName="Value" Type="Boolean" />
+				<asp:ControlParameter ControlID="HiddenField_ShowCancelledLoads" Name="ShowCancelledLoads" PropertyName="Value" Type="Boolean" />
+				<asp:ControlParameter ControlID="HiddenField_ShowReimbursable" Name="ShowReimbursablesOnly" PropertyName="Value" Type="Boolean" />
+				<asp:ControlParameter ControlID="HiddenField_ShowMissingBol" Name="ShowNoBolAttachedOnly" PropertyName="Value" Type="Boolean" />
+				<asp:ControlParameter ControlID="HiddenField_ShowMissingDates" Name="ShowNoDropDatesOnly" PropertyName="Value" Type="Boolean" />
+			<asp:ControlParameter ControlID="HiddenField_ShowClientType" Name="ShowClientType" PropertyName="Value" Type="String" />
+			<asp:ControlParameter ControlID="HiddenField_SearchText" Name="SearchAllString" PropertyName="Value" Type="String" />
+		</SelectParameters>
+
+
+		HiddenField_ShowBilledLoads.Value = "false";
+			HiddenField_ShowCancelledLoads.Value = "false";
+			HiddenField_ShowReimbursable.Value = "false";
+			HiddenField_ShowMissingBol.Value = "false";
+			HiddenField_ShowMissingDates.Value = "false";
+		HiddenField_ShowClientType.Value = "A";
+		
+
+
+
+
 
 999999999999999999999999999999999999999999999999999999999999999999999999999999
 
