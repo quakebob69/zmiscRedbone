@@ -50,7 +50,6 @@ BEGIN
 			@LSearchAllString varchar(max) = @SearchAllString
 
 	DECLARE @ValidLoads Table (LoadId int NOT NULL PRIMARY KEY CLUSTERED);
-	--CREATE TABLE #ValidLoads (LoadId int NOT NULL PRIMARY KEY CLUSTERED);
 
 	IF COALESCE(@LSearchAllString, '') <> ''
 		BEGIN
@@ -71,15 +70,12 @@ BEGIN
 			SELECT	DISTINCT l.LoadId 
 			FROM	dispatch.Load l
 					JOIN dispatch.AccCharge acc ON acc.LoadId = l.LoadId
-					--JOIN dispatch.AccChargeType acct ON acct.AccChargeTypeId = acc.AccChargeTypeId
-					--JOIN dispatch.AccChargeType ct ON ct.AccChargeTypeId = acc.AccChargeTypeId
-			WHERE	l.LoadStatusTypeId != (SELECT LoadStatusTypeId FROM dispatch.LoadStatusType WHERE UPPER(LoadStatusTypeNm) = 'BILLED')	--status is not 'billed'
+			WHERE	l.LoadStatusTypeId != (SELECT LoadStatusTypeId FROM dispatch.LoadStatusType WHERE UPPER(LoadStatusTypeNm) = 'BILLED') --status is not 'billed'
 			AND		(
 						(acc.AccChargeTypeId IN (3, 13) AND acc.BillableInd = 1)
 						OR
 						(acc.AccChargeTypeId = 15 AND acc.ReimbursableInd = 1)
 					)
-			--AND		acct.ReiumbursementInd = 1
 			AND		COALESCE(acc.MarkedAsCompleted, 0) = 0
 		END
 	ELSE IF @LShowNoBolAttachedOnly = 1
@@ -89,8 +85,6 @@ BEGIN
 			FROM	dispatch.Load l
 					JOIN dispatch.LoadStop ls ON ls.LoadId = l.LoadId AND ls.LoadStopTypeId = 3
 			WHERE	(SELECT COUNT(*) FROM dispatch.LoadFile WHERE LoadFileTypeId = 2 AND LoadId = l.LoadId) = 0	--# of BOL attachemnts for load
-			--AND		ArrivalDateTime is not null
-			--AND		l.LoadStatusTypeId in (5, 7, 8)
 			AND		DATEDIFF(	HOUR, 
 								(SELECT MAX(StartDateTime) FROM dispatch.LoadStop WHERE LoadStopTypeId = 3 AND LoadStopId = ls.LoadStopId),
 								GETDATE()
@@ -102,7 +96,7 @@ BEGIN
 			SELECT @LShowBilledLoads = 1
 
 			INSERT	INTO @ValidLoads
-			SELECT	DISTINCT l.LoadId		--,CreatedTs, DATEDIFF(WEEK, l.CreatedTs, GETDATE())
+			SELECT	DISTINCT l.LoadId
 			FROM	dispatch.Load l
 					JOIN dispatch.LoadStop ls ON ls.LoadId = l.LoadId AND ls.LoadStopTypeId = 3
 			WHERE	ls.LoadStopTypeId IN (2, 3)	--drops or legs
@@ -118,16 +112,12 @@ BEGIN
 			INSERT	INTO @ValidLoads
 			SELECT	l.LoadId 
 			FROM	dispatch.Load l
-			--WHERE	(SELECT COUNT(*) FROM dispatch.LoadStop WHERE LoadId = l.LoadId AND StartDateTime IS NULL) = 0
-			--WHERE	((@LShowCancelledLoads = 1 AND LoadStatusTypeId = 100)  OR (@LShowCancelledLoads = 0 AND LoadStatusTypeId <> 100))
-			--AND		(@LShowBilledLoads = 1 OR (@LShowBilledLoads = 0 AND LoadStatusTypeId <> 8))
 		END
 
 	--SELECT * FROM @ValidLoads
 
     SELECT	ld.LoadId,
             ld.TripNumber,
-			--Notes = (SELECT COALESCE(dbo.GetLoadNotes(ld.LoadId, 0), '')),
 			SUBSTATUSES = (SELECT STRING_AGG(lsst.Name, ', ') AS Departments FROM dispatch.LoadToLoadStatusSubType ltl inner join dispatch.LoadStatusSubType lsst on lsst.LoadStatusSubTypeId = ltl.LoadStatusSubTypeId where ltl.LoadId = ld.LoadId),
             CUSTNAME = clnt.ClientName,
             StartLocation =	(	SELECT	TOP (1) City + ' ' + State
@@ -169,12 +159,6 @@ BEGIN
 									AND		LoadStopTypeId = 1
 									AND		StopTypeNumber = 1
 								),
-			--PICKUP_BY_TIME =	(	SELECT	TOP (1) CAST(StartDateTime AS TIME)
-								--	FROM	dispatch.LoadStop AS LoadStop_2
-								--	WHERE	LoadId = ld.LoadId
-								--	AND		LoadStopTypeId = 1
-								--	AND		StopTypeNumber = 1
-								--),
             PICKUP_BY_TIME =	(	SELECT	TOP (1) CAST(CONCAT(CAST(GETDATE() AS Date),' ', CAST(StartDateTime AS time(0))) AS datetime)
 									FROM	dispatch.LoadStop AS LoadStop_2
 									WHERE	LoadId = ld.LoadId
@@ -217,8 +201,6 @@ BEGIN
 													END 
 												+ ' ' + prsnDispatch.LastName,
 			ld.ProblemInd,
-			--Trailer_ID = ISNULL(tr.Trailer_ID, '') 
-			-- DMS 11/30/2022
 			Trailer_ID =	COALESCE((	SELECT	TOP 1 Trailer_ID
 										FROM	dispatch.LoadStop ls
 												LEFT JOIN dispatch.Trailer t ON t.TrailerId = ls.Trailer1_TrailerId
@@ -230,11 +212,9 @@ BEGIN
     FROM	dispatch.[Load] AS ld 
 			JOIN @ValidLoads vl ON vl.LoadId = ld.loadId
             INNER JOIN dispatch.LoadStatusType AS ldsta ON ld.LoadStatusTypeId = ldsta.LoadStatusTypeId 
-			--LEFT JOIN dispatch.LoadNotes ln ON ln.LoadId = ld.LoadId AND NoteTypeId = 1
             LEFT OUTER JOIN main.Client AS clnt ON ld.ClientId = clnt.ClientId 
 			LEFT JOIN main.ClientType ct ON ct.ClientTypeId = clnt.ClientTypeId
-            LEFT OUTER JOIN main.Person AS prsn ON ld.Driver1_PersonId = prsn.PersonId 
-            --LEFT OUTER JOIN dispatch.Punit AS trk ON ld.TruckPunitId = trk.PunitId
+            LEFT OUTER JOIN main.Person AS prsn ON ld.Driver1_PersonId = prsn.PersonId
             LEFT OUTER JOIN equipment.Punit AS trk ON ld.TruckPunitId = trk.PunitId
             LEFT OUTER JOIN main.Person As prsnDispatch ON ld.DispatcherPersonId = prsnDispatch.PersonId
             LEFT OUTER JOIN dispatch.Trailer tr on ld.Trailer1_TrailerId = tr.TrailerId
@@ -242,22 +222,6 @@ BEGIN
 	AND		(@LShowBilledLoads = 1 OR (@LShowBilledLoads = 0 AND COALESCE(ld.LoadStatusTypeId, 0) <> 8))
 	AND		(@LShowClientType = 'A' OR (@LShowClientType = 'D' AND ct.ClientType = 'D') OR (@LShowClientType = 'B' AND ct.ClientType = 'B'))
 
-	-- sp_LoadsForStatus_Get 0, 0
-
-	--IF @ShowCancelledLoads = 1
-	--	DELETE from #tmp where LoadStatusTypeId <> 100
-	--ELSE
-	--	DELETE from #tmp where LoadStatusTypeId = 100
-        
-	--IF @ShowBilledLoads = 0
-	--	DELETE from #tmp where LoadStatusTypeId = 8
-        
-	--IF isnull(@SearchAllString,'') <> ''
-	--	DELETE from #tmp where LoadId not in (select LoadId from ufn_Load_Search_MultiFields(@SearchAllString))
-
-
-	-- loop through each Load in the #tmp, and loop through each leg of each load and grab the driver and update back to Driver in #tmp
-	-- added all drivers into stuff and added back to Driver1 field
 
 	IF OBJECT_ID('tempdb..#TEMPSTUFF') IS NOT NULL DROP TABLE #TEMPSTUFF
 
@@ -292,12 +256,10 @@ BEGIN
 								FOR XML PATH('')), 1, 1, '') [DRIVER_1_ID]
 				FROM	#TEMPSTUFF A
 				GROUP BY A.LoadId
-				--ORDER BY 1
 			) C
 
 	SELECT	t.LoadId,
 			TripNumber,
-			--Notes,
 			SUBSTATUSES,
 			CUSTNAME,
 			StartLocation,
@@ -329,34 +291,6 @@ BEGIN
 
 END
 
-
-/*
-
-
-        -- Hide Cancelled and Billed Loads by default
-        IF @ShowCancelledLoads = 1 -- show only cancelled loads when this is checked. Otherwise, never include Cancelled loads
-                SELECT * FROM #tmp WHERE CURRENT_STATUS = 'Cancelled' and (isnull(@SearchAllString,'') <> '' and LoadId in (select LoadId from ufn_Load_Search_MultiFields(@SearchAllString)) or (isnull(@SearchAllString,'') = '' ))
-                order by TripNumber desc
-        else if @ShowBilledLoads = 0
-                begin
-                        IF OBJECT_ID('tempdb..#tmp2') IS NOT NULL DROP TABLE #tmp2
-                        SELECT * into #tmp2 FROM #tmp WHERE CURRENT_STATUS <> 'Cancelled' and CURRENT_STATUS <> 'Billed' and (isnull(@SearchAllString,'') <> '' and LoadId in (select LoadId from ufn_Load_Search_MultiFields(@SearchAllString)) or (isnull(@SearchAllString,'') = '' ))
-                        order by TripNumber desc
-                end
-        else if @ShowBilledLoads = 1
-                begin
-                        IF OBJECT_ID('tempdb..#tmp2') IS NOT NULL DROP TABLE #tmp2
-                        SELECT * into #tmp2 FROM #tmp WHERE CURRENT_STATUS <> 'Cancelled' order by TripNumber desc
-                end
-
-        if @SearchAllString is not null
-                SELECT * FROM #tmp2 where LoadId not in (select LoadId from ufn_Load_Search_MultiFields(@SearchAllString))
-        else
-                SELECT * FROM #tmp2 
-
-        IF OBJECT_ID('tempdb..#tmp') IS NOT NULL DROP TABLE #tmp
-        IF OBJECT_ID('tempdb..#tmp2') IS NOT NULL DROP TABLE #tmp2
-*/
 GO
 
 
