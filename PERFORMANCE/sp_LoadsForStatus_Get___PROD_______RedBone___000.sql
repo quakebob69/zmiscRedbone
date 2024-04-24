@@ -53,75 +53,75 @@ BEGIN
 	--CREATE TABLE #ValidLoads (LoadId int NOT NULL PRIMARY KEY CLUSTERED);
 
 	IF COALESCE(@LSearchAllString, '') <> ''
-	BEGIN
-		--include all loads in the search
-		SELECT	@LShowBilledLoads = 1,
-				@LShowCancelledLoads = 0,
-				@LShowReimbursablesOnly = 0,
-				@LShowNoBolAttachedOnly = 0,
-				@LShowClientType = 'A',
-				@LShowNoDropDatesOnly = 0
+		BEGIN
+			--include all loads in the search
+			SELECT	@LShowBilledLoads = 1,
+					@LShowCancelledLoads = 0,
+					@LShowReimbursablesOnly = 0,
+					@LShowNoBolAttachedOnly = 0,
+					@LShowClientType = 'A',
+					@LShowNoDropDatesOnly = 0
 
-		INSERT	INTO @ValidLoads
-		SELECT	LoadId FROM ufn_Load_Search_MultiFields(@LSearchAllString)
-	END
+			INSERT	INTO @ValidLoads
+			SELECT	LoadId FROM ufn_Load_Search_MultiFields(@LSearchAllString)
+		END
 	ELSE IF @LShowReimbursablesOnly = 1
-	BEGIN
-		INSERT	INTO @ValidLoads
-		SELECT	DISTINCT l.LoadId 
-		FROM	dispatch.Load l
-				JOIN dispatch.AccCharge acc ON acc.LoadId = l.LoadId
-				--JOIN dispatch.AccChargeType acct ON acct.AccChargeTypeId = acc.AccChargeTypeId
-				--JOIN dispatch.AccChargeType ct ON ct.AccChargeTypeId = acc.AccChargeTypeId
-		WHERE	l.LoadStatusTypeId != (SELECT LoadStatusTypeId FROM dispatch.LoadStatusType WHERE UPPER(LoadStatusTypeNm) = 'BILLED')	--status is not 'billed'
-		AND		(
-					(acc.AccChargeTypeId IN (3, 13) AND acc.BillableInd = 1)
-					OR
-					(acc.AccChargeTypeId = 15 AND acc.ReimbursableInd = 1)
-				)
-		--AND		acct.ReiumbursementInd = 1
-		AND		COALESCE(acc.MarkedAsCompleted, 0) = 0
-	END
+		BEGIN
+			INSERT	INTO @ValidLoads
+			SELECT	DISTINCT l.LoadId 
+			FROM	dispatch.Load l
+					JOIN dispatch.AccCharge acc ON acc.LoadId = l.LoadId
+					--JOIN dispatch.AccChargeType acct ON acct.AccChargeTypeId = acc.AccChargeTypeId
+					--JOIN dispatch.AccChargeType ct ON ct.AccChargeTypeId = acc.AccChargeTypeId
+			WHERE	l.LoadStatusTypeId != (SELECT LoadStatusTypeId FROM dispatch.LoadStatusType WHERE UPPER(LoadStatusTypeNm) = 'BILLED')	--status is not 'billed'
+			AND		(
+						(acc.AccChargeTypeId IN (3, 13) AND acc.BillableInd = 1)
+						OR
+						(acc.AccChargeTypeId = 15 AND acc.ReimbursableInd = 1)
+					)
+			--AND		acct.ReiumbursementInd = 1
+			AND		COALESCE(acc.MarkedAsCompleted, 0) = 0
+		END
 	ELSE IF @LShowNoBolAttachedOnly = 1
-	BEGIN
-		INSERT	INTO @ValidLoads
-		SELECT	DISTINCT l.LoadId 
-		FROM	dispatch.Load l
-				JOIN dispatch.LoadStop ls ON ls.LoadId = l.LoadId AND ls.LoadStopTypeId = 3
-		WHERE	(SELECT COUNT(*) FROM dispatch.LoadFile WHERE LoadFileTypeId = 2 AND LoadId = l.LoadId) = 0	--# of BOL attachemnts for load
-		--AND		ArrivalDateTime is not null
-		--AND		l.LoadStatusTypeId in (5, 7, 8)
-		AND		DATEDIFF(	HOUR, 
-							(SELECT MAX(StartDateTime) FROM dispatch.LoadStop WHERE LoadStopTypeId = 3 AND LoadStopId = ls.LoadStopId),
-							GETDATE()
-						) >= 48
-	END
+		BEGIN
+			INSERT	INTO @ValidLoads
+			SELECT	DISTINCT l.LoadId 
+			FROM	dispatch.Load l
+					JOIN dispatch.LoadStop ls ON ls.LoadId = l.LoadId AND ls.LoadStopTypeId = 3
+			WHERE	(SELECT COUNT(*) FROM dispatch.LoadFile WHERE LoadFileTypeId = 2 AND LoadId = l.LoadId) = 0	--# of BOL attachemnts for load
+			--AND		ArrivalDateTime is not null
+			--AND		l.LoadStatusTypeId in (5, 7, 8)
+			AND		DATEDIFF(	HOUR, 
+								(SELECT MAX(StartDateTime) FROM dispatch.LoadStop WHERE LoadStopTypeId = 3 AND LoadStopId = ls.LoadStopId),
+								GETDATE()
+							) >= 48
+		END
 	ELSE IF @LShowNoDropDatesOnly = 1
-	BEGIN
-		--include billed
-		SELECT @LShowBilledLoads = 1
+		BEGIN
+			--include billed
+			SELECT @LShowBilledLoads = 1
 
-		INSERT	INTO @ValidLoads
-		SELECT	DISTINCT l.LoadId		--,CreatedTs, DATEDIFF(WEEK, l.CreatedTs, GETDATE())
-		FROM	dispatch.Load l
-				JOIN dispatch.LoadStop ls ON ls.LoadId = l.LoadId AND ls.LoadStopTypeId = 3
-		WHERE	ls.LoadStopTypeId IN (2, 3)	--drops or legs
-		AND		DATEDIFF(WEEK, l.CreatedTs, GETDATE()) <= 2		--last 2 weeks only
-		AND		(
-					(LoadStopTypeId = 2 AND DropStartDateTime IS NULL)	--leg
-					OR
-					(LoadStopTypeId = 3 AND StartDateTime IS NULL)		--drop
-				)
-	END
+			INSERT	INTO @ValidLoads
+			SELECT	DISTINCT l.LoadId		--,CreatedTs, DATEDIFF(WEEK, l.CreatedTs, GETDATE())
+			FROM	dispatch.Load l
+					JOIN dispatch.LoadStop ls ON ls.LoadId = l.LoadId AND ls.LoadStopTypeId = 3
+			WHERE	ls.LoadStopTypeId IN (2, 3)	--drops or legs
+			AND		DATEDIFF(WEEK, l.CreatedTs, GETDATE()) <= 2		--last 2 weeks only
+			AND		(
+						(LoadStopTypeId = 2 AND DropStartDateTime IS NULL)	--leg
+						OR
+						(LoadStopTypeId = 3 AND StartDateTime IS NULL)		--drop
+					)
+		END
 	ELSE
-	BEGIN
-		INSERT	INTO @ValidLoads
-		SELECT	l.LoadId 
-		FROM	dispatch.Load l
-		--WHERE	(SELECT COUNT(*) FROM dispatch.LoadStop WHERE LoadId = l.LoadId AND StartDateTime IS NULL) = 0
-		--WHERE	((@LShowCancelledLoads = 1 AND LoadStatusTypeId = 100)  OR (@LShowCancelledLoads = 0 AND LoadStatusTypeId <> 100))
-		--AND		(@LShowBilledLoads = 1 OR (@LShowBilledLoads = 0 AND LoadStatusTypeId <> 8))
-	END
+		BEGIN
+			INSERT	INTO @ValidLoads
+			SELECT	l.LoadId 
+			FROM	dispatch.Load l
+			--WHERE	(SELECT COUNT(*) FROM dispatch.LoadStop WHERE LoadId = l.LoadId AND StartDateTime IS NULL) = 0
+			--WHERE	((@LShowCancelledLoads = 1 AND LoadStatusTypeId = 100)  OR (@LShowCancelledLoads = 0 AND LoadStatusTypeId <> 100))
+			--AND		(@LShowBilledLoads = 1 OR (@LShowBilledLoads = 0 AND LoadStatusTypeId <> 8))
+		END
 
 	--SELECT * FROM @ValidLoads
 
