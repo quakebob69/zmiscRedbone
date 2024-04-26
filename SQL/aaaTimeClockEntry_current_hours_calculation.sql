@@ -8,11 +8,11 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
 		DECLARE @Mo VARCHAR(2)		= '04'
-			DECLARE @Dy VARCHAR(2)		= '19'
+			DECLARE @Dy VARCHAR(2)		= '26'
 
 		------------------------------------------
-		DECLARE @Hr VARCHAR(2)		= '14'
-			DECLARE @Mi VARCHAR(2)		= '38'
+		DECLARE @Hr VARCHAR(2)		= '15'
+			DECLARE @Mi VARCHAR(2)		= '34'
 
 
 --1st RECORD
@@ -83,9 +83,9 @@ SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT Person
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 --Set dates manually
-DECLARE @EntryId INTEGER			= 25574
+DECLARE @EntryId INTEGER			= 25686
 	DECLARE @ClockedIn NVARCHAR(25)		= '2024-04-22 06:58:41.237';
-		DECLARE @ClockedOut NVARCHAR(25)	= '2024-04-22 16:12:21.162';
+		DECLARE @ClockedOut NVARCHAR(25)	= '2024-04-25 12:39:23.439';
 
 				--SELECT * FROM [RedBone].[main].[TimeClockEntry] where personid = 2775 order by entryid desc
 
@@ -102,5 +102,3 @@ DECLARE @EntryId INTEGER			= 25574
 
 
 --DECLARE @emailName NVARCHAR(25) = 'danny'; SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com') order by EntryId desc
-
-

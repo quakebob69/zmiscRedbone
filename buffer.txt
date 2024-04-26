@@ -1,4 +1,4 @@
-oROd5ITSqEgh
+oROd5ITSqEgh	
 
 rya_$/T@KHy~Je8o
 
@@ -2513,7 +2513,7 @@ SELECT OriginatingOTRPayPeriodId, payrollOTRDATasourceid,  AccountingExportPayro
 	Default:
 		HiddenField_ShowBilledLoads.Value = "false";
 			HiddenField_ShowCancelledLoads.Value = "false";
-			HiddenField_ShowReimbursable.Value = "false";
+			HiddenField_ShowReimbursable.Value = "false";	
 			HiddenField_ShowMissingBol.Value = "false";
 			HiddenField_ShowMissingDates.Value = "false";
 				HiddenField_ShowClientType.Value = "A";
@@ -2537,15 +2537,39 @@ SELECT OriginatingOTRPayPeriodId, payrollOTRDATasourceid,  AccountingExportPayro
 +_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_
 
 
+61191
+
+
+<telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Default" Modal="true" />
+
+                <telerik:AjaxSetting AjaxControlID="radBtnOTRPR_RefreshAll">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="divMain" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="RadLabeldataRefreshPopup" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
 
 
 
+        <telerik:RadWindow ID="dataRefreshPopup" runat="server" Title="Data Retrieval" Width="375px" Height="200px" Modal="true" OffsetElementID="main">
+            <ContentTemplate>
+                <div style="font-size: 1.5em; font-weight: bold; margin-top: 5px; padding: 30px;">
+                    &nbsp;&nbsp;<telerik:RadLabel ID="RadLabeldataRefreshPopup" runat="server" />
+                    <span style="font-size: initial; font-weight: 100;">records retrieved</span>
+                    <div style="float: right; margin-top: 30px;">
+                        <telerik:RadButton ID="RadButton_Cancel" runat="server" Text="Close" OnClientClicked="closeLoadingWindow" Width="85px" Visible="true" />
+                    </div>
+                </div>
+            </ContentTemplate>
+        </telerik:RadWindow>
 
-
-
-
-
-
+            function ShowDataRefreshPopup(sender, eventArgs) {
+                var dataRefreshPopupWnd = $find("<%= dataRefreshPopup.ClientID %>");
+                dataRefreshPopupWnd.show();
+            }
+			
+			
+			
 
 
 

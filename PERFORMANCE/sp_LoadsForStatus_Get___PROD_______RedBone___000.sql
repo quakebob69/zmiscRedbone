@@ -43,11 +43,11 @@ BEGIN
 
 	DECLARE @LShowCancelledLoads bit = @ShowCancelledLoads,
 			@LShowBilledLoads bit = @ShowBilledLoads,
-			@LShowReimbursablesOnly bit = @ShowReimbursablesOnly,
-			@LShowNoBolAttachedOnly bit = @ShowNoBolAttachedOnly,
+				@LShowReimbursablesOnly bit = @ShowReimbursablesOnly,
+				@LShowNoBolAttachedOnly bit = @ShowNoBolAttachedOnly,
 			@LShowClientType char(1) = CASE WHEN @ShowClientType = '' THEN 'A' ELSE @ShowClientType END,
-			@LShowNoDropDatesOnly bit = @ShowNoDropDatesOnly,
-			@LSearchAllString varchar(max) = @SearchAllString
+				@LShowNoDropDatesOnly bit = @ShowNoDropDatesOnly,
+				@LSearchAllString varchar(max) = @SearchAllString
 
 	DECLARE @ValidLoads Table (LoadId int NOT NULL PRIMARY KEY CLUSTERED);
 
