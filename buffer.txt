@@ -2537,6 +2537,48 @@ SELECT OriginatingOTRPayPeriodId, payrollOTRDATasourceid,  AccountingExportPayro
 +_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_
 
 
+        protected void RefreshAllData(object sender, EventArgs e)
+        {
+            QueriesTableAdapter qry = new QueriesTableAdapter();
+            qry.CommandTimeoutQry = 1000000;
+            qry.sp_Payroll_OTR_StagePayroll(true, true, auth.PersonId);
+
+            string recsRetrieved = setAllRecsLabel();
+            RadLabeldataRefreshPopup.Text = recsRetrieved + " 'Total'";
+
+            LoadForm();
+        }
+
+
+<telerik:RadButton ID="radBtnOTRPR_RefreshAll" Text="get ALL" runat="server" OnClientClicking="RefreshDataAll" OnClick="RefreshAllData" />
+
+            function RefreshDataAll(sender, eventArgs) {
+                //Message Vars
+                var confMessage = "Retrieving ALL data may take several minutes.<br><br>Are you sure you want to continue?<br><br><br>";
+                var confMessageTitle = "Get All Data?";
+                var confMessageWidth = 400;
+                var confMessageHeight = 200;
+
+                var confCallBack = function (shouldSubmit) {
+                    if (shouldSubmit) {
+                        //original postback
+                        sender.click();
+
+                        ShowDataRefreshPopup(sender, eventArgs);
+                    }
+                };
+
+                radconfirm(confMessage, confCallBack, confMessageWidth, confMessageHeight, null, confMessageTitle);
+
+                //prevent original postback (since using RadConfirm)
+                eventArgs.set_cancel(true);
+            }
+			
+			
+			
+			
+
+
 61191
 
 
