@@ -27,5 +27,12 @@ CREATE TABLE [payroll].[Holiday](
 GO
 
 
+ALTER TABLE [payroll].[Holiday]  WITH CHECK ADD  CONSTRAINT [FK_Holiday_FY] FOREIGN KEY([FYId])
+REFERENCES [payroll].[FY] ([FYId])
+GO
+ALTER TABLE [payroll].[Holiday] CHECK CONSTRAINT [FK_Holiday_FY]
+GO
+
+
 -----------------------------------------
 INSERT INTO [payroll].[Holiday] ([HolidayId], [FY], [Date], [Name]) VALUES (1, 2023, '2023-12-13 00:00:00.000', 'National Danny Day');

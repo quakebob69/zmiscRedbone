@@ -59,6 +59,13 @@ ALTER TABLE [payroll].[PayrollOTRPayPeriod] CHECK CONSTRAINT [FK_PayrollOTRPayPe
 GO
 
 
+ALTER TABLE [payroll].[PayrollOTRPayPeriod]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRPayPeriod_FY] FOREIGN KEY([FYId])
+REFERENCES [payroll].[FY] ([FYId])
+GO
+ALTER TABLE [payroll].[PayrollOTRPayPeriod] CHECK CONSTRAINT [FK_PayrollOTRPayPeriod_FY]
+GO
+
+
 SET QUOTED_IDENTIFIER ON
 CREATE UNIQUE INDEX IX_PayrollOTRPayPeriod_IsActive
 ON [payroll].[PayrollOTRPayPeriod](IsActive)
