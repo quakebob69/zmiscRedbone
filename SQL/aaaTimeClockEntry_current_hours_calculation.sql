@@ -7,12 +7,12 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
-		DECLARE @Mo VARCHAR(2)		= '04'
-			DECLARE @Dy VARCHAR(2)		= '29'
+		DECLARE @Mo VARCHAR(2)		= '05'
+			DECLARE @Dy VARCHAR(2)		= '02'
 
 		------------------------------------------
-		DECLARE @Hr VARCHAR(2)		= '17'
-			DECLARE @Mi VARCHAR(2)		= '23'
+		DECLARE @Hr VARCHAR(2)		= '16'
+			DECLARE @Mi VARCHAR(2)		= '00'
 
 
 --1st RECORD
@@ -83,15 +83,17 @@ SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT Person
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 --Set dates manually
-DECLARE @EntryId INTEGER			= 25794
-	DECLARE @ClockedIn NVARCHAR(25)		= '2024-04-22 06:58:41.237';
-		DECLARE @ClockedOut NVARCHAR(25)	= '2024-04-29 12:04:27.926';
+DECLARE @EntryId INTEGER			= 25923
+
+
+	DECLARE @ClockedIn NVARCHAR(25)		= '2024-05-02 06:52:58.657';
+		DECLARE @ClockedOut NVARCHAR(25)	= '2024-05-01 16:12:23.153';
 
 				--SELECT * FROM [RedBone].[main].[TimeClockEntry] where personid = 2775 order by entryid desc
 
 --SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE EntryId = @EntryId
-	--ClockIn------------------------											UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
-	--ClockOut***********************													UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
+	--ClockIn------------------------												UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
+	--ClockOut***********************														UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
 --SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE EntryId = @EntryId
 
 					
