@@ -53,11 +53,12 @@ END
 			(
 				SELECT
 				TOP 1 PayrollOTRPayPeriodId 
-				FROM [payroll].[PayrollOTRPayPeriod]
+					FROM [payroll].[PayrollOTRPayPeriod] pp
+					JOIN [main].[FY] fy on fy.FYId = pp.FYId
 				WHERE
-				PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @StatusNotOpened)
+				pp.PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @StatusNotOpened)
 				ORDER BY 
-				FY, Number
+				fy.FY, pp.Number
 			)
 		
 			--IsActive
