@@ -11,7 +11,7 @@ GO
 
 CREATE TABLE [main].[FY](
 	[FYId] [int] NOT NULL,
-	[FY] [int] NULL
+	[FY] [varchar](4) NOT NULL
  CONSTRAINT [PK_FY] PRIMARY KEY CLUSTERED 
 (
 	[FYId] ASC

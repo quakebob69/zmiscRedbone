@@ -11,7 +11,7 @@ GO
 
 CREATE TABLE [payroll].[Holiday](
 	[HolidayId] [int] NOT NULL,
-	[FY] [varchar](4) NOT NULL,
+	[FYId] [int] NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[Name] [varchar](30) NOT NULL
  CONSTRAINT [PK_Holiday] PRIMARY KEY CLUSTERED 
@@ -28,11 +28,11 @@ GO
 
 
 ALTER TABLE [payroll].[Holiday]  WITH CHECK ADD  CONSTRAINT [FK_Holiday_FY] FOREIGN KEY([FYId])
-REFERENCES [payroll].[FY] ([FYId])
+REFERENCES [main].[FY] ([FYId])
 GO
 ALTER TABLE [payroll].[Holiday] CHECK CONSTRAINT [FK_Holiday_FY]
 GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[Holiday] ([HolidayId], [FY], [Date], [Name]) VALUES (1, 2023, '2023-12-13 00:00:00.000', 'National Danny Day');
+INSERT INTO [payroll].[Holiday] ([HolidayId], [FY], [Date], [Name]) VALUES (1, 1, '2023-12-13 00:00:00.000', 'National Danny Day');
