@@ -20,19 +20,19 @@ CREATE TABLE [payroll].[Holiday](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UQ_Holiday] UNIQUE NONCLUSTERED 
 (
-	[FY] ASC,
+	[FYId] ASC,
 	[Date] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
 
-ALTER TABLE [payroll].[Holiday]  WITH CHECK ADD  CONSTRAINT [FK_Holiday_FY] FOREIGN KEY([FYId])
+ALTER TABLE [payroll].[Holiday]  WITH CHECK ADD  CONSTRAINT [FK_Holiday_FYId] FOREIGN KEY([FYId])
 REFERENCES [main].[FY] ([FYId])
 GO
-ALTER TABLE [payroll].[Holiday] CHECK CONSTRAINT [FK_Holiday_FY]
+ALTER TABLE [payroll].[Holiday] CHECK CONSTRAINT [FK_Holiday_FYId]
 GO
 
 
 -----------------------------------------
-INSERT INTO [payroll].[Holiday] ([HolidayId], [FY], [Date], [Name]) VALUES (1, 1, '2023-12-13 00:00:00.000', 'National Danny Day');
+INSERT INTO [payroll].[Holiday] ([HolidayId], [FYId], [Date], [Name]) VALUES (1, 1, '2023-12-13 00:00:00.000', 'National Danny Day');

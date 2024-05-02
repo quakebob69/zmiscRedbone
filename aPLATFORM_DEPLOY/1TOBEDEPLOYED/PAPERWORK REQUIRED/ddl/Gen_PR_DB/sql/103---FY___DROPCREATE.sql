@@ -25,11 +25,11 @@ GO
 
 
 -----------------------------------------
-INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (1, 2023);
-INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (2, 2024);
-INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (3, 2025);
-INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (4, 2026);
-INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (5, 2027);
-INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (6, 2028);
-INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (7, 2029);
-INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (8, 2030);
+INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (1, '2023');
+INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (2, '2024');
+INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (3, '2025');
+INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (4, '2026');
+INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (5, '2027');
+INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (6, '2028');
+INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (7, '2029');
+INSERT INTO [main].[FY] ([FYId], [FY]) VALUES (8, '2030');
