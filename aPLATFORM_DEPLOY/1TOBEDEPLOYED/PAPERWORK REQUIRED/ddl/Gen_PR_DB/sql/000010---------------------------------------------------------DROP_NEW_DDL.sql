@@ -156,3 +156,14 @@ GO
 		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRStatus]
 		GO
+
+
+		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[Holiday]') AND type in (N'U'))
+			DROP TABLE [payroll].[Holiday]
+		GO
+
+
+		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[main].[FY]') AND type in (N'U'))
+			DROP TABLE [main].[FY]
+		GO
+		
