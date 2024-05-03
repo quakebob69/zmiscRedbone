@@ -2616,41 +2616,7 @@ SELECT OriginatingOTRPayPeriodId, payrollOTRDATasourceid,  AccountingExportPayro
 FindByLoadId
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public static readonly string NO_RECORDS_FILTER = "[LoadId] = -1";
 
 
 

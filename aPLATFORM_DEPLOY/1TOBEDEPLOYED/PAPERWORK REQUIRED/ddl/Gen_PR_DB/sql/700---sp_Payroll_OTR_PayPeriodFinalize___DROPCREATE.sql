@@ -44,7 +44,12 @@ END
 			
 			--IsOpen/PayrollOTRStatus
 			UPDATE [payroll].[PayrollOTRPayPeriod]
-			SET IsActive = 0, IsOpen = 0, PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
+			SET
+				IsActive = 0,
+				IsOpen = 0,
+				IsDataLocked = 0,
+				IsDataStaged = 0,
+				PayrollOTRStatusId = (select PayrollOTRStatusId from payroll.PayrollOTRStatus where Name = @ChangeToStatus)
 			WHERE PayrollOTRPayPeriodId = @ActivePayPeriodId
 
 		--activate next
