@@ -10,18 +10,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [payroll].[PayrollOTRTimeOffScheduled](
-	[AccountingExportPayrollDataId] [int] IDENTITY(1,1) NOT NULL,
-	[PayPeriodId] [int] NULL,
+	[PayrollOTRTimeOffScheduledId] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
-	[AccountingExportPayrollEntryTypeId] [int] NOT NULL,
-	[AccountingExportPayrollItemId] [int] NOT NULL,
-	[OriginatingOTRPayPeriodId] [int] NOT NULL,
-	[LoadIdOrDriverPayId] [int] NOT NULL,
-	[PayrollOTRDataSourceId] [int] NOT NULL,
-	[PayrollOTRPaymentHoldReasonId] [int] NULL,
-	[Rate] [decimal](10, 2) NULL,
-	[Hours] [decimal](10, 2) NULL,
-	[Quantity] [decimal](10, 2) NULL,
+	asdf
+	[Hours] [decimal](10, 2) NOT NULL,
+	[Days] [decimal](10, 2) NOT NULL,
  CONSTRAINT [PK_AccountingExportPayrollData] PRIMARY KEY CLUSTERED 
 (
 	[AccountingExportPayrollDataId] ASC
