@@ -133,8 +133,13 @@ GO
 
 
 	--'payroll' schema 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRTimeOffScheduled]') AND type in (N'U'))
-			DROP TABLE [payroll].[PayrollOTRTimeOffScheduled]
+		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveType]') AND type in (N'U'))
+			DROP TABLE [payroll].[PayrollOTRLeaveType]
+		GO
+
+
+		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveScheduled]') AND type in (N'U'))
+			DROP TABLE [payroll].[PayrollOTRLeaveScheduled]
 		GO
 
 
