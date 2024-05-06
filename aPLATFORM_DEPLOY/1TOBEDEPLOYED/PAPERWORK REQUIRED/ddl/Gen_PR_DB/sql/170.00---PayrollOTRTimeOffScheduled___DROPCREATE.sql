@@ -12,68 +12,23 @@ GO
 CREATE TABLE [payroll].[PayrollOTRTimeOffScheduled](
 	[PayrollOTRTimeOffScheduledId] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
-	asdf
+	[Date] [datetime] NOT NULL,
 	[Hours] [decimal](10, 2) NOT NULL,
 	[Days] [decimal](10, 2) NOT NULL,
- CONSTRAINT [PK_AccountingExportPayrollData] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_PayrollOTRTimeOffScheduled] PRIMARY KEY CLUSTERED 
 (
-	[AccountingExportPayrollDataId] ASC
+	[PayrollOTRTimeOffScheduledId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [UQ_AccountingExportPayrollData] UNIQUE NONCLUSTERED 
+ CONSTRAINT [UQ_PayrollOTRTimeOffScheduled] UNIQUE NONCLUSTERED 
 (
-	[PayPeriodId],
 	[PersonId],
-	[AccountingExportPayrollEntryTypeId],
-	[AccountingExportPayrollItemId],
-	[OriginatingOTRPayPeriodId],
-	[LoadIdOrDriverPayId]
+	[Date]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_Person] FOREIGN KEY([PersonId])
+ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled]  WITH CHECK ADD  CONSTRAINT [FK_PayrollOTRTimeOffScheduled_Person] FOREIGN KEY([PersonId])
 REFERENCES [main].[Person] ([PersonId])
 GO
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled] CHECK CONSTRAINT [FK_AccountingExportPayrollData_Person]
-GO
-
-
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRDataSource] FOREIGN KEY([PayrollOTRDataSourceId])
-REFERENCES [payroll].[PayrollOTRDataSource] ([PayrollOTRDataSourceId])
-GO
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRDataSource]
-GO
-
-
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_OriginatingOTRPayPeriod] FOREIGN KEY([OriginatingOTRPayPeriodId])
-REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
-GO
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled] CHECK CONSTRAINT [FK_AccountingExportPayrollData_OriginatingOTRPayPeriod]
-GO
-
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayPeriod] FOREIGN KEY([PayPeriodId])
-REFERENCES [payroll].[PayrollOTRPayPeriod] ([PayrollOTRPayPeriodId])
-GO
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayPeriod]
-GO
-
-
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollEntryType] FOREIGN KEY([AccountingExportPayrollEntryTypeId])
-REFERENCES [export].[AccountingExportPayrollEntryType] ([AccountingExportPayrollEntryTypeId])
-GO
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled] CHECK CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollEntryType]
-GO
-
-
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollItem] FOREIGN KEY([AccountingExportPayrollItemId])
-REFERENCES [export].[AccountingExportPayrollItem] ([AccountingExportPayrollItemId])
-GO
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled] CHECK CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollItem]
-GO
-
-
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled]  WITH CHECK ADD  CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPaymentHoldReason] FOREIGN KEY([PayrollOTRPaymentHoldReasonId])
-REFERENCES [payroll].[PayrollOTRPaymentHoldReason] ([PayrollOTRPaymentHoldReasonId])
-GO
-ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled] CHECK CONSTRAINT [FK_AccountingExportPayrollData_PayrollOTRPaymentHoldReason]
+ALTER TABLE [payroll].[PayrollOTRTimeOffScheduled] CHECK CONSTRAINT [FK_PayrollOTRTimeOffScheduled_Person]
 GO
