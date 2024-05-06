@@ -8,11 +8,11 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
 		DECLARE @Mo VARCHAR(2)		= '05'
-			DECLARE @Dy VARCHAR(2)		= '02'
+			DECLARE @Dy VARCHAR(2)		= '03'
 
 		------------------------------------------
-		DECLARE @Hr VARCHAR(2)		= '16'
-			DECLARE @Mi VARCHAR(2)		= '00'
+		DECLARE @Hr VARCHAR(2)		= '15'
+			DECLARE @Mi VARCHAR(2)		= '30'
 
 
 --1st RECORD
