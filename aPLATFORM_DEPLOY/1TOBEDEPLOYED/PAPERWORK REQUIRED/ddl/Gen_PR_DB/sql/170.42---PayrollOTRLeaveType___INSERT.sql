@@ -2,12 +2,22 @@
 --select * from main.person where personid in (8, 62, 73, 2153)
 
 
---amdin
+
+
+
+
+--Admin
+
 select personid from main.persontypemapping permap where persontypeid = 1
 
 
---fedex
+
+
+
+
+--Fedex
 select personid from main.persontypemapping permap where persontypeid = 3
+
 
 
 
