@@ -133,13 +133,13 @@ GO
 
 
 	--'payroll' schema
-
-
-			ALTER TABLE [main].[Person]
+			IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveType]') AND type in (N'U'))
+				ALTER TABLE [main].[Person]
 				DROP CONSTRAINT [FK_Person_PayrollOTRLeaveType];
 			GO
 
-			ALTER TABLE [main].[Person]
+			IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveType]') AND type in (N'U'))
+				ALTER TABLE [main].[Person]
 				DROP COLUMN [PayrollOTRLeaveTypeId];
 			GO
 
