@@ -7,12 +7,13 @@ UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 1
 WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 1)
 
 
+--OTR
+UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 2
+WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 4)
+
+
 --Fedex
-UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 1
+UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 3
 WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 3)
 
-
---OTR
-UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 1
-WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 4)
 
