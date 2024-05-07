@@ -8,11 +8,11 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
 		DECLARE @Mo VARCHAR(2)		= '05'
-			DECLARE @Dy VARCHAR(2)		= '03'
+			DECLARE @Dy VARCHAR(2)		= '07'
 
 		------------------------------------------
 		DECLARE @Hr VARCHAR(2)		= '15'
-			DECLARE @Mi VARCHAR(2)		= '30'
+			DECLARE @Mi VARCHAR(2)		= '47'
 
 
 --1st RECORD
@@ -83,11 +83,11 @@ SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT Person
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 --Set dates manually
-DECLARE @EntryId INTEGER			= 25923
+DECLARE @EntryId INTEGER			= 26027
 
 
 	DECLARE @ClockedIn NVARCHAR(25)		= '2024-05-02 06:52:58.657';
-		DECLARE @ClockedOut NVARCHAR(25)	= '2024-05-01 16:12:23.153';
+		DECLARE @ClockedOut NVARCHAR(25)	= '2024-05-06 11:28:31.135';
 
 				--SELECT * FROM [RedBone].[main].[TimeClockEntry] where personid = 2775 order by entryid desc
 
