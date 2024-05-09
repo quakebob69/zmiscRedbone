@@ -11,12 +11,12 @@ WHERE personid in (select personid from main.persontypemapping permap where pers
 
 
 --OTR
-UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 3
+UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 4
 WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 4)
 
 
 --Fedex
-UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 4
+UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 5
 WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 3)
 
 
