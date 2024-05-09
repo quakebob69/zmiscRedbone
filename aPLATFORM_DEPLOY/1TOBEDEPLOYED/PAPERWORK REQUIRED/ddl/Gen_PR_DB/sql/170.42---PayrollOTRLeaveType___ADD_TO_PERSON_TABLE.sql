@@ -4,11 +4,13 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
 ALTER TABLE [main].[Person]
-	ADD [PayrollOTRLeaveTypeId] [int] NULL
+ADD [PayrollOTRLeaveTypeId] [int] NOT NULL CONSTRAINT DF_mainPerson_PayrollOTRLeaveTypeId DEFAULT 1
 GO
 
+ALTER TABLE [main].[Person]
+DROP CONSTRAINT DF_mainPerson_PayrollOTRLeaveTypeId
+GO
 
 ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRLeaveType] FOREIGN KEY([PayrollOTRLeaveTypeId])
 REFERENCES [payroll].[PayrollOTRLeaveType] ([PayrollOTRLeaveTypeId])

@@ -112,73 +112,70 @@ GO
 		
 --TABLES
 	--'export' schema 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollData]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollData]') AND type in (N'U'))
 			DROP TABLE [export].[AccountingExportPayrollData]
 		GO
 
 		
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollItem]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollItem]') AND type in (N'U'))
 			DROP TABLE [export].[AccountingExportPayrollItem]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollEntryType]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollEntryType]') AND type in (N'U'))
 			DROP TABLE [export].[AccountingExportPayrollEntryType]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportCompany]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportCompany]') AND type in (N'U'))
 			DROP TABLE [export].[AccountingExportCompany]
 		GO
 
 
+
 	--'payroll' schema
-			IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveType]') AND type in (N'U'))
-				ALTER TABLE [main].[Person]
-				DROP CONSTRAINT [FK_Person_PayrollOTRLeaveType];
+		--PayrollOTRLeaveType
+			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRLeaveType];
+			ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRLeaveTypeId];
+			DROP TABLE IF EXISTS [payroll].[PayrollOTRLeaveType]
 
-				ALTER TABLE [main].[Person]
-				DROP COLUMN [PayrollOTRLeaveTypeId];
 
-				DROP TABLE [payroll].[PayrollOTRLeaveType]
-			GO
-
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveScheduled]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveScheduled]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRLeaveScheduled]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRPaymentHoldReason]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStaging]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStaging]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRStaging]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPayPeriod]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPayPeriod]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRPayPeriod]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRDataSource]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRDataSource]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRDataSource]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRStatus]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[Holiday]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[Holiday]') AND type in (N'U'))
 			DROP TABLE [payroll].[Holiday]
 		GO
 
 
-		IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[main].[FY]') AND type in (N'U'))
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[main].[FY]') AND type in (N'U'))
 			DROP TABLE [main].[FY]
 		GO
 		
