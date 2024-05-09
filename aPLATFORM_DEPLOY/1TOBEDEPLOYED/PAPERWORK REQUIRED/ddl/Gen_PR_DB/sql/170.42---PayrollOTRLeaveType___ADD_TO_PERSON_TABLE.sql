@@ -6,7 +6,7 @@ GO
 
 
 ALTER TABLE [main].[Person]
-	ADD [PayrollOTRLeaveTypeId] [int] NOT NULL
+	ADD [PayrollOTRLeaveTypeId] [int] NOT NULL DEFAULT 1
 GO
 
 
