@@ -134,6 +134,12 @@ GO
 
 
 	--'payroll' schema
+		DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsEligibility]
+		
+
+		DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
+		
+
 		--PayrollOTRLeaveType
 			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS DF_mainPerson_PayrollOTRLeaveTypeId
 			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRLeaveType];
