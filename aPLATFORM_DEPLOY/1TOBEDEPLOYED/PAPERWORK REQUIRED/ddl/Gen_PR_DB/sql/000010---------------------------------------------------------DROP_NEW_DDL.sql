@@ -135,17 +135,20 @@ GO
 
 	--'payroll' schema
 		DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsEligibility]
-		
-
-		DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
-		
+	
 
 		--PayrollOTRLeaveType
 			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS DF_mainPerson_PayrollOTRLeaveTypeId
 			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRLeaveType];
 			ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRLeaveTypeId];
 			DROP TABLE IF EXISTS [payroll].[PayrollOTRLeaveType]
+		
 
+		--PayrollOTRBenefitsStatus
+			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRBenefitsStatus];
+			ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRBenefitsStatusId];
+			DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
+		
 
 		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveScheduled]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRLeaveScheduled]

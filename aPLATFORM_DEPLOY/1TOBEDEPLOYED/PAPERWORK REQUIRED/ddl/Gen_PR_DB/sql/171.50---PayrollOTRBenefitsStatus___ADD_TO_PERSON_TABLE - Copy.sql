@@ -5,7 +5,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER TABLE [main].[Person]
-ADD [PayrollOTRBenefitsStatusId] [int] NULL CONSTRAINT DF_mainPerson_PayrollOTRBenefitsStatusId DEFAULT 0
+ADD [PayrollOTRBenefitsStatusId] [int] NULL
 GO
 
 ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus] FOREIGN KEY([PayrollOTRBenefitsStatusId])
