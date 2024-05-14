@@ -1,4 +1,4 @@
-oROd5ITSqEgh	
+oROd5ITSqEgh
 
 rya_$/T@KHy~Je8o
 
@@ -2627,9 +2627,7 @@ public static readonly string NO_RECORDS_FILTER = "[LoadId] = -1";
 
 
 telerik:RadComboBox ID="RadComboBox_PersonPTO"
-	DataSourceID="ObjectDataSource_PersonPTOGroupList"
-		DataTextField="PersonPTOGroupName"
-		DataValueField="PersonPTOGroupId"								
+	DataSourceID="ObjectDataSource_PersonPTOGroupList"							
 	OnDataBound="RadComboBox_PersonPTO_DataBound"
 
 
