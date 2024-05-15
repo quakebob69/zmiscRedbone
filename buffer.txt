@@ -2620,7 +2620,27 @@ public static readonly string NO_RECORDS_FILTER = "[LoadId] = -1";
 
 
 
+In Telerik RadGrid you can enable dropdown filters for GridBoundColumns (or those columns which inherit from GridBoundColumns like GridDateTimeColumn, GridNumericColumn, etc.) and GridTemplateColumns declaratively - just set AllowFilteringByColumn = true for the entire grid and define FilterTemplate for the columns in question.
 
+In the first grid there are three columns with dropdown filters in their headers - two GridBoundColumns (ContactTitle and City) and one GridTemplateColumn (Country) with text and images in it. 
+
+
+
+
+
+Note that the important properties that has to be synchronized are
+	DataField/binding expressionfor the column and
+	the SelectedValue for the combobox filter (which has to match the CurrentFilterValue of the column).
+
+
+OnClientSelectedIndexChanged
+	event of RadComboBox
+		calling the filter(colUniqueName, valueToCompare, filterFunction)
+
+ The filtering is triggered intercepting the OnClientSelectedIndexChanged 
+	event of RadComboBoxand calling the filter(colUniqueName, valueToCompare, filterFunction) client method of the grid.
+
+In the second grid there are date range, slider range and date filters implemented for three GridBoundColumns. Again the general idea is to utilize the filter(colUniqueName, valueToCompare, filterFunction) client method of the grid by invoking it from the OnDateSelected/OnClientSlideEnd events of the date pickers/slider respectively. You will also need to use server properties to store the selected dates/slider handlers position and restore them when the grid is refr
 
 
 
@@ -2633,7 +2653,7 @@ telerik:RadComboBox ID="RadComboBox_PersonPTO"
 
 
 
-
+PayrollOTRLeaveType
 
 
 

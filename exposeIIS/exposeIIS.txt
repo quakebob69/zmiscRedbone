@@ -1,0 +1,30 @@
+netsh http add urlacl url=http://192.168.0.215:8080/ user=everyone
+netsh advfirewall firewall add rule name="IISExpressWeb" dir=in protocol=tcp localport=8080 profile=private remoteip=localsubnet action=allow
+
+
+
+
+netsh http add urlacl url=http://192.168.0.215/  user=everyone
+
+netsh advfirewall firewall add rule name="IISExpressWeb" dir=in protocol=tcp localport=50193 profile=private remoteip=localsubnet action=allow
+
+
+netsh http delete urlacl url=http://192.168.0.215:8080/
+
+
+
+http://192.168.0.215:8080/
+
+
+
+delete 
+
+
+netsh http delete urlacl url=http://localhost:8080/myapp
+
+
+
+netsh http delete urlacl url=http://192.168.0.215:8080/
+
+
+netsh advfirewall
