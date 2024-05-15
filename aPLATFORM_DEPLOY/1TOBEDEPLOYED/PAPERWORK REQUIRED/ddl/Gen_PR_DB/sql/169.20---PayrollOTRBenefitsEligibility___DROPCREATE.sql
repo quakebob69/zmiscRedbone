@@ -10,7 +10,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [payroll].[PayrollOTRBenefitsEligibility](
-	[PayrollOTRBenefitsEligibilityId] [int] IDENTITY(1,1) NOT NULL,
+	[PayrollOTRBenefitsEligibilityId] [int] NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[PayrollOTRBenefitsStatusId] [int] NOT NULL,
 	[Date] [datetime] NOT NULL,

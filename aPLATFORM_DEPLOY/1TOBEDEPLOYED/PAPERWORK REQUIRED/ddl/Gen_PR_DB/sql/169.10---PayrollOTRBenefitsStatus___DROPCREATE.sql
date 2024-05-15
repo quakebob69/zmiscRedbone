@@ -27,7 +27,8 @@ GO
 
 
 INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('New Employee Waiting Period', 'New Employee Waiting Period' , 1)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('Full-Time', 'Full-Time' , 2)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('Part-Time', 'Part-Time' , 3)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('Part-Time', 'Part-Time' , 2)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('Full-Time', 'Full-Time' , 3)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('N/A', 'N/A' , 4)
 GO
 
