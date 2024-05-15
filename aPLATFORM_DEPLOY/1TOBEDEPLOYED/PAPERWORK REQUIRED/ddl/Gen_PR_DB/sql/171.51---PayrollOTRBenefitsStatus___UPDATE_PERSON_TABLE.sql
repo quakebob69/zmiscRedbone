@@ -11,5 +11,5 @@ SET @UnassignedId =
 
 --All
 UPDATE [main].[Person] SET PayrollOTRBenefitsStatusId = @UnassignedId
-WHERE personid in (select personid from main.person WHERE IsActive = 1)
+WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
 
