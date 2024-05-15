@@ -8,7 +8,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [payroll].[PayrollOTRBenefitsStatus](
-	[PayrollOTRBenefitsStatusId] [int] IDENTITY(1,1) NOT NULL,
+	[PayrollOTRBenefitsStatusId] [int] NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[Description] [varchar](500) NULL,
 	[DisplayOrder] [int] NOT NULL,
@@ -26,9 +26,10 @@ GO
 
 
 
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('New Employee Waiting Period', 'New Employee Waiting Period' , 1)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('Part-Time', 'Part-Time' , 2)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('Full-Time', 'Full-Time' , 3)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([Name] ,[Description] ,[DisplayOrder]) VALUES ('N/A', 'N/A' , 4)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (1, 'New Employee Waiting Period', 'New Employee Waiting Period' , 1)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (2, 'Part-Time', 'Part-Time' , 2)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (3, 'Full-Time', 'Full-Time' , 3)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (4, 'Unassigned', 'Unassigned' , 4)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (5, 'N/A', 'N/A' , 5)	
 GO
 
