@@ -1,8 +1,8 @@
-DECLARE @FullTimeStatusId INT
+DECLARE @UnassignedId INT
 
-SET @FullTimeStatusId =
+SET @UnassignedId =
 	(
-		SELECT PayrollOTRBenefitsStatusId from [payroll].[PayrollOTRBenefitsStatus] where Name = 'Full-Time'
+		SELECT PayrollOTRBenefitsStatusId from [payroll].[PayrollOTRBenefitsStatus] where Name = 'Unassigned'
 	)
 
 
@@ -10,6 +10,6 @@ SET @FullTimeStatusId =
 
 
 --All
-UPDATE [main].[Person] SET PayrollOTRBenefitsStatusId = @FullTimeStatusId
+UPDATE [main].[Person] SET PayrollOTRBenefitsStatusId = @UnassignedId
 WHERE personid in (select personid from main.person WHERE IsActive = 1)
 
