@@ -2666,11 +2666,9 @@ PayrollOTRLeaveType
 
 DELETE FROM [payroll].[PayrollOTRLeaveScheduled] WHERE (([PayrollOTRLeaveScheduledId] = @Original_PayrollOTRLeaveScheduledId))
 
-INSERT INTO [payroll].[PayrollOTRLeaveScheduled] ([PersonId], [Date], [Hours], [Days], [Planned]) VALUES (@PersonId, @Date, @Hours, @Days, @Planned)
+INSERT INTO [payroll].[PayrollOTRLeaveScheduled] ([PersonId], [Date], [Hours], [Days], [Planned], [Notes], [LastUpdate], [LastUpdatePersonId]) VALUES (@PersonId, @Date, @Hours, @Days, @Planned, @Notes, @LastUpdate, @LastUpdatePersonId)
 
-UPDATE [payroll].[PayrollOTRLeaveScheduled] SET [PersonId] = @PersonId, [Date] = @Date, [Hours] = @Hours, [Days] = @Days, [Planned] = @Planned WHERE (([PayrollOTRLeaveScheduledId] = @Original_PayrollOTRLeaveScheduledId))
-
-
+UPDATE [payroll].[PayrollOTRLeaveScheduled] SET [PersonId] = @PersonId, [Date] = @Date, [Hours] = @Hours, [Days] = @Days, [Planned] = @Planned, [Notes] = @Notes, [LastUpdate] = @LastUpdate, [LastUpdatePersonId] = @LastUpdatePersonId WHERE (([PayrollOTRLeaveScheduledId] = @Original_PayrollOTRLeaveScheduledId))
 
 
 
@@ -2678,3 +2676,12 @@ UPDATE [payroll].[PayrollOTRLeaveScheduled] SET [PersonId] = @PersonId, [Date] =
 
 
 
+SELECT payroll.PayrollOTRLeaveScheduled.PayrollOTRLeaveScheduledId, payroll.PayrollOTRLeaveScheduled.Date, payroll.PayrollOTRLeaveScheduled.Hours, payroll.PayrollOTRLeaveScheduled.Days, 
+                  payroll.PayrollOTRLeaveScheduled.Planned, 
+main.Person.FirstName + ISNULL(' ' + main.Person.MiddleInitial + ' ', ' ') + main.Person.LastName AS PersonName
+payroll.PayrollOTRLeaveType.Type, payroll.PayrollOTRLeaveScheduled.Notes, 
+                  payroll.PayrollOTRLeaveScheduled.LastUpdate, payroll.PayrollOTRLeaveScheduled.LastUpdatePersonId, payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId, main.Person.PersonId
+FROM     payroll.PayrollOTRLeaveScheduled INNER JOIN
+                  main.Person ON payroll.PayrollOTRLeaveScheduled.PersonId = main.Person.PersonId INNER JOIN
+                  payroll.PayrollOTRLeaveType ON main.Person.PayrollOTRLeaveTypeId = payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId
+ORDER BY PersonName, payroll.PayrollOTRLeaveScheduled.Date
