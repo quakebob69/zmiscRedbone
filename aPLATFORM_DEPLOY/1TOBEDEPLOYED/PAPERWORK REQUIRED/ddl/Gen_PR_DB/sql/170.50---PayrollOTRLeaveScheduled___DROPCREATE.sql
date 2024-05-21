@@ -15,6 +15,7 @@ CREATE TABLE [payroll].[PayrollOTRLeaveScheduled](
 	[Date] [datetime] NOT NULL,
 	[Hours] [decimal](10, 2) NOT NULL,
 	[Days] [decimal](10, 2) NOT NULL,
+	[Planned] [bit] NOT NULL
  CONSTRAINT [PK_PayrollOTRLeaveScheduled] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRLeaveScheduledId] ASC
