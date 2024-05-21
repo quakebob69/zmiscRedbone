@@ -2664,3 +2664,17 @@ PayrollOTRLeaveType
 
 
 
+DELETE FROM [payroll].[PayrollOTRLeaveScheduled] WHERE (([PayrollOTRLeaveScheduledId] = @Original_PayrollOTRLeaveScheduledId))
+
+INSERT INTO [payroll].[PayrollOTRLeaveScheduled] ([PersonId], [Date], [Hours], [Days], [Planned]) VALUES (@PersonId, @Date, @Hours, @Days, @Planned)
+
+UPDATE [payroll].[PayrollOTRLeaveScheduled] SET [PersonId] = @PersonId, [Date] = @Date, [Hours] = @Hours, [Days] = @Days, [Planned] = @Planned WHERE (([PayrollOTRLeaveScheduledId] = @Original_PayrollOTRLeaveScheduledId))
+
+
+
+
+
+
+
+
+

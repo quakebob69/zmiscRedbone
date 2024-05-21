@@ -13,7 +13,7 @@ CREATE TABLE [payroll].[PayrollOTRLeaveScheduled](
 	[PayrollOTRLeaveScheduledId] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[Date] [datetime] NOT NULL,
-	[Hours] [decimal](10, 2) NOT NULL,
+	[Hours] [int] NOT NULL,
 	[Days] [decimal](10, 2) NOT NULL,
 	[Planned] [bit] NOT NULL,
 	[Notes] [text] NULL,

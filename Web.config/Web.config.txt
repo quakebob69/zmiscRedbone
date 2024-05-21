@@ -6,4 +6,3 @@ DRIVERAPP:
 
 PROD:
 	<add name="RedBoneConnectionString" connectionString="Data Source=truckingwizard.com\;Initial Catalog=RedBone;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB2;Password=oROd5ITSqEgh" providerName="System.Data.SqlClient" />
-
