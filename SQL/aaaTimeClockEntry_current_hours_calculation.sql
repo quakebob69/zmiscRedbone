@@ -83,17 +83,17 @@ SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT Person
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 --Set dates manually
-DECLARE @EntryId INTEGER			= 26129
+DECLARE @EntryId INTEGER			= 26510
 
 
-	DECLARE @ClockedIn NVARCHAR(25)		= '2024-05-08 06:46:51.167';
-		DECLARE @ClockedOut NVARCHAR(25)	= '2024-05-06 11:28:31.135';
+	DECLARE @ClockedIn NVARCHAR(25)		= '2024-05-21 06:46:03.272';
+		DECLARE @ClockedOut NVARCHAR(25)	= '2024-05-20 14:45:13.362';
 
 				--SELECT * FROM [RedBone].[main].[TimeClockEntry] where personid = 2775 order by entryid desc
 
 --SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE EntryId = @EntryId
-	--ClockIn------------------------												UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
-	--ClockOut***********************														UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
+	--ClockIn------------------------													UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
+	--ClockOut***********************															UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
 --SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE EntryId = @EntryId
 
 					
