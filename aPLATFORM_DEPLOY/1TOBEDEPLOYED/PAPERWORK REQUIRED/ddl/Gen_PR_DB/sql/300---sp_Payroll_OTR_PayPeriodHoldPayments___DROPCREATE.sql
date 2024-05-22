@@ -38,9 +38,7 @@ END
 				DISTINCT(stag.LoadId)
 			FROM
 				[payroll].[PayrollOTRStaging] stag
-					JOIN
-						[dispatch].[Load] ld
-						ON stag.LoadId = ld.LoadId
+				JOIN [dispatch].[Load] ld ON stag.LoadId = ld.LoadId
 			WHERE
 				stag.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
 				AND

@@ -25,45 +25,34 @@ SET FMTONLY OFF
 END
 
 	--VARS
+		DECLARE @ActivePayPeriodId INT
+		EXEC @ActivePayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
+
 		DECLARE @DataSourceName_LOAD VARCHAR(4)
 		SET @DataSourceName_LOAD = 'LOAD'
 		DECLARE @PayrollOTRDataSourceId_LOAD INT
 			SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
-
-	--GET LOADS TO UNHOLD
-		DECLARE @LoadsToHold TABLE ( LoadId INT )
-		INSERT INTO @LoadsToHold
-			SELECT
-				DISTINCT(stag.LoadId)
-			FROM
-				[payroll].[PayrollOTRStaging] stag
-					JOIN
-						[dispatch].[Load] ld
-						ON stag.LoadId = ld.LoadId
-			WHERE
-				stag.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
-				AND
-				ld.PaperworkRecvdDate IS NULL
-			
-
-	--ISHELD RESET
+	--UNHOLD
 		UPDATE
-			[payroll].[PayrollOTRStaging]
+			[export].[AccountingExportPayrollData] 
 		SET
-			isHeld = 0
-
-
-	--HOLD 'LOAD' AND 'DRIVERPAY' RECORDS
-		UPDATE
-			[payroll].[PayrollOTRStaging]
-		SET
-			isHeld = 1
+			PayPeriodId = @ActivePayPeriodId
 		WHERE
-			--'LOAD'
-			(LoadId in (SELECT LoadId FROM @LoadsToHold))
-				OR
-			--'DRIVERPAY'
-			(TripNumber in (SELECT LoadId FROM @LoadsToHold))
+			AccountingExportPayrollDataId
+				IN
+					(
+					SELECT
+						aepd.AccountingExportPayrollDataId
+					FROM
+						[export].[AccountingExportPayrollData] aepd
+						JOIN [dispatch].[load] ld on aepd.LoadIdOrDriverPayId = ld.loadid
+					WHERE
+						PayPeriodId is null
+						AND
+						ld.PaperworkRecvdDate is not null
+						AND
+						aepd.PayrollOTRDataSourceId = @PayrollOTRDataSourceId_LOAD
+					)
 
 GO
