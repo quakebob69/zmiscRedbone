@@ -20,9 +20,13 @@ GO
 
 	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFHeld]
 	GO
-
+	
 	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFReleased]
 	GO
+
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataHeld]
+	GO
+
 
 
 
