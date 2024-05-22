@@ -9,16 +9,7 @@ DECLARE @LOADYLOAD INT		= 57009;
 
 
 --unhold
-update dispatch.load set PaperworkRecvdDate = @dt where loadid = @LOADYLOAD
-
-
-select aepd.* , '-------',
- ld.* 
-from
-[export].[AccountingExportPayrollData] aepd
-join dispatch.load ld on aepd.LoadIdOrDriverPayId = ld.loadid
-where PayPeriodId is null
-and ld.PaperworkRecvdDate is not null
+--update dispatch.load set PaperworkRecvdDate = @dt where loadid = @LOADYLOAD
 
 
 
