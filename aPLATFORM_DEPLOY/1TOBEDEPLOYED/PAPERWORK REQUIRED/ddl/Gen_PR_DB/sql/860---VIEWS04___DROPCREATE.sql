@@ -96,10 +96,10 @@ GO
 
 
 --Held
-DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDFHeld]
+DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataAllPDFHeld]
 GO
 
-	CREATE VIEW [export].[vAccountingExportPayrollDataPastPDFHeld] AS
+	CREATE VIEW [export].[vAccountingExportPayrollDataAllPDFHeld] AS
 
 			select TOP (1000000) 
 				exdata.PayPeriodId as period_code,
@@ -120,12 +120,6 @@ GO
 				join payroll.PayrollOTRPayPeriod ppo on exdata.OriginatingOTRPayPeriodId = ppo.PayrollOTRPayPeriodId
 			where------------------------------------------------------------------------
 				--(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
-				OriginatingOTRPayPeriodId = (SELECT
-													TOP 1 PayrollOTRPayPeriodId 
-													FROM [payroll].[PayrollOTRPayPeriod]
-													WHERE
-													IsActive = 0)
-				AND
 				PayPeriodId IS NULL
 			order by 
 				period_code,

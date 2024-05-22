@@ -9,7 +9,7 @@ GO
 	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDFDetail]
 	GO
 
-	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDFHeld]
+	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataAllPDFHeld]
 	GO
 
 	DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDF]
