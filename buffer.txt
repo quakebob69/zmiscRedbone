@@ -2675,3 +2675,14 @@ UPDATE [payroll].[PayrollOTRLeaveScheduled] SET [PersonId] = @PersonId, [Date] =
 
 
 SELECT payroll.PayrollOTRLeaveScheduled.PayrollOTRLeaveScheduledId, payroll.PayrollOTRLeaveScheduled.Date, payroll.PayrollOTRLeaveScheduled.Hours, payroll.PayrollOTRLeaveScheduled.Days, payroll.PayrollOTRLeaveScheduled.Planned, main.Person.FirstName + ISNULL(' ' + main.Person.MiddleInitial + ' ', ' ') + main.Person.LastName AS PersonName, payroll.PayrollOTRLeaveType.Type, payroll.PayrollOTRLeaveScheduled.Notes, payroll.PayrollOTRLeaveScheduled.LastUpdate, payroll.PayrollOTRLeaveScheduled.LastUpdatePersonId, payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId, main.Person.PersonId FROM     payroll.PayrollOTRLeaveScheduled INNER JOIN main.Person ON payroll.PayrollOTRLeaveScheduled.PersonId = main.Person.PersonId INNER JOIN payroll.PayrollOTRLeaveType ON main.Person.PayrollOTRLeaveTypeId = payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId ORDER BY PersonName, payroll.PayrollOTRLeaveScheduled.Date
+
+
+SELECT payroll.PayrollOTRLeaveScheduled.PayrollOTRLeaveScheduledId, payroll.PayrollOTRLeaveScheduled.Date, payroll.PayrollOTRLeaveScheduled.Hours, payroll.PayrollOTRLeaveScheduled.Days, 
+                  payroll.PayrollOTRLeaveScheduled.Planned, main.Person.FirstName + ISNULL(' ' + main.Person.MiddleInitial + ' ', ' ') + main.Person.LastName AS PersonName, Person_1.FirstName + ISNULL(' ' + Person_1.MiddleInitial + ' ', ' ') 
+                  + Person_1.LastName AS LastUpdatePersonName, payroll.PayrollOTRLeaveType.Type, payroll.PayrollOTRLeaveScheduled.Notes, payroll.PayrollOTRLeaveScheduled.LastUpdate, 
+                  payroll.PayrollOTRLeaveScheduled.LastUpdatePersonId, payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId, main.Person.PersonId
+FROM     payroll.PayrollOTRLeaveScheduled INNER JOIN
+                  main.Person ON payroll.PayrollOTRLeaveScheduled.PersonId = main.Person.PersonId INNER JOIN
+                  payroll.PayrollOTRLeaveType ON main.Person.PayrollOTRLeaveTypeId = payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId INNER JOIN
+                  main.Person AS Person_1 ON payroll.PayrollOTRLeaveScheduled.LastUpdatePersonId = Person_1.PersonId AND payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId = Person_1.PayrollOTRLeaveTypeId
+ORDER BY PersonName, payroll.PayrollOTRLeaveScheduled.Date
