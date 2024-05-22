@@ -51,7 +51,7 @@ END
 			
 			
 		--UNHOLD
-			-- UNHOLD SHIZ IN EXPORTDATA TABLE
+			EXEC [payroll].[sp_Payroll_OTR_PayPeriodUnHoldPayments] @LastUpdateBy		
 			
 			
 		--AccountingExportPayrollData
