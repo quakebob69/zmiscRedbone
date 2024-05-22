@@ -80,6 +80,9 @@ GO
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodSubmitForValidation]
 		GO
 		
+		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodUnHoldPayments]
+		GO
+		
 		DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments]
 		GO
 						
