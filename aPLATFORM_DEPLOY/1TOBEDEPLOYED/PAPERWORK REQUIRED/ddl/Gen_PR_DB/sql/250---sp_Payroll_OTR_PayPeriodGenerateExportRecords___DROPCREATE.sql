@@ -36,11 +36,15 @@ END
 	DECLARE @PayrollOTRDataSourceId_LOAD INT
 		SET @PayrollOTRDataSourceId_LOAD = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_LOAD)
 
-
 	DECLARE @DataSourceName_DRIVERPAY VARCHAR(9)
 	SET @DataSourceName_DRIVERPAY = 'DRIVERPAY'
 	DECLARE @PayrollOTRDataSourceId_DRIVERPAY INT
 		SET @PayrollOTRDataSourceId_DRIVERPAY = (SELECT PayrollOTRDataSourceId FROM payroll.PayrollOTRDataSource WHERE Name = @DataSourceName_DRIVERPAY)
+
+	DECLARE @PaymentHoldReason_INCOMPLETELOADPAPERWORK VARCHAR(9)
+	SET @PaymentHoldReason_INCOMPLETELOADPAPERWORK = 'INCOMPLETELOADPAPERWORK'
+	DECLARE @PaymentHoldReason_INCOMPLETELOADPAPERWORK_ID INT
+		SET @PaymentHoldReason_INCOMPLETELOADPAPERWORK_ID = (SELECT PayrollOTRPaymentHoldReasonId FROM payroll.PayrollOTRPaymentHoldReason WHERE Name = @PaymentHoldReason_INCOMPLETELOADPAPERWORK)
 
 	DECLARE @OpenPayPeriodId INT
 	EXEC @OpenPayPeriodId = [payroll].[sp_Payroll_OTR_PayPeriodGetOpen] 2775
@@ -87,9 +91,9 @@ END
 		--INSERT
 			--HELD
 				INSERT INTO [export].[AccountingExportPayrollData]
-					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity)
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity, PayrollOTRPaymentHoldReasonId)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.LoadId, recs.Quantity
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.LoadId, recs.Quantity, @PayrollOTRDataSourceId_DRIVERPAY
 				FROM @PayrollRecs__LOAD recs
 				WHERE IsHeld = 1;
 
@@ -134,9 +138,9 @@ END
 		--INSERT
 			--HELD
 				INSERT INTO [export].[AccountingExportPayrollData]
-					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity)
+					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity, PayrollOTRPaymentHoldReasonId)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.DriverPayId, recs.Quantity
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.DriverPayId, recs.Quantity, @PayrollOTRDataSourceId_DRIVERPAY
 				FROM @PayrollRecs__DRIVERPAY recs
 				WHERE IsHeld = 1;
 
