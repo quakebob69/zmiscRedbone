@@ -93,7 +93,7 @@ END
 				INSERT INTO [export].[AccountingExportPayrollData]
 					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity, PayrollOTRPaymentHoldReasonId)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.LoadId, recs.Quantity, @PayrollOTRDataSourceId_DRIVERPAY
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_LOAD, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.LoadId, recs.Quantity, @PaymentHoldReason_INCOMPLETELOADPAPERWORK_ID
 				FROM @PayrollRecs__LOAD recs
 				WHERE IsHeld = 1;
 
@@ -140,7 +140,7 @@ END
 				INSERT INTO [export].[AccountingExportPayrollData]
 					(OriginatingOTRPayPeriodId, PayrollOTRDataSourceId, AccountingExportPayrollEntryTypeId, AccountingExportPayrollItemId, PersonId, LoadIdOrDriverPayId, Quantity, PayrollOTRPaymentHoldReasonId)
 				SELECT
-					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.DriverPayId, recs.Quantity, @PayrollOTRDataSourceId_DRIVERPAY
+					@OpenPayPeriodId, @PayrollOTRDataSourceId_DRIVERPAY, recs.AccountingExportPayrollEntryTypeId, recs.AccountingExportPayrollItemId, recs.PersonId, recs.DriverPayId, recs.Quantity, @PaymentHoldReason_INCOMPLETELOADPAPERWORK_ID
 				FROM @PayrollRecs__DRIVERPAY recs
 				WHERE IsHeld = 1;
 
