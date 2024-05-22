@@ -51,7 +51,7 @@ END
 			
 			
 		--UNHOLD
-			--EXEC [payroll].[sp_Payroll_OTR_PayPeriodUnHoldPayments] @LastUpdateBy		
+			EXEC [payroll].[sp_Payroll_OTR_PayPeriodUnHoldPayments] @LastUpdateBy		
 			
 			
 		--AccountingExportPayrollData

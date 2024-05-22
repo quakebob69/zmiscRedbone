@@ -4,12 +4,12 @@ DECLARE @LOADYLOAD INT		= 57009;
 -------------------------------------------------------select * from [export].[AccountingExportPayrollData] aepd order by LoadIdOrDriverPayId 
 
 --reset
-update dispatch.load  set PaperworkRecvdDate = NULL where loadid = @LOADYLOAD
+--update dispatch.load  set PaperworkRecvdDate = NULL where loadid = @LOADYLOAD
 
 
 
 --unhold
---update dispatch.load set PaperworkRecvdDate = @dt where loadid = @LOADYLOAD
+update dispatch.load set PaperworkRecvdDate = @dt where loadid = @LOADYLOAD
 
 
 
