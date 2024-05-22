@@ -108,7 +108,8 @@ GO
 				itm.Name as item_name,
 				ppo.Code as period_code_orig,
 				LoadIdOrDriverPayId,
-				PayrollOTRPaymentHoldReasonId,
+				exdata.PayrollOTRPaymentHoldReasonId,
+				hldrsn.Description as HoldReasonText,
 				Rate,
 				Hours,
 				Quantity
@@ -118,6 +119,7 @@ GO
 				join export.AccountingExportPayrollEntryType typ on exdata.AccountingExportPayrollEntryTypeId = typ.AccountingExportPayrollEntryTypeId
 				join export.AccountingExportPayrollItem itm on exdata.AccountingExportPayrollItemId = itm.AccountingExportPayrollItemId
 				join payroll.PayrollOTRPayPeriod ppo on exdata.OriginatingOTRPayPeriodId = ppo.PayrollOTRPayPeriodId
+				join payroll.PayrollOTRPaymentHoldReason hldrsn on exdata.PayrollOTRPaymentHoldReasonId = hldrsn.PayrollOTRPaymentHoldReasonId
 			where------------------------------------------------------------------------
 				--(exdata.PersonId = 2451 OR exdata.PersonId =  1252) and
 				OriginatingOTRPayPeriodId = (SELECT
