@@ -5,11 +5,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER TABLE [main].[Person]
-ADD [PayrollOTRLeaveTypeId] [int] NULL CONSTRAINT DF_mainPerson_PayrollOTRLeaveTypeId DEFAULT 0
+ADD [PayrollOTRPersonLeaveTypeId] [int] NULL CONSTRAINT DF_mainPerson_PayrollOTRPersonLeaveTypeId DEFAULT 0
 GO
 
-ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRLeaveType] FOREIGN KEY([PayrollOTRLeaveTypeId])
-REFERENCES [payroll].[PayrollOTRLeaveType] ([PayrollOTRLeaveTypeId])
+ALTER TABLE [main].[Person] WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRPersonLeaveType] FOREIGN KEY([PayrollOTRPersonLeaveTypeId])
+REFERENCES [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId])
 GO
-ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRLeaveType]
+ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRPersonLeaveType]
 GO

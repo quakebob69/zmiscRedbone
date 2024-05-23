@@ -144,11 +144,11 @@ GO
 		DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsEligibility]
 	
 
-		--PayrollOTRLeaveType
-			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS DF_mainPerson_PayrollOTRLeaveTypeId
-			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRLeaveType];
-			ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRLeaveTypeId];
-			DROP TABLE IF EXISTS [payroll].[PayrollOTRLeaveType]
+		--PayrollOTRPersonLeaveType
+			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS DF_mainPerson_PayrollOTRPersonLeaveTypeId
+			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRPersonLeaveType];
+			ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRPersonLeaveTypeId];
+			DROP TABLE IF EXISTS [payroll].[PayrollOTRPersonLeaveType]
 		
 
 		--PayrollOTRBenefitsStatus

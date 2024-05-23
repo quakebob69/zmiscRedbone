@@ -2,18 +2,18 @@
 --select * from main.person where personid in (8, 62, 73, 2153)
 
 --OTR
-UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 1
+UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 1
 WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 4)
 
 --Fedex
-UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 2
+UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 2
 WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 3)
 
 --Salary
-UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 3
+UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 3
 WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 1)
 
 --All
-UPDATE [main].[Person] SET PayrollOTRLeaveTypeId = 5
-WHERE personid in (select personid from main.person per where PayrollOTRLeaveTypeId IS NULL)
+UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 5
+WHERE personid in (select personid from main.person per where PayrollOTRPersonLeaveTypeId IS NULL)
 

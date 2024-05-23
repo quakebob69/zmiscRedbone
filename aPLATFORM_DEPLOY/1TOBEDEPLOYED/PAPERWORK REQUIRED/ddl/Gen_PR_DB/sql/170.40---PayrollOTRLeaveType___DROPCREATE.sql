@@ -1,24 +1,24 @@
-/****** Object:  Table [payroll].[PayrollOTRLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveType]') AND type in (N'U'))
-DROP TABLE [payroll].[PayrollOTRLeaveType]
+/****** Object:  Table [payroll].[PayrollOTRPersonLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPersonLeaveType]') AND type in (N'U'))
+DROP TABLE [payroll].[PayrollOTRPersonLeaveType]
 GO
 
-/****** Object:  Table [payroll].[PayrollOTRLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
+/****** Object:  Table [payroll].[PayrollOTRPersonLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [payroll].[PayrollOTRLeaveType](
-	[PayrollOTRLeaveTypeId] [int] NOT NULL,
+CREATE TABLE [payroll].[PayrollOTRPersonLeaveType](
+	[PayrollOTRPersonLeaveTypeId] [int] NOT NULL,
 	[Type] [varchar](30) NOT NULL,
 	[Description] [varchar](128) NOT NULL,
 	[Enabled] [bit] NOT NULL,
- CONSTRAINT [PK_PayrollOTRLeaveType] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_PayrollOTRPersonLeaveType] PRIMARY KEY CLUSTERED 
 (
-	[PayrollOTRLeaveTypeId] ASC
+	[PayrollOTRPersonLeaveTypeId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [UQ_PayrollOTRLeaveType] UNIQUE NONCLUSTERED 
+ CONSTRAINT [UQ_PayrollOTRPersonLeaveType] UNIQUE NONCLUSTERED 
 (
 	[Type]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
