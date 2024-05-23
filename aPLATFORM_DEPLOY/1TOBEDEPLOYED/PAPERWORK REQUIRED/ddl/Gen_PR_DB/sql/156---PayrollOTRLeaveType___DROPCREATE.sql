@@ -26,7 +26,7 @@ CREATE TABLE [payroll].[PayrollOTRLeaveType](
 GO
 
 
---INSERT INTO [payroll].[PayrollOTRLeaveType] ([PayrollOTRLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (1,'OTR' ,'OTR' ,1)
+INSERT INTO [payroll].[PayrollOTRLeaveType] ([PayrollOTRLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (1,'Placeholder' ,'Placeholder' ,1)
 --INSERT INTO [payroll].[PayrollOTRLeaveType] ([PayrollOTRLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (2,'FedEx' ,'FedEx' ,1)
 --INSERT INTO [payroll].[PayrollOTRLeaveType] ([PayrollOTRLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (3,'Salary' ,'Salary' ,1)
 --INSERT INTO [payroll].[PayrollOTRLeaveType] ([PayrollOTRLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (4,'Hourly' ,'Hourly' ,1)
