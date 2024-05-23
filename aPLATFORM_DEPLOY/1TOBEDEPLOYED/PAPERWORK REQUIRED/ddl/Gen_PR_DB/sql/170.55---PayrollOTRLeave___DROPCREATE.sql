@@ -16,6 +16,7 @@ CREATE TABLE [payroll].[PayrollOTRLeave](
 	[PersonId] [int] NOT NULL,
 	[Hours] [decimal](10, 2) NULL,
 	[Days] [int] NULL,
+	[IsPaid] [bit] NOT NULL,
 	[HadUnplannedLeave] [bit] NOT NULL,
 	[Notes] [text] NULL,
 	[LastUpdate] [datetime] NOT NULL
