@@ -167,6 +167,16 @@ GO
 		GO
 
 
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeave]') AND type in (N'U'))
+			DROP TABLE [payroll].[PayrollOTRLeave]
+		GO
+		
+
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveType]') AND type in (N'U'))
+			DROP TABLE [payroll].[PayrollOTRLeaveType]
+		GO
+		
+
 		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStaging]') AND type in (N'U'))
 			DROP TABLE [payroll].[PayrollOTRStaging]
 		GO
