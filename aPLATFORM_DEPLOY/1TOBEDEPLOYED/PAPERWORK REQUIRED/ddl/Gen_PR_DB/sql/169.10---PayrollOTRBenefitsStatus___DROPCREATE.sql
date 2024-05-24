@@ -29,8 +29,8 @@ GO
 INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (1, 'New Employee Waiting Period', 'New Employee Waiting Period' , 1)
 INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (2, 'Part-Time', 'Part-Time' , 2)
 INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (3, 'Full-Time', 'Full-Time' , 3)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (4, 'Probation', 'Probation' , 3)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (5, 'Unassigned', 'Unassigned' , 4)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (6, 'N/A', 'N/A' , 5)	
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (4, 'Probation', 'Probation' , 4)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (5, 'Unassigned', 'Unassigned' , 5)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (6, 'N/A', 'N/A' , 6)	
 GO
 
