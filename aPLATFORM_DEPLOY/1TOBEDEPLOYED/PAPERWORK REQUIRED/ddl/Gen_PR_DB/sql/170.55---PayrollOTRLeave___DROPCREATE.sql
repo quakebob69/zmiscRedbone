@@ -15,9 +15,10 @@ CREATE TABLE [payroll].[PayrollOTRLeave](
 	[PayPeriodId] [int] NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[Date] [datetime] NOT NULL,
+	[Accrual] [bit] NOT NULL,
+	[IsPaid] [bit] NOT NULL,
 	[Hours] [decimal](10, 2) NULL,
 	[Days] [int] NULL,
-	[IsPaid] [bit] NOT NULL,
 	[PaidValue] [decimal](18, 2) NULL,
 	[Planned] [bit] NOT NULL,
 	[Notes] [text] NULL,
@@ -32,7 +33,9 @@ CREATE TABLE [payroll].[PayrollOTRLeave](
 	[PayrollOTRLeaveTypeId],
 	[PayPeriodId],
 	[PersonId],
-	[Date]
+	[Date],
+	[Accrual],
+	[IsPaid]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
