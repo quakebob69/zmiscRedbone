@@ -29,7 +29,7 @@ BEGIN
 		SELECT LoadId FROM dispatch.Load where LoadId = @LSearchAllString
 	END
 
-	SELECT * FROM @ValidLoads
+	SELECT top 1 LoadId FROM @ValidLoads
 
 END
 
