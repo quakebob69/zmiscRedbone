@@ -2688,9 +2688,7 @@ UPDATE [payroll].[PayrollOTRLeaveScheduled] SET [PersonId] = @PersonId, [Date] =
 
 
 
-	62406
-	229292
-
-	50225
+	- 62406 (cust num: 229292)
+	- 12869 -> 50225
 
 
