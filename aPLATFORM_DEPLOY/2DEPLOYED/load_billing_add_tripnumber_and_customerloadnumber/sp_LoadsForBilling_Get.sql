@@ -24,21 +24,68 @@ BEGIN
 	DECLARE @ValidLoads Table (LoadId int NOT NULL PRIMARY KEY CLUSTERED);
 
 	IF COALESCE(@LSearchAllString, '') <> ''
-	BEGIN
+	BEGIN		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IF dbo.IsInteger(@LSearchAllString) = 1
+BEGIN
+    
 		INSERT INTO @ValidLoads
 		SELECT LoadId FROM dispatch.Load where LoadId = @LSearchAllString
+END
+ELSE
+BEGIN
+    PRINT 'Poor score.';
+END
 
-		INSERT INTO @ValidLoads
-		SELECT LoadId FROM dispatch.Load where TripNumber = @LSearchAllString
+
+
+
+
+
+
+
+		--INSERT INTO @ValidLoads
+		--SELECT LoadId FROM dispatch.Load where LoadId = @LSearchAllString
+
+		--INSERT INTO @ValidLoads
+		--SELECT LoadId FROM dispatch.Load where TripNumber = @LSearchAllString
 		
-		INSERT INTO @ValidLoads
-		SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
+		--INSERT INTO @ValidLoads
+		--SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
 	END
 
-	SELECT top 1 LoadId FROM @ValidLoads
+	--SELECT top 1 LoadId FROM @ValidLoads
 
 END
 
 GO
 
+
+
+
+
+
+
+exec dbo.sp_LoadsForBilling_Get '62406' --62406
+exec dbo.sp_LoadsForBilling_Get '229292'--229292
+exec dbo.sp_LoadsForBilling_Get '12869'--12869
+exec dbo.sp_LoadsForBilling_Get '50225'--12869
 
