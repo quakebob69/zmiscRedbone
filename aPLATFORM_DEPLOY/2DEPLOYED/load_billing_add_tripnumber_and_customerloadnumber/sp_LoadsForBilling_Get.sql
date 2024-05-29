@@ -8,90 +8,57 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE procedure [dbo].[sp_LoadsForBilling_Get]
-(
-	@SearchAllString varchar(max) = ''
-)
-AS 
+CREATE PROCEDURE [dbo].[sp_LoadsForBilling_Get] (@SearchAllString VARCHAR(max) = '')
+AS
 BEGIN
-
-	IF 1=0 BEGIN
+	IF 1 = 0
+	BEGIN
 		SET FMTONLY OFF
 	END
 
-	DECLARE @LSearchAllString varchar(max) = @SearchAllString
-
-	DECLARE @ValidLoads Table (LoadId int NOT NULL PRIMARY KEY CLUSTERED);
+	DECLARE @LSearchAllString VARCHAR(max) = @SearchAllString
+	DECLARE @ValidLoads TABLE (LoadId INT NOT NULL PRIMARY KEY CLUSTERED);
 
 	IF COALESCE(@LSearchAllString, '') <> ''
-	BEGIN		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-IF dbo.IsInteger(@LSearchAllString) = 1
-BEGIN
-    
-		INSERT INTO @ValidLoads
-		SELECT LoadId FROM dispatch.Load where LoadId = @LSearchAllString
-
-		IF (select count(*) from @ValidLoads) < 1
+	BEGIN
+		IF dbo.IsInteger(@LSearchAllString) = 1
 		BEGIN
 			INSERT INTO @ValidLoads
-			SELECT LoadId FROM dispatch.Load where TripNumber = @LSearchAllString
-		END
+				SELECT LoadId
+				FROM dispatch.LOAD
+				WHERE LoadId = @LSearchAllString
 
-		IF (select count(*) from @ValidLoads) < 1
+			IF (SELECT count(*) FROM @ValidLoads) < 1
+			BEGIN
+				INSERT INTO @ValidLoads
+					SELECT LoadId
+					FROM dispatch.LOAD
+					WHERE TripNumber = @LSearchAllString
+			END
+
+			IF (SELECT count(*) FROM @ValidLoads) < 1
+			BEGIN
+				INSERT INTO @ValidLoads
+					SELECT LoadId
+					FROM dispatch.LOAD
+					WHERE CustomerLoadNumber = @LSearchAllString
+			END
+		END
+		ELSE
 		BEGIN
 			INSERT INTO @ValidLoads
-			SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
+				SELECT LoadId
+				FROM dispatch.LOAD
+				WHERE CustomerLoadNumber = @LSearchAllString
 		END
-END
-ELSE
-BEGIN
-		INSERT INTO @ValidLoads
-		SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
-END
-
-
-
-
-
-
-
-
-
 	END
 
-	SELECT top 1 LoadId FROM @ValidLoads
-
+	SELECT TOP 1 LoadId FROM @ValidLoads
 END
-
 GO
 
-
-
-
-
-exec dbo.sp_LoadsForBilling_Get '62406' --62406
-exec dbo.sp_LoadsForBilling_Get '229292'--229292
-exec dbo.sp_LoadsForBilling_Get '12869'--12869
-exec dbo.sp_LoadsForBilling_Get '50225'--12869
-exec dbo.sp_LoadsForBilling_Get 'Q82380077'--62318
-
-
+EXEC dbo.sp_LoadsForBilling_Get '62406' --62406
+EXEC dbo.sp_LoadsForBilling_Get '229292' --229292
+EXEC dbo.sp_LoadsForBilling_Get '12869' --12869
+EXEC dbo.sp_LoadsForBilling_Get '50225' --12869
+EXEC dbo.sp_LoadsForBilling_Get 'Q82380077' --62318
