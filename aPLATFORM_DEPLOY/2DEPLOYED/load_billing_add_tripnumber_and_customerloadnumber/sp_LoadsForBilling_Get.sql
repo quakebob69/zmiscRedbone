@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS [dbo].[sp_LoadsForBilling_Get]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_LoadsForStatus_Get]    Script Date: 5/29/2024 9:40:43 AM ******/
+/****** Object:  StoredProcedure [dbo].[sp_LoadsForBilling_Get]    Script Date: 5/29/2024 9:40:43 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -75,14 +75,7 @@ END
 
 
 
-		--INSERT INTO @ValidLoads
-		--SELECT LoadId FROM dispatch.Load where LoadId = @LSearchAllString
 
-		--INSERT INTO @ValidLoads
-		--SELECT LoadId FROM dispatch.Load where TripNumber = @LSearchAllString
-		
-		--INSERT INTO @ValidLoads
-		--SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
 	END
 
 	SELECT top 1 LoadId FROM @ValidLoads
@@ -94,12 +87,11 @@ GO
 
 
 
-		--DECLARE @Aasdf INT
-		--EXEC @Aasdf = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
-
 
 exec dbo.sp_LoadsForBilling_Get '62406' --62406
 exec dbo.sp_LoadsForBilling_Get '229292'--229292
 exec dbo.sp_LoadsForBilling_Get '12869'--12869
 exec dbo.sp_LoadsForBilling_Get '50225'--12869
+exec dbo.sp_LoadsForBilling_Get 'Q82380077'--62318
+
 
