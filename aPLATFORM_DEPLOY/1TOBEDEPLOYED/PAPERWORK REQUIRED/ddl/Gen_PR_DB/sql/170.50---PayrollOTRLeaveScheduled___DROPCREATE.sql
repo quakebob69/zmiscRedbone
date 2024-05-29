@@ -18,7 +18,7 @@ CREATE TABLE [payroll].[PayrollOTRLeaveScheduled](
 	[Planned] [bit] NOT NULL,
 	[Notes] [text] NULL,
 	[LastUpdate] [datetime] NULL,
-	[LastUpdatePersonId] [int] NULL,
+	[LastUpdatePersonId] [int] NULL
  CONSTRAINT [PK_PayrollOTRLeaveScheduled] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRLeaveScheduledId] ASC

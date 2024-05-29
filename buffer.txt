@@ -2716,3 +2716,17 @@ BEGIN
     RETURN @Result
 END
 GO
+
+
+
+[Date] [datetime] NOT NULL,
+[Planned] [bit] NOT NULL,
+[LastUpdatePersonId] [int] NULL
+
+
+
+SELECT payroll.PayrollOTRLeave.PayrollOTRLeaveId, payroll.PayrollOTRLeave.PayrollOTRLeaveTypeId, payroll.PayrollOTRLeave.PayPeriodId, payroll.PayrollOTRLeave.PersonId, payroll.PayrollOTRLeave.Date, payroll.PayrollOTRLeave.Hours, 
+                  payroll.PayrollOTRLeave.Days, payroll.PayrollOTRLeave.IsPaid, payroll.PayrollOTRLeave.PaidValue, payroll.PayrollOTRLeave.Planned, payroll.PayrollOTRLeave.Notes, payroll.PayrollOTRLeave.LastUpdate, payroll.PayrollOTRLeave.LastUpdatePersonId, 
+                  payroll.PayrollOTRLeaveType.Type, payroll.PayrollOTRLeaveType.Description
+FROM     payroll.PayrollOTRLeave INNER JOIN
+                  payroll.PayrollOTRLeaveType ON payroll.PayrollOTRLeave.PayrollOTRLeaveTypeId = payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId
