@@ -27,6 +27,12 @@ BEGIN
 	BEGIN
 		INSERT INTO @ValidLoads
 		SELECT LoadId FROM dispatch.Load where LoadId = @LSearchAllString
+
+		INSERT INTO @ValidLoads
+		SELECT LoadId FROM dispatch.Load where TripNumber = @LSearchAllString
+		
+		INSERT INTO @ValidLoads
+		SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
 	END
 
 	SELECT top 1 LoadId FROM @ValidLoads
