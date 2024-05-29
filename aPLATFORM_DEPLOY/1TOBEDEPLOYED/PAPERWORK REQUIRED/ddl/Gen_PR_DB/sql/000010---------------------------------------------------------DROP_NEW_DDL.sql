@@ -154,6 +154,7 @@ GO
 		--PayrollOTRBenefitsStatus
 			ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRBenefitsStatus];
 			ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRBenefitsStatusId];
+			ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [FullTimeEligibleDate];
 			DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
 		
 

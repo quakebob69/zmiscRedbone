@@ -14,6 +14,7 @@ CREATE TABLE [payroll].[PayrollOTRBenefitsEligibility](
 	[PersonId] [int] NOT NULL,
 	[PayrollOTRBenefitsStatusId] [int] NOT NULL,
 	[Date] [datetime] NOT NULL,
+	[FullTimeEligibleDate] [datetime] NULL
  CONSTRAINT [PK_PayrollOTRBenefitsEligibility] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRBenefitsEligibilityId] ASC
