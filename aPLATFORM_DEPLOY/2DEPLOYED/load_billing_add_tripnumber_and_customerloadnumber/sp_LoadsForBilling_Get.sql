@@ -16,10 +16,10 @@ BEGIN
 		SET FMTONLY OFF
 	END
 
-	DECLARE @LSearchAllString VARCHAR(max) = @SearchAllString
+	DECLARE @LSearchAllString VARCHAR(max) = TRIM(COALESCE(@SearchAllString, ''))
 	DECLARE @ValidLoads TABLE (LoadId INT NOT NULL PRIMARY KEY CLUSTERED);
 
-	IF COALESCE(@LSearchAllString, '') <> ''
+	IF @LSearchAllString <> ''
 	BEGIN
 		IF dbo.IsInteger(@LSearchAllString) = 1
 		BEGIN
@@ -57,8 +57,8 @@ BEGIN
 END
 GO
 
-EXEC dbo.sp_LoadsForBilling_Get '62406' --62406
-EXEC dbo.sp_LoadsForBilling_Get '229292' --229292
-EXEC dbo.sp_LoadsForBilling_Get '12869' --12869
-EXEC dbo.sp_LoadsForBilling_Get '50225' --12869
-EXEC dbo.sp_LoadsForBilling_Get 'Q82380077' --62318
+--EXEC dbo.sp_LoadsForBilling_Get '62406' --62406
+--EXEC dbo.sp_LoadsForBilling_Get '229292' --229292
+--EXEC dbo.sp_LoadsForBilling_Get '12869' --12869
+--EXEC dbo.sp_LoadsForBilling_Get '50225' --12869
+--EXEC dbo.sp_LoadsForBilling_Get 'Q82380077' --62318
