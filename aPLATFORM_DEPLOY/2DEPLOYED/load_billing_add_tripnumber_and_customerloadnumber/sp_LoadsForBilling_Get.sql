@@ -58,7 +58,7 @@ END
 GO
 
 --EXEC dbo.sp_LoadsForBilling_Get '62406' --62406
---EXEC dbo.sp_LoadsForBilling_Get '229292' --229292
---EXEC dbo.sp_LoadsForBilling_Get '12869' --12869
---EXEC dbo.sp_LoadsForBilling_Get '50225' --12869
+--EXEC dbo.sp_LoadsForBilling_Get '229292' --62406
+--EXEC dbo.sp_LoadsForBilling_Get '12869' --50225
+--EXEC dbo.sp_LoadsForBilling_Get '50225' --50225
 --EXEC dbo.sp_LoadsForBilling_Get 'Q82380077' --62318
