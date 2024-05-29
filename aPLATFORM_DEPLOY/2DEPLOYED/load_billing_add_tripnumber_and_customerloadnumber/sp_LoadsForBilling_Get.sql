@@ -49,10 +49,23 @@ BEGIN
     
 		INSERT INTO @ValidLoads
 		SELECT LoadId FROM dispatch.Load where LoadId = @LSearchAllString
+
+		IF (select count(*) from @ValidLoads) < 1
+		BEGIN
+			INSERT INTO @ValidLoads
+			SELECT LoadId FROM dispatch.Load where TripNumber = @LSearchAllString
+		END
+
+		IF (select count(*) from @ValidLoads) < 1
+		BEGIN
+			INSERT INTO @ValidLoads
+			SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
+		END
 END
 ELSE
 BEGIN
-    PRINT 'Poor score.';
+		INSERT INTO @ValidLoads
+		SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
 END
 
 
@@ -72,7 +85,7 @@ END
 		--SELECT LoadId FROM dispatch.Load where CustomerLoadNumber = @LSearchAllString
 	END
 
-	--SELECT top 1 LoadId FROM @ValidLoads
+	SELECT top 1 LoadId FROM @ValidLoads
 
 END
 
@@ -81,7 +94,8 @@ GO
 
 
 
-
+		--DECLARE @Aasdf INT
+		--EXEC @Aasdf = [payroll].[sp_Payroll_OTR_PayPeriodGetActive] @LastUpdateBy
 
 
 exec dbo.sp_LoadsForBilling_Get '62406' --62406
