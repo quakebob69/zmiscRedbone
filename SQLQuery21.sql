@@ -231,7 +231,7 @@ where l.loadid = 57013
 
 
 SELECT * from #RECSASDF
---order by StopNumber desc
+order by StopNumber
 
 
 
