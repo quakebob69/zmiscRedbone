@@ -229,12 +229,32 @@ where l.loadid = 57013
 
 
 
-declare @searchPerson int
-set @searchPerson = 1252
-set @searchPerson = 2081
 
 SELECT * from #RECSASDF
-where StopType = 'LEG' or StopType = 'Drop'
+order by StopNumber desc
+
+
+
+
+
+	declare @searchPerson int
+	set @searchPerson = 1252
+SELECT top 1 State, COALESCE(LEGDROPDt, DROPDt) from #RECSASDF
+where
+StopType = 'LEG' or StopType = 'Drop'
+and (LOAD_Driver = @searchPerson OR STOP_Driver = @searchPerson)
+order by StopNumber desc
+
+
+
+
+
+	declare @searchPerson2 int
+	set @searchPerson2 = 2081
+SELECT top 1 State, COALESCE(LEGDROPDt, DROPDt) from #RECSASDF
+where
+StopType = 'LEG' or StopType = 'Drop'
+and (LOAD_Driver = @searchPerson2 OR STOP_Driver = @searchPerson2)
 order by StopNumber desc
 
 
@@ -247,7 +267,6 @@ order by StopNumber desc
 
 
 
---1252/2081
 --getLastLoadActivityStateAndDate(1252) --> UT, 2023-12-16 10:00:00.000
 --getLastLoadActivityStateAndDate(2081) --> UT, 2023-12-19 06:00:00.000
 
