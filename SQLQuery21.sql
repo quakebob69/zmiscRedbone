@@ -204,7 +204,20 @@ name, PR_OTR_History.PickupBy
 
 
 
+DROP TABLE IF EXISTS #RECSASDF
+CREATE TABLE #RECSASDF
+(
+	l_Driver1_PersonId int,
+	lst_StopNm varchar(999),
+	ls_StopNumber int,
+	ca_City varchar(999), 
+	ca_State varchar(999),
+	ls_StartDateTime datetime,
+	ls_DropStartDateTime datetime  NULL,
+	ls_Driver1_PersonId int  NULL
+)
 
+insert into #RECSASDF
 select l.Driver1_PersonId as 'LOAD: Driver                                   ', lst.StopNm as 'Stop Type', ls.StopNumber as 'Stop Number', ca.City as 'City', ca.State as 'State', ls.StartDateTime as 'Non-Leg Date', ls.DropStartDateTime as 'Leg Date', ls.Driver1_PersonId as 'Leg Driver'--, '---------------------------------------------', ls.*, ls.*
 from dispatch.Load l
 join dispatch.LoadStop ls on l.LoadId = ls.LoadId
@@ -216,7 +229,20 @@ order by ls.StopNumber  desc;
 
 
 
+
+
+SELECT * from #RECS;
+
+
+
+
+
+
+
+
 --1252/2081
 --getLastLoadActivityState(1252) --> asdf
 --getLastLoadActivityState(2081) --> asdf
+
+
 
