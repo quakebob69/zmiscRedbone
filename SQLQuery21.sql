@@ -130,7 +130,7 @@ name, dispatch.PR_OTR_History.loadid
 
 
 
-*/
+
 select PickOrigin, DropDest, PR_OTR_History.PickupBy, DeliverBy,loadid, TripNumber, * from dispatch.PR_OTR_History 
 where 
 name like '%BRETT%CIMRHAKL%' and
@@ -149,7 +149,7 @@ name, PR_OTR_History.PickupBy
 
 select PickOrigin, DropDest, PR_OTR_History.PickupBy, DeliverBy,loadid, TripNumber, * from dispatch.PR_OTR_History 
 where 
-name like '%BRETT CIMRHAKL%' and
+--name like '%BRETT CIMRHAKL%' and
 PickupBy > '2023-09-15 09:00:00.000'
 --and
 --PickupBy < '2023-05-29 09:00:00.000'
@@ -157,6 +157,62 @@ and payid = 84
 and (Client_Id <> 'AUT1003' or Client_Id <> 'PIC1004')
 order by
 name, PR_OTR_History.PickupBy
+
+
+
+
+
+select top 100 ls.CLIENTid, ls.StartDateTime, ls.DropStartDateTime, ls.* 
+from dispatch.Load l
+join dispatch.LoadStop ls on l.LoadId = ls.LoadId
+--where l.loadid = 57692
+where l.PaperworkRecvdDate is not null
+and LoadStopTypeId = 2
+and ls.clientid in (select CLIENTid from main.Client where ClientName like '%redbone%' or ClientName like '%REDBONE%')
+order by l.loadid desc;
+
+
+
+
+select top 100 ca.State, ls.CLIENTid, ls.StartDateTime, ls.DropStartDateTime, ls.* 
+from dispatch.Load l
+join dispatch.LoadStop ls on l.LoadId = ls.LoadId
+join main.ClientAddress ca on ca.clientid = ls.clientid
+--where l.loadid = 57692
+where l.PaperworkRecvdDate is not null
+and ls.clientid not in (select CLIENTid from main.Client where ClientName like '%redbone%' or ClientName like '%REDBONE%')
+and LoadStopTypeId = 2
+order by l.loadid desc;
+
+
+
+
+
+--select * from main.Client where ClientId = '5098'
+
+
+
+select PickOrigin, DropDest, PR_OTR_History.PickupBy, DeliverBy,loadid, TripNumber, * from dispatch.PR_OTR_History 
+where 
+name like '%GARY PEEBLES%' 
+and payid = 84
+order by
+name, PR_OTR_History.PickupBy
+
+--select top 10 * from main.ClientAddress
+
+
+
+
+*/
+select ls.CLIENTid, ls.StartDateTime, ls.DropStartDateTime, ls.* 
+from dispatch.Load l
+join dispatch.LoadStop ls on l.LoadId = ls.LoadId
+where l.loadid = 57013
+--where l.PaperworkRecvdDate is not null
+--and LoadStopTypeId = 2
+order by ls.StopNumber  desc;
+
 
 
 

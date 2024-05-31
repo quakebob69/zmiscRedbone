@@ -2730,3 +2730,33 @@ SELECT payroll.PayrollOTRLeave.PayrollOTRLeaveId, payroll.PayrollOTRLeave.Payrol
                   payroll.PayrollOTRLeaveType.Type, payroll.PayrollOTRLeaveType.Description
 FROM     payroll.PayrollOTRLeave INNER JOIN
                   payroll.PayrollOTRLeaveType ON payroll.PayrollOTRLeave.PayrollOTRLeaveTypeId = payroll.PayrollOTRLeaveType.PayrollOTRLeaveTypeId
+				  
+				  
+				  Load Billing
+	add number of drivers and stops to load billing page
+	change load billing search field to alphanumeric
+	add lookup by tripNumber and Customer Load
+
+Driver points
+	add cost column to driver points page
+
+
+Entitlements
+	replace sortId with EntitlementId and UI cleanup
+	remove entitlement info from all page titles
+
+
+General
+	hide all status bars
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
