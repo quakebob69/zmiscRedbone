@@ -229,6 +229,9 @@ where l.loadid = 57013
 
 
 
+declare @searchPerson int
+set @searchPerson = 1252
+set @searchPerson = 2081
 
 SELECT * from #RECSASDF
 where StopType = 'LEG' or StopType = 'Drop'
@@ -245,8 +248,8 @@ order by StopNumber desc
 
 
 --1252/2081
---getLastLoadActivityStateAndDate(1252) --> UT, 
---getLastLoadActivityStateAndDate(2081) --> UT, 
+--getLastLoadActivityStateAndDate(1252) --> UT, 2023-12-16 10:00:00.000
+--getLastLoadActivityStateAndDate(2081) --> UT, 2023-12-19 06:00:00.000
 
 
 
