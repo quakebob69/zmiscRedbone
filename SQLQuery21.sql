@@ -238,7 +238,7 @@ order by StopNumber
 
 
 	set @searchPerson = 1252
-SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
+SELECT top 1 StopNumber, @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
 and (LOAD_Driver = @searchPerson OR LEG_Driver = @searchPerson)
@@ -249,7 +249,7 @@ order by StopNumber desc
 
 
 	set @searchPerson = 2081
-SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
+SELECT top 1 StopNumber, @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
 and (LOAD_Driver = @searchPerson OR LEG_Driver = @searchPerson)
@@ -257,10 +257,13 @@ order by StopNumber desc
 
 
 
+SELECT * from #RECSASDF
+where
+StopType = 'LEG' or StopType = 'Drop'
 
 
 
-
+select * from dispatch.PR_OTR_History where driverpersonid in (select personid from main.person where personid = 1252) order by LoadId desc
 
 
 
