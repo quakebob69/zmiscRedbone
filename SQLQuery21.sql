@@ -224,22 +224,20 @@ join dispatch.LoadStop ls on l.LoadId = ls.LoadId
 join dispatch.LoadStopType lst on ls.LoadStopTypeId = lst.LoadStopTypeId
 join main.ClientAddress ca on ca.clientid = ls.clientid
 where l.loadid = 57013
---order by ls.StopNumber  desc;
+--order by ls.StopNumber desc;
 
 
 
 
 
 SELECT * from #RECSASDF
-order by StopNumber desc
+--order by StopNumber desc
 
 
 
 	declare @searchPerson int
-
-
 	set @searchPerson = 1252
-SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop Date' from #RECSASDF
+SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
 and (LOAD_Driver = @searchPerson OR STOP_Driver = @searchPerson)
@@ -250,7 +248,7 @@ order by StopNumber desc
 
 
 	set @searchPerson = 2081
-SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop Date' from #RECSASDF
+SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
 and (LOAD_Driver = @searchPerson OR STOP_Driver = @searchPerson)
