@@ -229,13 +229,14 @@ where l.loadid = 57013
 
 
 
+declare @searchPerson int
+
 
 SELECT * from #RECSASDF
 order by StopNumber
 
 
 
-	declare @searchPerson int
 	set @searchPerson = 1252
 SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
 where
