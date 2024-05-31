@@ -208,30 +208,34 @@ DROP TABLE IF EXISTS #RECSASDF
 CREATE TABLE #RECSASDF
 (
 	l_Driver1_PersonId int,
-	lst_StopNm varchar(999),
+	ls_Driver1_PersonId int  NULL,
+	lst_StopType varchar(999),
 	ls_StopNumber int,
 	ca_City varchar(999), 
 	ca_State varchar(999),
 	ls_StartDateTime datetime,
-	ls_DropStartDateTime datetime  NULL,
-	ls_Driver1_PersonId int  NULL
+	ls_DropStartDateTime datetime  NULL
 )
 
 insert into #RECSASDF
-select l.Driver1_PersonId as 'LOAD: Driver                                   ', lst.StopNm as 'Stop Type', ls.StopNumber as 'Stop Number', ca.City as 'City', ca.State as 'State', ls.StartDateTime as 'Non-Leg Date', ls.DropStartDateTime as 'Leg Date', ls.Driver1_PersonId as 'Leg Driver'--, '---------------------------------------------', ls.*, ls.*
+select l.Driver1_PersonId as 'LOAD: Driver                                   ', ls.Driver1_PersonId as 'Leg Driver', lst.StopNm as 'Stop Type', ls.StopNumber as 'Stop Number', ca.City as 'City', ca.State as 'State', ls.StartDateTime as 'Non-Leg Date', ls.DropStartDateTime as 'Leg Date'--, '---------------------------------------------', ls.*, ls.*
 from dispatch.Load l
 join dispatch.LoadStop ls on l.LoadId = ls.LoadId
 join dispatch.LoadStopType lst on ls.LoadStopTypeId = lst.LoadStopTypeId
 join main.ClientAddress ca on ca.clientid = ls.clientid
 where l.loadid = 57013
---and LoadStopTypeId = 2
 order by ls.StopNumber  desc;
 
 
 
 
 
-SELECT * from #RECS;
+SELECT * from #RECSASDF
+where lst_StopType = 'LEG' or lst_StopType = 'Drop'
+
+
+
+
 
 
 
