@@ -207,6 +207,7 @@ name, PR_OTR_History.PickupBy
 DROP TABLE IF EXISTS #RECSASDF
 CREATE TABLE #RECSASDF
 (
+	LOAD_ID int,
 	LOAD_Driver int,
 	LEG_Driver int  NULL,
 	StopType varchar(999),
@@ -218,14 +219,13 @@ CREATE TABLE #RECSASDF
 )
 
 insert into #RECSASDF
-select l.Driver1_PersonId as 'LOAD: Driver                                   ', ls.Driver1_PersonId as 'Leg Driver', lst.StopNm as 'Stop Type', ls.StopNumber as 'Stop Number', ca.City as 'City', ca.State as 'State', ls.StartDateTime as 'Non-Leg Date', ls.DropStartDateTime as 'Leg Date'--, '---------------------------------------------', ls.*, ls.*
+select l.LoadId as 'LOAD: Id', l.Driver1_PersonId as 'LOAD: Driver', ls.Driver1_PersonId as 'Leg Driver', lst.StopNm as 'Stop Type', ls.StopNumber as 'Stop Number', ca.City as 'City', ca.State as 'State', ls.StartDateTime as 'Non-Leg Date', ls.DropStartDateTime as 'Leg Date'
 from dispatch.Load l
 join dispatch.LoadStop ls on l.LoadId = ls.LoadId
 join dispatch.LoadStopType lst on ls.LoadStopTypeId = lst.LoadStopTypeId
 join main.ClientAddress ca on ca.clientid = ls.clientid
 where l.loadid = 57013
---order by ls.StopNumber desc;
-
+--where l.LoadId in (select distinct top 3 loadid from dispatch.PR_OTR_History where driverpersonid in (select personid from main.person where personid = 1252))
 
 
 
@@ -263,7 +263,7 @@ StopType = 'LEG' or StopType = 'Drop'
 
 
 
-select * from dispatch.PR_OTR_History where driverpersonid in (select personid from main.person where personid = 1252) order by LoadId desc
+--(select distinct top 3 loadid from dispatch.PR_OTR_History where driverpersonid in (select personid from main.person where personid = 1252) order by LoadId desc)
 
 
 
