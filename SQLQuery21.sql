@@ -263,7 +263,10 @@ StopType = 'LEG' or StopType = 'Drop'
 
 
 
+
+
 --(select distinct top 3 loadid from dispatch.PR_OTR_History where driverpersonid in (select personid from main.person where personid = 1252) order by LoadId desc)
+
 
 
 
