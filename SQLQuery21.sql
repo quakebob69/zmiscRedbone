@@ -214,5 +214,7 @@ where l.loadid = 57013
 order by ls.StopNumber  desc;
 
 
---getLast
+
+--1252/2081
+--getLastLoadActivityState(driver)
 
