@@ -205,7 +205,7 @@ name, PR_OTR_History.PickupBy
 
 
 */
-select ls.StopNumber, ls.LoadStopTypeId, ls.StartDateTime, ls.DropStartDateTime, '---------------------------------------------', ls.* 
+select ls.StopNumber as 'STOP: Stop Number', ls.StartDateTime as 'STOP: Non-Leg Date', ls.DropStartDateTime as 'STOP: Leg Date', ls.ClientId as 'STOP: Client', l.Driver1_PersonId as 'LOAD: Driver', ls.Driver1_PersonId as 'STOP: Leg Driver' , '---------------------------------------------', ls.* 
 from dispatch.Load l
 join dispatch.LoadStop ls on l.LoadId = ls.LoadId
 where l.loadid = 57013
@@ -213,5 +213,5 @@ where l.loadid = 57013
 order by ls.StopNumber  desc;
 
 
-
+--getLast
 
