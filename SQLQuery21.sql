@@ -200,14 +200,15 @@ order by
 name, PR_OTR_History.PickupBy
 
 --select top 10 * from main.ClientAddress
-
-
-
-
 */
-select L.ClientId as 'LOAD: Client', l.Driver1_PersonId as 'LOAD: Driver', ls.StopNumber as 'stop: Stop Number', ls.ClientId as 'stop: Client', ls.StartDateTime as 'stop: Non-Leg Date', ls.DropStartDateTime as 'stop: Leg Date', ls.Driver1_PersonId as 'stop: Leg Driver', '---------------------------------------------', ls.*, ls.*
+
+
+
+
+select L.ClientId as 'LOAD: Client', l.Driver1_PersonId as 'LOAD: Driver', ls.StopNumber as 'stop: Stop Number', ca.City as 'stop: City', ca.State as 'stop: State', ls.StartDateTime as 'stop: Non-Leg Date', ls.DropStartDateTime as 'stop: Leg Date', ls.Driver1_PersonId as 'stop: Leg Driver', '---------------------------------------------', ls.*, ls.*
 from dispatch.Load l
 join dispatch.LoadStop ls on l.LoadId = ls.LoadId
+join main.ClientAddress ca on ca.clientid = ls.clientid
 where l.loadid = 57013
 --and LoadStopTypeId = 2
 order by ls.StopNumber  desc;
