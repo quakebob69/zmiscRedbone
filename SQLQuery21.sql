@@ -208,7 +208,7 @@ DROP TABLE IF EXISTS #RECSASDF
 CREATE TABLE #RECSASDF
 (
 	LOAD_Driver int,
-	STOP_Driver int  NULL,
+	LEG_Driver int  NULL,
 	StopType varchar(999),
 	StopNumber int,
 	City varchar(999), 
@@ -241,7 +241,7 @@ order by StopNumber
 SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
-and (LOAD_Driver = @searchPerson OR STOP_Driver = @searchPerson)
+and (LOAD_Driver = @searchPerson OR LEG_Driver = @searchPerson)
 order by StopNumber desc
 
 
@@ -252,7 +252,7 @@ order by StopNumber desc
 SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
-and (LOAD_Driver = @searchPerson OR STOP_Driver = @searchPerson)
+and (LOAD_Driver = @searchPerson OR LEG_Driver = @searchPerson)
 order by StopNumber desc
 
 
