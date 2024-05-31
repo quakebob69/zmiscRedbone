@@ -239,7 +239,7 @@ order by StopNumber desc
 
 
 	set @searchPerson = 1252
-SELECT top 1 @searchPerson as 'Driver', State, COALESCE(LEGDROPDt, DROPDt) AS 'Drop Date' from #RECSASDF
+SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop Date' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
 and (LOAD_Driver = @searchPerson OR STOP_Driver = @searchPerson)
@@ -250,7 +250,7 @@ order by StopNumber desc
 
 
 	set @searchPerson = 2081
-SELECT top 1 @searchPerson as 'Driver', State, COALESCE(LEGDROPDt, DROPDt) AS 'Drop Date' from #RECSASDF
+SELECT top 1 @searchPerson as 'Driver                           ', State, FORMAT(COALESCE(LEGDROPDt, DROPDt), 'MM/dd  hh:mm') AS 'Drop Date' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
 and (LOAD_Driver = @searchPerson OR STOP_Driver = @searchPerson)
