@@ -207,14 +207,14 @@ name, PR_OTR_History.PickupBy
 DROP TABLE IF EXISTS #RECSASDF
 CREATE TABLE #RECSASDF
 (
-	l_Driver1_PersonId int,
-	ls_Driver1_PersonId int  NULL,
-	lst_StopType varchar(999),
-	ls_StopNumber int,
-	ca_City varchar(999), 
-	ca_State varchar(999),
-	ls_StartDateTime datetime,
-	ls_DropStartDateTime datetime  NULL
+	LOAD_Driver int,
+	STOP_Driver int  NULL,
+	StopType varchar(999),
+	StopNumber int,
+	City varchar(999), 
+	State varchar(999),
+	DROPDt datetime,
+	LEGDROPDt datetime  NULL
 )
 
 insert into #RECSASDF
@@ -224,15 +224,15 @@ join dispatch.LoadStop ls on l.LoadId = ls.LoadId
 join dispatch.LoadStopType lst on ls.LoadStopTypeId = lst.LoadStopTypeId
 join main.ClientAddress ca on ca.clientid = ls.clientid
 where l.loadid = 57013
-order by ls.StopNumber  desc;
+--order by ls.StopNumber  desc;
 
 
 
 
 
 SELECT * from #RECSASDF
-where lst_StopType = 'LEG' or lst_StopType = 'Drop'
-
+where StopType = 'LEG' or StopType = 'Drop'
+order by StopNumber desc
 
 
 
@@ -245,8 +245,8 @@ where lst_StopType = 'LEG' or lst_StopType = 'Drop'
 
 
 --1252/2081
---getLastLoadActivityState(1252) --> asdf
---getLastLoadActivityState(2081) --> asdf
+--getLastLoadActivityStateAndDate(1252) --> UT, 
+--getLastLoadActivityStateAndDate(2081) --> UT, 
 
 
 
