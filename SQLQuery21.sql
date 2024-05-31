@@ -205,7 +205,7 @@ name, PR_OTR_History.PickupBy
 
 
 
-select L.ClientId as 'LOAD: Client', l.Driver1_PersonId as 'LOAD: Driver', ls.StopNumber as 'stop: Stop Number', ca.City as 'stop: City', ca.State as 'stop: State', ls.StartDateTime as 'stop: Non-Leg Date', ls.DropStartDateTime as 'stop: Leg Date', ls.Driver1_PersonId as 'stop: Leg Driver', '---------------------------------------------', ls.*, ls.*
+select l.Driver1_PersonId as 'LOAD: Driver', ls.StopNumber as 'Stop Number', ca.City as 'City', ca.State as 'State', ls.StartDateTime as 'Non-Leg Date', ls.DropStartDateTime as 'Leg Date', ls.Driver1_PersonId as 'Leg Driver'--, '---------------------------------------------', ls.*, ls.*
 from dispatch.Load l
 join dispatch.LoadStop ls on l.LoadId = ls.LoadId
 join main.ClientAddress ca on ca.clientid = ls.clientid
