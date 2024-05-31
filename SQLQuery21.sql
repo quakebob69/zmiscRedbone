@@ -205,11 +205,10 @@ name, PR_OTR_History.PickupBy
 
 
 */
-select ls.CLIENTid, ls.StartDateTime, ls.DropStartDateTime, ls.* 
+select ls.StopNumber, ls.LoadStopTypeId, ls.StartDateTime, ls.DropStartDateTime, '---------------------------------------------', ls.* 
 from dispatch.Load l
 join dispatch.LoadStop ls on l.LoadId = ls.LoadId
 where l.loadid = 57013
---where l.PaperworkRecvdDate is not null
 --and LoadStopTypeId = 2
 order by ls.StopNumber  desc;
 
