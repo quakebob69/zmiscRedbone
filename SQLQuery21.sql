@@ -239,7 +239,7 @@ order by StopNumber desc
 
 	declare @searchPerson int
 	set @searchPerson = 1252
-SELECT top 1 State, COALESCE(LEGDROPDt, DROPDt) from #RECSASDF
+SELECT top 1 State, COALESCE(LEGDROPDt, DROPDt) AS 'Drop Date' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
 and (LOAD_Driver = @searchPerson OR STOP_Driver = @searchPerson)
@@ -251,7 +251,7 @@ order by StopNumber desc
 
 	declare @searchPerson2 int
 	set @searchPerson2 = 2081
-SELECT top 1 State, COALESCE(LEGDROPDt, DROPDt) from #RECSASDF
+SELECT top 1 State, COALESCE(LEGDROPDt, DROPDt) AS 'Drop Date' from #RECSASDF
 where
 StopType = 'LEG' or StopType = 'Drop'
 and (LOAD_Driver = @searchPerson2 OR STOP_Driver = @searchPerson2)
