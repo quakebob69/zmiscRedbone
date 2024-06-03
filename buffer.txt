@@ -2759,4 +2759,17 @@ General
 	
 	
 	
+	Datasets.dsFactoring.Plans_LookUpRow planRow = adaptPlans.GetData().Where(p => p.PlanId == PlanId).FirstOrDefault();
+
+
+Datasets.dsPayroll.PayrollOTRStatusRow statusStaging = payrollOTRStatusAdapter.GetData().Where(stat => stat.Name == "STAGING").FirstOrDefault();
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
