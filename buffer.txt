@@ -2764,12 +2764,20 @@ General
 
 Datasets.dsPayroll.PayrollOTRStatusRow statusStaging = payrollOTRStatusAdapter.GetData().Where(stat => stat.Name == "STAGING").FirstOrDefault();
 	
+
+
+Person - fixes to adding certifications	
+	
+	
+	
+hist => hist.DeliverBy > searchFromThisDate
 	
 	
 	
 	
 	
 	
-	
-	
-	
+	                pR_OTR_HistoryTableAdapter
+                .GetData()
+                .Where(hist => hist.DeliverBy > searchFromThisDate)
+                //.Where(hist => (hist.Field<DateTime>("DeliverBy") ?? "").ToUpper() == "VALUE")
