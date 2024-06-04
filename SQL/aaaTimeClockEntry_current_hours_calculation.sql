@@ -7,8 +7,8 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
-		DECLARE @Mo VARCHAR(2)		= '05'
-			DECLARE @Dy VARCHAR(2)		= '31'
+		DECLARE @Mo VARCHAR(2)		= '06'
+			DECLARE @Dy VARCHAR(2)		= '04'
 
 		------------------------------------------
 		DECLARE @Hr VARCHAR(2)		= '16'
@@ -91,23 +91,38 @@ SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT Person
 
 
 
+DECLARE @emailName2 NVARCHAR(25) = 'danny'; 
 -------------------------------------------------------------------------------------------------------------------------------------------------
---Set datew manually
-DECLARE @EntryId INTEGER			= 26828
-
-
-DECLARE @ClockedIn NVARCHAR(25)		= '2024-05-31 06:58:52.547';
---UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
+SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
-						--DECLARE @emailName NVARCHAR(25) = 'danny'; SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com') order by EntryId desc
+
+--Set dates manually
+DECLARE @EntryId INTEGER			= 26882
+
+
+
+
+			--IN
+			DECLARE @ClockedIn NVARCHAR(25)		= '2024-05-31 06:58:52.547';
+			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
+
+
 
 
 					
+			--OUT
+			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-03 15:41:24.004';
+			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
 
-DECLARE @ClockedOut NVARCHAR(25)	= '2024-05-30 15:15:24.153';
---UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
