@@ -26,5 +26,4 @@ WHERE        (main.CertificationPersonMapping.PersonId = 2775) and activeind = 1
 --select * from main.CertificationPersonMapping where CertificationPersonMappingId = 7643
 
 
-select * from main.CertificationPersonMapping
-where filename is not null
+select * from main.CertificationPersonMapping where filename is not null
