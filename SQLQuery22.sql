@@ -75,6 +75,21 @@ declare @driverId int set @driverId = 1708
 				 order by h.loadid
 
 				 
+				 select Driver1_PersonId  from dispatch.load where loadid in (
+				 				select distinct(LoadId) from dispatch.PR_OTR_History where  DriverPersonId = @driverId
+				and loadid not in (select LoadId from dispatch.PR_OTR_History h where  DriverPersonId = @driverId and payid = 84)
+				--order by loadid
+				)
+
+
+				select loadid, Driver1_PersonId, *  from dispatch.LoadStop where loadid in (
+				 				select distinct(LoadId) from dispatch.PR_OTR_History where  DriverPersonId = @driverId
+				and loadid not in (select LoadId from dispatch.PR_OTR_History h where  DriverPersonId = @driverId and payid = 84) and Driver1_PersonId is not null
+				--order by loadid
+				)
+				and Driver1_PersonId = @driverId
+				
+
 
 
 
