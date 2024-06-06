@@ -1,18 +1,19 @@
 select top 100
 	l.loadid,
-	l.Driver1_PersonId as Driver_Load,
-	ls.Driver1_PersonId as Driver_Stop,
-	ca.State, 
 	ls.StopNumber,  
 	ls.LoadStopTypeId, 
-	ls.StartDateTime, 
-	ls.DropStartDateTime
-from dispatch.Load l
-join dispatch.LoadStop ls on l.LoadId = ls.LoadId
-join main.ClientAddress ca on ca.clientid = ls.clientid
+	l.Driver1_PersonId as DriverFromLoadRec,
+	ca.State as PickOrDropState, 
+	ls.Driver1_PersonId as DriverFromStopRec,
+	ls.StartDateTime as PickOrDropDt, 
+	ls.DropStartDateTime as PickOrDropDtLeg
+from
+	dispatch.Load l
+	join dispatch.LoadStop ls on l.LoadId = ls.LoadId
+	join main.ClientAddress ca on ca.clientid = ls.clientid
 where
-l.loadid in (select Loadid from payroll.PayrollOTRStaging)
-
+	--l.loadid in (select Loadid from payroll.PayrollOTRStaging)
+	l.LoadId in (57013)
 order by
-l.loadid,
-ls.StopNumber
+	l.loadid,
+	ls.StopNumber
