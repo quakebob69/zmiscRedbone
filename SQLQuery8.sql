@@ -25,5 +25,26 @@ FROM     dispatch.[Load] INNER JOIN
                   dispatch.LoadStop ON dispatch.[Load].LoadId = dispatch.LoadStop.LoadId INNER JOIN
                   main.ClientAddress ON dispatch.LoadStop.ClientId = main.ClientAddress.ClientId
 order by
+	dispatch.[Load].LoadId,
+	dispatch.LoadStop.StopNumber
+
+
+SELECT  top 100 dispatch.[Load].LoadId, dispatch.LoadStop.StopNumber, dispatch.LoadStop.LoadStopTypeId, dispatch.[Load].Driver1_PersonId AS DriverFromLoadRec, main.ClientAddress.State AS PickOrDropState, 
+                  dispatch.LoadStop.Driver1_PersonId AS DriverFromStopRec, dispatch.LoadStop.StartDateTime AS PickOrDropDt, dispatch.LoadStop.DropStartDateTime as PickOrDropDtLeg
+FROM     dispatch.[Load] INNER JOIN
+                  dispatch.LoadStop ON dispatch.[Load].LoadId = dispatch.LoadStop.LoadId INNER JOIN
+                  main.ClientAddress ON dispatch.LoadStop.ClientId = main.ClientAddress.ClientId
+order by
 	dispatch.Load.LoadId,
 	dispatch.LoadStop.StopNumber
+
+
+select * from dispatch.PR_OTR_History h where  h.PayPeriodEnding  >=
+ DATEADD(day, -10, (select BeginDate from payroll.PayrollOTRPayPeriod where PayrollOTRPayPeriodId = 1))
+
+
+
+select * from dispatch.PR_OTR_History h where  h.PayPeriodEnding  >=
+ DATEADD(day, -10, (select BeginDate from payroll.PayrollOTRPayPeriod where PayrollOTRPayPeriodId = 1))
+ where loadid is null
+
