@@ -23,7 +23,7 @@ CREATE TABLE [payroll].[PayrollOTRDriverLoadChain](
 	[EndCity] [varchar](50) NOT NULL,
 	[EndState] [varchar](10) NOT NULL,
 	[EndAtHomeTerminal] [bit] NOT NULL,
-	[isLeg] [bit] NOT NULL
+	[IsLeg] [bit] NOT NULL
  CONSTRAINT [PK_PayrollOTRDriverLoadChain] PRIMARY KEY CLUSTERED 
 (
 	[PayrollOTRDriverLoadChainId] ASC
