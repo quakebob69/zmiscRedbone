@@ -141,6 +141,9 @@ GO
 
 
 	--'payroll' schema
+		DROP TABLE IF EXISTS [payroll].[PayrollOTRDriverLoadChain]	
+	
+	
 		DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsEligibility]
 	
 
