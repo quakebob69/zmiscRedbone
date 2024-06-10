@@ -2812,5 +2812,55 @@ endState = asdf;
 endAtHomeTerminal = asdf;
 isLeg = false;
 
+                /*
+                if (chainDataTable.Rows.Count == 0)
+                {
+                    beginDate = asdf;
+                    beginTimeZone = asdf;
+                    beginCity = asdf;
+                    beginState = asdf;
+                    beginAtHomeTerminal = asdf;
+                    endDate = asdf;
+                    endTimeZone = asdf;
+                    endCity = asdf;
+                    endState = asdf;
+                    endAtHomeTerminal = asdf;
+                    
+                }
+                */
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+                /*
+
+                chainRow.PersonId = item.DriverFromLoadRec;
+                chainRow.LoadId = item.LoadId;
+
+
+                chainRow.BeginDate = DateTime.Now;
+                chainRow.BeginTimeZone = "BTZ";
+                chainRow.BeginCity = "BeginCity";
+                chainRow.BeginState = "BeginState";
+                chainRow.BeginAtHomeTerminal = true;
+
+
+                chainRow.EndDate = DateTime.Now;
+                chainRow.EndTimeZone = "ETZ";
+                chainRow.EndCity = "EndCity";
+                chainRow.EndState = "EndState";
+                chainRow.EndAtHomeTerminal = true;
+
+
+                chainRow.isLeg = true;
+                */
