@@ -2797,3 +2797,20 @@ Google Calendar - Tasks.pdf
 				
 				
 				
+				
+personId = item.DriverFromLoadRec;
+loadId = item.LoadId;
+beginDate = asdf;
+beginTimeZone = asdf;
+beginCity = asdf;
+beginState = asdf;
+beginAtHomeTerminal = asdf;
+endDate = asdf;
+endTimeZone = asdf;
+endCity = asdf;
+endState = asdf;
+endAtHomeTerminal = asdf;
+isLeg = false;
+
+
+
