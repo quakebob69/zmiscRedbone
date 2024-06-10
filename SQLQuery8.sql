@@ -46,5 +46,5 @@ select * from dispatch.PR_OTR_History h where  h.PayPeriodEnding  >=
 
 select * from dispatch.PR_OTR_History h where  h.PayPeriodEnding  >=
  DATEADD(day, -10, (select BeginDate from payroll.PayrollOTRPayPeriod where PayrollOTRPayPeriodId = 1))
- where loadid is null
-
+ and loadid is null
+ and PayCode <> 'Other Pay'
