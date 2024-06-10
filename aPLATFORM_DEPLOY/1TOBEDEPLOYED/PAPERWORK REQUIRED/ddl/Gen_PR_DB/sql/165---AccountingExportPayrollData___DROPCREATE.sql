@@ -1,6 +1,3 @@
---ALTER TABLE [export].[AccountingExportPayrollData] DROP CONSTRAINT [FK_AccountingExportPayrollData_AccountingExportPayrollEntryType]
---GO
-
 /****** Object:  Table [export].[AccountingExportPayrollData]    Script Date: 2/20/2024 9:39:54 AM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollData]') AND type in (N'U'))
 DROP TABLE [export].[AccountingExportPayrollData]
