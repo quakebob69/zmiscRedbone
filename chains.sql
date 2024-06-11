@@ -7,7 +7,7 @@
 
 -- bad dates
 select
-	count(*) as BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD
+	count(*) as BAD
 from
 	payroll.PayrollOTRdriverloadchain
 where
