@@ -106,7 +106,15 @@ SELECT count(*) as '> 2 legs'
 
 
 
-
+--asdf
+/*
+	- 1 driver, 1 pick, 1 drop
+	-1 driver, 1 pick, 1->m drops
+	1 driver, 1->m picks, 1 drop
+	1 driver, 1->m picks, 1->m drops
+	1 driver, x picks, x + y drops
+	others?
+*/
 
 
 
