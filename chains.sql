@@ -268,48 +268,34 @@ select 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX'
 
 
 
---history
-select driverpersonid, * from dispatch.PR_OTR_History
+select 'history' as 'history', driverpersonid, h.pickupby, h.DeliverBy from dispatch.PR_OTR_History h
 where
 	loadid = 56480
+	and paycode = 'Per Diem'
 order by
-PickupBy
+h.PickupBy
 
 
 --loadstop
-select 
-	s.LoadId, LoadStopTypeId, StartDateTime as legDT, DropStartDateTime as notlegDT, '-----------------------------', *--
+select 'loadstop' as 'loadstop', s.driver1_personid, StartDateTime as X, DropStartDateTime as DropX--, *
 from
 	dispatch.loadstop s
 where
-	--s.LoadStopTypeId = 2 and 
+	(s.LoadStopTypeId <> 4) and 
 	s.loadid = 56480
 	order by 
 	--s.loadid,
 	stopnumber
 
 
---loadstop = 2
-select 
-	s.LoadId, StartDateTime as legDT, DropStartDateTime as notlegDT, '-----------------------------', *--
-from
-	dispatch.loadstop s
-where
-	s.LoadStopTypeId = 2 and 
-	s.loadid = 56480
-	order by 
-	--s.loadid,
-	stopnumber
-
-
-select 
-	LoadId, begindate, enddate, '-----------------------------', *--
+select 'chain' as 'chain', personid, begindate, enddate, '-----------------------------'--, *--
 from
 	payroll.PayrollOTRdriverloadchain c
 where
 	--LoadStopTypeId = 2 and 
 	loadid = 56480
-	--order by 
+	order by 
+	c.enddate
 	--s.loadid,
 	--stopnumber
 
