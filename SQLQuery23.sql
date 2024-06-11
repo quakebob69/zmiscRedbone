@@ -1,17 +1,23 @@
 select count(*) from payroll.PayrollOTRStaging;
 
-delete from payroll.PayrollOTRdriverloadchain
+--delete from payroll.PayrollOTRdriverloadchain
 
 
 -- bad dates
---(
 select
-	PayrollOTRdriverloadchainid, loadid
+	count(*)
 from
 	payroll.PayrollOTRdriverloadchain
 where
 	enddate <= begindate
---order by 
---	personid, BeginDate
---)
+
+
+
+--all
+select
+	count(*)
+from
+	payroll.PayrollOTRdriverloadchain
+
+
 
