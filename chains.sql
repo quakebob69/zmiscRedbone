@@ -19,11 +19,14 @@ where
 
 --all
 select
-	count(*) AS 'NUM CHAINS'
+	count(distinct(PayrollOTRdriverloadchainid)) AS 'NUM CHAINS (with legs)'
 from
 	payroll.PayrollOTRdriverloadchain
 
 
+
+
+--deets
 select
 	'CHAIN DETAILS' AS 'CHAIN DETAILS', *
 from
@@ -34,10 +37,20 @@ ORDER by
 
 
 
+select 
+	count(distinct(PayrollOTRdriverloadchainid)) AS 'all legs' 
+from
+	payroll.PayrollOTRdriverloadchain c
+	join dispatch.loadstop s on c.loadid = s.loadid
+where
+	s.LoadStopTypeId = 2
+	
 
 
 
-select count(distinct loadid) as 'all legs' from dispatch.loadstop where loadid in 
+
+
+select count(distinct loadid) as from dispatch.loadstop where loadid in 
 (
 	select
 	loadid
@@ -52,7 +65,29 @@ from
 
 
 	
-SELECT COUNT(*) as 'asdf f'
+SELECT count(*) as '1 leg'  
+	FROM (
+			select distinct loadid from dispatch.loadstop
+				where loadid in 
+						(
+							select
+								loadid
+							from
+								payroll.PayrollOTRdriverloadchain
+						)
+
+				and
+					dispatch.loadstop.LoadStopTypeId <> 2
+				group by
+					loadid
+	having
+		count(loadid) = 2
+) subquery;
+
+
+
+	
+SELECT COUNT(*) as '2 legs'  
 	FROM (
 			select loadid from dispatch.loadstop
 				where loadid in 
@@ -67,31 +102,9 @@ SELECT COUNT(*) as 'asdf f'
 					dispatch.loadstop.LoadStopTypeId = 2
 				group by
 					loadid
-				having
-					count(loadid) = 1
-		) subquery;
-
-
-
-select count(distinct loadid) as '2 legs'  from dispatch.loadstop
-	where loadid in 
-			(
-				select
-					loadid
-				from
-					payroll.PayrollOTRdriverloadchain
-			)
-
-	and
-		dispatch.loadstop.LoadStopTypeId = 2
-	group by
-		loadid
 	having
 		count(loadid) = 2
-		;
-
-
-
+) subquery;
 
 
 
