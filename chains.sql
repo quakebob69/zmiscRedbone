@@ -52,7 +52,8 @@ where
 SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (1) ------'  , '39' as '----CHECK WORK' 
 	FROM (
 		select 
-			count(c.loadid) as cnt
+			--count(c.loadid) as cnt
+			count(distinct c.loadid) as cnt
 		from
 			payroll.PayrollOTRdriverloadchain c
 			join dispatch.loadstop s on c.loadid = s.loadid
@@ -71,7 +72,8 @@ SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (1) ------'  , '39' as '
 SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (2) ------'  , '9' as '----CHECK WORK' 
 	FROM (
 		select 
-			count(c.loadid) as cnt
+			--count(c.loadid) as cnt
+			count(distinct c.loadid) as cnt
 		from
 			payroll.PayrollOTRdriverloadchain c
 			join dispatch.loadstop s on c.loadid = s.loadid
@@ -89,7 +91,8 @@ SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (2) ------'  , '9' as '-
 SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (> 2) ----' , '0' as '----CHECK WORK' 
 	FROM (
 		select 
-			count(c.loadid) as cnt
+			--count(c.loadid) as cnt
+			count(distinct c.loadid) as cnt
 		from
 			payroll.PayrollOTRdriverloadchain c
 			join dispatch.loadstop s on c.loadid = s.loadid
