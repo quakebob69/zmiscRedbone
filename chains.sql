@@ -19,7 +19,7 @@ where
 
 --all
 select
-	count(distinct(PayrollOTRdriverloadchainid)) AS 'NUM CHAINS (with legs)'
+	count(distinct(PayrollOTRdriverloadchainid)) AS 'NUM CHAINS (including loads with legs)'
 from
 	payroll.PayrollOTRdriverloadchain
 
@@ -28,7 +28,7 @@ from
 
 --deets
 select
-	'CHAIN DETAILS' AS 'CHAIN DETAILS', *
+	'CHAIN DETAILS (with legs)' AS 'CHAIN DETAILS (with legs)', *
 from
 	payroll.PayrollOTRdriverloadchain
 ORDER by
@@ -38,8 +38,7 @@ ORDER by
 
 
 select 
-	count(distinct(PayrollOTRdriverloadchainid)) AS 'all legs' 
-from
+	count(distinct(PayrollOTRdriverloadchainid)) AS 'NUM CHAINS (ONLY loads with legs)'from
 	payroll.PayrollOTRdriverloadchain c
 	join dispatch.loadstop s on c.loadid = s.loadid
 where
@@ -47,20 +46,15 @@ where
 	
 
 
-
-
-
-select count(distinct loadid) as from dispatch.loadstop where loadid in 
-(
-	select
-	loadid
+select 
+	count(distinct(PayrollOTRdriverloadchainid + s.loadstopid)) - count(distinct(PayrollOTRdriverloadchainid)) AS 'asdfs' 
 from
-	payroll.PayrollOTRdriverloadchain
---ORDER by
-	--personid, enddate
-	)
+	payroll.PayrollOTRdriverloadchain c
+	join dispatch.loadstop s on c.loadid = s.loadid
+where
+	s.LoadStopTypeId = 2
+	
 
-	and dispatch.loadstop.LoadStopTypeId = 2;
 
 
 
