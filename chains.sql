@@ -35,7 +35,9 @@ ORDER by
 
 
 
-select count(distinct loadid) as  from dispatch.loadstop where loadid in 
+
+
+select count(distinct loadid) as 'all legs' from dispatch.loadstop where loadid in 
 (
 	select
 	loadid
@@ -49,8 +51,8 @@ from
 
 
 
-
-select distinct(loadid) as numlegs from dispatch.loadstop
+	
+select count(distinct loadid) as '1 leg'  from dispatch.loadstop
 	where loadid in 
 			(
 				select
@@ -60,12 +62,31 @@ select distinct(loadid) as numlegs from dispatch.loadstop
 			)
 
 	and
-		dispatch.loadstop.LoadStopTypeId <> 2
+		dispatch.loadstop.LoadStopTypeId = 2
 	group by
 		loadid
 	having
 		count(loadid) = 1
 		;
+
+		
+select count(distinct loadid) as '1 leg'  from dispatch.loadstop
+	where loadid in 
+			(
+				select
+					loadid
+				from
+					payroll.PayrollOTRdriverloadchain
+			)
+
+	and
+		dispatch.loadstop.LoadStopTypeId = 2
+	group by
+		loadid
+	having
+		count(loadid) = 2
+		;
+
 
 
 
