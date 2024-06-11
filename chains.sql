@@ -71,7 +71,7 @@ SELECT count(*) as '2 legs'
 	FROM (
 		select 
 		--	count(distinct(c.loadid)) AS 'NUM CHAINS - LOADS WITH LEGS - 1 leg)'
-			count(c.loadid) AS 'NUM CHAINS - LOADS WITH LEGS - 1 leg)'
+			count(c.loadid) AS 'NUM CHAINS --- LOADS WITH LEGS - 1 leg'
 		from
 			payroll.PayrollOTRdriverloadchain c
 			join dispatch.loadstop s on c.loadid = s.loadid
@@ -90,7 +90,7 @@ SELECT count(*) as '> 2 legs'
 	FROM (
 		select 
 		--	count(distinct(c.loadid)) AS 'NUM CHAINS - LOADS WITH LEGS - 1 leg)'
-			count(c.loadid) AS 'NUM CHAINS - LOADS WITH LEGS - 1 leg)'
+			count(c.loadid) AS 'NUM CHAINS --- LOADS WITH LEGS - 1 leg)'
 		from
 			payroll.PayrollOTRdriverloadchain c
 			join dispatch.loadstop s on c.loadid = s.loadid
