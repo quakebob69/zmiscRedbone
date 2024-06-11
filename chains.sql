@@ -268,24 +268,52 @@ select 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX'
 
 
 
-
-select 
-	s.LoadId, LoadStopTypeId, StartDateTime as legDT, DropStartDateTime as notlegDT
-from
-	payroll.PayrollOTRdriverloadchain c
-	join dispatch.loadstop s on c.loadid = s.loadid
-where
-	s.LoadStopTypeId = 2 and 
-	s.loadid = 56480
-	order by 
-	s.loadid,
-	stopnumber
-
-select * from dispatch.PR_OTR_History
+--history
+select driverpersonid, * from dispatch.PR_OTR_History
 where
 	loadid = 56480
 order by
 PickupBy
+
+
+--loadstop
+select 
+	s.LoadId, LoadStopTypeId, StartDateTime as legDT, DropStartDateTime as notlegDT, '-----------------------------', *--
+from
+	dispatch.loadstop s
+where
+	--s.LoadStopTypeId = 2 and 
+	s.loadid = 56480
+	order by 
+	--s.loadid,
+	stopnumber
+
+
+--loadstop = 2
+select 
+	s.LoadId, StartDateTime as legDT, DropStartDateTime as notlegDT, '-----------------------------', *--
+from
+	dispatch.loadstop s
+where
+	s.LoadStopTypeId = 2 and 
+	s.loadid = 56480
+	order by 
+	--s.loadid,
+	stopnumber
+
+
+select 
+	LoadId, begindate, enddate, '-----------------------------', *--
+from
+	payroll.PayrollOTRdriverloadchain c
+where
+	--LoadStopTypeId = 2 and 
+	loadid = 56480
+	--order by 
+	--s.loadid,
+	--stopnumber
+
+
 
 
 
