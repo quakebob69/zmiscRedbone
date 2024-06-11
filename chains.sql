@@ -274,7 +274,9 @@ from
 	dispatch.loadstop s
 where
 	(s.LoadStopTypeId <> 4) and 
-	s.loadid = 56480
+	s.loadid 
+	in (select distinct loadid from payroll.PayrollOTRdriverloadchain)
+	--= 56480
 order by 
 	loadid,
 	stopnumber
@@ -286,7 +288,9 @@ select
 from
 	dispatch.PR_OTR_History h
 where
-	loadid = 56480
+	loadid 
+	in (select distinct loadid from payroll.PayrollOTRdriverloadchain)
+	--= 56480
 	and paycode = 'Per Diem'
 order by
 	h.PickupBy
@@ -297,13 +301,14 @@ order by
 select
 	'chain---' as 'chain', loadid, personid, begindate, enddate
 from
-	payroll.PayrollOTRdriverloadchain c
+	payroll.PayrollOTRdriverloadchain
 where
-	loadid = 56480
+	loadid 
+	in (select distinct loadid from payroll.PayrollOTRdriverloadchain)
+	--= 56480
 order by 
-	c.enddate
-	--s.loadid,
-	--stopnumber
+	loadid,
+	enddate
 
 
 
