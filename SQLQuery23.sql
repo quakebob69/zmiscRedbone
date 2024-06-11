@@ -102,11 +102,12 @@ select distinct(loadid) as numlegs from dispatch.loadstop
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --1 leg
 				select
-					*
+					p.firstname, p.lastname, c.*
 				from
-					payroll.PayrollOTRdriverloadchain
+					payroll.PayrollOTRdriverloadchain c
+					join main.Person p on c.personid = p.PersonId
 				where
-					loadid = 56357
+					loadid = 56460
 
 
 
@@ -114,7 +115,7 @@ select distinct(loadid) as numlegs from dispatch.loadstop
 
 
 /*
-	56357
+	----------------56357
 	56460
 	56477
 	56480
