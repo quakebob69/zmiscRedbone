@@ -52,25 +52,28 @@ from
 
 
 	
-select count(distinct loadid) as '1 leg'  from dispatch.loadstop
-	where loadid in 
-			(
-				select
+SELECT COUNT(*) as 'asdf f'
+	FROM (
+			select loadid from dispatch.loadstop
+				where loadid in 
+						(
+							select
+								loadid
+							from
+								payroll.PayrollOTRdriverloadchain
+						)
+
+				and
+					dispatch.loadstop.LoadStopTypeId = 2
+				group by
 					loadid
-				from
-					payroll.PayrollOTRdriverloadchain
-			)
+				having
+					count(loadid) = 1
+		) subquery;
 
-	and
-		dispatch.loadstop.LoadStopTypeId = 2
-	group by
-		loadid
-	having
-		count(loadid) = 1
-		;
 
-		
-select count(distinct loadid) as '1 leg'  from dispatch.loadstop
+
+select count(distinct loadid) as '2 legs'  from dispatch.loadstop
 	where loadid in 
 			(
 				select
