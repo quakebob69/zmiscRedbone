@@ -65,6 +65,10 @@ select distinct(loadid) as numlegs from dispatch.loadstop
 
 
 
+
+
+
+--asdf
 /*
 --no legs
 	56703
@@ -91,7 +95,13 @@ select distinct(loadid) as numlegs from dispatch.loadstop
 	56926
 	56488
 	56634
+*/
 
+
+
+
+--asdf
+/*
 --1 leg
 	56357
 	56460
@@ -132,7 +142,12 @@ select distinct(loadid) as numlegs from dispatch.loadstop
 	57228
 	57268
 	57292
+*/
 
+
+
+--asdf
+/*
 --2 legs:
 	56547
 	56572
@@ -143,7 +158,7 @@ select distinct(loadid) as numlegs from dispatch.loadstop
 	57171
 	57210
 	57234
-	*/
+*/
 
 
 
