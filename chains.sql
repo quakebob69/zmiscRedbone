@@ -15,7 +15,7 @@ where
 
 
 
-
+SELECT 'CHAINZ++++++++++++++++++++++++++++++++++++++++++++++++++++' AS 'CHAINZ'
 --all
 select
 	count(distinct(PayrollOTRdriverloadchainid)) AS 'NUM CHAINS --- ALL',  (485 + 1*39 + 2*9) as 'CHECK WORK'
@@ -38,6 +38,13 @@ ORDER by
 
 
 
+
+
+
+SELECT 'LOADZ++++++++++++++++++++++++++++++++++++++++++++++++++++' AS 'LOADZ'
+
+
+
 select 
 	count(distinct(PayrollOTRdriverloadchainid)) AS 'NUM CHAINS - LOADS WITH LEGS ------ (all) -----', '48' as '----CHECK WORK' from
 	payroll.PayrollOTRdriverloadchain c
@@ -45,6 +52,7 @@ select
 where
 	s.LoadStopTypeId = 2
 	
+
 
 
 
@@ -110,6 +118,88 @@ SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (> 2) ----' , '0' as '--
 
 
 
+
+
+
+
+
+
+
+	/*
+SELECT 'DRIVERZ++++++++++++++++++++++++++++++++++++++++++++++++++++' AS 'DRIVERZ'
+
+
+select 
+	count(distinct(PayrollOTRdriverloadchainid)) AS 'NUM CHAINS - LOADS WITH LEGS ------ (all) -----', '48' as '----CHECK WORK' from
+	payroll.PayrollOTRdriverloadchain c
+	join dispatch.loadstop s on c.loadid = s.loadid
+	JOIN main.person p on c.personid = p.personid
+where
+	s.LoadStopTypeId = 2
+	
+
+
+
+		
+SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (1) ------'  , '39' as '----CHECK WORK' 
+	FROM (
+		select 
+			--count(c.loadid) as cnt
+			count(distinct c.loadid) as cnt
+		from
+			payroll.PayrollOTRdriverloadchain c
+			join dispatch.loadstop s on c.loadid = s.loadid
+		where
+			s.LoadStopTypeId = 2
+		group by
+			c.loadid
+		having
+			count(c.loadid) = 1
+	) subquery;
+
+
+
+
+		
+SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (2) ------'  , '9' as '----CHECK WORK' 
+	FROM (
+		select 
+			--count(c.loadid) as cnt
+			count(distinct c.loadid) as cnt
+		from
+			payroll.PayrollOTRdriverloadchain c
+			join dispatch.loadstop s on c.loadid = s.loadid
+		where
+			s.LoadStopTypeId = 2
+		group by
+			c.loadid
+		having
+			count(c.loadid) = 2
+	) subquery;
+
+
+
+		
+SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (> 2) ----' , '0' as '----CHECK WORK' 
+	FROM (
+		select 
+			--count(c.loadid) as cnt
+			count(distinct c.loadid) as cnt
+		from
+			payroll.PayrollOTRdriverloadchain c
+			join dispatch.loadstop s on c.loadid = s.loadid
+		where
+			s.LoadStopTypeId = 2
+		group by
+			c.loadid
+		having
+			count(c.loadid) > 2
+	) subquery;
+	*/
+
+
+
+
 --asdf
 /*
 	- 1 driver, 1 pick, 1 drop
@@ -155,6 +245,55 @@ SELECT count(*) as 'NUM CHAINS - LOADS WITH LEGS ------ (> 2) ----' , '0' as '--
 
 
 select 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX'
+
+
+
+
+
+
+/*
+	select 
+		blah as leg_city,
+		blah as leg_state,
+		asdf as driverend times.* from
+		payroll.PayrollOTRdriverloadchain c
+		join dispatch.loadstop s on c.loadid = s.loadid
+	where
+		s.LoadStopTypeId = 2
+		and s.loadid = 56480
+*/
+
+
+
+
+
+
+
+select 
+	s.LoadId, LoadStopTypeId, StartDateTime as legDT, DropStartDateTime as notlegDT
+from
+	payroll.PayrollOTRdriverloadchain c
+	join dispatch.loadstop s on c.loadid = s.loadid
+where
+	s.LoadStopTypeId = 2 and 
+	s.loadid = 56480
+	order by 
+	s.loadid,
+	stopnumber
+
+select * from dispatch.PR_OTR_History
+where
+	loadid = 56480
+order by
+PickupBy
+
+
+
+
+
+
+
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --1 leg
 				select
@@ -174,7 +313,7 @@ select 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXXX'
 	----------------56357 (I may have changed this in prod?)
 	56460
 	56477
-	56480
+	----------------56480 (possible bad datain driver db)
 	56523
 	56525
 	56540
