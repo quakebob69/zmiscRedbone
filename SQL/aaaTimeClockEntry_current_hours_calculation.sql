@@ -8,7 +8,7 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
 		DECLARE @Mo VARCHAR(2)		= '06'
-			DECLARE @Dy VARCHAR(2)		= '04'
+			DECLARE @Dy VARCHAR(2)		= '12'
 
 		------------------------------------------
 		DECLARE @Hr VARCHAR(2)		= '16'
@@ -100,13 +100,13 @@ SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT
 
 
 --Set dates manually
-DECLARE @EntryId INTEGER			= 26882
+DECLARE @EntryId INTEGER			= 27181
 
 
 
 
 			--IN
-			DECLARE @ClockedIn NVARCHAR(25)		= '2024-05-31 06:58:52.547';
+			DECLARE @ClockedIn NVARCHAR(25)		= '2024-06-12 06:58:25.141';
 			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
 
 
