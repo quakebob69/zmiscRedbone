@@ -24,7 +24,7 @@ set @loadid = 56572
 
 
 SELECT 
-	' ' as '                                                      LOAD---->', l.LoadId AS 'id', l.Driver1_PersonId AS 'driver', ' ' as '                                                      STOP---->', s.Driver1_PersonId as 'driver', s.StopNumber as 'stop', s.LoadStopTypeId as 'stop', s.ClientId as 'client', s.StartDateTime as 'StartDateTime (PICK OR DROP)', s.DropStartDateTime as 'DropStartDateTime (LEG)'
+	' ' as '                                                      LOAD---->', l.LoadId AS 'id', l.Driver1_PersonId AS 'driver', ' ' as '                                                      STOP---->', s.Driver1_PersonId as 'driver', s.StopNumber as 'stop', s.LoadStopTypeId as 'type', s.ClientId as 'client', s.StartDateTime as 'StartDateTime (PICK OR DROP)', s.DropStartDateTime as 'DropStartDateTime (LEG)'
 FROM     
 	dispatch.[Load] l INNER JOIN
     dispatch.LoadStop s ON l.LoadId = s.LoadId
@@ -58,8 +58,7 @@ ORDER BY
 
 
 SELECT 
-	' ' as '                                                      STOP---->', s.Driver1_PersonId as 'driver', s.StopNumber as 'stop', s.LoadStopTypeId as 'stop', s.ClientId as 'client', s.StartDateTime as 'StartDateTime', s.DropStartDateTime as 'DropStartDateTime'
-FROM     
+	' ' as '                                                      STOP---->', s.Driver1_PersonId as 'driver', s.StopNumber as 'stop', s.LoadStopTypeId as 'type', s.ClientId as 'client', s.StartDateTime as 'StartDateTime (PICK OR DROP)', s.DropStartDateTime as 'DropStartDateTime (LEG)'FROM     
 	dispatch.LoadStop s
 where
 	s.LoadId = @loadid 
