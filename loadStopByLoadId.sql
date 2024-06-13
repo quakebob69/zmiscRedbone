@@ -27,13 +27,14 @@ s.stopnumber
 
 --load and stop
 SELECT top 10
-l.LoadId, s.StopNumber, s.LoadStopTypeId, l.Driver1_PersonId AS DriverFromLoadRec, main.ClientAddress.State AS PickOrDropState, main.ClientAddress.City AS PickOrDropCity, 
-                  s.Driver1_PersonId AS DriverFromStopRec, s.StartDateTime AS PickOrDropDt, s.DropStartDateTime AS PickOrDropDtLeg
-FROM     dispatch.[Load] l INNER JOIN
-                  dispatch.LoadStop s ON l.LoadId = s.LoadId INNER JOIN
-                  main.ClientAddress ON s.ClientId = main.ClientAddress.ClientId	
-where l.LoadId = @loadid 
-ORDER BY l.LoadId, s.StopNumber
+	l.LoadId, l.Driver1_PersonId AS 'LOAD driver', '------------------------------' as '------------------------------', s.StopNumber as 'STOP stop number', s.LoadStopTypeId as 'STOP stop type', s.ClientId as 'STOP client id', s.Driver1_PersonId as 'STOP driver id', s.StartDateTime as 'STOP StartDateTime', s.DropStartDateTime as 'STOP DropStartDateTime'
+FROM     
+	dispatch.[Load] l INNER JOIN
+    dispatch.LoadStop s ON l.LoadId = s.LoadId
+where
+	l.LoadId = @loadid 
+ORDER BY
+	l.LoadId, s.StopNumber
 
 
 
