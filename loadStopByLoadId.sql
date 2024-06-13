@@ -17,7 +17,7 @@ s.stopnumber
 
 
 
---stop only
+
 
 
 
@@ -35,6 +35,21 @@ where
 ORDER BY
 	l.LoadId, s.StopNumber
 
+
+
+
+
+
+
+SELECT top 10
+	' ' as '                                             LOAD---->', l.LoadId AS 'LOAD id', l.Driver1_PersonId AS 'LOAD driver', ' ' as '                                                      STOP---->', s.Driver1_PersonId as 'STOP driver id', s.StopNumber as 'STOP stop number', s.LoadStopTypeId as 'STOP stop type', s.ClientId as 'STOP client id', s.StartDateTime as 'STOP StartDateTime', s.DropStartDateTime as 'STOP DropStartDateTime'
+FROM     
+	dispatch.[Load] l INNER JOIN
+    dispatch.LoadStop s ON l.LoadId = s.LoadId
+where
+	l.LoadId = @loadid 
+ORDER BY
+	l.LoadId, s.StopNumber
 
 
 
