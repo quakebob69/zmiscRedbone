@@ -38,6 +38,8 @@ ORDER BY
 
 
 
+
+
 SELECT 
 	' ' as '                                                      LOAD---->', l.LoadId AS 'LOAD id', l.Driver1_PersonId AS 'LOAD driver'
 	
@@ -47,6 +49,8 @@ where
 	l.LoadId = @loadid 
 ORDER BY
 	l.LoadId
+
+
 
 
 
