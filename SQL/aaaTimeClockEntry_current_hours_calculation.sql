@@ -8,7 +8,7 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
 		DECLARE @Mo VARCHAR(2)		= '06'
-			DECLARE @Dy VARCHAR(2)		= '12'
+			DECLARE @Dy VARCHAR(2)		= '13'
 
 		------------------------------------------
 		DECLARE @Hr VARCHAR(2)		= '16'
@@ -93,8 +93,7 @@ SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT Person
 
 DECLARE @emailName2 NVARCHAR(25) = 'danny'; 
 -------------------------------------------------------------------------------------------------------------------------------------------------
-SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
--------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
@@ -114,7 +113,7 @@ DECLARE @EntryId INTEGER			= 27181
 
 					
 			--OUT
-			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-03 15:41:24.004';
+			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-12 11:01:43.764';
 			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
 
 
