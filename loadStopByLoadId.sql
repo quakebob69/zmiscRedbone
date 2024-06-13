@@ -4,15 +4,15 @@ set @loadid = 56572
 
 
 
-
-select s.loadstoptypeid, s.startdatetime, s.dropstartdatetime, '--------------------------------',s.* from 
-dispatch.Load l join dispatch.LoadStop s on l.LoadId = s.LoadId
-where
-s.loadstoptypeid <> 4 and
-s.loadid = @loadid
-order by
-s.stopnumber
-
+/*
+	select s.loadstoptypeid, s.startdatetime, s.dropstartdatetime, '--------------------------------',s.* from 
+	dispatch.Load l join dispatch.LoadStop s on l.LoadId = s.LoadId
+	where
+	s.loadstoptypeid <> 4 and
+	s.loadid = @loadid
+	order by
+	s.stopnumber
+*/
 
 
 
