@@ -93,5 +93,6 @@ ORDER BY
 
 
 --select * from dispatch.LoadStatusType
+--select * from dispatch.LoadType
 
 

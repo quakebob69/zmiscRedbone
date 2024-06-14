@@ -8,7 +8,7 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
 		DECLARE @Mo VARCHAR(2)		= '06'
-			DECLARE @Dy VARCHAR(2)		= '13'
+			DECLARE @Dy VARCHAR(2)		= '14'
 
 		------------------------------------------
 		DECLARE @Hr VARCHAR(2)		= '16'
@@ -99,13 +99,13 @@ DECLARE @emailName2 NVARCHAR(25) = 'danny';
 
 
 --Set dates manually
-DECLARE @EntryId INTEGER			= 27181
+DECLARE @EntryId INTEGER			= 27264
 
 
 
 
 			--IN
-			DECLARE @ClockedIn NVARCHAR(25)		= '2024-06-12 06:58:25.141';
+			DECLARE @ClockedIn NVARCHAR(25)		= '2024-06-14 06:59:40.160';
 			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
 
 
@@ -113,9 +113,9 @@ DECLARE @EntryId INTEGER			= 27181
 
 					
 			--OUT
-			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-12 11:01:43.764';
+			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-13 13:18:24.523';
 			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
-
+			
 
 
 
@@ -128,4 +128,4 @@ SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT
 
 
 --XXX
---2024-05-29 06:58:10.840
+--2024-06-13 06:59:55.823
