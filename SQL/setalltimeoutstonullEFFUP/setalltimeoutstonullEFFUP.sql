@@ -1,6 +1,6 @@
 -- num clockouts updated since eff up
-select count(*) - 208 FROM [104.42.111.50].[RedBone].[main].[TimeClockEntry] where clockout != null
-select * FROM [104.42.111.50].[RedBone].[main].[TimeClockEntry] where clockout != null
+select count(*) - 208 FROM [104.42.111.50].[RedBone].[main].[TimeClockEntry] where clockout is not null
+select * FROM [104.42.111.50].[RedBone].[main].[TimeClockEntry] where clockout is not null
 
 
 
@@ -33,7 +33,11 @@ select top 100 * from [104.42.111.50].[RedBone].[main].[TimeClockEntry] order by
 	from [main].[TimeClockEntry] backTBL
 	join [104.42.111.50].[RedBone].[main].[TimeClockEntry] prodTBL
 		 on backTBL.EntryId = prodTBL.EntryId
-	where prodTBL.personid = 2775
+	where 
+	(prodTBL.personid = 6 or prodTBL.personid = 2775)
+	and prodTBL.clockout is null
+
+
 
 
 
@@ -54,6 +58,6 @@ select top 100 * from [104.42.111.50].[RedBone].[main].[TimeClockEntry] order by
 	where prod.personid = 2775
 
 
-
--- num clockouts updated since eff up
-select * FROM [104.42.111.50].[RedBone].[main].[TimeClockEntry] where clockout != null
+--
+select count(*) - 208 FROM [104.42.111.50].[RedBone].[main].[TimeClockEntry] where clockout is not null
+select * FROM [104.42.111.50].[RedBone].[main].[TimeClockEntry] where clockout is not null

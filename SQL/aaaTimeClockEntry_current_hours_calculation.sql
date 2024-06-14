@@ -113,7 +113,7 @@ DECLARE @EntryId INTEGER			= 27233
 
 					
 			--OUT
-			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-13 16:28:45.770';
+			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-13 22:22:22.222';
 			UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
 			
 
