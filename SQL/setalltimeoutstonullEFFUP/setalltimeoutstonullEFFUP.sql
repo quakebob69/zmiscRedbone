@@ -34,8 +34,8 @@ select top 100 * from [104.42.111.50].[RedBone].[main].[TimeClockEntry] order by
 	join [104.42.111.50].[RedBone].[main].[TimeClockEntry] prodTBL
 		 on backTBL.EntryId = prodTBL.EntryId
 	where 
-	(prodTBL.personid = 6 or prodTBL.personid = 2775)
-	and prodTBL.clockout is null
+	--(prodTBL.personid = 6 or prodTBL.personid = 2775) and
+	prodTBL.clockout is null
 
 
 
