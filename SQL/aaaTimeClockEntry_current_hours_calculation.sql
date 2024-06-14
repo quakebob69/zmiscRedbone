@@ -99,7 +99,7 @@ DECLARE @emailName2 NVARCHAR(25) = 'danny';
 
 
 --Set dates manually
-DECLARE @EntryId INTEGER			= 27264
+DECLARE @EntryId INTEGER			= 27233
 
 
 
@@ -113,8 +113,8 @@ DECLARE @EntryId INTEGER			= 27264
 
 					
 			--OUT
-			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-13 13:18:24.523';
-			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
+			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-13 22:22:22.111';
+			UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
 			
 
 
@@ -128,4 +128,4 @@ SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT
 
 
 --XXX
---2024-06-13 06:59:55.823
+--2024-06-13 16:28:45.770
