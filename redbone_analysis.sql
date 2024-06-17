@@ -10,12 +10,13 @@
 	JOIN
 		sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 	WHERE
-		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
+	--		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
+			OBJECT_NAME(referenced_id) like ('LOAD%')
 	GROUP BY
 		OBJECT_NAME(referenced_id)
 	ORDER BY
-		OBJECT_NAME(referenced_id)
-		,COUNT(*) desc
+		COUNT(*) desc
+		,OBJECT_NAME(referenced_id)
 	;
 
 
@@ -34,7 +35,8 @@
 	JOIN
 		sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 	WHERE
-		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
+	--		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
+			OBJECT_NAME(referenced_id) like ('LOAD%')
 	GROUP BY
 		OBJECT_NAME(referenced_id)
 		,o.type_desc
@@ -60,7 +62,8 @@
 	JOIN
 		sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 	WHERE
-		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
+	--		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
+			OBJECT_NAME(referenced_id) like ('LOAD%')
 	ORDER BY
 		OBJECT_NAME(referenced_id)
 		--,dep_on.type_desc
