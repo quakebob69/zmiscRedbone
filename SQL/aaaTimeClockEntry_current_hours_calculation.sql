@@ -93,19 +93,21 @@ SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT Person
 
 DECLARE @emailName2 NVARCHAR(25) = 'danny'; 
 -------------------------------------------------------------------------------------------------------------------------------------------------
---Set dates manually
-	--IN
-		DECLARE @EntryId__IN INTEGER = 27304
-		DECLARE @ClockedIn__IN NVARCHAR(25)			= '2024-06-14 06:59:40.160';
-		--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
-
-
-	--OUT
-		DECLARE @EntryId__OUT INTEGER = 27304
-		DECLARE @ClockedIn__OUT NVARCHAR(25)		= '2024-06-14 06:59:40.160';
-		--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
+SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
 -------------------------------------------------------------------------------------------------------------------------------------------------
-SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
+	--Set dates manually
+		--IN
+			DECLARE @EntryId__IN INTEGER = 27304
+			DECLARE @ClockedIn__IN NVARCHAR(25)			= '2024-06-14 06:59:40.160';
+			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
+
+
+		--OUT
+			DECLARE @EntryId__OUT INTEGER = 27304
+			DECLARE @ClockedIn__OUT NVARCHAR(25)		= '2024-06-14 06:59:40.160';
+			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
+-------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
 
