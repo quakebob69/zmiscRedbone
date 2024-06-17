@@ -1,6 +1,5 @@
 declare @tblNameList varchar(100)
-set @tblNameList = '"'+ CHAR(39) "LOAD"'",' 'LOADSTOP''
-	--SELECT 'She said asdf"I' + CHAR(39) + 'm going to the store."asdf' AS quote;
+set @tblNameList = 'LOAD, LOADSTOP'
 
 
 --SUMMARY
@@ -22,6 +21,7 @@ set @tblNameList = '"'+ CHAR(39) "LOAD"'",' 'LOADSTOP''
 			o.type_desc
 		;
 	*/
+
 
 	--DETAIL
 		--LOAD
