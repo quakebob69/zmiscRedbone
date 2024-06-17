@@ -1,35 +1,3 @@
-/*
-SELECT top 1000 p.FirstName, p.LastName, * FROM
-
-[RedBone].[main].[TimeClockEntry] t
-join main.person p on t.PersonId = p.personid
-
-
-where
-LunchAdj > 0
-order by 
-entryid desc
-,p.LastName
-,p.FirstName
-
-
-,
-p.firstName,
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- caculate lunch time from first 2 records
 --create column that says how many more minutes
 -- ADD LUNCH to estimate????
@@ -125,32 +93,17 @@ SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT Person
 
 DECLARE @emailName2 NVARCHAR(25) = 'danny'; 
 -------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 --Set dates manually
---DECLARE @EntryId INTEGER			= 27233
+	--IN
+		DECLARE @EntryId__IN INTEGER = 27304
+		DECLARE @ClockedIn__IN NVARCHAR(25)			= '2024-06-14 06:59:40.160';
+		--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
 
 
-
-
-			--IN
-			DECLARE @ClockedIn NVARCHAR(25)		= '2024-06-14 06:59:40.160';
-			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @ClockedIn WHERE EntryId = @EntryId
-
-
-
-
-					
-			--OUT
-			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-13 16:28:45.770';
-			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
-			
-
-
-
+	--OUT
+		DECLARE @EntryId__OUT INTEGER = 27304
+		DECLARE @ClockedIn__OUT NVARCHAR(25)		= '2024-06-14 06:59:40.160';
+		--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SELECT top 10 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
 -------------------------------------------------------------------------------------------------------------------------------------------------
