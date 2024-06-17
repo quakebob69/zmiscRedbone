@@ -1,3 +1,35 @@
+/*
+SELECT top 1000 p.FirstName, p.LastName, * FROM
+
+[RedBone].[main].[TimeClockEntry] t
+join main.person p on t.PersonId = p.personid
+
+
+where
+LunchAdj > 0
+order by 
+entryid desc
+,p.LastName
+,p.FirstName
+
+
+,
+p.firstName,
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- caculate lunch time from first 2 records
 --create column that says how many more minutes
 -- ADD LUNCH to estimate????
