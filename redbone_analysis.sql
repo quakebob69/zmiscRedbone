@@ -10,8 +10,9 @@
 	JOIN
 		sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 	WHERE
-	--		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
-			OBJECT_NAME(referenced_id) like ('LOAD%')
+		--OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP', 'LOADSTOPTYPE')
+		OBJECT_NAME(referenced_id) in ('LOADSTOPTYPE')
+		--OBJECT_NAME(referenced_id) like ('LOAD%')
 	GROUP BY
 		OBJECT_NAME(referenced_id)
 	ORDER BY
@@ -35,8 +36,9 @@
 	JOIN
 		sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 	WHERE
-	--		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
-			OBJECT_NAME(referenced_id) like ('LOAD%')
+		--OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP', 'LOADSTOPTYPE')
+		OBJECT_NAME(referenced_id) in ('LOADSTOPTYPE')
+		--OBJECT_NAME(referenced_id) like ('LOAD%')
 	GROUP BY
 		OBJECT_NAME(referenced_id)
 		,o.type_desc
@@ -54,7 +56,7 @@
 		--,dep_on.type_desc AS 'referencED type'
 		,'<---------' AS ' '
 		,OBJECT_NAME(referencing_id) AS 'referencING object'
-		,o.type_desc AS 'referencING type'
+		--,o.type_desc AS 'referencING type'
 	FROM
 		sys.sql_expression_dependencies sed
 	JOIN
@@ -62,8 +64,12 @@
 	JOIN
 		sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 	WHERE
-	--		OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
-			OBJECT_NAME(referenced_id) like ('LOAD%')
+		--OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP', 'LOADSTOPTYPE')
+		OBJECT_NAME(referenced_id) in ('LOADSTOPTYPE')
+		--OBJECT_NAME(referenced_id) like ('LOAD%')
+			--and OBJECT_NAME(referencing_id) like ('%payroll%')
+			--and OBJECT_NAME(referencing_id) like ('%performanc%')
+			--and OBJECT_NAME(referencing_id) like ('%acc%')
 	ORDER BY
 		OBJECT_NAME(referenced_id)
 		--,dep_on.type_desc
