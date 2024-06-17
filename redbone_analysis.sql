@@ -1,7 +1,10 @@
-declare @tblName varchar(100)
+declare @tblNameList varchar(100)
+set @tblNameList = '"'+ CHAR(39) "LOAD"'",' 'LOADSTOP''
+	--SELECT 'She said asdf"I' + CHAR(39) + 'm going to the store."asdf' AS quote;
 
 
 --SUMMARY
+	/*
 	set @tblName = 'LOAD'
 	--LOAD
 		SELECT
@@ -18,15 +21,13 @@ declare @tblName varchar(100)
 		GROUP BY
 			o.type_desc
 		;
-
-
+	*/
 
 	--DETAIL
-		set @tblName = 'LOAD'
 		--LOAD
 			SELECT
-				OBJECT_NAME(referenced_id) AS referenced_object_name
-				,dep_on.type_desc AS referenced_object_type
+				OBJECT_NAME(referenced_id) AS 'Referenced Name'
+				,dep_on.type_desc AS 'Referenced Type'
 				,OBJECT_NAME(referencing_id) AS referencing_object_name
 				,o.type_desc AS referencing_object_type
 			FROM
@@ -36,11 +37,14 @@ declare @tblName varchar(100)
 			JOIN
 				sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 			WHERE
-				OBJECT_NAME(referenced_id) = @tblName
+				OBJECT_NAME(referenced_id) in (@tblNameList)
 			ORDER BY
 				referencing_object_type
 				, referencing_object_name
 			;
+
+	/*
+
 
 
 	set @tblName = 'LOADSTOP'
@@ -62,3 +66,7 @@ declare @tblName varchar(100)
 		, referencing_object_name
 	;
 
+
+
+
+	*/
