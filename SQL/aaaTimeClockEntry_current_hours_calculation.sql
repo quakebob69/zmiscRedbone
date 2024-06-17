@@ -12,7 +12,7 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 		------------------------------------------
 		DECLARE @Hr VARCHAR(2)		= '16'
-			DECLARE @Mi VARCHAR(2)		= '33'
+			DECLARE @Mi VARCHAR(2)		= '36'
 
 
 --1st RECORD
