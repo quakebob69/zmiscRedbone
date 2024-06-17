@@ -1,14 +1,9 @@
-declare @tblNameList varchar(100)
-set @tblNameList = 'LOAD, LOADSTOP'
-
 
 --SUMMARY
-	/*
-	set @tblName = 'LOAD'
 	--LOAD
 		SELECT
 			o.type_desc AS 'types referencing LOAD',
-			COUNT(*) as asdf
+			COUNT(*) as 'type count'
 		FROM
 			sys.sql_expression_dependencies sed
 		JOIN
@@ -16,11 +11,11 @@ set @tblNameList = 'LOAD, LOADSTOP'
 		JOIN
 			sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 		WHERE
-			OBJECT_NAME(referenced_id) = @tblName
+			OBJECT_NAME(referenced_id) = 'LOAD'
 		GROUP BY
 			o.type_desc
 		;
-	*/
+
 
 
 	--DETAIL
@@ -37,9 +32,10 @@ set @tblNameList = 'LOAD, LOADSTOP'
 			JOIN
 				sys.objects dep_on ON sed.referenced_id = dep_on.object_id
 			WHERE
-				OBJECT_NAME(referenced_id) in (@tblNameList)
+				OBJECT_NAME(referenced_id) in ('LOAD', 'LOADSTOP')
 			ORDER BY
-				referencing_object_type
+				OBJECT_NAME(referenced_id)
+				,referencing_object_type
 				, referencing_object_name
 			;
 
