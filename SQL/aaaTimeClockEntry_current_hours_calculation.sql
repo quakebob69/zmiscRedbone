@@ -8,7 +8,7 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
 		DECLARE @Mo VARCHAR(2)		= '06'
-			DECLARE @Dy VARCHAR(2)		= '14'
+			DECLARE @Dy VARCHAR(2)		= '17'
 
 		------------------------------------------
 		DECLARE @Hr VARCHAR(2)		= '16'
@@ -99,7 +99,7 @@ DECLARE @emailName2 NVARCHAR(25) = 'danny';
 
 
 --Set dates manually
-DECLARE @EntryId INTEGER			= 27233
+--DECLARE @EntryId INTEGER			= 27233
 
 
 
@@ -114,7 +114,7 @@ DECLARE @EntryId INTEGER			= 27233
 					
 			--OUT
 			DECLARE @ClockedOut NVARCHAR(25)	= '2024-06-13 16:28:45.770';
-			UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
+			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @ClockedOut WHERE EntryId = @EntryId
 			
 
 
