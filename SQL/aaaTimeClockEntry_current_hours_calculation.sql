@@ -8,11 +8,11 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 	------------------------------------------
 	DECLARE @Yr VARCHAR(4)		= '2024'
 		DECLARE @Mo VARCHAR(2)		= '06'
-			DECLARE @Dy VARCHAR(2)		= '17'
+			DECLARE @Dy VARCHAR(2)		= '18'
 
 		------------------------------------------
 		DECLARE @Hr VARCHAR(2)		= '16'
-			DECLARE @Mi VARCHAR(2)		= '36'
+			DECLARE @Mi VARCHAR(2)		= '28'
 
 
 --1st RECORD
@@ -103,8 +103,8 @@ SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT 
 
 
 		--OUT
-			--DECLARE @EntryId__OUT INTEGER = 27304
-			--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-06-17 11:13:11.923';
+			--DECLARE @EntryId__OUT INTEGER = 27321
+			--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-06-17 15:56:54.523';
 			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
