@@ -97,15 +97,16 @@ SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 	--Set dates manually
 		--IN
-			--DECLARE @EntryId__IN INTEGER = 27321
-			--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-06-17 11:52:43.327';
-			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN
+			DECLARE @EntryId__IN INTEGER = 27388
+			DECLARE @Clocked__IN NVARCHAR(25)		= '2024-06-19 06:57:04.940';
+			UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN
 
+		
 
 		--OUT
-			--DECLARE @EntryId__OUT INTEGER = 27321
-			--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-06-17 15:56:54.523';
-			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT
+			DECLARE @EntryId__OUT INTEGER = 27341
+			DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-06-18 17:19:21.142';
+			UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
 -------------------------------------------------------------------------------------------------------------------------------------------------
