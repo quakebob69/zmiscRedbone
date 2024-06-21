@@ -85,40 +85,6 @@ DECLARE @TimeToGo VARCHAR(5)	= CAST(CAST(@Hr as int) - 12 as VARCHAR) + ':' + @M
 
 
 
-DECLARE @hourCurrent DECIMAL(38, 10)
-DECLARE @hourToReach DECIMAL(38, 10)
-
-SET @hourCurrent = 42.71
-SET @hourToReach = 45
-
-
---4th RECORD
-	SELECT TOP 1
-				--TARGET TIME
-				DATEADD(MINUTE, (60 * (@hourToReach - @hourCurrent)), [ClockIn]) as 'Quiting Time'
-		
-
-		--ROUND(CAST(DATEDIFF(minute, [ClockIn], GETDATE()) as float)/CAST(60 as float), 2) as hours
-				--ROUND(CAST(DATEDIFF(minute, [ClockInAdj], GETDATE()) as float)/CAST(60 as float), 2) as hours
-		--,'----------------------------' as ' '
-		--, *
-	FROM
-		[RedBone].[main].[TimeClockEntry]
-	WHERE
-		personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com')
-	ORDER BY
-		EntryId desc
-
-
-
-
-
-
-
-
-
-
-
 ------------------------------------------------------------------------------------------------------------------SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com') AND [ClockIn] >= CAST(GETDATE() AS DATE) AND [ClockIn] < DATEADD(DAY, 1, CAST(GETDATE() AS DATE)) order by EntryId desc
 
 
@@ -129,6 +95,67 @@ SET @hourToReach = 45
 --SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE EntryId = @EntryId
 
 --UPDATE [RedBone].[main].[TimeClockEntry] SET ClockInAdj = null WHERE EntryId = @EntryId
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					DECLARE @hourCurrent DECIMAL(38, 10)
+					DECLARE @hourToReach DECIMAL(38, 10)
+
+--**************************************************************************************************************************************************************************
+	--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$						-----------------
+		SET @hourCurrent =									42.71			
+		SET @hourToReach =									45
+	--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$						-----------------
+--**************************************************************************************************************************************************************************
+SELECT TOP 1
+			DATEADD(MINUTE, (60 * (@hourToReach - @hourCurrent)), [ClockIn]) as 'Quiting Time'
+FROM
+	[RedBone].[main].[TimeClockEntry]
+WHERE
+	personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com')
+ORDER BY
+	EntryId desc
+--**************************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
 
 
 
