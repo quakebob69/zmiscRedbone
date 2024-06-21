@@ -129,7 +129,7 @@ DECLARE @TimeToGo VARCHAR(5)	= CAST(CAST(@Hr as int) - 12 as VARCHAR) + ':' + @M
 
 
 
---Quiting Time
+--Quit Time
 	--**************************************************************************************************************************************************************************
 	DECLARE @hourCurrent DECIMAL(38, 10)
 	DECLARE @hourToReach DECIMAL(38, 10)
@@ -145,7 +145,7 @@ DECLARE @TimeToGo VARCHAR(5)	= CAST(CAST(@Hr as int) - 12 as VARCHAR) + ':' + @M
 
 	--**************************************************************************************************************************************************************************
 		SELECT TOP 1
-					FORMAT(DATEADD(MINUTE, (60 * (@hourToReach - @hourCurrent)), [ClockIn]), 'HH:mm') as 'Quiting Time'
+					FORMAT(DATEADD(MINUTE, (60 * (@hourToReach - @hourCurrent)), DATEADD(HOUR, -12, [ClockIn])), 'H:mm') as 'Leave'
 		FROM
 			[RedBone].[main].[TimeClockEntry]
 		WHERE
