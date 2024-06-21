@@ -1,20 +1,102 @@
--- caculate lunch time from first 2 records
---create column that says how many more minutes
--- ADD LUNCH to estimate????
-
-------------------------------------------
 DECLARE @emailName NVARCHAR(25) = 'danny';
 
+--ADJUST RECORDS
+		-------------------------------------------------------------------------------------------------------------------------------------------------
+		SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com') order by EntryId desc
+		-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+																				--Set dates manually
+																					--IN
+																						--DECLARE @EntryId__IN INTEGER = 27511
+																						--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-06-21 12:49:04.940';
+																						--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN
+
+		
+
+																					--OUT
+																						--DECLARE @EntryId__OUT INTEGER = 27462
+																						--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-06-21 11:28:12.053';
+																						--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT
+
+
+		-------------------------------------------------------------------------------------------------------------------------------------------------
+		SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com') order by EntryId desc
+		-------------------------------------------------------------------------------------------------------------------------------------------------
+		--XXX
+		--2024-06-13 16:28:45.770
+
+
+
+
+
+
+
+
+--QUITIN' TIME
+		--**************************************************************************************************************************************************************************
+		DECLARE @hourCurrent DECIMAL(38, 10)
+		DECLARE @hourToReach DECIMAL(38, 10)
+
+
+
+			--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$									----------
+				SET @hourCurrent =											42.71
+				SET @hourToReach =											45
+			--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$									----------
+
+
+
+
+
+		--**************************************************************************************************************************************************************************
+			SELECT TOP 1
+						FORMAT(DATEADD(MINUTE, (60 * (@hourToReach - @hourCurrent)), DATEADD(HOUR, -12, [ClockIn])), 'H:mm') as 'Leave'
+			FROM
+				[RedBone].[main].[TimeClockEntry]
+			WHERE
+				personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com')
+			ORDER BY
+				EntryId desc
+		--**************************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------
+DECLARE @Yr VARCHAR(4)		= '2024'
+	DECLARE @Mo VARCHAR(2)		= '06'
+		DECLARE @Dy VARCHAR(2)		= '21'
+
 	------------------------------------------
-	DECLARE @Yr VARCHAR(4)		= '2024'
-		DECLARE @Mo VARCHAR(2)		= '06'
-			DECLARE @Dy VARCHAR(2)		= '21'
-
-		------------------------------------------
-		DECLARE @Hr VARCHAR(2)		= '15'
-			DECLARE @Mi VARCHAR(2)		= '10'
+	DECLARE @Hr VARCHAR(2)		= '15'
+		DECLARE @Mi VARCHAR(2)		= '10'
 
 
+
+
+	
 --1st RECORD
 																																										/*
 																																										SELECT TOP 1
@@ -95,101 +177,3 @@ DECLARE @TimeToGo VARCHAR(5)	= CAST(CAST(@Hr as int) - 12 as VARCHAR) + ':' + @M
 --SELECT * FROM [RedBone].[main].[TimeClockEntry] WHERE EntryId = @EntryId
 
 --UPDATE [RedBone].[main].[TimeClockEntry] SET ClockInAdj = null WHERE EntryId = @EntryId
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---Quit Time
-	--**************************************************************************************************************************************************************************
-	DECLARE @hourCurrent DECIMAL(38, 10)
-	DECLARE @hourToReach DECIMAL(38, 10)
-
-
-
-		--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$						----------
-			SET @hourCurrent =								   42.71
-			SET @hourToReach =								   45
-		--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$						----------
-
-
-
-
-
-	--**************************************************************************************************************************************************************************
-		SELECT TOP 1
-					FORMAT(DATEADD(MINUTE, (60 * (@hourToReach - @hourCurrent)), DATEADD(HOUR, -12, [ClockIn])), 'H:mm') as 'Leave'
-		FROM
-			[RedBone].[main].[TimeClockEntry]
-		WHERE
-			personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com')
-		ORDER BY
-			EntryId desc
-	--**************************************************************************************************************************************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-DECLARE @emailName2 NVARCHAR(25) = 'danny'; 
--------------------------------------------------------------------------------------------------------------------------------------------------
-SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
--------------------------------------------------------------------------------------------------------------------------------------------------
-	--Set dates manually
-		--IN
-			--DECLARE @EntryId__IN INTEGER = 27511
-			--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-06-21 12:49:04.940';
-			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN
-
-		
-
-		--OUT
-			--DECLARE @EntryId__OUT INTEGER = 27462
-			--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-06-21 11:28:12.053';
-			--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT
--------------------------------------------------------------------------------------------------------------------------------------------------
-SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName2 + '@redbonetrucking.com') order by EntryId desc
--------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
---XXX
---2024-06-13 16:28:45.770
