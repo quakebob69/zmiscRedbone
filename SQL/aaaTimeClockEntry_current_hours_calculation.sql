@@ -129,30 +129,30 @@ DECLARE @TimeToGo VARCHAR(5)	= CAST(CAST(@Hr as int) - 12 as VARCHAR) + ':' + @M
 
 
 
-
-DECLARE @hourCurrent DECIMAL(38, 10)
-DECLARE @hourToReach DECIMAL(38, 10)
---**************************************************************************************************************************************************************************
-
-
-
-	--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$						----------
-		SET @hourCurrent =								   42.71
-		SET @hourToReach =								   45
-	--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$						----------
+--Quiting Time
+	--**************************************************************************************************************************************************************************
+	DECLARE @hourCurrent DECIMAL(38, 10)
+	DECLARE @hourToReach DECIMAL(38, 10)
 
 
 
---**************************************************************************************************************************************************************************
-SELECT TOP 1
-			FORMAT(DATEADD(MINUTE, (60 * (@hourToReach - @hourCurrent)), [ClockIn]), 'HH:mm') as 'Quiting Time'
-FROM
-	[RedBone].[main].[TimeClockEntry]
-WHERE
-	personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com')
-ORDER BY
-	EntryId desc
---**************************************************************************************************************************************************************************
+		--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$						----------
+			SET @hourCurrent =								   42.71
+			SET @hourToReach =								   45
+		--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$						----------
+
+
+
+	--**************************************************************************************************************************************************************************
+		SELECT TOP 1
+					FORMAT(DATEADD(MINUTE, (60 * (@hourToReach - @hourCurrent)), [ClockIn]), 'HH:mm') as 'Quiting Time'
+		FROM
+			[RedBone].[main].[TimeClockEntry]
+		WHERE
+			personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com')
+		ORDER BY
+			EntryId desc
+	--**************************************************************************************************************************************************************************
 
 
 
