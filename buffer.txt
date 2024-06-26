@@ -2871,3 +2871,80 @@ isLeg = false;
 30.86
 36.76
 
+
+
+
+
+Certificate File Upload Linkage
+	- Files uploaded via the 'Certifications' box on the 'Personal' tab will now be linked to the record they are uploaded on.  Previously uploaded files will not have this linkage.  If a certificate record has a file linkage, it will show ONLY that file.  Otherwise it will list ALL files for that person and record type (eg. Medical Card).
+2nd Save Buttton
+	- Added a 2nd save button to the top of the 'Personal' tab to reduce scrolling.
+Person Types Box
+	-Increased height of the 'Person Types' box on the 'Personal' tab to eliminate scrolling.
+
+Performance Report
+	- Added 'FORECASTED amount' to the 'Gross Revenue' column of the 'Trucking - Company' grid on the 'Performance' report.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
