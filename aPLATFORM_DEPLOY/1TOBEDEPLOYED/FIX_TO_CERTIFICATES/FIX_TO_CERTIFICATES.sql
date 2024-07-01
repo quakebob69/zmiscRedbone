@@ -3,9 +3,9 @@ from
 main.CertificationPersonMapping pm
 join main.Person p on pm.PersonId = p.PersonId
 where 
-p.FirstName = 'CHRISTINE'
+p.FirstName = 'DANIEL'
 and
-p.LastName = 'ROBINSON'
+p.LastName = 'CALL'
 
 
 /*

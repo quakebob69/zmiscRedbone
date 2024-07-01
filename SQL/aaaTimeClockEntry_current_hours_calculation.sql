@@ -11,8 +11,8 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 																					--------------------------------------------------------------------------------------------------------------
 																						--IN
-																							--DECLARE @EntryId__IN INTEGER = 27699
-																							--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-06-28 06:36:52.120';
+																							--DECLARE @EntryId__IN INTEGER = 27760
+																							--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-07-01 13:20:51.407';
 																							--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN
 
 		
