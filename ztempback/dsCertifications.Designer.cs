@@ -4293,7 +4293,7 @@ VALUES        (@PersonId,@CertificationTypeId,@ReceivedDate,@ExpireDate,@Notes,@
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE main.CertificationPersonMapping
 SET          PersonId = @PersonId, CertificationTypeId = @CertificationTypeId, ReceivedDate = @ReceivedDate, ExpireDate = @ExpireDate, Notes = @Notes, CertificationCode = @CertificationCode, CertificationState = @CertificationState, 
-                  ActiveInd = @ActiveInd, FileName = @FileName
+                  ActiveInd = @ActiveInd
 WHERE  (CertificationPersonMappingId = @Original_CertificationPersonMappingId)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PersonId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "PersonId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4304,7 +4304,6 @@ WHERE  (CertificationPersonMappingId = @Original_CertificationPersonMappingId)";
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CertificationCode", global::System.Data.SqlDbType.VarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "CertificationCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CertificationState", global::System.Data.SqlDbType.VarChar, 2, global::System.Data.ParameterDirection.Input, 0, 0, "CertificationState", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ActiveInd", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "ActiveInd", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FileName", global::System.Data.SqlDbType.VarChar, 256, global::System.Data.ParameterDirection.Input, 0, 0, "FileName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CertificationPersonMappingId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CertificationPersonMappingId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -4484,7 +4483,7 @@ WHERE  (main.CertificationPersonMapping.PersonId = @PersonId) AND (main.Certific
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int PersonId, short CertificationTypeId, global::System.Nullable<global::System.DateTime> ReceivedDate, global::System.Nullable<global::System.DateTime> ExpireDate, string Notes, string CertificationCode, string CertificationState, global::System.Nullable<bool> ActiveInd, string FileName, int Original_CertificationPersonMappingId) {
+        public virtual int Update(int PersonId, short CertificationTypeId, global::System.Nullable<global::System.DateTime> ReceivedDate, global::System.Nullable<global::System.DateTime> ExpireDate, string Notes, string CertificationCode, string CertificationState, global::System.Nullable<bool> ActiveInd, int Original_CertificationPersonMappingId) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(PersonId));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((short)(CertificationTypeId));
             if ((ReceivedDate.HasValue == true)) {
@@ -4523,13 +4522,7 @@ WHERE  (main.CertificationPersonMapping.PersonId = @PersonId) AND (main.Certific
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((FileName == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(FileName));
-            }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_CertificationPersonMappingId));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_CertificationPersonMappingId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
