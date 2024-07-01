@@ -2910,11 +2910,26 @@ Performance Report
 									</Nodes>
 								</telerik:RadTreeNode>
 
+----------------
+
+	git config --list
+
+		git config --global user.name "Your New Name"
+		git config --global user.email "your.new.email@example.com"
 
 
+			git config --global user.name "danny call"
+			git config --global user.email "danny@redbonetrucking.com"
 
+			git config --global user.name
+			git config --global user.email
+
+			danny@redbonetrucking.com
+
+----------------                            
                             
-                            
+
+
 
 
 
