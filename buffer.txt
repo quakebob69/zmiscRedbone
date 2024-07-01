@@ -2883,27 +2883,38 @@ Person Types Box
 	-Increased height of the 'Person Types' box on the 'Personal' tab to eliminate scrolling.
 
 Performance Report
-	- Added 'FORECASTED amount' to the 'Gross Revenue' column of the 'Trucking - Company' grid on the 'Performance' report.
+	- Added 'forecasted amount' to the 'Gross Revenue' column of the 'Trucking - Company' grid on the 'Performance' report.
 
 
 
 
 
 
+'Operations' menu cleanup
+  - remove old items
+  - move 'Fedex Terminals' to Fedex payroll
+  - move Fuel items to new Fuel submenu
+  - move 'Load Billing', 'Money Code Modifications', 'Detention requests' to new top level 'Billing'
+
+----
+
+----------------
+
+
+                               <telerik:RadTreeNode Text="Fuel"
+                                    Font-Size="13px"
+                                    Style="padding-bottom: 2px">
+									<Nodes>
+										<telerik:RadTreeNode Text="Time Clock" Value="Timeclock"></telerik:RadTreeNode>
+										<telerik:RadTreeNode Text="Time Clock Approvals" Value="TimeclockApprv"></telerik:RadTreeNode>
+									</Nodes>
+								</telerik:RadTreeNode>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+                            
+                            
 
 
 
