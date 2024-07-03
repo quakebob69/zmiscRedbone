@@ -2937,6 +2937,23 @@ Fix Certificates not saving - remove filename from adapter
 
 
 
+Operations Menu
+	- Removed unsused items
+	- Added Driver Manager menu item
+
+Billing Menu
+	- Added new top level Billing Menu
+	- Moved billing menu items from 'Operations' menu to 'Billing' menu
+
+Person/Certificates Save Fix
+	- 'Certifications' on the 'Personal' now works.
+
+
+
+
+
+
+
 
 
 
