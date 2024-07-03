@@ -55,3 +55,6 @@ GO
 ALTER TABLE [equipment].[PUnit] CHECK CONSTRAINT [FK_PUnit_DispatchFleet]
 GO
 
+
+
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '261';
