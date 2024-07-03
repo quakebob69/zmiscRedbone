@@ -42,13 +42,16 @@ GO
 
 
 
-ALTER TABLE [main].[Person]
+
+
+
+ALTER TABLE [equipment].[PUnit]
 ADD [DispatchFleetId] [int] NULL
 GO
 
-ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_DispatchFleet] FOREIGN KEY([DispatchFleetId])
+ALTER TABLE [equipment].[PUnit]  WITH CHECK ADD  CONSTRAINT [FK_PUnit_DispatchFleet] FOREIGN KEY([DispatchFleetId])
 REFERENCES [payroll].[DispatchFleet] ([DispatchFleetId])
 GO
-ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_DispatchFleet]
+ALTER TABLE [equipment].[PUnit] CHECK CONSTRAINT [FK_PUnit_DispatchFleet]
 GO
 
