@@ -58,3 +58,11 @@ GO
 
 
 UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '261';
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '262';
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '263';
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '264';
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '265';
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '266';
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '267';
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '268';
+UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '269';
