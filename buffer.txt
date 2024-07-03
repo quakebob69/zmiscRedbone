@@ -2936,22 +2936,21 @@ Fix Certificates not saving - remove filename from adapter
 
 
 
-
+EDI Service
+Changed logic for flagging an incoming tender as a duplicate.  Process will now check for accepted tenders with the same Shipment Id and if found it will flag the new incoming tender as a duplicate.
+Adjusted logic for incoming tender updates so previous updates are not cleared from the Incoming Tenders page.
+Wizard Front End
+Fixed wrong coloring for the Expiring Tenders count in the main header.
 Operations Menu
-	- Removed unsused items
-	- Added Driver Manager menu item
-
+Removed unused items
+Added 'Driver Manager'
 Billing Menu
-	- Added new top level Billing Menu
-	- Moved billing menu items from 'Operations' menu to 'Billing' menu
-
+Added new top level 'Billing' Menu
+Moved Billing menu items from 'Operations' menu to 'Billing' menu
 Person/Certificates Save Fix
-	- 'Certifications' on the 'Personal' now works.
-
-
-
-
-
+'Certifications' on the 'Personal' tab of Person Management now works.
+ 
+ 
 
 
 
