@@ -43,12 +43,12 @@ GO
 
 
 ALTER TABLE [main].[Person]
-ADD [PayrollOTRBenefitsStatusId] [int] NULL
+ADD [DispatchFleetId] [int] NULL
 GO
 
-ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus] FOREIGN KEY([PayrollOTRBenefitsStatusId])
-REFERENCES [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId])
+ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_DispatchFleet] FOREIGN KEY([DispatchFleetId])
+REFERENCES [payroll].[DispatchFleet] ([DispatchFleetId])
 GO
-ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus]
+ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_DispatchFleet]
 GO
 
