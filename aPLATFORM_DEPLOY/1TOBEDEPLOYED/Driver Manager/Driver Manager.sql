@@ -50,7 +50,7 @@ ADD [DispatchFleetId] [int] NULL
 GO
 
 ALTER TABLE [equipment].[PUnit]  WITH CHECK ADD  CONSTRAINT [FK_PUnit_DispatchFleet] FOREIGN KEY([DispatchFleetId])
-REFERENCES [payroll].[DispatchFleet] ([DispatchFleetId])
+REFERENCES [dispatch].[DispatchFleet] ([DispatchFleetId])
 GO
 ALTER TABLE [equipment].[PUnit] CHECK CONSTRAINT [FK_PUnit_DispatchFleet]
 GO
