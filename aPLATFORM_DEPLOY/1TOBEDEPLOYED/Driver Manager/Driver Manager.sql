@@ -57,6 +57,20 @@ GO
 
 
 
+/*
+	1642	260
+	1591	261
+	1648	262
+	1649	263
+	1650	264
+	1651	265
+	1652	266
+	1653	267
+	1654	268
+	1655	269
+*/
+
+
 UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '261';
 UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '262';
 UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '263';
