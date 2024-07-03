@@ -32,3 +32,10 @@ ALTER TABLE [dispatch].[DispatchFleet] CHECK CONSTRAINT [FK_DispatchFleet_Person
 GO
 
 
+
+INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('Dickie Dos' , 45)
+INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('OTaRmy' , 2467)
+INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('Whirling Dervishes' , 2484)
+GO
+
+
