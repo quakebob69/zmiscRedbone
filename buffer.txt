@@ -2978,6 +2978,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+
 CREATE PROCEDURE [dbo].[sp_LoadsForBilling_Get] (@SearchAllString VARCHAR(max) = '')
 AS
 BEGIN
