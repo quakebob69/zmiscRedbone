@@ -2,7 +2,8 @@ oROd5ITSqEgh
 
 rya_$/T@KHy~Je8o
 
-C:\temp\temp2\DB_RESTORES\
+	Computer: RedbonePlatform--Server (0009)
+	C:\temp\temp2\DB_RESTORES\
 
 104.42.111.50
 
@@ -2982,6 +2983,17 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
+USE [RedBone]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_LoadsForBilling_Get]    Script Date: 7/8/2024 11:03:39 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
 CREATE PROCEDURE [dbo].[sp_LoadsForBilling_Get] (@SearchAllString VARCHAR(max) = '')
 AS
 BEGIN
@@ -3030,6 +3042,12 @@ BEGIN
 	SELECT TOP 1 LoadId FROM @ValidLoads
 END
 GO
+
+
+
+
+
+
 
 
 
