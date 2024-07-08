@@ -2968,12 +2968,146 @@ Person/Certificates Save Fix
 
 
 
+DROP PROCEDURE IF EXISTS [dbo].[sp_LoadsForBilling_Get]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_LoadsForBilling_Get]    Script Date: 5/29/2024 9:40:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_LoadsForBilling_Get] (@SearchAllString VARCHAR(max) = '')
+AS
+BEGIN
+	IF 1 = 0
+	BEGIN
+		SET FMTONLY OFF
+	END
+
+	DECLARE @LSearchAllString VARCHAR(max) = TRIM(COALESCE(@SearchAllString, ''))
+	DECLARE @ValidLoads TABLE (LoadId INT NOT NULL PRIMARY KEY CLUSTERED);
+
+	IF @LSearchAllString <> ''
+	BEGIN
+		IF dbo.IsInteger(@LSearchAllString) = 1
+		BEGIN
+			INSERT INTO @ValidLoads
+				SELECT LoadId
+				FROM dispatch.LOAD
+				WHERE LoadId = @LSearchAllString
+
+			IF (SELECT count(*) FROM @ValidLoads) < 1
+			BEGIN
+				INSERT INTO @ValidLoads
+					SELECT LoadId
+					FROM dispatch.LOAD
+					WHERE TripNumber = @LSearchAllString
+			END
+
+			IF (SELECT count(*) FROM @ValidLoads) < 1
+			BEGIN
+				INSERT INTO @ValidLoads
+					SELECT LoadId
+					FROM dispatch.LOAD
+					WHERE CustomerLoadNumber = @LSearchAllString
+			END
+		END
+		ELSE
+		BEGIN
+			INSERT INTO @ValidLoads
+				SELECT LoadId
+				FROM dispatch.LOAD
+				WHERE CustomerLoadNumber = @LSearchAllString
+		END
+	END
+
+	SELECT TOP 1 LoadId FROM @ValidLoads
+END
+GO
+
+--EXEC dbo.sp_LoadsForBilling_Get '62406' --62406
+--EXEC dbo.sp_LoadsForBilling_Get '229292' --62406
+--EXEC dbo.sp_LoadsForBilling_Get '12869' --12869
+--EXEC dbo.sp_LoadsForBilling_Get '50225' --12869
+--EXEC dbo.sp_LoadsForBilling_Get 'Q82380077' --62318
+
+--select loadid,TripNumber from dispatch.Load where loadid = 12869
+--select loadid,TripNumber from dispatch.Load where TripNumber = 50225
+
+
+
+
+INSERT INTO [main].[Entitlement]
+           ([EntitlementId]
+           ,[EntitlementName]
+           ,[Description]
+           ,[Enabled]
+           ,[SortId])
+     VALUES
+           (915
+           ,'Main-Operations-OpenLoadBilledNoPrompt'
+           ,'Ability to open and take over a billed load without being prompted'
+           ,1
+           ,1010125000)
+GO
 
 
 
 
 
 
+/****** Object:  Table [edi].[Settings]    Script Date: 7/8/2024 10:42:14 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [edi].[Settings](
+	[Id] [int] NOT NULL,
+	[MinimumExpirationMinutes] [int] NOT NULL,
+	[MustRespondDateBufferMinutes] [int] NOT NULL,
+ CONSTRAINT [PK_Settings_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [edi].[Settings] ADD  CONSTRAINT [DF_Settings_MustRespondDateBufferMinutes]  DEFAULT ((0)) FOR [MustRespondDateBufferMinutes]
+GO
+
+
+
+
+
+
+CREATE PROCEDURE [dbo].[sp_EDI_LoadTendersExpiring_Count]
+AS
+BEGIN
+
+	-- sp_EDI_LoadTendersExpiring_Count
+
+	SET NOCOUNT ON;
+
+	--number of minutes until expiration
+	DECLARE @ExpiringIn int
+
+	SELECT	TOP 1
+			@ExpiringIn = MinimumExpirationMinutes + MustRespondDateBufferMinutes
+	FROM	edi.Settings
+
+	PRINT @ExpiringIn
+
+	SELECT	TenderCount = COUNT(*)
+	FROM	edi.LoadTenders
+	WHERE	StatusId = 'O'
+	AND		MustRespondByDate = CAST(GETDATE() AS DATE)
+	AND		MustRespondByTime <= DATEADD(MINUTE, @ExpiringIn, CAST(GETDATE() AS TIME))
+
+END
 
 
 
