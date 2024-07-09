@@ -1,4 +1,4 @@
-using RedbonePlatform.Classes;
+﻿using RedbonePlatform.Classes;
 using RedbonePlatform.Services;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using System.Windows.Controls;
 using Telerik.Web.UI;
 using Telerik.Web.UI.Editor.DialogControls;
+using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
 
 namespace RedbonePlatform.Pages.ContainerPages
 {
@@ -1389,10 +1390,8 @@ namespace RedbonePlatform.Pages.ContainerPages
                 case "RadComboBox_Driver1":
                     if (e.Value != e.OldValue)
                     {
-                        Boolean DriverHasCharge = false;
-                        qry.sp_DriverInLoadHasChargeInd(LoadId, Convert.ToInt32(e.OldValue), out DriverHasCharge);
+                        if(driverHasCharges(LoadId, e.OldValue))
 
-                        if (DriverHasCharge)
                         {
                             RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("This Driver has an associated Charge and can't be changed!"), 500, 130, "Driver has associated Charge!", "");
                             // select old driver again.
@@ -1425,10 +1424,8 @@ namespace RedbonePlatform.Pages.ContainerPages
                 case "RadComboBox_Driver2":
                     if (e.Value != e.OldValue)
                     {
-                        Boolean DriverHasCharge = false;
-                        qry.sp_DriverInLoadHasChargeInd(LoadId, Convert.ToInt32(e.OldValue), out DriverHasCharge);
+                        if (driverHasCharges(LoadId, e.OldValue))
 
-                        if (DriverHasCharge)
                         {
                             RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("This Driver has an associated Charge and can't be changed!"), 500, 130, "Driver has associated Charge!", "");
                             // select old driver again.
@@ -1514,29 +1511,12 @@ namespace RedbonePlatform.Pages.ContainerPages
                     if (RadComboBox_Truck1.SelectedValue != "0")
                         TruckPunitId = Convert.ToInt16(RadComboBox_Truck1.SelectedValue);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     1
                     get driver(s) from person table using TruckPunitId:
                         Driver1Id
                         Driver2Id
-
-
                     2
                     if either of the trucks drivers driverHasCharges:
-
                         use this:
                             if (e.Value != e.OldValue)
                             {
@@ -1548,20 +1528,15 @@ namespace RedbonePlatform.Pages.ContainerPages
                                     return;
                                 }
                             }
-
                     return And don't change truck for drivers
-
-
                     3
                     apply this to all drivers:
                         DriverExpirationLogic(Convert.ToInt32(e.Value), RadComboBox_Driver1, RadToolTip_RadComboBox_Driver1, true);
-
-
                     4
                     try
                     {
-                        // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
-                        qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
+                    // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
+                    qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
                         qry.sp_Load_SaveDrivers(LoadId, Driver1Id, Driver2Id);
                     }
                     catch (Exception ex)
@@ -1569,20 +1544,16 @@ namespace RedbonePlatform.Pages.ContainerPages
                         set back if both stored procs don't work
                         qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
                         qry.sp_Load_SaveDrivers(LoadId, Driver1Id, Driver2Id);
-                        
                         throw ex;
                     }
-
                     5
                     //update drivers on page
                     RadComboBox_Driver1.SelectedValue = Driver1Id == null ? null : Driver1Id.ToString();
                     RadComboBox_Driver2.SelectedValue = Driver2Id == null ? null : Driver2Id.ToString();
                     LoadPopulate();
-
                     6
                     //Set Driver Manager
                     //
-
                     ediUpdateNeeded = true;
                     break;
                 default:
@@ -1595,7 +1566,14 @@ namespace RedbonePlatform.Pages.ContainerPages
                 //call to update truck/trailer through edi  We arent doing this for now
                 //SendStatusChangeToClient(LoadId, 0, int.Parse(HiddenField_ClientId.Value), "", DateTime.Now, "NS", EDIService.StatusDateType.Scheduled, EDIService.ShipmentStatusType.StatusChange);
             }
+        }
 
+        private bool driverHasCharges(int loadId, string oldValue)
+        {
+            Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter qry = new Datasets.dsDispatchExpirationsTableAdapters.QueriesTableAdapter();
+            Boolean DriverHasCharge = false;
+            qry.sp_DriverInLoadHasChargeInd(loadId, Convert.ToInt32(oldValue), out DriverHasCharge);
+            return DriverHasCharge;
         }
 
         protected void RadDropDownList_TempMode_SelectedIndexChanged(object sender, DropDownListEventArgs e)

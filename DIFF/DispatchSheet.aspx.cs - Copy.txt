@@ -1,4 +1,4 @@
-using RedbonePlatform.Classes;
+﻿using RedbonePlatform.Classes;
 using RedbonePlatform.Services;
 using System;
 using System.Collections.Generic;
@@ -1514,75 +1514,8 @@ namespace RedbonePlatform.Pages.ContainerPages
                     if (RadComboBox_Truck1.SelectedValue != "0")
                         TruckPunitId = Convert.ToInt16(RadComboBox_Truck1.SelectedValue);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    1
-                    get driver(s) from person table using TruckPunitId:
-                        Driver1Id
-                        Driver2Id
-
-
-                    2
-                    if either of the trucks drivers driverHasCharges:
-
-                        use this:
-                            if (e.Value != e.OldValue)
-                            {
-                                if (driverHasCharges(LoadId, e.OldValue))
-                                {
-                                    RadWindowManager1.RadAlert(HttpUtility.HtmlEncode("This Driver has an associated Charge and can't be changed!"), 500, 130, "Driver has associated Charge!", "");
-                                    // select old driver again.
-                                    RadComboBox_Driver1.SelectedValue = e.OldValue;
-                                    return;
-                                }
-                            }
-
-                    return And don't change truck for drivers
-
-
-                    3
-                    apply this to all drivers:
-                        DriverExpirationLogic(Convert.ToInt32(e.Value), RadComboBox_Driver1, RadToolTip_RadComboBox_Driver1, true);
-
-
-                    4
-                    try
-                    {
-                        // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
-                        qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
-                        qry.sp_Load_SaveDrivers(LoadId, Driver1Id, Driver2Id);
-                    }
-                    catch (Exception ex)
-                    {
-                        set back if both stored procs don't work
-                        qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
-                        qry.sp_Load_SaveDrivers(LoadId, Driver1Id, Driver2Id);
-                        
-                        throw ex;
-                    }
-
-                    5
-                    //update drivers on page
-                    RadComboBox_Driver1.SelectedValue = Driver1Id == null ? null : Driver1Id.ToString();
-                    RadComboBox_Driver2.SelectedValue = Driver2Id == null ? null : Driver2Id.ToString();
-                    LoadPopulate();
-
-                    6
-                    //Set Driver Manager
-                    //
-
+                    // Save just this selection to the load, so no need to save entire load and refresh via SaveLoad
+                    qry.sp_Load_SaveTruck(LoadId, TruckPunitId);
                     ediUpdateNeeded = true;
                     break;
                 default:

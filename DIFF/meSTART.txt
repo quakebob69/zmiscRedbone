@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using System.Windows.Controls;
 using Telerik.Web.UI;
 using Telerik.Web.UI.Editor.DialogControls;
+using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
 
 namespace RedbonePlatform.Pages.ContainerPages
 {
@@ -28,7 +29,6 @@ namespace RedbonePlatform.Pages.ContainerPages
 
         public static bool IsEdiLocked { get; set; } = false;
 
-
         protected void Page_Init(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -37,8 +37,6 @@ namespace RedbonePlatform.Pages.ContainerPages
 
                 CurrentDockStates.Clear();
                 HiddenField_PageGUID.Value = Guid.NewGuid().ToString();
-
-                CheckIsEdiLoad();
 
                 // Prevent tabbing to RadNumericTextBox up down spinners.
                 foreach (System.Web.UI.Control ctl in Page.Controls)
@@ -67,21 +65,7 @@ namespace RedbonePlatform.Pages.ContainerPages
                         dock.DockMode = DockMode.Docked;
                         dock.Command += new DockCommandEventHandler(RadDock_Command);
                         dock.DockPositionChanged += new DockPositionChangedEventHandler(RadDock_DockPositionChanged);
-                        //dock.DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.ExpandCollapse | Telerik.Web.UI.Dock.DefaultCommands.Close; // temporarily just providing the expand / collapse 
-                        dock.DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.None;
-
-                        dock.Commands.Clear();
-
-                        dock.Commands.Add(new DockExpandCollapseCommand());
-
-                        if (!IsEdiLocked)
-                        {
-                            dock.Commands.Add(new DockCloseCommand());
-                        }
-
-                        //dock.Commands.Clear();
-                        //dock.Commands.Add(new DockCloseCommand());
-                        //dock.Commands.Add(new DockExpandCollapseCommand());
+                        dock.DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.ExpandCollapse | Telerik.Web.UI.Dock.DefaultCommands.Close; // temporarily just providing the expand / collapse 
 
                         if (!CurrentDockStates[i].Closed)
                         {
@@ -211,18 +195,6 @@ namespace RedbonePlatform.Pages.ContainerPages
             }
         }
 
-        private void CheckIsEdiLoad()
-        {
-            Int32 loadId = Convert.ToInt32(Request.QueryString["LoadId"]);
-
-            Datasets.dsDispatchTableAdapters.LoadTableAdapter adaptLoad = new Datasets.dsDispatchTableAdapters.LoadTableAdapter();
-            Datasets.dsDispatch.LoadRow rowLoad = adaptLoad.GetData(loadId).FirstOrDefault();
-
-            IsEdiLoad = (rowLoad.TenderId != 0 && rowLoad.TenderId != null);
-            IsEdiLocked = IsEdiLoad;
-        }
-
-
         //RadComboBox_HoldSub_OnNeedDataSource
         protected void RadComboBox_HoldSub_OnNeedDataSource(object source, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
         {
@@ -288,8 +260,8 @@ namespace RedbonePlatform.Pages.ContainerPages
                 RadButton_TenderDetails.Enabled = (!rowLoad.IsTenderIdNull() && rowLoad.TenderId > 0);
 
                 //if the tenderid on the load is null or 0 then it's not an edi load even though the client is edi enabled
-                //IsEdiLoad = (rowLoad.TenderId != 0 && rowLoad.TenderId != null);
-                //IsEdiLocked = IsEdiLoad;
+                IsEdiLoad = (rowLoad.TenderId != 0 && rowLoad.TenderId != null);
+                IsEdiLocked = IsEdiLoad;
 
                 if (!rowLoad.IsMileageFromLEGOverrideIndNull())
                 {
@@ -1006,23 +978,9 @@ namespace RedbonePlatform.Pages.ContainerPages
                 AutoPostBack = true,
                 CommandsAutoPostBack = true,
                 CssClass = (Enums.LoadStopType)rowLoadStop.LoadStopTypeId == Enums.LoadStopType.Pick ? "pick" : (Enums.LoadStopType)rowLoadStop.LoadStopTypeId == Enums.LoadStopType.Drop ? "drop" : "",
-                //DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.ExpandCollapse | Telerik.Web.UI.Dock.DefaultCommands.Close // temporarily just providing the expand / collapse 
-                DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.None
-                //OnClientCommand = "CloseDock"                
+                DefaultCommands = Telerik.Web.UI.Dock.DefaultCommands.ExpandCollapse | Telerik.Web.UI.Dock.DefaultCommands.Close // temporarily just providing the expand / collapse 
+                                                                                                                                 //OnClientCommand = "CloseDock"                
             };
-
-            dock.Commands.Clear();
-
-            dock.Commands.Add(new DockExpandCollapseCommand());
-
-            if (!IsEdiLocked)
-            {
-                dock.Commands.Add(new DockCloseCommand());
-            }
-
-            //dock.Commands.Clear();
-            //dock.Commands.Add(new DockExpandCollapseCommand());
-            //dock.Commands.Add(new DockCloseCommand());
 
             dock.Attributes["stoptype"] = rowLoadStop.LoadStopTypeId.ToString();
 
