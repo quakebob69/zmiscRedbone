@@ -1,11 +1,41 @@
 --DROP STUFF
 ------------------------------------------------
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dispatch].[DispatchFleet]') AND type in (N'U'))
-		update [equipment].[PUnit] set [DispatchFleetId] = null;
+
+		IF EXISTS (
+		  SELECT 1 
+		  FROM sys.columns 
+		  WHERE Name = N'columnName'
+		  AND Object_ID = Object_ID(N'[equipment].[PUnit]')
+		)
+		BEGIN
+
 		delete from [dispatch].[DispatchFleet]
+		  update [equipment].[PUnit] set [DispatchFleetId] = null;
+		END
+	  
+
+
+
+
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dispatch].[DispatchFleet]') AND type in (N'U'))
+
+	BEGIN
+		SELECT ' ASDF ';
+
+
+
+
+
+		
+
+
+
+		
 
 		ALTER TABLE [dispatch].[DispatchFleet]
 			DROP CONSTRAINT FK_DispatchFleet_Person;
+
+
 
 		ALTER TABLE [equipment].[PUnit]
 			DROP CONSTRAINT [FK_PUnit_DispatchFleet];
@@ -13,8 +43,11 @@
 		ALTER TABLE [equipment].[PUnit]
 			DROP COLUMN IF EXISTS [DispatchFleetId];
 
+
+
+
 		DROP TABLE [dispatch].[DispatchFleet]
-	GO
+	END
 
 
 
