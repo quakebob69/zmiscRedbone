@@ -130,7 +130,8 @@
 
 --CHECK
 -------------------------------------------------------------------------------------------------------------
-	SELECT COUNT(*) FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
+	SELECT * FROM [dispatch].[DispatchFleetManager] 
+	SELECT * FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
 
 
 /*
