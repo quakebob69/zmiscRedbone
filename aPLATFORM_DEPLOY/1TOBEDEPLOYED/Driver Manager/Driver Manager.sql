@@ -44,7 +44,8 @@
 	CREATE TABLE [dispatch].[DispatchFleetManager](
 		[DispatchFleetManagerId] [int] IDENTITY(1,1) NOT NULL,
 		[Name] [varchar](128) NULL,
-		[PersonId] [int] NOT NULL
+		[PersonId] [int] NOT NULL,
+		[PhoneNumber] [varchar](50) NOT NULL
 	 CONSTRAINT [PK_DispatchFleetManager] PRIMARY KEY CLUSTERED 
 	(
 		[DispatchFleetManagerId] ASC
@@ -81,9 +82,9 @@
 
 --INSERT STUFF
 -------------------------------------------------------------------------------------------------------------
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId]) VALUES  ('Dickie Dos' , 45)
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId]) VALUES  ('OTaRmy' , 2467)
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId]) VALUES  ('Whirling Dervishes' , 2484)
+	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES  ('Dickie Dos' , 45, '(801) 111-1111')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES  ('OTaRmy' , 2467, '(801) 222-2222')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES  ('Whirling Dervishes' , 2484, '(801) 333-3333')
 	GO
 
 
