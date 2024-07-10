@@ -73,6 +73,8 @@ GO
 */
 
 
+--207 = spare
+
 UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '261';
 UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '262';
 UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '263';
