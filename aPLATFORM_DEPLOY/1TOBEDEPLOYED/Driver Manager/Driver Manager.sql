@@ -8,21 +8,21 @@
 	)
 	BEGIN
 		update [equipment].[PUnit] set [DispatchFleetManagerId] = null;
-	END
-	  
-
-	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dispatch].[DispatchFleetManager]') AND type in (N'U'))
-	BEGIN
-		delete from [dispatch].[DispatchFleetManager]
-
-		ALTER TABLE [dispatch].[DispatchFleetManager]
-			DROP CONSTRAINT FK_DispatchFleetManager_Person;
 
 		ALTER TABLE [equipment].[PUnit]
 			DROP CONSTRAINT [FK_PUnit_DispatchFleetManager];
 
 		ALTER TABLE [equipment].[PUnit]
 			DROP COLUMN IF EXISTS [DispatchFleetManagerId];
+	END
+	  
+
+	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dispatch].[DispatchFleetManager]') AND type in (N'U'))
+	BEGIN
+		DELETE FROM [dispatch].[DispatchFleetManager]
+
+		ALTER TABLE [dispatch].[DispatchFleetManager]
+			DROP CONSTRAINT FK_DispatchFleetManager_Person;
 
 		DROP TABLE [dispatch].[DispatchFleetManager]
 	END
