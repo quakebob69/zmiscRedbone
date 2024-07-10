@@ -1,5 +1,8 @@
 --DROP STUFF
 ------------------------------------------------
+	delete FROM [RedBone].[main].[PhoneNumberType]
+		where Description = 'Driver Manager'
+
 	IF EXISTS (
 		SELECT 1 
 		FROM sys.columns 
