@@ -97,7 +97,9 @@
 
 
 
-
+--CHECK
+-------------------------------------------------------------------------------------------------------------
+	SELECT COUNT(*) FROM [equipment].[PUnit] WHERE [DispatchFleetId] IS NOT NULL
 
 
 /*
