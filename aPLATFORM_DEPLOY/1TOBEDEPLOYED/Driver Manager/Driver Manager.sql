@@ -1,50 +1,27 @@
 --DROP STUFF
 ------------------------------------------------
-
-		IF EXISTS (
-		  SELECT 1 
-		  FROM sys.columns 
-		  WHERE Name = N'columnName'
-		  AND Object_ID = Object_ID(N'[equipment].[PUnit]')
-		)
-		BEGIN
-
+	IF EXISTS (
+		SELECT 1 
+		FROM sys.columns 
+		WHERE Name = N'columnName'
+		AND Object_ID = Object_ID(N'[equipment].[PUnit]')
+	)
+	BEGIN
 		delete from [dispatch].[DispatchFleet]
-		  update [equipment].[PUnit] set [DispatchFleetId] = null;
-		END
+		update [equipment].[PUnit] set [DispatchFleetId] = null;
+	END
 	  
 
-
-
-
 	IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dispatch].[DispatchFleet]') AND type in (N'U'))
-
 	BEGIN
-		SELECT ' ASDF ';
-
-
-
-
-
-		
-
-
-
-		
-
 		ALTER TABLE [dispatch].[DispatchFleet]
 			DROP CONSTRAINT FK_DispatchFleet_Person;
-
-
 
 		ALTER TABLE [equipment].[PUnit]
 			DROP CONSTRAINT [FK_PUnit_DispatchFleet];
 
 		ALTER TABLE [equipment].[PUnit]
 			DROP COLUMN IF EXISTS [DispatchFleetId];
-
-
-
 
 		DROP TABLE [dispatch].[DispatchFleet]
 	END
@@ -83,7 +60,7 @@
 
 
 
-
+	------------
 	ALTER TABLE [equipment].[PUnit]
 	ADD [DispatchFleetId] [int] NULL
 	GO
@@ -100,22 +77,25 @@
 
 --INSERT STUFF
 -------------------------------------------------------------------------------------------------------------
-INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('Dickie Dos' , 45)
-INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('OTaRmy' , 2467)
-INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('Whirling Dervishes' , 2484)
-GO
+	INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('Dickie Dos' , 45)
+	INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('OTaRmy' , 2467)
+	INSERT INTO [dispatch].[DispatchFleet] ([Name] ,[PersonId]) VALUES  ('Whirling Dervishes' , 2484)
+	GO
 
 
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '261';
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '262';
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '263';
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '264';
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '265';
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '266';
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '267';
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '268';
-UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '269';
-GO
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '261';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '262';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 1 WHERE unit_id = '263';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '264';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '265';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 2 WHERE unit_id = '266';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '267';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '268';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetId] = 3 WHERE unit_id = '269';
+	GO
+
+
+
 
 
 
@@ -133,8 +113,9 @@ GO
 	1653	267
 	1654	268
 	1655	269
+
+
+
+	207 = spare
+	272 = spare
 */
-
-
---207 = spare
---272 = spare
