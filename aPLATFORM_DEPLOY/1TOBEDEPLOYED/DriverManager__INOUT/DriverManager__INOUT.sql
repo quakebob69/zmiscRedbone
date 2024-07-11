@@ -304,7 +304,7 @@
 -------------------------------------------------------------------------------------------------------------
 	SELECT * FROM [dispatch].[DispatchFleetManager] 
 	SELECT * FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
-	SELECT * FROM [dispatch].[Load] WHERE [DispatchFleetManagerId] IS NOT NULL
+	SELECT * FROM [dispatch].[vInOut]
 
 
 /*
