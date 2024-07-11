@@ -3160,17 +3160,19 @@ if (RadComboBox_Truck1.SelectedValue == "0") rowLoad.SetTruckPunitIdNull(); else
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+<!--
+																																						l.dispatchFleetManagerid as DispatchFleetManagerId
+																																						,fm.Name as DispatchFleetName
+																																						,p.FirstName + ' ' + p.LastName as DispatchFleetManagerFullName
+																																						,l.loadid
+																																						,ls.loadStopid
+																																						,lst.StopNm as StopTypeName
+																																						,CONVERT(VARCHAR(16), ls.StartDateTime, 120) AS Scheduled
+																																						,CAST(ls.StartDateTime AS DATE) AS ScheduledDate
+																																						,CONVERT(VARCHAR(5), ls.StartDateTime, 108) AS ScheduledTime
+																																						,ls.ArrivalDateTime as ActualArrivalDateTime
+																																						,ls.DepartureDateTime as ActualDepartureDateTime
+-->
 
 
 
