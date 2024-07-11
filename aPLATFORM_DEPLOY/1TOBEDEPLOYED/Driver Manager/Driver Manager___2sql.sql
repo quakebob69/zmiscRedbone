@@ -4,6 +4,8 @@
 		,p.FirstName + ' ' + p.LastName as FullName
 		,l.loadid
 		,ls.LoadStopTypeId
+		,ls.ArrivalDateTime
+		,ls.DepartureDateTime
 	from
 		dispatch.load l
 		join dispatch.loadStop ls on l.loadid = ls.loadid
@@ -14,4 +16,4 @@
 		and
 		(ls.LoadStopTypeId = 1 or ls.LoadStopTypeId = 3)
 		and
-		(ls.ArrivalDateTime is null)
+		(ls.ArrivalDateTime is null OR ls.DepartureDateTime is null)
