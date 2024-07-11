@@ -244,6 +244,7 @@
 																																						,fm.Name as DispatchFleetName
 																																						,p.FirstName + ' ' + p.LastName as DispatchFleetManagerFullName
 																																						,l.loadid
+																																						,ls.loadStopid
 																																						,lst.StopNm as StopTypeName
 																																						--,ls.StartDateTime as Scheduled
 																																						,CONVERT(VARCHAR(16), ls.StartDateTime, 120) AS Scheduled
@@ -322,8 +323,7 @@
 -------------------------------------------------------------------------------------------------------------
 	SELECT * FROM [dispatch].[DispatchFleetManager] 
 	SELECT * FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
-	SELECT * FROM [dispatch].[vInOut]
-	SELECT * FROM [dispatch].[vInOut] where loadid = 63830
+
 
 
 /*
@@ -354,8 +354,17 @@
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	--63830
+		--reset
+			update dispatch.LoadStop set ArrivalDateTime = NULL where LoadId = 63830
+
+
+
+	update dispatch.LoadStop set ArrivalDateTime = '2024-07-04 00:00:00.000' where LoadStopId = 106715
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	SELECT * FROM [dispatch].[vInOut]
+	SELECT * FROM [dispatch].[vInOut] where loadid = 63830
 
 
