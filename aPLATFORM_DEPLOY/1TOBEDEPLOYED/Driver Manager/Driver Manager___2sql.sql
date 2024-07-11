@@ -14,4 +14,4 @@
 		and
 		(ls.LoadStopTypeId = 1 or ls.LoadStopTypeId = 3)
 		and
-		(ls.LoadStopTypeId = 1)
+		(ls.LoadApptTypeId is null)
