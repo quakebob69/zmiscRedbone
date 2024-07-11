@@ -244,12 +244,13 @@
 																																						--,fm.name
 																																						--,p.FirstName + ' ' + p.LastName as FullName
 																																						,l.loadid
-																																						,ls.LoadStopTypeId
+																																						,lst.StopNm
 																																						,ls.ArrivalDateTime
 																																						,ls.DepartureDateTime
 																																					from
 																																						dispatch.load l
 																																						join dispatch.loadStop ls on l.loadid = ls.loadid
+																																						join dispatch.LoadStopType lst on ls.LoadStopTypeId = lst.LoadStopTypeId
 																																						left join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
 																																						left join main.Person p on p.PersonId = fm.PersonId
 																																					where
