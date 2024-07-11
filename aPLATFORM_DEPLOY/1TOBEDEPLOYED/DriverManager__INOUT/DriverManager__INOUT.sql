@@ -236,7 +236,7 @@
 
 																																				CREATE VIEW [dispatch].[vInOut] AS
 																																					/*
-																																						select top 100 loadid from dispatch.load order by loadid desc
+																																						select top 8 loadid from dispatch.load order by loadid desc
 																																					*/
 
 																																					select top 1000
@@ -266,7 +266,7 @@
 										l.loadid > 
 										
 										
-														63741
+														63849
 										
 										
 										and
@@ -355,8 +355,8 @@
 											------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 												--63830
 													--reset
-														update dispatch.LoadStop set ArrivalDateTime = NULL where LoadId = 63830
-														update dispatch.LoadStop set DepartureDateTime = NULL where LoadId = 63830
+														update dispatch.LoadStop set ArrivalDateTime = NULL where LoadId = 63853
+														update dispatch.LoadStop set DepartureDateTime = NULL where LoadId = 63853
 
 
 
@@ -366,6 +366,6 @@
 
 
 												SELECT * FROM [dispatch].[vInOut]
-												SELECT * FROM [dispatch].[vInOut] where loadid = 63830
+												SELECT * FROM [dispatch].[vInOut] where loadid = 63853
 											------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 											
