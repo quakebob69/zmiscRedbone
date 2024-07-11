@@ -316,6 +316,7 @@
 	SELECT * FROM [dispatch].[DispatchFleetManager] 
 	SELECT * FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
 	SELECT * FROM [dispatch].[vInOut]
+	SELECT * FROM [dispatch].[vInOut] where LoadId = 63855
 
 
 /*
