@@ -67,9 +67,9 @@
 
 	CREATE TABLE [dispatch].[DispatchFleetManager](
 		[DispatchFleetManagerId] [int] IDENTITY(1,1) NOT NULL,
-		[Name] [varchar](128) NULL,
-		[PersonId] [int] NOT NULL,
-		[PhoneNumber] [varchar](50) NOT NULL
+		[Name] [varchar](128) NOT NULL,
+		[PersonId] [int] NULL,
+		[PhoneNumber] [varchar](50) NULL
 	 CONSTRAINT [PK_DispatchFleetManager] PRIMARY KEY CLUSTERED 
 	(
 		[DispatchFleetManagerId] ASC
@@ -241,8 +241,8 @@
 
 																																					select top 1000
 																																						l.dispatchFleetManagerid
-																																						--,fm.name
-																																						--,p.FirstName + ' ' + p.LastName as FullName
+																																						,fm.Name
+																																						,p.FirstName + ' ' + p.LastName as DispatchFleetManagerFullName
 																																						,l.loadid
 																																						,lst.StopNm
 																																						,ls.ArrivalDateTime
@@ -251,8 +251,8 @@
 																																						dispatch.load l
 																																						join dispatch.loadStop ls on l.loadid = ls.loadid
 																																						join dispatch.LoadStopType lst on ls.LoadStopTypeId = lst.LoadStopTypeId
-																																						left join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
-																																						left join main.Person p on p.PersonId = fm.PersonId
+																																						join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
+																																						join main.Person p on p.PersonId = fm.PersonId
 																																					where
 
 
@@ -287,6 +287,7 @@
 	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Dickie Dos' , 45, '(801) 111-1111')
 	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('OTaRmy' , 2467, '(801) 222-2222')
 	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Whirling Dervishes' , 2484, '(801) 333-3333')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Unassigned' , 2775, '(801) 444-4444')
 	GO
 
 
@@ -307,6 +308,7 @@
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 1 where LoadId % 10 IN (1, 2, 3);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId % 10 IN (4, 5, 6);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 3 where LoadId % 10 IN (7, 8, 9);
+	Update [dispatch].[Load] set [DispatchFleetManagerId] = 4 where LoadId % 10 IN (0);
 
 
 --CHECK
