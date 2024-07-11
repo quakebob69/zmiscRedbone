@@ -246,8 +246,8 @@
 																																						,l.loadid
 																																						,lst.StopNm as StopTypeName
 																																						,ls.StartDateTime as Scheduled
-																																						,ls.StartDateTime as ScheduledDate
-																																						,ls.StartDateTime as ScheduledTime
+																																						,CAST(ls.StartDateTime AS DATE) AS ScheduledDate
+																																						,CAST(ls.StartDateTime AS TIME) AS ScheduledTime
 																																						,ls.ArrivalDateTime as ActualArrivalDateTime
 																																						,ls.DepartureDateTime as ActualDepartureDateTime
 																																					from
