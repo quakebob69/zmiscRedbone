@@ -236,7 +236,7 @@
 
 																																				CREATE VIEW [dispatch].[vInOut] AS
 																																					/*
-																																						select top 5 loadid from dispatch.load order by loadid desc
+																																						select top 6 loadid from dispatch.load order by loadid desc
 																																					*/
 
 																																					select top 1000
@@ -263,10 +263,10 @@
 
 
 
-										l.loadid > 
+										l.loadid >= 
 										
 										
-														63854
+														63853
 										
 										
 										and
@@ -313,7 +313,7 @@
 
 
 	--Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId = 62602;	
-	Update [dispatch].[Load] set [DispatchFleetManagerId] = 1 where LoadId % 10 IN (1, 2, 3, 4, 5);
+	Update [dispatch].[Load] set [DispatchFleetManagerId] = 1 where LoadId % 10 IN (1, 2, 3, 4);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId % 10 IN (6);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 3 where LoadId % 10 IN (7, 8, 9);
 
