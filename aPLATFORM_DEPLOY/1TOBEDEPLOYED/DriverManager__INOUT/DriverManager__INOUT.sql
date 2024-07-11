@@ -255,7 +255,7 @@
 																																						join dispatch.loadStop ls on l.loadid = ls.loadid
 																																						join dispatch.LoadStopType lst on ls.LoadStopTypeId = lst.LoadStopTypeId
 																																						join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
-																																						join main.Person p on p.PersonId = fm.PersonId
+																																						left outer join main.Person p on p.PersonId = fm.PersonId
 																																					where
 
 
@@ -324,7 +324,6 @@
 	SELECT * FROM [dispatch].[DispatchFleetManager] 
 	SELECT * FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
 	SELECT * FROM [dispatch].[vInOut]
-	SELECT * FROM [dispatch].[vInOut] where LoadId = 63855
 
 
 /*
