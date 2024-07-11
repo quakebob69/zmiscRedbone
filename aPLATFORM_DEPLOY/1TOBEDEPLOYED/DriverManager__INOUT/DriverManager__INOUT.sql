@@ -360,8 +360,8 @@
 
 
 
-												update dispatch.LoadStop set ArrivalDateTime = '2024-07-04 00:00:00.000' where LoadStopId = 106715
-												update dispatch.LoadStop set DepartureDateTime = '2024-07-04 00:00:00.000' where LoadStopId = 106715
+												--update dispatch.LoadStop set ArrivalDateTime = '2024-07-04 00:00:00.000' where LoadStopId = 106715
+												--update dispatch.LoadStop set DepartureDateTime = '2024-07-04 00:00:00.000' where LoadStopId = 106715
 
 
 
