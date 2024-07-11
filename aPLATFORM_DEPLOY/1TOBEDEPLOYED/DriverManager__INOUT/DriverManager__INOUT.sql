@@ -295,7 +295,6 @@
 	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Dickie Dos' , 45, '(801) 111-1111')
 	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('OTaRmy' , 2467, '(801) 222-2222')
 	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Whirling Dervishes' , 2484, '(801) 333-3333')
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Unassigned' , null, '(801) 444-4444')
 	GO
 
 
@@ -316,7 +315,6 @@
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 1 where LoadId % 10 IN (1, 2, 3);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId % 10 IN (4, 5, 6);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 3 where LoadId % 10 IN (7, 8, 9);
-	--Update [dispatch].[Load] set [DispatchFleetManagerId] = 4 where LoadId % 10 IN (0);
 
 
 --CHECK
