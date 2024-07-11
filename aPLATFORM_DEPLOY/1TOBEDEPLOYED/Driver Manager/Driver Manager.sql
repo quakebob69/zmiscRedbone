@@ -125,13 +125,14 @@
 	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 3 WHERE unit_id = '269';
 	GO
 
-
+	Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId = 62602;
 
 
 --CHECK
 -------------------------------------------------------------------------------------------------------------
 	SELECT * FROM [dispatch].[DispatchFleetManager] 
 	SELECT * FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
+	SELECT count(*) FROM [dispatch].[Load] WHERE [DispatchFleetManagerId] IS NOT NULL
 
 
 /*
