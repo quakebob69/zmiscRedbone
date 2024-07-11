@@ -278,28 +278,6 @@
 
 
 
-/*
-	select
-	l.dispatchFleetManagerid
-	,fm.name
-	,p.FirstName + ' ' + p.LastName as FullName
-	,l.loadid
-
-
-	from
-	dispatch.load l
-	join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
-	join main.Person p on p.PersonId = fm.PersonId
-	where
-	
-	l.dispatchFleetManagerid is not null
-*/
-
-
-
-
-
-
 
 
 
