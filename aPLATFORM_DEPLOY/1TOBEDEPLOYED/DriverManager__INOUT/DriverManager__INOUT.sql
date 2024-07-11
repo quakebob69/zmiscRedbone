@@ -279,9 +279,9 @@
 																																						(ls.ArrivalDateTime is null OR ls.DepartureDateTime is null)
 
 																																					order by
-																																					l.dispatchFleetManagerid,
-																																					Scheduled desc,
-																																					ls.StopNumber
+																																					l.dispatchFleetManagerid
+																																					,l.LoadId desc
+																																					,ls.StopNumber
 																																					
 																																				GO
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
