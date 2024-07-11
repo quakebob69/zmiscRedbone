@@ -247,7 +247,7 @@
 																																						,lst.StopNm as StopTypeName
 																																						,ls.StartDateTime as Scheduled
 																																						,CAST(ls.StartDateTime AS DATE) AS ScheduledDate
-																																						,CAST(ls.StartDateTime AS TIME) AS ScheduledTime
+																																						,CONVERT(VARCHAR(8), ls.StartDateTime, 108) AS ScheduledTime
 																																						,ls.ArrivalDateTime as ActualArrivalDateTime
 																																						,ls.DepartureDateTime as ActualDepartureDateTime
 																																					from
