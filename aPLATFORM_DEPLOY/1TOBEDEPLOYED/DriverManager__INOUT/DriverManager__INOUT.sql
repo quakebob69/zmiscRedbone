@@ -357,6 +357,7 @@
 												--63830
 													--reset
 														update dispatch.LoadStop set ArrivalDateTime = NULL where LoadId = 63830
+														update dispatch.LoadStop set DepartureDateTime = NULL where LoadId = 63830
 
 
 
