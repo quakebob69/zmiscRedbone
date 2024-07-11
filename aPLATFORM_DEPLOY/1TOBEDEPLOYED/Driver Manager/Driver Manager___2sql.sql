@@ -17,3 +17,20 @@
 		(ls.LoadStopTypeId = 1 or ls.LoadStopTypeId = 3)
 		and
 		(ls.ArrivalDateTime is null OR ls.DepartureDateTime is null)
+
+
+/*
+	select * from main.PersonTypes
+
+
+
+
+
+	select
+		*
+	from
+		main.PersonTypeMapping pm
+		join main.Person p on p.PersonId = pm.PersonId
+	where
+	PersonTypeid = 19
+*/
