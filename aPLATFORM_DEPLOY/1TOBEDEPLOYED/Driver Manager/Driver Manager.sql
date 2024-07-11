@@ -1,5 +1,9 @@
 --DROP STUFF
 ------------------------------------------------
+	DROP PROCEDURE IF EXISTS [dbo].[sp_Load_Select]
+	GO
+
+
 	IF EXISTS (
 		SELECT 1 
 		FROM sys.columns 
@@ -104,6 +108,89 @@
 	GO
 
 
+	------------
+		/****** Object:  StoredProcedure [dbo].[sp_Load_Select]    Script Date: 7/10/2024 6:26:48 PM ******/
+		SET ANSI_NULLS ON
+		GO
+
+		SET QUOTED_IDENTIFIER ON
+		GO
+
+		CREATE PROCEDURE [dbo].[sp_Load_Select]
+		(
+			@LoadId int
+		)
+		AS
+		BEGIN
+			SET NOCOUNT ON;
+
+			-- sp_Load_Select 6858
+
+			SELECT	l.LoadId,
+					TripNumber,
+					TenderId = COALESCE(l.TenderId, 0),
+					l.ClientId,
+					Charges,
+					ExtraCharges,
+					Miles,
+					PaidMiles,
+					PaidEmpty,
+					DeadHead,
+					BillableMiles,
+					Paid,
+					RatePerMile,
+					DispatcherPersonId,
+					CreatedTs,
+					AvailableBilling,
+					--Notes = ln.NoteText + char(13) + char(10) +  + FORMAT(ln.NoteDate, 'd', 'us') + ' - ' + p.FirstName + ' ' + p.LastName,
+					Notes = (SELECT dbo.GetLoadNotes(@LoadId, 1)),
+					--Notes = '',
+					NoteCountAll =	(SELECT COUNT(*) FROM dispatch.LoadNotes WHERE LoadId = @LoadId AND LoadStopid = 0 AND ArchivedInd = 0),
+					NoteCountBilling =	(SELECT COUNT(*) FROM dispatch.LoadNotes WHERE LoadId = @LoadId AND LoadStopid = 0 AND NoteTypeId = 8 and ArchivedInd = 0),
+					CommodityTypeId,
+					LoadPlannerPersonId,
+					EquipmentTypeId,
+					Driver1_PersonId,
+					Driver2_PersonId,
+					TruckPunitId,
+					Trailer1_TrailerId,
+					Trailer2_TrailerId,
+					Temperature,
+					TemperatureTypeId,
+					l.CustomerLoadNumber,
+					l.Weight,
+					l.Rate,
+					LoadStatusTypeId,
+					GrossRevenue,
+					CreatedDt,
+					CreatePersonId,
+					LastUpdtDt,
+					LastUpdtPersonId,
+					SubTotal,
+					LockedPersonId,
+					Pieces,
+					SendOriginalsInd,
+					LoadTotal,
+					AutoRatingInd,
+					AccChargesTotal,
+					PaperworkRecvdDate,
+					InvoiceDate,
+					ProblemInd,
+					AllowPerBOLInd,
+					BillableTotal,
+					MileageFromLEGOverrideInd,
+					Mode = COALESCE(t.UsageIndicator, 'P'),
+					InvoiceApprovedByOps,
+					InvoiceApprovedByAcctg,
+					DispatchFleetManagerId
+			FROM	dispatch.Load l
+					LEFT JOIN edi.LoadTenders t ON t.TenderId = l.TenderId
+					--LEFT JOIN dispatch.LoadNotes ln ON ln.LoadId = l.LoadId
+					--LEFT JOIN main.Person p ON p.PersonId = ln.NotePersonId
+			WHERE	l.LoadId = @LoadId
+
+		END
+		GO
 
 
 --INSERT STUFF
