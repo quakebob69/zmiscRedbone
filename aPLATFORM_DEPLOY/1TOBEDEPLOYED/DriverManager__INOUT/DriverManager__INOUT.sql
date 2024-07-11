@@ -246,7 +246,6 @@
 																																						,l.loadid
 																																						,ls.loadStopid
 																																						,lst.StopNm as StopTypeName
-																																						--,ls.StartDateTime as Scheduled
 																																						,CONVERT(VARCHAR(16), ls.StartDateTime, 120) AS Scheduled
 																																						,CAST(ls.StartDateTime AS DATE) AS ScheduledDate
 																																						,CONVERT(VARCHAR(5), ls.StartDateTime, 108) AS ScheduledTime
