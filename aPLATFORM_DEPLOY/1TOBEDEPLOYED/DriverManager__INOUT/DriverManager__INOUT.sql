@@ -254,7 +254,7 @@
 																																						dispatch.load l
 																																						join dispatch.loadStop ls on l.loadid = ls.loadid
 																																						join dispatch.LoadStopType lst on ls.LoadStopTypeId = lst.LoadStopTypeId
-																																						join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
+																																						left outer join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
 																																						left outer join main.Person p on p.PersonId = fm.PersonId
 																																					where
 
@@ -316,7 +316,7 @@
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 1 where LoadId % 10 IN (1, 2, 3);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId % 10 IN (4, 5, 6);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 3 where LoadId % 10 IN (7, 8, 9);
-	Update [dispatch].[Load] set [DispatchFleetManagerId] = 4 where LoadId % 10 IN (0);
+	--Update [dispatch].[Load] set [DispatchFleetManagerId] = 4 where LoadId % 10 IN (0);
 
 
 --CHECK
