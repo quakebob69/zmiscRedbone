@@ -250,8 +250,8 @@
 																																					from
 																																						dispatch.load l
 																																						join dispatch.loadStop ls on l.loadid = ls.loadid
-																																						--join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
-																																						--join main.Person p on p.PersonId = fm.PersonId
+																																						left join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
+																																						left join main.Person p on p.PersonId = fm.PersonId
 																																					where
 
 
@@ -281,9 +281,9 @@
 
 --INSERT STUFF
 -------------------------------------------------------------------------------------------------------------
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES  ('Dickie Dos' , 45, '(801) 111-1111')
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES  ('OTaRmy' , 2467, '(801) 222-2222')
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES  ('Whirling Dervishes' , 2484, '(801) 333-3333')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Dickie Dos' , 45, '(801) 111-1111')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('OTaRmy' , 2467, '(801) 222-2222')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Whirling Dervishes' , 2484, '(801) 333-3333')
 	GO
 
 
