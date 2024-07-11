@@ -42,7 +42,7 @@ GO
 
 
 
-select * from  [dispatch].[vInOut]
+
 
 
 
