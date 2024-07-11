@@ -278,7 +278,18 @@
 
 
 
+/*
+	select
+	l.loadid
+	,fm.name
+	,p.FirstName + ' ' + p.LastName as FullName
 
+	from
+	dispatch.load l
+	join dispatch.DispatchFleetManager fm on l.dispatchFleetManagerid = fm.DispatchFleetManagerId
+	join main.Person p on p.PersonId = fm.PersonId
+	where l.dispatchFleetManagerid is not null
+*/
 
 
 
