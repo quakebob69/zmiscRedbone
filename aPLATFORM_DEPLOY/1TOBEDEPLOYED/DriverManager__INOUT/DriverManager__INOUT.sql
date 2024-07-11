@@ -255,16 +255,20 @@
 
 
 
-				l.loadid > 63741
-				and
 
-
-
+							l.loadid > 63741
+							and
 
 				(ls.LoadStopTypeId = 1 or ls.LoadStopTypeId = 3)
 				and
 				(ls.ArrivalDateTime is null OR ls.DepartureDateTime is null)
-			order by loadid desc
+
+
+
+
+			order by
+			l.dispatchFleetManagerid,
+			loadid desc 
 
 
 		GO
