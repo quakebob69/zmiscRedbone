@@ -247,6 +247,8 @@
 																																						,lst.StopNm
 																																						,ls.ArrivalDateTime
 																																						,ls.DepartureDateTime
+																																						,ls.asdf
+																																						,ls.asdf
 																																					from
 																																						dispatch.load l
 																																						join dispatch.loadStop ls on l.loadid = ls.loadid
