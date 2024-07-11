@@ -1,5 +1,8 @@
 --DROP STUFF
 ------------------------------------------------
+	DROP PROCEDURE IF EXISTS [dbo].[sp_Load_SaveFleetManager]
+	GO
+
 	DROP PROCEDURE IF EXISTS [dbo].[sp_Load_Select]
 	GO
 
@@ -108,6 +111,7 @@
 	GO
 
 
+
 	------------
 		/****** Object:  StoredProcedure [dbo].[sp_Load_Select]    Script Date: 7/10/2024 6:26:48 PM ******/
 		SET ANSI_NULLS ON
@@ -191,6 +195,34 @@
 
 		END
 		GO
+
+
+
+
+	------------
+	/****** Object:  StoredProcedure [dbo].sp_Load_SaveFleetManager]    Script Date: 7/10/2024 7:11:14 PM ******/
+		SET ANSI_NULLS ON
+		GO
+
+		SET QUOTED_IDENTIFIER ON
+		GO
+
+		CREATE procedure [dbo].[sp_Load_SaveFleetManager]
+		(
+			@LoadId int
+			,@DispatchFleetManagerId int
+		)
+		as 
+		UPDATE       
+			dispatch.[Load]
+		SET                
+			DispatchFleetManagerId = @DispatchFleetManagerId
+		WHERE        
+			(LoadId = @LoadId)
+		GO
+
+
+
 
 
 --INSERT STUFF

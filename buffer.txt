@@ -3153,7 +3153,7 @@ set drivers manager based on driver selection
 
 
 
-
+if (RadComboBox_Truck1.SelectedValue == "0") rowLoad.SetTruckPunitIdNull(); else rowLoad.TruckPunitId = Convert.ToInt32(RadComboBox_Truck1.SelectedValue);
 
 
 
