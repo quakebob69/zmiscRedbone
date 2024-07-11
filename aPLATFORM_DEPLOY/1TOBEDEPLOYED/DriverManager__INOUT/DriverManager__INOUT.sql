@@ -240,15 +240,16 @@
 																																					*/
 
 																																					select top 1000
-																																						l.dispatchFleetManagerid
-																																						,fm.Name
+																																						l.dispatchFleetManagerid as DispatchFleetManagerId
+																																						,fm.Name as DispatchFleetName
 																																						,p.FirstName + ' ' + p.LastName as DispatchFleetManagerFullName
 																																						,l.loadid
-																																						,lst.StopNm
-																																						,ls.ArrivalDateTime
-																																						,ls.DepartureDateTime
-																																						,ls.asdf
-																																						,ls.asdf
+																																						,lst.StopNm as StopTypeName
+																																						,ls.StartDateTime as Scheduled
+																																						,ls.StartDateTime as ScheduledDate
+																																						,ls.StartDateTime as ScheduledTime
+																																						,ls.ArrivalDateTime as ActualArrivalDateTime
+																																						,ls.DepartureDateTime as ActualDepartureDateTime
 																																					from
 																																						dispatch.load l
 																																						join dispatch.loadStop ls on l.loadid = ls.loadid
@@ -279,7 +280,7 @@
 
 																																					order by
 																																					l.dispatchFleetManagerid,
-																																					loadid desc,
+																																					Scheduled desc,
 																																					ls.StopNumber
 																																					
 																																				GO
