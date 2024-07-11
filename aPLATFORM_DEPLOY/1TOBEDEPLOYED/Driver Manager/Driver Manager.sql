@@ -244,14 +244,19 @@
 	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 3 WHERE unit_id = '269';
 	GO
 
-	--Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId = 62602;
+
+
+	--Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId = 62602;	
+	Update [dispatch].[Load] set [DispatchFleetManagerId] = 1 where LoadId % 10 IN (1, 2, 3);
+	Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId % 10 IN (4, 5, 6);
+	Update [dispatch].[Load] set [DispatchFleetManagerId] = 3 where LoadId % 10 IN (7, 8, 9);
 
 
 --CHECK
 -------------------------------------------------------------------------------------------------------------
 	SELECT * FROM [dispatch].[DispatchFleetManager] 
 	SELECT * FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
-	--SELECT count(*) FROM [dispatch].[Load] WHERE [DispatchFleetManagerId] IS NOT NULL
+	SELECT count(*) FROM [dispatch].[Load] WHERE [DispatchFleetManagerId] IS NOT NULL
 
 
 /*

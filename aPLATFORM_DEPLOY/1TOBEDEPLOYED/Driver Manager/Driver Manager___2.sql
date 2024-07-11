@@ -2,9 +2,6 @@
 	select * from main.PersonTypes
 
 
-
-
-
 	select
 		*
 	from
