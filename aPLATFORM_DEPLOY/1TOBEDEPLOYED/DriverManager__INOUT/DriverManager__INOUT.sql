@@ -245,9 +245,10 @@
 																																						,p.FirstName + ' ' + p.LastName as DispatchFleetManagerFullName
 																																						,l.loadid
 																																						,lst.StopNm as StopTypeName
-																																						,ls.StartDateTime as Scheduled
+																																						--,ls.StartDateTime as Scheduled
+																																						,CONVERT(VARCHAR(16), ls.StartDateTime, 120) AS Scheduled
 																																						,CAST(ls.StartDateTime AS DATE) AS ScheduledDate
-																																						,CONVERT(VARCHAR(8), ls.StartDateTime, 108) AS ScheduledTime
+																																						,CONVERT(VARCHAR(5), ls.StartDateTime, 108) AS ScheduledTime
 																																						,ls.ArrivalDateTime as ActualArrivalDateTime
 																																						,ls.DepartureDateTime as ActualDepartureDateTime
 																																					from
