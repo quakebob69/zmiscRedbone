@@ -33,16 +33,19 @@
 	272 = spare
 */
 
-select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName from
-	main.Driver d
-	join main.Person p on d.PersonId = p.personid	
-	join equipment.PUnit e on d.PunitId = e.punitid
-where e.punitid in 
-	(
-		select punitid from equipment.PUnit pu
-		where pu.DispatchFleetManagerId is not null
-	)
-order by e.Unit_ID
+
+
+--  fleet managers peeps
+	select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName from
+		main.Driver d
+		join main.Person p on d.PersonId = p.personid	
+		join equipment.PUnit e on d.PunitId = e.punitid
+	where e.punitid in 
+		(
+			select punitid from equipment.PUnit pu
+			where pu.DispatchFleetManagerId is not null
+		)
+	order by e.Unit_ID
 
 
 
@@ -52,34 +55,60 @@ order by e.Unit_ID
 
 
 
-select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName from
-	main.Driver d
-	join main.Person p on d.PersonId = p.personid	
-	join equipment.PUnit e on d.PunitId = e.punitid
---where d.PunitId is not null
-order by e.Unit_ID
-
-
 
 
 --drivers with trucks
-select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
-from
-	main.Driver d
-	join main.Person p on d.PersonId = p.personid	
-	join equipment.PUnit e on d.PunitId = e.punitid
---where d.PunitId is not null
-order by e.Unit_ID
+	select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
+	from
+		main.Driver d
+		join main.Person p on d.PersonId = p.personid	
+		join equipment.PUnit e on d.PunitId = e.punitid
+
+	order by e.Unit_ID
 
 
-
+select * from equipment.PunitMapping
 
 
 --Un-drivered trucks
-select e.Unit_ID, d.*
-from
-	main.Driver d
-	--join main.Person p on d.PersonId = p.personid	
-	join equipment.PUnit e on d.PunitId = e.punitid
-where d.PunitId is not null
-order by e.Unit_ID
+	select
+		e.*
+	from
+		equipment.PUnit e
+		join equipment.PunitMapping m on e.PUnitId = m.PunitId
+		join main.GroupType gt on gt.GroupTypeId = m.GroupTypeId
+	where e.PunitId
+		not in
+		(
+			select 
+				PunitId
+			from
+				main.Driver d
+			where
+				punitid is not null
+		)
+	and
+		ActiveInd = 1
+	and
+		gt.GroupTypeId = 4
+
+
+/*
+	SELECT TOP (1000) [GroupTypeId]
+      ,[Group]
+      ,[Enabled]
+	FROM [RedBone].[main].[GroupType]
+*/
+
+
+
+/*
+	select e.Unit_ID, d.*
+	from
+	
+		--join main.Person p on d.PersonId = p.personid	
+		equipment.PUnit e
+		right outer join main.Driver d  on d.PunitId = e.punitid
+	where d.PunitId is not null
+	order by e.Unit_ID
+*/
