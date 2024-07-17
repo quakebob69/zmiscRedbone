@@ -12,6 +12,7 @@
 */
 
 
+
 /*
 	--62602
 
@@ -31,6 +32,7 @@
 	207 = spare
 	272 = spare
 */
+
 
 
 select * from equipment.PUnit where  DispatchFleetManagerId is not null order by DispatchFleetManagerId;
