@@ -4,8 +4,16 @@
 		full join main.Person p on d.PersonId = p.personid	
 		full join equipment.PUnit e on d.PunitId = e.punitid
 		full join dispatch.DispatchFleetManager dfm on dfm.DispatchFleetManagerid = e.DispatchFleetManagerid
+		full join equipment.PunitMapping m on e.PUnitId = m.PunitId
+		full join main.GroupType gt on gt.GroupTypeId = m.GroupTypeId
+	where 
+		ActiveInd = 1
+		and
+		gt.GroupTypeId =
+			(
+				select GroupTypeId from main.GroupType WHERE [group] = 'OTR'
+			)
 	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
-
 
 
 
