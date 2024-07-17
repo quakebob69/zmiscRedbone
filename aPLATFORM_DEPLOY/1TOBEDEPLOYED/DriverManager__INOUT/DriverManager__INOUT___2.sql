@@ -1,4 +1,4 @@
-	select e.Unit_ID, dfm.name, p.FirstName + ' ' + p.LastName as FullName
+	select e.Unit_ID, dfm.DispatchFleetManagerId,  dfm.name as 'DriverManagerName', p.PersonId, p.FirstName + ' ' + p.LastName as DriverFullName, p.FirstName as DriverFirstName, p.LastName as DriverLastName
 	from
 		main.Driver d
 		full join main.Person p on d.PersonId = p.personid	
