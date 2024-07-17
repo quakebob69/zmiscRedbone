@@ -33,7 +33,6 @@
 
 
 
-
 --Trucks/[no drivers]/DispatchFleetManagerId 
 --[ALL TRUCKS WITHOUT DRIVERS, BUT HAVE DispatchFleetManager]
 	select
