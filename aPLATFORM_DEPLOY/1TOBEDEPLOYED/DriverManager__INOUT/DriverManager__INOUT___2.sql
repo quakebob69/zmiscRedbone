@@ -1,4 +1,4 @@
---  truck/drivers/fleetManagers
+--  truck/drivers/fleetManagers [ALL TRUCKS WITH DispatchFleetManager]
 	select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName, dfm.name
 	from
 		main.Driver d
@@ -15,23 +15,22 @@
 
 
 
---trucks/drivers
+--trucks/drivers [ALL TRUCKS WITH DRIVERS]
 	select
 		e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
 	from
 		main.Driver d
 		join main.Person p on d.PersonId = p.personid	
 		join equipment.PUnit e on d.PunitId = e.punitid
-	--Where e.Unit_ID = '44'
 	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
 
 
 
 
---Trucks,  no drivers
+--Trucks/[no drivers] [ALL TRUCKS WITHOUT DRIVERS]
 	select
-		e.Unit_ID, '' as asdfasdasdfasdasdfasdasdfasdasdfasdasdfasd,  e.*
+		e.Unit_ID, e.DispatchFleetManagerId
 	from
 		equipment.PUnit e
 		join equipment.PunitMapping m on e.PUnitId = m.PunitId
@@ -50,6 +49,34 @@
 		ActiveInd = 1
 	and
 		gt.GroupTypeId = 4
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
+
+
+
+
+--Trucks/[no drivers]/DispatchFleetManagerId  [ALL TRUCKS WITHOUT DRIVERS, BUT HAVE FLEET MANS]
+	select
+		e.Unit_ID, e.DispatchFleetManagerId
+	from
+		equipment.PUnit e
+		join equipment.PunitMapping m on e.PUnitId = m.PunitId
+		join main.GroupType gt on gt.GroupTypeId = m.GroupTypeId
+	where e.PunitId
+		not in
+		(
+			select 
+				PunitId
+			from
+				main.Driver d
+			where
+				punitid is not null
+		)
+	and
+		ActiveInd = 1
+	and
+		gt.GroupTypeId = 4
+	and
+		e.DispatchFleetManagerId is not null
 	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
 
