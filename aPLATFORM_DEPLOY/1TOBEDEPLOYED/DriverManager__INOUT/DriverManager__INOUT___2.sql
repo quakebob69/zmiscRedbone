@@ -1,3 +1,16 @@
+	select e.Unit_ID, dfm.name, p.FirstName + ' ' + p.LastName as FullName
+	from
+		main.Driver d
+		full join main.Person p on d.PersonId = p.personid	
+		full join equipment.PUnit e on d.PunitId = e.punitid
+		full join dispatch.DispatchFleetManager dfm on dfm.DispatchFleetManagerid = e.DispatchFleetManagerid
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
+
+
+
+
+
+/*
 --truck/fleetManagers (truck)
 --[ALL TRUCKS WITH DispatchFleetManager]
 	select e.Unit_ID, dfm.name
@@ -101,7 +114,7 @@
 	and
 		gt.GroupTypeId = 4
 	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
-
+*/
 
 
 
