@@ -45,7 +45,7 @@
 			select punitid from equipment.PUnit pu
 			where pu.DispatchFleetManagerId is not null
 		)
-	order by e.Unit_ID desc
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
 
 
@@ -55,19 +55,15 @@
 
 
 
-
-
 --drivers, with trucks
 	select
-		e.Unit_ID, '' as asdfasdasdfasdasdfasdasdfasdasdfasdasdfasd
+		e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
 	from
 		main.Driver d
 		join main.Person p on d.PersonId = p.personid	
 		join equipment.PUnit e on d.PunitId = e.punitid
 	--Where e.Unit_ID = '44'
-	ORDER BY 
-	  LEFT(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a') - 1),
-	  CAST(SUBSTRING(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a'), LEN(e.Unit_ID)) AS INT) desc;
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
 
 
@@ -94,9 +90,20 @@
 		ActiveInd = 1
 	and
 		gt.GroupTypeId = 4
-	ORDER BY 
-	  LEFT(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a') - 1),
-	  CAST(SUBSTRING(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a'), LEN(e.Unit_ID)) AS INT) desc;
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
+
+
+
+
+--Trucks,  DispatchFleetManagerIds
+	select
+		e.Unit_ID, '' as asdfasdasdfasdasdfasdasdfasdasdfasdasdfasd,  e.*
+	from
+		equipment.PUnit e
+		join equipment.PunitMapping m on e.PUnitId = m.PunitId
+		join main.GroupType gt on gt.GroupTypeId = m.GroupTypeId
+	where DispatchFleetManagerId is not null
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
 
 
