@@ -17,7 +17,9 @@
 					select GroupTypeId from main.GroupType WHERE [group] = 'OTR'
 				)
 		*/
-	ORDER BY TRY_CAST(e.Unit_ID AS INT) --desc
+	--ORDER BY TRY_CAST(e.Unit_ID AS INT) --desc
+
+
 
 
 	--select * from equipment.PUnit where Unit_ID = '185'
