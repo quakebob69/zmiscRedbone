@@ -18,8 +18,8 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 		
 
 																						--OUT
-																							DECLARE @EntryId__OUT INTEGER = 28142
-																							DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-07-15 14:55:51.843';
+																							DECLARE @EntryId__OUT INTEGER = 28218
+																							DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-07-17 11:51:58.264';
 																							UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT;
 																					--------------------------------------------------------------------------------------------------------------
 
