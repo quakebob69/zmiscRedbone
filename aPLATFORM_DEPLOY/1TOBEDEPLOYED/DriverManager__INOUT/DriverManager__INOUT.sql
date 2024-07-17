@@ -20,7 +20,7 @@
 		update [dispatch].[Load] set [DispatchFleetManagerId] = null;
 
 		ALTER TABLE [dispatch].[Load]
-			DROP CONSTRAINT [FK_Load_DispatchFleetManager];
+			DROP CONSTRAINT [FK_Load_DispatchFleetManager]
 
 		ALTER TABLE [dispatch].[Load]
 			DROP COLUMN IF EXISTS [DispatchFleetManagerId];

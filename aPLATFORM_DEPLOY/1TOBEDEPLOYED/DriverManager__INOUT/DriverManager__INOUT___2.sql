@@ -46,8 +46,40 @@ order by e.Unit_ID
 
 
 
-select punitid, Unit_ID from equipment.PUnit where Unit_ID in ('207', '272')
+
+--select punitid, Unit_ID from equipment.PUnit where Unit_ID in ('207', '272');
 
 
 
 
+select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName from
+	main.Driver d
+	join main.Person p on d.PersonId = p.personid	
+	join equipment.PUnit e on d.PunitId = e.punitid
+--where d.PunitId is not null
+order by e.Unit_ID
+
+
+
+
+--drivers with trucks
+select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
+from
+	main.Driver d
+	join main.Person p on d.PersonId = p.personid	
+	join equipment.PUnit e on d.PunitId = e.punitid
+--where d.PunitId is not null
+order by e.Unit_ID
+
+
+
+
+
+--Un-drivered trucks
+select e.Unit_ID, d.*
+from
+	main.Driver d
+	--join main.Person p on d.PersonId = p.personid	
+	join equipment.PUnit e on d.PunitId = e.punitid
+where d.PunitId is not null
+order by e.Unit_ID
