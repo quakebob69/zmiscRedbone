@@ -35,8 +35,8 @@
 
 
 
---  fleet managers peeps
-	select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName from
+--  fleetManagers/truck/drivers
+	select e.DispatchFleetManagerId, e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName from
 		main.Driver d
 		join main.Person p on d.PersonId = p.personid	
 		join equipment.PUnit e on d.PunitId = e.punitid
@@ -55,7 +55,7 @@
 
 
 
---drivers, with trucks
+--trucks/drivers
 	select
 		e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
 	from
@@ -69,7 +69,7 @@
 
 
 
---Trucks,  with no drivers
+--Trucks,  no drivers
 	select
 		e.Unit_ID, '' as asdfasdasdfasdasdfasdasdfasdasdfasdasdfasd,  e.*
 	from
@@ -93,17 +93,6 @@
 	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
 
-
-
---Trucks,  DispatchFleetManagerIds
-	select
-		e.Unit_ID, '' as asdfasdasdfasdasdfasdasdfasdasdfasdasdfasd,  e.*
-	from
-		equipment.PUnit e
-		join equipment.PunitMapping m on e.PUnitId = m.PunitId
-		join main.GroupType gt on gt.GroupTypeId = m.GroupTypeId
-	where DispatchFleetManagerId is not null
-	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
 
 
