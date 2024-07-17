@@ -9,12 +9,14 @@
 	where 
 		ActiveInd = 1
 		and
-		gt.GroupTypeId =
-			(
-				select GroupTypeId from main.GroupType WHERE [group] = 'OTR'
-			)
-		and
 		pum.PUnitActiveTypeId = 1
+		/*
+			and
+			gt.GroupTypeId =
+				(
+					select GroupTypeId from main.GroupType WHERE [group] = 'OTR'
+				)
+		*/
 	ORDER BY TRY_CAST(e.Unit_ID AS INT) --desc
 
 
