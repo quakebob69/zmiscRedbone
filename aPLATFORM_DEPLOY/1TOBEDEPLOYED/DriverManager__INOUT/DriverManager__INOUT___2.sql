@@ -1,8 +1,10 @@
---  fleetManagers/truck/drivers
-	select e.DispatchFleetManagerId, e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName from
+--  truck/drivers/fleetManagers
+	select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName, dfm.name
+	from
 		main.Driver d
 		join main.Person p on d.PersonId = p.personid	
 		join equipment.PUnit e on d.PunitId = e.punitid
+		join dispatch.DispatchFleetManager dfm on dfm.DispatchFleetManagerid = e.DispatchFleetManagerid
 	where e.punitid in 
 		(
 			select punitid from equipment.PUnit pu
