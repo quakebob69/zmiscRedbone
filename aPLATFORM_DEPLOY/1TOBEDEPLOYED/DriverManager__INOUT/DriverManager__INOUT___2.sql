@@ -46,5 +46,8 @@ order by e.Unit_ID
 
 
 
-select * from equipment.PUnit where Unit_ID in ('207', '272');
+select punitid, Unit_ID from equipment.PUnit where Unit_ID in ('207', '272')
+
+
+
 
