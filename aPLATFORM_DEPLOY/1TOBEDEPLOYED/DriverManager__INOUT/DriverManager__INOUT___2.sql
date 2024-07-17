@@ -1,5 +1,22 @@
---  truck/drivers/fleetManagers [ALL TRUCKS WITH DispatchFleetManager]
-	select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName, dfm.name
+--truck/fleetManagers (truck)
+--[ALL TRUCKS WITH DispatchFleetManager]
+	select e.Unit_ID, dfm.name
+	from
+		equipment.PUnit e 
+		join dispatch.DispatchFleetManager dfm on dfm.DispatchFleetManagerid = e.DispatchFleetManagerid
+	where e.punitid in 
+		(
+			select punitid from equipment.PUnit pu
+			where pu.DispatchFleetManagerId is not null
+		)
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
+
+
+
+
+--truck/fleetManagers/driver
+--[ALL DRIVERS WITH TRUCKS AND DispatchFleetManager]
+	select e.Unit_ID, dfm.name, p.FirstName + ' ' + p.LastName as FullName
 	from
 		main.Driver d
 		join main.Person p on d.PersonId = p.personid	
@@ -11,6 +28,41 @@
 			where pu.DispatchFleetManagerId is not null
 		)
 	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
+
+
+
+
+
+
+--Trucks/[no drivers]/DispatchFleetManagerId 
+--[ALL TRUCKS WITHOUT DRIVERS, BUT HAVE DispatchFleetManager]
+	select
+		e.Unit_ID, dfm.name
+	from
+		equipment.PUnit e
+		join dispatch.DispatchFleetManager dfm on dfm.DispatchFleetManagerid = e.DispatchFleetManagerid
+		join equipment.PunitMapping m on e.PUnitId = m.PunitId
+		join main.GroupType gt on gt.GroupTypeId = m.GroupTypeId
+	where e.PunitId
+		not in
+		(
+			select 
+				PunitId
+			from
+				main.Driver d
+			where
+				punitid is not null
+		)
+	and
+		ActiveInd = 1
+	and
+		gt.GroupTypeId = 4
+	and
+		e.DispatchFleetManagerId is not null
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
+
+
+
 
 
 
@@ -51,33 +103,6 @@
 		gt.GroupTypeId = 4
 	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
-
-
-
---Trucks/[no drivers]/DispatchFleetManagerId  [ALL TRUCKS WITHOUT DRIVERS, BUT HAVE FLEET MANS]
-	select
-		e.Unit_ID, e.DispatchFleetManagerId
-	from
-		equipment.PUnit e
-		join equipment.PunitMapping m on e.PUnitId = m.PunitId
-		join main.GroupType gt on gt.GroupTypeId = m.GroupTypeId
-	where e.PunitId
-		not in
-		(
-			select 
-				PunitId
-			from
-				main.Driver d
-			where
-				punitid is not null
-		)
-	and
-		ActiveInd = 1
-	and
-		gt.GroupTypeId = 4
-	and
-		e.DispatchFleetManagerId is not null
-	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
 
 
 
