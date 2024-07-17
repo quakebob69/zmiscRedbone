@@ -59,14 +59,15 @@
 
 --drivers, with trucks
 	select
-		e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
+		e.Unit_ID, '' as asdfasdasdfasdasdfasdasdfasdasdfasdasdfasd
 	from
 		main.Driver d
 		join main.Person p on d.PersonId = p.personid	
 		join equipment.PUnit e on d.PunitId = e.punitid
+	--Where e.Unit_ID = '44'
 	ORDER BY 
 	  LEFT(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a') - 1),
-	  CAST(SUBSTRING(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a'), LEN(e.Unit_ID)) AS INT) desc
+	  CAST(SUBSTRING(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a'), LEN(e.Unit_ID)) AS INT) desc;
 
 
 
@@ -95,7 +96,7 @@
 		gt.GroupTypeId = 4
 	ORDER BY 
 	  LEFT(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a') - 1),
-	  CAST(SUBSTRING(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a'), LEN(e.Unit_ID)) AS INT) desc
+	  CAST(SUBSTRING(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a'), LEN(e.Unit_ID)) AS INT) desc;
 
 
 
