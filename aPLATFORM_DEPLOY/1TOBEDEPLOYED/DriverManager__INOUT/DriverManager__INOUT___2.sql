@@ -64,7 +64,9 @@
 		main.Driver d
 		join main.Person p on d.PersonId = p.personid	
 		join equipment.PUnit e on d.PunitId = e.punitid
-	order by e.Unit_ID desc
+	ORDER BY 
+	  LEFT(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a') - 1),
+	  CAST(SUBSTRING(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a'), LEN(e.Unit_ID)) AS INT) desc
 
 
 
@@ -72,7 +74,7 @@
 
 --Trucks,  with no drivers
 	select
-		e.*
+		e.Unit_ID, '' as asdfasdasdfasdasdfasdasdfasdasdfasdasdfasd,  e.*
 	from
 		equipment.PUnit e
 		join equipment.PunitMapping m on e.PUnitId = m.PunitId
@@ -91,7 +93,20 @@
 		ActiveInd = 1
 	and
 		gt.GroupTypeId = 4
-	order by e.Unit_ID desc
+	ORDER BY 
+	  LEFT(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a') - 1),
+	  CAST(SUBSTRING(e.Unit_ID, PATINDEX('%[0-9]%', e.Unit_ID + 'a'), LEN(e.Unit_ID)) AS INT) desc
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 	SELECT TOP (1000) [GroupTypeId]
@@ -101,14 +116,3 @@
 */
 
 
-
-/*
-	select e.Unit_ID, d.*
-	from
-	
-		--join main.Person p on d.PersonId = p.personid	
-		equipment.PUnit e
-		right outer join main.Driver d  on d.PunitId = e.punitid
-	where d.PunitId is not null
-	order by e.Unit_ID
-*/
