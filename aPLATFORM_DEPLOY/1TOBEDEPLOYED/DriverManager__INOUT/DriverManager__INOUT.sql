@@ -1,5 +1,8 @@
 --DROP STUFF
 ------------------------------------------------
+	DROP VIEW IF EXISTS [dispatch].[vFleetManagerDriver]
+	GO
+
 	DROP VIEW IF EXISTS [dispatch].[vInOut]
 	GO
 
@@ -286,6 +289,36 @@
 																																					
 																																				GO
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	DROP VIEW IF EXISTS [dispatch].[vFleetManagerDriver]
+	GO
+
+	CREATE VIEW [dispatch].[vFleetManagerDriver] AS
+
+		select  top 1000
+			e.Unit_ID, e.PunitId, dfm.DispatchFleetManagerId,  dfm.name as 'DriverManagerName', p.PersonId, p.FirstName + ' ' + p.LastName as DriverFullName, p.FirstName as DriverFirstName, p.LastName as DriverLastName
+		from
+			main.Driver d
+			full join main.Person p on d.PersonId = p.personid	
+			full join equipment.PUnit e on d.PunitId = e.punitid
+			full join dispatch.DispatchFleetManager dfm on dfm.DispatchFleetManagerid = e.DispatchFleetManagerid
+			full join equipment.PunitMapping pum on e.PUnitId = pum.PunitId
+			full join main.GroupType gt on gt.GroupTypeId = pum.GroupTypeId
+		where 
+			ActiveInd = 1
+			and
+			pum.PUnitActiveTypeId = 1
+		ORDER BY TRY_CAST(e.Unit_ID AS INT)
+
+	GO
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 

@@ -1,4 +1,5 @@
-	select e.Unit_ID, e.PunitId, dfm.DispatchFleetManagerId,  dfm.name as 'DriverManagerName', p.PersonId, p.FirstName + ' ' + p.LastName as DriverFullName, p.FirstName as DriverFirstName, p.LastName as DriverLastName
+	select
+		e.Unit_ID, e.PunitId, dfm.DispatchFleetManagerId,  dfm.name as 'DriverManagerName', p.PersonId, p.FirstName + ' ' + p.LastName as DriverFullName, p.FirstName as DriverFirstName, p.LastName as DriverLastName
 	from
 		main.Driver d
 		full join main.Person p on d.PersonId = p.personid	
@@ -17,9 +18,7 @@
 					select GroupTypeId from main.GroupType WHERE [group] = 'OTR'
 				)
 		*/
-	--ORDER BY TRY_CAST(e.Unit_ID AS INT) --desc
-
-
+	ORDER BY TRY_CAST(e.Unit_ID AS INT)
 
 
 	--select * from equipment.PUnit where Unit_ID = '185'
