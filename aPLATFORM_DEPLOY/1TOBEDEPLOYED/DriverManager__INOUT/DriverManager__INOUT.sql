@@ -355,6 +355,16 @@
 	SELECT * FROM [dispatch].[DispatchFleetManager] 
 	SELECT * FROM [equipment].[PUnit] WHERE [DispatchFleetManagerId] IS NOT NULL
 
+	SELECT count(*) as vFleetManagerDriver__count FROM [dispatch].[vFleetManagerDriver] 
+	SELECT * FROM [dispatch].[vFleetManagerDriver]
+
+	--normal
+	SELECT PersonId, DispatchFleetManagerId FROM [dispatch].[vFleetManagerDriver] where Unit_ID = '266'
+
+	--spare
+		SELECT PersonId, DispatchFleetManagerId FROM [dispatch].[vFleetManagerDriver] where Unit_ID = '207'
+
+		SELECT PersonId, DispatchFleetManagerId FROM [dispatch].[vFleetManagerDriver] where PersonId = 2970
 
 
 
@@ -379,7 +389,10 @@
 
 
 
-												SELECT * FROM [dispatch].[vInOut]
-												SELECT * FROM [dispatch].[vInOut] where loadid = 63856
+												--SELECT * FROM [dispatch].[vInOut]
+												--SELECT * FROM [dispatch].[vInOut] where loadid = 63856
 											------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+											
+
+
 											
