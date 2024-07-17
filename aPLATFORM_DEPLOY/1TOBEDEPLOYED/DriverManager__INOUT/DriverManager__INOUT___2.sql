@@ -33,8 +33,18 @@
 	272 = spare
 */
 
+select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName from
+	main.Driver d
+	join main.Person p on d.PersonId = p.personid	
+	join equipment.PUnit e on d.PunitId = e.punitid
+where e.punitid in 
+	(
+		select punitid from equipment.PUnit pu
+		where pu.DispatchFleetManagerId is not null
+	)
+order by e.Unit_ID
 
 
-select * from equipment.PUnit where  DispatchFleetManagerId is not null order by DispatchFleetManagerId;
+
 select * from equipment.PUnit where Unit_ID in ('207', '272');
 
