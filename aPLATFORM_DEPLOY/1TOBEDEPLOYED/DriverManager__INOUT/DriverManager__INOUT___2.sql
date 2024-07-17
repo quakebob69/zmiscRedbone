@@ -4,8 +4,8 @@
 		full join main.Person p on d.PersonId = p.personid	
 		full join equipment.PUnit e on d.PunitId = e.punitid
 		full join dispatch.DispatchFleetManager dfm on dfm.DispatchFleetManagerid = e.DispatchFleetManagerid
-		full join equipment.PunitMapping m on e.PUnitId = m.PunitId
-		full join main.GroupType gt on gt.GroupTypeId = m.GroupTypeId
+		full join equipment.PunitMapping pum on e.PUnitId = pum.PunitId
+		full join main.GroupType gt on gt.GroupTypeId = pum.GroupTypeId
 	where 
 		ActiveInd = 1
 		and
@@ -13,8 +13,14 @@
 			(
 				select GroupTypeId from main.GroupType WHERE [group] = 'OTR'
 			)
-	ORDER BY TRY_CAST(e.Unit_ID AS INT) desc
+		and
+		pum.PUnitActiveTypeId = 1
+	ORDER BY TRY_CAST(e.Unit_ID AS INT) --desc
 
+
+	--select * from equipment.PUnit where Unit_ID = '185'
+	--select * from main.Driver where punitid = 1115
+	--select * from equipment.PunitMapping where punitid = 1115
 
 
 
