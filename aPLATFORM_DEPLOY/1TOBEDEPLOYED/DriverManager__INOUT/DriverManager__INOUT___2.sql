@@ -45,7 +45,7 @@
 			select punitid from equipment.PUnit pu
 			where pu.DispatchFleetManagerId is not null
 		)
-	order by e.Unit_ID
+	order by e.Unit_ID desc
 
 
 
@@ -57,20 +57,20 @@
 
 
 
---drivers with trucks
-	select e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
+--drivers, with trucks
+	select
+		e.Unit_ID, p.FirstName + ' ' + p.LastName as FullName
 	from
 		main.Driver d
 		join main.Person p on d.PersonId = p.personid	
 		join equipment.PUnit e on d.PunitId = e.punitid
-
-	order by e.Unit_ID
-
-
-select * from equipment.PunitMapping
+	order by e.Unit_ID desc
 
 
---Un-drivered trucks
+
+
+
+--Trucks,  with no drivers
 	select
 		e.*
 	from
@@ -91,7 +91,7 @@ select * from equipment.PunitMapping
 		ActiveInd = 1
 	and
 		gt.GroupTypeId = 4
-
+	order by e.Unit_ID desc
 
 /*
 	SELECT TOP (1000) [GroupTypeId]
