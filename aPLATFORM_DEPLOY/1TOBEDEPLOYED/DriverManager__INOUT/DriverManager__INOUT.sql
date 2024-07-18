@@ -20,6 +20,23 @@
 		SELECT 1 
 		FROM sys.columns 
 		WHERE Name = N'DispatchFleetManagerId'
+		AND Object_ID = Object_ID(N'[dispatch].[LoadStop]')
+	)
+	BEGIN
+		update [dispatch].[LoadStop] set [DispatchFleetManagerId] = null;
+
+		ALTER TABLE [dispatch].[LoadStop]
+			DROP CONSTRAINT [FK_LoadStop_DispatchFleetManager]
+
+		ALTER TABLE [dispatch].[LoadStop]
+			DROP COLUMN IF EXISTS [DispatchFleetManagerId];
+	END
+
+
+	IF EXISTS (
+		SELECT 1 
+		FROM sys.columns 
+		WHERE Name = N'DispatchFleetManagerId'
 		AND Object_ID = Object_ID(N'[dispatch].[Load]')
 	)
 	BEGIN
@@ -117,6 +134,19 @@
 	REFERENCES [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId])
 	GO
 	ALTER TABLE [dispatch].[Load] CHECK CONSTRAINT [FK_Load_DispatchFleetManager]
+	GO
+
+
+
+	------------
+	ALTER TABLE [dispatch].[LoadStop]
+	ADD [DispatchFleetManagerId] [int] NULL
+	GO
+
+	ALTER TABLE [dispatch].[LoadStop]  WITH CHECK ADD  CONSTRAINT [FK_LoadStop_DispatchFleetManager] FOREIGN KEY([DispatchFleetManagerId])
+	REFERENCES [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId])
+	GO
+	ALTER TABLE [dispatch].[LoadStop] CHECK CONSTRAINT [FK_LoadStop_DispatchFleetManager]
 	GO
 
 
