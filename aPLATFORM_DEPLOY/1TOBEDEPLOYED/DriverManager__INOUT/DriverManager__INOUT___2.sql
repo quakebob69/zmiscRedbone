@@ -55,11 +55,16 @@ where
 
 	(
 select punitid from dispatch.vFleetManagerDriver
-where personid <> 0
+--where personid <> 0
+WHERE UNIT_ID = 204
 group by PunitId
 having count(punitid) > 1
 	)
+
+	
 	ORDER BY DRIVERFULLNAME
+
+
 
 --1101
 
