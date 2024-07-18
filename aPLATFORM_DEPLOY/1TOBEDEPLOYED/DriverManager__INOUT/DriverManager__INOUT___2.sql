@@ -59,6 +59,7 @@ where personid <> 0
 group by PunitId
 having count(punitid) > 1
 	)
+	ORDER BY DRIVERFULLNAME
 
 --1101
 
