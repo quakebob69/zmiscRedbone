@@ -21,6 +21,82 @@
 	ORDER BY TRY_CAST(e.Unit_ID AS INT)
 
 
+
+
+
+
+
+
+
+
+
+
+select count(punitid), punitid from dispatch.vFleetManagerDriver
+where personid <> 0
+group by PunitId
+having count(punitid) > 1
+
+
+
+
+select punitid from dispatch.vFleetManagerDriver
+where personid <> 0
+group by PunitId
+having count(punitid) > 1
+
+
+
+select * from
+	dispatch.vFleetManagerDriver
+where
+	PunitId in
+
+	(
+select punitid from dispatch.vFleetManagerDriver
+where personid <> 0
+group by PunitId
+having count(punitid) > 1
+	)
+
+--1101
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	--select * from equipment.PUnit where Unit_ID = '185'
 	--select * from main.Driver where punitid = 1115
 	--select * from equipment.PunitMapping where punitid = 1115

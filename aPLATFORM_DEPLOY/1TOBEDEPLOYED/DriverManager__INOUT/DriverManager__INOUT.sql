@@ -302,7 +302,14 @@
 	CREATE VIEW [dispatch].[vFleetManagerDriver] AS
 
 		select  top 1000
-			e.Unit_ID, e.PunitId, dfm.DispatchFleetManagerId,  dfm.name as 'DriverManagerName', p.PersonId, p.FirstName + ' ' + p.LastName as DriverFullName, p.FirstName as DriverFirstName, p.LastName as DriverLastName
+			e.Unit_ID
+			,e.PunitId
+			,dfm.DispatchFleetManagerId
+			,dfm.name as 'DriverManagerName'
+			,ISNULL(p.PersonId, 0) AS PersonId
+			,p.FirstName + ' ' + p.LastName as DriverFullName
+			,p.FirstName as DriverFirstName
+			,p.LastName as DriverLastName
 		from
 			main.Driver d
 			full join main.Person p on d.PersonId = p.personid	
