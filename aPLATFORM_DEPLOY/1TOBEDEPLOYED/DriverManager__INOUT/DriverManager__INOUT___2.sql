@@ -76,6 +76,45 @@ having count(punitid) > 1
 
 
 
+/*
+select top 10  DispatchFleetManagerid from dispatch.LoadStop
+where DispatchFleetManagerid is not null
+order by DispatchFleetManagerId desc
+
+exec sp_LoadStop_SaveFleetManager 62602, 106849, 3
+
+		UPDATE       
+			dispatch.[LoadStop]
+		SET                
+			DispatchFleetManagerId = @DispatchFleetManagerId
+		WHERE        
+			(LoadId = @LoadId)
+			and
+			(LoadStopId = @LoadStopId)
+
+
+
+
+
+					UPDATE       
+			dispatch.[LoadStop]
+		SET                
+			DispatchFleetManagerId = 3
+		WHERE        
+			(LoadId = 62602)
+			and
+			(LoadStopId = 106849)
+
+
+
+			select * from dispatch.[LoadStop]
+					
+		WHERE        
+			(LoadId = 62602)
+			and
+			(LoadStopId = 106849)
+			*/
+
 
 
 
