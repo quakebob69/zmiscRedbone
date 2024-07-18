@@ -18,7 +18,9 @@
 					select GroupTypeId from main.GroupType WHERE [group] = 'OTR'
 				)
 		*/
-	ORDER BY TRY_CAST(e.Unit_ID AS INT)
+	ORDER BY
+	DriverFullName,
+	TRY_CAST(e.Unit_ID AS INT)
 
 
 

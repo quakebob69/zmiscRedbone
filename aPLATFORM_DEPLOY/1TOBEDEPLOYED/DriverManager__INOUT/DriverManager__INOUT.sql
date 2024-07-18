@@ -1,5 +1,8 @@
 --DROP STUFF
 ------------------------------------------------
+	DROP PROCEDURE IF EXISTS [dbo].[sp_LoadStop_SaveFleetManager]
+	GO
+
 	DROP VIEW IF EXISTS [dispatch].[vFleetManagerDriver]
 	GO
 
@@ -206,7 +209,7 @@
 
 
 	------------
-	/****** Object:  StoredProcedure [dbo].sp_Load_SaveFleetManager]    Script Date: 7/10/2024 7:11:14 PM ******/
+	/****** Object:  StoredProcedure [dbo].[sp_Load_SaveFleetManager]    Script Date: 7/10/2024 7:11:14 PM ******/
 		SET ANSI_NULLS ON
 		GO
 
@@ -325,6 +328,67 @@
 
 	GO
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	/****** Object:  StoredProcedure [dbo].[sp_LoadStop_SaveFleetManager]    Script Date: 7/10/2024 7:11:14 PM ******/
+		SET ANSI_NULLS ON
+		GO
+
+		SET QUOTED_IDENTIFIER ON
+		GO
+
+		CREATE procedure [dbo].[sp_LoadStop_SaveFleetManager]
+		(
+			@LoadId int
+			,@LoadStopId int
+			,@DispatchFleetManagerId int
+		)
+		as 
+		UPDATE       
+			dispatch.[LoadStop]
+		SET                
+			DispatchFleetManagerId = @DispatchFleetManagerId
+		WHERE        
+			(LoadId = @LoadId)
+			and
+			(LoadStopId = @LoadStopId)
+		GO
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
