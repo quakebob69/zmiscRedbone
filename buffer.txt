@@ -3210,3 +3210,52 @@ DispatchFleetManager
 
 
 
+                            /*
+                            fleetManagerDriverRow = fleetManagerDriverTableAdapt.GetData().Where(vFMD => vFMD.PersonId == 2970).FirstOrDefault();
+                            if (fleetManagerDriverRow != null)
+                            {
+                                if (!fleetManagerDriverRow.IsDispatchFleetManagerIdNull()) FleetManagerId = fleetManagerDriverRow.DispatchFleetManagerId;
+                                if (!fleetManagerDriverRow.IsPersonIdNull()) FleetManager_PersonId = fleetManagerDriverRow.PersonId;
+                            }
+                            */
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+
+	using RedbonePlatform.Datasets.dsPersonEdit_DriverInfoTableAdapters;
+	using static RedbonePlatform.Datasets.dsPersonEdit_DriverInfo;
+
+			/*
+			private int? getDispatchFleetManager(int? TruckPunitId, int? driver1Id)
+			{
+				int? DispatchFleetManagerId = null;
+
+				//get from truck
+				if(TruckPunitId != null)
+				{
+					Datasets.dsEquipmentTableAdapters.PUnitTableAdapter adaptPUnit = new Datasets.dsEquipmentTableAdapters.PUnitTableAdapter();
+					Datasets.dsEquipment.PUnitRow punit = adaptPUnit.GetData(Convert.ToInt32(TruckPunitId)).FirstOrDefault();
+					DispatchFleetManagerId = punit.DispatchFleetManagerId;
+				}
+
+																																															//get from driver1
+																																															if (DispatchFleetManagerId == null && driver1Id != null)
+																																															{
+																																																//asdf
+																																															}
+
+				return DispatchFleetManagerId;
+			}
+			*/
