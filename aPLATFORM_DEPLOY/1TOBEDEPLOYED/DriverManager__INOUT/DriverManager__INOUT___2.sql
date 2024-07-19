@@ -78,6 +78,12 @@ where unit_id = '205'
 
 
 
+SELECT Unit_ID, PunitId, DispatchFleetManagerId, DriverManagerName, PersonId, DriverFullName, DriverFirstName, DriverLastName FROM dispatch.vFleetManagerDriver
+
+where unit_id = '263'
+
+
+
 
 
 
