@@ -56,7 +56,7 @@ where
 	(
 select punitid from dispatch.vFleetManagerDriver
 where personid <> 0
-and UNIT_ID = 204
+--and UNIT_ID = 204
 group by PunitId
 having count(punitid) > 1
 	)
@@ -72,7 +72,9 @@ having count(punitid) > 1
 
 
 
+SELECT Unit_ID, PunitId, DispatchFleetManagerId, DriverManagerName, PersonId, DriverFullName, DriverFirstName, DriverLastName FROM dispatch.vFleetManagerDriver
 
+where unit_id = '205'
 
 
 
