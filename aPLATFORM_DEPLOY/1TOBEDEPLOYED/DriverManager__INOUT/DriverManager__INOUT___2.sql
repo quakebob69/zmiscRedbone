@@ -1,3 +1,33 @@
+SELECT * FROM [dispatch].[vFleetManagerDriver] 
+where
+DispatchFleetManagerId is not null
+and
+PersonId <> 0
+order by DriverFullName
+
+SELECT * FROM [dispatch].[vFleetManagerDriver] 
+where
+DispatchFleetManagerId is null
+and
+PersonId = 0
+--or
+--PersonId <> 0
+order by Unit_ID desc
+
+
+--SELECT * FROM [dispatch].[vFleetManagerDriver] order by unit_id
+--SELECT * FROM [dispatch].[vFleetManagerDriver] order by DriverFullName
+
+
+
+
+
+
+/*
+
+
+
+
 	select
 		e.Unit_ID, e.PunitId, dfm.DispatchFleetManagerId,  dfm.name as 'DriverManagerName', p.PersonId, p.FirstName + ' ' + p.LastName as DriverFullName, p.FirstName as DriverFirstName, p.LastName as DriverLastName
 	from
@@ -90,7 +120,7 @@ where unit_id = '263'
 
 
 
-/*
+
 select top 10  DispatchFleetManagerid from dispatch.LoadStop
 where DispatchFleetManagerid is not null
 order by DispatchFleetManagerId desc
