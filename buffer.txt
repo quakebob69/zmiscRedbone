@@ -1,5 +1,9 @@
 oROd5ITSqEgh
 	
+	
+	--RedBonePortalTest
+		<secret name="RedBoneConnectionString" value="Data Source=40.78.62.55;Initial Catalog=RedBonePortalTest;Persist Security Info=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9;Encrypt=False;TrustServerCertificate=True" />s	
+
 
 rya_$/T@KHy~Je8o
 rya_$/T@KHy~Je8o
