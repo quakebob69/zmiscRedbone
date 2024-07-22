@@ -4,7 +4,7 @@ LOCAL:
 DRIVERAPP:
 	<add name="RedBoneConnectionString" connectionString="Data Source=40.78.62.55\;Initial Catalog=RedBoneThomas;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB3;Password=Kd2GP#Wlrt9Ws" providerName="System.Data.SqlClient" />
 
-DAVID:
+TEST:
 	<add name="RedBoneConnectionString" connectionString="Data Source=40.78.62.55\;Initial Catalog=RedBone;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB3;Password=Kd2GP#Wlrt9Ws" providerName="System.Data.SqlClient" />
 
 PROD:
