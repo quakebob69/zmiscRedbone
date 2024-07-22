@@ -25,6 +25,37 @@ AND Unit_ID < 999
 order by TRY_CAST(Unit_ID AS INT)
 
 
+
+
+SELECT * FROM [dispatch].[vFleetManagerDriver] 
+where
+DispatchFleetManagerId is null
+and
+(
+	PersonId <> 0
+	and
+	PersonId is not null
+)
+AND Unit_ID < 999
+order by TRY_CAST(Unit_ID AS INT)
+
+
+
+
+
+SELECT * FROM [dispatch].[vFleetManagerDriver] 
+where
+DispatchFleetManagerId is not null
+and
+(
+	PersonId = 0
+	OR
+	PersonId is null
+)
+AND Unit_ID < 999
+order by TRY_CAST(Unit_ID AS INT)
+
+
 --SELECT * FROM [dispatch].[vFleetManagerDriver] order by unit_id
 --SELECT * FROM [dispatch].[vFleetManagerDriver] order by DriverFullName
 
