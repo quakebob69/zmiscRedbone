@@ -2,17 +2,27 @@ SELECT * FROM [dispatch].[vFleetManagerDriver]
 where
 DispatchFleetManagerId is not null
 and
-PersonId <> 0
+(
+	PersonId <> 0
+	and
+	PersonId is not null
+)
 order by DriverFullName
+
+
+
 
 SELECT * FROM [dispatch].[vFleetManagerDriver] 
 where
 DispatchFleetManagerId is null
 and
-PersonId = 0
---or
---PersonId <> 0
-order by Unit_ID desc
+(
+	PersonId = 0
+	OR
+	PersonId is null
+)
+AND Unit_ID < 999
+order by TRY_CAST(Unit_ID AS INT)
 
 
 --SELECT * FROM [dispatch].[vFleetManagerDriver] order by unit_id
