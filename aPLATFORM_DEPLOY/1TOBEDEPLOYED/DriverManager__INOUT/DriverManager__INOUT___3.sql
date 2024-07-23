@@ -1,4 +1,22 @@
+SELECT DispatchFleetManagerId, COUNT(DISTINCT(DispatchFleetManagerId)) FROM [dispatch].[vFleetManagerDriver]
+
+group by DispatchFleetManagerId
+
+
+
+
 SELECT * FROM [dispatch].[vFleetManagerDriver] 
+WHERE DISPATCHFLEETmANAGERID IS NOT NULL
+ORDER BY DISPATCHFLEETmANAGERID
+
+
+
+SELECT * FROM [dispatch].[vFleetManagerDriver] 
+WHERE DISPATCHFLEETmANAGERID IS  NULL
+ORDER BY DISPATCHFLEETmANAGERID
+
+
+/*
 where
 DispatchFleetManagerId is not null
 and
@@ -383,3 +401,4 @@ exec sp_LoadStop_SaveFleetManager 62602, 106849, 3
 	FROM [RedBone].[main].[GroupType]
 */
 
+*/
