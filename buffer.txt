@@ -3282,10 +3282,23 @@ Infer Driver Manager (from Driver) on LEG
 				
 
 				
+SELECT Unit_ID, PunitId, DispatchFleetManagerId, DriverManagerName, PersonId, DriverFullName, DriverFirstName, DriverLastName FROM dispatch.vFleetManagerDriver
+				
+				
+				
+-------------------------------------------------------------
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
 
-				
-				
-				
-				
-				
-				
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="RedBoneConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RedBoneConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.RedBoneConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+
+	RedBoneConnectionString
+	RedBoneThomasConnectionString
+	RedBoneThomasConnectionString1
+-------------------------------------------------------------
+
+			
