@@ -97,7 +97,7 @@
 	GO
 
 	CREATE TABLE [dispatch].[DispatchFleetManager](
-		[DispatchFleetManagerId] [int] IDENTITY(1,1) NOT NULL,
+		[DispatchFleetManagerId] [int] NOT NULL,
 		[Name] [varchar](128) NOT NULL,
 		[PersonId] [int] NULL,
 		[PhoneNumber] [varchar](50) NULL
@@ -598,9 +598,9 @@
 
 --INSERT STUFF
 -------------------------------------------------------------------------------------------------------------
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Dickie Dos' , 45, '(801) 111-1111')
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('OTaRmy' , 2467, '(801) 222-2222')
-	INSERT INTO [dispatch].[DispatchFleetManager] ([Name] ,[PersonId], [PhoneNumber]) VALUES ('Whirling Dervishes' , 2484, '(801) 333-3333')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId], [PhoneNumber]) VALUES (1, 'Driver Manager 1' , 45, '(801) 111-1111')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId], [PhoneNumber]) VALUES (2, 'Driver Manager 2' , 2467, '(801) 222-2222')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId], [PhoneNumber]) VALUES (3, 'Driver Manager 3' , 2484, '(801) 333-3333')
 	GO
 
 
