@@ -571,7 +571,7 @@
 
 	CREATE VIEW [dispatch].[vFleetManagerDriver] AS
 
-		select  top 10000
+		select DISTINCT top 10000
 			e.Unit_ID
 			,e.PunitId
 			,dfm.DispatchFleetManagerId
@@ -591,7 +591,7 @@
 		--	e.ActiveInd = 1
 		--	and
 		--	pum.PUnitActiveTypeId = 1
-		ORDER BY TRY_CAST(e.Unit_ID AS INT)
+		--ORDER BY TRY_CAST(e.Unit_ID AS INT)
 
 	GO
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
