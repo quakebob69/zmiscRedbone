@@ -40,18 +40,19 @@
 			UNION ALL
 			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
-
 			select
+
+			(select
 			count(distinct allTrcks.PUnitId)
 			from
-			#TEMP_PUnit_Active allTrcks
-
-
-
-			select
+			#TEMP_PUnit_Active allTrcks)
+			
+			-
+			
+			(select
 			count(distinct asgnedTrucks.PUnitId)
 			from
-			#TEMP_PUnit_AssignedToDriverMans asgnedTrucks
+			#TEMP_PUnit_AssignedToDriverMans asgnedTrucks)
 
 
 			select
