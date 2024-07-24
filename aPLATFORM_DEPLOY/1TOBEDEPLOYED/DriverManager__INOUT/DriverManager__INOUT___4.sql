@@ -46,4 +46,9 @@
 
 
 
-			select distinct(PUnitId) from #TEMP_PUnit_AssignedToDriverMans
+			
+			--select distinct(PUnitId) from #TEMP_PUnit_AssignedToDriverMans
+			--where PUnitId not in
+			--(
+			--	select distinct(PUnitId) from #TEMP_PUnit_Active
+			--)
