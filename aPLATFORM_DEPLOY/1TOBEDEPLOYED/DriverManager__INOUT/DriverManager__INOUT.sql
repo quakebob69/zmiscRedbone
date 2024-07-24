@@ -633,7 +633,8 @@
 			INSERT INTO #UnassignedTrucks (Unit_ID)
 			select distinct allTrcks.Unit_ID
 			from
-			#TEMP_Unit_ID_Active allTrcks
+			--equipment.PUnit P join 
+			#TEMP_Unit_ID_Active allTrcks --on p.PUnitId = allTrcks.PUnitId
 			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
 
@@ -644,7 +645,6 @@
 		
 
 
-		exec [dbo].[sp_DriverManagerUnassignedTrucks]
 
 
 
@@ -819,6 +819,7 @@ UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '185
 												--SELECT * FROM [dispatch].[vInOut] where loadid = 63856
 											------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 											
-
+	--
+	exec [dbo].[sp_DriverManagerUnassignedTrucks]
 
 											
