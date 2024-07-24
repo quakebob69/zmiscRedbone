@@ -44,7 +44,11 @@
 
 
 
-
+			select
+			distinct unasng.PUnitId
+			from
+			#TEMP_PUnit_AssignedToDriverMans unasng
+			right join #TEMP_PUnit_AssignedToDriverMans asng on asng.PUnitId = unasng.PUnitId
 
 			
 			--select distinct(PUnitId) from #TEMP_PUnit_AssignedToDriverMans
