@@ -569,7 +569,7 @@
 		AS
 		BEGIN
 			--DROP TABLE IF EXISTS #TEMP_Unit_ID_Active
-			DROP TABLE IF EXISTS #TEMP_Unit_ID_AssignedToDriverMans
+			--DROP TABLE IF EXISTS #TEMP_Unit_ID_AssignedToDriverMans
 			DROP TABLE IF EXISTS #UnassignedTrucks
 
 			DECLARE @TEMP_Unit_ID_Active TABLE (
@@ -616,10 +616,10 @@
 				,EquipTypeId)
 			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 0
 
-			CREATE TABLE #TEMP_Unit_ID_AssignedToDriverMans(
+			DECLARE @TEMP_Unit_ID_AssignedToDriverMans TABLE (
 			Unit_ID int NULL
 			)			
-			INSERT INTO #TEMP_Unit_ID_AssignedToDriverMans (Unit_ID)
+			INSERT INTO @TEMP_Unit_ID_AssignedToDriverMans (Unit_ID)
 			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 1
 			UNION ALL
 			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 2
@@ -635,7 +635,7 @@
 			from
 			--equipment.PUnit P join 
 			@TEMP_Unit_ID_Active allTrcks --on p.PUnitId = allTrcks.PUnitId
-			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
+			left join @TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
 
 			SELECT distinct Unit_ID FROM #UnassignedTrucks 
