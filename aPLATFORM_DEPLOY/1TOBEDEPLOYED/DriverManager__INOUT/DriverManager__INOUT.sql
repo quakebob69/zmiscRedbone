@@ -638,6 +638,8 @@
 			#TEMP_Unit_ID_Active allTrcks
 			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
+
+			SELECT distinct Unit_ID FROM #UnassignedTrucks 
 		END
 		GO
 
