@@ -571,7 +571,7 @@
 
 	CREATE VIEW [dispatch].[vFleetManagerDriver] AS
 
-		select  top 1000
+		select  top 10000
 			e.Unit_ID
 			,e.PunitId
 			,dfm.DispatchFleetManagerId
@@ -587,17 +587,17 @@
 			full join dispatch.DispatchFleetManager dfm on dfm.DispatchFleetManagerid = e.DispatchFleetManagerid
 			full join equipment.PunitMapping pum on e.PUnitId = pum.PunitId
 			full join main.GroupType gt on gt.GroupTypeId = pum.GroupTypeId
-		where 
-			e.ActiveInd = 1
-			and
-			pum.PUnitActiveTypeId = 1
+		--where 
+		--	e.ActiveInd = 1
+		--	and
+		--	pum.PUnitActiveTypeId = 1
 		ORDER BY TRY_CAST(e.Unit_ID AS INT)
 
 	GO
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
+select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 1
+select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 2
+select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 3
 
 
 
