@@ -567,7 +567,7 @@
 
 		CREATE procedure [dbo].[sp_DriverManagerUnassignedTrucks]
 		AS
-		
+		BEGIN
 			DROP TABLE IF EXISTS #TEMP_Unit_ID_Active
 			CREATE TABLE #TEMP_Unit_ID_Active(
 			PUnitId int NULL
@@ -630,6 +630,7 @@
 			#TEMP_Unit_ID_Active allTrcks
 			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
+		END
 		GO
 
 		
