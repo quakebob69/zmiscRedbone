@@ -569,52 +569,53 @@
 		AS
 		BEGIN
 			DROP TABLE IF EXISTS #TEMP_Unit_ID_Active
+			DROP TABLE IF EXISTS #TEMP_Unit_ID_AssignedToDriverMans
+			DROP TABLE IF EXISTS #UnassignedTrucks
+
 			CREATE TABLE #TEMP_Unit_ID_Active(
-			PUnitId int NULL
-			,Unit_ID [varchar](50) NULL
-			,VIN [varchar](50) NULL
-			,PUnitMakeId int NULL
-			,PUnitMakeModelId int NULL
-			,Mod_Year int NULL
-			,Notes [text] NULL
-			,InService [datetime] NULL
-			,ActiveInd bit NULL
-			,PlateNumber varchar(50) NULL
-			,TireSize varchar(20) NULL
-			,Company varchar(50) NULL
-			,Division varchar(50) NULL
-			,[Group] varchar(50) NULL
-			, Client varchar(100) NULL
-			,[Location] varchar(50) NULL
-			,Indicator bit NULL
-			,Indicatoryellow bit NULL
-			,EquipTypeId int NULL
+				PUnitId int NULL
+				,Unit_ID [varchar](50) NULL
+				,VIN [varchar](50) NULL
+				,PUnitMakeId int NULL
+				,PUnitMakeModelId int NULL
+				,Mod_Year int NULL
+				,Notes [text] NULL
+				,InService [datetime] NULL
+				,ActiveInd bit NULL
+				,PlateNumber varchar(50) NULL
+				,TireSize varchar(20) NULL
+				,Company varchar(50) NULL
+				,Division varchar(50) NULL
+				,[Group] varchar(50) NULL
+				, Client varchar(100) NULL
+				,[Location] varchar(50) NULL
+				,Indicator bit NULL
+				,Indicatoryellow bit NULL
+				,EquipTypeId int NULL
 			)
 			
 			INSERT INTO #TEMP_Unit_ID_Active
-			(PUnitId
-			,Unit_ID
-			,VIN
-			,PUnitMakeId
-			,PUnitMakeModelId
-			,Mod_Year
-			,Notes
-			,InService
-			,ActiveInd
-			,PlateNumber
-			,TireSize
-			,Company
-			,Division
-			,[Group]
-			, Client
-			,[Location]
-			,Indicator
-			,Indicatoryellow
-			,EquipTypeId)
-
+				(PUnitId
+				,Unit_ID
+				,VIN
+				,PUnitMakeId
+				,PUnitMakeModelId
+				,Mod_Year
+				,Notes
+				,InService
+				,ActiveInd
+				,PlateNumber
+				,TireSize
+				,Company
+				,Division
+				,[Group]
+				, Client
+				,[Location]
+				,Indicator
+				,Indicatoryellow
+				,EquipTypeId)
 			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 0
 
-			DROP TABLE IF EXISTS #TEMP_Unit_ID_AssignedToDriverMans
 			CREATE TABLE #TEMP_Unit_ID_AssignedToDriverMans(
 			Unit_ID int NULL
 			)			
@@ -625,29 +626,6 @@
 			UNION ALL
 			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
-			/*
-			select
-			(select count(distinct allTrcks.PUnitId) from #TEMP_PUnit_Active allTrcks)			
-			-
-			(select count(distinct asgnedTrucks.PUnitId) from #TEMP_PUnit_AssignedToDriverMans asgnedTrucks)
-
-			select count(distinct allTrcks.PUnitId) from
-			#TEMP_PUnit_Active allTrcks
-			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
-			where asgnedTrucks.PUnitId IS NULL
-
-			select count(distinct allTrcks.PUnitId) from #TEMP_PUnit_Active allTrcks
-			
-			select count(distinct asgnedTrucks.PUnitId) from #TEMP_PUnit_AssignedToDriverMans asgnedTrucks
-			
-			select count(distinct allTrcks.PUnitId) from
-			#TEMP_PUnit_Active allTrcks
-			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
-			where asgnedTrucks.PUnitId IS NULL
-			*/
-
-
-			DROP TABLE IF EXISTS #UnassignedTrucks
 			CREATE TABLE #UnassignedTrucks(
 			Unit_ID [varchar](50) NULL
 			)
@@ -659,8 +637,6 @@
 			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
 
-
-			DROP TABLE IF EXISTS #TEMP_Unit_ID_Active
 			SELECT distinct Unit_ID FROM #UnassignedTrucks 
 		END
 
@@ -668,7 +644,7 @@
 		
 
 
-		--exec [dbo].[sp_DriverManagerUnassignedTrucks]
+		exec [dbo].[sp_DriverManagerUnassignedTrucks]
 
 
 
