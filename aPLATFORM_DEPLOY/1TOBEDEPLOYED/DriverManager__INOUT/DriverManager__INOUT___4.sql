@@ -24,11 +24,6 @@
 			INSERT INTO #TEMP_PUnit_Active
 			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 0
 
-
-
-
-
-
 			DROP TABLE IF EXISTS #TEMP_PUnit_AssignedToDriverMans
 			CREATE TABLE #TEMP_PUnit_AssignedToDriverMans(
 			PUnitId int NULL
@@ -40,7 +35,7 @@
 			UNION ALL
 			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
-		
+			/*
 			select
 			(select count(distinct allTrcks.PUnitId) from #TEMP_PUnit_Active allTrcks)			
 			-
@@ -51,10 +46,6 @@
 			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
 			where asgnedTrucks.PUnitId IS NULL
 
-			
-
-
-
 			select count(distinct allTrcks.PUnitId) from #TEMP_PUnit_Active allTrcks
 			
 			select count(distinct asgnedTrucks.PUnitId) from #TEMP_PUnit_AssignedToDriverMans asgnedTrucks
@@ -63,4 +54,9 @@
 			#TEMP_PUnit_Active allTrcks
 			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
 			where asgnedTrucks.PUnitId IS NULL
+			*/
 
+			select distinct allTrcks.PUnitId from
+			#TEMP_PUnit_Active allTrcks
+			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
+			where asgnedTrucks.PUnitId IS NULL
