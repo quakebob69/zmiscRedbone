@@ -474,8 +474,8 @@
 			,[Group] varchar(50) NULL
 			, Client varchar(100) NULL
 			,[Location] varchar(50) NULL
-			,Indicator 
-			,Indicatoryellow
+			,Indicator bit NULL
+			,Indicatoryellow bit NULL
 			,EquipTypeId int NULL
 
 			)
