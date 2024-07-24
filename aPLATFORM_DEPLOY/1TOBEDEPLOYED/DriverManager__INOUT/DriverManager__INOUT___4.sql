@@ -45,11 +45,11 @@
 
 
 			select
-			distinct unasng.PUnitId
+			distinct t1.PUnitId
 			from
-			#TEMP_PUnit_AssignedToDriverMans unasng
-			left join #TEMP_PUnit_AssignedToDriverMans asng on asng.PUnitId = unasng.PUnitId
-			where asng.PUnitId IS NULL
+			#TEMP_PUnit_Active t1
+			left join #TEMP_PUnit_AssignedToDriverMans t2 on t1.PUnitId = t2.PUnitId
+			where t2.PUnitId IS NULL
 
 			
 			--select distinct(PUnitId) from #TEMP_PUnit_AssignedToDriverMans
