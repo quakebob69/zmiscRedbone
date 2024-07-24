@@ -568,8 +568,8 @@
 		CREATE procedure [dbo].[sp_DriverManagerUnassignedTrucks]
 		AS
 		
-			DROP TABLE IF EXISTS #TEMP_PUnit_Active
-			CREATE TABLE #TEMP_PUnit_Active(
+			DROP TABLE IF EXISTS #TEMP_Unit_ID_Active
+			CREATE TABLE #TEMP_Unit_ID_Active(
 			PUnitId int NULL
 			,Unit_ID [varchar](50) NULL
 			,VIN [varchar](50) NULL
@@ -591,19 +591,19 @@
 			,EquipTypeId int NULL
 			)
 			
-			INSERT INTO #TEMP_PUnit_Active
+			INSERT INTO #TEMP_Unit_ID_Active
 			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 0
 
-			DROP TABLE IF EXISTS #TEMP_PUnit_AssignedToDriverMans
-			CREATE TABLE #TEMP_PUnit_AssignedToDriverMans(
-			PUnitId int NULL
+			DROP TABLE IF EXISTS #TEMP_Unit_ID_AssignedToDriverMans
+			CREATE TABLE #TEMP_Unit_ID_AssignedToDriverMans(
+			Unit_ID int NULL
 			)			
-			INSERT INTO #TEMP_PUnit_AssignedToDriverMans (PUnitId)
-			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 1
+			INSERT INTO #TEMP_Unit_ID_AssignedToDriverMans (Unit_ID)
+			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 1
 			UNION ALL
-			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 2
+			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 2
 			UNION ALL
-			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
+			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
 			/*
 			select
@@ -626,10 +626,10 @@
 			where asgnedTrucks.PUnitId IS NULL
 			*/
 
-			select distinct allTrcks.PUnitId from
-			#TEMP_PUnit_Active allTrcks
-			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
-			where asgnedTrucks.PUnitId IS NULL
+			select distinct allTrcks.Unit_ID from
+			#TEMP_Unit_ID_Active allTrcks
+			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
+			where asgnedTrucks.Unit_ID IS NULL
 		GO
 
 		
