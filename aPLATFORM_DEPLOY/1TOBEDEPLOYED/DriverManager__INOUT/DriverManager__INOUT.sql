@@ -626,11 +626,11 @@
 			UNION ALL
 			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
-			CREATE TABLE #UnassignedTrucks(
+			DECLARE @UnassignedTrucks TABLE (
 			Unit_ID [varchar](50) NULL
 			)
 
-			INSERT INTO #UnassignedTrucks (Unit_ID)
+			INSERT INTO @UnassignedTrucks (Unit_ID)
 			select distinct allTrcks.Unit_ID
 			from
 			--equipment.PUnit P join 
@@ -638,7 +638,7 @@
 			left join @TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
 
-			SELECT distinct Unit_ID FROM #UnassignedTrucks 
+			SELECT distinct Unit_ID FROM @UnassignedTrucks 
 		END
 		GO
 
