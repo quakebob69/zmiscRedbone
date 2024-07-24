@@ -627,7 +627,7 @@
 			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
 			DECLARE @UnassignedTrucks TABLE (
-				PUnitId [varchar](50) NULL
+				PUnitId int NULL
 			)
 
 			INSERT INTO @UnassignedTrucks (PUnitId)
@@ -639,11 +639,20 @@
 			where asgnedTrucks.PUnitId IS NULL
 
 			SELECT
-			pu.*
+				pu.PunitId
+				,pu.Unit_ID
+				,pu.ActiveInd
+				
+
+				,pu.VIN
+				--,pu.Make
+				--,pu.Model
+				,pu.Mod_Year
+				,pu.InService
+
 			FROM
-			equipment.PUnit pu
-			join 
-			@UnassignedTrucks unass on pu.PUnitId = unass.PUnitId
+				equipment.PUnit pu
+				join @UnassignedTrucks unass on pu.PUnitId = unass.PUnitId
 		END
 		GO
 
