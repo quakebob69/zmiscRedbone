@@ -3,13 +3,13 @@
 	DROP PROCEDURE IF EXISTS [dbo].[sp_LoadStop_SaveFleetManager]
 	GO
 
-	DROP VIEW IF EXISTS [dispatch].[vFleetManagerDriver]
-	GO
-
 	DROP VIEW IF EXISTS [dispatch].[vInOut]
 	GO
 
 	DROP PROCEDURE IF EXISTS [dbo].[sp_DriverManagerUnassignedTrucks]
+	GO
+
+	DROP VIEW IF EXISTS [dispatch].[vFleetManagerDriver]
 	GO
 
 	DROP PROCEDURE IF EXISTS [dbo].[sp_Load_SaveFleetManager]
