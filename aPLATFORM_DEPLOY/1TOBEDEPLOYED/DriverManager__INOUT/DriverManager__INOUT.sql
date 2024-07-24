@@ -568,11 +568,11 @@
 		CREATE procedure [dbo].[sp_DriverManagerUnassignedTrucks]
 		AS
 		BEGIN
-			DROP TABLE IF EXISTS #TEMP_Unit_ID_Active
+			--DROP TABLE IF EXISTS #TEMP_Unit_ID_Active
 			DROP TABLE IF EXISTS #TEMP_Unit_ID_AssignedToDriverMans
 			DROP TABLE IF EXISTS #UnassignedTrucks
 
-			CREATE TABLE #TEMP_Unit_ID_Active(
+			DECLARE @TEMP_Unit_ID_Active TABLE (
 				PUnitId int NULL
 				,Unit_ID [varchar](50) NULL
 				,VIN [varchar](50) NULL
@@ -594,7 +594,7 @@
 				,EquipTypeId int NULL
 			)
 			
-			INSERT INTO #TEMP_Unit_ID_Active
+			INSERT INTO @TEMP_Unit_ID_Active
 				(PUnitId
 				,Unit_ID
 				,VIN
@@ -634,7 +634,7 @@
 			select distinct allTrcks.Unit_ID
 			from
 			--equipment.PUnit P join 
-			#TEMP_Unit_ID_Active allTrcks --on p.PUnitId = allTrcks.PUnitId
+			@TEMP_Unit_ID_Active allTrcks --on p.PUnitId = allTrcks.PUnitId
 			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
 
