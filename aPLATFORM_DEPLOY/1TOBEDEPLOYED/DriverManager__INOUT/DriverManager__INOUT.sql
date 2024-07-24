@@ -456,6 +456,7 @@
 
 		CREATE procedure [dbo].[sp_DriverManagerUnassignedTrucks]
 		AS
+		
 			DROP TABLE IF EXISTS #TEMP_PUnit_Active
 			CREATE TABLE #TEMP_PUnit_Active(
 			PUnitId int NULL
@@ -477,14 +478,47 @@
 			,Indicator bit NULL
 			,Indicatoryellow bit NULL
 			,EquipTypeId int NULL
-
 			)
 			
 			INSERT INTO #TEMP_PUnit_Active
 			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 0
 
-			select * from #TEMP_PUnit_Active
+			DROP TABLE IF EXISTS #TEMP_PUnit_AssignedToDriverMans
+			CREATE TABLE #TEMP_PUnit_AssignedToDriverMans(
+			PUnitId int NULL
+			)			
+			INSERT INTO #TEMP_PUnit_AssignedToDriverMans (PUnitId)
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 1
+			UNION ALL
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 2
+			UNION ALL
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
+			/*
+			select
+			(select count(distinct allTrcks.PUnitId) from #TEMP_PUnit_Active allTrcks)			
+			-
+			(select count(distinct asgnedTrucks.PUnitId) from #TEMP_PUnit_AssignedToDriverMans asgnedTrucks)
+
+			select count(distinct allTrcks.PUnitId) from
+			#TEMP_PUnit_Active allTrcks
+			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
+			where asgnedTrucks.PUnitId IS NULL
+
+			select count(distinct allTrcks.PUnitId) from #TEMP_PUnit_Active allTrcks
+			
+			select count(distinct asgnedTrucks.PUnitId) from #TEMP_PUnit_AssignedToDriverMans asgnedTrucks
+			
+			select count(distinct allTrcks.PUnitId) from
+			#TEMP_PUnit_Active allTrcks
+			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
+			where asgnedTrucks.PUnitId IS NULL
+			*/
+
+			select distinct allTrcks.PUnitId from
+			#TEMP_PUnit_Active allTrcks
+			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
+			where asgnedTrucks.PUnitId IS NULL
 		GO
 
 
