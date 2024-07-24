@@ -456,18 +456,22 @@
 
 		CREATE procedure [dbo].[sp_DriverManagerUnassignedTrucks]
 		AS
-
-			SELECT count(*) from main.Person
-
+			DROP TABLE IF EXISTS #TEMP_PUnit_Active
+			CREATE TABLE #TEMP_PUnit_Active(
+				PUnitId int NULL
+			)
+			
+			INSERT INTO #TEMP_PUnit_Active
+			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 1
 
 		GO
 
 
 
+		
 
 
-
-
+		exec [dbo].[sp_DriverManagerUnassignedTrucks]
 
 
 
