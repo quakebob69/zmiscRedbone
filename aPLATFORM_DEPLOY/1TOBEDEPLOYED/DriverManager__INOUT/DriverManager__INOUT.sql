@@ -632,8 +632,6 @@
 			where asgnedTrucks.PUnitId IS NULL
 		GO
 
-
-
 		
 
 
