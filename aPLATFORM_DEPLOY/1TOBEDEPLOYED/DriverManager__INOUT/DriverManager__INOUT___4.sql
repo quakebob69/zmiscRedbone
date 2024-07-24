@@ -48,7 +48,8 @@
 			distinct unasng.PUnitId
 			from
 			#TEMP_PUnit_AssignedToDriverMans unasng
-			right join #TEMP_PUnit_AssignedToDriverMans asng on asng.PUnitId = unasng.PUnitId
+			left join #TEMP_PUnit_AssignedToDriverMans asng on asng.PUnitId = unasng.PUnitId
+			where asng.PUnitId IS NULL
 
 			
 			--select distinct(PUnitId) from #TEMP_PUnit_AssignedToDriverMans
