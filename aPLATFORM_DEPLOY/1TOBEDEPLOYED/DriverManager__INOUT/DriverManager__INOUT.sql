@@ -481,7 +481,7 @@
 			)
 			
 			INSERT INTO #TEMP_PUnit_Active
-			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 1
+			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 0
 
 			select * from #TEMP_PUnit_Active
 
