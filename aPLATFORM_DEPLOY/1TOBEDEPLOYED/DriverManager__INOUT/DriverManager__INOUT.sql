@@ -638,6 +638,7 @@
 			left join @TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
 			where asgnedTrucks.PUnitId IS NULL
 
+
 			SELECT
 				pu.PUnitId
 				,pu.Unit_ID
@@ -653,6 +654,7 @@
 			FROM
 				equipment.PUnit pu
 				join @UnassignedTrucks unass on pu.PUnitId = unass.PUnitId
+
 		END
 		GO
 
