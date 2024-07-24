@@ -617,28 +617,33 @@
 			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 0
 
 			DECLARE @TEMP_Unit_ID_AssignedToDriverMans TABLE (
-			Unit_ID int NULL
+				PUnitId int NULL
 			)			
-			INSERT INTO @TEMP_Unit_ID_AssignedToDriverMans (Unit_ID)
-			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 1
+			INSERT INTO @TEMP_Unit_ID_AssignedToDriverMans (PUnitId)
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 1
 			UNION ALL
-			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 2
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 2
 			UNION ALL
-			SELECT Unit_ID FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
 			DECLARE @UnassignedTrucks TABLE (
-			Unit_ID [varchar](50) NULL
+				PUnitId [varchar](50) NULL
 			)
 
-			INSERT INTO @UnassignedTrucks (Unit_ID)
-			select distinct allTrcks.Unit_ID
+			INSERT INTO @UnassignedTrucks (PUnitId)
+			select distinct allTrcks.PUnitId
 			from
 			--equipment.PUnit P join 
 			@TEMP_Unit_ID_Active allTrcks --on p.PUnitId = allTrcks.PUnitId
-			left join @TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
-			where asgnedTrucks.Unit_ID IS NULL
+			left join @TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
+			where asgnedTrucks.PUnitId IS NULL
 
-			SELECT distinct Unit_ID FROM @UnassignedTrucks 
+			SELECT
+			pu.*
+			FROM
+			equipment.PUnit pu
+			join 
+			@UnassignedTrucks unass on pu.PUnitId = unass.PUnitId
 		END
 		GO
 
