@@ -626,7 +626,15 @@
 			where asgnedTrucks.PUnitId IS NULL
 			*/
 
-			select distinct allTrcks.Unit_ID from
+
+			DROP TABLE IF EXISTS #UnassignedTrucks
+			CREATE TABLE #UnassignedTrucks(
+			Unit_ID [varchar](50) NULL
+			)
+
+			INSERT INTO #UnassignedTrucks (Unit_ID)
+			select distinct allTrcks.Unit_ID
+			from
 			#TEMP_Unit_ID_Active allTrcks
 			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
