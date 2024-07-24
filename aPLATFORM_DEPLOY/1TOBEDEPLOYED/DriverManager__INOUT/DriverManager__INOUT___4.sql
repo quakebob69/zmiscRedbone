@@ -28,4 +28,22 @@
 
 
 
-			select distinct(PUnitId) from #TEMP_PUnit_Active
+
+			DROP TABLE IF EXISTS #TEMP_PUnit_AssignedToDriverMans
+			CREATE TABLE #TEMP_PUnit_AssignedToDriverMans(
+			PUnitId int NULL
+			)			
+			INSERT INTO #TEMP_PUnit_AssignedToDriverMans (PUnitId)
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 1
+			UNION ALL
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 2
+			UNION ALL
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
+
+
+
+
+
+
+
+			select distinct(PUnitId) from #TEMP_PUnit_AssignedToDriverMans

@@ -594,10 +594,10 @@
 		--ORDER BY TRY_CAST(e.Unit_ID AS INT)
 
 	GO
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 1
-select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 2
-select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 3
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 1
+--select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 2
+--select * from [dispatch].[vFleetManagerDriver] where DispatchFleetManagerId = 3
 
 
 
