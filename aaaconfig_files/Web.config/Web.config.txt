@@ -11,5 +11,5 @@ PROD:
 	<add name="RedBoneConnectionString" connectionString="Data Source=truckingwizard.com\;Initial Catalog=RedBone;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB2;Password=oROd5ITSqEgh" providerName="System.Data.SqlClient" />
 
 NEW SECRET SHIZ:
-	<add name="RedBoneConnectionString (Web.config)1" connectionString="Data Source=40.78.62.55\;Initial Catalog=RedBoneThomas;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB3;Password=Kd2GP#Wlrt9Ws" providerName="System.Data.SqlClient" />
-	
+	<add name="RedBoneConnectionString" connectionString="${RedBoneConnectionString}" providerName="System.Data.SqlClient" />
+	<add name="RedBoneConnectionString" connectionString="Data Source=40.78.62.55\;Initial Catalog=RedBoneThomas;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB3;Password=Kd2GP#Wlrt9Ws" providerName="System.Data.SqlClient" />
