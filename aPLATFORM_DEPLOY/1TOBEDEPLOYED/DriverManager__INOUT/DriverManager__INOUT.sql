@@ -635,7 +635,7 @@
 		
 
 
-		exec [dbo].[sp_DriverManagerUnassignedTrucks]
+		--exec [dbo].[sp_DriverManagerUnassignedTrucks]
 
 
 
