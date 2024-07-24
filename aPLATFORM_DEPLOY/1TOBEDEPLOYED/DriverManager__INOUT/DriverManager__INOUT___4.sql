@@ -41,15 +41,25 @@
 			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
 
 
+			select
+			count(distinct allTrcks.PUnitId)
+			from
+			#TEMP_PUnit_Active allTrcks
 
 
 
 			select
-			distinct t1.PUnitId
+			count(distinct asgnedTrucks.PUnitId)
 			from
-			#TEMP_PUnit_Active t1
-			left join #TEMP_PUnit_AssignedToDriverMans t2 on t1.PUnitId = t2.PUnitId
-			where t2.PUnitId IS NULL
+			#TEMP_PUnit_AssignedToDriverMans asgnedTrucks
+
+
+			select
+			distinct allTrcks.PUnitId
+			from
+			#TEMP_PUnit_Active allTrcks
+			left join #TEMP_PUnit_AssignedToDriverMans asgnedTrucks on allTrcks.PUnitId = asgnedTrucks.PUnitId
+			where asgnedTrucks.PUnitId IS NULL
 
 			
 			--select distinct(PUnitId) from #TEMP_PUnit_AssignedToDriverMans
