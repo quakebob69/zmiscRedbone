@@ -592,6 +592,26 @@
 			)
 			
 			INSERT INTO #TEMP_Unit_ID_Active
+			(PUnitId
+			,Unit_ID
+			,VIN
+			,PUnitMakeId
+			,PUnitMakeModelId
+			,Mod_Year
+			,Notes
+			,InService
+			,ActiveInd
+			,PlateNumber
+			,TireSize
+			,Company
+			,Division
+			,[Group]
+			, Client
+			,[Location]
+			,Indicator
+			,Indicatoryellow
+			,EquipTypeId)
+
 			EXEC [dbo].[sp_Equipment_PUnit_For_Grid] 0
 
 			DROP TABLE IF EXISTS #TEMP_Unit_ID_AssignedToDriverMans
@@ -639,9 +659,11 @@
 			left join #TEMP_Unit_ID_AssignedToDriverMans asgnedTrucks on allTrcks.Unit_ID = asgnedTrucks.Unit_ID
 			where asgnedTrucks.Unit_ID IS NULL
 
+
+			DROP TABLE IF EXISTS #TEMP_Unit_ID_Active
 			SELECT distinct Unit_ID FROM #UnassignedTrucks 
 		END
-		GO
+
 
 		
 
