@@ -639,17 +639,17 @@
 			where asgnedTrucks.PUnitId IS NULL
 
 			SELECT
-				pu.PunitId
+				pu.PUnitId
 				,pu.Unit_ID
-				,pu.ActiveInd
-				
-
 				,pu.VIN
-				--,pu.Make
-				--,pu.Model
+				,pu.PUnitMakeModelId
 				,pu.Mod_Year
+				,pu.Notes
 				,pu.InService
-				--,pu.Division
+				,pu.ActiveInd
+				,pu.ClientId
+				,pu.EquipTypeId
+				,pu.DispatchFleetManagerId
 			FROM
 				equipment.PUnit pu
 				join @UnassignedTrucks unass on pu.PUnitId = unass.PUnitId
