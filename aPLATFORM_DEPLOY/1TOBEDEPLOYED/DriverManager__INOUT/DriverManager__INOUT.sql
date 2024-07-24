@@ -639,7 +639,7 @@
 
 			SELECT distinct Unit_ID FROM #UnassignedTrucks 
 		END
-
+		GO
 
 		
 
