@@ -473,10 +473,10 @@
 			,Division varchar(50) NULL
 			,[Group] varchar(50) NULL
 			, Client varchar(100) NULL
-			,[Location] = lt.[Location]
-			,CAST(isnull(a.Indicator,0) as bit) as Indicator
-			,CAST(isnull(a1.Indicatoryellow,0) as bit) as Indicatoryellow
-			,p.EquipTypeId int NULL
+			,[Location] varchar(50) NULL
+			,Indicator 
+			,Indicatoryellow
+			,EquipTypeId int NULL
 
 			)
 			
