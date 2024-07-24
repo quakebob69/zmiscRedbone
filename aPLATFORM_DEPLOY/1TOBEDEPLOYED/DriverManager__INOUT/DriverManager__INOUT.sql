@@ -649,7 +649,7 @@
 				--,pu.Model
 				,pu.Mod_Year
 				,pu.InService
-
+				--,pu.Division
 			FROM
 				equipment.PUnit pu
 				join @UnassignedTrucks unass on pu.PUnitId = unass.PUnitId
