@@ -9,6 +9,9 @@
 	DROP VIEW IF EXISTS [dispatch].[vInOut]
 	GO
 
+	DROP PROCEDURE IF EXISTS [dbo].[sp_DriverManagerUnassignedTrucks]
+	GO
+
 	DROP PROCEDURE IF EXISTS [dbo].[sp_Load_SaveFleetManager]
 	GO
 
@@ -437,6 +440,42 @@
 
 
 
+
+
+
+
+
+
+	------------
+	/****** Object:  StoredProcedure [dbo].[sp_DriverManagerUnassignedTrucks]    Script Date: 7/10/2024 7:11:14 PM ******/
+		SET ANSI_NULLS ON
+		GO
+
+		SET QUOTED_IDENTIFIER ON
+		GO
+
+		CREATE procedure [dbo].[sp_DriverManagerUnassignedTrucks]
+		AS
+
+			SELECT count(*) from main.Person
+
+
+		GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 																																				DROP VIEW IF EXISTS [dispatch].[vInOut]
 																																				GO
@@ -499,6 +538,8 @@
 
 
 
+
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	DROP VIEW IF EXISTS [dispatch].[vFleetManagerDriver]
 	GO
@@ -522,18 +563,13 @@
 			full join equipment.PunitMapping pum on e.PUnitId = pum.PunitId
 			full join main.GroupType gt on gt.GroupTypeId = pum.GroupTypeId
 		where 
-			ActiveInd = 1
+			e.ActiveInd = 1
 			and
 			pum.PUnitActiveTypeId = 1
 		ORDER BY TRY_CAST(e.Unit_ID AS INT)
 
 	GO
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 
 
 
