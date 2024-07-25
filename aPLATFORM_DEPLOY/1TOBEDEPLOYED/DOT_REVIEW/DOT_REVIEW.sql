@@ -98,8 +98,8 @@ SELECT PersonId FROM @IDList;
 					,Birthday
 					/*,LicenseNumb
 					,LicenseState
-					,CDL_Y_N
-					,PhoneNumber*/
+					,CDL_Y_N*/
+					,PhoneNumber
 					,DateHire
 					,DateTermination
 				)
@@ -112,9 +112,9 @@ SELECT PersonId FROM @IDList;
 
 						/*,'asdf' as 'License State'
 						,'asdf' as 'License #'
-						,'asdf' as 'CDL (Y/N)'
+						,'asdf' as 'CDL (Y/N)'*/
 	
-						,'asdf' as 'Phone Number'*/
+						,'asdf' as 'Phone Number'
 	
 						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
@@ -172,8 +172,9 @@ SELECT
 		,'asdf' as 'License State'
 		,'asdf' as 'License #'
 		,'asdf' as 'CDL (Y/N)'
+*/
 		,'asdf' as 'Phone Number'
-	*/
+	
 	,DateHire as 'Date of Hire (MM/DD/YYYY)'
 	,DateTermination as 'Date of Termination (MM/DD/YYYY)'
 FROM
