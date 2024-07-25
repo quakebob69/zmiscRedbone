@@ -110,11 +110,11 @@ SELECT PersonId FROM @IDList;
 	
 					,Convert(VARCHAR, p.Birthday, 101)
 
+						,'asdf1'
 						,cpm.CertificationState
-						,'asdf'
-						,'asdf'
+						,'asdf2'
 	
-						,'asdf'
+						,'asdf3'
 	
 						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
@@ -170,11 +170,11 @@ SELECT
 	,LastName as 'Driver Last Name'
 	,Birthday 'Date of Birth (MM/DD/YYYY)'
 
+		,'asdf4' as 'License #'
 		,LicenseState as 'License State'
-		,'asdf' as 'License #'
-		,'asdf' as 'CDL (Y/N)'
+		,'asdf5' as 'CDL (Y/N)'
 
-		,'asdf' as 'Phone Number'
+		,'asdf6' as 'Phone Number'
 	
 	,DateHire as 'Date of Hire (MM/DD/YYYY)'
 	,DateTermination as 'Date of Termination (MM/DD/YYYY)'
