@@ -35,6 +35,7 @@ DECLARE @FINAL_LIST TABLE
 DECLARE @PERSONID INT;
 DECLARE @LAST_HiringStatusType INT;
 DECLARE @HireRehireDate VARCHAR(100);
+DECLARE @TermQuitDate VARCHAR(100);
 DECLARE @PhoneNUMB VARCHAR(100);
 DECLARE @LicenseNumb VARCHAR(100);
 DECLARE @LicenseState VARCHAR(100);
@@ -82,12 +83,6 @@ SELECT PersonId FROM @IDList;
 			FROM main.PersonHiringStatusHistory
 			WHERE PERSONID = @PERSONID
 			order by StatusChangeDate desc;
-			
-			--hire/rehire date
-			SELECT TOP 1 @HireRehireDate = Convert(VARCHAR, StatusChangeDate, 101)
-			FROM main.PersonHiringStatusHistory
-			WHERE PERSONID = @PERSONID
-			order by StatusChangeDate desc;
 
 			--phone
 			SELECT TOP 1 @PhoneNUMB = PhoneNumber
@@ -116,6 +111,14 @@ SELECT PersonId FROM @IDList;
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
 			--IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 2 OR @LAST_HiringStatusType = 3 OR @LAST_HiringStatusType = 4
 			BEGIN
+
+						
+				--hire/rehire date
+				SELECT TOP 1 @HireRehireDate = Convert(VARCHAR, StatusChangeDate, 101)
+				FROM main.PersonHiringStatusHistory
+				WHERE PERSONID = @PERSONID
+				order by StatusChangeDate desc;
+
 
 				INSERT INTO @FINAL_LIST
 				(
@@ -227,7 +230,22 @@ SELECT PersonId FROM @IDList;
 					StatusChangeDate desc)
 
 					BEGIN
-					SELECT 'horray'
+						
+						--TermQuit date
+						SELECT TOP 1 @TermQuitDate = Convert(VARCHAR, StatusChangeDate, 101)
+						FROM main.PersonHiringStatusHistory
+						WHERE PERSONID = @PERSONID
+						order by StatusChangeDate desc;
+
+
+						select @TermQuitDate
+
+
+
+
+
+
+
 					END
 			END
 
