@@ -3,23 +3,21 @@ select
 	p.FirstName as 'Driver First Name'
 	,p.LastName as 'Driver Last Name'
 	
-	,'Date of Birth (MM/DD/YYY)' as 'Date of Birth (MM/DD/YYY)'
+	,'asdf' as 'Date of Birth (MM/DD/YYY)'
 	
-	,'License State' as 'License State'
+	,'asdf' as 'License State'
 	
-	,'CDL (Y/N)' as 'CDL (Y/N)', 'Phone Number' as 'Phone Number'
+	,'asdf' as 'CDL (Y/N)', 'Phone Number' as 'Phone Number'
 	
-	,'Date of Hire (MM/DD/YYY)' as 'Date of Hire (MM/DD/YYY)'
-	
-	,'----------------------------------------'
-	
-	,'Date of Termination (MM/DD/YYY)' as 'Date of Termination (MM/DD/YYY)'
+	,'asdf' as 'Date of Hire (MM/DD/YYY)'
+		
+	,'asdf' as 'Date of Termination (MM/DD/YYY)'
 	
 	,'----------------------------------------'
 	
 	,pt.PersonType-- as 'Person Type'
 
-	,'asdf' as 'asdf'
+	--,'asdf' as 'asdf'
 	
 	,*
 
