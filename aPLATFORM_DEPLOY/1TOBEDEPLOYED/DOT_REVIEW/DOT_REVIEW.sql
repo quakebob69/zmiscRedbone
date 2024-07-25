@@ -172,7 +172,7 @@ SELECT
 
 		,LicenseNumb as 'License #'
 		,LicenseState as 'License State'
-		,'asdf5' as 'CDL (Y/N)'
+		,'TODO' as 'CDL (Y/N)'
 
 		,'asdf6' as 'Phone Number'
 	
