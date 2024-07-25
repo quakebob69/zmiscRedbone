@@ -12,8 +12,52 @@ DECLARE @FINAL_LIST TABLE
 		,DateTermination VARCHAR(100)
 	)
 
+
+DECLARE @PERSONID INT;
 DECLARE @IDList TABLE (PersonId INT);
 INSERT INTO @IDList (PersonId) VALUES (1123), (1169), (1252);
+
+
+
+
+DECLARE PersonId_cursor CURSOR FOR
+SELECT PersonId FROM @IDList;
+
+OPEN PersonId_cursor;
+FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- Perform the lookup here
+    -- Replace this with your actual lookup logic
+		SELECT 'Result for ID ' + CAST(@PERSONID AS VARCHAR(10))
+		--SELECT @LookupResult = 'Result for ID ' + CAST(@ID AS VARCHAR(10))
+		--FROM SomeTable
+		--WHERE SomeColumn = @ID;
+
+    -- Insert the result into the temporary table
+		--INSERT INTO #Results (ID, LookupResult)
+		--VALUES (@ID, @LookupResult);
+
+    FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
+END
+
+CLOSE PersonId_cursor;
+DEALLOCATE PersonId_cursor;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 select
 	p.FirstName as 'Driver First Name'
