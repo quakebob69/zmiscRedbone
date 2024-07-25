@@ -23,26 +23,26 @@ INSERT INTO @IDList (PersonId) VALUES (1123), (1169), (1252);
 DECLARE PersonId_cursor CURSOR FOR
 SELECT PersonId FROM @IDList;
 
-OPEN PersonId_cursor;
-FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
+	OPEN PersonId_cursor;
+		FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
 
-WHILE @@FETCH_STATUS = 0
-BEGIN
-    -- Perform the lookup here
-    -- Replace this with your actual lookup logic
-		SELECT 'Result for ID ' + CAST(@PERSONID AS VARCHAR(10))
-		--SELECT @LookupResult = 'Result for ID ' + CAST(@ID AS VARCHAR(10))
-		--FROM SomeTable
-		--WHERE SomeColumn = @ID;
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			-- Perform the lookup here
+			-- Replace this with your actual lookup logic
+				SELECT 'Result for ID ' + CAST(@PERSONID AS VARCHAR(10))
+				--SELECT @LookupResult = 'Result for ID ' + CAST(@ID AS VARCHAR(10))
+				--FROM SomeTable
+				--WHERE SomeColumn = @ID;
 
-    -- Insert the result into the temporary table
-		--INSERT INTO #Results (ID, LookupResult)
-		--VALUES (@ID, @LookupResult);
+			-- Insert the result into the temporary table
+				--INSERT INTO #Results (ID, LookupResult)
+				--VALUES (@ID, @LookupResult);
 
-    FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
-END
+			FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
+		END
+	CLOSE PersonId_cursor;
 
-CLOSE PersonId_cursor;
 DEALLOCATE PersonId_cursor;
 
 
