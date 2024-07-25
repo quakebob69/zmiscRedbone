@@ -91,7 +91,8 @@ SELECT PersonId FROM @IDList;
 			SELECT TOP 1 @PhoneNUMB = PhoneNumber
 			FROM main.PersonPhoneNumber
 			WHERE PERSONID = @PERSONID
-			--order by StatusChangeDate desc;
+			and UseForDispatch = 1
+
 
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
 			--IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 2 OR @LAST_HiringStatusType = 3 OR @LAST_HiringStatusType = 4
