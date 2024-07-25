@@ -95,7 +95,7 @@ SELECT PersonId FROM @IDList;
 					,DateHire
 					,DateTermination
 				)
-				VALUES
+				/*VALUES
 				(
 					@PERSONID
 					,'FirstName'
@@ -107,7 +107,7 @@ SELECT PersonId FROM @IDList;
 					,'PhoneNumber'*/
 					,'DateHire'
 					,''
-				)
+				)*/
 select top 1 
 	@PERSONID,
 	p.FirstName as 'Driver First Name'
