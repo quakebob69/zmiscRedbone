@@ -5,18 +5,19 @@ select
 	
 	,Convert(VARCHAR, p.Birthday, 101) as 'Date of Birth (MM/DD/YYYY)'
 
-	,'asdf' as 'License State'
-	,'asdf' as 'CDL (Y/N)'
+		,'asdf' as 'License State'
+		,'asdf' as 'CDL (Y/N)'
 	
-	,'asdf' as 'Phone Number'
+		,'asdf' as 'Phone Number'
 	
-	,'asdf' as 'Date of Hire (MM/DD/YYYY)'
+		,'asdf' as 'Date of Hire (MM/DD/YYYY)'
 		
-	,'asdf' as 'Date of Termination (MM/DD/YYYY)'
+		,'asdf' as 'Date of Termination (MM/DD/YYYY)'
 	
 	,'-------------------------' as '-------------------------'
 	
 	,pt.PersonType-- as 'Person Type'
+	,phst.Description as 'HiringS tatus Type'
 	,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
 
 	,'-------------------------' as '-------------------------'
@@ -29,11 +30,15 @@ select
 from
 	main.CertificationPersonMapping cpm
 	join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
+	join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
 	join main.Person p on p.PersonId = sh.PersonId
 	join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
 	join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
 where
-	ptm.PersonTypeId = 4-- = 
+	ptm.PersonTypeId = 4
+		
+		--and cpm
+
 	and
 	StatusChangeDate >= DATEADD(day, -366, GETDATE())
 order by
