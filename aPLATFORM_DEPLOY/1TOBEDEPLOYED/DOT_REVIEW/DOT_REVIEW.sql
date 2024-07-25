@@ -150,7 +150,7 @@ SELECT PersonId FROM @IDList;
 					and
 					StatusChangeDate >= DATEADD(day, -366, GETDATE())
 				order by
-					p.PersonId, StatusChangeDate
+					StatusChangeDate desc;
 
 
 
