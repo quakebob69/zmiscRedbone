@@ -90,7 +90,6 @@ SELECT PersonId FROM @IDList;
 			--IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 2 OR @LAST_HiringStatusType = 3 OR @LAST_HiringStatusType = 4
 			BEGIN
 
-
 				INSERT INTO @FINAL_LIST
 				(
 					PersonId
@@ -104,73 +103,57 @@ SELECT PersonId FROM @IDList;
 					,DateHire
 					,DateTermination
 				)
-				/*VALUES
-				(
-					@PERSONID
-					,'FirstName'
-					,'LastName'
-					,'Birthday'/*
-					,'LicenseNumb'
-					,'LicenseState'
-					,'CDL_Y_N'
-					,'PhoneNumber'*/
-					,'DateHire'
-					,''
-				)*/
-select top 1 
-	@PERSONID,
-	p.FirstName as 'Driver First Name'
-	,p.LastName as 'Driver Last Name'
+				select top 1 
+					@PERSONID,
+					p.FirstName as 'Driver First Name'
+					,p.LastName as 'Driver Last Name'
 	
-	,Convert(VARCHAR, p.Birthday, 101) as 'Date of Birth (MM/DD/YYYY)'
+					,Convert(VARCHAR, p.Birthday, 101) as 'Date of Birth (MM/DD/YYYY)'
 
-		/*,'asdf' as 'License State'
-		,'asdf' as 'License #'
-		,'asdf' as 'CDL (Y/N)'
+						/*,'asdf' as 'License State'
+						,'asdf' as 'License #'
+						,'asdf' as 'CDL (Y/N)'
 	
-		,'asdf' as 'Phone Number'*/
+						,'asdf' as 'Phone Number'*/
 	
-		,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
+						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
-		,' - '
+						,' - '
 	
-/*	,'-------------------------' as '-------------------------'
+				/*	,'-------------------------' as '-------------------------'
 	
-	,pt.PersonType-- as 'Person Type'
-	,phst.Description as 'HiringS tatus Type'
-	,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
+					,pt.PersonType-- as 'Person Type'
+					,phst.Description as 'HiringS tatus Type'
+					,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
 
-	,'-------------------------' as '-------------------------'
+					,'-------------------------' as '-------------------------'
 
-	--,'asdf' as 'asdf'
+					--,'asdf' as 'asdf'
 	
-	,*
-	*/
+					,*
+					*/
 	
-from
-	main.CertificationPersonMapping cpm
-	join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
-	join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
-	join main.Person p on p.PersonId = sh.PersonId
-	join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
-	join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
-where
-	p.PERSONID = @PERSONID
+				from
+					main.CertificationPersonMapping cpm
+					join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
+					join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
+					join main.Person p on p.PersonId = sh.PersonId
+					join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
+					join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
+				where
+					p.PERSONID = @PERSONID
 		
-		--and cpm
-		--PHONE NUMBE
+						--and cpm
+						--PHONE NUMBE
 
-	and
-	StatusChangeDate >= DATEADD(day, -366, GETDATE())
-order by
-	p.PersonId, StatusChangeDate
+					and
+					StatusChangeDate >= DATEADD(day, -366, GETDATE())
+				order by
+					p.PersonId, StatusChangeDate
 
 
 
 			END
-
-
-
 
 			FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
 		END
