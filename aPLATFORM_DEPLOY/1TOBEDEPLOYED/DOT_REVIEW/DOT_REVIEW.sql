@@ -32,6 +32,7 @@ DECLARE @IDList TABLE (PersonId INT);
 INSERT INTO @IDList (PersonId)
 SELECT
 	DISTINCT TOP 5 p.personid
+	--p.personid
 from
 	main.PersonHiringStatusHistory sh
 	join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
@@ -63,7 +64,7 @@ SELECT PersonId FROM @IDList;
 				--WHERE SomeColumn = @ID;
 
 
-
+			SELECT top 1 * from main.PersonEmploymentHistory where PersonId = @PERSONID;
 			
 
 			-- Insert the result into the temporary table
