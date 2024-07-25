@@ -25,6 +25,7 @@ DECLARE @FINAL_LIST TABLE
 
 DECLARE @PERSONID INT;
 DECLARE @LAST_HiringStatusType INT;
+DECLARE @HireRehireDate VARCHAR(100);
 DECLARE @IDList TABLE (PersonId INT);
 
 
@@ -64,27 +65,33 @@ SELECT PersonId FROM @IDList;
 				--FROM SomeTable
 				--WHERE SomeColumn = @ID;
 
-
+			-- @LAST_HiringStatusType
 			SELECT TOP 1 @LAST_HiringStatusType = PersonHiringStatusTypeId
 			FROM main.PersonHiringStatusHistory
 			WHERE PERSONID = @PERSONID
 			order by StatusChangeDate desc;
 			
-			
+			--hire/rehire date
+			SELECT TOP 1 @HireRehireDate = StatusChangeDate
+			FROM main.PersonHiringStatusHistory
+			WHERE PERSONID = @PERSONID
+			order by StatusChangeDate desc;
 
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
 			--IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 2 OR @LAST_HiringStatusType = 3 OR @LAST_HiringStatusType = 4
 			BEGIN
+
+
 				INSERT INTO @FINAL_LIST
 				(
 					PersonId
 					,FirstName
 					,LastName
-					,Birthday)
+					,Birthday
 					/*,LicenseNumb
 					,LicenseState
 					,CDL_Y_N
-					,PhoneNumber
+					,PhoneNumber*/
 					,DateHire
 					,DateTermination
 				)
@@ -93,14 +100,14 @@ SELECT PersonId FROM @IDList;
 					@PERSONID
 					,'FirstName'
 					,'LastName'
-					,'Birthday'
+					,'Birthday'/*
 					,'LicenseNumb'
 					,'LicenseState'
 					,'CDL_Y_N'
-					,'PhoneNumber'
+					,'PhoneNumber'*/
 					,'DateHire'
 					,''
-				)*/
+				)
 select top 1 
 	@PERSONID,
 	p.FirstName as 'Driver First Name'
@@ -112,13 +119,13 @@ select top 1
 		,'asdf' as 'License #'
 		,'asdf' as 'CDL (Y/N)'
 	
-		,'asdf' as 'Phone Number'
+		,'asdf' as 'Phone Number'*/
 	
-		,'asdf' as 'Date of Hire (MM/DD/YYYY)'
+		,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
-		,'asdf' as 'Date of Termination (MM/DD/YYYY)'
+		,''
 	
-	,'-------------------------' as '-------------------------'
+/*	,'-------------------------' as '-------------------------'
 	
 	,pt.PersonType-- as 'Person Type'
 	,phst.Description as 'HiringS tatus Type'
