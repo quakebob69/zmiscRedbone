@@ -35,6 +35,7 @@ DECLARE @FINAL_LIST TABLE
 DECLARE @PERSONID INT;
 DECLARE @LAST_HiringStatusType INT;
 DECLARE @HireRehireDate VARCHAR(100);
+DECLARE @PhoneNUMB VARCHAR(100);
 DECLARE @IDList TABLE (PersonId INT);
 
 
@@ -86,6 +87,12 @@ SELECT PersonId FROM @IDList;
 			WHERE PERSONID = @PERSONID
 			order by StatusChangeDate desc;
 
+			--phone
+			SELECT TOP 1 @PhoneNUMB = PhoneNumber
+			FROM main.PersonPhoneNumber
+			WHERE PERSONID = @PERSONID
+			--order by StatusChangeDate desc;
+
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
 			--IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 2 OR @LAST_HiringStatusType = 3 OR @LAST_HiringStatusType = 4
 			BEGIN
@@ -114,7 +121,7 @@ SELECT PersonId FROM @IDList;
 						,cpm.CertificationState
 						,'asdf2'
 	
-						,'asdf3'
+						,@PhoneNUMB
 	
 						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
@@ -174,7 +181,7 @@ SELECT
 		,LicenseState as 'License State'
 		,'TODO' as 'CDL (Y/N)'
 
-		,'asdf6' as 'Phone Number'
+		,PhoneNumber as 'Phone Number'
 	
 	,DateHire as 'Date of Hire (MM/DD/YYYY)'
 	,DateTermination as 'Date of Termination (MM/DD/YYYY)'
