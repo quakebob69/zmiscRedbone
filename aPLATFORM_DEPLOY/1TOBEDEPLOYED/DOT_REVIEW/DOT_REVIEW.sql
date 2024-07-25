@@ -82,28 +82,28 @@ SELECT PersonId FROM @IDList;
 				INSERT INTO @FINAL_LIST
 				(
 					PersonId
-					/*,FirstName VARCHAR(100)
-					,LastName VARCHAR(100)
-					,Birthday VARCHAR(100)
-					,LicenseNumb VARCHAR(100)
-					,LicenseState VARCHAR(100)
-					,CDL_Y_N VARCHAR(100)
-					,PhoneNumber VARCHAR(100)
-					,DateHire VARCHAR(100)
-					,DateTermination VARCHAR(100)*/
+					,FirstName
+					,LastName
+					,Birthday
+					,LicenseNumb
+					,LicenseState
+					,CDL_Y_N
+					,PhoneNumber
+					,DateHire
+					,DateTermination
 				)
 				VALUES
 				(
 					@PERSONID
-					/*,FirstName VARCHAR(100)
-					,LastName VARCHAR(100)
-					,Birthday VARCHAR(100)
-					,LicenseNumb VARCHAR(100)
-					,LicenseState VARCHAR(100)
-					,CDL_Y_N VARCHAR(100)
-					,PhoneNumber VARCHAR(100)
-					,DateHire VARCHAR(100)
-					,DateTermination VARCHAR(100)*/
+					,'FirstName'
+					,'LastName'
+					,'Birthday'
+					,'LicenseNumb'
+					,'LicenseState'
+					,'CDL_Y_N'
+					,'PhoneNumber'
+					,'DateHire'
+					,'DateTermination'
 				)
 
 			FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
