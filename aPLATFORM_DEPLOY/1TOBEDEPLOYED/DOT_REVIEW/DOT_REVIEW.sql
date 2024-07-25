@@ -32,7 +32,7 @@ DECLARE @IDList TABLE (PersonId INT);
 
 INSERT INTO @IDList (PersonId)
 SELECT
-	DISTINCT TOP 10 p.personid
+	DISTINCT TOP 30 p.personid
 	--p.personid
 from
 	main.PersonHiringStatusHistory sh
@@ -70,7 +70,13 @@ SELECT PersonId FROM @IDList;
 			WHERE PERSONID = @PERSONID
 			order by StatusChangeDate desc;
 			
-			SELECT @LAST_HiringStatusType;
+			
+
+			IF @LAST_HiringStatusType = 4
+			BEGIN
+				SELECT @LAST_HiringStatusType;
+			END
+
 
 			-- Insert the result into the temporary table
 				INSERT INTO @FINAL_LIST
