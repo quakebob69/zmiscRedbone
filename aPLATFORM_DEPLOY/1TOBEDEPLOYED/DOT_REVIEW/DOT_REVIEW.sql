@@ -136,7 +136,7 @@ SELECT PersonId FROM @IDList;
 
 												,@LicenseNumb
 												,@LicenseState
-												,'asdf2'
+												,'TODO?'
 	
 												,@PhoneNUMB
 	
@@ -187,7 +187,7 @@ SELECT PersonId FROM @IDList;
 
 							,@LicenseNumb
 							,@LicenseState
-							,'asdf2'
+							,'TODO?'
 	
 							,@PhoneNUMB
 	
@@ -230,7 +230,8 @@ SELECT PersonId FROM @IDList;
 							SELECT TOP 1 @HireRehireDate = Convert(VARCHAR, StatusChangeDate, 101)
 							FROM main.PersonHiringStatusHistory
 							WHERE PERSONID = @PERSONID
-							order by StatusChangeDate desc;
+							AND PersonHiringStatusTypeId = 1
+							order by StatusChangeDate;
 						
 							--TermQuit date
 							SET @TermQuitDate = '';
