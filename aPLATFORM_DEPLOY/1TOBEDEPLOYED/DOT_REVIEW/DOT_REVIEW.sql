@@ -72,7 +72,7 @@ SELECT PersonId FROM @IDList;
 			order by StatusChangeDate desc;
 			
 			--hire/rehire date
-			SELECT TOP 1 @HireRehireDate = StatusChangeDate
+			SELECT TOP 1 @HireRehireDate = Convert(VARCHAR, StatusChangeDate, 101)
 			FROM main.PersonHiringStatusHistory
 			WHERE PERSONID = @PERSONID
 			order by StatusChangeDate desc;
