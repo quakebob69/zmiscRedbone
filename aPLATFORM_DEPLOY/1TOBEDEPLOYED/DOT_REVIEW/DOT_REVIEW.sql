@@ -71,45 +71,38 @@ SELECT PersonId FROM @IDList;
 
 		WHILE @@FETCH_STATUS = 0
 		BEGIN
-			-- Perform the lookup here
-			-- Replace this with your actual lookup logic
-				--SELECT 'Result for ID ' + CAST(@PERSONID AS VARCHAR(10))
-				--SELECT @LookupResult = 'Result for ID ' + CAST(@ID AS VARCHAR(10))
-				--FROM SomeTable
-				--WHERE SomeColumn = @ID;
-
 			-- @LAST_HiringStatusType
+			SET @LAST_HiringStatusType = '';
 			SELECT TOP 1 @LAST_HiringStatusType = PersonHiringStatusTypeId
 			FROM main.PersonHiringStatusHistory
 			WHERE PERSONID = @PERSONID
 			order by StatusChangeDate desc;
 
 			--phone
+			SET @PhoneNUMB = '';
 			SELECT TOP 1 @PhoneNUMB = PhoneNumber
 			FROM main.PersonPhoneNumber
 			WHERE PERSONID = @PERSONID
 			and UseForDispatch = 1
 
+			SET @LicenseNumb = '';
+			--LicenseNumb
+			SELECT TOP 1 @LicenseNumb= CertificationCode
+			FROM main.CertificationPersonMapping
+			where
+			PERSONID = @PERSONID
+			and CertificationTypeId = 4
 
-				SET @LicenseNumb = '';
-				--LicenseNumb
-				SELECT TOP 1 @LicenseNumb= CertificationCode
-				FROM main.CertificationPersonMapping
-				where
-						PERSONID = @PERSONID
-						and CertificationTypeId = 4
-
-				SET @LicenseState = '';
-				--LicenseState
-				SELECT TOP 1 @LicenseState= CertificationState
-				FROM main.CertificationPersonMapping
-				where
-						PERSONID = @PERSONID
-						and CertificationTypeId = 4
+			SET @LicenseState = '';
+			--LicenseState
+			SELECT TOP 1 @LicenseState= CertificationState
+			FROM main.CertificationPersonMapping
+			where
+			PERSONID = @PERSONID
+			and CertificationTypeId = 4
 
 
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
-			--IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 2 OR @LAST_HiringStatusType = 3 OR @LAST_HiringStatusType = 4
 			BEGIN
 
 						
@@ -120,134 +113,193 @@ SELECT PersonId FROM @IDList;
 				order by StatusChangeDate desc;
 
 
-				INSERT INTO @FINAL_LIST
-				(
-					PersonId
-					,FirstName
-					,LastName
-					,Birthday
-					,LicenseNumb
-					,LicenseState
-					,CDL_Y_N
-					,PhoneNumber
-					,DateHire
-					,DateTermination
-				)
-				select top 1 
-					@PERSONID,
-					p.FirstName
-					,p.LastName
+										INSERT INTO @FINAL_LIST
+										(
+											PersonId
+											,FirstName
+											,LastName
+											,Birthday
+											,LicenseNumb
+											,LicenseState
+											,CDL_Y_N
+											,PhoneNumber
+											,DateHire
+											,DateTermination
+										)
+										select top 1 
+											@PERSONID,
+											p.FirstName
+											,p.LastName
 	
-					,Convert(VARCHAR, p.Birthday, 101)
+											,Convert(VARCHAR, p.Birthday, 101)
 
-						,@LicenseNumb
-						,@LicenseState
-						,'asdf2'
+												,@LicenseNumb
+												,@LicenseState
+												,'asdf2'
 	
-						,@PhoneNUMB
+												,@PhoneNUMB
 	
-						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
+												,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
-						,'N/A'
+												,'N/A'
 	
-				/*	,'-------------------------' as '-------------------------'
+										/*	,'-------------------------' as '-------------------------'
 	
-					,pt.PersonType-- as 'Person Type'
-					,phst.Description as 'HiringS tatus Type'
-					,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
+											,pt.PersonType-- as 'Person Type'
+											,phst.Description as 'HiringS tatus Type'
+											,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
 
-					,'-------------------------' as '-------------------------'
+											,'-------------------------' as '-------------------------'
 
-					--,'asdf' as 'asdf'
+											--,'asdf' as 'asdf'
 	
-					,*
-					*/
+											,*
+											*/
 	
-				from
-					--main.CertificationPersonMapping cpm
-					--join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
-					main.PersonHiringStatusHistory sh
-					--join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
-					join main.Person p on p.PersonId = sh.PersonId
-					--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
-					--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
-					--join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
-				where
-					p.PERSONID = @PERSONID
-					--and cpm.CertificationTypeId = 4-- or cpm.CertificationTypeId is null
-					--and StatusChangeDate >= DATEADD(day, -366, GETDATE())
-				order by
-					StatusChangeDate desc;
+										from
+											--main.CertificationPersonMapping cpm
+											--join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
+											main.PersonHiringStatusHistory sh
+											--join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
+											join main.Person p on p.PersonId = sh.PersonId
+											--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
+											--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
+											--join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
+										where
+											p.PERSONID = @PERSONID
+											--and cpm.CertificationTypeId = 4-- or cpm.CertificationTypeId is null
+											--and StatusChangeDate >= DATEADD(day, -366, GETDATE())
+										order by
+											StatusChangeDate desc;
 			END
 
 			ELSE
 			BEGIN
 
-			if exists (
-					select top 1 
-					@PERSONID,
-					p.FirstName
-					,p.LastName
+				if exists (
+						select top 1 
+						@PERSONID,
+						p.FirstName
+						,p.LastName
 	
-					,Convert(VARCHAR, p.Birthday, 101)
+						,Convert(VARCHAR, p.Birthday, 101)
 
-						,@LicenseNumb
-						,@LicenseState
-						,'asdf2'
+							,@LicenseNumb
+							,@LicenseState
+							,'asdf2'
 	
-						,@PhoneNUMB
+							,@PhoneNUMB
 	
-						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
+							,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
-						,'N/A'
+							,'N/A'
 	
-				/*	,'-------------------------' as '-------------------------'
+					/*	,'-------------------------' as '-------------------------'
 	
-					,pt.PersonType-- as 'Person Type'
-					,phst.Description as 'HiringS tatus Type'
-					,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
+						,pt.PersonType-- as 'Person Type'
+						,phst.Description as 'HiringS tatus Type'
+						,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
 
-					,'-------------------------' as '-------------------------'
+						,'-------------------------' as '-------------------------'
 
-					--,'asdf' as 'asdf'
+						--,'asdf' as 'asdf'
 	
-					,*
-					*/
+						,*
+						*/
 	
-				from
-					--main.CertificationPersonMapping cpm
-					--join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
-					main.PersonHiringStatusHistory sh
-					--join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
-					join main.Person p on p.PersonId = sh.PersonId
-					--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
-					--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
-					--join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
-				where
-					p.PERSONID = @PERSONID
-					and StatusChangeDate >= DATEADD(day, -365, GETDATE())
-				order by
-					StatusChangeDate desc)
+					from
+						--main.CertificationPersonMapping cpm
+						--join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
+						main.PersonHiringStatusHistory sh
+						--join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
+						join main.Person p on p.PersonId = sh.PersonId
+						--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
+						--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
+						--join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
+					where
+						p.PERSONID = @PERSONID
+						and StatusChangeDate >= DATEADD(day, -365, GETDATE())
+					order by
+						StatusChangeDate desc)
 
-					BEGIN
+						BEGIN
+
+							SET @HireRehireDate = '';
+					
 						
-						--TermQuit date
-						SELECT TOP 1 @TermQuitDate = Convert(VARCHAR, StatusChangeDate, 101)
-						FROM main.PersonHiringStatusHistory
-						WHERE PERSONID = @PERSONID
-						order by StatusChangeDate desc;
-
-
-						select @TermQuitDate
-
+							--TermQuit date
+							SET @TermQuitDate = '';
+							SELECT TOP 1 @TermQuitDate = Convert(VARCHAR, StatusChangeDate, 101)
+							FROM main.PersonHiringStatusHistory
+							WHERE PERSONID = @PERSONID
+							order by StatusChangeDate desc;
 
 
 
+													INSERT INTO @FINAL_LIST
+													(
+														PersonId
+														,FirstName
+														,LastName
+														,Birthday
+														,LicenseNumb
+														,LicenseState
+														,CDL_Y_N
+														,PhoneNumber
+														,DateHire
+														,DateTermination
+													)
+													select top 1 
+														@PERSONID,
+														p.FirstName
+														,p.LastName
+	
+														,Convert(VARCHAR, p.Birthday, 101)
+
+															,@LicenseNumb
+															,@LicenseState
+															,'asdf2'
+	
+															,@PhoneNUMB
+	
+															,@HireRehireDate
+		
+															,@TermQuitDate
+	
+													/*	,'-------------------------' as '-------------------------'
+	
+														,pt.PersonType-- as 'Person Type'
+														,phst.Description as 'HiringS tatus Type'
+														,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
+
+														,'-------------------------' as '-------------------------'
+
+														--,'asdf' as 'asdf'
+	
+														,*
+														*/
+	
+													from
+														--main.CertificationPersonMapping cpm
+														--join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
+														main.PersonHiringStatusHistory sh
+														--join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
+														join main.Person p on p.PersonId = sh.PersonId
+														--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
+														--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
+														--join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
+													where
+														p.PERSONID = @PERSONID
+														--and cpm.CertificationTypeId = 4-- or cpm.CertificationTypeId is null
+														--and StatusChangeDate >= DATEADD(day, -366, GETDATE())
+													order by
+														StatusChangeDate desc;
 
 
 
-					END
-			END
+
+						END
+				END
 
 
 
