@@ -96,9 +96,9 @@ SELECT PersonId FROM @IDList;
 					,FirstName
 					,LastName
 					,Birthday
-					/*,LicenseNumb
+					,LicenseNumb
 					,LicenseState
-					,CDL_Y_N*/
+					,CDL_Y_N
 					,PhoneNumber
 					,DateHire
 					,DateTermination
@@ -110,9 +110,9 @@ SELECT PersonId FROM @IDList;
 	
 					,Convert(VARCHAR, p.Birthday, 101) as 'Date of Birth (MM/DD/YYYY)'
 
-						/*,'asdf' as 'License State'
+						,'asdf' as 'License State'
 						,'asdf' as 'License #'
-						,'asdf' as 'CDL (Y/N)'*/
+						,'asdf' as 'CDL (Y/N)'
 	
 						,'asdf' as 'Phone Number'
 	
@@ -169,11 +169,11 @@ SELECT
 	FirstName as 'Driver First Name'
 	,LastName as 'Driver Last Name'
 	,Birthday 'Date of Birth (MM/DD/YYYY)'
-	/*
+
 		,'asdf' as 'License State'
 		,'asdf' as 'License #'
 		,'asdf' as 'CDL (Y/N)'
-*/
+
 		,'asdf' as 'Phone Number'
 	
 	,DateHire as 'Date of Hire (MM/DD/YYYY)'
