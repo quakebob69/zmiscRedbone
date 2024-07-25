@@ -172,10 +172,7 @@ SELECT PersonId FROM @IDList;
 				where
 					p.PERSONID = @PERSONID
 					--and cpm.CertificationTypeId = 4-- or cpm.CertificationTypeId is null
-						
-
-					and
-					StatusChangeDate >= DATEADD(day, -366, GETDATE())
+					--and StatusChangeDate >= DATEADD(day, -366, GETDATE())
 				order by
 					StatusChangeDate desc;
 
