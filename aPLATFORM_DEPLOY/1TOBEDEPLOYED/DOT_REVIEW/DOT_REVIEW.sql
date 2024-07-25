@@ -1,3 +1,17 @@
+DECLARE @FINAL_LIST TABLE
+	(
+		FirstName VARCHAR(100)
+		,LastName VARCHAR(100)
+		,Birthday VARCHAR(100)
+		,LicenseNumb VARCHAR(100)
+		,LicenseState VARCHAR(100)
+		,CDL_Y_N VARCHAR(100)
+		,PhoneNumber VARCHAR(100)
+		,DateHire VARCHAR(100)
+		,DateTermination VARCHAR(100)
+	)
+
+
 
 select
 	p.FirstName as 'Driver First Name'
@@ -6,6 +20,7 @@ select
 	,Convert(VARCHAR, p.Birthday, 101) as 'Date of Birth (MM/DD/YYYY)'
 
 		,'asdf' as 'License State'
+		,'asdf' as 'License #'
 		,'asdf' as 'CDL (Y/N)'
 	
 		,'asdf' as 'Phone Number'
@@ -38,6 +53,7 @@ where
 	ptm.PersonTypeId = 4
 		
 		--and cpm
+		--PHONE NUMBE
 
 	and
 	StatusChangeDate >= DATEADD(day, -366, GETDATE())
