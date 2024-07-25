@@ -96,20 +96,21 @@ SELECT PersonId FROM @IDList;
 			and UseForDispatch = 1
 
 
-			--LicenseNumb
-			SELECT TOP 1 @LicenseNumb= CertificationCode
-			FROM main.CertificationPersonMapping
-			where
-					PERSONID = @PERSONID
-					and CertificationTypeId = 4
+				SET @LicenseNumb = '';
+				--LicenseNumb
+				SELECT TOP 1 @LicenseNumb= CertificationCode
+				FROM main.CertificationPersonMapping
+				where
+						PERSONID = @PERSONID
+						and CertificationTypeId = 4
 
-
-			--LicenseState
-			SELECT TOP 1 @LicenseState= CertificationState
-			FROM main.CertificationPersonMapping
-			where
-					PERSONID = @PERSONID
-					and CertificationTypeId = 4
+				SET @LicenseState = '';
+				--LicenseState
+				SELECT TOP 1 @LicenseState= CertificationState
+				FROM main.CertificationPersonMapping
+				where
+						PERSONID = @PERSONID
+						and CertificationTypeId = 4
 
 
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
