@@ -25,7 +25,9 @@ DECLARE @FINAL_LIST TABLE
 
 DECLARE @PERSONID INT;
 DECLARE @IDList TABLE (PersonId INT);
-INSERT INTO @IDList (PersonId) --VALUES (1123), (1169), (1252);
+
+
+INSERT INTO @IDList (PersonId)
 select
 	distinct(p.personid)
 from
@@ -36,12 +38,6 @@ from
 	join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
 where
 	ptm.PersonTypeId = 4
-		
-		--and cpm
-		--PHONE NUMBE
-
-	and
-	StatusChangeDate >= DATEADD(day, -366, GETDATE())
 
 
 
@@ -56,7 +52,7 @@ SELECT PersonId FROM @IDList;
 		BEGIN
 			-- Perform the lookup here
 			-- Replace this with your actual lookup logic
-				SELECT 'Result for ID ' + CAST(@PERSONID AS VARCHAR(10))
+				--SELECT 'Result for ID ' + CAST(@PERSONID AS VARCHAR(10))
 				--SELECT @LookupResult = 'Result for ID ' + CAST(@ID AS VARCHAR(10))
 				--FROM SomeTable
 				--WHERE SomeColumn = @ID;
@@ -112,7 +108,7 @@ SELECT * FROM @FINAL_LIST;
 
 
 
-
+/*
 select
 	p.FirstName as 'Driver First Name'
 	,p.LastName as 'Driver Last Name'
@@ -159,3 +155,4 @@ where
 	StatusChangeDate >= DATEADD(day, -366, GETDATE())
 order by
 	p.PersonId, StatusChangeDate
+	*/
