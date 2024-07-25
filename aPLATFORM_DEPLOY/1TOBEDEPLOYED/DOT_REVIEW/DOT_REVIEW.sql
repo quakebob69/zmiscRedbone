@@ -1,6 +1,7 @@
 DECLARE @FINAL_LIST TABLE
 	(
-		FirstName VARCHAR(100)
+		PersonId int
+		,FirstName VARCHAR(100)
 		,LastName VARCHAR(100)
 		,Birthday VARCHAR(100)
 		,LicenseNumb VARCHAR(100)
