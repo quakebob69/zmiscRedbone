@@ -139,8 +139,8 @@ SELECT PersonId FROM @IDList;
 					main.PersonHiringStatusHistory sh
 					--join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
 					join main.Person p on p.PersonId = sh.PersonId
-					join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
-					join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
+					--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
+					--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
 				where
 					p.PERSONID = @PERSONID
 		
