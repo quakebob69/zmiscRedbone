@@ -25,7 +25,23 @@ DECLARE @FINAL_LIST TABLE
 
 DECLARE @PERSONID INT;
 DECLARE @IDList TABLE (PersonId INT);
-INSERT INTO @IDList (PersonId) VALUES (1123), (1169), (1252);
+INSERT INTO @IDList (PersonId) --VALUES (1123), (1169), (1252);
+select
+	distinct(p.personid)
+from
+	main.PersonHiringStatusHistory sh
+	join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
+	join main.Person p on p.PersonId = sh.PersonId
+	join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
+	join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
+where
+	ptm.PersonTypeId = 4
+		
+		--and cpm
+		--PHONE NUMBE
+
+	and
+	StatusChangeDate >= DATEADD(day, -366, GETDATE())
 
 
 
