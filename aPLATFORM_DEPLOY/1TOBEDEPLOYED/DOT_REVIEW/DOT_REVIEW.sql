@@ -43,8 +43,8 @@ DECLARE @IDList TABLE (PersonId INT);
 
 INSERT INTO @IDList (PersonId)
 SELECT
-	DISTINCT TOP 30 p.personid
-	--p.personid
+	--DISTINCT TOP 30 p.personid
+	p.personid
 from
 	main.PersonHiringStatusHistory sh
 	join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
