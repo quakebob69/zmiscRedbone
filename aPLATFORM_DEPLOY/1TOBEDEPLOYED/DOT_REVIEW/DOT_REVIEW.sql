@@ -105,16 +105,16 @@ SELECT PersonId FROM @IDList;
 				)
 				select top 1 
 					@PERSONID,
-					p.FirstName as 'Driver First Name'
-					,p.LastName as 'Driver Last Name'
+					p.FirstName
+					,p.LastName
 	
-					,Convert(VARCHAR, p.Birthday, 101) as 'Date of Birth (MM/DD/YYYY)'
+					,Convert(VARCHAR, p.Birthday, 101)
 
-						,'asdf' as 'License State'
-						,'asdf' as 'License #'
-						,'asdf' as 'CDL (Y/N)'
+						,cpm.CertificationState
+						,'asdf'
+						,'asdf'
 	
-						,'asdf' as 'Phone Number'
+						,'asdf'
 	
 						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
@@ -170,7 +170,7 @@ SELECT
 	,LastName as 'Driver Last Name'
 	,Birthday 'Date of Birth (MM/DD/YYYY)'
 
-		,'asdf' as 'License State'
+		,LicenseState as 'License State'
 		,'asdf' as 'License #'
 		,'asdf' as 'CDL (Y/N)'
 
