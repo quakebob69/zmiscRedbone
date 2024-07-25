@@ -3,21 +3,21 @@ select
 	p.FirstName as 'Driver First Name'
 	,p.LastName as 'Driver Last Name'
 	
-	,Convert(DATE, p.Birthday, 108) as 'Date of Birth (MM/DD/YYY)'
+	,Convert(VARCHAR, p.Birthday, 101) as 'Date of Birth (MM/DD/YYYY)'
 
 	,'asdf' as 'License State'
 	,'asdf' as 'CDL (Y/N)'
 	
 	,'asdf' as 'Phone Number'
 	
-	,'asdf' as 'Date of Hire (MM/DD/YYY)'
+	,'asdf' as 'Date of Hire (MM/DD/YYYY)'
 		
-	,'asdf' as 'Date of Termination (MM/DD/YYY)'
+	,'asdf' as 'Date of Termination (MM/DD/YYYY)'
 	
 	,'-------------------------' as '-------------------------'
 	
 	,pt.PersonType-- as 'Person Type'
-	,Convert(DATE, sh.StatusChangeDate, 108) as Status_Change_Date
+	,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
 
 	,'-------------------------' as '-------------------------'
 
