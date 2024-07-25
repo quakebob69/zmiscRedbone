@@ -78,10 +78,10 @@ SELECT PersonId FROM @IDList;
 				INSERT INTO @FINAL_LIST
 				(
 					PersonId
-					,FirstName)
-					/*,LastName
-					,Birthday
-					,LicenseNumb
+					,FirstName
+					,LastName
+					,Birthday)
+					/*,LicenseNumb
 					,LicenseState
 					,CDL_Y_N
 					,PhoneNumber
@@ -104,11 +104,11 @@ SELECT PersonId FROM @IDList;
 select top 1 
 	@PERSONID,
 	p.FirstName as 'Driver First Name'
-/*	,p.LastName as 'Driver Last Name'
+	,p.LastName as 'Driver Last Name'
 	
 	,Convert(VARCHAR, p.Birthday, 101) as 'Date of Birth (MM/DD/YYYY)'
 
-		,'asdf' as 'License State'
+		/*,'asdf' as 'License State'
 		,'asdf' as 'License #'
 		,'asdf' as 'CDL (Y/N)'
 	
