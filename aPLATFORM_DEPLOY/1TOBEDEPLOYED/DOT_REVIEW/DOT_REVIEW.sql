@@ -191,9 +191,12 @@ SELECT
 		,'asdf' as 'CDL (Y/N)'
 		,'asdf' as 'Phone Number'
 	*/
-		,DateHire as 'Date of Hire (MM/DD/YYYY)'
-		,DateTermination as 'Date of Termination (MM/DD/YYYY)'
-FROM @FINAL_LIST;
+	,DateHire as 'Date of Hire (MM/DD/YYYY)'
+	,DateTermination as 'Date of Termination (MM/DD/YYYY)'
+FROM
+@FINAL_LIST
+order by FirstName + ' ' + LastName
+;
 
 
 
