@@ -175,10 +175,65 @@ SELECT PersonId FROM @IDList;
 					--and StatusChangeDate >= DATEADD(day, -366, GETDATE())
 				order by
 					StatusChangeDate desc;
-
-
-
 			END
+
+			ELSE
+			BEGIN
+
+			if exists (
+					select top 1 
+					@PERSONID,
+					p.FirstName
+					,p.LastName
+	
+					,Convert(VARCHAR, p.Birthday, 101)
+
+						,@LicenseNumb
+						,@LicenseState
+						,'asdf2'
+	
+						,@PhoneNUMB
+	
+						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
+		
+						,'N/A'
+	
+				/*	,'-------------------------' as '-------------------------'
+	
+					,pt.PersonType-- as 'Person Type'
+					,phst.Description as 'HiringS tatus Type'
+					,Convert(VARCHAR, sh.StatusChangeDate, 101) as 'Status Change Date'
+
+					,'-------------------------' as '-------------------------'
+
+					--,'asdf' as 'asdf'
+	
+					,*
+					*/
+	
+				from
+					--main.CertificationPersonMapping cpm
+					--join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
+					main.PersonHiringStatusHistory sh
+					--join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
+					join main.Person p on p.PersonId = sh.PersonId
+					--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
+					--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
+					--join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
+				where
+					p.PERSONID = @PERSONID
+					and StatusChangeDate >= DATEADD(day, -366, GETDATE())
+				order by
+					StatusChangeDate desc)
+
+					BEGIN
+					SELECT 'horray'
+					END
+			END
+
+
+
+
 
 			FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
 		END
