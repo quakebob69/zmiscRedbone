@@ -224,8 +224,8 @@ SELECT PersonId FROM @IDList;
 
 						BEGIN
 
-							SET @HireRehireDate = '';
-					
+							SET @HireRehireDate = 'TODO';
+							
 						
 							--TermQuit date
 							SET @TermQuitDate = '';
