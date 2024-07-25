@@ -27,9 +27,11 @@ DECLARE @PERSONID INT;
 DECLARE @IDList TABLE (PersonId INT);
 
 
+
+
 INSERT INTO @IDList (PersonId)
-select
-	distinct(p.personid)
+SELECT
+	DISTINCT TOP 5 p.personid
 from
 	main.PersonHiringStatusHistory sh
 	join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
@@ -38,6 +40,9 @@ from
 	join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
 where
 	ptm.PersonTypeId = 4
+ORDER BY
+	P.PersonId DESC;
+
 
 
 
@@ -56,6 +61,8 @@ SELECT PersonId FROM @IDList;
 				--SELECT @LookupResult = 'Result for ID ' + CAST(@ID AS VARCHAR(10))
 				--FROM SomeTable
 				--WHERE SomeColumn = @ID;
+
+
 
 			
 
