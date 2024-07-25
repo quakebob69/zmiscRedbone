@@ -100,7 +100,7 @@ SELECT PersonId FROM @IDList;
 					,'DateHire'
 					,''
 				)*/
-select
+select top 1 
 	@PERSONID,
 	p.FirstName as 'Driver First Name'
 /*	,p.LastName as 'Driver Last Name'
@@ -138,7 +138,7 @@ from
 	join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
 	join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
 where
-	ptm.PersonTypeId = 4
+	p.PERSONID = @PERSONID
 		
 		--and cpm
 		--PHONE NUMBE
