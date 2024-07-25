@@ -1,3 +1,11 @@
+DECLARE @PERSON_LIST TABLE
+	(
+		PersonId int
+		,FirstName VARCHAR(100)
+		,LastName VARCHAR(100)
+		,Birthday VARCHAR(100)
+	)
+
 DECLARE @FINAL_LIST TABLE
 	(
 		PersonId int
@@ -36,6 +44,8 @@ SELECT PersonId FROM @IDList;
 				--SELECT @LookupResult = 'Result for ID ' + CAST(@ID AS VARCHAR(10))
 				--FROM SomeTable
 				--WHERE SomeColumn = @ID;
+
+			
 
 			-- Insert the result into the temporary table
 				INSERT INTO @FINAL_LIST
