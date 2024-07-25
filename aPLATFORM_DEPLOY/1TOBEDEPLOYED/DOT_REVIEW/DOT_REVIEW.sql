@@ -85,6 +85,11 @@ SELECT PersonId FROM @IDList;
 			WHERE PERSONID = @PERSONID
 			and UseForDispatch = 1
 
+			IF @PhoneNUMB = ''
+			BEGIN
+				SET @PhoneNUMB = '------------------------'
+			END
+
 			SET @LicenseNumb = '';
 			--LicenseNumb
 			SELECT TOP 1 @LicenseNumb= CertificationCode
