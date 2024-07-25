@@ -149,11 +149,11 @@ SELECT PersonId FROM @IDList;
 					join main.Person p on p.PersonId = sh.PersonId
 					--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
 					--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
-					join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
+					full outer join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
 				where
 					p.PERSONID = @PERSONID
-					and cpm.CertificationTypeId = 4
-						--PHONE NUMBE
+					--and cpm.CertificationTypeId = 4-- or cpm.CertificationTypeId is null
+						
 
 					and
 					StatusChangeDate >= DATEADD(day, -366, GETDATE())
@@ -180,7 +180,7 @@ SELECT
 
 		,LicenseNumb as 'License #'
 		,LicenseState as 'License State'
-		,'TODO' as 'CDL (Y/N)'
+		,'Y' as 'CDL (Y/N)'
 
 		,PhoneNumber as 'Phone Number'
 	
