@@ -3,10 +3,9 @@ select
 	p.FirstName as 'Driver First Name'
 	,p.LastName as 'Driver Last Name'
 	
-	,'asdf' as 'Date of Birth (MM/DD/YYY)'
-	
+	,Convert(DATE, p.Birthday, 108) as 'Date of Birth (MM/DD/YYY)'
+
 	,'asdf' as 'License State'
-	
 	,'asdf' as 'CDL (Y/N)'
 	
 	,'asdf' as 'Phone Number'
@@ -18,13 +17,15 @@ select
 	,'-------------------------' as '-------------------------'
 	
 	,pt.PersonType-- as 'Person Type'
+	,Convert(DATE, sh.StatusChangeDate, 108) as Status_Change_Date
+
+	,'-------------------------' as '-------------------------'
 
 	--,'asdf' as 'asdf'
 	
 	,*
 
 	
-	,Convert(DATE, sh.StatusChangeDate, 108) as Status_Change_Date
 from
 	main.CertificationPersonMapping cpm
 	join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
