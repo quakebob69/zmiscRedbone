@@ -12,7 +12,8 @@ DECLARE @FINAL_LIST TABLE
 		,DateTermination VARCHAR(100)
 	)
 
-
+DECLARE @IDList TABLE (PersonId INT);
+INSERT INTO @IDList (PersonId) VALUES (1123), (1169), (1252);
 
 select
 	p.FirstName as 'Driver First Name'
