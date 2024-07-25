@@ -104,8 +104,8 @@ SELECT PersonId FROM @IDList;
 					,FirstName
 					,LastName
 					,Birthday
-					,LicenseNumb
-					,LicenseState
+					--,LicenseNumb
+					--,LicenseState
 					,CDL_Y_N
 					,PhoneNumber
 					,DateHire
@@ -118,8 +118,8 @@ SELECT PersonId FROM @IDList;
 	
 					,Convert(VARCHAR, p.Birthday, 101)
 
-						,cpm.CertificationCode
-						,cpm.CertificationState
+						--,cpm.CertificationCode
+						--,cpm.CertificationState
 						,'asdf2'
 	
 						,@PhoneNUMB
@@ -149,7 +149,7 @@ SELECT PersonId FROM @IDList;
 					join main.Person p on p.PersonId = sh.PersonId
 					--join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
 					--join main.PersonTypes pt on pt.PersonTypeId = ptm.PersonTypeId
-					full outer join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
+					--join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
 				where
 					p.PERSONID = @PERSONID
 					--and cpm.CertificationTypeId = 4-- or cpm.CertificationTypeId is null
