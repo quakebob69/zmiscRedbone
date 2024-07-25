@@ -111,6 +111,12 @@ SELECT PersonId FROM @IDList;
 			and CertificationTypeId = 4
 
 
+			IF @LicenseState IS NULL
+			BEGIN
+				SET @LicenseState = ''
+			END
+
+
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
 			BEGIN
 
