@@ -222,7 +222,7 @@ SELECT PersonId FROM @IDList;
 					--join main.CertificationPersonMapping cpm on cpm.PersonId = p.personid
 				where
 					p.PERSONID = @PERSONID
-					and StatusChangeDate >= DATEADD(day, -366, GETDATE())
+					and StatusChangeDate >= DATEADD(day, -365, GETDATE())
 				order by
 					StatusChangeDate desc)
 
