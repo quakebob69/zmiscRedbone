@@ -13,6 +13,8 @@ DECLARE @FINAL_LIST TABLE
 	)
 
 
+
+
 DECLARE @PERSONID INT;
 DECLARE @IDList TABLE (PersonId INT);
 INSERT INTO @IDList (PersonId) VALUES (1123), (1169), (1252);
@@ -36,14 +38,40 @@ SELECT PersonId FROM @IDList;
 				--WHERE SomeColumn = @ID;
 
 			-- Insert the result into the temporary table
-				--INSERT INTO #Results (ID, LookupResult)
-				--VALUES (@ID, @LookupResult);
+				INSERT INTO @FINAL_LIST
+				(
+					PersonId
+					/*,FirstName VARCHAR(100)
+					,LastName VARCHAR(100)
+					,Birthday VARCHAR(100)
+					,LicenseNumb VARCHAR(100)
+					,LicenseState VARCHAR(100)
+					,CDL_Y_N VARCHAR(100)
+					,PhoneNumber VARCHAR(100)
+					,DateHire VARCHAR(100)
+					,DateTermination VARCHAR(100)*/
+				)
+				VALUES
+				(
+					@PERSONID
+					/*,FirstName VARCHAR(100)
+					,LastName VARCHAR(100)
+					,Birthday VARCHAR(100)
+					,LicenseNumb VARCHAR(100)
+					,LicenseState VARCHAR(100)
+					,CDL_Y_N VARCHAR(100)
+					,PhoneNumber VARCHAR(100)
+					,DateHire VARCHAR(100)
+					,DateTermination VARCHAR(100)*/
+				)
 
 			FETCH NEXT FROM PersonId_cursor INTO @PERSONID;
 		END
 	CLOSE PersonId_cursor;
 
 DEALLOCATE PersonId_cursor;
+
+SELECT * FROM @FINAL_LIST;
 
 
 
