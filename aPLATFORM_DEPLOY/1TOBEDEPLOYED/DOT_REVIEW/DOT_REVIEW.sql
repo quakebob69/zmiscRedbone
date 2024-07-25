@@ -64,7 +64,7 @@ SELECT PersonId FROM @IDList;
 				--WHERE SomeColumn = @ID;
 
 
-			SELECT top 1 * from main.PersonEmploymentHistory where PersonId = @PERSONID;
+			SELECT top 1 * from main.PersonHiringStatusHistory where PersonId = @PERSONID;
 			
 
 			-- Insert the result into the temporary table
