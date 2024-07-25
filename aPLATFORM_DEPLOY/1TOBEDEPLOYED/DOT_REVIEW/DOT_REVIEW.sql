@@ -126,7 +126,7 @@ SELECT PersonId FROM @IDList;
 	
 						,@HireRehireDate as 'Date of Hire (MM/DD/YYYY)'
 		
-						,' - '
+						,'N/A'
 	
 				/*	,'-------------------------' as '-------------------------'
 	
