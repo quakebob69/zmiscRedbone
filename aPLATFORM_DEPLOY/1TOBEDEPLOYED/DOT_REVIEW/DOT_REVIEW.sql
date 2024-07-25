@@ -7,13 +7,15 @@ select
 	
 	,'asdf' as 'License State'
 	
-	,'asdf' as 'CDL (Y/N)', 'Phone Number' as 'Phone Number'
+	,'asdf' as 'CDL (Y/N)'
+	
+	,'asdf' as 'Phone Number'
 	
 	,'asdf' as 'Date of Hire (MM/DD/YYY)'
 		
 	,'asdf' as 'Date of Termination (MM/DD/YYY)'
 	
-	,'----------------------------------------'
+	,'-------------------------' as '-------------------------'
 	
 	,pt.PersonType-- as 'Person Type'
 
