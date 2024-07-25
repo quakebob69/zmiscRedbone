@@ -134,8 +134,9 @@ SELECT PersonId FROM @IDList;
 					*/
 	
 				from
-					main.CertificationPersonMapping cpm
-					join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
+					--main.CertificationPersonMapping cpm
+					--join main.PersonHiringStatusHistory sh on cpm.PersonId = sh.Personid
+					main.PersonHiringStatusHistory sh
 					join main.PersonHiringStatusType phst on phst.PersonHiringStatusTypeId = sh.PersonHiringStatusTypeId
 					join main.Person p on p.PersonId = sh.PersonId
 					join main.PersonTypeMapping ptm on p.PersonId = ptm.PersonId
