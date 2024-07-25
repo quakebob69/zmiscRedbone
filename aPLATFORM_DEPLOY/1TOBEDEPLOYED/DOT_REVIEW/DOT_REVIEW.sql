@@ -6,6 +6,15 @@ DECLARE @PERSON_LIST TABLE
 		,Birthday VARCHAR(100)
 	)
 
+
+
+
+
+
+
+
+
+
 DECLARE @FINAL_LIST TABLE
 	(
 		PersonId int
@@ -169,7 +178,22 @@ order by
 
 DEALLOCATE PersonId_cursor;
 
-SELECT * FROM @FINAL_LIST;
+
+
+
+SELECT
+	FirstName as 'Driver First Name'
+	,LastName as 'Driver Last Name'
+	,Birthday 'Date of Birth (MM/DD/YYYY)'
+	/*
+		,'asdf' as 'License State'
+		,'asdf' as 'License #'
+		,'asdf' as 'CDL (Y/N)'
+		,'asdf' as 'Phone Number'
+	*/
+		,DateHire as 'Date of Hire (MM/DD/YYYY)'
+		,DateTermination as 'Date of Termination (MM/DD/YYYY)'
+FROM @FINAL_LIST;
 
 
 
