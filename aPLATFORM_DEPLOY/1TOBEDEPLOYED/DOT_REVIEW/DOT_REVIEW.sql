@@ -72,7 +72,7 @@ SELECT PersonId FROM @IDList;
 			
 			
 
-			IF @LAST_HiringStatusType = 4
+			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
 			BEGIN
 				SELECT @LAST_HiringStatusType;
 			END
