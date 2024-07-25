@@ -36,6 +36,8 @@ DECLARE @PERSONID INT;
 DECLARE @LAST_HiringStatusType INT;
 DECLARE @HireRehireDate VARCHAR(100);
 DECLARE @PhoneNUMB VARCHAR(100);
+DECLARE @LicenseNumb VARCHAR(100);
+DECLARE @LicenseState VARCHAR(100);
 DECLARE @IDList TABLE (PersonId INT);
 
 
@@ -94,6 +96,22 @@ SELECT PersonId FROM @IDList;
 			and UseForDispatch = 1
 
 
+			--LicenseNumb
+			SELECT TOP 1 @LicenseNumb= CertificationCode
+			FROM main.CertificationPersonMapping
+			where
+					PERSONID = @PERSONID
+					and CertificationTypeId = 4
+
+
+			--LicenseState
+			SELECT TOP 1 @LicenseState= CertificationState
+			FROM main.CertificationPersonMapping
+			where
+					PERSONID = @PERSONID
+					and CertificationTypeId = 4
+
+
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
 			--IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 2 OR @LAST_HiringStatusType = 3 OR @LAST_HiringStatusType = 4
 			BEGIN
@@ -104,8 +122,8 @@ SELECT PersonId FROM @IDList;
 					,FirstName
 					,LastName
 					,Birthday
-					--,LicenseNumb
-					--,LicenseState
+					,LicenseNumb
+					,LicenseState
 					,CDL_Y_N
 					,PhoneNumber
 					,DateHire
@@ -118,8 +136,8 @@ SELECT PersonId FROM @IDList;
 	
 					,Convert(VARCHAR, p.Birthday, 101)
 
-						--,cpm.CertificationCode
-						--,cpm.CertificationState
+						,@LicenseNumb
+						,@LicenseState
 						,'asdf2'
 	
 						,@PhoneNUMB
