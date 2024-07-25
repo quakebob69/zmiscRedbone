@@ -110,7 +110,7 @@ SELECT PersonId FROM @IDList;
 	
 					,Convert(VARCHAR, p.Birthday, 101)
 
-						,'asdf1'
+						,cpm.CertificationCode
 						,cpm.CertificationState
 						,'asdf2'
 	
@@ -170,7 +170,7 @@ SELECT
 	,LastName as 'Driver Last Name'
 	,Birthday 'Date of Birth (MM/DD/YYYY)'
 
-		,'asdf4' as 'License #'
+		,LicenseNumb as 'License #'
 		,LicenseState as 'License State'
 		,'asdf5' as 'CDL (Y/N)'
 
