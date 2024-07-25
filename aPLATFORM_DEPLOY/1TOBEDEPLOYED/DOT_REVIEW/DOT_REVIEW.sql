@@ -87,7 +87,11 @@ SELECT PersonId FROM @IDList;
 
 			IF @PhoneNUMB = ''
 			BEGIN
-				SET @PhoneNUMB = '------------------------'
+				SET @PhoneNUMB = '';
+				SELECT TOP 1 @PhoneNUMB = PhoneNumber
+				FROM main.PersonPhoneNumber
+				WHERE PERSONID = @PERSONID
+				--and UseForDispatch = 1
 			END
 
 			SET @LicenseNumb = '';
