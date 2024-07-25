@@ -107,6 +107,7 @@ SELECT PersonId FROM @IDList;
 
 						
 				--hire/rehire date
+				SET @HireRehireDate = ''
 				SELECT TOP 1 @HireRehireDate = Convert(VARCHAR, StatusChangeDate, 101)
 				FROM main.PersonHiringStatusHistory
 				WHERE PERSONID = @PERSONID
@@ -224,8 +225,12 @@ SELECT PersonId FROM @IDList;
 
 						BEGIN
 
-							SET @HireRehireDate = 'TODO';
-							
+							SET @HireRehireDate = '';
+							--hire/rehire date
+							SELECT TOP 1 @HireRehireDate = Convert(VARCHAR, StatusChangeDate, 101)
+							FROM main.PersonHiringStatusHistory
+							WHERE PERSONID = @PERSONID
+							order by StatusChangeDate desc;
 						
 							--TermQuit date
 							SET @TermQuitDate = '';
