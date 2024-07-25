@@ -24,6 +24,7 @@ DECLARE @FINAL_LIST TABLE
 
 
 DECLARE @PERSONID INT;
+DECLARE @LAST_HiringStatusType INT;
 DECLARE @IDList TABLE (PersonId INT);
 
 
@@ -31,7 +32,7 @@ DECLARE @IDList TABLE (PersonId INT);
 
 INSERT INTO @IDList (PersonId)
 SELECT
-	DISTINCT TOP 5 p.personid
+	DISTINCT TOP 10 p.personid
 	--p.personid
 from
 	main.PersonHiringStatusHistory sh
@@ -64,8 +65,12 @@ SELECT PersonId FROM @IDList;
 				--WHERE SomeColumn = @ID;
 
 
-			SELECT top 1 * from main.PersonHiringStatusHistory where PersonId = @PERSONID order by StatusChangeDate desc;
+			SELECT TOP 1 @LAST_HiringStatusType = PersonHiringStatusTypeId
+			FROM main.PersonHiringStatusHistory
+			WHERE PERSONID = @PERSONID
+			order by StatusChangeDate desc;
 			
+			SELECT @LAST_HiringStatusType;
 
 			-- Insert the result into the temporary table
 				INSERT INTO @FINAL_LIST
