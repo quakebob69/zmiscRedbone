@@ -73,6 +73,7 @@ SELECT PersonId FROM @IDList;
 			
 
 			IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 4
+			--IF @LAST_HiringStatusType = 1 OR @LAST_HiringStatusType = 2 OR @LAST_HiringStatusType = 3 OR @LAST_HiringStatusType = 4
 			BEGIN
 				INSERT INTO @FINAL_LIST
 				(
