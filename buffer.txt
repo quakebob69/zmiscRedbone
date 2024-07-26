@@ -3372,3 +3372,12 @@ function onEdit(e) {
     range.clearContent();
   }
 }
+
+
+
+function createInstallableTrigger() {
+    ScriptApp.newTrigger('installedOnEdit')
+        .forSpreadsheet(SpreadsheetApp.getActive())
+        .onEdit()
+        .create();
+}
