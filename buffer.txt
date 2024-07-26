@@ -3345,10 +3345,30 @@ PersonEmpHistoryList
 
 
 
+in google sheets, i want to have a sheet with 3 columns.  column a contains tasks . column b contains checkboxes.  column c is a list of completed tasks. I want the task from the column a to be moved to the end of this list in column c When the checkbox is clicked, .
 
 
 
 
 
+function onEdit(e) {
+  // Get the edited range
+  const sheet = e.source.getActiveSheet();
+  const range = e.range;
 
-
+  // Check if the edit was made in column E
+  if (range.getColumn() == 5 && range.getValue() === true) {
+    const row = range.getRow();
+    const task = sheet.getRange(row, 4).getValue(); // Get the task from column D
+    
+    // Find the last row in column G
+    const lastRowG = sheet.getRange('G:G').getValues().filter(String).length;
+    SpreadsheetApp.getUi().alert(task);
+    // Append the task to column G
+    sheet.getRange(lastRowG + 1, 7).setValue(task);
+    
+    // Clear the task and checkbox
+    sheet.getRange(row, 4).clearContent();
+    range.clearContent();
+  }
+}
