@@ -1,0 +1,32 @@
+                    <fieldset style="border: none;">
+                        <legend style="font-size: small; font-weight: bold;">Driver Manager 5<br />
+                            <asp:Label ID="FullName_DM5" runat="server"></asp:Label></legend>
+                        <div class="box">
+                            <telerik:RadGrid ID="RadGridDriverMan5Trucks" runat="server" CellSpacing="-1" AllowSorting="True"
+                                AutoGenerateColumns="False"
+                                OnItemCommand="RadGrid_ItemCommand"
+                                DataSourceID="ObjectDataSource_vFleetManagerDriver_DM5">
+                                <ClientSettings Resizing-AllowColumnResize="true" EnableRowHoverStyle="true">
+                                    <Scrolling AllowScroll="False" UseStaticHeaders="True" />
+                                    <Resizing AllowColumnResize="true" AllowResizeToFit="true" EnableRealTimeResize="true" />
+                                    <Selecting AllowRowSelect="True" />
+                                </ClientSettings>
+                                <MasterTableView GridLines="None" AllowFilteringByColumn="false" AllowSorting="true"
+                                    DataKeyNames="PUnitId" DataSourceID="ObjectDataSource_vFleetManagerDriver_DM5">
+                                    <RowIndicatorColumn Visible="False">
+                                    </RowIndicatorColumn>
+                                    <ExpandCollapseColumn Created="True">
+                                    </ExpandCollapseColumn>
+                                    <Columns>
+                                        <telerik:GridBoundColumn DataField="PUnitId" FilterControlAltText="Filter PUnitId column" UniqueName="PUnitId" HeaderText="PUnitId"
+                                            DataType="System.Int32" ReadOnly="False" SortExpression="PUnitId" Display="false" FilterControlWidth="50px" HeaderStyle-Width="60px" AutoPostBackOnFilter="true">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn AllowFiltering="True" DataField="Unit_ID" FilterControlAltText="Filter Unit_ID column"
+                                            HeaderText="Unit" SortExpression="Unit_ID" UniqueName="Unit_ID" FilterControlWidth="30px" HeaderStyle-Width="40px" AutoPostBackOnFilter="true">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridButtonColumn Text="Unassign" CommandName="Unassign5" UniqueName="Unassign5Button" />
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </div>
+                    </fieldset>
