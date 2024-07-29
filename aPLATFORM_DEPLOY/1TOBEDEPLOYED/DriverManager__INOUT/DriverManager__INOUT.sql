@@ -625,6 +625,10 @@
 			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 2
 			UNION ALL
 			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 3
+			UNION ALL
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 4
+			UNION ALL
+			SELECT PUnitId FROM dispatch.vFleetManagerDriver where DispatchFleetManagerId = 5
 
 			DECLARE @UnassignedTrucks TABLE (
 				PUnitId int NULL
