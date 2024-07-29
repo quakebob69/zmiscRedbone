@@ -743,7 +743,7 @@
 
 	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 1 WHERE unit_id = '204';
 	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 1 WHERE unit_id = '205';
-	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 4 WHERE unit_id = '206';
+	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 3 WHERE unit_id = '206';
 	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '207';
 	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '208';
 	UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '209';
@@ -758,7 +758,7 @@
 	
 		UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '261';
 		UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 1 WHERE unit_id = '262';
-		UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 4 WHERE unit_id = '263';
+		UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 3 WHERE unit_id = '263';
 		UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '264';
 		UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '265';
 		UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '266';
@@ -770,9 +770,9 @@
 
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 1 WHERE unit_id = '234';
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 1 WHERE unit_id = '235';
-UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 4 WHERE unit_id = '236';
+UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 3 WHERE unit_id = '236';
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '237';
-UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 4 WHERE unit_id = '238';
+UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 3 WHERE unit_id = '238';
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '239';
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '240';
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '241';
@@ -796,7 +796,7 @@ UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '185
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 1 where LoadId % 10 IN (1, 2, 3, 4);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId % 10 IN (6);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 3 where LoadId % 10 IN (7, 8);
-	Update [dispatch].[Load] set [DispatchFleetManagerId] = 4 where LoadId % 10 IN (9);
+	--Update [dispatch].[Load] set [DispatchFleetManagerId] = 4 where LoadId % 10 IN (9);
 
 
 --CHECK
