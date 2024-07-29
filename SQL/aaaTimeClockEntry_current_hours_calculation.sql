@@ -11,15 +11,15 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 																					--------------------------------------------------------------------------------------------------------------
 																						--IN
-																							--DECLARE @EntryId__IN INTEGER = 28358
-																							--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-07-22 06:58:58.367';
+																							--DECLARE @EntryId__IN INTEGER = 28584
+																							--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-07-29 06:49:12.887';
 																							--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN;
 
 		
 
 																						--OUT
-																							--DECLARE @EntryId__OUT INTEGER = 28358
-																							--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-07-22 11:47:32.900';
+																							--DECLARE @EntryId__OUT INTEGER = 28584
+																							--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-07-29 06:49:12.887';
 																							--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT;
 																					--------------------------------------------------------------------------------------------------------------
 
