@@ -3381,3 +3381,19 @@ function createInstallableTrigger() {
         .onEdit()
         .create();
 }
+
+
+
+
+
+
+SELECT dispatch.DispatchFleetManager.DispatchFleetManagerId, dispatch.DispatchFleetManager.Name, dispatch.DispatchFleetManager.PersonId, dispatch.DispatchFleetManager.PhoneNumber, main.Person.LastName, 
+                  main.Person.MiddleInitial, main.Person.FirstName
+FROM     dispatch.DispatchFleetManager INNER JOIN
+                  main.Person ON dispatch.DispatchFleetManager.PersonId = main.Person.PersonId
+
+
+
+
+
+
