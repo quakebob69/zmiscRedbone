@@ -659,6 +659,11 @@
 			FROM
 				equipment.PUnit pu
 				join @UnassignedTrucks unass on pu.PUnitId = unass.PUnitId
+			WHERE
+				TRY_CONVERT(INT, pu.Unit_ID) < 1000
+			ORDER BY
+				TRY_CONVERT(INT, pu.Unit_ID)
+				
 
 		END
 		GO
