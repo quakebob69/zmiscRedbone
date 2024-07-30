@@ -540,6 +540,7 @@
 			full join equipment.PunitMapping pum on e.PUnitId = pum.PunitId
 			full join main.GroupType gt on gt.GroupTypeId = pum.GroupTypeId
 		--where 
+		--  e.Unit_ID < 1000
 		--	e.ActiveInd = 1
 		--	and
 		--	pum.PUnitActiveTypeId = 1
