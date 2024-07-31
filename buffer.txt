@@ -3385,6 +3385,8 @@ function createInstallableTrigger() {
 
 
 
+DispatchFleetManager2
+
 
 
 SELECT dispatch.DispatchFleetManager.DispatchFleetManagerId, dispatch.DispatchFleetManager.Name, dispatch.DispatchFleetManager.PersonId, dispatch.DispatchFleetManager.PhoneNumber, main.Person.LastName, 
@@ -3396,4 +3398,76 @@ FROM     dispatch.DispatchFleetManager INNER JOIN
 
 
 
+dsPersonEdit_DriverInfoTableAdapters.DispatchFleetManagerTableAdapter
+RedbonePlatform.Datasets.asdf.DispatchFleetManager2TableAdapter
 
+
+
+function installedOnEdit(e) {
+  // Get the edited range
+  const sheet = e.source.getActiveSheet();
+  const range = e.range;
+
+  var activeTab = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var activeTabName = activeTab.getName();
+
+  // Check if the edit was made in column E
+  if (range.getColumn() == 5 && range.getRow() >= 15 && range.getValue() === true && activeTabName != 'Matt T.') {
+    const taskToMoveRow = range.getRow();
+    const taskToMove = sheet.getRange(row, 4).getValue(); // Get the task from column D
+    
+
+
+    var lastCompletedTasksRow = sheet.getRange('G:G').getValues().filter(String).length
+    var rangeCompletedTasks = sheet.getRange("G2:G" + lastCompletedTasksRow);
+    rangeCompletedTasks.insertCells(SpreadsheetApp.Dimension.ROWS);
+    sheet.getRange(1, 7).setValue(taskToMove);
+
+
+
+
+
+
+  //  // Find the last row in column G
+  //  const lastRowG = sheet.getRange('G:G').getValues().filter(String).length;
+  //  //SpreadsheetApp.getUi().alert(taskToMove);
+  //  // Append the task to column G
+  //  sheet.getRange(lastRowG + 1, 7).setValue(taskToMove);
+
+
+
+
+
+
+//  var lastRow = sheet.getLastRow();
+//  var range = sheet.getRange("G2:G" + lastRow);
+//  var values = range.getValues();
+//  
+//  // Filter out empty cells
+//  var nonEmptyValues = values.filter(function(row) {
+//    return row[0] !== "";
+//  });
+//  
+//  // Insert an empty row at the top
+//  nonEmptyValues.unshift([""]);
+//  
+//  // Set the new values back to the range
+//  range.setValues(nonEmptyValues);
+
+
+
+
+
+
+
+    
+    
+    // Clear the task and checkbox
+    sheet.getRange(taskToMoveRow, 4).clearContent();
+    range.clearContent();
+  }
+}
+
+
+
+asdf
