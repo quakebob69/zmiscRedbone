@@ -3351,179 +3351,13 @@ in google sheets, i want to have a sheet with 3 columns.  column a contains task
 
 
 
-function onEdit(e) {
-  // Get the edited range
-  const sheet = e.source.getActiveSheet();
-  const range = e.range;
-
-  // Check if the edit was made in column E
-  if (range.getColumn() == 5 && range.getValue() === true) {
-    const row = range.getRow();
-    const task = sheet.getRange(row, 4).getValue(); // Get the task from column D
-    
-    // Find the last row in column G
-    const lastRowG = sheet.getRange('G:G').getValues().filter(String).length;
-    SpreadsheetApp.getUi().alert(task);
-    // Append the task to column G
-    sheet.getRange(lastRowG + 1, 7).setValue(task);
-    
-    // Clear the task and checkbox
-    sheet.getRange(row, 4).clearContent();
-    range.clearContent();
-  }
-}
-
-
-
-function createInstallableTrigger() {
-    ScriptApp.newTrigger('installedOnEdit')
-        .forSpreadsheet(SpreadsheetApp.getActive())
-        .onEdit()
-        .create();
-}
-
-
-
-
-DispatchFleetManager2
-
-
-
-SELECT dispatch.DispatchFleetManager.DispatchFleetManagerId, dispatch.DispatchFleetManager.Name, dispatch.DispatchFleetManager.PersonId, dispatch.DispatchFleetManager.PhoneNumber, main.Person.LastName, 
-                  main.Person.MiddleInitial, main.Person.FirstName
-FROM     dispatch.DispatchFleetManager INNER JOIN
-                  main.Person ON dispatch.DispatchFleetManager.PersonId = main.Person.PersonId
-
-
-
-
-
-dsPersonEdit_DriverInfoTableAdapters.DispatchFleetManagerTableAdapter
-RedbonePlatform.Datasets.asdf.DispatchFleetManager2TableAdapter
-
-
-
-function installedOnEdit(e) {
-  // Get the edited range
-  const sheet = e.source.getActiveSheet();
-  const range = e.range;
-
-  var activeTab = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var activeTabName = activeTab.getName();
-
-  // Check if the edit was made in column E
-  if (range.getColumn() == 5 && range.getRow() >= 15 && range.getValue() === true && activeTabName != 'Matt T.') {
-    const taskToMoveRow = range.getRow();
-    const taskToMove = sheet.getRange(row, 4).getValue(); // Get the task from column D
-    
-
-
-    var lastCompletedTasksRow = sheet.getRange('G:G').getValues().filter(String).length
-    var rangeCompletedTasks = sheet.getRange("G2:G" + lastCompletedTasksRow);
-    rangeCompletedTasks.insertCells(SpreadsheetApp.Dimension.ROWS);
-    sheet.getRange(1, 7).setValue(taskToMove);
-
-
-
-
-
-
-  //  // Find the last row in column G
-  //  const lastRowG = sheet.getRange('G:G').getValues().filter(String).length;
-  //  //SpreadsheetApp.getUi().alert(taskToMove);
-  //  // Append the task to column G
-  //  sheet.getRange(lastRowG + 1, 7).setValue(taskToMove);
-
-
-
-
-
-
-//  var lastRow = sheet.getLastRow();
-//  var range = sheet.getRange("G2:G" + lastRow);
-//  var values = range.getValues();
-//  
-//  // Filter out empty cells
-//  var nonEmptyValues = values.filter(function(row) {
-//    return row[0] !== "";
-//  });
-//  
-//  // Insert an empty row at the top
-//  nonEmptyValues.unshift([""]);
-//  
-//  // Set the new values back to the range
-//  range.setValues(nonEmptyValues);
-
-
-
-
-
-
-
-    
-    
-    // Clear the task and checkbox
-    sheet.getRange(taskToMoveRow, 4).clearContent();
-    range.clearContent();
-  }
-}
-
-
-
-function MoveCompletedTODOsV02(e) {
-  // Get the edited range
+function MoveCompletedTODOsV04(e) {
+  // get the edited range
   var sheet = e.source.getActiveSheet();
   var range = e.range;
   var activeSheetName = sheet.getName();
 
-  // Check if the edit was made in column E
-  if (range.getColumn() == 5 && range.getRow() >= 15 && range.getValue() === true && activeSheetName != 'Matt T.') {
-    const rangeasdf = sheet.getRange('G2');
-    rangeasdf.insertCells(SpreadsheetApp.Dimension.ROWS);
-
-
-
-    //var targetCellg = sheet.getRange("G2"); // Change this to your desired cell
-    //var targetRowg = targetCellg.getRow();
-    //var targetColumng = targetCellg.getColumn();
-  
-  // Insert a row above the target cell
-  //sheet.insertRowBefore(targetRowg);
-
-    //var rangeToShiftG = sheet.getRange('G2:G');
-    //sheet.insertCells(rangeToShiftG, SpreadsheetApp.Dimension.ROWS);
-
-
-
-
-
-    //var taskToMoveRow = range.getRow();
-    //var taskToMove = sheet.getRange(taskToMoveRow, 4).getValue(); // Get the task from column D
-
-    //var lastCompletedTasksRow = sheet.getRange('G:G').getValues().filter(String).length
-    //var rangeCompletedTasks = sheet.getRange("G2:G" + lastCompletedTasksRow);
-
-
-
-    ////sheet.getRange(2, 7).setValue(taskToMove);
-
-    // Clear the task and checkbox
-    ////sheet.getRange(taskToMoveRow, 4).clearContent();
-    ////range.clearContent();
-  }
-}
-
-
-
-
-
-function MoveCompletedTODOsV03(e) {
-  // Get the edited range
-  var sheet = e.source.getActiveSheet();
-  var range = e.range;
-  var activeSheetName = sheet.getName();
-
-  // Check if the edit was made in column E
+  // check if the edit was made in column E
   if (range.getColumn() == 5 && range.getRow() >= 15 && range.getValue() === true && activeSheetName != 'Matt T.') {
     const rangeCompletedTasks = sheet.getRange('G2');
     rangeCompletedTasks.insertCells(SpreadsheetApp.Dimension.ROWS);
@@ -3532,20 +3366,19 @@ function MoveCompletedTODOsV03(e) {
     var taskToMoveValue = sheet.getRange(taskToMoveRow, 4).getValue();
     sheet.getRange(2, 7).setValue(taskToMoveValue);
 
-    // Clear the task and checkbox
+    // clear the task and checkbox
     sheet.getRange(taskToMoveRow, 4).clearContent();
-    //sheet.getRange(taskToMoveRow, 4).insertCells(SpreadsheetApp.Dimension.ROWS);
-    //sheet.getRange(taskToMoveRow, 4).deleteCells(SpreadsheetApp.Dimension.ROWS);
     range.clearContent();
 
-    var rangeToDoRangeToShift = sheet.getRange('D20:D63');
+    var lastRowNum = 63;
+    var numRowsToShift = 63 - taskToMoveRow;
+    var rangeToDoRangeToShift = sheet.getRange(taskToMoveRow + 1, 4, numRowsToShift);
     var valuesToDoRangeToShift = rangeToDoRangeToShift.getValues();
-    var destinationTODORange = sheet.getRange('D19:D62');
+    var destinationTODORange = sheet.getRange(taskToMoveRow, 4, numRowsToShift);
     destinationTODORange.setValues(valuesToDoRangeToShift);
     sheet.getRange('D63').setValue("");
   }
 }
-
 
 
 
