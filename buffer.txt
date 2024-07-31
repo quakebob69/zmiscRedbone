@@ -3512,3 +3512,40 @@ function MoveCompletedTODOsV02(e) {
     ////range.clearContent();
   }
 }
+
+
+
+
+
+function MoveCompletedTODOsV03(e) {
+  // Get the edited range
+  var sheet = e.source.getActiveSheet();
+  var range = e.range;
+  var activeSheetName = sheet.getName();
+
+  // Check if the edit was made in column E
+  if (range.getColumn() == 5 && range.getRow() >= 15 && range.getValue() === true && activeSheetName != 'Matt T.') {
+    const rangeCompletedTasks = sheet.getRange('G2');
+    rangeCompletedTasks.insertCells(SpreadsheetApp.Dimension.ROWS);
+
+    var taskToMoveRow = range.getRow();
+    var taskToMoveValue = sheet.getRange(taskToMoveRow, 4).getValue();
+    sheet.getRange(2, 7).setValue(taskToMoveValue);
+
+    // Clear the task and checkbox
+    sheet.getRange(taskToMoveRow, 4).clearContent();
+    //sheet.getRange(taskToMoveRow, 4).insertCells(SpreadsheetApp.Dimension.ROWS);
+    //sheet.getRange(taskToMoveRow, 4).deleteCells(SpreadsheetApp.Dimension.ROWS);
+    range.clearContent();
+
+    var rangeToDoRangeToShift = sheet.getRange('D20:D63');
+    var valuesToDoRangeToShift = rangeToDoRangeToShift.getValues();
+    var destinationTODORange = sheet.getRange('D19:D62');
+    destinationTODORange.setValues(valuesToDoRangeToShift);
+    sheet.getRange('D63').setValue("");
+  }
+}
+
+
+
+
