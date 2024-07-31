@@ -3470,4 +3470,45 @@ function installedOnEdit(e) {
 
 
 
-asdf
+function MoveCompletedTODOsV02(e) {
+  // Get the edited range
+  var sheet = e.source.getActiveSheet();
+  var range = e.range;
+  var activeSheetName = sheet.getName();
+
+  // Check if the edit was made in column E
+  if (range.getColumn() == 5 && range.getRow() >= 15 && range.getValue() === true && activeSheetName != 'Matt T.') {
+    const rangeasdf = sheet.getRange('G2');
+    rangeasdf.insertCells(SpreadsheetApp.Dimension.ROWS);
+
+
+
+    //var targetCellg = sheet.getRange("G2"); // Change this to your desired cell
+    //var targetRowg = targetCellg.getRow();
+    //var targetColumng = targetCellg.getColumn();
+  
+  // Insert a row above the target cell
+  //sheet.insertRowBefore(targetRowg);
+
+    //var rangeToShiftG = sheet.getRange('G2:G');
+    //sheet.insertCells(rangeToShiftG, SpreadsheetApp.Dimension.ROWS);
+
+
+
+
+
+    //var taskToMoveRow = range.getRow();
+    //var taskToMove = sheet.getRange(taskToMoveRow, 4).getValue(); // Get the task from column D
+
+    //var lastCompletedTasksRow = sheet.getRange('G:G').getValues().filter(String).length
+    //var rangeCompletedTasks = sheet.getRange("G2:G" + lastCompletedTasksRow);
+
+
+
+    ////sheet.getRange(2, 7).setValue(taskToMove);
+
+    // Clear the task and checkbox
+    ////sheet.getRange(taskToMoveRow, 4).clearContent();
+    ////range.clearContent();
+  }
+}
