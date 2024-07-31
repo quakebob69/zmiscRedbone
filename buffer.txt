@@ -3351,7 +3351,27 @@ in google sheets, i want to have a sheet with 3 columns.  column a contains task
 
 
 
-function MoveCompletedTODOsV04(e) {
+function MoveCompletedTODOsV06(e) {
+    var now = new Date();
+    var timeZone = Session.getScriptTimeZone();
+    var formattedDateTime = Utilities.formatDate(now, timeZone, "yyyy-MM-dd HH:mm '('z')'");
+    //SpreadsheetApp.getUi().alert(formattedDateTime);
+    
+    var lock = LockService.getScriptLock();
+    try {
+      // Attempt to acquire the lock, wait for up to 30 seconds
+      lock.waitLock(30000);
+
+      handleCompletedTODOsClick(e, formattedDateTime);
+    } catch (ex) {
+      Logger.log('Could not obtain lock: ' + ex);
+    } finally {
+      // Release the lock
+      lock.releaseLock();
+    }
+}
+
+function handleCompletedTODOsClick(e, currDateTime) {
   // get the edited range
   var sheet = e.source.getActiveSheet();
   var range = e.range;
@@ -3359,26 +3379,26 @@ function MoveCompletedTODOsV04(e) {
 
   // check if the edit was made in column E
   if (range.getColumn() == 5 && range.getRow() >= 15 && range.getValue() === true && activeSheetName != 'Matt T.') {
+
     const rangeCompletedTasks = sheet.getRange('G2');
     rangeCompletedTasks.insertCells(SpreadsheetApp.Dimension.ROWS);
 
     var taskToMoveRow = range.getRow();
     var taskToMoveValue = sheet.getRange(taskToMoveRow, 4).getValue();
-    sheet.getRange(2, 7).setValue(taskToMoveValue);
-
+    sheet.getRange(2, 7).setValue(currDateTime + ":  " + taskToMoveValue);
+    
     // clear the task and checkbox
     sheet.getRange(taskToMoveRow, 4).clearContent();
     range.clearContent();
 
     var lastRowNum = 63;
     var numRowsToShift = 63 - taskToMoveRow;
-    var rangeToDoRangeToShift = sheet.getRange(taskToMoveRow + 1, 4, numRowsToShift);
-    var valuesToDoRangeToShift = rangeToDoRangeToShift.getValues();
-    var destinationTODORange = sheet.getRange(taskToMoveRow, 4, numRowsToShift);
-    destinationTODORange.setValues(valuesToDoRangeToShift);
-    sheet.getRange('D63').setValue("");
+    if(numRowsToShift > 0) {
+      var rangeToDoRangeToShift = sheet.getRange(taskToMoveRow + 1, 4, numRowsToShift);
+      var valuesToDoRangeToShift = rangeToDoRangeToShift.getValues();
+      var destinationTODORange = sheet.getRange(taskToMoveRow, 4, numRowsToShift);
+      destinationTODORange.setValues(valuesToDoRangeToShift);
+      sheet.getRange('D63').setValue("");
+    }
   }
 }
-
-
-
