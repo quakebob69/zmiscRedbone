@@ -742,7 +742,7 @@
 	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId], [PhoneNumber]) VALUES (2, 'Driver Manager 2' , 2467, '(801) 222-2222')
 	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId], [PhoneNumber]) VALUES (3, 'Driver Manager 3' , 2484, '(801) 333-3333')
 	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId], [PhoneNumber]) VALUES (4, 'Driver Manager 4' , 6, '(801) 444-4444')
-	--INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId], [PhoneNumber]) VALUES (5, 'Driver Manager 5' , 2775, '(801) 555-5555')
+	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId], [PhoneNumber]) VALUES (5, 'Driver Manager 5' , 2775, '(801) 555-5555')
 	GO
 
 
