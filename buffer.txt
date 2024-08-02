@@ -2,8 +2,8 @@ oROd5ITSqEgh
 	
 	
 	--RedBonePortalTest
-		<secret name="RedBoneConnectionString" value="Data Source=40.78.62.55;Initial Catalog=RedBonePortalTest;Persist Security Info=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9;Encrypt=False;TrustServerCertificate=True" />s	
-
+		<add name="RedBoneConnectionString" connectionString="Data Source=40.78.62.55\;Initial Catalog=RedBonePortalTest;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9" providerName="System.Data.SqlClient" />
+		<secret name="RedBoneConnectionString" value="Data Source=40.78.62.55;Initial Catalog=RedBonePortalTest;Persist Security Info=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9;Encrypt=False;TrustServerCertificate=True" />
 
 rya_$/T@KHy~Je8o
 rya_$/T@KHy~Je8o
@@ -15,7 +15,6 @@ rya_$/T@KHy~Je8o
 
 
 
-<add name="RedBoneConnectionString" connectionString="Data Source=.;Initial Catalog=RedBone;Persist Security Info=True;User ID=redboneDB3;Password=Kd2GP#Wlrt9Ws" providerName="System.Data.SqlClient"/>
 	
 	
 SQL Server
@@ -3406,7 +3405,12 @@ function handleCompletedTODOsClick(e, currDateTime) {
 
 
 
-
+SELECT dispatch.DispatchFleetManager.DispatchFleetManagerId, dispatch.DispatchFleetManager.Name, dispatch.DispatchFleetManager.PersonId, main.PersonPhoneNumber.PhoneNumber, main.Person.LastName, 
+                  main.Person.MiddleInitial, main.Person.FirstName
+FROM     dispatch.DispatchFleetManager INNER JOIN
+         main.Person ON dispatch.DispatchFleetManager.PersonId = main.Person.PersonId INNER JOIN
+		 main.PersonPhoneNumber on main.PersonPhoneNumber.PersonId = main.Person.PersonId
+WHERE main.PersonPhoneNumber.PhoneNumberTypeId = 1;
 
 
 
