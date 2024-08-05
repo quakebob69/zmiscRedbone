@@ -5,8 +5,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER TABLE main.CertificationPersonMapping 
-	ADD [DocumentPath] [nvarchar](500) NULL;
+	ALTER COLUMN [FileName] [nvarchar](500) NULL;
 GO
+
 
 
 
