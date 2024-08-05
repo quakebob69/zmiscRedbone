@@ -3473,7 +3473,7 @@ WHERE main.PersonPhoneNumber.PhoneNumberTypeId = 1;
 
 											
 											
-asdf										
+I have a google sheet with data only in column A.  some rows have text and others have check boxes .  write a google apps script unchecks all checkboxes in column a every monday at 6:30 moutain time.										
 											
 											
 											
