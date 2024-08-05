@@ -1,4 +1,16 @@
-select * from main.CertificationPersonMapping where filename is not null
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER TABLE main.CertificationPersonMapping 
+	ADD [DocumentPath] [nvarchar](500) NULL;
+GO
+
+
+
+/*select * from main.CertificationPersonMapping where filename is not null
 
 
 select * from main.CertificationPersonMapping where PersonId = (select top 1 PersonId from main.person where LastName = 'BRAVO')
@@ -14,4 +26,4 @@ select * from main.CertificationPersonMapping where filename is not null
 ORDER BY PERSONID
 
 
---where PersonId = (select top 1 PersonId from main.person where LastName = 'BRAVO')
+--where PersonId = (select top 1 PersonId from main.person where LastName = 'BRAVO')*/

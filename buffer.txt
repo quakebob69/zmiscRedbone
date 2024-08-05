@@ -1,6 +1,6 @@
 oROd5ITSqEgh
 	
-	
+git reset --hard HEAD	
 	--RedBonePortalTest
 		<add name="RedBoneConnectionString" connectionString="Data Source=40.78.62.55\;Initial Catalog=RedBonePortalTest;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9" providerName="System.Data.SqlClient" />
 		<secret name="RedBoneConnectionString" value="Data Source=40.78.62.55;Initial Catalog=RedBonePortalTest;Persist Security Info=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9;Encrypt=False;TrustServerCertificate=True" />
@@ -3477,11 +3477,6 @@ I have a google sheet with data only in column A.  some rows have text and other
 											
 											
 											
-											
-											
-											
-											
-											
-											
-											
-											
+																						
+CertificationFilesExplorer_ExplorerPopulated
+CertificationFilesExplorer_ItemCommand
