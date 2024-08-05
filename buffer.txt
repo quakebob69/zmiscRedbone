@@ -3427,3 +3427,61 @@ WHERE main.PersonPhoneNumber.PhoneNumberTypeId = 1;
 
 
 
+											<tr>
+												<td class='rightAlign'><label id="Label2" runat="server">Driver 1</label></td>
+												<td>
+													<table class="nospacing">
+														<tr>
+															<td class="nospacing">
+																<telerik:RadComboBox ID="RadComboBox_Driver1" runat="server" DataSourceID="ObjectDataSource_Driver1" HighlightTemplatedItems="True"
+																	OnClientKeyPressing="radComboKeyPress" TabIndex="16"
+																	DataTextField="DriverName" DataValueField="PersonId" ValidationGroup="Dispatch"
+																	Filter="Contains" OnSelectedIndexChanged="RadComboBox_SelectedIndexChanged" AutoPostBack="True"
+																	AppendDataBoundItems="True" MarkFirstMatch="True" OnClientFocus="OnClientFocusHandler" CausesValidation="False">
+																	<Items>
+																		<telerik:RadComboBoxItem runat="server" Text="-Driver #1-" Value="0" />
+																	</Items>
+																</telerik:RadComboBox>
+																<telerik:RadToolTip ID="RadToolTip_RadComboBox_Driver1" runat="server" ShowEvent="OnMouseOver" AutoCloseDelay="10000"
+																	Text="Driver 1 (OTR, Lease Operator, Owner Operator)" TargetControlID="RadComboBox_Driver1" Position="TopCenter">
+																</telerik:RadToolTip>
+															</td>
+															<td style="width: 50px">
+																<%--<telerik:RadButton ID="RadButton_CustomerLoad" runat="server" Width="20" Text="C" ></telerik:RadButton>--%>
+																<%--<asp:ImageButton ID="ImageButton_CustomerLoad" runat="server" ImageUrl="~/images/16x16/Business_16x.png" 
+																OnClientClick="OpenPersonEdit" style="top: 2px; position: relative" TabIndex="-1" />--%>
+																<img src="../../images/16x16/Business_16x.png" onclick="OpenDriver_1Edit()"
+																	onmouseover="this.style.cursor = 'pointer';" style="top: 2px; position: relative" />
+															</td>
+															<td class="nospacing" style="padding-left: 2px">
+																<asp:RequiredFieldValidator ID="RequiredFieldValidator_Driver1" runat="server" ErrorMessage="*" InitialValue="-Driver #1-"
+																	Font-Bold="true" ForeColor="Red" Display="Dynamic" ControlToValidate="RadComboBox_Driver1" ValidationGroup="Dispatch">
+																</asp:RequiredFieldValidator>
+																<asp:CustomValidator ID="CustomValidator_Driver1" runat="server" ErrorMessage="Not Unique" ValidationGroup="Dispatch"
+																	ControlToValidate="RadComboBox_Driver1" ForeColor="Red" Font-Bold="true" Display="Dynamic" Enabled="false"
+																	OnServerValidate="CustomValidator_Drivers_ServerValidate" EnableClientScript="false"
+																	ClientValidationFunction="CustomValidator_Drivers_ClientValidate">
+																</asp:CustomValidator>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+											
+											
+											
+
+											
+											
+asdf										
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
