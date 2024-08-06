@@ -3500,4 +3500,18 @@ CertificationFilesExplorer_ItemCommand
 		
 		
 		
-asdf
+refactor uploading certificates - removed fileexplorer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
