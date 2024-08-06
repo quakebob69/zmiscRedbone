@@ -3480,3 +3480,24 @@ I have a google sheet with data only in column A.  some rows have text and other
 																						
 CertificationFilesExplorer_ExplorerPopulated
 CertificationFilesExplorer_ItemCommand
+
+
+                                    OnItemCommand="RadGrid_AllGrids_ItemCommand"
+                                    OnItemInserted="RadGrid_Certifications_ItemInserted"
+									
+									
+									
+	<telerik:RadFileExplorer ID="RadFileExplorer_CertificationFiles" runat="server" Height="200px" Width="350px"
+		EnableOpenFile="True" VisibleControls="Toolbar, ContextMenus, FileList" EnableCreateNewFolder="False"
+		OnClientFileOpen="OnClientFileOpen" OnExplorerPopulated="CertificationFilesExplorer_ExplorerPopulated"
+		OnItemCommand="CertificationFilesExplorer_ItemCommand">
+		<Configuration EnableAsyncUpload="True" SearchPatterns="*.*" />
+	</telerik:RadFileExplorer>
+	<asp:Label ID="Label_ToAddFiles" runat="server" Text="To add files, first Create this Certification then Edit it!"
+		Visible="false"></asp:Label>
+		
+		
+		
+		
+		
+asdf
