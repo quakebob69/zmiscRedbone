@@ -3506,6 +3506,7 @@ refactor uploading certificates - removed fileexplorer
 
 
 
+<telerik:RadButton ID="btnDownld" runat="server" Text="Download" CommandName="downld" CommandArgument='<%# Eval("DocumentPath") %>' CssClass="bookNowLink" />
 
 
 
@@ -3513,5 +3514,51 @@ refactor uploading certificates - removed fileexplorer
 
 
 
+
+
+
+
+			RadAsyncUpload radAsyncUpload = updateItem.FindControl("AsyncUpload1") as RadAsyncUpload;
+
+			bool filePresent = false;
+			byte[] fileData = new byte[] { };
+			string filpth = "";
+			if (radAsyncUpload.UploadedFiles.Count > 0)
+			{
+				UploadedFile file = radAsyncUpload.UploadedFiles[0];
+				fileData = new byte[file.InputStream.Length];
+				file.InputStream.Read(fileData, 0, (int)file.InputStream.Length);
+				filePresent = true;
+				//filpth = @"~\UserFiles\RecruitingFiles\" + HiddenField_ProfileId.Value + "\\" + radAsyncUpload.UploadedFiles[0].FileName;
+				Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + "UserFiles\\RecruitingFiles\\" + HiddenField_ProfileId.Value);
+				filpth = AppDomain.CurrentDomain.BaseDirectory + "\\" + "UserFiles\\RecruitingFiles\\" + HiddenField_ProfileId.Value + "\\" + radAsyncUpload.UploadedFiles[0].FileName;
+				// filpth = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+			}
+			else
+			{
+				filePresent = false;
+				RadNotificationApprvFail.Show("Uploading a File is required for creating a document record");
+				e.Canceled = true;
+				// e.Item.Edit = true;
+				return;
+			}
+
+
+
+
+                                                                   <!--
+                                                                   <span>
+                                                                       <fieldset>
+                                                                           <legend style="font-size: small; font-weight: bold;">Download Document</legend>
+                                                                           <asp:Label ID="lblFileName" runat="server"></asp:Label>
+                                                                           <telerik:RadButton ID="btnDownld" runat="server" Text="Download" CommandName="downld" CommandArgument='<%# Eval("FileName") %>' CssClass="bookNowLink" />
+                                                                       </fieldset>
+                                                                   </span>
+                                                                   -->
+																   
+																   
+																   
+asdf
+																   
 
 
