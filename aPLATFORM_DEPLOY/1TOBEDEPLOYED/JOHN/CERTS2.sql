@@ -7,9 +7,6 @@ WHERE        (main.CertificationPersonMapping.PersonId = 1661)
 
 
 
-
-
-
 SELECT TOP (1000) [CertificationPersonMappingId]
       ,[PersonId]
       ,[CertificationTypeId]
@@ -26,39 +23,25 @@ SELECT TOP (1000) [CertificationPersonMappingId]
 
 
 
+
   SELECT distinct 
      (concat([PersonId]
        , [FileName]))
   FROM [main].[CertificationPersonMapping]
   where filename is not null
-  --order by personid, CertificationPersonMappingId desc
+  --order by personid, CertificationPersonMappingId des
 
 
 
 
-
-
-
-
-
-
-
-SELECT        main.CertificationPersonMapping.CertificationPersonMappingId, main.CertificationPersonMapping.FileName, main.CertificationPersonMapping.PersonId, main.CertificationPersonMapping.CertificationTypeId, main.CertificationPersonMapping.ReceivedDate,                           main.CertificationPersonMapping.ExpireDate, main.CertificationPersonMapping.Notes, main.CertificationPersonMapping.CertificationCode, main.CertificationType.CertificationDescription, main.CertificationPersonMapping.fileName FROM           
-
-main.CertificationPersonMapping
-
-
-INNER JOIN                          main.CertificationType ON main.CertificationPersonMapping.CertificationTypeId = main.CertificationType.CertificationTypeId
-WHERE        main.CertificationPersonMapping.PersonId in 
-
-(select personid from main.Person
-
-where personid = 2775
-
-
-)
-
-
+SELECT
+	main.CertificationPersonMapping.CertificationPersonMappingId, main.CertificationPersonMapping.FileName, main.CertificationPersonMapping.PersonId, main.CertificationPersonMapping.CertificationTypeId, main.CertificationPersonMapping.ReceivedDate,                           main.CertificationPersonMapping.ExpireDate, main.CertificationPersonMapping.Notes, main.CertificationPersonMapping.CertificationCode, main.CertificationType.CertificationDescription, main.CertificationPersonMapping.fileName
+FROM
+	main.CertificationPersonMapping
+	INNER JOIN main.CertificationType ON main.CertificationPersonMapping.CertificationTypeId = main.CertificationType.CertificationTypeId
+WHERE
+	main.CertificationPersonMapping.PersonId in
+		(select personid from main.Person where personid = 2775)
 
 
 
@@ -74,22 +57,6 @@ SELECT TOP (1000) [CertificationPersonMappingId]
       ,[ActiveInd]
       ,[FileName]
   FROM [main].[CertificationPersonMapping]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
