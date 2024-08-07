@@ -3556,9 +3556,71 @@ refactor uploading certificates - removed fileexplorer
                                                                    </span>
                                                                    -->
 																   
-																   
-																   
-asdf
+<Content Include="Pages\ContainerPages\PRPayroll_Utilities.aspx" />															   
+															   
+<Compile Include="Pages\ContainerPages\PRPayroll_Utilities.aspx.cs">
+  <DependentUpon>PRPayroll_Utilities.aspx</DependentUpon>
+  <SubType>ASPXCodeBehind</SubType>
+</Compile>
+<Compile Include="Pages\ContainerPages\PRPayroll_Utilities.aspx.designer.cs">
+  <DependentUpon>PRPayroll_Utilities.aspx</DependentUpon>
+</Compile>
 																   
 
 
+
+            if (e.Item is GridEditableItem && e.Item.IsInEditMode)
+            {
+                GridEditableItem itm = e.Item as GridEditableItem;
+                RadFileExplorer explr = itm.FindControl("RadFileExplorer_CertificationFiles") as RadFileExplorer;
+                Label lbl = itm.FindControl("Label_ToAddFiles") as Label;
+
+                // ignore when in insert mode.
+                if (e.Item is GridEditFormInsertItem || e.Item is GridDataInsertItem)
+                {
+                    explr.Visible = false;
+                    lbl.Visible = true;
+                    return;
+                }
+
+                Int16 CertificationTypeId = (Int16)e.Item.OwnerTableView.DataKeyValues[e.Item.ItemIndex]["CertificationTypeId"];
+                string CertificationDescription = (string)e.Item.OwnerTableView.DataKeyValues[e.Item.ItemIndex]["CertificationDescription"];
+                HiddenField_CertificationTypeId.Value = CertificationTypeId.ToString();
+
+                Classes.Auth auth = (Classes.Auth)Session["Auth"];
+
+
+                if (auth.Entitlements.Contains(215))
+                {
+                    // Get reference to RadFileExplorer
+
+                    // Setup RadFileExplorer
+                    string PersonId = HiddenField_PersonId.Value;
+
+                    // Create the folder structure for this user if it doesn't already exist
+                    string sTopDirectory = Request.PhysicalApplicationPath + @"UserFiles\" + PersonId.ToString();
+
+                    if (!Directory.Exists(sTopDirectory)) Directory.CreateDirectory(sTopDirectory);
+
+                    sTopDirectory += @"\Qualification";
+                    if (!Directory.Exists(sTopDirectory)) Directory.CreateDirectory(sTopDirectory);
+
+                    sTopDirectory += @"\Certifications";
+                    if (!Directory.Exists(sTopDirectory)) Directory.CreateDirectory(sTopDirectory);
+
+                    sTopDirectory += @"\" + CertificationDescription;
+                    if (!Directory.Exists(sTopDirectory)) Directory.CreateDirectory(sTopDirectory);
+
+                    string path = "~/UserFiles/" + PersonId.ToString() + "/Qualification/Certifications/" + CertificationDescription;
+
+                    explr.Configuration.UploadPaths = new string[] { path };
+                    explr.Configuration.DeletePaths = new string[] { path };
+                    explr.Configuration.ViewPaths = new string[] { path };
+                    explr.Configuration.MaxUploadFileSize = 20480 * 1024; // 20 MB
+                }
+                else
+                {
+                    explr.Visible = false;
+                }
+
+            }
