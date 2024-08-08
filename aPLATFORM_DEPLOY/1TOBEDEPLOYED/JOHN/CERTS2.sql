@@ -2,10 +2,13 @@ SELECT
 main.CertificationPersonMapping.CertificationPersonMappingId, main.CertificationPersonMapping.PersonId, main.CertificationPersonMapping.CertificationTypeId, main.CertificationPersonMapping.ReceivedDate,                           main.CertificationPersonMapping.ExpireDate, main.CertificationPersonMapping.Notes, main.CertificationPersonMapping.CertificationCode, main.CertificationType.CertificationDescription, main.CertificationPersonMapping.fileName
 FROM            main.CertificationPersonMapping
 INNER JOIN                          main.CertificationType ON main.CertificationPersonMapping.CertificationTypeId = main.CertificationType.CertificationTypeId
-WHERE        (main.CertificationPersonMapping.PersonId = 2755)
+WHERE        (main.CertificationPersonMapping.PersonId = 2775)
 
 
-
+update main.CertificationPersonMapping set filename = 'C:\Users\danny.call\Source\Repos\RedboneWizard\RedBonePlatform\RedBonePlatform\UserFiles\2775\Qualification\Certifications\1234.pdf' where personid = 2775
+                                                      --C:\Users\portl\source\redbone\redboneplatform\RedBonePlatform\RedBonePlatform\\UserFiles\RecruitingFiles\1002\shutterstock_645891550 (4).png
+													  --"C:\\Users\\portl\\source\\redbone\\redboneplatform\\RedBonePlatform\\RedBonePlatform\\\\UserFiles\\RecruitingFiles\\1002\\shutterstock_645891550 (4).png"
+													  --'C:\Users\danny.call\source\repos\RedboneWizard\RedBonePlatform\RedBonePlatform\UserFiles\2775\Qualification\Certifications\Safe Land\127.jpg'
 
 SELECT TOP (1000) [CertificationPersonMappingId]
       ,[PersonId]

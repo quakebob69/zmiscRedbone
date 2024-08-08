@@ -3634,11 +3634,32 @@ refactor uploading certificates - removed fileexplorer
 		
 		
 	C:\\Users\\danny.call\\Source\\Repos\\RedboneWizard\\RedBonePlatform\\RedBonePlatform\\UserFiles2775\\Qualification\\Certifications\\Safe Land
+	
+	
+	C:\Users\danny.call\source\repos\RedboneWizard\RedBonePlatform\RedBonePlatform\UserFiles\2775\Qualification\Certifications\Safe Land
 
 
 
 
-asdf
+C:\Users\danny.call\Source\Repos\RedboneWizard\RedBonePlatform\RedBonePlatform\UserFiles\2775\Qualification\Certifications\Safe Land\127.jpg
+C:\\Users\\danny.call\\Source\\Repos\\RedboneWizard\\RedBonePlatform\\RedBonePlatform\\UserFiles2775\\Qualification\\Certifications\\Safe Land\\127.jpg
+
+C:\Users\danny.call\Source\Repos\RedboneWizard\RedBonePlatform\RedBonePlatform\UserFiles\2775\Qualification\Certifications\Safe Land\1234.pdf
+C:\Users\danny.call\Source\Repos\RedboneWizard\RedBonePlatform\RedBonePlatform\UserFiles\2775\Qualification\Certifications\1234.pdf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
