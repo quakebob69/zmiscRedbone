@@ -10,6 +10,8 @@ update main.CertificationPersonMapping set filename = 'C:\Users\danny.call\sourc
 													  --"C:\\Users\\portl\\source\\redbone\\redboneplatform\\RedBonePlatform\\RedBonePlatform\\\\UserFiles\\RecruitingFiles\\1002\\shutterstock_645891550 (4).png"
 													  --'C:\Users\danny.call\source\repos\RedboneWizard\RedBonePlatform\RedBonePlatform\UserFiles\2775\Qualification\Certifications\Safe Land\127.jpg'
 
+delete from main.CertificationPersonMapping where main.CertificationPersonMapping.PersonId = 2775;
+
 SELECT TOP (1000) [CertificationPersonMappingId]
       ,[PersonId]
       ,[CertificationTypeId]
