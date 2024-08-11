@@ -3775,3 +3775,99 @@ function OnClientFileSelected(sender, args) {
     var currentFileName = args.get_fileName();
     alert(currentFileName);
 }
+
+
+
+
+
+
+
+
+
+
+		4d0a413e055ba8d6da5ea5f90a1ebf256eb91f47	danny call <danny@redbonetrucking.com>	8/2/2024 6:24:28 PM +00:00	add editing to radgrid
+
+		e38fc1574d1cf477e104932cea7b8148c08951d2	danny call <danny@redbonetrucking.com>	8/2/2024 2:09:39 PM +00:00	add driver manager grid
+
+		53dd449de704a65dbd36bfbc022a19cd16009d8a	danny call <danny@redbonetrucking.com>	7/24/2024 9:22:15 PM +00:00	add columns to sp_DriverManagerUnassignedTrucks
+
+		85fc42806594273d5c220cbdbf9e3d602b9b6ba4	danny call <danny@redbonetrucking.com>	7/24/2024 8:36:43 PM +00:00	point unassigned radgrid to sp_DriverManagerUnassignedTrucks
+
+		fa8abe83a616a4024bb4fd820207f931c8e55361	danny call <danny@redbonetrucking.com>	7/23/2024 6:52:56 PM +00:00	fill drivermanager radgrids - driver manager 1
+
+		2aa2b0c9f1aef309a69f5dc49c17fcea10e9e7b0	danny call <danny@redbonetrucking.com>	7/23/2024 2:22:49 PM +00:00	rename DispatchFleetManager to dsDispatchFleetManager
+
+		c40848d56f02867bf10a548b7e064fc523977fc8	danny call <danny@redbonetrucking.com>	7/22/2024 9:48:44 PM +00:00	fix connection string from hard coded (local) to secret.xml
+
+		2f79d174f52ffd095cf363ff6ada8eb0608f1505	danny call <danny@redbonetrucking.com>	7/18/2024 4:36:51 PM +00:00	On danny-master-merge: Infer Driver Manager (from Driver) on Load
+
+		2a5d0ef6600a3c1341941b48866d5926b0fc2351	danny call <danny@redbonetrucking.com>	7/18/2024 7:16:58 AM +00:00	add Driver Manager to Leg - add DispatchFleetManagerId
+
+		7ea474089e66aac8f82d6697553053757941713b	danny call <danny@redbonetrucking.com>	7/18/2024 7:04:36 AM +00:00	add Driver Manager to Leg - add DispatchFleetManagerId
+
+		f4259696c75557bcf2a1485439db6f1b3d87aba9	danny call <danny@redbonetrucking.com>	7/18/2024 6:49:14 AM +00:00	add Driver Manager to Leg - add DispatchFleetManagerId
+
+		1fdb329b923a5d44c755e2426cd9d6022eb3e2db	danny call <danny@redbonetrucking.com>	7/18/2024 6:04:07 AM +00:00	add Driver Manager to Leg - add DispatchFleetManagerId
+
+		6f333ff6b414adf512bf492720554bd4fdc0b516	danny call <danny@redbonetrucking.com>	7/18/2024 3:44:15 AM +00:00	add Driver Manager to Leg
+
+		4768b75b418b4cb6316c55d95d112e19ea2f48d1	danny call <danny@redbonetrucking.com>	7/18/2024 3:20:41 AM +00:00	add Driver Manager to Load - ACC charges - don't allow driver change
+
+		9495790721ccae9dc56c8d220bf6cb0d44c32ce4	danny call <danny@redbonetrucking.com>	7/18/2024 2:53:45 AM +00:00	add Driver Manager to Load
+
+		38417f20e451313b622e7ba185b866d2a2fe31a5	danny call <danny@redbonetrucking.com>	7/17/2024 11:55:13 PM +00:00	add Driver Manager to Load
+
+		25a92462bec3f2193fe7718b4f35e1711644d09e	danny call <danny@redbonetrucking.com>	7/17/2024 11:01:28 PM +00:00	add vFleetManagerDriver to DispatchFleetManager dataset
+
+		ef3a5455afa3fb4bf7c317df3b45e54f213b550b	danny call <danny@redbonetrucking.com>	7/17/2024 8:54:15 PM +00:00	add DispatchFleetManager dataset
+
+		a3187cae21c36935de3f1f352a28c8bd2c963309	danny call <danny@redbonetrucking.com>	7/17/2024 2:34:00 PM +00:00	add Driver Manager to Leg - disable driver manager dropdown
+
+		3585ddcb495f9011f43f804a17dc432dcd4bccd2	danny call <danny@redbonetrucking.com>	7/17/2024 2:25:59 PM +00:00	add Driver Manager to Leg
+
+		7ec7fb3e90a5847343b811551c8a2c83606bd5f4	danny call <danny@redbonetrucking.com>	7/17/2024 4:46:45 AM +00:00	add Driver Manager to Leg
+
+		446d3bac26d1194d65274dab434c4d3ef3420063	danny call <danny@redbonetrucking.com>	7/16/2024 7:24:13 PM +00:00	add Driver Manager to Leg
+
+		359fba303e55a6b3df75d90bfef97c15c2c68bdd	danny call <danny@redbonetrucking.com>	7/16/2024 5:15:33 PM +00:00	add Driver Manager to Leg
+
+		dcd5e17e8339e23789c4a4e984668643ac6872df	danny call <danny@redbonetrucking.com>	7/16/2024 5:12:40 PM +00:00	add Driver Manager to Leg
+
+		23ae292bad7bfd822d781aed3f79ca10ac1feee1	danny call <danny@redbonetrucking.com>	7/16/2024 5:00:01 PM +00:00	add Driver Manager to Leg
+
+		799baab977915027ef4de98cf6c6657bceeea738	danny call <danny@redbonetrucking.com>	7/16/2024 4:22:30 PM +00:00	add Driver Manager to Leg - cleanup
+
+		cbf98faa6d7aa24df2839b792aa24caa6a11f4aa	danny call <danny@redbonetrucking.com>	7/16/2024 3:40:37 PM +00:00	rearrange fields
+
+		b29288d372f217b14dcf421396ab49d79000ceac	danny call <danny@redbonetrucking.com>	7/16/2024 3:08:26 PM +00:00	rearrange fields
+
+		a565733cac7427e28805d60367a615a34b3479a5	danny call <danny@redbonetrucking.com>	7/16/2024 3:04:38 PM +00:00	rearrange fields
+
+		472c8b67f272dd2a062e30e8c87397dc44f09bd2	danny call <danny@redbonetrucking.com>	7/11/2024 1:21:28 AM +00:00	set drivers manager based on truck selection
+
+		efac9fba8fdb9542b35dca37e41ce1e7bd70434d	danny call <danny@redbonetrucking.com>	7/11/2024 12:38:00 AM +00:00	set drivers manager based on driver selection
+
+		ed83a0806559354dbf580fddebb3e5f93104ba09	danny call <danny@redbonetrucking.com>	7/10/2024 11:34:52 PM +00:00	set drivers manager based on driver selection
+
+		6311cd92e70ad0fd6eec9bade11ec193513fd8d0	danny call <danny@redbonetrucking.com>	7/10/2024 10:37:38 PM +00:00	set drivers manager based on driver selection
+
+		d9d18c42a484a495b8d060f151aab593c357d62c	danny call <danny@redbonetrucking.com>	7/10/2024 4:58:29 PM +00:00	set drivers based on truck selection - disable/enable drivers on page
+
+		9f5300690662655459bcbeacbbc340ac1dafb446	danny call <danny@redbonetrucking.com>	7/10/2024 1:59:37 PM +00:00	set drivers based on truck selection - get drivers
+
+		43c6aaef5a00200adb57afbc53236651b6b6f46a	danny call <danny@redbonetrucking.com>	7/9/2024 6:34:32 PM +00:00	set drivers based on truck selection - revert on truck save error
+
+		1bf04a47db10d64fd279ac80cdaf886d0d5e4525	danny call <danny@redbonetrucking.com>	7/9/2024 4:15:59 PM +00:00	set drivers based on truck selection
+
+		b6aa24893462785b4f64f8ec5d9af8c659e4f49c	danny call <danny@redbonetrucking.com>	7/9/2024 3:48:22 PM +00:00	disable driver boxes
+
+		5cd87317cf60755d2c72c00a18c3acebe1f34d7c	danny call <danny@redbonetrucking.com>	7/9/2024 3:41:16 PM +00:00	refactor bLoadBilledManager entitlement
+
+		3112114b82972678f49b4b8093925f413e6344df	danny call <danny@redbonetrucking.com>	7/9/2024 3:26:15 PM +00:00	driverHasCharges refactor
+
+		884604c68ccea85de095c6575e43b5614d78f481	danny call <danny@redbonetrucking.com>	7/9/2024 1:46:25 PM +00:00	reformat
+
+
+			git revert 4d0a413e055ba8d6da5ea5f90a1ebf256eb91f47		e38fc1574d1cf477e104932cea7b8148c08951d2		53dd449de704a65dbd36bfbc022a19cd16009d8a		85fc42806594273d5c220cbdbf9e3d602b9b6ba4		fa8abe83a616a4024bb4fd820207f931c8e55361		2aa2b0c9f1aef309a69f5dc49c17fcea10e9e7b0		c40848d56f02867bf10a548b7e064fc523977fc8		2f79d174f52ffd095cf363ff6ada8eb0608f1505		2a5d0ef6600a3c1341941b48866d5926b0fc2351		7ea474089e66aac8f82d6697553053757941713b		f4259696c75557bcf2a1485439db6f1b3d87aba9		1fdb329b923a5d44c755e2426cd9d6022eb3e2db		6f333ff6b414adf512bf492720554bd4fdc0b516		4768b75b418b4cb6316c55d95d112e19ea2f48d1		9495790721ccae9dc56c8d220bf6cb0d44c32ce4		38417f20e451313b622e7ba185b866d2a2fe31a5		25a92462bec3f2193fe7718b4f35e1711644d09e		ef3a5455afa3fb4bf7c317df3b45e54f213b550b		a3187cae21c36935de3f1f352a28c8bd2c963309		3585ddcb495f9011f43f804a17dc432dcd4bccd2		7ec7fb3e90a5847343b811551c8a2c83606bd5f4		446d3bac26d1194d65274dab434c4d3ef3420063		359fba303e55a6b3df75d90bfef97c15c2c68bdd		dcd5e17e8339e23789c4a4e984668643ac6872df		23ae292bad7bfd822d781aed3f79ca10ac1feee1		799baab977915027ef4de98cf6c6657bceeea738		cbf98faa6d7aa24df2839b792aa24caa6a11f4aa		b29288d372f217b14dcf421396ab49d79000ceac		a565733cac7427e28805d60367a615a34b3479a5		472c8b67f272dd2a062e30e8c87397dc44f09bd2		efac9fba8fdb9542b35dca37e41ce1e7bd70434d		ed83a0806559354dbf580fddebb3e5f93104ba09		6311cd92e70ad0fd6eec9bade11ec193513fd8d0		d9d18c42a484a495b8d060f151aab593c357d62c		9f5300690662655459bcbeacbbc340ac1dafb446		43c6aaef5a00200adb57afbc53236651b6b6f46a		1bf04a47db10d64fd279ac80cdaf886d0d5e4525		b6aa24893462785b4f64f8ec5d9af8c659e4f49c		5cd87317cf60755d2c72c00a18c3acebe1f34d7c		3112114b82972678f49b4b8093925f413e6344df		884604c68ccea85de095c6575e43b5614d78f481
+
+
