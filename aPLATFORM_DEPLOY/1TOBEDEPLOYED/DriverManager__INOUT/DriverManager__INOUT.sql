@@ -737,11 +737,11 @@
 
 --INSERT STUFF
 -------------------------------------------------------------------------------------------------------------
-	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId]) VALUES (1, 'Driver Manager 1' , 45)
+	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId]) VALUES (1, 'Driver Manager 1' , 6)
 	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId]) VALUES (2, 'Driver Manager 2' , 2467)
 	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId]) VALUES (3, 'Driver Manager 3' , 2484)
-	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId]) VALUES (4, 'Driver Manager 4' , 6)
-	INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId]) VALUES (5, 'Driver Manager 5' , 2775)
+	--INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId]) VALUES (4, 'Driver Manager 4' , 6)
+	--INSERT INTO [dispatch].[DispatchFleetManager] ([DispatchFleetManagerId], [Name], [PersonId]) VALUES (5, 'Driver Manager 5' , 2775)
 	GO
 
 
@@ -791,7 +791,7 @@ UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '181
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '182';
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 2 WHERE unit_id = '183';
 UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 3 WHERE unit_id = '184';
-UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 4 WHERE unit_id = '185';
+--UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 4 WHERE unit_id = '185';
 
 
 	/**/
@@ -801,7 +801,7 @@ UPDATE [equipment].[PUnit] SET [DispatchFleetManagerId] = 4 WHERE unit_id = '185
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 1 where LoadId % 10 IN (1, 2, 3, 4);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 2 where LoadId % 10 IN (6);
 	Update [dispatch].[Load] set [DispatchFleetManagerId] = 3 where LoadId % 10 IN (7, 8);
-	Update [dispatch].[Load] set [DispatchFleetManagerId] = 4 where LoadId % 10 IN (9);
+--	Update [dispatch].[Load] set [DispatchFleetManagerId] = 4 where LoadId % 10 IN (9);
 
 
 --CHECK

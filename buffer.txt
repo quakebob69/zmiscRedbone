@@ -3768,6 +3768,10 @@ C:\Users\danny.call\source\repos\RedboneWizard\RedBonePlatform\RedBonePlatform\U
 DownloadCertButton
 
 
+OnClientFileSelected="OnClientFileSelected"
 
 
-
+function OnClientFileSelected(sender, args) {
+    var currentFileName = args.get_fileName();
+    alert(currentFileName);
+}

@@ -1,0 +1,396 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Recruiting_Profile_Documents.aspx.cs" Inherits="RedbonePlatform.Pages.ContainerPages.Recruiting_Profile_Documents" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style type="text/css">
+        html {
+            /*added to prevent scroll bars in radwindow - for slight css differences between different browsers, needed this*/
+            overflow: hidden;
+        }
+
+        .rgCaption {
+            font-size: medium;
+            font-weight: bold;
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 15px;
+        }
+
+        .requiredFieldLabel {
+            padding-left: 5px;
+        }
+
+        .auto-style1 {
+            width: 130px;
+            text-align: right;
+            padding-right: 5px;
+            height: 23px;
+        }
+
+        .auto-style2 {
+            height: 23px;
+        }
+
+        .auto-style4 {
+            width: 500px;
+            text-align: left;
+            padding-left: 5px;
+            height: 23px;
+        }
+
+
+
+        .RadComboBoxDropDown .rcbList label{
+            color:black !important;
+        }
+
+
+        .mecls{
+            color: black
+        }
+
+         .mecls2{
+            color: black
+        }
+                                   
+        .auto-style5 {
+            width: 130px;
+            text-align: left;
+            padding-left: 5px;
+            height: 23px;
+        }
+    </style>
+    <link href="../../Styles/common.css" rel="stylesheet" />
+    <telerik:RadScriptBlock ID="RadScriptBlock2" runat="server">
+        <script type="text/javascript" id="telerikClientEvents1">
+
+            (function (global, undefined) {
+                function OnClientFileOpen(oExplorer, args) {
+
+                    var item = args.get_item();
+
+                    // Ensure user is not trying to open a folder..
+                    // Had Issue with security when trying to open a folder thus the line below.
+                    if (item.isDirectory()) return;
+
+                    var fileExtension = item.get_extension();
+
+                    // File is a image document, do not open a new window
+                    args.set_cancel(true);
+
+                    // Tell browser to open file directly
+                    var requestImage = "Handler.ashx?path=" + item.get_url();
+                    document.location = requestImage;
+                }
+
+                global.OnClientFileOpen = OnClientFileOpen;
+            })(window);
+        </script>
+    </telerik:RadScriptBlock>
+</head>
+<body style="margin: 0px; height: 100%">
+    <form id="form1" runat="server">
+        <asp:HiddenField ID="HiddenField_ProfileId" runat="server" />
+        <asp:HiddenField ID="HiddenField_CertificationTypeId" runat="server" />
+         <asp:HiddenField ID="HiddenField_Hired" runat="server" />
+        <%--<telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        </telerik:RadScriptManager>--%>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" DefaultLoadingPanelID="RadAjaxLoadingPanel1" EnableAJAX="false">
+            <AjaxSettings>
+                <telerik:AjaxSetting AjaxControlID="RadGrid_Certifications">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="HiddenField_CertificationTypeId" UpdatePanelCssClass="" />
+                             <telerik:AjaxUpdatedControl ControlID="HiddenField_ProfileId" UpdatePanelCssClass="" />
+                         <telerik:AjaxUpdatedControl ControlID="HiddenField_Hired" UpdatePanelCssClass="" />
+                        <telerik:AjaxUpdatedControl ControlID="RadGrid_Certifications" 
+                            LoadingPanelID="RadAjaxLoadingPanel1" UpdatePanelCssClass="" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+            </AjaxSettings>
+        </telerik:RadAjaxManager>
+        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"
+            InitialDelayTime="500" MinDisplayTime="500">
+        </telerik:RadAjaxLoadingPanel>
+        <telerik:RadSkinManager ID="RadSkinManager1" runat="server">
+        </telerik:RadSkinManager>
+        <telerik:RadWindowManager ID="RadWindowManager1" runat="server"></telerik:RadWindowManager>
+        <telerik:RadFormDecorator ID="RadFormDecorator1" runat="server" DecoratedControls="All" />
+        <div>
+             <fieldset>
+                <legend style="font-size: small; font-weight: bold;">Documents</legend>
+            <telerik:RadGrid ID="RadGrid_Certifications" runat="server" CellSpacing="-1"
+                        GridLines="None" AllowAutomaticDeletes="False"
+                        AllowAutomaticInserts="False" AllowAutomaticUpdates="False" AllowSorting="True"
+                        AutoGenerateColumns="False" Width="100%" Height="150px"
+                        OnItemCommand="RadGrid_AllGrids_ItemCommand" DataSourceID="ObjectDataSource_Certifications"
+                        OnItemInserted="RadGrid_Certifications_ItemInserted" OnPreRender="RadGrid_Certifications_PreRender" OnItemCreated="RadGrid_Certifications_ItemCreated" OnInsertCommand="RadGrid_Certifications_InsertCommand" OnDeleteCommand="RadGrid_Certifications_DeleteCommand"
+                        OnItemUpdated="RadGrid_Certifications_ItemUpdated"
+                        OnItemDataBound="RadGrid_Certifications_ItemDataBound"
+                        OnEditCommand="RadGrid_Certifications_EditCommand"
+                        OnCancelCommand="RadGrid_Certifications_CancelCommand"
+                        OnUpdateCommand="RadGrid_Certifications_UpdateCommand">
+                        <GroupingSettings CollapseAllTooltip="Collapse all groups"></GroupingSettings>
+                        <ClientSettings Resizing-AllowColumnResize="true">
+                            <ClientEvents OnGridCreated="RadGrid_OnGridCreated" />
+                            <Scrolling AllowScroll="True" UseStaticHeaders="True" />
+                            <Resizing AllowColumnResize="true" AllowResizeToFit="true" EnableRealTimeResize="true" />
+                            <Selecting AllowRowSelect="True" />
+                        </ClientSettings>
+                        <MasterTableView GridLines="None"
+                            CommandItemDisplay="Top" DataSourceID="ObjectDataSource_Certifications"
+                            DataKeyNames="ProfileDocumentId,DocumentPath" EditMode="PopUp">
+                            <CommandItemSettings AddNewRecordText="Add a Document1" ShowRefreshButton="false" />
+                            <RowIndicatorColumn Visible="False">
+                            </RowIndicatorColumn>
+                            <ExpandCollapseColumn Created="True">
+                            </ExpandCollapseColumn>
+                            <Columns>
+                                <telerik:GridEditCommandColumn InsertText="Add" UpdateText="Update" UniqueName="Edt" CancelText="Cancel">
+                                    <HeaderStyle Width="95px" />
+                                    <ItemStyle VerticalAlign="Top" HorizontalAlign="Left"></ItemStyle>
+                                </telerik:GridEditCommandColumn>
+                                <telerik:GridBoundColumn DataField="Name" FilterControlAltText="Filter Name column"
+                                    HeaderText="Name" SortExpression="Name" UniqueName="Name" ColumnEditorID="GridTextBoxColumnEditor_Generic">
+                                </telerik:GridBoundColumn>
+
+                                <telerik:GridBoundColumn DataField="DocType"
+                                    FilterControlAltText="Filter DocType column" HeaderText="DocType"
+                                    SortExpression="DocType" UniqueName="DocType">
+                                    <HeaderStyle Width="150px" />                           
+                                </telerik:GridBoundColumn>
+
+                                    <telerik:GridDateTimeColumn FilterControlAltText="Filter Created Date column" UniqueName="CreatedDate"
+                                    DataField="CreatedDate" HeaderText="CreatedDate"  SortExpression="CreatedDate"
+                                    DataFormatString="{0:d}">
+                                    <HeaderStyle Width="90px" />
+                                </telerik:GridDateTimeColumn>
+                                 
+                                <telerik:GridBoundColumn DataField="CreatedByTxt" FilterControlAltText="Filter CreatedByTxt column"
+                                    HeaderText="Created By" SortExpression="CreatedByTxt" UniqueName="CreatedByTxt" ColumnEditorID="GridTextBoxColumnEditor_Generic">
+                                </telerik:GridBoundColumn>
+                                                          
+                                 <telerik:GridTemplateColumn HeaderText="Download" AllowFiltering="false" UniqueName="downldBtn">
+                                
+                                        <HeaderStyle Width="102px" />
+                                <ItemTemplate> 
+                                    <telerik:RadButton  ID="btnDownld" runat="server" Text="Download" CommandName="downld" CommandArgument='<%# Eval("DocumentPath") %>'  CssClass="bookNowLink" />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                                <telerik:GridButtonColumn ConfirmText="Are you sure you want to delete this Document?" FooterStyle-HorizontalAlign="Right"
+                                    CommandName="Delete" Text="Delete" ConfirmDialogType="RadWindow" UniqueName="Dlt" ConfirmTitle="Delete Document?"
+                                    ConfirmDialogHeight="150px">
+                                    <FooterStyle HorizontalAlign="Right"></FooterStyle>
+                                    <HeaderStyle Width="50px" />
+                                </telerik:GridButtonColumn>
+                            </Columns>
+                            <EditFormSettings EditFormType="Template"  >
+                                <PopUpSettings Width="710px" Height="303px" KeepInScreenBounds="False" />
+                                <EditColumn UniqueName="EditCommandColumn1" FilterControlAltText="Filter EditCommandColumn1 column">
+                                </EditColumn>
+                                <FormTemplate>
+                                    <div style="padding-top: 5px; width: 710px">
+                                        <fieldset>
+                                            <legend style="font-size: small; font-weight: bold;"><%# (Container is GridEditFormInsertItem) ? "Add Document" : "Edit Document" %></legend>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <table style="border-style: none; border-width: thin; border-color: inherit; padding-top: 5px">
+
+                                      
+                                                            <tr>
+                                                                <td class="auto-style1">Type:</td>
+                                                                <td class="auto-style2">
+                                                              <%--      <telerik:RadTextBox ID="RadTextBox_State" runat="server" Width="100%" LabelWidth="40%"
+                                                                        Resize="None" Text='<%# Bind("State") %>' >
+                                                                    </telerik:RadTextBox>--%>
+
+
+                                                                     <telerik:RadDropDownList ID="RadDropDownList_DocType" runat="server"
+                                                                        DefaultMessage="-Select Type-" DataValueField="DocumentTypeId"
+                                                                        DataTextField="Name" DataSourceID="ObjectDataSource_DocType"
+                                                                        SelectedValue='<%# Bind("DocumentTypeId") %>' Width="180px">
+                                                                    </telerik:RadDropDownList>
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required!" ForeColor="Red"
+                                                                        ControlToValidate="RadDropDownList_DocType" Display="Dynamic" Font-Bold="true"></asp:RequiredFieldValidator>
+
+                                                                </td>
+                                                            </tr>
+                                                           <tr>
+                                                               <td class="auto-style1">Name:</td>
+                                                                <td class="auto-style2">
+                                                                    <telerik:RadTextBox ID="RadTextBox_Name" runat="server" Width="100%" LabelWidth="40%"
+                                                                        Resize="None" Rows="4" Text='<%# Bind("Name") %>' >
+                                                                    </telerik:RadTextBox>
+                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Required!" ForeColor="Red"
+                                                                        ControlToValidate="RadTextBox_Name" Display="Dynamic" Font-Bold="true"></asp:RequiredFieldValidator>
+                                                                </td>
+                                                            </tr> 
+                                                            <tr>
+                                                               <td class="auto-style1">Description:</td>
+                                                                <td class="auto-style2">
+                                                                    <telerik:RadTextBox ID="RadTextBox_Description" runat="server" Width="100%" LabelWidth="40%"
+                                                                        Resize="None" Rows="4" Text='<%# Bind("Description") %>' >
+                                                                    </telerik:RadTextBox>
+                                                                     
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td> <span style='<%# (Container is GridEditFormInsertItem) ? "visibility:unset" : "visibility:hidden" %>'>Document File</span></td>
+                                                                <td>
+                                       <%--                               <telerik:RadAsyncUpload RenderMode="Lightweight" runat="server" ID="AsyncUpload1" 
+                                AllowedFileExtensions="jpg,jpeg,png,gif" MaxFileSize="1048576" OnFileUploaded="AsyncUpload1_FileUploaded1">
+                            </telerik:RadAsyncUpload>--%>                             <span style='<%# (Container is GridEditFormInsertItem) ? "visibility:unset" : "visibility:hidden" %>'> 
+                                <telerik:RadAsyncUpload RenderMode="Lightweight" runat="server" ID="AsyncUpload1" 
+                                AllowedFileExtensions="jpg,jpeg,png,gif,pdf,doc,docx,xls,xlsx"  OnFileUploaded="AsyncUpload1_FileUploaded1" MaxFileInputsCount="1">
+                            </telerik:RadAsyncUpload>
+                          <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator222" runat="server" ErrorMessage="Required!" ForeColor="Red"
+                                                                         Display="Dynamic" Font-Bold="true"></asp:RequiredFieldValidator>--%>
+                                </span>
+                                                                </td>
+                                                            </tr>
+
+
+
+                                                            <tr>
+                                                                <td class="auto-style4" colspan="2" style="padding-top: 5px; padding-bottom: 5PX">
+                                                                    <asp:Button ID="btnUpdate" Text='<%# (Container is GridEditFormInsertItem) ? "Insert" : "Update" %>'
+                                                                        runat="server" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
+                                                                    </asp:Button>&nbsp;
+                                        <asp:Button ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False"
+                                            CommandName="Cancel"></asp:Button>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td style="vertical-align: top">
+                                                       <span style='<%# (Container is GridEditFormInsertItem) ? "visibility:hidden" : "visibility:unset" %>'>
+                                                        <fieldset>
+                                                            <legend style="font-size: small; font-weight: bold;">Download Document</legend>
+                                                         <%-- <img src="../../images/downloadIcon.png" height="50px" width="50px"/>--%>
+                                                           
+                                                            <asp:Label id="lblFileName" runat="server"></asp:Label>
+                                                            <telerik:RadButton  ID="btnDownld" runat="server" Text="Download" CommandName="downld" CommandArgument='<%# Eval("DocumentPath") %>'  CssClass="bookNowLink" />
+                                                            <%-- <telerik:RadImageButton runat="server" ID="btnDownld"  
+                     CommandName="downld" CommandArgument='<%# Eval("DocumentPath") %>' >
+                    <img src="../../images/downloadIcon.png" height="50px" width="50px"/>
+                </telerik:RadImageButton>--%>
+                                                        </fieldset>
+                                                           </span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </fieldset>
+                                    </div>
+                                </FormTemplate>
+                                <PopUpSettings Modal="True" />
+                            </EditFormSettings>
+                        </MasterTableView>
+                    </telerik:RadGrid>
+                 </fieldset>
+            <telerik:GridDropDownListColumnEditor ID="GridDropDownListColumnEditor_CertificationType" runat="server"
+                DropDownStyle-Width="120px">
+            </telerik:GridDropDownListColumnEditor>
+            <telerik:GridTextBoxColumnEditor ID="GridTextBoxColumnEditor_Generic" runat="server">
+                <TextBoxStyle Width="100%" />
+            </telerik:GridTextBoxColumnEditor>
+        </div>
+
+
+         <telerik:RadNotification ID="RadNotificationApprvFail" runat="server" VisibleOnPageLoad="False" AutoCloseDelay="0" EnableRoundedCorners="true" EnableShadow="True" Title="Error" Position="Center" TitleIcon="none" />
+
+        <asp:ObjectDataSource ID="ObjectDataSource_Certifications" runat="server" DeleteMethod="Delete"
+            InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="GetData"
+            TypeName="RedbonePlatform.Datasets.dsRecruitingTableAdapters.ProfileDocumentListTableAdapter"
+            UpdateMethod="Update" OnUpdating="ObjectDataSource_Certifications_Updating"
+            OnDeleting="ObjectDataSource_Certifications_Deleting" 
+            OnUpdated="ObjectDataSource_Certifications_Updated" 
+            OnInserting="ObjectDataSource_Certifications_Inserting">
+            <DeleteParameters>
+                <asp:Parameter Name="Original_ProfileDocumentId" Type="Int32" />
+            </DeleteParameters>
+            
+            <SelectParameters>
+                <asp:QueryStringParameter Name="ProfileId" QueryStringField="ProfileId" Type="Int32" />
+            </SelectParameters>
+           
+        </asp:ObjectDataSource>
+          <asp:ObjectDataSource ID="ObjectDataSource_DocType" runat="server"
+                OldValuesParameterFormatString="original_{0}" SelectMethod="GetData"
+                TypeName="RedbonePlatform.Datasets.dsRecruitingTableAdapters.DocumentTypeTableAdapter">
+            </asp:ObjectDataSource>
+       <%-- <asp:ObjectDataSource ID="ObjectDataSource_CertificationTypesForGridRecords" runat="server"
+            OldValuesParameterFormatString="original_{0}" SelectMethod="GetData"
+            TypeName="RedbonePlatform.Datasets.dsCertificationsTableAdapters.CertificationTypeTableAdapter">
+        </asp:ObjectDataSource>--%>
+      <%--  <asp:ObjectDataSource ID="ObjectDataSource_CertificationTypesForEditDropdown" runat="server"
+            OldValuesParameterFormatString="original_{0}" SelectMethod="GetData"
+            TypeName="RedbonePlatform.Datasets.dsCertificationsTableAdapters.CertificationType_ActiveOrAssignedTableAdapter">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="HiddenField_CertificationTypeId"
+                    Name="Assigned_CertificationTypeId" PropertyName="Value" Type="Int16" />
+            </SelectParameters>
+        </asp:ObjectDataSource>--%>
+        <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
+            <script type="text/javascript">
+                window.addEventListener('resize', grid_resize);
+
+                function pageLoad() {
+                    // this is to size the MultiPage on the parent page so that this content will then size to it and not be collapsed
+                    window.parent.MultiPage_resize();
+                    grid_resize();
+                }
+
+               <%-- function validateUpload(sender, args) {
+                    var upload = $find('<%=AsyncUpload1.ClientID %>');
+                    args.IsValid = upload.getUploadedFiles().length != 0;
+                }--%>
+
+
+                function GetRadWindow() {
+                    var oWindow = null; if (window.radWindow)
+                        oWindow = window.radWindow; else if (window.frameElement.radWindow)
+                        oWindow = window.frameElement.radWindow; return oWindow;
+                }
+
+                function grid_resize() {
+                    try {
+                        var gridAddresses = $find('<%=RadGrid_Certifications.ClientID %>');
+                        gridAddresses.get_element().style.height = ((window.innerHeight / 2) - 48) + "px";
+                        gridAddresses.repaint();
+                    }
+                    catch (e) {
+                        // Do nothing... window may be minimized and grid unavailable when double clicked to restore
+                    }
+                }
+
+                function RadGrid_OnGridCreated(sender, args) {
+                    //  If any grid is in edit or insert mode, update parent that data has changed 
+                    //      otherwise, update parent that data hasn't changed.
+                    var gridCertifications = $find("<%=RadGrid_Certifications.ClientID %>");
+                    try {
+                        if (gridCertifications.get_masterTableView().get_editItems().length > 0 || gridCertifications.get_masterTableView().get_insertItem() != undefined) {
+                            window.parent.UpdateHiddenField_Certifications_UnsavedData("UnsavedData");
+                            //alert('unsaved data');
+                        }
+                        else {
+                            window.parent.UpdateHiddenField_Certifications_UnsavedData("");
+                            //alert('saved data');
+                        }
+                    }
+                    catch (e) {
+                        alert(e);
+                    }
+                }
+
+            </script>
+        </telerik:RadScriptBlock>
+    </form>
+</body>
+</html>
