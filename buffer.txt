@@ -3879,3 +3879,17 @@ function OnClientFileSelected(sender, args) {
 
 
 
+
+            <tr>
+                <td style="height: 150px; width: 100%; ">
+                    <telerik:RadFileExplorer ID="RadFileExplorer1" runat="server"
+                        Height="170px" Width="100%"
+                        OnClientItemSelected="OnClientItemSelected" OnClientFileOpen="OnClientFileOpen" EnableCreateNewFolder="False" 
+                        VisibleControls="TreeView, Toolbar, ContextMenus, FileList" >
+                        <Configuration UploadPaths="~/UserFiles"
+                            DeletePaths="~/UserFiles" ViewPaths="~/UserFiles" MaxUploadFileSize="20000000" />
+                    </telerik:RadFileExplorer>
+                </td>
+            </tr>
+
+
