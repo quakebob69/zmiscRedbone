@@ -35,6 +35,18 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 
 
+--++++
+		--OTHER
+			--DECLARE @EntryId__IN INTEGER = 29098
+			--UPDATE [RedBone].[main].[TimeClockEntry] SET LastModifiedBy = 2775 WHERE EntryId = @EntryId__IN;
+--++++
+
+
+
+
+
+
+
 
 --QUITIN' TIME
 		--**************************************************************************************************************************************************************************
