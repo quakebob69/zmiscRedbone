@@ -13,7 +13,7 @@ rya_$/T@KHy~Je8o
 104.42.111.50
 
 
-
+http://localhost:50193/Pages/ContainerPages/PersonEdit.aspx?PersonId=2775
 	
 	
 SQL Server
@@ -3911,3 +3911,27 @@ mon 00:16 - 3:13
 
 
 
+
+<FormTemplate>
+	telerik:RadDropDownList ID="RadDropDownList_CertificationTypes" runat="server"
+		DefaultMessage="-Select Certification Type-" DataValueField="CertificationTypeId"
+		DataTextField="CertificationDescription" DataSourceID="ObjectDataSource_CertificationTypesForEditDropdown"
+		SelectedValue='<%# Bind("CertificationTypeId") %>' Width="180px">
+	</telerik:RadDropDownList>
+	<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required!" ForeColor="Red"
+		ControlToValidate="RadDropDownList_CertificationTypes" Display="Dynamic" Font-Bold="true"></asp:RequiredFieldValidator>
+</FormTemplate>
+
+
+
+
+            if (e.Item is GridEditFormInsertItem || e.Item is GridDataInsertItem)
+            {
+
+                // insert item
+            }
+            else
+            {
+
+                // edit item
+            }
