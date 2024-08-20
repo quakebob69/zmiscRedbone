@@ -18,28 +18,23 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 		
 
 																						--OUT
-																							--DECLARE @EntryId__OUT INTEGER = 29107
-																							--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-08-12 15:11:45.610'
+																							--DECLARE @EntryId__OUT INTEGER = 29282
+																							--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-08-19 12:02:00.877'
 																							--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT;
 																					--------------------------------------------------------------------------------------------------------------
+
+
+																									--++++
+																											--OTHER
+																												--DECLARE @EntryId__IN INTEGER = 29108
+																												--UPDATE [RedBone].[main].[TimeClockEntry] SET LastModifiedBy = 2775 WHERE EntryId = @EntryId__IN;
+																									--++++
 
 		-------------------------------------------------------------------------------------------------------------------------------------------------
 		SELECT top 5 * FROM [RedBone].[main].[TimeClockEntry] WHERE personid in (SELECT PersonId FROM main.person WHERE LoginId = @emailName + '@redbonetrucking.com') order by EntryId desc
 		-------------------------------------------------------------------------------------------------------------------------------------------------
 		--XXX
 		--2024-06-13 16:28:45.770
-
-
-
-
-
-
-
---++++
-		--OTHER
-			--DECLARE @EntryId__IN INTEGER = 29108
-			--UPDATE [RedBone].[main].[TimeClockEntry] SET LastModifiedBy = 2775 WHERE EntryId = @EntryId__IN;
---++++
 
 
 
