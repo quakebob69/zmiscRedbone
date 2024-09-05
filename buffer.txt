@@ -5,6 +5,7 @@ git reset --hard HEAD
 		<add name="RedBoneConnectionString" connectionString="Data Source=40.78.62.55\;Initial Catalog=RedBonePortalTest;Persist Security Info=True;TrustServerCertificate=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9" providerName="System.Data.SqlClient" />
 		<secret name="RedBoneConnectionString" value="Data Source=40.78.62.55;Initial Catalog=RedBonePortalTest;Persist Security Info=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9;Encrypt=False;TrustServerCertificate=True" />
 
+Redbone09*&
 rya_$/T@KHy~Je8o
 
 	Computer: RedbonePlatform--Server (0009)
@@ -3957,4 +3958,6 @@ DUSTIN COPELAND
 
 
 
-			
+Kris			
+
+
