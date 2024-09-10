@@ -11,17 +11,17 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 																					--------------------------------------------------------------------------------------------------------------
 																						--IN
-																							DECLARE @EntryId__IN INTEGER = 29855
-																							DECLARE @Clocked__IN NVARCHAR(25)		= '2024-09-06 16:23:12.81';
-																							UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN;
+																							--DECLARE @EntryId__IN INTEGER = 29943
+																							--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-09-10 06:17:45.633';
+																							--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN;
 
 																								--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOutAdj = NULL
 																							
 																							--2024-09-06 15:30:00.000
 
 																						--OUT
-																							--DECLARE @EntryId__OUT INTEGER = 29855
-																							--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-08-30 16:26:23.143'
+																							--DECLARE @EntryId__OUT INTEGER = 29904
+																							--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-09-09 15:53:00.837'
 																							--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT;
 																					--------------------------------------------------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 
 
-
+		--delete FROM [RedBone].[main].[TimeClockEntry] WHERE entryid = 29925
 
 
 
