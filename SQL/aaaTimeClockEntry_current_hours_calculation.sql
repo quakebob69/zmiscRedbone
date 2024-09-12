@@ -11,8 +11,8 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 
 																					--------------------------------------------------------------------------------------------------------------
 																						--IN
-																							--DECLARE @EntryId__IN INTEGER = 29987
-																							--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-09-10 13:22:06.287';
+																							--DECLARE @EntryId__IN INTEGER = 30040
+																							--DECLARE @Clocked__IN NVARCHAR(25)		= '2024-09-12 06:58:40.503';
 																							--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockIn = @Clocked__IN WHERE EntryId = @EntryId__IN;
 
 																								--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOutAdj = NULL
@@ -20,8 +20,8 @@ DECLARE @emailName NVARCHAR(25) = 'danny';
 																							--2024-09-06 15:30:00.000
 
 																						--OUT
-																							--DECLARE @EntryId__OUT INTEGER = 29943
-																							--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-09-10 11:44:56.513'
+																							--DECLARE @EntryId__OUT INTEGER = 29988
+																							--DECLARE @Clocked__OUT NVARCHAR(25)		= '2024-09-11 15:14:03.027'
 																							--UPDATE [RedBone].[main].[TimeClockEntry] SET ClockOut = @Clocked__OUT WHERE EntryId = @EntryId__OUT;
 																					--------------------------------------------------------------------------------------------------------------
 
