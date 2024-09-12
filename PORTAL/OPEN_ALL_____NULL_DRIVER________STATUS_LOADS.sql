@@ -36,4 +36,6 @@ update dispatch.load
 					PaperworkRecvdDate IS NULL
 					AND
 					LoadDriverStatusId IS NULL
+				ORDER BY
+					LoadStatusTypeNm
 
