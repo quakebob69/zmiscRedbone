@@ -35,6 +35,10 @@ rbPlatform2
 tohMdbJzg$
 
 
+Bejay:
+	801 383 3385 (x 124)
+
+
 
 sp_Recruiting_File_Delete	dbo	RedBone	Procedures	Text	CREATE PROCEDURE [dbo].sp_Recruiting_File_Delete  (   @Original_ProfileFileId int  )  AS   SET NOCOUNT OFF;  DELETE FROM [recruiting].[ProfileFile] WHERE (([ProfileFileId] = @Original_ProfileFileId))
 sp_Recruiting_File_Insert	dbo	RedBone	Procedures	Text	CREATE PROCEDURE [dbo].sp_Recruiting_File_Insert  (   @Name nvarchar(50),   @Data varbinary(MAX),   @MimeType nvarchar(50)  )  AS   SET NOCOUNT OFF;  INSERT INTO [recruiting].[ProfileFile] ([Name], [Data], [MimeType]) VALUES (@Name, @Data, @MimeType);     SELECT ProfileFileId, Name, Data, MimeType FROM recruiting.ProfileFile WHERE (ProfileFileId = SCOPE_IDENTITY())
