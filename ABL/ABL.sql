@@ -161,6 +161,29 @@ delete from feeds.Omnitracs_T4010;
 delete from feeds.Omnitracs_T4010_Equipment;
 delete from feeds.Omnitracs_Control;
 
+delete from logistics.LoadStatus;
+delete from logistics.LoadStop;
+delete from logistics.Carrier_AccCharge;
+delete from logistics.AccCharge;
+delete from logistics.LoadFile;
+delete from logistics.LoadNotes;
+delete from logistics.LoadTrace;
+delete from logistics.Load;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
