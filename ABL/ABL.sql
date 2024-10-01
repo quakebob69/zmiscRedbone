@@ -152,41 +152,14 @@ delete from equipment.PUnitRegistrationTemplateMapping;
 delete from equipment.PUnitSpecificationTemplateMapping;
 delete from factoring.Settings;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+delete from feeds.Omnitracs_T2060_Proximity;
+delete from feeds.Omnitracs_T2060;
+delete from feeds.Omnitracs_T2060_Equipment;
+delete from feeds.Omnitracs_DriverLog;
+delete from feeds.Omnitracs_T4010_Proximity;
+delete from feeds.Omnitracs_T4010;
+delete from feeds.Omnitracs_T4010_Equipment;
+delete from feeds.Omnitracs_Control;
 
 
 
