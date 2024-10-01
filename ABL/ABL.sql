@@ -225,40 +225,33 @@ delete from edi.LoadTenders_Equipment;
 
 
 
+select TOP 100 * from main.BusinessEnityType;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+select TOP 100 * from main.PhoneNumberType;
+select TOP 100 * from main.ClientEdi_StatusSettings;
+select TOP 100 * from main.PersonPayRateAttributeMapping;
+select TOP 100 * from main.QuickBooksCompanyFileToSync;
+select TOP 100 * from main.AvailabilityType;
+select TOP 100 * from main.ClientType;
+select TOP 100 * from main.DivisionType;
+select TOP 100 * from main.LocationType;
+select TOP 100 * from main.PersonHiringStatusType;
+select TOP 100 * from main.PersonMessageType;
+select TOP 100 * from main.PersonPTOGroup;
+select TOP 100 * from main.TimeClockZone;
+select TOP 100 * from main.AddressType;
+select TOP 100 * from main.ClientStatusType;
+select TOP 100 * from main.PersonPay_FedExDriver_Desc;
+select TOP 100 * from main.proto_CompanyPerformance;
+select TOP 100 * from main.SubmitType;
+select TOP 100 * from main.ClientFuelSurcharge_WeekEnding;
+select TOP 100 * from main.ClientNote;
+select TOP 100 * from main.FundingType;
+select TOP 100 * from main.PersonGender;
+select TOP 100 * from main.AccessToPlatformSync;
+select TOP 100 * from main.AppNotification;
+select TOP 100 * from main.AppNotificationType;
+select TOP 100 * from main.PersonMessageDisplayType;
 
 
 
