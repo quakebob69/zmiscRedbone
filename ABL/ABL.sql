@@ -71,6 +71,7 @@ delete from dbo."1";
 delete from dbo.proto_DispatcherByDivisionPerformance;
 delete from dbo.proto_DispatcherPerformance;
 delete from dbo.LeaseOperatorSettlementReportSummary;
+
 delete from dispatch.FUEL_IMPORT;
 delete from dispatch.LoadStatus;
 delete from dispatch.PR_SettlementStmt_History;
@@ -169,6 +170,73 @@ delete from logistics.LoadFile;
 delete from logistics.LoadNotes;
 delete from logistics.LoadTrace;
 delete from logistics.Load;
+
+delete from edi.LoadTenders_Updates_Stops_MarksAndNumbers;
+delete from edi.LoadTenders_Stops_MarksAndNumbers;
+delete from edi.LoadTenders_Updates_Stops_OrderIdDetail;
+delete from edi.LoadTenders_Updates_BusinessInstructions;
+delete from edi.LoadTenders_Updates_Stops;
+delete from edi.LoadTenders_Updates_Stops_ReferenceNumbers;
+delete from edi.Incoming;
+delete from edi.LoadTenders_Updates;
+delete from edi.LoadTenders_Updates_Parties;
+delete from edi.LoadTenders_Updates_Equipment;
+delete from edi.LoadTenders_Stops_OrderIdDetail;
+delete from edi.Outgoing_214;
+delete from edi.LoadTenders_Stops_ReferenceNumbers;
+delete from edi.LoadTenders_Stops;
+delete from edi.LoadTenders_BusinessInstructions;
+delete from edi.LoadTenders;
+delete from edi.LoadTenders_Parties;
+delete from edi.Outgoing_990;
+delete from edi.LoadTenders_Equipment;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
