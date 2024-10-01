@@ -150,35 +150,7 @@ delete from dispatch.MileageDivisionDesc;
 delete from equipment.PUnitGoalMapping;
 delete from equipment.PUnitRegistrationTemplateMapping;
 delete from equipment.PUnitSpecificationTemplateMapping;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+delete from factoring.Settings;
 
 
 
