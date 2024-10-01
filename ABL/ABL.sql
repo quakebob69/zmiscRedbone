@@ -131,6 +131,31 @@ delete from dispatch.PUNIT_Staging;
 delete from dispatch.FuelSurcharge;
 delete from dispatch.CompanyGoal;
 delete from dispatch.DispatcherGoal;
+delete from dispatch.DivisionGoal;
+delete from dispatch.MileageDivisionDesc;
+
+
+
+
+
+
+
+
+
+
+
+
+										
+
+										asdf
+											delete from dispatch.DispatchFleet;
+
+
+
+
+
+
+
 
 
 
