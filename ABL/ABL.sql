@@ -115,11 +115,10 @@ delete from dispatch.PR_Staged_DD;
 delete from dispatch.LoadFileRequest;
 delete from dispatch.PR_SettlementStmt_Processing;
 delete from dispatch.PR_Staged_RB;
+delete from dispatch.MileageGoals;
 
 
-
-
-
+select TOP 100 * from dispatch.Punit;
 
 
 
