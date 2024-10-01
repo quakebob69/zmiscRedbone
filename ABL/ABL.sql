@@ -92,8 +92,49 @@ delete from dispatch.PR_SettlementStmt_History;
 delete from dispatch.LoadNotes;
 delete from dispatch.FUEL_IMPORT_Archive;
 delete from dispatch.PR_OTR_History;
+delete from dispatch.Log;
+delete from dispatch.TRANSCHECK_IMPORT;
 
-asdf
+
+	delete from dispatch.LoadTrace;
+	delete from dispatch.LoadBilling;
+	delete from dispatch.Load_BusinessInstructions;
+	delete from dispatch.LoadStop_Time_Updates;
+	delete from dispatch.LoadToLoadStatusSubType;
+		delete from dispatch.Load;
+
+
+--
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
