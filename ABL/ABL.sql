@@ -124,9 +124,9 @@ delete from dispatch.MileageGoals;
 		delete from dispatch.Punit;
 
 
+delete from dispatch.TargetVsActualMileage;
+delete from dispatch.MileageActual;
 --
-
-
 
 
 
