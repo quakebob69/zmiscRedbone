@@ -147,16 +147,8 @@ delete from dispatch.MileageDivisionDesc;
 		delete from dispatch.DispatchFleet;
 
 
+delete from equipment.PUnitGoalMapping;
 --
-
-
-
-
-
-
-
-
-
 
 
 
