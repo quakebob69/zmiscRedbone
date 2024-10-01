@@ -104,11 +104,8 @@ delete from dispatch.TRANSCHECK_IMPORT;
 		delete from dispatch.Load;
 
 
-
- 
-
-
-
+delete from dispatch.LoadStop_ReferenceNumbers;
+delete from dispatch.DriverPay;
 
 
 
