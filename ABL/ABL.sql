@@ -148,7 +148,7 @@ delete from dispatch.MileageDivisionDesc;
 
 
 delete from equipment.PUnitGoalMapping;
---
+asdf
 
 
 
