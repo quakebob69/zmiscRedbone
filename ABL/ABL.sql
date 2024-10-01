@@ -118,20 +118,13 @@ delete from dispatch.PR_Staged_RB;
 delete from dispatch.MileageGoals;
 
 
-select TOP 100 * from dispatch.Punit;
+	delete from dispatch.ScheduleDrivers;
+	delete from dispatch.ScheduleDaysMapping;
+	delete from dispatch.Schedule;
+		delete from dispatch.Punit;
 
 
-
-
-
-
-
-
-
-
-
-
-
+--
 
 
 
