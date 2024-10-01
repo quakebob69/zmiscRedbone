@@ -70,6 +70,46 @@ delete from dbo.TestData_Employees;
 delete from dbo."1";
 delete from dbo.proto_DispatcherByDivisionPerformance;
 delete from dbo.proto_DispatcherPerformance;
+delete from dbo.LeaseOperatorSettlementReportSummary;
+delete from dispatch.FUEL_IMPORT;
+delete from dispatch.LoadStatus;
+delete from dispatch.PR_SettlementStmt_History;
+
+
+
+	delete from equipment.DocumentApproval;
+														delete from equipment.ConditionRecord;
+
+
+
+
+	delete from dispatch.LoadFileRequestTemp;
+	delete from dispatch.LoadFileRequest;
+	delete from dispatch.LoadDriverEvent;
+	delete from dispatch.LoadStatusUpdate_Pending;
+	delete from dispatch.LoadFile;
+	delete from dispatch.AccCharge;
+														delete from dispatch.LoadStop;
+
+
+
+
+delete from dispatch.LoadNotes;
+delete from dispatch.FUEL_IMPORT_Archive;
+delete from dispatch.PR_OTR_History;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
