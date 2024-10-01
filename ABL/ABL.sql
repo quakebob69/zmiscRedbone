@@ -135,28 +135,19 @@ delete from dispatch.DivisionGoal;
 delete from dispatch.MileageDivisionDesc;
 
 
+	delete from equipment.PUnitRegistrationMapping;										
+	update equipment.PUnit set DispatchFleetId = NULL;
+	update equipment.PUnit set DispatchFleetManagerId = NULL;
+	update main.Driver set PunitId = NULL;
+	delete from equipment.PunitMapping;
+	delete from equipment.PUnitSpecificationMapping;
+	delete from equipment.PUnitServiceIntervalMapping;
+	delete from equipment.PunitMappingPerson;
+	delete from equipment.PUnit;
+		delete from dispatch.DispatchFleet;
 
 
-
-
-
-
-
-
-
-
-										
-
-										asdf
-											delete from dispatch.DispatchFleet;
-
-
-
-
-
-
-
-
+--
 
 
 
