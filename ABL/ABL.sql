@@ -130,6 +130,26 @@ delete from dispatch.Trailer;
 delete from dispatch.PUNIT_Staging;
 delete from dispatch.FuelSurcharge;
 delete from dispatch.CompanyGoal;
+delete from dispatch.DispatcherGoal;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
