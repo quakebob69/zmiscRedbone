@@ -106,39 +106,15 @@ delete from dispatch.TRANSCHECK_IMPORT;
 
 delete from dispatch.LoadStop_ReferenceNumbers;
 delete from dispatch.DriverPay;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+delete from dispatch.GasStation;
+delete from dispatch.FuelTaxRates;
+delete from dispatch.TerminalList;
+delete from dispatch.Mileage_DD_Staged;
+delete from dispatch.PR_Staged_GJ;
+delete from dispatch.PR_Staged_DD;
+delete from dispatch.LoadFileRequest;
+delete from dispatch.PR_SettlementStmt_Processing;
+delete from dispatch.PR_Staged_RB;
 
 
 
