@@ -148,7 +148,55 @@ delete from dispatch.MileageDivisionDesc;
 
 
 delete from equipment.PUnitGoalMapping;
-asdf
+delete from equipment.PUnitRegistrationTemplateMapping;
+delete from equipment.PUnitSpecificationTemplateMapping;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
