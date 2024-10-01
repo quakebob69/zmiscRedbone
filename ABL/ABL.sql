@@ -126,8 +126,10 @@ delete from dispatch.MileageGoals;
 
 delete from dispatch.TargetVsActualMileage;
 delete from dispatch.MileageActual;
---
-
+delete from dispatch.Trailer;
+delete from dispatch.PUNIT_Staging;
+delete from dispatch.FuelSurcharge;
+delete from dispatch.CompanyGoal;
 
 
 
