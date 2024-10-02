@@ -204,63 +204,8 @@ delete from main.AppNotification;
 delete from main.ClientNote;
 delete from main.QuickBooksSyncIssueNotificationPerson;
 delete from main.System;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-select TOP 100 * from main.ZipCode5Plus;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+delete from main.FedExLinehaulRevenue;
+delete from main.ClientFuelTrans;
+delete from main.ClientFuelTrans;
+delete from main.FedExFuel;
 
