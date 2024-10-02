@@ -424,8 +424,83 @@ delete from main.FedExFuel;
 
 
 delete from main.PersonPTO;
+delete from main.ClientAddress;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+delete from main.ClientPerMileOverride;
+delete from main.ClientBillingDefaults;
+delete from main.ClientContactMapping;
+delete from main.ClientFuelSurcharge;
+delete from dispatch.AutoRatingDetail;
+delete from main.ClientFuelCard;
+delete from main.ClientFuel;
+
+
+	delete from Service.ServiceStatus;					
+		----------------------------------
+		delete from Service.LaborStory;
+		delete from Service.OrderClock;
+			delete from Service.OrderDetail;	
+		----------------------------------
+			delete from Service.WorkOrder;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+													delete from main.Client;
 
 
 
