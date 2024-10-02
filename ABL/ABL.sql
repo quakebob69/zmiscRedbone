@@ -217,17 +217,14 @@ delete from main.FedExFuel;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+	select TOP 100 * from payroll.LineItemType;
+	select TOP 100 * from payroll.LiabilityAccount;
+	select TOP 100 * from payroll.PayrollOTRBenefitsStatus;
+	select TOP 100 * from payroll.PayrollOTRPersonLeaveType;
+	select TOP 100 * from payroll.ItemGroupSourceType;
+	select TOP 100 * from payroll.SplitType;
+	select TOP 100 * from payroll.ItemGroupDisbursementType;
+	select TOP 100 * from payroll.ItemGroupType;
 
 
 
