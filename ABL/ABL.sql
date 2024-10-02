@@ -456,6 +456,9 @@ delete from main.ClientFuel;
 --asdf
 
 
+delete from main.Client_Staging;
+delete from main.ClientPerMileOverride;
+
 
 
 
