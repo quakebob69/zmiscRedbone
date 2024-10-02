@@ -231,6 +231,35 @@ delete from main.System;
 
 
 
+select TOP 100 * from main.ZipCode5Plus;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
