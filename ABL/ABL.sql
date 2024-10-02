@@ -477,6 +477,10 @@ delete from main.ClientFuel;
 		----------------------------------
 			delete from Service.WorkOrder;
 
+				delete from factoring.PlanDetail;
+				delete from factoring.Plans;
+
+
 
 
 
