@@ -427,39 +427,6 @@ delete from main.PersonPTO;
 delete from main.ClientAddress;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 delete from main.ClientPerMileOverride;
 delete from main.ClientBillingDefaults;
 delete from main.ClientContactMapping;
@@ -479,34 +446,12 @@ delete from main.ClientFuel;
 
 				delete from factoring.PlanDetail;
 				delete from factoring.Plans;
+				delete from main.ClientEdi_StatusSettings;
+
+					delete from main.Client;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-													delete from main.Client;
-
-
+--asdf
 
 
 
