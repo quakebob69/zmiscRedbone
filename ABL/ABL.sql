@@ -475,6 +475,19 @@ delete from main.PersonEntitlementMapping;
 delete from main.PersonHiringStatusHistory;
 delete from main.PersonPhoneNumber;
 delete from main.FinancialTransaction;
+		
+
+														delete from main.LocationPersonMapping;
+															delete from main.Driver;
+
+																--------------------------------------
+																delete from main.Feature;
+																	delete from main.ReleaseNote;
+																--------------------------------------
+		
+																delete from main.PersonTypeMapping;
+																delete from main.PersonPTOGroupMapping;
+																delete from main.PersonAddress;
 
 
 
@@ -496,8 +509,6 @@ delete from main.FinancialTransaction;
 
 
 
-delete from main.LocationPersonMapping;
-	delete from main.Driver;
 
 
 
@@ -509,10 +520,10 @@ delete from main.LocationPersonMapping;
 
 
 
-delete from main.Person;
 
+																					delete from main.Person;
 
-
+	
 
 
 
