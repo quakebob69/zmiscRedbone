@@ -503,34 +503,44 @@ delete from main.FinancialTransaction;
 
 
 
-																select TOP 100 * from Vendor.VendorPayCode;		--(don't delete)
 
 
 
 
 
-																select top 100 * from dbo.VENDOR;
-																select top 100 * from dispatch.PayCode;
-																select top 100 * from main.Client;
-																select top 100 * from main.ReleaseNote;
-
-
-																	DELETE FROM Vendor.VendorRating;
-																	DELETE FROM Vendor.VendorDocument;
-																	DELETE FROM Vendor.VendorContactMapping;
-																	DELETE FROM Vendor.VendorPhoneNumber;
-																	DELETE FROM Vendor.VendorAddress;
-																	delete from Vendor.VendorPay;
-																	DELETE FROM Vendor.VendorPayMemorized;
-																	DELETE FROM Vendor.VendorPayMemorized_Staging;
-																	delete from Vendor.VendorMC;
-																	delete from Vendor.Insurance;
-																	delete from Vendor.VendorFuelSurcharge;
-																	delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-																																												DELETE FROM Vendor.Carrier;
+
+
+
+
+
+
+
+
+
+select TOP 100 * from Vendor.VendorPayCode;
+select top 100 * from dispatch.PayCode;
+
+
+
+
+
+
+DELETE FROM Vendor.VendorRating;
+DELETE FROM Vendor.VendorDocument;
+DELETE FROM Vendor.VendorContactMapping;
+DELETE FROM Vendor.VendorPhoneNumber;
+DELETE FROM Vendor.VendorAddress;
+delete from Vendor.VendorPay;
+DELETE FROM Vendor.VendorPayMemorized;
+DELETE FROM Vendor.VendorPayMemorized_Staging;
+delete from Vendor.VendorMC;
+delete from Vendor.Insurance;
+delete from Vendor.VendorFuelSurcharge;
+delete from Vendor.VendorFuelSurcharge_WeekEnding;
+	DELETE FROM Vendor.Carrier;
 																
 																
 																
