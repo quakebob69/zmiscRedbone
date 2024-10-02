@@ -436,6 +436,7 @@ delete from main.ClientFuelCard;
 delete from main.ClientFuel;
 
 
+
 	delete from Service.ServiceStatus;					
 		----------------------------------
 		delete from Service.LaborStory;
@@ -449,6 +450,7 @@ delete from main.ClientFuel;
 				delete from main.ClientEdi_StatusSettings;
 
 					delete from main.Client;
+
 
 
 --asdf
