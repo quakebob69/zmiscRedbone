@@ -458,6 +458,23 @@ delete from main.ClientFuel;
 
 delete from main.Client_Staging;
 delete from main.ClientPerMileOverride;
+delete from main.QuickBooksCompanyFileUpdateHistory;
+delete from main.QuickBooksUpdateNeeded;
+
+
+delete from main.PersonMessagePersonDisplayType;
+	delete from main.PersonMessage;
+
+
+delete from main.PersonNote;
+delete from main.PersonQuitList;
+delete from main.PersonPay;
+delete from main.CertificationPersonMapping;
+delete from main.PersonMessageViewRecord;
+delete from main.PersonEntitlementMapping;
+delete from main.PersonHiringStatusHistory;
+delete from main.PersonPhoneNumber;
+delete from main.FinancialTransaction;
 
 
 
@@ -479,6 +496,8 @@ delete from main.ClientPerMileOverride;
 
 
 
+delete from main.LocationPersonMapping;
+	delete from main.Driver;
 
 
 
@@ -490,14 +509,7 @@ delete from main.ClientPerMileOverride;
 
 
 
-
-
-
-
-
-
-
-
+delete from main.Person;
 
 
 
