@@ -566,7 +566,20 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from main.PersonEntitlementGroup;
 	delete from main.PersonEmploymentHistoryToCommercialEquipmentType;
 	delete from main.PersonEmploymentHistory;
+	delete from recruiting.ProfileChecklistItem;
+	delete from recruiting.ProfileEventDetail;
+	delete from recruiting.ProfileEvent;
 
+
+
+
+
+
+	-- insert basic users for entry into the wizard
+
+
+
+	recruiting.ExternalMessage
 
 
 
