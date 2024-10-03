@@ -564,9 +564,18 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from main.AppLayout;
 	delete from main.PersonPay_FedExDriver_Default;
 	delete from main.PersonEntitlementGroup;
+	delete from main.PersonEmploymentHistoryToCommercialEquipmentType;
+	delete from main.PersonEmploymentHistory;
 
 
-	select TOP 100 * from dispatch.PayCode;
+
+
+
+
+
+
+
+
 
 
 		delete from main.Person
@@ -579,7 +588,33 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 select * from main.Person
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
