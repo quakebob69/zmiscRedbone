@@ -545,36 +545,22 @@ delete from Vendor.Insurance;
 delete from Vendor.VendorFuelSurcharge;
 delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	DELETE FROM Vendor.Carrier;
-																
-																
-																
-																
+							
+			
+			
 
-
-
-
-
-select distinct  from main.DivisionPersonMapping
-
+select TOP 100 * from main.PersonDeviceNotificationMapping;
 
 
 
 
 
 
-
-																					
-delete from main.Person where personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode);
-delete from main.Person where personid not in (select distinct PersonId from main.DivisionPersonMapping);
-
-
-
-
-
-
-																					select * from main.Person;
-
-	
+	delete from main.DivisionPersonMapping;
+	delete from main.PersonEmailAddress;
+	delete from main.UsageStatistic;
+	delete from main.PersonPreference;
+	delete from main.PersonPTOScheduled;
 
 
 
@@ -582,7 +568,14 @@ delete from main.Person where personid not in (select distinct PersonId from mai
 
 
 
+		delete from main.Person
+		where
+		personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode)
 
+
+
+
+select * from main.Person
 
 
 
