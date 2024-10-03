@@ -776,6 +776,32 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from recruiting.ExternalMessage;
 
 
+	update main.person set LoginId = 'asdf@asdf.asdf' where personid = 6
+
+	
+
+	update
+		main.Person
+		set
+			LastName ='USER',
+			FirstName ='ADMIN',
+			LoginId ='admin@admin.com',
+			Birthday ='1972-01-01',
+			IsActive =1,
+			AvailabilityTypeId =3,
+			PersonGenderId =1,
+			TIN ='111-11-1111',
+			PayrollOTRBenefitsStatusId =5,
+			FullTimeEligibleDate ='2011-11-01 00:00:00.000',
+			PayrollOTRPersonLeaveTypeId =5
+		where personid = 6;
+
+
+
+	update Vendor.VendorPayCode set CreatedByPersonId = 6
+	update dispatch.PayCode set CreatedByPersonId = 6
+
+
 
 
 	delete from main.PersonEntitlementMapping
@@ -785,28 +811,19 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	
 
 
-	select * from main.Entitlement
-
-
-		(personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode))
-		and
-		(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
 
 
 
-		update main.Person
 		delete from main.Person
 		where
 		(personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode))
 		and
 		(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
-			--select * from main.Person
 
 
 
-	select * from main.Person
 
-	select * from main.PersonEntitlementMapping
+
 
 
 
