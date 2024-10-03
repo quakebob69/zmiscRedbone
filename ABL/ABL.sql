@@ -549,8 +549,6 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 			
 			
 
-select TOP 100 * from main.PersonDeviceNotificationMapping;
-
 
 
 
@@ -561,16 +559,22 @@ select TOP 100 * from main.PersonDeviceNotificationMapping;
 	delete from main.UsageStatistic;
 	delete from main.PersonPreference;
 	delete from main.PersonPTOScheduled;
+	delete from main.PersonDeviceNotificationMapping;
+	delete from main.AppLayoutAppPreference;
+	delete from main.AppLayout;
+	delete from main.PersonPay_FedExDriver_Default;
+	delete from main.PersonEntitlementGroup;
 
 
-
-
-
+	select TOP 100 * from dispatch.PayCode;
 
 
 		delete from main.Person
 		where
-		personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode)
+		(personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode))
+		and
+		(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
+		
 
 
 
