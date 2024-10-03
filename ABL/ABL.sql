@@ -779,7 +779,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 	delete from main.PersonEntitlementMapping
-	insert into main.PersonEntitlementMapping (EntitlementId, PersonId) select Entitlementid, 6 from main.Entitlement where EntitlementId not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard')
+	insert into main.PersonEntitlementMapping (EntitlementId, PersonId) select Entitlementid, 6 from main.Entitlement where EntitlementId not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard' or EntitlementName like '%actoring%')
 
 
 	
