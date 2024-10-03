@@ -430,40 +430,38 @@ delete from main.FedExFuel;
 
 
 
-DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
+										DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
 
-/****** Object:  Table [payroll].[PayrollOTRBenefitsStatus]    Script Date: 5/10/2024 7:11:52 AM ******/
-SET ANSI_NULLS ON
-GO
+										/****** Object:  Table [payroll].[PayrollOTRBenefitsStatus]    Script Date: 5/10/2024 7:11:52 AM ******/
+										SET ANSI_NULLS ON
+										GO
 
-SET QUOTED_IDENTIFIER ON
-GO
+										SET QUOTED_IDENTIFIER ON
+										GO
 
-CREATE TABLE [payroll].[PayrollOTRBenefitsStatus](
-	[PayrollOTRBenefitsStatusId] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL,
-	[Description] [varchar](500) NULL,
-	[DisplayOrder] [int] NOT NULL,
- CONSTRAINT [PK_PayrollOTRBenefitsStatus] PRIMARY KEY CLUSTERED 
-(
-	[PayrollOTRBenefitsStatusId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [UQ_PayrollOTRBenefitsStatus] UNIQUE NONCLUSTERED 
-(
-	[Name] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+										CREATE TABLE [payroll].[PayrollOTRBenefitsStatus](
+											[PayrollOTRBenefitsStatusId] [int] NOT NULL,
+											[Name] [varchar](50) NOT NULL,
+											[Description] [varchar](500) NULL,
+											[DisplayOrder] [int] NOT NULL,
+										 CONSTRAINT [PK_PayrollOTRBenefitsStatus] PRIMARY KEY CLUSTERED 
+										(
+											[PayrollOTRBenefitsStatusId] ASC
+										)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+										 CONSTRAINT [UQ_PayrollOTRBenefitsStatus] UNIQUE NONCLUSTERED 
+										(
+											[Name] ASC
+										)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+										) ON [PRIMARY]
+										GO
 
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (1, 'New Employee Waiting Period', 'New Employee Waiting Period' , 1)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (2, 'Part-Time', 'Part-Time' , 2)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (3, 'Full-Time', 'Full-Time' , 3)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (4, 'Probation', 'Probation' , 4)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (5, 'Unassigned', 'Unassigned' , 5)
-INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (6, 'N/A', 'N/A' , 6)	
-GO
-
-
+										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (1, 'New Employee Waiting Period', 'New Employee Waiting Period' , 1)
+										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (2, 'Part-Time', 'Part-Time' , 2)
+										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (3, 'Full-Time', 'Full-Time' , 3)
+										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (4, 'Probation', 'Probation' , 4)
+										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (5, 'Unassigned', 'Unassigned' , 5)
+										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (6, 'N/A', 'N/A' , 6)	
+										GO
 
 
 
@@ -471,6 +469,52 @@ GO
 
 
 
+										SET ANSI_NULLS ON
+										GO
+										SET QUOTED_IDENTIFIER ON
+										GO
+
+										ALTER TABLE [main].[Person]
+										ADD [PayrollOTRBenefitsStatusId] [int] NULL
+										GO
+
+										ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus] FOREIGN KEY([PayrollOTRBenefitsStatusId])
+										REFERENCES [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId])
+										GO
+										ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus]
+										GO
+
+
+										ALTER TABLE [main].[Person]
+										ADD [FullTimeEligibleDate] [datetime] NULL
+										GO
+
+
+
+
+
+
+										DECLARE @UnassignedId INT
+
+										SET @UnassignedId =
+											(
+												SELECT PayrollOTRBenefitsStatusId from [payroll].[PayrollOTRBenefitsStatus] where Name = 'Unassigned'
+											)
+
+
+										--SELECT * from [payroll].[PayrollOTRBenefitsStatus] where PayrollOTRBenefitsStatusid = @FullTimeStatusId
+
+
+										--All
+										UPDATE [main].[Person] SET PayrollOTRBenefitsStatusId = @UnassignedId
+										WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
+
+
+										DECLARE @FullTimeEligibleDate date
+										SET @FullTimeEligibleDate = '11/01/2011'
+
+										UPDATE [main].[Person] SET FullTimeEligibleDate = @FullTimeEligibleDate
+										WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
 
 
 
@@ -479,25 +523,6 @@ GO
 
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-ALTER TABLE [main].[Person]
-ADD [PayrollOTRBenefitsStatusId] [int] NULL
-GO
-
-ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus] FOREIGN KEY([PayrollOTRBenefitsStatusId])
-REFERENCES [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId])
-GO
-ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus]
-GO
-
-
-ALTER TABLE [main].[Person]
-ADD [FullTimeEligibleDate] [datetime] NULL
-GO
 
 
 
@@ -511,30 +536,85 @@ GO
 
 
 
+			/****** Object:  Table [payroll].[PayrollOTRPersonLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
+			IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPersonLeaveType]') AND type in (N'U'))
+			DROP TABLE [payroll].[PayrollOTRPersonLeaveType]
+			GO
 
-DECLARE @UnassignedId INT
+			/****** Object:  Table [payroll].[PayrollOTRPersonLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
+			SET ANSI_NULLS ON
+			GO
+			SET QUOTED_IDENTIFIER ON
+			GO
 
-SET @UnassignedId =
-	(
-		SELECT PayrollOTRBenefitsStatusId from [payroll].[PayrollOTRBenefitsStatus] where Name = 'Unassigned'
-	)
+			CREATE TABLE [payroll].[PayrollOTRPersonLeaveType](
+				[PayrollOTRPersonLeaveTypeId] [int] NOT NULL,
+				[Type] [varchar](30) NOT NULL,
+				[Description] [varchar](128) NOT NULL,
+				[Enabled] [bit] NOT NULL,
+			 CONSTRAINT [PK_PayrollOTRPersonLeaveType] PRIMARY KEY CLUSTERED 
+			(
+				[PayrollOTRPersonLeaveTypeId] ASC
+			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+			 CONSTRAINT [UQ_PayrollOTRPersonLeaveType] UNIQUE NONCLUSTERED 
+			(
+				[Type]
+			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+			) ON [PRIMARY]
+			GO
 
 
---SELECT * from [payroll].[PayrollOTRBenefitsStatus] where PayrollOTRBenefitsStatusid = @FullTimeStatusId
 
 
---All
-UPDATE [main].[Person] SET PayrollOTRBenefitsStatusId = @UnassignedId
-WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
+
+			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (1,'OTR' ,'OTR' ,1)
+			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (2,'FedEx' ,'FedEx' ,1)
+			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (3,'Salary' ,'Salary' ,1)
+			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (4,'Hourly' ,'Hourly' ,1)
+			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (5,'Unassigned' ,'Unassigned' ,1)
+			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (6,'N/A' ,'N/A' ,1)
 
 
-DECLARE @FullTimeEligibleDate date
-SET @FullTimeEligibleDate = '11/01/2011'
-
-UPDATE [main].[Person] SET FullTimeEligibleDate = @FullTimeEligibleDate
-WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
 
 
+
+			SET ANSI_NULLS ON
+			GO
+			SET QUOTED_IDENTIFIER ON
+			GO
+
+			ALTER TABLE [main].[Person]
+			ADD [PayrollOTRPersonLeaveTypeId] [int] NULL CONSTRAINT DF_mainPerson_PayrollOTRPersonLeaveTypeId DEFAULT 0
+			GO
+
+			ALTER TABLE [main].[Person] WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRPersonLeaveType] FOREIGN KEY([PayrollOTRPersonLeaveTypeId])
+			REFERENCES [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId])
+			GO
+			ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRPersonLeaveType]
+			GO
+
+
+
+
+
+			--select pers.personid, count(pers.personid) as 'tot types' from main.person pers join main.persontypemapping permap on pers.personid = permap.PersonId where pers.isactive = 1 and (persontypeid = 1 or persontypeid = 3  or persontypeid = 4) group by pers.personid having count(pers.personid) > 1 
+			--select * from main.person where personid in (8, 62, 73, 2153)
+
+			--OTR
+			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 1
+			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 4)
+
+			--Fedex
+			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 2
+			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 3)
+
+			--Salary
+			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 3
+			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 1)
+
+			--All
+			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 5
+			WHERE personid in (select personid from main.person per where PayrollOTRPersonLeaveTypeId IS NULL)
 
 
 
@@ -698,11 +778,11 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-
-	insert into main.PersonEntitlementMapping (EntitlementId, PersonId) select Entitlementid, 6 from main.Entitlement
-
-
 	delete from main.PersonEntitlementMapping
+	insert into main.PersonEntitlementMapping (EntitlementId, PersonId) select Entitlementid, 6 from main.Entitlement where EntitlementId not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard')
+
+
+	
 
 
 	select * from main.Entitlement
@@ -747,8 +827,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-	where EntitlementId
-not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard')
+where EntitlementId not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard')
 
 
 
