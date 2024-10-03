@@ -695,48 +695,6 @@ delete from main.FinancialTransaction;
 																delete from main.PersonAddress;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-select * from Vendor.VendorPayCode;
-;
-
-
-
-select top 100 * from dispatch.PayCode;
-
-
-
-
-
-
 DELETE FROM Vendor.VendorRating;
 DELETE FROM Vendor.VendorDocument;
 DELETE FROM Vendor.VendorContactMapping;
@@ -751,102 +709,53 @@ delete from Vendor.VendorFuelSurcharge;
 delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	DELETE FROM Vendor.Carrier;
 							
-			
-			
+		delete from main.DivisionPersonMapping;
+		delete from main.PersonEmailAddress;
+		delete from main.UsageStatistic;
+		delete from main.PersonPreference;
+		delete from main.PersonPTOScheduled;
+		delete from main.PersonDeviceNotificationMapping;
+		delete from main.AppLayoutAppPreference;
+		delete from main.AppLayout;
+		delete from main.PersonPay_FedExDriver_Default;
+		delete from main.PersonEntitlementGroup;
+		delete from main.PersonEmploymentHistoryToCommercialEquipmentType;
+		delete from main.PersonEmploymentHistory;
+		delete from recruiting.ProfileChecklistItem;
+		delete from recruiting.ProfileEventDetail;
+		delete from recruiting.ProfileEvent;
+		delete from recruiting.ExternalMessageAttachment;
+		delete from recruiting.ExternalMessage;
 
+			update main.person set LoginId = 'asdf@asdf.asdf' where personid = 6
 
+				update
+					main.Person
+					set
+						LastName ='USER',
+						FirstName ='ADMIN',
+						LoginId ='admin@admin.com',
+						Birthday ='1972-01-01',
+						IsActive =1,
+						AvailabilityTypeId =3,
+						PersonGenderId =1,
+						TIN ='111-11-1111',
+						PayrollOTRBenefitsStatusId =5,
+						FullTimeEligibleDate ='2011-11-01 00:00:00.000',
+						PayrollOTRPersonLeaveTypeId =5
+					where personid = 6;
 
+					update Vendor.VendorPayCode set CreatedByPersonId = 6
+					update dispatch.PayCode set CreatedByPersonId = 6
 
-	delete from main.DivisionPersonMapping;
-	delete from main.PersonEmailAddress;
-	delete from main.UsageStatistic;
-	delete from main.PersonPreference;
-	delete from main.PersonPTOScheduled;
-	delete from main.PersonDeviceNotificationMapping;
-	delete from main.AppLayoutAppPreference;
-	delete from main.AppLayout;
-	delete from main.PersonPay_FedExDriver_Default;
-	delete from main.PersonEntitlementGroup;
-	delete from main.PersonEmploymentHistoryToCommercialEquipmentType;
-	delete from main.PersonEmploymentHistory;
-	delete from recruiting.ProfileChecklistItem;
-	delete from recruiting.ProfileEventDetail;
-	delete from recruiting.ProfileEvent;
-	delete from recruiting.ExternalMessageAttachment;
-	delete from recruiting.ExternalMessage;
+						delete from main.PersonEntitlementMapping
+						insert into main.PersonEntitlementMapping (EntitlementId, PersonId) select Entitlementid, 6 from main.Entitlement where EntitlementId not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard' or EntitlementName like '%actoring%')
 
-
-	update main.person set LoginId = 'asdf@asdf.asdf' where personid = 6
-
-	
-
-	update
-		main.Person
-		set
-			LastName ='USER',
-			FirstName ='ADMIN',
-			LoginId ='admin@admin.com',
-			Birthday ='1972-01-01',
-			IsActive =1,
-			AvailabilityTypeId =3,
-			PersonGenderId =1,
-			TIN ='111-11-1111',
-			PayrollOTRBenefitsStatusId =5,
-			FullTimeEligibleDate ='2011-11-01 00:00:00.000',
-			PayrollOTRPersonLeaveTypeId =5
-		where personid = 6;
-
-
-
-	update Vendor.VendorPayCode set CreatedByPersonId = 6
-	update dispatch.PayCode set CreatedByPersonId = 6
-
-
-
-
-	delete from main.PersonEntitlementMapping
-	insert into main.PersonEntitlementMapping (EntitlementId, PersonId) select Entitlementid, 6 from main.Entitlement where EntitlementId not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard' or EntitlementName like '%actoring%')
-
-
-	
-
-
-
-
-
-		delete from main.Person
-		where
-		(personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode))
-		and
-		(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-where EntitlementId not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard')
-
-
+							delete from main.Person
+							where
+							(personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode))
+							and
+							(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
 
 
 
