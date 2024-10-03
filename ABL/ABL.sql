@@ -419,6 +419,131 @@ delete from main.FedExFuel;
 			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[main].[FY]') AND type in (N'U'))
 				DROP TABLE [main].[FY]
 			GO
+
+
+
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
+
+/****** Object:  Table [payroll].[PayrollOTRBenefitsStatus]    Script Date: 5/10/2024 7:11:52 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [payroll].[PayrollOTRBenefitsStatus](
+	[PayrollOTRBenefitsStatusId] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Description] [varchar](500) NULL,
+	[DisplayOrder] [int] NOT NULL,
+ CONSTRAINT [PK_PayrollOTRBenefitsStatus] PRIMARY KEY CLUSTERED 
+(
+	[PayrollOTRBenefitsStatusId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_PayrollOTRBenefitsStatus] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (1, 'New Employee Waiting Period', 'New Employee Waiting Period' , 1)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (2, 'Part-Time', 'Part-Time' , 2)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (3, 'Full-Time', 'Full-Time' , 3)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (4, 'Probation', 'Probation' , 4)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (5, 'Unassigned', 'Unassigned' , 5)
+INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (6, 'N/A', 'N/A' , 6)	
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER TABLE [main].[Person]
+ADD [PayrollOTRBenefitsStatusId] [int] NULL
+GO
+
+ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus] FOREIGN KEY([PayrollOTRBenefitsStatusId])
+REFERENCES [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId])
+GO
+ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus]
+GO
+
+
+ALTER TABLE [main].[Person]
+ADD [FullTimeEligibleDate] [datetime] NULL
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DECLARE @UnassignedId INT
+
+SET @UnassignedId =
+	(
+		SELECT PayrollOTRBenefitsStatusId from [payroll].[PayrollOTRBenefitsStatus] where Name = 'Unassigned'
+	)
+
+
+--SELECT * from [payroll].[PayrollOTRBenefitsStatus] where PayrollOTRBenefitsStatusid = @FullTimeStatusId
+
+
+--All
+UPDATE [main].[Person] SET PayrollOTRBenefitsStatusId = @UnassignedId
+WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
+
+
+DECLARE @FullTimeEligibleDate date
+SET @FullTimeEligibleDate = '11/01/2011'
+
+UPDATE [main].[Person] SET FullTimeEligibleDate = @FullTimeEligibleDate
+WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
+
+
+
+
+
+
+
+
+
+
+
 --PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL
 
 
@@ -572,7 +697,16 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-	insert into main.PersonEntitlementMapping (EntitlementId, PersonId) values (100, 6);
+
+
+	insert into main.PersonEntitlementMapping (EntitlementId, PersonId) select Entitlementid, 6 from main.Entitlement
+
+
+	delete from main.PersonEntitlementMapping
+
+
+	select * from main.Entitlement
+
 
 		(personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode))
 		and
@@ -613,6 +747,8 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
+	where EntitlementId
+not in (select EntitlementId from main.Entitlement where EntitlementName = 'Reports-Company-Driver Dashboard')
 
 
 
