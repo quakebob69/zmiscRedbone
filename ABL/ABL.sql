@@ -520,7 +520,11 @@ delete from main.FinancialTransaction;
 
 
 
-select TOP 100 * from Vendor.VendorPayCode;
+select * from Vendor.VendorPayCode;
+;
+
+
+
 select top 100 * from dispatch.PayCode;
 
 
@@ -550,6 +554,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
+select distinct  from main.DivisionPersonMapping
 
 
 
@@ -558,8 +563,16 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
+																					
+delete from main.Person where personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode);
+delete from main.Person where personid not in (select distinct PersonId from main.DivisionPersonMapping);
 
-																					delete from main.Person;
+
+
+
+
+
+																					select * from main.Person;
 
 	
 
