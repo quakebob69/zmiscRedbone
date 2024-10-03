@@ -552,8 +552,6 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-
-
 	delete from main.DivisionPersonMapping;
 	delete from main.PersonEmailAddress;
 	delete from main.UsageStatistic;
@@ -569,51 +567,37 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from recruiting.ProfileChecklistItem;
 	delete from recruiting.ProfileEventDetail;
 	delete from recruiting.ProfileEvent;
+	delete from recruiting.ExternalMessageAttachment;
+	delete from recruiting.ExternalMessage;
 
 
 
+	insert into main.PersonEntitlementMapping (EntitlementId, PersonId) values (100, 6);
+
+		(personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode))
+		and
+		(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
 
 
 
-	-- insert basic users for entry into the wizard
-
-
-
-	recruiting.ExternalMessage
-
-
-
-
-
-
-
-
-
-
-
+		update main.Person
 		delete from main.Person
 		where
 		(personid not in (select distinct CreatedByPersonId from Vendor.VendorPayCode))
 		and
 		(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
-		
+			--select * from main.Person
+
+
+
+	select * from main.Person
+
+	select * from main.PersonEntitlementMapping
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-select * from main.Person
 
 
 
