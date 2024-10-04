@@ -727,14 +727,12 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 		delete from recruiting.ExternalMessageAttachment;
 		delete from recruiting.ExternalMessage;
 
-			update main.person set LoginId = 'asdf@asdf.asdf' where personid = 6
-
 				update
 					main.Person
 					set
 						LastName ='USER',
 						FirstName ='ADMIN',
-						LoginId ='admin@admin.admin',
+						LoginId ='thomas@jadedsaint.com',
 						Birthday ='1972-01-01',
 						IsActive =1,
 						AvailabilityTypeId =3,
