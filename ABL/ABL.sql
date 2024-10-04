@@ -734,7 +734,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 					set
 						LastName ='USER',
 						FirstName ='ADMIN',
-						LoginId ='admin@admin.com',
+						LoginId ='admin@admin.admin',
 						Birthday ='1972-01-01',
 						IsActive =1,
 						AvailabilityTypeId =3,
