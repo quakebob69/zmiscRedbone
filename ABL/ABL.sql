@@ -757,11 +757,13 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
+	
 
-	delete from main.Person
-	delete from main.PersonEntitlementMapping
-	select * from main.Person
-	select * from main.PersonEntitlementMapping
+
+	--delete from main.Person
+	--delete from main.PersonEntitlementMapping
+	--select * from main.Person
+	--select * from main.PersonEntitlementMapping
 
 
 
