@@ -756,6 +756,8 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 							(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
 
 
+	select * from main.Person
+	select * from main.PersonEntitlementMapping
 
 
 
