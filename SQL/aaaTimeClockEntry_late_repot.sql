@@ -127,10 +127,8 @@
 
 
 --POST New Schedule
-	DECLARE @emailName NVARCHAR(25) = 'danny';
-	DECLARE @NewSchedule datetime = '2024-10-09 00:28:30.210';
-	DECLARE @AverageArriveTime TIME;
-	DECLARE @AverageLeaveTime TIME;
+	DECLARE @AverageArriveTimePOST TIME;
+	DECLARE @AverageLeaveTimePOST TIME;
 
 
 	--SUMMARY
@@ -150,7 +148,7 @@
 				AND ClockIn <= @NewSchedule
 
 			)
-			SELECT @AverageArriveTime = CAST(
+			SELECT @AverageArriveTimePOST = CAST(
 			  DATEADD(
 				MILLISECOND,
 				AVG(CAST(DATEDIFF(MILLISECOND, '00:00:00', CAST(ClockIn AS TIME)) AS BIGINT)),
@@ -176,7 +174,7 @@
 					AND ClockIn >= '2023-11-30 07:28:30.210'
 					AND ClockIn <= @NewSchedule
 			)
-			SELECT @AverageLeaveTime = CAST(
+			SELECT @AverageLeaveTimePOST = CAST(
 				DATEADD(
 				MILLISECOND,
 				AVG(CAST(DATEDIFF(MILLISECOND, '00:00:00', CAST(ClockOut AS TIME)) AS BIGINT)),
@@ -189,9 +187,9 @@
 
 
 		--**************************************************************************
-			SELECT @AverageArriveTime as 'Average Arrive Time';
-			SELECT @AverageLeaveTime as 'Average Leave Time';
-			SELECT ROUND(CAST(DATEDIFF(SECOND, @AverageArriveTime, @AverageLeaveTime) AS FLOAT) / 3600.0, 2) AS 'hours worked per day';
+			SELECT @AverageArriveTimePOST as 'Average Arrive Time';
+			SELECT @AverageLeaveTimePOST as 'Average Leave Time';
+			SELECT ROUND(CAST(DATEDIFF(SECOND, @AverageArriveTimePOST, @AverageLeaveTimePOST) AS FLOAT) / 3600.0, 2) AS 'hours worked per day';
 		--**************************************************************************
 
 
