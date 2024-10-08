@@ -3,7 +3,7 @@ use [ABL2.0];
 --========================================================================
 	-----INIT VARIABLES-----
 		DECLARE @AdminLoginId VARCHAR(100);
-		Set @AdminLoginId ='asdf@redbonetrucking.com'
+		Set @AdminLoginId ='danny@redbonetrucking.com'
 	-----INIT VARIABLES-----
 --========================================================================
 
@@ -752,15 +752,12 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 		delete from recruiting.ExternalMessageAttachment;
 		delete from recruiting.ExternalMessage;
 
-		DECLARE @AdminLoginId VARCHAR(100);
-		Set @AdminLoginId ='qwerty@redbonetrucking.com'
-
 				update
 					main.Person
 					set
 						LastName ='USER',
 						FirstName ='ADMIN',
-						LoginId = @AdminLoginId,
+						LoginId = "",
 						Birthday ='1972-01-01',
 						IsActive =1,
 						AvailabilityTypeId =3,
