@@ -1,4 +1,5 @@
 DECLARE @emailName NVARCHAR(25) = 'danny';
+DECLARE @NewSchedule datetime = '2024-10-09 00:28:30.210';
 DECLARE @AverageArriveTime TIME;
 DECLARE @AverageLeaveTime TIME;
 
@@ -17,7 +18,7 @@ DECLARE @AverageLeaveTime TIME;
 							 WHERE LoginId = @emailName + '@redbonetrucking.com')
 			AND DATEPART(HOUR, ClockIn) <= 9
 			AND ClockIn >= '2023-11-30 07:28:30.210'
-			AND ClockIn <= '2024-10-09 00:28:30.210'
+			AND ClockIn <= @NewSchedule
 
 		)
 		SELECT @AverageArriveTime = CAST(
@@ -44,7 +45,7 @@ DECLARE @AverageLeaveTime TIME;
 								 WHERE LoginId = @emailName + '@redbonetrucking.com')
 				AND DATEPART(HOUR, ClockOut) >= 14
 				AND ClockIn >= '2023-11-30 07:28:30.210'
-				AND ClockIn <= '2024-10-09 00:28:30.210'
+				AND ClockIn <= @NewSchedule
 		)
 		SELECT @AverageLeaveTime = CAST(
 			DATEADD(
@@ -85,7 +86,7 @@ DECLARE @AverageLeaveTime TIME;
 							 WHERE LoginId = @emailName + '@redbonetrucking.com')
 			AND DATEPART(HOUR, ClockIn) <= 9
 			AND ClockIn >= '2023-11-30 07:28:30.210'
-			AND ClockIn <= '2024-10-09 00:28:30.210'
+			AND ClockIn <= @NewSchedule
 		)
 		SELECT *
 		FROM DailyArriveRecords
@@ -107,7 +108,7 @@ DECLARE @AverageLeaveTime TIME;
 								 WHERE LoginId = @emailName + '@redbonetrucking.com')
 				AND DATEPART(HOUR, ClockOut) >= 14
 				AND ClockIn >= '2023-11-30 07:28:30.210'
-				AND ClockIn <= '2024-10-09 00:28:30.210'
+				AND ClockIn <= @NewSchedule
 		)
 		SELECT *
 		FROM DailyLeaveRecords
