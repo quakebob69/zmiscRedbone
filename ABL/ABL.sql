@@ -793,42 +793,9 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from main.proto_PUNIT;
 	delete from main.Fuel_QuikQ_Stage;
 	delete from main.proto_TRAILER;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	delete from main.Fuel_EFS_Stage;
+	delete from main.PersonPayRateAttributeMapping;
+	delete from main.QuickBooksCompanyFileToSync;
 
 
 
