@@ -22,10 +22,6 @@ use [ABL2.0];
 
 
 
--- Use later:
-SELECT VariableValue FROM ##GlobalVariables WHERE VariableName = 'AdminLoginId'
-
-
 
 
 
@@ -757,7 +753,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 		delete from recruiting.ExternalMessage;
 
 		DECLARE @AdminLoginId VARCHAR(100);
-		Set @AdminLoginId ='danny@redbonetrucking.com'
+		Set @AdminLoginId ='qwerty@redbonetrucking.com'
 
 				update
 					main.Person
@@ -793,7 +789,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 	--delete from main.Person
 	--delete from main.PersonEntitlementMapping
-	--select * from main.Person
+	select * from main.Person
 	--select * from main.PersonEntitlementMapping
 
 DROP TABLE ##GlobalVariables;
