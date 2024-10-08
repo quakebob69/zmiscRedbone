@@ -781,22 +781,12 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 							and
 							(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
 
-
-	
-
-
 	--delete from main.Person
 	--delete from main.PersonEntitlementMapping
 	--select * from main.Person
 	--select * from main.PersonEntitlementMapping
 
-DROP TABLE ##GlobalVariables;
-
-
-
-
-
-
+	--asdf
 
 
 
@@ -874,3 +864,5 @@ DROP TABLE ##GlobalVariables;
 
 
 
+
+DROP TABLE ##GlobalVariables;
