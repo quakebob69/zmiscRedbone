@@ -15,11 +15,27 @@ WITH DailyRecords AS (
 
 
 
-
+/*
 SELECT *
 FROM DailyRecords
 WHERE RowNum = 1
 ORDER BY ClockIn;	
+*/
+
+
+SELECT CAST(
+  DATEADD(
+    MILLISECOND,
+    AVG(DATEDIFF(MILLISECOND, '00:00:00', CAST(ClockIn AS TIME))),
+    '00:00:00'
+  ) AS TIME
+) AS AverageTime
+FROM DailyRecords
+
+
+--SELECT CAST(AVG(CAST(ClockIn AS FLOAT)) AS DATETIME) AS AverageDateTime FROM DailyRecords
+
+
 
 
 
