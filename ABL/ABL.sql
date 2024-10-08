@@ -3,7 +3,7 @@ use [ABL2.0];
 --========================================================================
 	-----INIT VARIABLES-----
 		DECLARE @AdminLoginId VARCHAR(100);
-		Set @AdminLoginId ='danny@redbonetrucking.com'
+		Set @AdminLoginId ='fefef@redbonetrucking.com'
 	-----INIT VARIABLES-----
 --========================================================================
 
