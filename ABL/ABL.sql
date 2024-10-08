@@ -766,7 +766,8 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 						TIN ='111-11-1111',
 						PayrollOTRBenefitsStatusId =5,
 						FullTimeEligibleDate ='2011-11-01 00:00:00.000',
-						PayrollOTRPersonLeaveTypeId =5
+						PayrollOTRPersonLeaveTypeId =5,
+						PersonProfileFileId=NULL
 					where personid = 6;
 
 					update Vendor.VendorPayCode set CreatedByPersonId = 6
@@ -786,9 +787,8 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	--select * from main.Person
 	--select * from main.PersonEntitlementMapping
 
-	--asdf
-
-
+	
+	delete from main.PersonProfileFile;
 
 
 --PRs------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
