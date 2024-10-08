@@ -731,7 +731,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 		delete from recruiting.ExternalMessage;
 
 		DECLARE @AdminLoginId VARCHAR(100);
-		Set @AdminLoginId ='asdf@redbonetrucking.com'
+		Set @AdminLoginId ='danny@redbonetrucking.com'
 
 				update
 					main.Person
