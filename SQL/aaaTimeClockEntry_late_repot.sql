@@ -1,4 +1,4 @@
---PRE New Schedule
+	DECLARE @StartDate datetime = '2023-11-30 07:28:30.210';
 	DECLARE @emailName NVARCHAR(25) = 'danny';
 	DECLARE @NewSchedule datetime = '2024-10-09 00:28:30.210';
 
@@ -22,7 +22,7 @@
 								 FROM main.person 
 								 WHERE LoginId = @emailName + '@redbonetrucking.com')
 				AND DATEPART(HOUR, ClockIn) <= 9
-				AND ClockIn >= '2023-11-30 07:28:30.210'
+				AND ClockIn >= @StartDate
 				AND ClockIn <= @NewSchedule
 
 			)
@@ -49,7 +49,7 @@
 									 FROM main.person 
 									 WHERE LoginId = @emailName + '@redbonetrucking.com')
 					AND DATEPART(HOUR, ClockOut) >= 14
-					AND ClockIn >= '2023-11-30 07:28:30.210'
+					AND ClockIn >= @StartDate
 					AND ClockIn <= @NewSchedule
 			)
 			SELECT @AverageLeaveTimePRE = CAST(
@@ -90,7 +90,7 @@
 								 FROM main.person 
 								 WHERE LoginId = @emailName + '@redbonetrucking.com')
 				AND DATEPART(HOUR, ClockIn) <= 9
-				AND ClockIn >= '2023-11-30 07:28:30.210'
+				AND ClockIn >= @StartDate
 				AND ClockIn <= @NewSchedule
 			)
 			SELECT *
@@ -112,7 +112,7 @@
 									 FROM main.person 
 									 WHERE LoginId = @emailName + '@redbonetrucking.com')
 					AND DATEPART(HOUR, ClockOut) >= 14
-					AND ClockIn >= '2023-11-30 07:28:30.210'
+					AND ClockIn >= @StartDate
 					AND ClockIn <= @NewSchedule
 			)
 			SELECT *
@@ -147,7 +147,7 @@
 								 FROM main.person 
 								 WHERE LoginId = @emailName + '@redbonetrucking.com')
 				AND DATEPART(HOUR, ClockIn) <= 9
-				AND ClockIn >= '2023-11-30 07:28:30.210'
+				AND ClockIn >= @StartDate
 				AND ClockIn <= @NewSchedule
 
 			)
@@ -174,7 +174,7 @@
 									 FROM main.person 
 									 WHERE LoginId = @emailName + '@redbonetrucking.com')
 					AND DATEPART(HOUR, ClockOut) >= 14
-					AND ClockIn >= '2023-11-30 07:28:30.210'
+					AND ClockIn >= @StartDate
 					AND ClockIn <= @NewSchedule
 			)
 			SELECT @AverageLeaveTimePOST = CAST(
@@ -215,7 +215,7 @@
 								 FROM main.person 
 								 WHERE LoginId = @emailName + '@redbonetrucking.com')
 				AND DATEPART(HOUR, ClockIn) <= 9
-				AND ClockIn >= '2023-11-30 07:28:30.210'
+				AND ClockIn >= @StartDate
 				AND ClockIn <= @NewSchedule
 			)
 			SELECT *
@@ -237,7 +237,7 @@
 									 FROM main.person 
 									 WHERE LoginId = @emailName + '@redbonetrucking.com')
 					AND DATEPART(HOUR, ClockOut) >= 14
-					AND ClockIn >= '2023-11-30 07:28:30.210'
+					AND ClockIn >= @StartDate
 					AND ClockIn <= @NewSchedule
 			)
 			SELECT *
