@@ -1,8 +1,12 @@
 --PRE New Schedule
 	DECLARE @emailName NVARCHAR(25) = 'danny';
 	DECLARE @NewSchedule datetime = '2024-10-09 00:28:30.210';
-	DECLARE @AverageArriveTime TIME;
-	DECLARE @AverageLeaveTime TIME;
+
+
+
+--PRE New Schedule
+	DECLARE @AverageArriveTimePRE TIME;
+	DECLARE @AverageLeaveTimePRE TIME;
 
 
 	--SUMMARY
@@ -22,7 +26,7 @@
 				AND ClockIn <= @NewSchedule
 
 			)
-			SELECT @AverageArriveTime = CAST(
+			SELECT @AverageArriveTimePRE = CAST(
 			  DATEADD(
 				MILLISECOND,
 				AVG(CAST(DATEDIFF(MILLISECOND, '00:00:00', CAST(ClockIn AS TIME)) AS BIGINT)),
@@ -48,7 +52,7 @@
 					AND ClockIn >= '2023-11-30 07:28:30.210'
 					AND ClockIn <= @NewSchedule
 			)
-			SELECT @AverageLeaveTime = CAST(
+			SELECT @AverageLeaveTimePRE = CAST(
 				DATEADD(
 				MILLISECOND,
 				AVG(CAST(DATEDIFF(MILLISECOND, '00:00:00', CAST(ClockOut AS TIME)) AS BIGINT)),
@@ -61,9 +65,9 @@
 
 
 		--**************************************************************************
-			SELECT @AverageArriveTime as 'Average Arrive Time';
-			SELECT @AverageLeaveTime as 'Average Leave Time';
-			SELECT ROUND(CAST(DATEDIFF(SECOND, @AverageArriveTime, @AverageLeaveTime) AS FLOAT) / 3600.0, 2) AS 'hours worked per day';
+			SELECT @AverageArriveTimePRE as 'Average Arrive Time';
+			SELECT @AverageLeaveTimePRE as 'Average Leave Time';
+			SELECT ROUND(CAST(DATEDIFF(SECOND, @AverageArriveTimePRE, @AverageLeaveTimePRE) AS FLOAT) / 3600.0, 2) AS 'hours worked per day';
 		--**************************************************************************
 
 
@@ -124,7 +128,6 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 --POST New Schedule
 	DECLARE @AverageArriveTimePOST TIME;
