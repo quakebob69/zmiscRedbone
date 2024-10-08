@@ -791,9 +791,8 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from main.PersonProfileFile;
 	delete from main.EntitlementGroupToEntitlement;
 	delete from main.proto_PUNIT;
-
-
-
+	delete from main.Fuel_QuikQ_Stage;
+	delete from main.proto_TRAILER;
 
 
 
