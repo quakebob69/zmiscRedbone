@@ -31,7 +31,6 @@ DECLARE @AverageLeaveTime TIME;
 		WHERE RowNum = 1;
 
 
-
 	--Avg Leave
 		WITH DailyLeaveRecords AS (
 		  SELECT *,
@@ -95,10 +94,9 @@ DECLARE @AverageLeaveTime TIME;
 
 
 
-
 	--Avg Leave details
 		WITH DailyLeaveRecords AS (
-		  SELECT *,
+		  SELECT ClockOut,
 				 ROW_NUMBER() OVER (
 				   PARTITION BY CAST(ClockOut AS DATE) 
 				   ORDER BY ClockOut DESC
