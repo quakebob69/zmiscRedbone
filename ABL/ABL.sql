@@ -11,6 +11,7 @@ use [ABL2.0];
 
 
 --------------------------------------------------
+DROP TABLE IF EXISTS ##GlobalVariables;
 	CREATE TABLE ##GlobalVariables (
 		VariableName VARCHAR(50),
 		VariableValue SQL_VARIANT
@@ -757,7 +758,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 					set
 						LastName ='USER',
 						FirstName ='ADMIN',
-						LoginId = "",
+						LoginId = (SELECT VariableValue FROM ##GlobalVariables WHERE VariableName = 'AdminLoginId'),
 						Birthday ='1972-01-01',
 						IsActive =1,
 						AvailabilityTypeId =3,
