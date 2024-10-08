@@ -1,21 +1,23 @@
 use [ABL2.0];
 
------INIT VARIABLES-----
-	DECLARE @AdminLoginId VARCHAR(100);
-	Set @AdminLoginId ='asdf@redbonetrucking.com'
+--========================================================================
+	-----INIT VARIABLES-----
+		DECLARE @AdminLoginId VARCHAR(100);
+		Set @AdminLoginId ='asdf@redbonetrucking.com'
+	-----INIT VARIABLES-----
+--========================================================================
 
 
------INIT VARIABLES-----
 
 
 --------------------------------------------------
-CREATE TABLE ##GlobalVariables (
-	VariableName VARCHAR(50),
-	VariableValue SQL_VARIANT
-)
+	CREATE TABLE ##GlobalVariables (
+		VariableName VARCHAR(50),
+		VariableValue SQL_VARIANT
+	)
 
-INSERT INTO ##GlobalVariables (VariableName, VariableValue) 
-VALUES ('AdminLoginId', @AdminLoginId)
+	INSERT INTO ##GlobalVariables (VariableName, VariableValue) 
+	VALUES ('AdminLoginId', @AdminLoginId)
 --------------------------------------------------
 
 
@@ -23,7 +25,7 @@ VALUES ('AdminLoginId', @AdminLoginId)
 -- Use later:
 SELECT VariableValue FROM ##GlobalVariables WHERE VariableName = 'AdminLoginId'
 
-DROP TABLE ##GlobalVariables;
+
 
 
 
@@ -786,7 +788,6 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 							(personid not in (select distinct CreatedByPersonId from dispatch.PayCode))
 
 
-
 	
 
 
@@ -795,62 +796,77 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	--select * from main.Person
 	--select * from main.PersonEntitlementMapping
 
+DROP TABLE ##GlobalVariables;
 
 
 
 
 
---	PR1:  
---
---	1)
---		use [ABL2.0];
---		SET ANSI_NULLS ON
---		GO
---
---		SET QUOTED_IDENTIFIER ON
---		GO
---
---		ALTER TABLE [main].[Person]
---			ADD [WizardLoginEnabled] [bit] NOT NULL
---			CONSTRAINT [DF_Person_WizardLoginEnabled_1]  DEFAULT 1;
---		GO
---
---	2)
---		use [ABL2.0];
---		/****** Object:  StoredProcedure [dbo].[sp_AuthorizeUserDetails]    Script Date: 10/7/2024 2:54:37 PM ******/
---		DROP PROCEDURE [dbo].[sp_AuthorizeUserDetails]
---		GO
---
---		/****** Object:  StoredProcedure [dbo].[sp_AuthorizeUserDetails]    Script Date: 10/7/2024 2:54:37 PM ******/
---		SET ANSI_NULLS ON
---		GO
---
---		SET QUOTED_IDENTIFIER ON
---		GO
---
---
---		-- =============================================
---		-- Author:		Todd C Byers
---		-- Create date: 01/22/18
---		-- Description:	Will retrieve some basic user information
---		-- =============================================
---		CREATE PROCEDURE [dbo].[sp_AuthorizeUserDetails] 
---		(
---			@LoginId varchar(50)
---		)
---		/*
---			sp_AuthorizeUserDetails 'toddcbyers@gmail.com'
---		*/
---
---		AS
---		BEGIN
---			SET NOCOUNT ON;
---
---			SELECT	PersonId, LastName, MiddleInitial, FirstName, Birthday, IsActive, WizardLoginEnabled
---			FROM	main.Person
---			WHERE	LoginId = @LoginId	
---		END
---		GO
+
+
+
+
+
+--PRs------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	--	PR1:  
+	--
+	--	1)
+	--		use [ABL2.0];
+	--		SET ANSI_NULLS ON
+	--		GO
+	--
+	--		SET QUOTED_IDENTIFIER ON
+	--		GO
+	--
+	--		ALTER TABLE [main].[Person]
+	--			ADD [WizardLoginEnabled] [bit] NOT NULL
+	--			CONSTRAINT [DF_Person_WizardLoginEnabled_1]  DEFAULT 1;
+	--		GO
+	--
+	--	2)
+	--		use [ABL2.0];
+	--		/****** Object:  StoredProcedure [dbo].[sp_AuthorizeUserDetails]    Script Date: 10/7/2024 2:54:37 PM ******/
+	--		DROP PROCEDURE [dbo].[sp_AuthorizeUserDetails]
+	--		GO
+	--
+	--		/****** Object:  StoredProcedure [dbo].[sp_AuthorizeUserDetails]    Script Date: 10/7/2024 2:54:37 PM ******/
+	--		SET ANSI_NULLS ON
+	--		GO
+	--
+	--		SET QUOTED_IDENTIFIER ON
+	--		GO
+	--
+	--
+	--		-- =============================================
+	--		-- Author:		Todd C Byers
+	--		-- Create date: 01/22/18
+	--		-- Description:	Will retrieve some basic user information
+	--		-- =============================================
+	--		CREATE PROCEDURE [dbo].[sp_AuthorizeUserDetails] 
+	--		(
+	--			@LoginId varchar(50)
+	--		)
+	--		/*
+	--			sp_AuthorizeUserDetails 'toddcbyers@gmail.com'
+	--		*/
+	--
+	--		AS
+	--		BEGIN
+	--			SET NOCOUNT ON;
+	--
+	--			SELECT	PersonId, LastName, MiddleInitial, FirstName, Birthday, IsActive, WizardLoginEnabled
+	--			FROM	main.Person
+	--			WHERE	LoginId = @LoginId	
+	--		END
+	--		GO
+
+
+	--	PR2:  
+	--
+	--	1)
+
+
+--PRs------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
