@@ -14,7 +14,7 @@ use [ABL2.0];
 DROP TABLE IF EXISTS ##GlobalVariables;
 	CREATE TABLE ##GlobalVariables (
 		VariableName VARCHAR(50),
-		VariableValue SQL_VARIANT
+		VariableValue VARCHAR(50)
 	)
 
 	INSERT INTO ##GlobalVariables (VariableName, VariableValue) 
@@ -787,7 +787,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 	--delete from main.Person
 	--delete from main.PersonEntitlementMapping
-	select * from main.Person
+	--select * from main.Person
 	--select * from main.PersonEntitlementMapping
 
 DROP TABLE ##GlobalVariables;
