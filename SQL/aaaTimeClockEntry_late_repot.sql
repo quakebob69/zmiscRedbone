@@ -1,6 +1,6 @@
-	DECLARE @StartDate datetime = '2023-11-30 07:28:30.210';
-	DECLARE @emailName NVARCHAR(25) = 'danny';
-	DECLARE @NewSchedule datetime = '2024-10-09 00:28:30.210';
+DECLARE @emailName NVARCHAR(25) = 'danny';
+DECLARE @StartDate datetime = '2023-11-30 07:28:30.210';
+DECLARE @NewSchedule datetime = '2024-10-09 00:28:30.210';
 
 
 
