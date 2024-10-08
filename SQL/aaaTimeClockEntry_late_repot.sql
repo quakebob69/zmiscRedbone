@@ -43,3 +43,14 @@ SELECT *
 FROM DailyLeaveRecords
 WHERE RowNum = 1
 ORDER BY ClockOut;
+
+
+	/*SELECT CAST(
+	  DATEADD(
+		MILLISECOND,
+		AVG(CAST(DATEDIFF(MILLISECOND, '00:00:00', CAST(ClockIn AS TIME)) AS BIGINT)),
+		'00:00:00'
+	  ) AS TIME
+	) AS AverageLeaveTime
+	FROM DailyLeaveRecords
+	WHERE RowNum = 1;*/
