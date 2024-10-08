@@ -1,7 +1,31 @@
 use [ABL2.0];
 
-DECLARE @AdminLoginId VARCHAR(100);
-Set @AdminLoginId ='asdf@redbonetrucking.com'
+-----INIT VARIABLES-----
+	DECLARE @AdminLoginId VARCHAR(100);
+	Set @AdminLoginId ='asdf@redbonetrucking.com'
+
+
+-----INIT VARIABLES-----
+
+
+--------------------------------------------------
+CREATE TABLE ##GlobalVariables (
+	VariableName VARCHAR(50),
+	VariableValue SQL_VARIANT
+)
+
+INSERT INTO ##GlobalVariables (VariableName, VariableValue) 
+VALUES ('AdminLoginId', @AdminLoginId)
+--------------------------------------------------
+
+
+
+-- Use later:
+SELECT VariableValue FROM ##GlobalVariables WHERE VariableName = 'AdminLoginId'
+
+DROP TABLE ##GlobalVariables;
+
+
 
 
 /*
