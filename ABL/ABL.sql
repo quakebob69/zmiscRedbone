@@ -732,7 +732,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 					set
 						LastName ='USER',
 						FirstName ='ADMIN',
-						LoginId ='thomas@jadedsaint.com',
+						LoginId ='danny@redbonetrucking.com',
 						Birthday ='1972-01-01',
 						IsActive =1,
 						AvailabilityTypeId =3,
@@ -769,59 +769,59 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-/*
-	PR1:  
 
-	1)
-		use [ABL2.0];
-		SET ANSI_NULLS ON
-		GO
+--	PR1:  
+--
+--	1)
+--		use [ABL2.0];
+--		SET ANSI_NULLS ON
+--		GO
+--
+--		SET QUOTED_IDENTIFIER ON
+--		GO
+--
+--		ALTER TABLE [main].[Person]
+--			ADD [WizardLoginEnabled] [bit] NOT NULL
+--			CONSTRAINT [DF_Person_WizardLoginEnabled_1]  DEFAULT 1;
+--		GO
+--
+--	2)
+--		use [ABL2.0];
+--		/****** Object:  StoredProcedure [dbo].[sp_AuthorizeUserDetails]    Script Date: 10/7/2024 2:54:37 PM ******/
+--		DROP PROCEDURE [dbo].[sp_AuthorizeUserDetails]
+--		GO
+--
+--		/****** Object:  StoredProcedure [dbo].[sp_AuthorizeUserDetails]    Script Date: 10/7/2024 2:54:37 PM ******/
+--		SET ANSI_NULLS ON
+--		GO
+--
+--		SET QUOTED_IDENTIFIER ON
+--		GO
+--
+--
+--		-- =============================================
+--		-- Author:		Todd C Byers
+--		-- Create date: 01/22/18
+--		-- Description:	Will retrieve some basic user information
+--		-- =============================================
+--		CREATE PROCEDURE [dbo].[sp_AuthorizeUserDetails] 
+--		(
+--			@LoginId varchar(50)
+--		)
+--		/*
+--			sp_AuthorizeUserDetails 'toddcbyers@gmail.com'
+--		*/
+--
+--		AS
+--		BEGIN
+--			SET NOCOUNT ON;
+--
+--			SELECT	PersonId, LastName, MiddleInitial, FirstName, Birthday, IsActive, WizardLoginEnabled
+--			FROM	main.Person
+--			WHERE	LoginId = @LoginId	
+--		END
+--		GO
 
-		SET QUOTED_IDENTIFIER ON
-		GO
-
-		ALTER TABLE [main].[Person]
-			ADD [WizardLoginEnabled] [bit] NOT NULL
-			CONSTRAINT [DF_Person_WizardLoginEnabled_1]  DEFAULT 1;
-		GO
-
-	2)
-		use [ABL2.0];
-		/****** Object:  StoredProcedure [dbo].[sp_AuthorizeUserDetails]    Script Date: 10/7/2024 2:54:37 PM ******/
-		DROP PROCEDURE [dbo].[sp_AuthorizeUserDetails]
-		GO
-
-		/****** Object:  StoredProcedure [dbo].[sp_AuthorizeUserDetails]    Script Date: 10/7/2024 2:54:37 PM ******/
-		SET ANSI_NULLS ON
-		GO
-
-		SET QUOTED_IDENTIFIER ON
-		GO
-
-
-		-- =============================================
-		-- Author:		Todd C Byers
-		-- Create date: 01/22/18
-		-- Description:	Will retrieve some basic user information
-		-- =============================================
-		CREATE PROCEDURE [dbo].[sp_AuthorizeUserDetails] 
-		(
-			@LoginId varchar(50)
-		)
-		/*
-			sp_AuthorizeUserDetails 'toddcbyers@gmail.com'
-		*/
-
-		AS
-		BEGIN
-			SET NOCOUNT ON;
-
-			SELECT	PersonId, LastName, MiddleInitial, FirstName, Birthday, IsActive, WizardLoginEnabled
-			FROM	main.Person
-			WHERE	LoginId = @LoginId	
-		END
-		GO
-*/
 
 
 
