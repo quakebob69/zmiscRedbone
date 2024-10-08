@@ -1,5 +1,9 @@
 use [ABL2.0];
 
+DECLARE @AdminLoginId VARCHAR(100);
+Set @AdminLoginId ='asdf@redbonetrucking.com'
+
+
 /*
 	SELECT 
 		SCHEMA_NAME(schema_id) AS SchemaName,
@@ -577,7 +581,6 @@ delete from main.FedExFuel;
 
 
 
-
 			SET ANSI_NULLS ON
 			GO
 			SET QUOTED_IDENTIFIER ON
@@ -727,12 +730,15 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 		delete from recruiting.ExternalMessageAttachment;
 		delete from recruiting.ExternalMessage;
 
+		DECLARE @AdminLoginId VARCHAR(100);
+		Set @AdminLoginId ='asdf@redbonetrucking.com'
+
 				update
 					main.Person
 					set
 						LastName ='USER',
 						FirstName ='ADMIN',
-						LoginId ='danny@redbonetrucking.com',
+						LoginId = @AdminLoginId,
 						Birthday ='1972-01-01',
 						IsActive =1,
 						AvailabilityTypeId =3,
