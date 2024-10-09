@@ -844,19 +844,31 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from Vendor.VendorDocument;
 	delete from Vendor.VendorPay;
 	delete from Vendor.VendorContactMapping;
-
-
-
-
-
-
-
-
-
-
-
-
 	delete from Vendor.VendorRating_Staging;
+	delete from Vendor.CarrierSettings;
+	delete from Vendor.Vendor_Staging;
+	delete from dispatch.AccChargeTypePayCodeMapping;
+	delete from Vendor.VendorPayCode;
+
+
+
+
+
+	select TOP 100 * from Vendor.CarrierSettings;
+	select TOP 100 * from Vendor.Vendor_Staging;
+	select TOP 100 * from Vendor.VendorPayCode;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
