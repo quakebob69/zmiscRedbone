@@ -816,6 +816,34 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
+	delete from recruiting.MovingViolation;
+	delete from recruiting.Unemployment;
+	delete from recruiting.ProfileAddress;
+	delete from recruiting.DriversLicense;
+	delete from recruiting.ProfilePhoneNumber;
+	delete from recruiting.EmployerToCommercialEquipmentType;
+	delete from recruiting.EmployerToCommercialWorkType;
+	delete from recruiting.Employer;
+	delete from recruiting.Profile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --PRs------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	--	PR1:  
 	--
