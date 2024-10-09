@@ -804,18 +804,8 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from recruiting.ProfileDocument;
 	delete from recruiting.Accident;
 
-
-
-
-
-
-
-
-
-
-
-
-
+	delete from recruiting.ProfileCode;
+	delete from recruiting.DrivingSchool;
 	delete from recruiting.MovingViolation;
 	delete from recruiting.Unemployment;
 	delete from recruiting.ProfileAddress;
@@ -825,20 +815,6 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from recruiting.EmployerToCommercialWorkType;
 	delete from recruiting.Employer;
 	delete from recruiting.Profile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
