@@ -23,21 +23,16 @@ use [ABL2.0];
 	-----INIT VARIABLES-----
 --========================================================================
 
+	--------------------------------------------------
+	DROP TABLE IF EXISTS ##GlobalVariables;
+		CREATE TABLE ##GlobalVariables (
+			VariableName VARCHAR(50),
+			VariableValue VARCHAR(50)
+		)
 
-
-
-
-
---------------------------------------------------
-DROP TABLE IF EXISTS ##GlobalVariables;
-	CREATE TABLE ##GlobalVariables (
-		VariableName VARCHAR(50),
-		VariableValue VARCHAR(50)
-	)
-
-	INSERT INTO ##GlobalVariables (VariableName, VariableValue) 
-	VALUES ('AdminLoginId', @AdminLoginId)
---------------------------------------------------
+		INSERT INTO ##GlobalVariables (VariableName, VariableValue) 
+		VALUES ('AdminLoginId', @AdminLoginId)
+	--------------------------------------------------
 
 /*
 	SELECT 
