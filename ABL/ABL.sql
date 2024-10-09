@@ -854,10 +854,6 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-	select TOP 100 * from Vendor.CarrierSettings;
-	select TOP 100 * from Vendor.Vendor_Staging;
-	select TOP 100 * from Vendor.VendorPayCode;
-
 
 
 
