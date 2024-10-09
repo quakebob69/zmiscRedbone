@@ -774,7 +774,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 						LastName ='USER',
 						FirstName ='ADMIN',
 						LoginId = (SELECT VariableValue FROM ##GlobalVariables WHERE VariableName = 'AdminLoginId'),
-						Birthday ='1972-01-01',
+						Birthday ='1999-01-01',
 						IsActive =1,
 						AvailabilityTypeId =3,
 						PersonGenderId =1,
