@@ -835,6 +835,9 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from recruiting.EmployerToCommercialWorkType;
 	delete from recruiting.Employer;
 	delete from recruiting.Profile;
+	delete from Service.MileageHistory;
+	delete from recruiting.SignatureImage;
+	delete from Service.ItemAssemblyDetail;
 
 
 
@@ -845,16 +848,20 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-	
-
-	delete from recruiting.ProfileFile;
-	delete from recruiting.ProfileSignature;
 
 
 
 
 
+--select TOP 100 * from Service.ItemList;		
 
+
+
+
+
+
+
+--select TOP 100 * from Service.ItemAssemblyDetail;
 
 
 
