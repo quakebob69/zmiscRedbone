@@ -39,12 +39,6 @@ DROP TABLE IF EXISTS ##GlobalVariables;
 	VALUES ('AdminLoginId', @AdminLoginId)
 --------------------------------------------------
 
-
-
-
-
-
-
 /*
 	SELECT 
 		SCHEMA_NAME(schema_id) AS SchemaName,
@@ -62,9 +56,6 @@ DROP TABLE IF EXISTS ##GlobalVariables;
 	ORDER BY 
 		SchemaName, Row_Count desc, TableName
 */
-
-
-update company.GeneralInfo set CompanyName = 'ABL Trucking';
 
 delete from dbo.LoadTrace_bak;
 delete from dbo.CLIENT_FUEL_TRANS_Stage;
@@ -257,213 +248,213 @@ delete from main.FedExFuel;
 
 
 --PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL
-	--VIEWS
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDF]
-		GO
+																																																	--VIEWS
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDF]
+																																																		GO
 
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDFDetail]
-		GO
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataPastPDFDetail]
+																																																		GO
 
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataAllPDFHeld]
-		GO
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataAllPDFHeld]
+																																																		GO
 
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDF]
-		GO
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDF]
+																																																		GO
 
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFDetail]
-		GO
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFDetail]
+																																																		GO
 
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFHeld]
-		GO
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFHeld]
+																																																		GO
 	
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFReleased]
-		GO
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriodPDFReleased]
+																																																		GO
 
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataHeld]
-		GO
-
-
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataHeld]
+																																																		GO
 
 
-		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriod]
-		GO
 
-		DROP VIEW IF EXISTS [payroll].[vPayrollOTROpenPayPeriod]
-		GO
 
-		DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
-		GO
+																																																		DROP VIEW IF EXISTS [export].[vAccountingExportPayrollDataCurrentPeriod]
+																																																		GO
+
+																																																		DROP VIEW IF EXISTS [payroll].[vPayrollOTROpenPayPeriod]
+																																																		GO
+
+																																																		DROP VIEW IF EXISTS [payroll].[vPayrollOTRCurrentPayPeriod]
+																																																		GO
 	
-		DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriod]
-		GO
+																																																		DROP VIEW IF EXISTS [payroll].[vLoadCurrentPayPeriod]
+																																																		GO
 
-		DROP VIEW IF EXISTS [payroll].[vLoadStopCurrentPayPeriod]
-		GO
+																																																		DROP VIEW IF EXISTS [payroll].[vLoadStopCurrentPayPeriod]
+																																																		GO
 
-		--temp...
-			DROP VIEW IF EXISTS [payroll].[vPR_OTR_History___withpersonsremoved]
-			GO
+																																																		--temp...
+																																																			DROP VIEW IF EXISTS [payroll].[vPR_OTR_History___withpersonsremoved]
+																																																			GO
 
-			DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging___withpersonsremoved]
-			GO
+																																																			DROP VIEW IF EXISTS [payroll].[vPayrollOTRStaging___withpersonsremoved]
+																																																			GO
 	
 	
-	--USER DEFINED FUNCTIONS
-		DROP FUNCTION IF EXISTS [payroll].[getLoadStopCurrentPayPeriodLoadIds]
-		GO
+																																																	--USER DEFINED FUNCTIONS
+																																																		DROP FUNCTION IF EXISTS [payroll].[getLoadStopCurrentPayPeriodLoadIds]
+																																																		GO
 
 
-	--STORED PROCEDURES
-		--'payroll' schema 
-			DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_Admin_Accrual]
-			GO
+																																																	--STORED PROCEDURES
+																																																		--'payroll' schema 
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_Admin_Accrual]
+																																																			GO
 
-			DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_OTR_Accrual]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_PayrollPTO_OTR_Accrual]
+																																																			GO
 		
 
-			---------
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodFinalize]
-			GO
+																																																			---------
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodFinalize]
+																																																			GO
 		
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodTotals]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodTotals]
+																																																			GO
 									
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodValidate]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodValidate]
+																																																			GO
 						
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodSubmitForValidation]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodSubmitForValidation]
+																																																			GO
 		
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodUnHoldPayments]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodUnHoldPayments]
+																																																			GO
 		
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodHoldPayments]
+																																																			GO
 						
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGenerateExportRecords]
+																																																			GO
 						
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayroll]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayroll]
+																																																			GO
 		
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollLoad]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollLoad]
+																																																			GO
 
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollDriverPay]
-			GO	
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_StagePayrollDriverPay]
+																																																			GO	
 		
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromLoad]
+																																																			GO
 						  
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_GetRecordsFromDriverPay]
+																																																			GO
 				
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodReset]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodReset]
+																																																			GO
 				
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodOpen]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodOpen]
+																																																			GO
 				
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetOpen]
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetOpen]
+																																																			GO
 				
-			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetActive]	
-			GO
+																																																			DROP PROCEDURE IF EXISTS [payroll].[sp_Payroll_OTR_PayPeriodGetActive]	
+																																																			GO
 		
 		
-	--TABLES
-		--'export' schema 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollData]') AND type in (N'U'))
-				DROP TABLE [export].[AccountingExportPayrollData]
-			GO
+																																																	--TABLES
+																																																		--'export' schema 
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollData]') AND type in (N'U'))
+																																																				DROP TABLE [export].[AccountingExportPayrollData]
+																																																			GO
 
 		
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollItem]') AND type in (N'U'))
-				DROP TABLE [export].[AccountingExportPayrollItem]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollItem]') AND type in (N'U'))
+																																																				DROP TABLE [export].[AccountingExportPayrollItem]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollEntryType]') AND type in (N'U'))
-				DROP TABLE [export].[AccountingExportPayrollEntryType]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportPayrollEntryType]') AND type in (N'U'))
+																																																				DROP TABLE [export].[AccountingExportPayrollEntryType]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportCompany]') AND type in (N'U'))
-				DROP TABLE [export].[AccountingExportCompany]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[export].[AccountingExportCompany]') AND type in (N'U'))
+																																																				DROP TABLE [export].[AccountingExportCompany]
+																																																			GO
 
 
 
-		--'payroll' schema
-			DROP TABLE IF EXISTS [payroll].[PayrollOTRDriverLoadChain]	
+																																																		--'payroll' schema
+																																																			DROP TABLE IF EXISTS [payroll].[PayrollOTRDriverLoadChain]	
 	
 	
-			DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsEligibility]
+																																																			DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsEligibility]
 	
 
-			--PayrollOTRPersonLeaveType
-				ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS DF_mainPerson_PayrollOTRPersonLeaveTypeId
-				ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRPersonLeaveType];
-				ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRPersonLeaveTypeId];
-				DROP TABLE IF EXISTS [payroll].[PayrollOTRPersonLeaveType]
+																																																			--PayrollOTRPersonLeaveType
+																																																				ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS DF_mainPerson_PayrollOTRPersonLeaveTypeId
+																																																				ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRPersonLeaveType];
+																																																				ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRPersonLeaveTypeId];
+																																																				DROP TABLE IF EXISTS [payroll].[PayrollOTRPersonLeaveType]
 		
 
-			--PayrollOTRBenefitsStatus
-				ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRBenefitsStatus];
-				ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRBenefitsStatusId];
-				ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [FullTimeEligibleDate];
-				DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
+																																																			--PayrollOTRBenefitsStatus
+																																																				ALTER TABLE [main].[Person] DROP CONSTRAINT IF EXISTS [FK_Person_PayrollOTRBenefitsStatus];
+																																																				ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [PayrollOTRBenefitsStatusId];
+																																																				ALTER TABLE [main].[Person] DROP COLUMN IF EXISTS [FullTimeEligibleDate];
+																																																				DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
 		
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveScheduled]') AND type in (N'U'))
-				DROP TABLE [payroll].[PayrollOTRLeaveScheduled]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveScheduled]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[PayrollOTRLeaveScheduled]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
-				DROP TABLE [payroll].[PayrollOTRPaymentHoldReason]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPaymentHoldReason]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[PayrollOTRPaymentHoldReason]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeave]') AND type in (N'U'))
-				DROP TABLE [payroll].[PayrollOTRLeave]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeave]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[PayrollOTRLeave]
+																																																			GO
 		
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveType]') AND type in (N'U'))
-				DROP TABLE [payroll].[PayrollOTRLeaveType]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRLeaveType]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[PayrollOTRLeaveType]
+																																																			GO
 		
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStaging]') AND type in (N'U'))
-				DROP TABLE [payroll].[PayrollOTRStaging]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStaging]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[PayrollOTRStaging]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPayPeriod]') AND type in (N'U'))
-				DROP TABLE [payroll].[PayrollOTRPayPeriod]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPayPeriod]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[PayrollOTRPayPeriod]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRDataSource]') AND type in (N'U'))
-				DROP TABLE [payroll].[PayrollOTRDataSource]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRDataSource]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[PayrollOTRDataSource]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
-				DROP TABLE [payroll].[PayrollOTRStatus]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRStatus]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[PayrollOTRStatus]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[Holiday]') AND type in (N'U'))
-				DROP TABLE [payroll].[Holiday]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[Holiday]') AND type in (N'U'))
+																																																				DROP TABLE [payroll].[Holiday]
+																																																			GO
 
 
-			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[main].[FY]') AND type in (N'U'))
-				DROP TABLE [main].[FY]
-			GO
+																																																			IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[main].[FY]') AND type in (N'U'))
+																																																				DROP TABLE [main].[FY]
+																																																			GO
 
 
 
@@ -475,38 +466,38 @@ delete from main.FedExFuel;
 
 
 
-										DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
+																																																										DROP TABLE IF EXISTS [payroll].[PayrollOTRBenefitsStatus]
 
-										/****** Object:  Table [payroll].[PayrollOTRBenefitsStatus]    Script Date: 5/10/2024 7:11:52 AM ******/
-										SET ANSI_NULLS ON
-										GO
+																																																										/****** Object:  Table [payroll].[PayrollOTRBenefitsStatus]    Script Date: 5/10/2024 7:11:52 AM ******/
+																																																										SET ANSI_NULLS ON
+																																																										GO
 
-										SET QUOTED_IDENTIFIER ON
-										GO
+																																																										SET QUOTED_IDENTIFIER ON
+																																																										GO
 
-										CREATE TABLE [payroll].[PayrollOTRBenefitsStatus](
-											[PayrollOTRBenefitsStatusId] [int] NOT NULL,
-											[Name] [varchar](50) NOT NULL,
-											[Description] [varchar](500) NULL,
-											[DisplayOrder] [int] NOT NULL,
-										 CONSTRAINT [PK_PayrollOTRBenefitsStatus] PRIMARY KEY CLUSTERED 
-										(
-											[PayrollOTRBenefitsStatusId] ASC
-										)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-										 CONSTRAINT [UQ_PayrollOTRBenefitsStatus] UNIQUE NONCLUSTERED 
-										(
-											[Name] ASC
-										)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-										) ON [PRIMARY]
-										GO
+																																																										CREATE TABLE [payroll].[PayrollOTRBenefitsStatus](
+																																																											[PayrollOTRBenefitsStatusId] [int] NOT NULL,
+																																																											[Name] [varchar](50) NOT NULL,
+																																																											[Description] [varchar](500) NULL,
+																																																											[DisplayOrder] [int] NOT NULL,
+																																																										 CONSTRAINT [PK_PayrollOTRBenefitsStatus] PRIMARY KEY CLUSTERED 
+																																																										(
+																																																											[PayrollOTRBenefitsStatusId] ASC
+																																																										)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+																																																										 CONSTRAINT [UQ_PayrollOTRBenefitsStatus] UNIQUE NONCLUSTERED 
+																																																										(
+																																																											[Name] ASC
+																																																										)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+																																																										) ON [PRIMARY]
+																																																										GO
 
-										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (1, 'New Employee Waiting Period', 'New Employee Waiting Period' , 1)
-										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (2, 'Part-Time', 'Part-Time' , 2)
-										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (3, 'Full-Time', 'Full-Time' , 3)
-										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (4, 'Probation', 'Probation' , 4)
-										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (5, 'Unassigned', 'Unassigned' , 5)
-										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (6, 'N/A', 'N/A' , 6)	
-										GO
+																																																										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (1, 'New Employee Waiting Period', 'New Employee Waiting Period' , 1)
+																																																										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (2, 'Part-Time', 'Part-Time' , 2)
+																																																										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (3, 'Full-Time', 'Full-Time' , 3)
+																																																										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (4, 'Probation', 'Probation' , 4)
+																																																										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (5, 'Unassigned', 'Unassigned' , 5)
+																																																										INSERT INTO [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId], [Name] ,[Description] ,[DisplayOrder]) VALUES (6, 'N/A', 'N/A' , 6)	
+																																																										GO
 
 
 
@@ -514,52 +505,52 @@ delete from main.FedExFuel;
 
 
 
-										SET ANSI_NULLS ON
-										GO
-										SET QUOTED_IDENTIFIER ON
-										GO
+																																																										SET ANSI_NULLS ON
+																																																										GO
+																																																										SET QUOTED_IDENTIFIER ON
+																																																										GO
 
-										ALTER TABLE [main].[Person]
-										ADD [PayrollOTRBenefitsStatusId] [int] NULL
-										GO
+																																																										ALTER TABLE [main].[Person]
+																																																										ADD [PayrollOTRBenefitsStatusId] [int] NULL
+																																																										GO
 
-										ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus] FOREIGN KEY([PayrollOTRBenefitsStatusId])
-										REFERENCES [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId])
-										GO
-										ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus]
-										GO
+																																																										ALTER TABLE [main].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus] FOREIGN KEY([PayrollOTRBenefitsStatusId])
+																																																										REFERENCES [payroll].[PayrollOTRBenefitsStatus] ([PayrollOTRBenefitsStatusId])
+																																																										GO
+																																																										ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRBenefitsStatus]
+																																																										GO
 
 
-										ALTER TABLE [main].[Person]
-										ADD [FullTimeEligibleDate] [datetime] NULL
-										GO
+																																																										ALTER TABLE [main].[Person]
+																																																										ADD [FullTimeEligibleDate] [datetime] NULL
+																																																										GO
 
 
 
 
 
 
-										DECLARE @UnassignedId INT
+																																																										DECLARE @UnassignedId INT
 
-										SET @UnassignedId =
-											(
-												SELECT PayrollOTRBenefitsStatusId from [payroll].[PayrollOTRBenefitsStatus] where Name = 'Unassigned'
-											)
+																																																										SET @UnassignedId =
+																																																											(
+																																																												SELECT PayrollOTRBenefitsStatusId from [payroll].[PayrollOTRBenefitsStatus] where Name = 'Unassigned'
+																																																											)
 
 
-										--SELECT * from [payroll].[PayrollOTRBenefitsStatus] where PayrollOTRBenefitsStatusid = @FullTimeStatusId
+																																																										--SELECT * from [payroll].[PayrollOTRBenefitsStatus] where PayrollOTRBenefitsStatusid = @FullTimeStatusId
 
 
-										--All
-										UPDATE [main].[Person] SET PayrollOTRBenefitsStatusId = @UnassignedId
-										WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
+																																																										--All
+																																																										UPDATE [main].[Person] SET PayrollOTRBenefitsStatusId = @UnassignedId
+																																																										WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
 
 
-										DECLARE @FullTimeEligibleDate date
-										SET @FullTimeEligibleDate = '11/01/2011'
+																																																										DECLARE @FullTimeEligibleDate date
+																																																										SET @FullTimeEligibleDate = '11/01/2011'
 
-										UPDATE [main].[Person] SET FullTimeEligibleDate = @FullTimeEligibleDate
-										WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
+																																																										UPDATE [main].[Person] SET FullTimeEligibleDate = @FullTimeEligibleDate
+																																																										WHERE personid in (select personid from main.person /*WHERE IsActive = 1*/)
 
 
 
@@ -581,93 +572,84 @@ delete from main.FedExFuel;
 
 
 
-			/****** Object:  Table [payroll].[PayrollOTRPersonLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
-			IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPersonLeaveType]') AND type in (N'U'))
-			DROP TABLE [payroll].[PayrollOTRPersonLeaveType]
-			GO
+																																																			/****** Object:  Table [payroll].[PayrollOTRPersonLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
+																																																			IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[payroll].[PayrollOTRPersonLeaveType]') AND type in (N'U'))
+																																																			DROP TABLE [payroll].[PayrollOTRPersonLeaveType]
+																																																			GO
 
-			/****** Object:  Table [payroll].[PayrollOTRPersonLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
-			SET ANSI_NULLS ON
-			GO
-			SET QUOTED_IDENTIFIER ON
-			GO
+																																																			/****** Object:  Table [payroll].[PayrollOTRPersonLeaveType]    Script Date: 2/20/2024 9:39:54 AM ******/
+																																																			SET ANSI_NULLS ON
+																																																			GO
+																																																			SET QUOTED_IDENTIFIER ON
+																																																			GO
 
-			CREATE TABLE [payroll].[PayrollOTRPersonLeaveType](
-				[PayrollOTRPersonLeaveTypeId] [int] NOT NULL,
-				[Type] [varchar](30) NOT NULL,
-				[Description] [varchar](128) NOT NULL,
-				[Enabled] [bit] NOT NULL,
-			 CONSTRAINT [PK_PayrollOTRPersonLeaveType] PRIMARY KEY CLUSTERED 
-			(
-				[PayrollOTRPersonLeaveTypeId] ASC
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-			 CONSTRAINT [UQ_PayrollOTRPersonLeaveType] UNIQUE NONCLUSTERED 
-			(
-				[Type]
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-			) ON [PRIMARY]
-			GO
+																																																			CREATE TABLE [payroll].[PayrollOTRPersonLeaveType](
+																																																				[PayrollOTRPersonLeaveTypeId] [int] NOT NULL,
+																																																				[Type] [varchar](30) NOT NULL,
+																																																				[Description] [varchar](128) NOT NULL,
+																																																				[Enabled] [bit] NOT NULL,
+																																																			 CONSTRAINT [PK_PayrollOTRPersonLeaveType] PRIMARY KEY CLUSTERED 
+																																																			(
+																																																				[PayrollOTRPersonLeaveTypeId] ASC
+																																																			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+																																																			 CONSTRAINT [UQ_PayrollOTRPersonLeaveType] UNIQUE NONCLUSTERED 
+																																																			(
+																																																				[Type]
+																																																			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+																																																			) ON [PRIMARY]
+																																																			GO
 
 
 
 
 
-			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (1,'OTR' ,'OTR' ,1)
-			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (2,'FedEx' ,'FedEx' ,1)
-			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (3,'Salary' ,'Salary' ,1)
-			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (4,'Hourly' ,'Hourly' ,1)
-			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (5,'Unassigned' ,'Unassigned' ,1)
-			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (6,'N/A' ,'N/A' ,1)
+																																																			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (1,'OTR' ,'OTR' ,1)
+																																																			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (2,'FedEx' ,'FedEx' ,1)
+																																																			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (3,'Salary' ,'Salary' ,1)
+																																																			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (4,'Hourly' ,'Hourly' ,1)
+																																																			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (5,'Unassigned' ,'Unassigned' ,1)
+																																																			INSERT INTO [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId] ,[Type], [Description], [Enabled]) VALUES (6,'N/A' ,'N/A' ,1)
 
 
 
 
-			SET ANSI_NULLS ON
-			GO
-			SET QUOTED_IDENTIFIER ON
-			GO
+																																																			SET ANSI_NULLS ON
+																																																			GO
+																																																			SET QUOTED_IDENTIFIER ON
+																																																			GO
 
-			ALTER TABLE [main].[Person]
-			ADD [PayrollOTRPersonLeaveTypeId] [int] NULL CONSTRAINT DF_mainPerson_PayrollOTRPersonLeaveTypeId DEFAULT 0
-			GO
+																																																			ALTER TABLE [main].[Person]
+																																																			ADD [PayrollOTRPersonLeaveTypeId] [int] NULL CONSTRAINT DF_mainPerson_PayrollOTRPersonLeaveTypeId DEFAULT 0
+																																																			GO
 
-			ALTER TABLE [main].[Person] WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRPersonLeaveType] FOREIGN KEY([PayrollOTRPersonLeaveTypeId])
-			REFERENCES [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId])
-			GO
-			ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRPersonLeaveType]
-			GO
+																																																			ALTER TABLE [main].[Person] WITH CHECK ADD  CONSTRAINT [FK_Person_PayrollOTRPersonLeaveType] FOREIGN KEY([PayrollOTRPersonLeaveTypeId])
+																																																			REFERENCES [payroll].[PayrollOTRPersonLeaveType] ([PayrollOTRPersonLeaveTypeId])
+																																																			GO
+																																																			ALTER TABLE [main].[Person] CHECK CONSTRAINT [FK_Person_PayrollOTRPersonLeaveType]
+																																																			GO
 
 
 
 
 
-			--select pers.personid, count(pers.personid) as 'tot types' from main.person pers join main.persontypemapping permap on pers.personid = permap.PersonId where pers.isactive = 1 and (persontypeid = 1 or persontypeid = 3  or persontypeid = 4) group by pers.personid having count(pers.personid) > 1 
-			--select * from main.person where personid in (8, 62, 73, 2153)
+																																																			--select pers.personid, count(pers.personid) as 'tot types' from main.person pers join main.persontypemapping permap on pers.personid = permap.PersonId where pers.isactive = 1 and (persontypeid = 1 or persontypeid = 3  or persontypeid = 4) group by pers.personid having count(pers.personid) > 1 
+																																																			--select * from main.person where personid in (8, 62, 73, 2153)
 
-			--OTR
-			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 1
-			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 4)
+																																																			--OTR
+																																																			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 1
+																																																			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 4)
 
-			--Fedex
-			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 2
-			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 3)
+																																																			--Fedex
+																																																			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 2
+																																																			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 3)
 
-			--Salary
-			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 3
-			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 1)
+																																																			--Salary
+																																																			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 3
+																																																			WHERE personid in (select personid from main.persontypemapping permap where persontypeid = 1)
 
-			--All
-			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 5
-			WHERE personid in (select personid from main.person per where PayrollOTRPersonLeaveTypeId IS NULL)
-
-
-
-
-
-
-
-
-
+																																																			--All
+																																																			UPDATE [main].[Person] SET PayrollOTRPersonLeaveTypeId = 5
+																																																			WHERE personid in (select personid from main.person per where PayrollOTRPersonLeaveTypeId IS NULL)
 --PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL--PAYROLL
 
 
