@@ -792,9 +792,13 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from main.PersonPayRateAttributeMapping;
 	delete from main.QuickBooksCompanyFileToSync;
 
+	delete from quickApp.QuickAppTrack;
+	delete from quickApp.QuickAppLog;
+	delete from quickApp.QuickAppWix;
+	delete from quickApp.QuickAppWixContactForm;
+	delete from quickApp.QuickAppSourceType;
 
-
-
+	asdf
 
 
 
