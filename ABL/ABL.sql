@@ -798,7 +798,9 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from quickApp.QuickAppWixContactForm;
 	delete from quickApp.QuickAppSourceType;
 
-	asdf
+	delete from recruiting.EmployerContact;
+	delete from recruiting.CustomQuestion;
+	delete from recruiting.QuickApp;
 
 
 
@@ -808,23 +810,10 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	delete from recruiting.Employer;
+	delete from recruiting.Accident;
+	delete from recruiting.ProfileDocument;
+	delete from recruiting.Profile;
 
 
 
