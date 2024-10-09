@@ -849,20 +849,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from Vendor.Vendor_Staging;
 	delete from dispatch.AccChargeTypePayCodeMapping;
 	delete from Vendor.VendorPayCode;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	delete from Vendor.CarrierPayQBMapping;
 
 
 
