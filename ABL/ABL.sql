@@ -838,6 +838,11 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from Service.MileageHistory;
 	delete from recruiting.SignatureImage;
 	delete from Service.ItemAssemblyDetail;
+	delete from Service.OrderNotes;
+	delete from Service.ServiceHistory;
+	delete from Service.ItemList;
+	delete from Vendor.VendorDocument;
+	delete from Vendor.VendorPay;
 
 
 
@@ -853,15 +858,8 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
---select TOP 100 * from Service.ItemList;		
 
 
-
-
-
-
-
---select TOP 100 * from Service.ItemAssemblyDetail;
 
 
 
