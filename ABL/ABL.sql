@@ -843,12 +843,20 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 	delete from Service.ItemList;
 	delete from Vendor.VendorDocument;
 	delete from Vendor.VendorPay;
+	delete from Vendor.VendorContactMapping;
 
 
 
 
 
 
+
+
+
+
+
+
+	delete from Vendor.VendorRating_Staging;
 
 
 
