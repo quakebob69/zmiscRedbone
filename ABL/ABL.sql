@@ -845,33 +845,10 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 
 
 
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	delete from recruiting.ProfileFile;
+	delete from recruiting.ProfileSignature;
 
 
 
