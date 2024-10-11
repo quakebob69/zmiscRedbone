@@ -773,6 +773,7 @@ delete from Vendor.VendorFuelSurcharge_WeekEnding;
 					set
 						LastName ='USER',
 						FirstName ='ADMIN',
+						MiddleInitial =	NULL,
 						LoginId = (SELECT VariableValue FROM ##GlobalVariables WHERE VariableName = 'AdminLoginId'),
 						Birthday ='1999-01-01',
 						IsActive =1,
