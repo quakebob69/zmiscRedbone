@@ -1,0 +1,31 @@
+- admin login user
+	- asdf
+	
+- Jay's email
+	- asdf
+	
+- TEST URL
+	- truckingwizard.com/ABLNEW
+	- truckingwizard.com/ABLOLD
+
+------------------------------------------------------------
+- Entitlements
+	- 
+
+- current functionality
+	- dispatch email?
+	- dispatch text?
+	- asdf
+	- asdf
+	- asdf
+	- asdf
+	- asdf
+
+- current issues
+	- dispatch image?
+	- email image?
+	- asdf
+	- asdf
+	- asdf
+	- asdf
+
