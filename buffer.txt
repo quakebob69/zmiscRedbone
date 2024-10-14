@@ -6,6 +6,9 @@ git reset --hard HEAD
 
 Redbone09*&
 rya_$/T@KHy~Je8o
+	CVIuxwVk8jaE
+			<add name="RedBoneConnectionString" connectionString="Data Source=.;Initial Catalog=RedBone10_9;Persist Security Info=True;User ID=redboneDB;Password=Ws2GPKd#Wlt9" providerName="System.Data.SqlClient"/>
+
 
 	Computer: RedbonePlatform--Server (0009)
 	C:\temp\temp2\DB_RESTORES\
