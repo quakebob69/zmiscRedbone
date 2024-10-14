@@ -1,31 +1,56 @@
 - admin login user
-	- asdf
+	- jay.anderson.ABL@gmail.com
 	
 - Jay's email
-	- asdf
+	- jay.anderson@ABLTL.com
 	
 - TEST URL
 	- truckingwizard.com/ABLNEW
 	- truckingwizard.com/ABLOLD
+	
+	super user in email
+	
+
 
 ------------------------------------------------------------
 - Entitlements
 	- 
 
 - current functionality
-	- dispatch email?
-	- dispatch text?
-	- asdf
-	- asdf
-	- asdf
+	- dispatch (no not reply)
+		- dispatch email
+		- dispatch text
+			text request
+	- no EDI
+	- no brokering
+	- no factoring
 	- asdf
 	- asdf
 
 - current issues
-	- dispatch image?
-	- email image?
 	- asdf
 	- asdf
 	- asdf
 	- asdf
 
+
+
+
+
+
+
+	- update to new logo
+	
+		
+- google 
+	admin
+	AR
+	dispatch
+	
+	
+	
+	email wrong logo
+	email wrong name
+	email wrong from/to
+	
+	
